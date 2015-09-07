@@ -40,3 +40,15 @@ CREATE TABLE `user_collections` (
   `updated_date` datetime DEFAULT NULL,
   PRIMARY KEY (`collection_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
+CREATE TABLE `user_messages` (
+  `msg_id` int(11) NOT NULL AUTO_INCREMENT,
+  `msg_sender_id` int(11) DEFAULT NULL,
+  `msg_receiver_id` int(11) DEFAULT NULL,
+  `msg_subject` text,
+  `message` text,
+  `msg_flag` tinyint(4) DEFAULT NULL COMMENT '0 is new ,1 is old',
+  `msg_status` tinyint(4) DEFAULT NULL COMMENT '0 is deactive,1 is active',
+  `msg_sended_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`msg_id`)
+)
