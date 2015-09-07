@@ -23,6 +23,7 @@
 	if($value==0){
 ?>
 <script type="text/javascript">
+/*
 function show_login_status(network, status)
 {
 	if (status)
@@ -58,6 +59,28 @@ function show_login_status(network, status)
 		}
 	}
 }
+*/
+
+function show_login_status(network, status)
+{
+	if (status)
+	{
+		if( $('#tpName').html() != ""  )
+		{
+			$('#socialLoginSecond').val( network );
+			return false;
+		}
+		if(network=='Facebook'){
+			$('#tpName').html( 'Facebook' );
+		}else if(network=='Google'){
+			$('#tpName').html( 'Google' );
+		}
+		$('#popUpConfirmTpLogin').popUpWindow({action: "open"});
+	}
+}
+
+
+
 </script>
 <script>
 window.fbAsyncInit = function(){
@@ -109,6 +132,11 @@ src="https://accounts.google.com/CheckCookie?continue=https%3A%2F%2Fwww.google.c
 	$loginDomAction=$this->action('Application\Controller\IndexController', 'logindomAction');
 	$socialOptions = $header->loginarray['options'];
 	?>
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/login-ready.js"></script>
+<input type="hidden" id="socialLoginSecond" value="" />
+<input type="hidden" id="checkGoogleLogin" />
+<input type="hidden" id="checkGoogleLogin1" value="0" />
+
     </head>
     <body>
         <div id="mainWrapper" class="mainWrapper">
@@ -242,7 +270,13 @@ src="https://accounts.google.com/CheckCookie?continue=https%3A%2F%2Fwww.google.c
                 </div>
             </section>
         </div>
+		<div id="popUpConfirmTpLogin" class="pop-up-display-content conform_popup_content">
+	<p>Do you want to continue with your <b id="tpName"></b> login ?</p><br/>
+	<p><a id="tpLoginLink" class="larg_btn" href="Javascript:void(0);">CONTINUE</a>
+	&nbsp;&nbsp;<a id="tpNoLink" class="larg_btn" href="Javascript:void(0);">NO</a></p>
+</div>
     </body>
+	
 <script>
 function sUpFunction(){
 	window.location=BASE_URL+ "/signup";
@@ -257,6 +291,35 @@ $(document).ready(function() {
 		$('#userPassword1').val(password);
 		$('#remember_me').attr('checked',true);
 	}
+	$('#tpLoginLink').click(function(event)
+	{
+		$('#popUpConfirmTpLogin').popUpWindow({action: "close"});
+		if( $('#tpName').html() == 'Facebook' )
+		{
+			openPopup('<?echo $facebook_login;?>');
+		}
+		else if( $('#tpName').html() =='Google' )
+		{
+			openPopup('<?echo $google_login;?>');
+		}
+	});
+	$('#tpNoLink').click(function(event)
+	{
+		$('#popUpConfirmTpLogin').popUpWindow({action: "close"});
+		$('#tpName').html( "" );
+		if( $('#socialLoginSecond').val() != ""  )
+		{
+			var socialLoginSecond = $('#socialLoginSecond').val();
+			$('#socialLoginSecond').val( "" );
+			var valGooglee=$('#checkGoogleLogin').val();
+			var valGooglee1=$('#checkGoogleLogin1').val();
+			if(valGooglee1==0){
+				if(valGooglee==1){
+					show_login_status( socialLoginSecond,true );
+				}
+			}
+		}
+	});
 });
 $('#userPassword1').keypress(function(e) {
 	  if(e.which == 13) {
