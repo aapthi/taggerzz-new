@@ -17,6 +17,8 @@ class DataboxuserController extends AbstractActionController
 	protected $loginLinkExpiredTable;
 	protected $forgotPasswordTable;
 	protected $userCollectionsTable;
+	protected $blockUserTable;
+	protected $userMessagesTable;
 
     public function indexAction()
 	{
