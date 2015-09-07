@@ -1,0 +1,1041 @@
+/*
+Copyright (C) 2015 arun
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : 25 Apr, 2015, 11:22:02 AM
+    Author     : arun
+*/
+/* Variables Declaration */
+/* Fonts Declaration */
+@font-face {
+  font-family: 'sinkin_sans300_light';
+  src: url("SinkinSans-300Light-webfont.eot");
+  src: url("SinkinSans-300Light-webfont.eot?#iefix") format("embedded-opentype"), url("SinkinSans-300Light-webfont.woff") format("woff"), url("SinkinSans-300Light-webfont.ttf") format("truetype"), url("SinkinSans-300Light-webfont.svg#sinkin_sans300_light") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'sinkin_sans800_black';
+  src: url("SinkinSans-800Black-webfont.eot");
+  src: url("SinkinSans-800Black-webfont.eot?#iefix") format("embedded-opentype"), url("SinkinSans-800Black-webfont.woff") format("woff"), url("SinkinSans-800Black-webfont.ttf") format("truetype"), url("SinkinSans-800Black-webfont.svg#sinkin_sans800_black") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+/* Animations and Transitions */
+@keyframes fadeIn {
+  from {
+    filter: alpha(opacity=0);
+    opacity: 0; }
+  to {
+    filter: alpha(opacity=100);
+    opacity: 1; } }
+@keyframes fadeOut {
+  from {
+    filter: alpha(opacity=100);
+    opacity: 1; }
+  to {
+    filter: alpha(opacity=0);
+    opacity: 0; } }
+@keyframes fadeInOut {
+  0% {
+    filter: alpha(opacity=40);
+    opacity: 0.4; }
+  50% {
+    filter: alpha(opacity=100);
+    opacity: 1; }
+  100% {
+    filter: alpha(opacity=40);
+    opacity: 0.4; } }
+@-webkit-keyframes fadeIn {
+  from {
+    filter: alpha(opacity=0);
+    opacity: 0; }
+  to {
+    filter: alpha(opacity=100);
+    opacity: 1; } }
+@-webkit-keyframes fadeOut {
+  from {
+    filter: alpha(opacity=100);
+    opacity: 1; }
+  to {
+    filter: alpha(opacity=0);
+    opacity: 0; } }
+@-webkit-keyframes fadeInOut {
+  0% {
+    filter: alpha(opacity=40);
+    opacity: 0.4; }
+  50% {
+    filter: alpha(opacity=100);
+    opacity: 1; }
+  100% {
+    filter: alpha(opacity=40);
+    opacity: 0.4; } }
+/* Generic classes Styling */
+.hidden {
+  animation-name: fadeOut;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-direction: normal;
+  -webkit-animation-name: fadeOut;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-direction: normal;
+  -webkit-animation-fill-mode: forwards;
+  /* Chrome, Safari, Opera */ }
+
+.shown {
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-direction: normal;
+  -webkit-animation-name: fadeOut;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-direction: normal;
+  -webkit-animation-fill-mode: forwards;
+  /* Chrome, Safari, Opera */ }
+
+.block, #secCreateHighlight .divCreateHighlightLinks, #secCreateHashtag .divCreateHighlightLinks, #secUploadBookmarks .divCreateHighlightLinks, #secSelectDatabox .divCreateHighlightLinks, #secCreatePrivateDatabox .divCreatePrivateDataboxLinks, #secCreatePublicDatabox .divCreatePublicDataboxLinks, #secAccountSettings .divAccountSettingsRow, #secAccountSettings .divAccountSettingsRow .divReplyToWrapper, #secCustomizeDatabox .c_DivHashTag, #secCustomizeDatabox .c_DivHeaderCommentRightBottom {
+  display: block;
+  padding: 2pt; }
+
+.inline-block, .divHeaderWrapper #divProfileDetails, .divHeaderWrapper #divProfileImage, .divHeaderWrapper .divSearchBoxes, .secHighlights .divHeadingLabel, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardContentWrapper .divCardViews, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardContentWrapper .divCardLoveTrash, .secDataboxes .divHeadingLabel, .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardViews, .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardLoveTrash, #secCreateHighlight .divCreateHighlightImage, #secCreateHashtag .divCreateHighlightImage, #secUploadBookmarks .divCreateHighlightImage, #secSelectDatabox .divCreateHighlightImage, #secCreateHighlight .divCreateHighlightNatureCategory, #secCreateHashtag .divCreateHighlightNatureCategory, #secUploadBookmarks .divCreateHighlightNatureCategory, #secSelectDatabox .divCreateHighlightNatureCategory, #secCreatePrivateDatabox .divCreatePrivateDataboxImage, #secCreatePrivateDatabox .divCreatePrivateDataboxEmail, #secCreatePublicDatabox .divCreatePublicDataboxImage, #secCreatePublicDatabox .divCreatePublicDataboxNatureCategory, #secAccountSettings .divAccountSettingsRow .divAccountSettingsCard, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard, #secAccountSettings .divAccountSettingsRow .divCommentHeader .divCommentHeaderUsernameBlock, #secAccountSettings .divAccountSettingsRow .divCommentHeader .divCommentTime, #secAccountSettings .divAccountSettingsRow .divCommentControls button, #secCustomizeDatabox .c_DivUserDetailsWrapper, #secCustomizeDatabox .c_DivHeaderCommentRight, #secCustomizeDatabox .c_DownArrow, #secCustomizeDatabox .c_DivCard .c_DivCardStoryWrapper .c_DivCardStorytellerDetails .c_DivCardStorytellerImg, #secCustomizeDatabox .c_DivCard .c_DivCardStoryWrapper .c_DivCardStorytellerDetails .c_DivCardStorytellerName {
+  display: inline-block; }
+
+.inline, .horizontalMenu li, .divHeaderWrapper .divLeftSlideMenu li, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divPublicDataboxCount, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divPrivateDataboxCount, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divTotalKeywordsCount, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divTotalLinksCount {
+  display: inline; }
+
+.input-label, #secCreateHighlight .divCreateHighlightNatureCategory .lblInpt, #secCreateHashtag .divCreateHighlightNatureCategory .lblInpt, #secUploadBookmarks .divCreateHighlightNatureCategory .lblInpt, #secSelectDatabox .divCreateHighlightNatureCategory .lblInpt, #secCreatePrivateDatabox .divCreatePrivateDataboxEmail .lblInpt, #secCreatePublicDatabox .divCreatePublicDataboxNatureCategory .lblInpt {
+  padding-left: 0pt; }
+
+input {
+  vertical-align: middle; }
+
+.verticalCenterWrapper, .mainWrapper .divLoaderWrapper, .mainWrapper #secLeftAspects {
+  display: table;
+  position: absolute;
+  height: 100%;
+  width: 100%; }
+
+.verticalCenterContainer, .mainWrapper .divLoaderWrapper .divLoader, .mainWrapper #secLeftAspects .divLeftWrapper {
+  display: table-cell;
+  vertical-align: middle;
+  width: 50%; }
+
+.verticalCenter, .mainWrapper .divLoaderWrapper .divLoader .divLogoText {
+  margin-left: auto;
+  margin-right: auto;
+  width: 15%; }
+
+.textCenter, .mainWrapper .divLoaderWrapper .divLoader .divLogoText, .secHighlights, .secHighlights .divHeadingLabel, .secHighlights .divCardsMainWrapper .divNavLeftArrow, .secHighlights .divCardsMainWrapper .divNavRightArrow, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .divCardHashtag, .secDataboxes, .secDataboxes .divHeadingLabel, .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardHashtag, .mainContainerWrapper #secModal .divModalBlurBackground .divModalContentWrapper .divModalBox, #secSelectDatabox .divSelectDataboxContentWrapper .divSelectDatabox, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divUserSummaryRow, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divUserSummaryRow .divUserSummaryColumn, #secCustomizeDatabox .c_DivHashTag, #secCustomizeDatabox .c_DivTitle, #secCustomizeDatabox .c_DivCardUser, #secCustomizeDatabox .c_DownArrow, #secCustomizeDatabox .c_DivCard .c_DivCardActions .c_DivCardAction {
+  text-align: center; }
+
+.textLeft, .secHighlights .divCardsMainWrapper .divCardsWrapper, .secDataboxes .divCardsWrapper .divCard {
+  text-align: left; }
+
+.textRight, .divHeaderWrapper .divLeftSlideMenu, .divHeaderWrapper .divSearchBoxes, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .ulCreatedCollectionList li .aCollectedCollectionEdit, #secAccountSettings .divAccountSettingsRow .divCommentHeader .divCommentTime {
+  text-align: right; }
+
+.left, .secHighlights .divCardsMainWrapper, .secHighlights .divCardsMainWrapper .divNavLeftArrow, .secHighlights .divCardsMainWrapper .divNavRightArrow, .secHighlights .divCardsMainWrapper .divCardsWrapper, .mainContainerWrapper #secModal .divModalBlurBackground .divModalContentWrapper .divModalBox, #secSelectDatabox .divSelectDataboxContentWrapper .divSelectDatabox, #secCustomizeDatabox .c_BtnReport, #secCustomizeDatabox .c_BtnShare {
+  float: left; }
+
+.right, .divHeaderWrapper .divSearchBoxes .aSearch, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardContentWrapper .divCardLoveTrash, .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardLoveTrash, #secAccountSettings .divAccountSettingsRow .divAccountSettingsCard .divAccountSettingsHeading .btnComposeMessage, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divAccountSettingsHeading .btnComposeMessage, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .divAccountSettingsHeading .btnComposeMessage, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divUserSummaryHeading .btnComposeMessage, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .ulCreatedCollectionList li .spnNewMessageLabel, #secCustomizeDatabox .c_BtnEditTitle, #secCustomizeDatabox .c_BtnAddComment, #secCustomizeDatabox .c_BtnPublish {
+  float: right; }
+
+.onTop, .mainWrapper .divLoaderWrapper, .mainContainerWrapper #secModal .divModalBlurBackground {
+  z-index: 9; }
+
+.onTopLessOne, .divHeaderWrapper #divAccountInfo, .secHighlights .divCardsMainWrapper .divNavLeftArrow, .secHighlights .divCardsMainWrapper .divNavRightArrow {
+  z-index: 8; }
+
+.fatFont, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .divCardHashtag, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardContentWrapper .divCardTitle, .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardHashtag, .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardTitle, #secAccountSettings .divAccountSettingsRow .divAccountSettingsCard .divAccountSettingsHeading, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divAccountSettingsHeading, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .divAccountSettingsHeading, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divUserSummaryHeading, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divPublicDataboxCount, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divPrivateDataboxCount, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divTotalKeywordsCount, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divTotalLinksCount, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divVotesCount, #secAccountSettings .divAccountSettingsRow .divCommentHeader .divCommentHeaderUsernameBlock .divCommentUsername, #secAccountSettings .divAccountSettingsRow .divCommentHeader .divCommentTime, #secAccountSettings .divAccountSettingsRow .divReplyToWrapper .divReplyToControls .divReplyToMaxCharsText, #secCustomizeDatabox .c_DivHashTag, #secCustomizeDatabox .c_SpnUsername, #secCustomizeDatabox .c_DivCard .c_DivCardActions, #secCustomizeDatabox .c_DivCard .c_DivCardStoryWrapper .c_DivCardStory {
+  font-family: sinkin_sans800_black; }
+
+.whiteFont, .primaryButton, #secUploadBookmarks .uploadBookmarksWrapper .inptUploadBookmarkFile, #secAccountSettings .divAccountSettingsRow .btnSaveAccount, .btnBlack, .mainWrapper #secLeftAspects .divLeftWrapper, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .divCardUser .divCardUserName, .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardUser .divCardUserName, #secCustomizeDatabox .c_DivCard .c_DivCardStoryWrapper .c_DivCardStorytellerDetails .c_DivCardStorytellerName {
+  color: white; }
+
+.highlightFont, .divHeaderWrapper .divSearchBoxes .inptSearchHashTag {
+  color: #e56470; }
+
+.dimFontColor, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardContentWrapper .divCardDescription, .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardDescription {
+  color: rgba(34, 34, 34, 0.7); }
+
+.smallFont, .input-label, #secCreateHighlight .divCreateHighlightNatureCategory .lblInpt, #secCreateHashtag .divCreateHighlightNatureCategory .lblInpt, #secUploadBookmarks .divCreateHighlightNatureCategory .lblInpt, #secSelectDatabox .divCreateHighlightNatureCategory .lblInpt, #secCreatePrivateDatabox .divCreatePrivateDataboxEmail .lblInpt, #secCreatePublicDatabox .divCreatePublicDataboxNatureCategory .lblInpt, .divHeaderWrapper .divLeftSlideMenu, .divHeaderWrapper .divSearchBoxes input[type="text"], .secHighlights .divHeadingLabel, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .divCardUser .divCardUserName, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardContentWrapper .divCardLoveTrash, .secDataboxes .divHeadingLabel, .secDataboxes .divCardsWrapper .divCard, .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardUser .divCardUserName, .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardLoveTrash, .mainContainerWrapper #secModal .divModalBlurBackground .divModalContentWrapper .divModalBox .divModalDescription, #secSelectDatabox .divSelectDataboxContentWrapper .divSelectDatabox .divSelectDataboxDescription, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .ulCreatedCollectionList li .aCollectedCollectionEdit, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .ulCreatedCollectionList li .spnNewMessageLabel, #secAccountSettings .divAccountSettingsRow .divCommentHeader .divCommentTime, #secAccountSettings .divAccountSettingsRow .divCommentText, #secAccountSettings .divAccountSettingsRow .divReplyToWrapper .divReplyToControls .divReplyToMaxCharsText, #secCustomizeDatabox .c_BtnEditTitle, #secCustomizeDatabox .c_DivHeaderCommentWrapper, #secCustomizeDatabox .c_DivCard .c_DivCardDescription, #secCustomizeDatabox .c_DivCard .c_DivCardActions, #secCustomizeDatabox .c_DivCard .c_DivCardStoryWrapper .c_DivCardStorytellerDetails .c_DivCardStorytellerName, #secCustomizeDatabox .c_DivCard .c_DivCardStoryWrapper .c_DivCardStory {
+  font-size: 8pt; }
+
+.defaultFont, .mainWrapper .divLoaderWrapper, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .divCardUser .divCardUserName, .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardUser .divCardUserName {
+  font-family: arial; }
+
+.verySmallFont, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardContentWrapper .divCardViews, .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardViews {
+  font-size: 6pt; }
+
+.largeFont {
+  font-size: 9.5pt; }
+
+.greyBackground, .secHighlights .divHeadingLabel, .secHighlights .divCardsMainWrapper, .secDataboxes .divHeadingLabel, .secDataboxes .divCardsWrapper, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .ulCreatedCollectionList li:nth-child(even), #secCustomizeDatabox .c_DivTitleWrapper, #secCustomizeDatabox .c_DivHeaderCommentWrapper {
+  background: rgba(0, 0, 0, 0.03); }
+
+.bottomSticky {
+  position: absolute;
+  left: 6pt;
+  bottom: 6pt;
+  z-index: 1; }
+
+.rightSticky {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  z-index: 4;
+  width: 60%;
+  height: 100%; }
+  .rightSticky img {
+    opacity: 0.60;
+    filter: alpha(opacity=60);
+    /* For IE8 and earlier */ }
+
+.leftSticky, .mainWrapper #secLeftAspects, .divHeaderWrapper #divAccountInfo {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 1;
+  width: 20%;
+  opacity: 0.9;
+  filter: alpha(opacity=90);
+  /* For IE8 and earlier */
+  text-wrap: normal; }
+
+.positionRelative, .secHighlights .divCardsMainWrapper .divNavLeftArrow, .secHighlights .divCardsMainWrapper .divNavRightArrow, .secHighlights .divCardsMainWrapper .divCardsWrapper, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper, .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper {
+  position: relative; }
+
+.positionFixed, .mainContainerWrapper #secModal .divModalBlurBackground, .mainContainerWrapper #secModal .divModalBlurBackground .divModalContentWrapper .divModalClose {
+  position: fixed; }
+
+.positionAbsolute, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .divCardHashtag, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .divCardUser, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .divCardSharedLinks, .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardHashtag, .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardUser, .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardSharedLinks {
+  position: absolute; }
+
+.width20, #secAccountSettings .divAccountSettingsRow .divCommentHeader .divCommentTime {
+  width: 20%; }
+
+.width25, .divHeaderWrapper #divAccountInfo, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardContentWrapper .divCardViews, .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardViews {
+  width: 25%; }
+
+.width30,#secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divUserSummaryRow .divUserSummaryColumn {
+  width: 30%; }
+.divHeaderWrapper .divSearchBoxes input[type="text"]{
+	width: 38%; 
+}  
+
+.width35 {
+  width: 35%; }
+
+.width40 {
+  width: 40%; }
+
+.width45, #secAccountSettings .divAccountSettingsRow .divAccountSettingsCard, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard {
+  width: 45%; }
+
+.width50, .mainContainerWrapper #secModal .divModalBlurBackground .divModalContentWrapper .divModalBox, #secCreateHighlight .divCreateHighlightHashtag *, #secCreateHashtag .divCreateHighlightHashtag *, #secUploadBookmarks .divCreateHighlightHashtag *, #secSelectDatabox .divCreateHighlightHashtag *, #secCreateHighlight .divCreateHighlightTitle *, #secCreateHashtag .divCreateHighlightTitle *, #secUploadBookmarks .divCreateHighlightTitle *, #secSelectDatabox .divCreateHighlightTitle *, #secCreateHighlight .divCreateHighlightImage, #secCreateHashtag .divCreateHighlightImage, #secUploadBookmarks .divCreateHighlightImage, #secSelectDatabox .divCreateHighlightImage, #secSelectDatabox .divSelectDataboxContentWrapper .divSelectDatabox, #secCreatePrivateDatabox .divCreatePrivateDataboxHashtag *, #secCreatePrivateDatabox .divCreatePrivateDataboxTitle *, #secCreatePrivateDatabox .divCreatePrivateDataboxUniqueCode *, #secCreatePrivateDatabox .divCreatePrivateDataboxImage, #secCreatePublicDatabox .divCreatePublicDataboxHashtag *, #secCreatePublicDatabox .divCreatePublicDataboxTitle *, #secCreatePublicDatabox .divCreatePublicDataboxImage, #secAccountSettings .divAccountSettingsRow .divAccountSettingsCard .divAccountSettingsForm input, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divAccountSettingsForm input, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .divAccountSettingsForm input {
+  width: 50%; }
+
+.width75, #secCreateHighlight, #secCreateHashtag, #secUploadBookmarks, #secSelectDatabox, #secCreatePrivateDatabox, #secCreatePublicDatabox, #secAccountSettings .divAccountSettingsRow .divCommentHeader .divCommentHeaderUsernameBlock {
+  width: 75%; }
+
+.width80, .mainContainerWrapper #secModal .divModalBlurBackground .divModalContentWrapper .divModalBox .divModalDescription, #secSelectDatabox .divSelectDataboxContentWrapper .divSelectDatabox .divSelectDataboxDescription {
+  width: 80%; }
+
+.width85, .divHeaderWrapper .divLeftSlideMenu, .divHeaderWrapper .divSearchBoxes, .mainContainerWrapper #secModal .divModalBlurBackground .divModalContentWrapper, #secSelectDatabox .divSelectDataboxContentWrapper {
+  width: 85%; }
+
+.width90, #secCreateHighlight .divCreateHighlightHashtag, #secCreateHashtag .divCreateHighlightHashtag, #secUploadBookmarks .divCreateHighlightHashtag, #secSelectDatabox .divCreateHighlightHashtag, #secCreateHighlight .divCreateHighlightTitle, #secCreateHashtag .divCreateHighlightTitle, #secUploadBookmarks .divCreateHighlightTitle, #secSelectDatabox .divCreateHighlightTitle, #secCreateHighlight .divCreateHighlightLinks .inptLinks, #secCreateHashtag .divCreateHighlightLinks .inptLinks, #secUploadBookmarks .divCreateHighlightLinks .inptLinks, #secSelectDatabox .divCreateHighlightLinks .inptLinks, #secCreateHighlight .divCreateHighlightNatureCategory .inptContentCategory, #secCreateHashtag .divCreateHighlightNatureCategory .inptContentCategory, #secUploadBookmarks .divCreateHighlightNatureCategory .inptContentCategory, #secSelectDatabox .divCreateHighlightNatureCategory .inptContentCategory, #secCreateHashtag .createHashtagWrapper .inptCreateHashtag, #secCreateHashtag .createHashtagWrapper .inptCreateTitle, #secCreatePrivateDatabox .divCreatePrivateDataboxHashtag, #secCreatePrivateDatabox .divCreatePrivateDataboxTitle, #secCreatePrivateDatabox .divCreatePrivateDataboxUniqueCode, #secCreatePrivateDatabox .divCreatePrivateDataboxLinks .inptLinks, #secCreatePrivateDatabox .divCreatePrivateDataboxEmail .inptEmail, #secCreatePublicDatabox .divCreatePublicDataboxHashtag, #secCreatePublicDatabox .divCreatePublicDataboxTitle, #secCreatePublicDatabox .divCreatePublicDataboxLinks .inptLinks, #secCreatePublicDatabox .divCreatePublicDataboxNatureCategory .inptContentCategory, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .ulCreatedCollectionList li .divCreatedCollectionText, #secCustomizeDatabox .c_DivHeaderComment {
+  width: 90%; }
+
+.width95, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard {
+  width: 95%; }
+
+.width100, .secHighlights .divCardsMainWrapper, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .imgCardImage, .secDataboxes .divCardsWrapper, .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .imgCardImage, .mainContainerWrapper #secModal .divModalBlurBackground, #secAccountSettings, #secAccountSettings .divAccountSettingsRow, #secAccountSettings .divAccountSettingsRow .divAccountSettingsCard .divAccountSettingsHeading, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divAccountSettingsHeading, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .divAccountSettingsHeading, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divUserSummaryHeading, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divUserSummaryRow, #secAccountSettings .divAccountSettingsRow .divReplyToWrapper .txtReplyTo, #secAccountSettings .divAccountSettingsRow .divReplyToWrapper .txtReplyToText, #secCustomizeDatabox .c_DivCustomizationWrapper, #secCustomizeDatabox .c_DivHashTag, #secCustomizeDatabox .c_DivTitleWrapper, #secCustomizeDatabox .c_DivHeaderCommentRightBottom, #secCustomizeDatabox .c_DivCard img, #secCustomizeDatabox .c_DivCard .c_DivCardActions {
+  width: 100%; }
+
+.height10 {
+  height: 10%; }
+
+.height15 {
+  height: 15%; }
+
+.height20 {
+  height: 20%; }
+
+.height25 {
+  height: 25%; }
+
+.height50 {
+  height: 50%; }
+
+.height75, .mainContainerWrapper #secModal .divModalBlurBackground .divModalContentWrapper, #secSelectDatabox .divSelectDataboxContentWrapper {
+  height: 75%; }
+
+.height100, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .imgCardImage, .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .imgCardImage, .mainContainerWrapper #secModal .divModalBlurBackground {
+  height: 100%; }
+
+.autoPadding {
+  padding: 10pt; }
+
+.minPadding, input, .horizontalMenu li, .divHeaderWrapper .divLeftSlideMenu li, .divHeaderWrapper #divAccountInfo, .divHeaderWrapper .divSearchBoxes input[type="text"], .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .divCardHashtag, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .divCardSharedLinks, .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardHashtag, .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardSharedLinks, #secCreateHighlight .divCreateHighlightHashtag .inptHashtag, #secCreateHashtag .divCreateHighlightHashtag .inptHashtag, #secUploadBookmarks .divCreateHighlightHashtag .inptHashtag, #secSelectDatabox .divCreateHighlightHashtag .inptHashtag, #secCreateHighlight .divCreateHighlightHashtag .inptTitle, #secCreateHashtag .divCreateHighlightHashtag .inptTitle, #secUploadBookmarks .divCreateHighlightHashtag .inptTitle, #secSelectDatabox .divCreateHighlightHashtag .inptTitle, #secCreateHighlight .divCreateHighlightTitle .inptHashtag, #secCreateHashtag .divCreateHighlightTitle .inptHashtag, #secUploadBookmarks .divCreateHighlightTitle .inptHashtag, #secSelectDatabox .divCreateHighlightTitle .inptHashtag, #secCreateHighlight .divCreateHighlightTitle .inptTitle, #secCreateHashtag .divCreateHighlightTitle .inptTitle, #secUploadBookmarks .divCreateHighlightTitle .inptTitle, #secSelectDatabox .divCreateHighlightTitle .inptTitle, #secCreateHighlight .divCreateHighlightLinks .inptLinks, #secCreateHashtag .divCreateHighlightLinks .inptLinks, #secUploadBookmarks .divCreateHighlightLinks .inptLinks, #secSelectDatabox .divCreateHighlightLinks .inptLinks, #secCreatePrivateDatabox .divCreatePrivateDataboxHashtag .inptHashtag, #secCreatePrivateDatabox .divCreatePrivateDataboxHashtag .inptTitle, #secCreatePrivateDatabox .divCreatePrivateDataboxTitle .inptHashtag, #secCreatePrivateDatabox .divCreatePrivateDataboxTitle .inptTitle, #secCreatePrivateDatabox .divCreatePrivateDataboxUniqueCode .inptHashtag, #secCreatePrivateDatabox .divCreatePrivateDataboxUniqueCode .inptTitle, #secCreatePrivateDatabox .divCreatePrivateDataboxHashtag .inptUniqueCode, #secCreatePrivateDatabox .divCreatePrivateDataboxTitle .inptUniqueCode, #secCreatePrivateDatabox .divCreatePrivateDataboxUniqueCode .inptUniqueCode, #secCreatePrivateDatabox .divCreatePrivateDataboxLinks .inptLinks, #secCreatePublicDatabox .divCreatePublicDataboxHashtag .inptHashtag, #secCreatePublicDatabox .divCreatePublicDataboxHashtag .inptTitle, #secCreatePublicDatabox .divCreatePublicDataboxTitle .inptHashtag, #secCreatePublicDatabox .divCreatePublicDataboxTitle .inptTitle, #secCreatePublicDatabox .divCreatePublicDataboxLinks .inptLinks, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divUserSummaryRow, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .ulCreatedCollectionList li, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .ulCreatedCollectionList li .spnNewMessageLabel, #secAccountSettings .divAccountSettingsRow .divReplyToWrapper .txtReplyToText, #secCustomizeDatabox .c_DivHashTag, #secCustomizeDatabox .c_DivTitle {
+  padding: 2pt; }
+
+.moderatePadding, .secHighlights .divHeadingLabel, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardContentWrapper, .secDataboxes .divHeadingLabel, .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper, #secCustomizeDatabox .c_DivTitleWrapper, #secCustomizeDatabox .c_DivUserDetailsWrapper, #secCustomizeDatabox .c_DownArrow, #secCustomizeDatabox .c_DivCard .c_DivCardDescription {
+  padding: 5pt; }
+
+.extraPadding, #secCreateHighlight .divCreateHighlightLinks, #secCreateHashtag .divCreateHighlightLinks, #secUploadBookmarks .divCreateHighlightLinks, #secSelectDatabox .divCreateHighlightLinks, #secCreateHighlight .divCreateHighlightImage, #secCreateHashtag .divCreateHighlightImage, #secUploadBookmarks .divCreateHighlightImage, #secSelectDatabox .divCreateHighlightImage, #secCreateHashtag .createHashtagWrapper, #secUploadBookmarks .uploadBookmarksWrapper, #secCreatePrivateDatabox .divCreatePrivateDataboxLinks, #secCreatePrivateDatabox .divCreatePrivateDataboxImage, #secCreatePublicDatabox .divCreatePublicDataboxLinks, #secCreatePublicDatabox .divCreatePublicDataboxImage, #secAccountSettings .divAccountSettingsRow .divAccountSettingsCard, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard, #secCustomizeDatabox .c_DivCardsWrapper, #secCustomizeDatabox .c_DivCard .c_DivCardStoryWrapper {
+  padding: 7pt; }
+
+.xExtraPadding {
+  padding: 10pt; }
+
+.widePadding, .primaryButton, #secUploadBookmarks .uploadBookmarksWrapper .inptUploadBookmarkFile, #secAccountSettings .divAccountSettingsRow .btnSaveAccount, .btnBlack, .btnGrey, #secAccountSettings .divAccountSettingsRow .divAccountSettingsCard .divAccountSettingsHeading .btnComposeMessage, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divAccountSettingsHeading .btnComposeMessage, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .divAccountSettingsHeading .btnComposeMessage, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divUserSummaryHeading .btnComposeMessage, #secAccountSettings .divAccountSettingsRow .btnDeactivateAccount, #secAccountSettings .divAccountSettingsRow .divCommentControls button, #secAccountSettings .divAccountSettingsRow .divReplyToWrapper .divReplyToControls button, #secCustomizeDatabox .c_BtnEditTitle, #secCustomizeDatabox .c_BtnReport, #secCustomizeDatabox .c_BtnShare, #secCustomizeDatabox .c_BtnAddComment, #secCustomizeDatabox .c_BtnPublish {
+  padding: 5pt 7pt; }
+
+.mobile, .divHeaderWrapper .divMobileMenuWrapper {
+  display: none; }
+  .mobile *, .divHeaderWrapper .divMobileMenuWrapper * {
+    display: none; }
+
+.desktop, .divHeaderWrapper #divAccountInfo {
+  display: block; }
+
+.primaryButton, #secUploadBookmarks .uploadBookmarksWrapper .inptUploadBookmarkFile, #secAccountSettings .divAccountSettingsRow .btnSaveAccount {
+  border: 1px solid #f97e76;
+  background: #f97e76;
+  cursor: pointer; }
+
+.btnBlack {
+  border: 1px solid black;
+  background: black;
+  cursor: pointer; }
+
+.btnGrey, #secAccountSettings .divAccountSettingsRow .divAccountSettingsCard .divAccountSettingsHeading .btnComposeMessage, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divAccountSettingsHeading .btnComposeMessage, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .divAccountSettingsHeading .btnComposeMessage, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divUserSummaryHeading .btnComposeMessage, #secAccountSettings .divAccountSettingsRow .btnDeactivateAccount, #secAccountSettings .divAccountSettingsRow .divCommentControls button, #secAccountSettings .divAccountSettingsRow .divReplyToWrapper .divReplyToControls button, #secCustomizeDatabox .c_BtnEditTitle, #secCustomizeDatabox .c_BtnReport, #secCustomizeDatabox .c_BtnShare, #secCustomizeDatabox .c_BtnAddComment, #secCustomizeDatabox .c_BtnPublish {
+  border: 1px solid #c8c8c8;
+  background: #d2d2d2;
+  color: rgba(0, 0, 0, 0.7);
+  cursor: pointer; }
+
+.marginallyCenter, .secHighlights, .secHighlights .divHeadingLabel, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .divCardUser img, .secDataboxes .divHeadingLabel, .secDataboxes .divCardsWrapper, .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardUser img, .mainContainerWrapper #secModal .divModalBlurBackground .divModalContentWrapper, .mainContainerWrapper #secModal .divModalBlurBackground .divModalContentWrapper .divModalBox .imgModalBoxImage, .mainContainerWrapper #secModal .divModalBlurBackground .divModalContentWrapper .divModalBox .divModalDescription, #secCreateHighlight, #secCreateHashtag, #secUploadBookmarks, #secSelectDatabox, #secCreateHighlight .divCreateHighlightLinks, #secCreateHashtag .divCreateHighlightLinks, #secUploadBookmarks .divCreateHighlightLinks, #secSelectDatabox .divCreateHighlightLinks, #secSelectDatabox .divSelectDataboxContentWrapper, #secSelectDatabox .divSelectDataboxContentWrapper .divSelectDatabox .imgDataboxImage, #secSelectDatabox .divSelectDataboxContentWrapper .divSelectDatabox .divSelectDataboxDescription, #secCreatePrivateDatabox, #secCreatePrivateDatabox .divCreatePrivateDataboxLinks, #secCreatePublicDatabox, #secCreatePublicDatabox .divCreatePublicDataboxLinks, #secAccountSettings .divAccountSettingsRow {
+  margin: 0px auto; }
+
+.horizontalMenu, .divHeaderWrapper .divLeftSlideMenu {
+  list-style: none;
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px; }
+  .horizontalMenu li:not(:last-child)::after, .divHeaderWrapper .divLeftSlideMenu li:not(:last-child)::after {
+    content: ' | '; }
+  .horizontalMenu li a, .divHeaderWrapper .divLeftSlideMenu li a {
+    text-decoration: none; }
+    .horizontalMenu li a:hover, .divHeaderWrapper .divLeftSlideMenu li a:hover {
+      color: #e56470; }
+
+/* Specific elements styling */
+* {
+  padding: 0px;
+  margin: 0px; }
+
+body {
+  font: 100% sinkin_sans300_light, Arial;
+  color: rgba(0, 0, 0, 0.9);
+  background: white;
+  overflow-x: hidden; }
+
+a {
+  color: rgba(0, 0, 0, 0.9);
+  font-family: sinkin_sans300_light, Arial; }
+
+.imgBackground, .mainWrapper {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  min-width: 100%;
+  min-height: 100%;
+  width: 100%;
+  height: 100%;
+  z-index: 0; }
+
+#imgBackgoundOverlay {
+  opacity: 0.3;
+  filter: alpha(opacity=30);
+  /* For IE8 and earlier */ }
+
+.mainWrapper {
+  background: url("../../img/bg1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat; }
+
+.imgLogo {
+  vertical-align: middle;
+  z-index: 2; }
+
+.divLogoText {
+  margin-left: 10pt; }
+
+#divLogoWrapper {
+  width: 10%; }
+
+.divLeftWrapper {
+  line-height: 70%; }
+
+.divLoaderWrapper {
+  background: white; }
+
+.divLoaderText img {
+  width: 90%;
+  vertical-align: middle;
+  animation-name: fadeInOut;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
+  animation-direction: normal;
+  -webkit-animation-name: fadeInOut;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-direction: normal;
+  -webkit-animation-fill-mode: forwards;
+  /* Chrome, Safari, Opera */ }
+
+.divCenter {
+  opacity: 0;
+  z-index: 1; }
+  .divCenter ul li {
+    display: none;
+    list-style: none;
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+    z-index: 1; }
+    .divCenter ul li img {
+      height: 90pt; }
+
+.secCenterAspects {
+  z-index: 1; }
+
+.divLoginWrapper {
+  position: absolute;
+  width: 30%;
+  top: 41%;
+  right: 5%; }
+  .divLoginWrapper .btnSubmit {
+    border: none;
+    background: #f97e76;
+    padding: 3pt 8pt;
+    color: white; }
+  .divLoginWrapper .btnSignup {
+    border: none;
+    background: #f9f9f9;
+    padding: 3pt 8pt; }
+  .divLoginWrapper input {
+    width: 100% !important;
+    padding: 4pt; }
+  .divLoginWrapper img {
+    opacity: 1;
+    filter: alpha(opacity=100);
+    /* For IE8 and earlier */ }
+
+.imgSocialImage {
+  width: 35pt;
+  padding: 1pt;
+  cursor: pointer; }
+
+#divTriangle {
+  position: absolute;
+  width: 0;
+  height: 0;
+  right: 0;
+  top: 0;
+  border-top: 350pt solid transparent;
+  /*border-right: 350pt solid rgba(146, 192, 238, 0.8);*/
+  border-right: 350pt solid rgba(255, 255, 255, 0.4);
+  border-bottom: 350pt solid transparent; }
+
+/* Landing Page Styling */
+/* Header Page Styling */
+.divHeaderWrapper {
+  /* Specific Class Styles Consolidation */ }
+  .divHeaderWrapper #divProfileDetails {
+    line-height: 7pt; }
+  .divHeaderWrapper #divProfileImage {
+    vertical-align: top; }
+  .divHeaderWrapper .divLeftSlideMenu.mobile, .divHeaderWrapper .divLeftSlideMenu.divMobileMenuWrapper {
+    z-index: -1; }
+  .divHeaderWrapper .divSearchBoxes input[type="text"] {
+    font-family: sinkin_sans300_light, Arial; }
+  .divHeaderWrapper .divSearchBoxes .inptSearchHashTag::-webkit-input-placeholder {
+    color: #e56470; }
+  .divHeaderWrapper .divSearchBoxes .aSearch {
+    background: url("../../img/search.png");
+    background-size: 20pt 20pt;
+    width: 20pt;
+    height: 20pt;
+    margin-left: 5pt; }
+
+/* Highlights Styling */
+.secHighlights {
+  margin-top: 12pt; }
+  .secHighlights .divHeadingLabel {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 0px; }
+  .secHighlights .divCardsMainWrapper {
+    margin: 5pt 0pt; }
+    .secHighlights .divCardsMainWrapper .divNavLeftArrow {
+      padding: 5% 0%;
+      width: 3%;
+      cursor: pointer; }
+      .secHighlights .divCardsMainWrapper .divNavLeftArrow:hover {
+        background: rgba(0, 0, 0, 0.1); }
+    .secHighlights .divCardsMainWrapper .divNavRightArrow {
+      padding: 5% 0%;
+      width: 3%;
+      cursor: pointer; }
+      .secHighlights .divCardsMainWrapper .divNavRightArrow:hover {
+        background: rgba(0, 0, 0, 0.1); }
+    .secHighlights .divCardsMainWrapper .divCardsWrapper {
+      width: 94%;
+      overflow-x: auto;
+      white-space: nowrap;
+      overflow: hidden; }
+      .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard {
+        vertical-align: top;
+        white-space: normal;
+        background: white;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        cursor: move !important;
+        box-shadow: 0px 0px 1px 0px #ABABAB;
+        -webkit-box-shadow: 0px 0px 1px 0px #ABABAB;
+        -moz-box-shadow: 0px 0px 1px 0px #ABABAB;
+        -o-box-shadow: 0px 0px 1px 0px #ABABAB; }
+        .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard:hover .divCardImageWrapper .divCardUser {
+          display: block; }
+        .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard a {
+          text-decoration: none; }
+        .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .imgCardImage {
+          z-index: 1;
+          opacity: 0.9;
+          filter: alpha(opacity=90);
+          /* For IE8 and earlier */ }
+          .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .imgCardImage:hover {
+            opacity: 1;
+            filter: alpha(opacity=100);
+            /* For IE8 and earlier */ }
+        .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .divCardHashtag {
+          z-index: 1;
+          top: 2%;
+          left: 0%;
+          background: white;
+          min-width: 40%;
+          text-decoration: none;
+          font-size: 8pt;
+          font-weight: bold; }
+        .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .divCardUser {
+          z-index: 2;
+          top: 5%;
+          right: 0%;
+          max-width: 50%;
+          margin: 0 0;
+          padding: 0 0;
+          display: none; }
+          .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .divCardUser img {
+            width: 25pt;
+            height: 25pt;
+            margin: 0 0;
+            padding: 0 0; }
+          .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .divCardUser .divCardUserName {
+            padding: 3.5pt;
+            background: black;
+            overflow: hidden; }
+        .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .divCardSharedLinks {
+          z-index: 1;
+          bottom: 10%;
+          right: 0%;
+          background: #fdce02;
+          min-width: 40%; }
+        .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardContentWrapper .divCardLoveTrash {
+          background: rgba(0, 0, 0, 0.5);
+          margin: -6pt -5pt 0pt 0pt;
+          padding: 3pt 10pt;
+          color: white; }
+          .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardContentWrapper .divCardLoveTrash img {
+            max-height: 10pt; }
+        .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardContentWrapper .divCardKeywords {
+          font-size: 7.1pt; }
+        .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardContentWrapper .divCardTitle {
+          border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+          padding-bottom: 5pt;
+          margin-bottom: 5pt; }
+        .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardContentWrapper .divCardDescription {
+          text-align: justify; }
+
+.secDataboxes {
+  margin-top: 12pt; }
+  .secDataboxes .divHeadingLabel {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 0px; }
+  .secDataboxes #divDataboxWrapper[data-columns]::before {
+    content: '4 .left.width25'; }
+  @media screen and (min-width: 1500px) {
+    .secDataboxes #divDataboxWrapper[data-columns]::before {
+      content: '5 .left.width20'; } }
+  .secDataboxes .divCardsWrapper .divCard {
+    background: white;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    border-radius: 5pt;
+    margin: 5pt; }
+    .secDataboxes .divCardsWrapper .divCard:hover > .secDataboxes .divCardsWrapper .divCard.imgCardImage {
+      opacity: 1;
+      filter: alpha(opacity=100);
+      /* For IE8 and earlier */ }
+    .secDataboxes .divCardsWrapper .divCard:hover .divCardImageWrapper .divCardUser {
+      display: block; }
+    .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .imgCardImage {
+      z-index: 1;
+      opacity: 0.9;
+      filter: alpha(opacity=90);
+      /* For IE8 and earlier */ }
+      .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .imgCardImage:hover {
+        opacity: 1;
+        filter: alpha(opacity=100);
+        /* For IE8 and earlier */ }
+    .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardHashtag {
+      z-index: 2;
+      top: 2%;
+      left: 0%;
+      background: white;
+      min-width: 40%;
+      text-decoration: none;
+      font-size: 8pt;
+      font-weight: bold; }
+    .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardUser {
+      z-index: 2;
+      top: 5%;
+      right: 0%;
+      max-width: 50%;
+      margin: 0 0;
+      padding: 0 0;
+      display: none; }
+      .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardUser img {
+        width: 25pt;
+        height: 25pt;
+        margin: 0 0;
+        padding: 0 0; }
+      .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardUser .divCardUserName {
+        padding: 3.5pt;
+        background: black;
+        overflow: hidden; }
+    .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardSharedLinks {
+      z-index: 2;
+      bottom: 10%;
+      right: 0%;
+      background: #fdce02;
+      min-width: 40%; }
+    .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardLoveTrash {
+      background: rgba(0, 0, 0, 0.5);
+      margin: -6pt -5pt 0pt 0pt;
+      padding: 3pt 10pt;
+      color: white; }
+      .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardLoveTrash img {
+        max-height: 10pt; }
+    .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardKeywords {
+      font-size: 7.1pt; }
+    .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardTitle {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+      padding-bottom: 5pt;
+      margin-bottom: 5pt; }
+    .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardDescription {
+      text-align: justify; }
+
+.mainContainerWrapper {
+  overflow: auto; }
+  .mainContainerWrapper #secModal {
+    display: none; }
+    .mainContainerWrapper #secModal .divModalBlurBackground {
+      top: 0px;
+      left: 0px;
+      background: rgba(255, 255, 255, 0.95); }
+      .mainContainerWrapper #secModal .divModalBlurBackground .divModalContentWrapper {
+        background: rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(0, 0, 0, 0.03);
+        padding-top: 10pt; }
+        .mainContainerWrapper #secModal .divModalBlurBackground .divModalContentWrapper .divModalClose {
+          right: 10pt;
+          top: 0pt;
+          font-size: 20pt;
+          cursor: pointer; }
+        .mainContainerWrapper #secModal .divModalBlurBackground .divModalContentWrapper a {
+          text-decoration: none; }
+          .mainContainerWrapper #secModal .divModalBlurBackground .divModalContentWrapper a:hover {
+            text-decoration: underline; }
+        .mainContainerWrapper #secModal .divModalBlurBackground .divModalContentWrapper .divModalBox .imgModalBoxImage {
+          max-width: 100%; }
+
+/* Create Highlight Page Styling */
+#secCreateHighlight, #secCreateHashtag, #secUploadBookmarks, #secSelectDatabox {
+  padding: 20pt;
+  margin-top: 12pt;
+  display: table;
+  background: #e0e8ed;
+  font-size: 10pt; }
+  #secCreateHighlight .heading, #secCreateHashtag .heading, #secUploadBookmarks .heading, #secSelectDatabox .heading {
+    padding-bottom: 10pt;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    font-size: 12pt; }
+  #secCreateHighlight .divCreateHighlightHashtag, #secCreateHashtag .divCreateHighlightHashtag, #secUploadBookmarks .divCreateHighlightHashtag, #secSelectDatabox .divCreateHighlightHashtag, #secCreateHighlight .divCreateHighlightTitle, #secCreateHashtag .divCreateHighlightTitle, #secUploadBookmarks .divCreateHighlightTitle, #secSelectDatabox .divCreateHighlightTitle {
+    display: table-row; }
+    #secCreateHighlight .divCreateHighlightHashtag .inptHashtag, #secCreateHashtag .divCreateHighlightHashtag .inptHashtag, #secUploadBookmarks .divCreateHighlightHashtag .inptHashtag, #secSelectDatabox .divCreateHighlightHashtag .inptHashtag, #secCreateHighlight .divCreateHighlightHashtag .inptTitle, #secCreateHashtag .divCreateHighlightHashtag .inptTitle, #secUploadBookmarks .divCreateHighlightHashtag .inptTitle, #secSelectDatabox .divCreateHighlightHashtag .inptTitle, #secCreateHighlight .divCreateHighlightTitle .inptHashtag, #secCreateHashtag .divCreateHighlightTitle .inptHashtag, #secUploadBookmarks .divCreateHighlightTitle .inptHashtag, #secSelectDatabox .divCreateHighlightTitle .inptHashtag, #secCreateHighlight .divCreateHighlightTitle .inptTitle, #secCreateHashtag .divCreateHighlightTitle .inptTitle, #secUploadBookmarks .divCreateHighlightTitle .inptTitle, #secSelectDatabox .divCreateHighlightTitle .inptTitle {
+      width: 200%; }
+    #secCreateHighlight .divCreateHighlightHashtag *, #secCreateHashtag .divCreateHighlightHashtag *, #secUploadBookmarks .divCreateHighlightHashtag *, #secSelectDatabox .divCreateHighlightHashtag *, #secCreateHighlight .divCreateHighlightTitle *, #secCreateHashtag .divCreateHighlightTitle *, #secUploadBookmarks .divCreateHighlightTitle *, #secSelectDatabox .divCreateHighlightTitle * {
+      display: table-cell;
+      padding: 10pt; }
+  #secCreateHighlight .divCreateHighlightLinks, #secCreateHashtag .divCreateHighlightLinks, #secUploadBookmarks .divCreateHighlightLinks, #secSelectDatabox .divCreateHighlightLinks {
+    background: #e0e8ed; }
+    #secCreateHighlight .divCreateHighlightLinks img, #secCreateHashtag .divCreateHighlightLinks img, #secUploadBookmarks .divCreateHighlightLinks img, #secSelectDatabox .divCreateHighlightLinks img {
+      vertical-align: middle; }
+  #secCreateHighlight .divCreateHighlightImage, #secCreateHashtag .divCreateHighlightImage, #secUploadBookmarks .divCreateHighlightImage, #secSelectDatabox .divCreateHighlightImage {
+    vertical-align: top; }
+    #secCreateHighlight .divCreateHighlightImage img, #secCreateHashtag .divCreateHighlightImage img, #secUploadBookmarks .divCreateHighlightImage img, #secSelectDatabox .divCreateHighlightImage img {
+      margin-left: 10pt;
+      vertical-align: text-top; }
+
+/* Create Hashtag Page Styling */
+#secCreateHashtag .createHashtagWrapper * {
+  display: block; }
+
+/* Upload Bookmarks Page Styling */
+/* Select Databox Page Styling */
+#secSelectDatabox .divSelectDataboxContentWrapper {
+  padding-top: 10pt; }
+  #secSelectDatabox .divSelectDataboxContentWrapper a {
+    text-decoration: none; }
+    #secSelectDatabox .divSelectDataboxContentWrapper a:hover {
+      text-decoration: underline; }
+  #secSelectDatabox .divSelectDataboxContentWrapper .divSelectDatabox .imgDataboxImage {
+    max-width: 100%;
+    border: 5pt solid rgba(0, 0, 0, 0.03); }
+
+/* Private Databox Page Styling */
+#secCreatePrivateDatabox {
+  padding: 20pt;
+  margin-top: 12pt;
+  display: table;
+  background: #e0e8ed;
+  font-size: 10pt; }
+  #secCreatePrivateDatabox .heading {
+    padding-bottom: 10pt;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    font-size: 12pt; }
+  #secCreatePrivateDatabox .divCreatePrivateDataboxHashtag, #secCreatePrivateDatabox .divCreatePrivateDataboxTitle, #secCreatePrivateDatabox .divCreatePrivateDataboxUniqueCode {
+    display: table-row; }
+    #secCreatePrivateDatabox .divCreatePrivateDataboxHashtag .inptHashtag, #secCreatePrivateDatabox .divCreatePrivateDataboxHashtag .inptTitle, #secCreatePrivateDatabox .divCreatePrivateDataboxTitle .inptHashtag, #secCreatePrivateDatabox .divCreatePrivateDataboxTitle .inptTitle, #secCreatePrivateDatabox .divCreatePrivateDataboxUniqueCode .inptHashtag, #secCreatePrivateDatabox .divCreatePrivateDataboxUniqueCode .inptTitle {
+      width: 200%; }
+    #secCreatePrivateDatabox .divCreatePrivateDataboxHashtag *, #secCreatePrivateDatabox .divCreatePrivateDataboxTitle *, #secCreatePrivateDatabox .divCreatePrivateDataboxUniqueCode * {
+      display: table-cell;
+      padding: 10pt; }
+    #secCreatePrivateDatabox .divCreatePrivateDataboxHashtag .imgRefreshUniqueCode, #secCreatePrivateDatabox .divCreatePrivateDataboxTitle .imgRefreshUniqueCode, #secCreatePrivateDatabox .divCreatePrivateDataboxUniqueCode .imgRefreshUniqueCode {
+      background: url("../../img/refresh.png") no-repeat center center;
+      background-size: 12pt auto;
+      display: inline;
+      cursor: pointer; }
+    #secCreatePrivateDatabox .divCreatePrivateDataboxHashtag .inptUniqueCode, #secCreatePrivateDatabox .divCreatePrivateDataboxTitle .inptUniqueCode, #secCreatePrivateDatabox .divCreatePrivateDataboxUniqueCode .inptUniqueCode {
+      width: 80%;
+      display: inline; }
+  #secCreatePrivateDatabox .divCreatePrivateDataboxLinks {
+    background: #e0e8ed; }
+    #secCreatePrivateDatabox .divCreatePrivateDataboxLinks img {
+      vertical-align: middle; }
+  #secCreatePrivateDatabox .divCreatePrivateDataboxImage {
+    vertical-align: top; }
+    #secCreatePrivateDatabox .divCreatePrivateDataboxImage img {
+      margin-left: 10pt;
+      vertical-align: text-top; }
+
+/* Public Databox Page Styling */
+#secCreatePublicDatabox {
+  padding: 20pt;
+  margin-top: 12pt;
+  display: table;
+  background: #e0e8ed;
+  font-size: 10pt; }
+  #secCreatePublicDatabox .heading {
+    padding-bottom: 10pt;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    font-size: 12pt; }
+  #secCreatePublicDatabox .divCreatePublicDataboxHashtag, #secCreatePublicDatabox .divCreatePublicDataboxTitle {
+    display: table-row; }
+    #secCreatePublicDatabox .divCreatePublicDataboxHashtag .inptHashtag, #secCreatePublicDatabox .divCreatePublicDataboxHashtag .inptTitle, #secCreatePublicDatabox .divCreatePublicDataboxTitle .inptHashtag, #secCreatePublicDatabox .divCreatePublicDataboxTitle .inptTitle {
+      width: 200%; }
+    #secCreatePublicDatabox .divCreatePublicDataboxHashtag *, #secCreatePublicDatabox .divCreatePublicDataboxTitle * {
+      display: table-cell;
+      padding: 10pt; }
+  #secCreatePublicDatabox .divCreatePublicDataboxLinks {
+    background: #e0e8ed; }
+    #secCreatePublicDatabox .divCreatePublicDataboxLinks img {
+      vertical-align: middle; }
+  #secCreatePublicDatabox .divCreatePublicDataboxImage {
+    vertical-align: top; }
+    #secCreatePublicDatabox .divCreatePublicDataboxImage img {
+      margin-left: 10pt;
+      vertical-align: text-top; }
+
+/* Account Settings Page Styling */
+#secAccountSettings .divAccountSettingsRow {
+  margin-bottom: 20pt; }
+  #secAccountSettings .divAccountSettingsRow .divAccountSettingsCard .divAccountSettingsHeading, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divAccountSettingsHeading, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .divAccountSettingsHeading, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divUserSummaryHeading {
+    padding-bottom: 5pt;
+    margin-bottom: 10pt;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
+  #secAccountSettings .divAccountSettingsRow .divAccountSettingsCard .divAccountSettingsForm, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divAccountSettingsForm, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .divAccountSettingsForm {
+    font-size: 10pt; }
+    #secAccountSettings .divAccountSettingsRow .divAccountSettingsCard .divAccountSettingsForm *, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divAccountSettingsForm *, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .divAccountSettingsForm * {
+      display: table-row; }
+    #secAccountSettings .divAccountSettingsRow .divAccountSettingsCard .divAccountSettingsForm input, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divAccountSettingsForm input, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .divAccountSettingsForm input {
+      margin-bottom: 5pt; }
+  #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divVotesText {
+    font-size: 7.5pt;
+    line-height: 1; }
+  #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divVotesCount {
+    line-height: 1.5;
+    font-size: 9pt; }
+  #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divUserSummaryRow:nth-child(odd) {
+    background: -moz-linear-gradient(top, rgba(102, 102, 102, 0.2) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 51%, rgba(28, 28, 28, 0.2) 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(102, 102, 102, 0.2)), color-stop(50%, rgba(255, 255, 255, 0.2)), color-stop(51%, rgba(255, 255, 255, 0.2)), color-stop(100%, rgba(28, 28, 28, 0.2)));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(102, 102, 102, 0.2) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 51%, rgba(28, 28, 28, 0.2) 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, rgba(102, 102, 102, 0.2) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 51%, rgba(28, 28, 28, 0.2) 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, rgba(102, 102, 102, 0.2) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 51%, rgba(28, 28, 28, 0.2) 100%);
+    /* IE10+ */
+    background: linear-gradient(to bottom, rgba(102, 102, 102, 0.2) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 51%, rgba(28, 28, 28, 0.2) 100%);
+    /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4d666666', endColorstr='#4d1c1c1c',GradientType=0 );
+    /* IE6-9 */ }
+  #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divUserSummaryRow .divUserSummaryColumn {
+    display: table-cell; }
+    #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divUserSummaryRow .divUserSummaryColumn img {
+      vertical-align: middle;
+      height: 70%; }
+    #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divUserSummaryRow .divUserSummaryColumn .divUserSummarySubColumn {
+      display: inline-block;
+      vertical-align: middle; }
+      #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divUserSummaryRow .divUserSummaryColumn .divUserSummarySubColumn img {
+        vertical-align: middle;
+        vertical-align: -moz-middle;
+        vertical-align: -webkit-middle;
+        height: 70%; }
+  #secAccountSettings .divAccountSettingsRow .imgEmailVerified {
+    vertical-align: middle; }
+  #secAccountSettings .divAccountSettingsRow .btnSaveAccount {
+    margin: 0px 10pt; }
+  #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard small {
+    font-family: arial;
+    font-size: 12pt; }
+  #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .ulCreatedCollectionList {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    max-height: 200pt;
+    overflow-y: scroll; }
+    #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .ulCreatedCollectionList li .divCreatedCollectionText {
+      display: inline-block; }
+    #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .ulCreatedCollectionList li:nth-child(even) {
+      vertical-align: middle; }
+    #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .ulCreatedCollectionList li .aCollectedCollectionEdit {
+      display: inline-block;
+      width: 8%;
+      text-decoration: none; }
+    #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .ulCreatedCollectionList li .spnNewMessageLabel {
+      background: rgba(0, 0, 0, 0.2); }
+  #secAccountSettings .divAccountSettingsRow .divCommentHeader {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
+    #secAccountSettings .divAccountSettingsRow .divCommentHeader .divCommentHeaderUsernameBlock .divCommentUsername {
+      display: inline-block; }
+  #secAccountSettings .divAccountSettingsRow .divCommentControls button {
+    margin: 10pt;
+    margin-left: 0px; }
+  #secAccountSettings .divAccountSettingsRow .divCommentControls .btnCommentReportSpam {
+    position: absolute;
+    right: 5%; }
+  #secAccountSettings .divAccountSettingsRow .divReplyToWrapper .txtReplyTo {
+    margin-bottom: 5pt; }
+  #secAccountSettings .divAccountSettingsRow .divReplyToWrapper .txtReplyToText {
+    height: 50pt; }
+  #secAccountSettings .divAccountSettingsRow .divReplyToWrapper .divReplyToControls {
+    position: absolute;
+    right: 5%; }
+    #secAccountSettings .divAccountSettingsRow .divReplyToWrapper .divReplyToControls .divReplyToMaxCharsText {
+      display: inline-block; }
+
+/* Customization Page Styling */
+#secCustomizeDatabox .c_DivTitleWrapper {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3); }
+#secCustomizeDatabox .c_BtnEditTitle {
+  right: 10pt; }
+#secCustomizeDatabox .c_BtnReport {
+  padding: 2pt 2pt;
+  margin: 0pt 3pt; }
+#secCustomizeDatabox .c_BtnShare {
+  padding: 2pt 2pt;
+  margin: 0pt 3pt; }
+#secCustomizeDatabox .c_BtnAddComment {
+  padding: 2pt 2pt;
+  margin: 0pt 3pt; }
+#secCustomizeDatabox .c_BtnPublish {
+  padding: 2pt 2pt;
+  margin: 0pt 3pt; }
+#secCustomizeDatabox .c_DivHeaderCommentWrapper {
+  margin-bottom: 10pt; }
+#secCustomizeDatabox .c_DivUserDetailsWrapper {
+  vertical-align: top; }
+#secCustomizeDatabox .c_DivCardUser img {
+  background-image: url("../img/c_userBG.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding: 7pt 2pt; }
+#secCustomizeDatabox .c_DivHeaderCommentRight {
+  width: 85%;
+  text-align: justify; }
+#secCustomizeDatabox .c_DivHeaderComment {
+  display: inline-block; }
+#secCustomizeDatabox .c_DownArrow {
+  width: 9%;
+  cursor: pointer; }
+#secCustomizeDatabox .grid-stack-item[data-gs-width='1'] {
+  width: 10%; }
+#secCustomizeDatabox .grid-stack-item[data-gs-x='1'] {
+  left: 10%; }
+#secCustomizeDatabox .grid-stack-item.grid-stack-item[data-gs-min-width='1'] {
+  min-width: 10%; }
+#secCustomizeDatabox .grid-stack-item.grid-stack-item[data-gs-max-width='1'] {
+  max-width: 10%; }
+#secCustomizeDatabox .grid-stack-item[data-gs-width='2'] {
+  width: 20%; }
+#secCustomizeDatabox .grid-stack-item[data-gs-x='2'] {
+  left: 20%; }
+#secCustomizeDatabox .grid-stack-item.grid-stack-item[data-gs-min-width='2'] {
+  min-width: 20%; }
+#secCustomizeDatabox .grid-stack-item.grid-stack-item[data-gs-max-width='2'] {
+  max-width: 20%; }
+#secCustomizeDatabox .grid-stack-item[data-gs-width='3'] {
+  width: 30%; }
+#secCustomizeDatabox .grid-stack-item[data-gs-x='3'] {
+  left: 30%; }
+#secCustomizeDatabox .grid-stack-item.grid-stack-item[data-gs-min-width='3'] {
+  min-width: 30%; }
+#secCustomizeDatabox .grid-stack-item.grid-stack-item[data-gs-max-width='3'] {
+  max-width: 30%; }
+#secCustomizeDatabox .grid-stack-item[data-gs-width='4'] {
+  width: 40%; }
+#secCustomizeDatabox .grid-stack-item[data-gs-x='4'] {
+  left: 40%; }
+#secCustomizeDatabox .grid-stack-item.grid-stack-item[data-gs-min-width='4'] {
+  min-width: 40%; }
+#secCustomizeDatabox .grid-stack-item.grid-stack-item[data-gs-max-width='4'] {
+  max-width: 40%; }
+#secCustomizeDatabox .grid-stack-item[data-gs-width='5'] {
+  width: 50%; }
+#secCustomizeDatabox .grid-stack-item[data-gs-x='5'] {
+  left: 50%; }
+#secCustomizeDatabox .grid-stack-item.grid-stack-item[data-gs-min-width='5'] {
+  min-width: 50%; }
+#secCustomizeDatabox .grid-stack-item.grid-stack-item[data-gs-max-width='5'] {
+  max-width: 50%; }
+#secCustomizeDatabox .grid-stack-item[data-gs-width='6'] {
+  width: 60%; }
+#secCustomizeDatabox .grid-stack-item[data-gs-x='6'] {
+  left: 60%; }
+#secCustomizeDatabox .grid-stack-item.grid-stack-item[data-gs-min-width='6'] {
+  min-width: 60%; }
+#secCustomizeDatabox .grid-stack-item.grid-stack-item[data-gs-max-width='6'] {
+  max-width: 60%; }
+#secCustomizeDatabox .grid-stack-item[data-gs-width='7'] {
+  width: 70%; }
+#secCustomizeDatabox .grid-stack-item[data-gs-x='7'] {
+  left: 70%; }
+#secCustomizeDatabox .grid-stack-item.grid-stack-item[data-gs-min-width='7'] {
+  min-width: 70%; }
+#secCustomizeDatabox .grid-stack-item.grid-stack-item[data-gs-max-width='7'] {
+  max-width: 70%; }
+#secCustomizeDatabox .grid-stack-item[data-gs-width='8'] {
+  width: 80%; }
+#secCustomizeDatabox .grid-stack-item[data-gs-x='8'] {
+  left: 80%; }
+#secCustomizeDatabox .grid-stack-item.grid-stack-item[data-gs-min-width='8'] {
+  min-width: 80%; }
+#secCustomizeDatabox .grid-stack-item.grid-stack-item[data-gs-max-width='8'] {
+  max-width: 80%; }
+#secCustomizeDatabox .grid-stack-item[data-gs-width='9'] {
+  width: 90%; }
+#secCustomizeDatabox .grid-stack-item[data-gs-x='9'] {
+  left: 90%; }
+#secCustomizeDatabox .grid-stack-item.grid-stack-item[data-gs-min-width='9'] {
+  min-width: 90%; }
+#secCustomizeDatabox .grid-stack-item.grid-stack-item[data-gs-max-width='9'] {
+  max-width: 90%; }
+#secCustomizeDatabox .grid-stack-item[data-gs-width='10'] {
+  width: 100%; }
+#secCustomizeDatabox .grid-stack-item[data-gs-x='10'] {
+  left: 100%; }
+#secCustomizeDatabox .grid-stack-item.grid-stack-item[data-gs-min-width='10'] {
+  min-width: 100%; }
+#secCustomizeDatabox .grid-stack-item.grid-stack-item[data-gs-max-width='10'] {
+  max-width: 100%; }
+#secCustomizeDatabox .c_DivCard {
+  background: rgba(0, 0, 0, 0.04);
+  cursor: pointer; }
+  #secCustomizeDatabox .c_DivCard .c_DivCardTitle {
+    padding: 0px 5pt;
+    text-align: justify; }
+  #secCustomizeDatabox .c_DivCard .c_DivCardDescription {
+    text-align: justify; }
+  #secCustomizeDatabox .c_DivCard .c_DivCardActions {
+    background: rgba(0, 0, 0, 0.4);
+    display: table;
+    padding: 5pt 0pt; }
+    #secCustomizeDatabox .c_DivCard .c_DivCardActions .c_DivCardAction {
+      display: table-cell;
+      cursor: pointer;
+      vertical-align: -webkit-baseline-middle;
+      vertical-align: middle;
+      text-decoration: none;
+      color: black; }
+      #secCustomizeDatabox .c_DivCard .c_DivCardActions .c_DivCardAction:nth-child(odd) {
+        border-right: 1px solid black; }
+      #secCustomizeDatabox .c_DivCard .c_DivCardActions .c_DivCardAction:hover {
+        color: rgba(0, 0, 0, 0.5); }
+  #secCustomizeDatabox .c_DivCard .c_DivCardStoryWrapper {
+    display: table;
+    margin-top: 5pt;
+    background: black;
+    border-radius: 10pt;
+    border: 5pt solid rgba(134, 184, 206, 0.7); }
+    #secCustomizeDatabox .c_DivCard .c_DivCardStoryWrapper .c_DivCardStorytellerDetails {
+      display: table-row; }
+      #secCustomizeDatabox .c_DivCard .c_DivCardStoryWrapper .c_DivCardStorytellerDetails .c_DivCardStorytellerImg {
+        width: 25pt;
+        padding: 0px 5pt 0px 0px;
+        vertical-align: middle; }
+    #secCustomizeDatabox .c_DivCard .c_DivCardStoryWrapper .c_DivCardStory {
+      display: table-row;
+      color: #06507e; }
+
+/*# sourceMappingURL=styles.css.map */
