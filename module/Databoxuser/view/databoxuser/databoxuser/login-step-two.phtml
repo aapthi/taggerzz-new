@@ -1,0 +1,32 @@
+<?
+global $loginType;
+$loginType='emailLogin';
+global $step;
+$step=2;
+?>
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/css/default.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/css/allfont.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/css/sugarcake.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/css/normalize.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/css/nexus_menu/component.css" />
+<div class="body_main_container cat_top">
+	<div class="body_middle_container">
+		<div class=" form_top">
+			<div class="row">
+				<center>
+					<p>
+					A Verification mail has been sent to your email id
+					</p>
+					<p><?php echo $this->email; ?>
+					</p>
+					<br/><br/>
+					<p>
+					Kindly click on the link to complete Verification.
+					</p>
+					<p>(check your junk folders if you have not received.)
+					</p>
+				</center>
+			</div>
+		</div>
+	</div>
+</div>

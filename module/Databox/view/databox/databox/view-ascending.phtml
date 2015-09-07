@@ -1,0 +1,231 @@
+
+<?php  //echo "<pre>";print_r(isset($databoxLinksGrid)); exit;?>
+<div class="pos_relative">
+<div class="votings_ratings highlights_top_height_start">
+	<div class="body_middle_container">
+		<div class="">
+			<div class="votesandrates">
+				<h3><?echo $this->hashName;?></h3>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="highlights_search asending_pad">
+	<div class="body_middle_container">
+		<h4><?echo $this->categoryTitle;?></h4>		
+	</div>
+</div>
+</div>
+<div class="body_main_container">
+	<div class="body_middle_container" style="margin-top:155px;">
+		<div class="row_2">
+		<?php if(isset($databoxLinksGrid)){ 
+			foreach($databoxLinksGrid as $databoxLinksGrids){
+			if(isset($databoxLinksGrids['image']) && $databoxLinksGrids['image']!=null){
+					$imageLink1=$databoxLinksGrids['image'];
+			}else{
+				$imageLink1=$basePath.'/images/social_media/noimage.png';
+			}
+			
+			$data = getimagesize($imageLink1);
+			if($data!=""){
+				$width = $data[0];
+				$height = $data[1];
+			}else{
+				$width =299;
+				$height =174;
+			}
+			if($databoxLinksGrids['title']=="" && $databoxLinksGrids['description']== 'no Description'){
+				$subclass="";
+				$mainclass="cgrg_image_middle";
+				$titleclass="";
+				$descriptionclass="";
+				if($height>=297 && $width>=299){
+						$fixHeight=297;
+						$fixWidth=299;
+				}else if($height>297 && $width<299){
+						$fixWidth=$width;
+						$fixHeight=297;
+				}else if($height<297 && $width>299){
+						$fixHeight=$height;
+						$fixWidth=299;
+				} else if($height<297 && $width<299){
+						$fixHeight=$height;
+						$fixWidth=$width;
+				}
+			}else if($databoxLinksGrids['title']!="" && $databoxLinksGrids['description']!=''){
+				$mainclass="";
+				$subclass="img_middle";
+				$titleclass="img_title_pos_ab";
+				$descriptionclass="img_desc_pos_ab";
+				if($height>=174 && $width>=299){
+						$fixHeight=174;
+						$fixWidth=299;
+				}else if($height>174 && $width<299){
+						$fixWidth=$width;
+						$fixHeight=174;
+				}else if($height<174 && $width>299){
+						$fixHeight=$height;
+						$fixWidth=299;
+				}if($height<174 && $width<299){
+						$fixHeight=$height;
+						$fixWidth=$width;
+				}
+			}else if($databoxLinksGrids['title']!="" && $databoxLinksGrids['description']== 'no Description'){
+				$mainclass="";
+				$subclass="img_middle";
+				$titleclass="img_title_pos_ab";
+				$descriptionclass="img_desc_pos_ab";
+				if($height>=174 && $width>=299){
+						$fixHeight=174;
+						$fixWidth=299;
+				}else if($height>174 && $width<299){
+						$fixWidth=$width;
+						$fixHeight=174;
+				}else if($height<174 && $width>299){
+						$fixHeight=$height;
+						$fixWidth=299;
+				}if($height<174 && $width<299){
+						$fixHeight=$height;
+						$fixWidth=$width;
+				}
+			}else if($databoxLinksGrids['title']=="" && $databoxLinksGrids['description']==''){
+				$subclass="";
+				$mainclass="cgrg_image_middle";
+				$titleclass="";
+				$descriptionclass="";
+				if($height>=297 && $width>=299){
+						$fixHeight=297;
+						$fixWidth=299;
+				}else if($height>297 && $width<299){
+						$fixWidth=$width;
+						$fixHeight=297;
+				}else if($height<297 && $width>299){
+						$fixHeight=$height;
+						$fixWidth=299;
+				} else if($height<297 && $width<299){
+						$fixHeight=$height;
+						$fixWidth=$width;
+				}
+			}			
+					
+					
+					
+			/*if($widthhight>=$maxwidth){ $fixHeight='281';}else{$fixHeight=$height;}*/
+			if( isset($databoxLinksGrids['user_hashname']) && isset($databoxLinksGrids['category_title']) )
+			{
+				global $layoutTitle;
+				$layoutTitle = $databoxLinksGrids['user_hashname'] . " | " . $databoxLinksGrids['category_title'];
+			}
+			if( isset($databoxLinksGrids['meta_tags']) && (! is_null($databoxLinksGrids['meta_tags'])) )
+			{
+				global $layoutKeywords;
+				$layoutKeywords = $databoxLinksGrids['meta_tags'];
+			}
+			if($databoxLinksGrids['link_validity_status']==1){
+			?>
+				<div class="custom1">
+				<?
+					if(strpos($databoxLinksGrids['link'], "https://") !== false || strpos($databoxLinksGrids['link'], "http://") !== false){
+						$url=$databoxLinksGrids['link'];
+					}else{
+						$url='http://'.$databoxLinksGrids['link'];
+					}
+				?>
+					<a href="<?echo $url;?>" target="_blank">
+						<p class="link_title"><? if(isset($databoxLinksGrids['link'])){
+							if(strlen($databoxLinksGrids['link'])>40){
+								echo substr($databoxLinksGrids['link'],0,40) . '...'; 
+							}else{
+								echo $databoxLinksGrids['link']; 
+							}}?></p>
+						<div class="cbrg  <?php if(isset($mainclass)){ echo $mainclass; }?>">
+						<div>
+							<?php if(isset($databoxLinksGrids['image']) && $databoxLinksGrids['image']!=null){
+								$imageLink=$databoxLinksGrids['image'];
+							}else{
+								$imageLink=$basePath.'/images/social_media/noimage.png';
+							}
+							?>
+							<div class="<?php if(isset($subclass)){ echo $subclass; }?>" ><img width="<?php if(isset($fixWidth))echo $fixWidth; ?>" height="<?php if(isset($fixHeight))echo $fixHeight; ?>"  src="<? echo $imageLink;?>"/>
+							</div>
+						</a>	
+							<!--<div class="cdescr img_title">
+								<h3></h3>
+								<p>
+								</p>
+							</div>-->
+							<div class="<?php if(isset($titleclass)){ echo $titleclass; }?>">
+								<p class="link_title">
+								<?php if(isset($databoxLinksGrids['title']) && $databoxLinksGrids['title']!=""){
+											if(strlen($databoxLinksGrids['title'])>50){
+												echo substr($databoxLinksGrids['title'],0,50) . '...'; 
+											}else{
+												echo $databoxLinksGrids['title']; 
+											}
+									 }else{
+											//echo 'No Title';
+										}
+									?>
+								</p>
+							</div>
+							<div class="<?php if(isset($descriptionclass)){ echo $descriptionclass; }?>">
+								<p><?php 
+										if(isset($databoxLinksGrids['description']) && $databoxLinksGrids['description']!=""){
+											if(strlen($databoxLinksGrids['description'])>172){
+												echo substr($databoxLinksGrids['description'],0,172) . '...Read more'; 
+											}else{
+												//echo $databoxLinksGrids['description']; 
+											}								
+										}else{
+											//echo 'no Description';
+										}
+									?> 
+								</p>
+							</div>
+						</div>
+						<div class="aut_n">
+							<p>Author: <?php if(isset($databoxLinksGrids['web_author'])){ echo $databoxLinksGrids['web_author']; }?></p>
+						</div>
+						<div class="update_today">
+							<p>Updated:<?php if(isset($databoxLinksGrids['last_updated_date'])){ echo $databoxLinksGrids['last_updated_date']; }?></p>
+						</div>
+				</div>
+				</div>
+			<? }}}?>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="pop-up-1" class="pop-up-display-content">
+<h1 class="tg_users_title">Login Using one of your Social network</h1>
+<div class="tg_users_socila_login">
+<?php
+	echo '<div class="pp-lg-buttons">';
+	foreach ($this->options->getEnabledProviders() as $provider) {
+		echo  $this->socialSignInButton($provider, $this->redirect);
+	}
+	echo '</div>';
+?>
+</div>
+
+<input type="hidden" id="basePath" name="basePath" value="<?php echo $basePath;?>" />
+<input type="hidden" id="baseUrl"  name="baseUrl" value="<?php echo $baseUrl;?>" />
+
+<div class="tg_users_email_login">
+	<h1>Or</h1>
+	<h1>Your email ID</h1>
+	<div class="tg_create_email">
+		<form class="" method="post" id="userLoginFormUrl" name="userLoginFormUrl" role="form">
+			<input type="hidden" id="categoryHighlight" name="categoryHighlight" value="0" />
+			<p>Email ID</p>
+			<input type="text" class="text_pad" name="emailId" id="emailId"/>
+			<p>Password</p>
+			<input type="password" class="text_pad" name="userPassword" id="userPassword"/>
+			<p class="tg_email_btn"><a href="javascript:void(0)" class="btn" onClick="Javascript:checkLogin();">CONTINUE</a></p>
+			<span id="userMessage" style="display:none;">Checking Username,Password...</span>
+		</form>
+	</div>
+</div>
+</div>

@@ -1,0 +1,30 @@
+
+<?php 
+	$i=0;$j=0;
+	foreach($this->getAllUsers as $users){
+		if($i==0){
+			$j=$this->value;
+		?>
+		<div id="users_<?echo $j;?>">
+		<?}else{
+			if($i%5==0){
+				$j=$j+5;
+			?>
+			<div id="users_<?echo $j;?>">
+			<?}
+		}
+		?>
+		
+			<p id="list_user_<? echo $users['user_id'];  ?>" class="search_user_pad">
+				<a href="javascript:void(0)" onClick="Javascript:viewUserBoxes(<? echo $users['user_id'];  ?>);"><? echo $users['display_name']?></a>
+			</p>
+		<?
+		$i++;
+		if($i%5==0){
+		?>
+		</div>
+		<?
+		}
+	}
+?>
+

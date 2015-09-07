@@ -1,0 +1,33 @@
+<?php
+$form = $this->loginForm;
+$form->prepare();
+$form->setAttribute('action', $this->url('zfcuser/login'));
+$form->setAttribute('method', 'post');
+?>
+
+<?php echo $this->form()->openTag($form) ?>
+
+    <div id="sign_up_form">
+        <?php echo $this->formElementErrors($form->get('identity')) ?>
+
+       <label><strong>EMAIL / USERNAME:</strong>
+        <?php echo $this->formInput($form->get('identity')) ?></label>
+
+        <label><strong>PASSWORD:</strong>
+        <?php echo $this->formInput($form->get('credential')) ?>
+		</label>
+        <?php if ($this->redirect): ?>
+            <input type="hidden" name="redirect" value="<?php echo $this->escapeHtml($this->redirect) ?>" />
+        <?php endif ?>
+
+        <div id="actions"><?php echo $this->formButton($form->get('submit')) ?></div>
+    </div>
+
+<?php echo $this->form()->closeTag() ?>
+<?php if ($this->enableRegistration) : ?>
+<div class="forgotReg">
+    <div class="left btn2Bg btn2a"><a href="#">Forgot Password?</a></div>
+    <div class="right btn2Bg btn2b"><a href="user/register"><?php echo $this->translate('Register?'); ?></a></div>
+    <div class="clear"></div>
+</div>
+<?php endif; ?>

@@ -1,0 +1,439 @@
+
+<input type="hidden" id="boxesterm" name="boxesterm" value="" />
+<?php
+		$dashBoardActive	='';
+		$montageActive		='';
+		$accountActive		='';
+		$homeActive			='';
+		$hintingOnActive		='';
+		$createActive		='';
+		if($_SERVER['REQUEST_URI']=='/taggerzz-new/trunk/dashboard'){
+			$dashBoardActive='active_menu';
+			
+		}else if($_SERVER['REQUEST_URI']=='/taggerzz-new/trunk/montage'){
+			$montageActive='active_menu';
+			
+		}else if($_SERVER['REQUEST_URI']=='/taggerzz-new/trunk/accounts'){
+			$accountActive='active_menu';
+			
+		}else if($_SERVER['REQUEST_URI']=='/taggerzz-new/trunk/'){
+			$homeActive='active_menu';
+			
+		}else if($_SERVER['REQUEST_URI']=='/taggerzz-new/trunk/hitting-on'){
+			$hintingOnActive='active_menu';
+			
+		}else if($_SERVER['REQUEST_URI']=='/taggerzz/databox/category-choice'){
+			$createActive='active_menu';
+			
+		}
+		$header=$this->action('Application\Controller\IndexController', 'headerAction',array('20','10'));
+		$baseUrl = $header->headerarray['baseUrl'];
+		$basePath = $header->headerarray['basePath'];
+		global $cropUrl;
+	?>
+	<script> 
+	
+	var newCommentText = "";
+	var tzGridStackRef;
+	
+	var BASE_URL = '<?php echo $baseUrl;?>';
+	var BASE_PATH = '<?php echo $basePath;?>';
+	var crop_url='<?echo $cropUrl;?>';
+	var crop_value='';
+	var crop_value_count=0;
+	var crop_value_countt=0;
+	var chkvalues=0;
+	var _URL = window.URL || window.webkitURL;
+	
+	</script>
+
+<!--All the CSS-->
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<script type="text/javascript" charset="utf-8">
+function logOut(value)
+{
+	if( chkvalues==0 )
+	{
+	}
+	else
+	{
+		$('#pop-up-alerts').popUpWindow({action: "open"});	
+		$("#alert_header_meassge").html('');
+		$("#alert_meassage").html(verifying_urls_alert);
+		return false;
+	}
+
+	var logoutUrl = '<?php echo $baseUrl; ?>' + "/application/logout";
+	$.ajax
+	({
+		url: logoutUrl,
+		success: function(data)
+		{
+			if(value!=""){
+				$('#deactiveLoad').hide();
+				var logoutUrl = '<?php echo $baseUrl; ?>' + "/application/deactivate";
+				window.location=logoutUrl;
+			}else{
+				if(data.output=='success')
+				{
+					window.location='<? echo $this->Url('home');?>';
+				}
+			}
+		}
+	});	
+}
+</script>
+	<?php
+if( $_SERVER['REQUEST_URI']== "/taggerzz-new/trunk/" )
+	{
+		?> 
+	<link rel="stylesheet" media="(max-width: 799px)" href="<?php echo $basePath; ?>/css/new_css/styles-mobile.css" />
+	<link  href="<?php echo $basePath; ?>/css/new_css/styles.css" rel="stylesheet" type="text/css" />
+	<?php } else{?>
+		<? if(strpos($cropUrl, "post-vertical") == false && strpos($cropUrl, "post-horizontal") == false){?>
+		
+		<?php } ?>
+		<link media="screen and (min-width: 800px)" href="<?php echo $basePath; ?>/css/new_css/styles.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" media="(max-width: 799px)" href="<?php echo $basePath; ?>/css/new_css/styles-mobile.css" />
+		
+	<link  href="<?php echo $basePath; ?>/css/new_css/jquery-ui-1-11-4.css" rel="stylesheet" type="text/css" />
+	<link  href="<?php echo $basePath; ?>/css/new_css/developer.css" rel="stylesheet" type="text/css" />
+	<? } ?>
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/css/popupwindow.css" />
+
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/jquery-172.min.js"></script>
+
+<? if(strpos($cropUrl, "post-vertical") == false && strpos($cropUrl, "post-horizontal") == false){?>
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/jquery-172-ui.min.js"></script>
+<? } ?>
+
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/jquery-ui-1.7.2.min.js"></script>
+<? if(strpos($cropUrl, "post-vertical") == false && strpos($cropUrl, "post-horizontal") == false){?>
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/jquery-172-ui.min.js"></script>
+<? } ?>
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/jquery.nicescroll.min.js"></script>
+<script src="<?php echo $basePath; ?>/js/new_js/custom_non_landingpage.js"></script>
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/index.js"></script>
+<script src="<?php echo $basePath; ?>/js/jquery.cookie.js"></script>
+
+<?php
+if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
+	{
+		?>   
+		<div id="mainContainerWrapper" class="mainContainerWrapper">
+		 <section id="secHeader">
+    <div id="divHeaderWrapper" class="width100 divHeaderWrapper">
+        <div id="divMobileMenuWrapper" class="divMobileMenuWrapper">
+            <img src="<?php echo $basePath; ?>/img/imgMenuCollapse.png" alt="" id="imgMenuCollapse" class="width25 autoPadding" />
+        </div>
+		<?php if( isset($_SESSION['usersinfo']) ) {
+					$hintingUserId = 0;
+					if( isset($_SESSION['usersinfo']->userId) )
+					{
+						$hintingUserId = $_SESSION['usersinfo']->userId;
+					}
+					$hintingState = "on";
+					$hintingNewVal = 0;
+					if( isset($_SESSION['usersinfo']->hinting_state) )
+					{
+						if( $_SESSION['usersinfo']->hinting_state == 0 )
+						{
+							$hintingState = "off";
+							$hintingNewVal = 1;
+						}
+					}
+				?>
+        <div id="divAccountInfo" class="divAccountInfo">
+            <div id="divProfileImage" class="inline-block">
+                <!--<img src="<?php //echo $basePath; ?>/img/imgFB.png" alt="" class="height100" />-->
+                <img height="60px" width="60px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $_SESSION['usersinfo']->montage_image; ?>" alt="" class="height100" />
+            </div>
+
+            <div id="divProfileDetails" class="inline-block ">
+                 <span id="spnGreetingsText" class="block smallFont">Hello, </span>
+                    <span id="spnUsername" class="block defaultFont"><?php echo $_SESSION['usersinfo']->displayName; ?></span>
+                    <span id="spnMessages" class="block verySmallFont">[<?php if(isset($_SESSION['usersinfo']->userMessagesCount)){echo $_SESSION['usersinfo']->userMessagesCount ; }else{ echo '0';}?> <a href="/taggerzz-new/trunk/accounts#msgoto">Messages</a>, <span id="tzUserCollCountSpan"><?php if(isset($_SESSION['usersinfo']->collectionsCount)){echo $_SESSION['usersinfo']->collectionsCount; }else{ echo '0';}?></span>  <a href="javascript:void(0)" onClick="goToLocation('my-collected-links')">Collections</a>]</span>
+                    <span id="spnCreateCollection" class="block smallFont highlightFont"><a href="#" class="highlightFont createCollection" id='createCollection'>+ Create Collection</a></span>
+            </div>
+        </div>
+        <div id="divLogoWrapper" class="width30 marginallyCenter">
+            <div class="width100">
+                <img src="<?php echo $basePath; ?>/img/imgLogo.png" alt="" class="imgLogo width100" />
+            </div> 
+        </div>
+        <div id="divLeftSlideMenu" class="divLeftSlideMenu">
+
+            <div id="divAccountInfoMobile" class="divAccountInfo mobile">
+                <div id="divProfileImageMobile" class="divProfileImage ">
+                    <!--<img src="<?php //echo $basePath; ?>/img/imgFB.png" alt="" class="height100" />-->
+					 <img height="60px" width="60px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $_SESSION['usersinfo']->montage_image; ?>" alt="" class="height100" />
+                </div>
+                <div id="divProfileDetailsMobile" class="divProfileDetails">
+                    <span id="spnGreetingsText" class="block smallFont">Hello, </span>
+                    <span id="spnUsername" class="block defaultFont"><?php echo $_SESSION['usersinfo']->displayName; ?></span>
+                    <span id="spnMessages" class="block verySmallFont">[<?php if(isset($_SESSION['usersinfo']->userMessagesCount)){echo $_SESSION['usersinfo']->userMessagesCount ; }else{ echo '0';}?> <a href="/taggerzz-new/trunk/accounts#msgoto">Messages</a>, <span id="tzUserCollCountSpan"><?php if(isset($_SESSION['usersinfo']->collectionsCount)){echo $_SESSION['usersinfo']->collectionsCount; }else{ echo '0';}?></span> <a href="javascript:void(0)" onClick="goToLocation('my-collected-links')">Collections</a>]</span>
+                    <span id="spnCreateCollection" class="block smallFont highlightFont"><a href="#" class="highlightFont createCollection" id='createCollection'>+ Create Collection</a></span>
+                </div>
+            </div>
+
+            <ul id="ulMenu" class="ulMenu">
+                <li> <a class="tag_chk  <?echo $homeActive; ?>" href="javascript:void(0);" onclick="goToLocation('/contentpage')">Home</a> </li>
+				<li> <a class="tag_chk  <?echo $montageActive; ?>" onClick="goToLocation('/montage')" href="javascript:void(0)" >My Profile</a></li>
+                <li> <a class="tag_chk <?echo $accountActive; ?>" href="javascript:void(0)" onClick="goToLocation('/accounts')">My account settings</a> </li>
+                <li> <a class="tag_chk " href="javascript:void(0)" onClick="goToLocation('logout')" >Logout</a> </li>
+            </ul>
+        </div>
+		<div id="divSearchBoxes" class="divSearchBoxes">
+            <input type="text" id="searchTermHolder" class="inptSearchHashTag" value="<?if(isset($_REQUEST['serTag']) && $_REQUEST['serTag']!=""){echo '#'.$_REQUEST['serTag'];}else{}?>" placeholder="Search by #hashtag"/>
+            <input type="text" id="pvtUniqueCodeHolder" class="inptSearchUniqueCode" placeholder="Search by private databox unique code" value="<?if(isset($_REQUEST['serCode']) && $_REQUEST['serCode']!=""){echo $_REQUEST['serCode'];}else{}?>"/>
+            <a href="Javascript:void(0);" id='homeSearchLink' class="aSearch"></a>
+        </div>
+			<?php
+				} else { ?>
+					<div id="divLogoWrapper" class="width30 marginallyCenter">
+						<div class="width100">
+							<img src="<?php echo $basePath; ?>/img/imgLogo.png" alt="" class="imgLogo width100" />
+						</div>
+					</div>
+				<div id="divLeftSlideMenu" class="divLeftSlideMenu">
+					<div id="divAccountInfoMobile" class="divAccountInfo mobile">
+					</div>
+					<ul id="ulMenu" class="ulMenu">
+							<!--<li><a href="<?php echo $baseUrl; ?>/signup">SignUp</a></li>
+							<li><a href="<?php echo $baseUrl; ?>">SignIn</a></li>-->
+							<li><a href="/taggerzz-new/trunk/contentpage" class="link_email_login">HOME</a></li>
+							<li><a id="open-pop-up-1" href="javascript:void(0);" onclick="loginWindow()" class="link_email_login">LOGIN</a></li>
+						<li><a id="signup-pop-up" href="javascript:void(0);" onclick="signUpWindow()" class="link_email_login">SIGN UP</a></li>
+					</ul>
+				</div>
+				<?php
+				if( $_SERVER['REQUEST_URI']== "/taggerzz-new/trunk/contentpage" )
+				{
+				?> 
+				<div id="divSearchBoxes" class="divSearchBoxes">
+						<input type="text" id="searchTermHolder" class="inptSearchHashTag" placeholder="Search by #hashtag"/>
+						<a href="Javascript:void(0);" id='homeSearchLink' class="aSearch"></a>
+				</div>
+				<?php } ?>
+				<?
+					global $forgotPwdPage;
+					global $browserDispPage;
+					global $errorDispPage;
+					global $loginType;
+					global $step;
+					if( $loginType == "emailLogin" )
+					{
+				?>
+						<p>LOGIN PROCESSING(<?echo $step;?> OF 3 STEPS)</p>
+				<?php
+					}
+					else if( $forgotPwdPage == "Yes" )
+					{
+				?>
+						<p><strong>Forgot Password</strong></p>
+				<?php
+					}
+					else if( $browserDispPage == "browserDisp" )
+					{
+				?>
+						<p><strong></strong></p>
+				<?php
+					}
+					else if( $errorDispPage == "errorDisp" )
+					{
+				?>
+						<p><strong></strong></p>
+				<?php
+					}
+					else
+					{
+				?>
+						<!--<div class="email_login_home" id="openloginwindwo"><a id="open-pop-up-1" href="#pop-up-1" onclick="loginWindow()" class="link_email_login">LOGIN</a></div>
+						<div class="email_login_home"><a id="signup-pop-up" href="javascript:void(0)" onclick="signUpWindow()" class="link_email_login">SIGN UP</a></div>-->
+				<?php
+					}}
+				?>
+				</div>
+</section>
+<section id="secModal" class="">
+    <div class="divModalBlurBackground">
+        <div class="divModalContentWrapper">
+            <div class="divModalClose">&times;</div>
+            <a href="javascript:void(0)"  onClick="goTohashtag('highlights')" class="divModalBox">
+                <div class="divModalHeading">
+                    Highlights &AMP; Current Affairs
+                </div>
+                <img src="<?php echo $basePath; ?>/img/modalbox1.png" class="imgModalBoxImage" alt="" />
+                <div class="divModalDescription">
+                    Present your ideas by sharing your preffered collection of weblinks about the current issues
+                    or on-going crisis or any current news and customize with your opinions as well #hashtag identify.
+                </div>
+            </a>
+
+            <a href="javascript:void(0)"  onClick="goTohashtag('publicPrivate')" class="divModalBox">
+                <div class="divModalHeading">
+                    Public &AMP; Private Databox
+                </div>
+                <img src="<?php echo $basePath; ?>/img/modalbox2.png" class="imgModalBoxImage" alt="" />
+                <div class="divModalDescription">
+                    Collected links can be shared with your opinions as well by uploading chrome or firefox's bookmark files
+                    to share your knowledge on any particular aspect to publish privately or for public. 
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+<?php  } ?>
+<?php
+	$loginDomAction=$this->action('Application\Controller\IndexController', 'logindomAction');
+	$socialOptions = $header->loginarray['options'];
+?>
+
+<div id="pop-up-1" class="pop-up-display-content">
+<h1 class="tg_users_title">Login Using one of your Social network</h1>
+<div class="tg_users_socila_login">
+<?php
+	echo '<div class="pp-lg-buttons">';
+	foreach ($socialOptions->getEnabledProviders() as $provider) {
+		echo  $this->socialSignInButton($provider, $this->redirect,$basePath);
+	}
+	echo '</div>';
+?>
+
+</div>
+
+<div class="tg_users_email_login">
+	<h1>Or</h1>
+	<h1 id="email_id_c">Your email ID</h1>
+	<div class="tg_create_email">
+		<form class="" method="post" id="userLoginFormUrl2" name="userLoginFormUrl2" role="form">
+			<input type="hidden" id="categoryHighlight" name="categoryHighlight" value="0" />
+			<input type="hidden" id="postHighlights" name="postHighlights" value="0" />
+			<input type="hidden" id="nsfwMcSet" name="nsfwMcSet" value="0" />
+			<input type="hidden" id="categoryId" name="categoryId" value="0" />
+			<input type="hidden" id="hashName" name="hashName" value="" />
+			<input type="hidden" id="categoryTitle" name="categoryTitle" value="" />
+			<input type="hidden" id="settingId" name="settingId" value="0" />
+			<input type="hidden" id="categoryImage" name="categoryImage" value="" />
+			<p>Email ID</p>
+			<input type="text" class="text_pad" name="emailId2" id="emailId2"/>
+			<p id="c_password">Password</p>
+			<input type="password" class="text_pad" name="userPassword2" id="userPassword2"/>
+			<p class="tg_email_btn"><button name="btnSubmit" id="btnSubmit" type="button" class="btn" onClick="return checkLogin('loginPopup');">CONTINUE</button><span id="userMessage2" style="display:none" class="check_un_p">Checking Username,Password...</span></p>
+			<p class="tg_fp_btn"><a href="javascript:void(0)" id="forgot_password" class="home_anchor_black" onClick="Javascript:showFpEmailIdForm();"><b>Forgot Password?</b></a><span style="display:none"id="tgaccount"><span>Already have a Taggerzz account?</span>&nbsp;&nbsp;<a href="javascript:void(0);" class="home_anchor_black" onclick="loginWindow()"><b>Login</b></a></span></p>
+			<input type="hidden" id="hid_log" name="hid_log" value="loginPopup">
+			<div class="crete_acc">
+				<p><span>Don't have an account</span>&nbsp;&nbsp;<a href="javascript:void(0);" onclick="signUpWindow()">Sign up now</a></p>
+			</div>
+		</form>
+	</div>
+</div>
+</div>
+<style>
+.tg_users_title{
+	font-size:18px;
+	text-align:center;
+}
+.tg_users_socila_login{
+	margin-top:10px;
+	margin-bottom:10px;
+	border-bottom:1px solid #ccc;
+	text-align:center;
+}
+.tg_users_socila_login img:first-child{
+	margin-left:0px;
+	margin-bottom:8px;
+}
+.tg_users_socila_login img{
+	margin-left:20px !important;
+}
+.tg_users_email_login h1{
+	font-size:18px;
+	text-align:center;
+}
+.tg_create_email{
+	margin-top:10px;
+}
+.tg_create_email input{
+	width:100%;
+	margin-bottom:10px;
+}
+.tg_create_email p{
+	font-size:11px;
+}
+.text_pad{
+	padding:6px 4px;
+	border:1px solid #c1cfd9;
+}
+.home_anchor_black{
+	color:#000000;
+	 text-decoration: none;
+}
+.tg_email_btn{
+	text-align:right;
+	position:relative;
+}
+.tg_fp_btn{
+	text-align:left;
+	position:relative;
+	bottom:15px;
+	width:80%;
+}
+.tg_fp_btn a:hover{
+	color:#f74b40;
+}
+.crete_acc{
+	border-top:1px solid #ccc;
+	margin-top:5px;
+	text-align:center;
+}
+.crete_acc p{
+	padding-top:5px;
+	padding-bottom:5px;
+}
+.crete_acc a{
+	color:#000;
+	font-weight:bold;
+	 text-decoration: none;
+}
+.crete_acc a:hover{
+	color:#f74b40;
+}
+.btn {
+	background: none repeat scroll 0 0 #f97e76;
+    border: 1px solid #f97e76;
+    color: #fff;
+    letter-spacing: 1px;
+	padding:3px 3px;
+    text-transform: uppercase;
+	text-align:center;
+	cursor:pointer;
+	/*line-height:40px;*/
+	font-size:10px;
+	 text-decoration: none;
+}
+</style>
+<script>
+function goTohashtag(title){
+	if(title=="highlights"){
+		if( setTzBoxId(0) )
+		{
+			window.location=BASE_URL+'/databox/createhashtag/highlight/0';
+		}
+		else
+		{
+			alert( "Highlight creation not available presently..." );
+			return false;
+		}
+	}else{
+		window.location=BASE_URL+'/databox/selectdatabox';
+	}
+}
+$('#userPassword2').keypress(function(e) {
+  if(e.which == 13) {
+    // enter pressed
+	checkLogin('loginPopup');
+  }
+}); 
+</script>

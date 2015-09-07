@@ -1,0 +1,51 @@
+
+        <div id="mainContainerWrapper" class="mainContainerWrapper">
+
+            <!-- This div is to include the header.html page 
+            <div id='divIncludeContent'></div>-->
+
+            <section id="secSelectDatabox" class="">
+                <div class="heading">SELECT DATABOX TYPE</div>
+                <span class="">(Step 3) Select either of the below options to continue </span>
+                <div class="divSelectDataboxContentWrapper">
+                    <a href="javascript:void(0);" onClick="selectDataBoxFunction('private')" class="divSelectDatabox">
+                        <div class="divSelectDataboxHeading">
+                            Private Databox
+                        </div>
+                        <img src="<?php echo $basePath; ?>/img/private_databox.png" class="imgDataboxImage" alt="" />
+                        <div class="divSelectDataboxDescription">
+                            Your page of collected and shared hot links can only be accessible with the combination of unique generated code 
+                            and #yourhashtag which can be changed at any time by you
+                        </div>
+                    </a>
+
+                  <a href="javascript:void(0);" onClick="selectDataBoxFunction('public')" class="divSelectDatabox">
+                        <div class="divSelectDataboxHeading">
+                            Public Databox
+                        </div>
+                        <img src="<?php echo $basePath; ?>/img/public_databox.png" class="imgDataboxImage" alt="" />
+                        <div class="divSelectDataboxDescription">
+                            Your collection gets shared openly in homepage for all the users
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </div>
+
+<script>
+function selectDataBoxFunction(selecttype){
+	if( setTzBoxId(0) )
+	{
+		if(selecttype=='private'){
+			window.location=BASE_URL+'/databox/createhashtag/privatedatabox/0';
+		}else{
+			window.location=BASE_URL+'/databox/createhashtag/publicdatabox/0';
+		}
+	}
+	else
+	{
+		alert( "Databox creation not available presently..." );
+		return false;
+	}
+}
+</script>

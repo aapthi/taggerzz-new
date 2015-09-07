@@ -1,0 +1,233 @@
+<?php if( ( isset($emailId)) && ($emailId != "" ) ){
+	$_SESSION['crop_email']=$emailId;
+	global $loginType;
+	$loginType='emailLogin';
+	global $step;
+	$step=1;
+	
+}$crop_montage_image=$this->imageNameCrop;
+if($crop_montage_image!=""){
+	$emailId=$_SESSION['crop_email'];
+}
+?>
+<!--ADD CSS -->
+
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/js/crop/cropit.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/css/default.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/css/allfont.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/css/sugarcake.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/css/normalize.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/css/nexus_menu/component.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/css/popupwindow.css" />
+
+<!-- EXIT-->
+<input type="hidden" id="basePath" name="basePath" value="<?php echo $basePath;?>" />
+<input type="hidden" id="baseUrl"  name="baseUrl" value="<?php echo $baseUrl;?>" />
+<input type="hidden" id="formUsageMode"  name="formUsageMode" value="<?php if( (! isset($emailId)) || ($emailId == "" ) ){?>socialLogin<?php }else{ ?>emailLogin<?php } ?>" />
+<div class="body_main_container admin_top">
+	<div class="body_middle_container">
+		<div class=" form_top">
+			<div class="row">
+				<div class="span5">
+					<div class="mar_l">
+						<div class="text_row">
+							<div class="float_l">
+								<h4 class="line_height">Please fill your details<?php if( (! isset($emailId)) || ($emailId == "" ) ){?>&nbsp;or&nbsp;<?php } ?></h4>
+							</div>
+							<div class="float_r">
+								 <?php if( (! isset($emailId)) || ($emailId == "" )  ){?><div class="skip_btn" id="skipLinkDiv"><a href="<?php echo $baseUrl; ?>/databoxuser/skip-to-continue">Skip to Continue</a></div><?php } ?>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<form class="insert" method="post" id="userDetailsForm" name="userDetailsForm" enctype="multipart/form-data">
+						  <p>
+							<label for="email">Profile Name</label>
+							<input type="text" name="displayname" <?php if( isset($_SESSION['Zend_Auth']->displayName) ){?>value="<?php echo $_SESSION['Zend_Auth']->displayName; ?>"<?php }?> id="displayname" placeholder="Set Profile Name" />
+						  </p>
+						  <p id="passwordLable">
+							<label for="password">Password</label>
+							<input type="password" name="password" id="emailLoginPassword" <?php if( isset($userPassword) && $userPassword != "" ){?>value="<?php echo $userPassword; ?>"<?php }?> placeholder="Set Password" onfocus="showPassword()">
+						  </p>
+						   <p id="confirmLable" style="display: none;">
+							<label for="password">Confirm Password</label>
+							<input type="password" name="confirmPassword" id="confirmPassword" <?php if( isset($userPassword) && $userPassword != "" ){?>value="<?php echo $userPassword; ?>"<?php }?> placeholder="Confirm Password"/>
+						  </p>
+						   <?if( isset($_SESSION['Zend_Auth']->storage) ){
+						   if($_SESSION['Zend_Auth']->email!=""){?>
+						  <p>
+						  <label for="password">Email ID</label>
+							<input type="text" name="email" readonly <?php if( isset($_SESSION['Zend_Auth']->email) ){?>value="<?php echo $_SESSION['Zend_Auth']->email; ?>"<?php }?> id="email" />
+						  </p>
+						  <?}}else{?>
+						  <p>
+						  <label for="password">Email ID</label>
+							<input type="text" name="email" readonly <?php if( isset($emailId) && $emailId != "" ){?>value="<?php echo $emailId; ?>"<?php }?>  id="email" />
+						  </p>
+						  <?}?>
+						  <p class="p-container">
+							<input type="submit" id="btnUserDetails" value="SUBMIT">
+						  </p>
+						  <input type="hidden" name="userImage" id="userImage" style="display:none;" >
+						  <?if($crop_montage_image!=""){?>
+							<input type="hidden" name="cropImage" id="cropImage" value="<?echo $crop_montage_image;?>">
+						  <?}else{?>
+						  <input type="hidden" name="cropImage" id="cropImage" value="0">
+						  <?}?>
+						  <input type="file" name="accountPublicImageFile" id="accountPublicImageFile" style="display:none;" >
+						  </form>
+					</div>
+				</div>
+				<div class="span6">
+				<h3>UPLOAD PICTURE</h3>
+				<p>(for montage, thumb, montage box home display ) <span>Upload  minimum 300 X 300</span></p>
+					<div class="upload_picture">
+						<div class="montage_pick">
+							<div class="file-input-wrapper">
+							<h5>&nbsp;#mycollections</h5>
+								<?if(isset($_SESSION['Zend_Auth']->photoURL)){?>
+								<img id="uploadedAccountImage1" src="<?php echo $_SESSION['Zend_Auth']->photoURL; ?>" class="btn-file-input" />
+								<?}else{
+								if(isset($_SESSION['usersinfo']->montage_image)){
+									if($_SESSION['usersinfo']->montage_image!=""){
+								?>
+								<img id="uploadedAccountImage1" src="<?php echo $basePath; ?>/images/project/montageImages/<?echo $_SESSION['usersinfo']->montage_image?>" class="btn-file-input" />
+								<?}}else if($crop_montage_image!=""){?>
+									<img id="uploadedAccountImage1" src="<?php echo $basePath; ?>/images/project/montageImages/<?echo $crop_montage_image;?>" class="btn-file-input" />
+									<?}else{?>
+								<img id="uploadedAccountImage1" src="<?php echo $basePath; ?>/images/social_media/profile_default_img.png" class="btn-file-input"/>
+								<?}}?>
+								
+							</div>
+						</div>
+						<p>ADJUST</p>
+					</div>
+					<div class="upload_picture">
+						<div class="thumb_pick">
+							<div class="file-input-wrapper-2 imagePreview" id="mediumImage">
+								<?if(isset($_SESSION['Zend_Auth']->photoURL)){?>
+								<img id="uploadedAccountImage2" src="<?php echo $_SESSION['Zend_Auth']->photoURL; ?>" class="btn-file-input" />
+								<?}else{
+								if(isset($_SESSION['usersinfo']->montage_image)){
+										if($_SESSION['usersinfo']->montage_image!=""){
+								?>
+								<img id="uploadedAccountImage2" src="<?php echo $basePath; ?>/images/project/montageImages/<?echo $_SESSION['usersinfo']->montage_image?>" class="btn-file-input" />
+								<?}}else if($crop_montage_image!=""){?>
+									<img id="uploadedAccountImage2" src="<?php echo $basePath; ?>/images/project/montageImages/<?echo $crop_montage_image;?>" class="btn-file-input" />
+									<?}else{?>
+								<img id="uploadedAccountImage2" src="<?php echo $basePath; ?>/images/social_media/profile_default_img_medium.png" class="btn-file-input" />
+								<?}}?>
+							</div>
+						</div>
+						<!--<p>Adjust</p>-->
+					</div>
+					<div class="upload_picture">
+						<div class="montage_box_pick">
+							<div class="file-input-wrapper-3 imagePreview" id="samllImage">
+								<?if(isset($_SESSION['Zend_Auth']->photoURL)){?>
+								<img id="uploadedAccountImage3" src="<?php echo $_SESSION['Zend_Auth']->photoURL; ?>" class="btn-file-input" />
+								<?}else{
+								if(isset($_SESSION['usersinfo']->montage_image)){
+									if($_SESSION['usersinfo']->montage_image!=""){
+								?>
+								<img id="uploadedAccountImage3" src="<?php echo $basePath; ?>/images/project/montageImages/<?echo $_SESSION['usersinfo']->montage_image?>" class="btn-file-input" />
+								<?}}else if($crop_montage_image!=""){?>
+									<img id="uploadedAccountImage3" src="<?php echo $basePath; ?>/images/project/montageImages/<?echo $crop_montage_image;?>" class="btn-file-input" />
+								<?}else{?>
+								<img id="uploadedAccountImage3" src="<?php echo $basePath; ?>/images/social_media/profile_default_img_small.png" class="btn-file-input" />
+								<?}}?>
+							</div>
+						</div>
+						<!--<p>Adjust</p>-->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="pop-up-image-crop-new" class="pop-up-display-content conform_popup_content" style="margin-bottom:20px;">
+	<div class="pop_up_haeding close"><h3>CROP IMAGE </h3><span onclick="selectCropImage();">Upload Image</span></div>
+	<input type="file" id="fileCropInp" class="cropit-image-input" style="display:none;" onchange="showCropButton()" />
+	<div class="cropit-image-preview-container">
+		<div id="crop_heigh" class="cropit-image-preview"></div>
+	</div>
+	<p style="text-align:center"><input type="range" class="cropit-image-zoom-input" /></p>
+	<button class="export">Crop</button><span id="l_i_c" style="display:none;margin-left:80%;"><img src="<?php echo $basePath; ?>/images/social_media/bx_loader.gif" /></span>
+</div>
+<input type="hidden" id="cropImage1" name="cropImage1" value="0" />
+<script src="<?php echo $basePath; ?>/js/crop/jquery.cropit.js"></script>
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/popupwindow.js"></script>
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/user-login.js"></script>
+
+<script>
+$(function() {
+	$('#pop-up-image-crop-new').cropit({
+		imageBackground: true
+	});
+	$('.export').click(function() {
+		var src = $('#pop-up-image-crop-new').cropit('export');
+		var fetchUploadedUrl = BASE_URL+'/upload-montage-image';
+		var imageId=$('#cropImage1').val();
+		$("#l_i_c").show();
+		$.ajax({
+			type	: "POST",
+			url		: fetchUploadedUrl,
+			data	: { data: src,page:'acc',imageId:imageId},
+			success: function(data){
+				$("#l_i_c").hide();
+				$('#pop-up-image-crop-new').popUpWindow({action: "close"});
+				$('#uploadedAccountImage1').attr('src',src);
+				$('#uploadedAccountImage2').attr('src',src);
+				$('#uploadedAccountImage3').attr('src',src);
+				$('#cropImage').val(data.imageId);
+				$('#cropImage1').val(data.imageId);
+			}
+		});
+		//window.open(imageData);
+	});
+});
+
+function closeCropPop(){
+	$('#pop-up-image-crop').css('display','none');
+}
+function selectCropImage(){
+	$('.cropit-image-input').click();	
+}
+function adjustImageCrop(){
+	$('#pop-up-image-crop-new').popUpWindow({action: "open"});
+	//crop_value_countt=0;
+	//$('#accountPublicImageFile').click();
+}
+function showCropButton(){
+	if( ! checkImageLoaded() )
+	{
+		return false;
+	}
+	$('.export').show();	
+}
+
+
+
+$('#uploadedAccountImage1').click(function(event){
+	// crop_value_countt=0;
+	// $('#accountPublicImageFile').click();
+	$('#pop-up-image-crop-new').popUpWindow({action: "open"});
+});	
+
+$("#accountPublicImageFile").change(function(click) {
+	var crop_width=0;
+	var crop_height=0;
+    var file, img;
+    if ((file = this.files[0])) {
+        img = new Image();
+		img.src = _URL.createObjectURL(file);
+        img.onload = function() {
+			crop_width=this.width;
+			crop_height=this.height;
+			accountPicChange1(img.src,crop_width,crop_height);
+        };
+    }
+});
+function showPassword(){
+	  $("#confirmLable").show();
+}
+</script>

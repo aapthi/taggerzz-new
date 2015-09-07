@@ -1,0 +1,52 @@
+<script src="<?php echo $basePath; ?>/js/crop/jquery.min.js"></script>
+<script src="<?php echo $basePath; ?>/js/crop/jquery.Jcrop.js"></script>
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/popupwindow.js"></script>
+<link rel="stylesheet" href="<?php echo $basePath; ?>/js/crop/jquery.Jcrop.css" type="text/css" />
+<script type="text/javascript">
+  $(function(){
+    $('#cropbox').Jcrop({
+      //aspectRatio: 1,
+	  minSize: [ 225, 300 ],
+      maxSize: [ 225, 300 ],
+      onSelect: updateCoords
+    });
+  });
+  function updateCoords(c)
+  {
+    $('#x').val(c.x);
+    $('#y').val(c.y);
+    $('#w').val(c.w);
+    $('#h').val(c.h);
+  };
+  function checkCoords()
+  {
+    if (parseInt($('#w').val())){
+		var cropUrl ="<?echo $baseUrl;?>/databox/image-crop";
+		var crop_src=$('#hid_src').val();
+		var x=$('#x').val();
+		var y=$('#y').val();
+		var w=$('#w').val();
+		var h=$('#h').val();
+		$.ajax({
+		  type:'POST',
+		  url: cropUrl,
+		  data:{val:1,x:x,y:y,w:w,h:h,src:crop_src},
+		  success: function(data) {
+			$('#pop-up-image-crop').popUpWindow({action: "close"});
+			$('#uploadedCatImage0').attr('src', '<?php echo $basePath; ?>/images/project/categoryImages/'+data.imageId+'.jpg');
+		  }
+		});
+	}else{	
+		alert('Please select a crop region then press submit.');
+    }
+  };
+</script>
+<img src="" id="cropbox" />
+<form  id="cropForm" method="post" >
+	<input type="hidden" id="x" name="x" />
+	<input type="hidden" id="y" name="y" />
+	<input type="hidden" id="w" name="w" />
+	<input type="hidden" id="h" name="h" />
+	<input type="hidden" id="hid_src" name="hid_src" />
+	<input type="button" value="Crop Image" onclick="checkCoords();"/>
+</form>

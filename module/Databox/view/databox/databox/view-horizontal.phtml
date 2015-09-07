@@ -1,0 +1,969 @@
+<style>
+.items007{
+	min-height:324px;
+	max-height:340px;
+	min-width:300px;
+	max-width:580px;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/js/crop/cropit.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/css/default.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/css/allfont.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/css/sugarcake.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/css/normalize.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/css/nexus_menu/component.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/css/popupwindow.css" />
+<link rel="stylesheet" href="<?php echo $basePath; ?>/js/grid/jquery-ui.css">
+<link rel="stylesheet" href="<?php echo $basePath; ?>/js/grid/jsplumb.css">
+<link rel="stylesheet" href="<?php echo $basePath; ?>/js/grid/demo.css">
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/login-ready.js"></script>
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/horizentascroll-wheel.js"></script>
+<?
+global $layoutTitle;
+global $layoutUrl;
+global $layoutImage;
+global $layoutDescription;
+$layoutUrl=$baseUrl.$_SERVER['REDIRECT_URL'];
+$layoutTitle = $this->hashName . " | " . $this->categoryTitle;
+$layoutImage=$basePath.'/images/project/categoryImages/'.$this->ImageNumber .'.jpg';
+$layoutDescription = "";
+if( isset($this->categoryDescripton) )
+{
+	if( strlen($this->categoryDescripton) > 600 )
+	{
+		$layoutDescription = substr($this->categoryDescripton,0,600) . '...';
+	}
+	else
+	{
+		$layoutDescription = $this->categoryDescripton;
+	}
+}
+global $isPrivateBox;
+if( isset($this->isPrivateDatabox) && ($this->isPrivateDatabox == 0) )
+{
+	// echo "<pre>";print_r($this->isPrivateDatabox);exit;
+	$isPrivateBox = "Yes";
+}
+if( isset($this->boxKeywords) && trim($this->boxKeywords) != "" )
+{
+	global $layoutKeywords;
+	$layoutKeywords = $this->boxKeywords;
+}
+?>
+<div class="pos_relative">
+	<div class="votings_ratings highlights_top_height_start">
+		<div class="body_middle_container">
+			<div class="">
+				<div class="votesandrates" style="position:relative;">
+					<h1><?echo $this->hashName;?></h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="highlights_search asending_pad">
+		<div class="body_middle_container pos_relative1">
+			<h2><?php echo $this->categoryTitle; ?></h2>
+		</div>
+	</div>
+	<div class="view_vertical_pos_fix">
+		<div class="body_middle_container pos_relative1 add_comment_bg">
+			<div class="add_comment_btn_left">
+				<a href="javascript:void(0);" onclick="custCommentCkEditorShow('',0);">Add Comment &nbsp;<img src="<?php echo $basePath; ?>/images/social_media/chatting.png"/></a> <a href="javascript:void(0);" onclick="savePositions('<?echo $this->categoryId?>')">Publish</a>
+			</div>
+			<div class="add_comment_by_author author">
+				<span>By :</span><span><?php echo $this->displayedCatUName; ?></span>
+			</div>
+			<div class="clearfix"></div>
+			<div id="catDescIntro" class="desc_intro_extra"><?php if( ! is_null($this->categoryDescripton) ){ echo $this->categoryDescripton; }?>&nbsp;Edit</div>
+			<div class="cust_desc_h" id="fullCatDesc">
+				<p id="fullDescPara"><?php if( ! is_null($this->categoryDescripton) ){ echo $this->categoryDescripton; }?></p>
+			</div>
+			<div class="relavence_worth_display_inline_block">
+				<div class="img_sp_inline">
+					<?
+						if($categoryRelevanceStatus==1){
+							$imageUp="upparrow_disable.png";
+							$imageDown="downarrow_enable.png";
+						}else if($categoryRelevanceStatus==0){
+							$imageUp="upparrow.png";
+							$imageDown="downarrow.png";
+						}else{
+							$imageUp="upparrow.png";
+							$imageDown="downarrow_enable.png";
+						}
+						
+						if($this->countRelevance1==0){
+							$countRelevance1='0';
+						}else{
+							$countRelevance1=$this->countRelevance1;
+						}
+						if($this->countRelevance0==0){
+							$countRelevance0='0';
+						}else{
+							$countRelevance0=$this->countRelevance0;
+						}
+					?>
+					<img src="<?php echo $basePath; ?>/images/social_media/rightmark.png"/>
+					<span>&nbsp;Relevance: <b id="upR1"><? echo $countRelevance1; ?></b></span>
+					<span id="up1">
+					<?if($categoryRelevanceStatus!=1){?>
+					<a href="javascript:void(0);" onclick="relAndWorthCustomization(1,<? echo $this->categoryId; ?>,1,<?echo $this->countRelevance1; ?>,<?echo $this->countRelevance0; ?>,<? echo $categoryRelevanceStatus; ?>)">
+						<img src="<?php echo $basePath; ?>/images/social_media/<? echo $imageUp; ?>"/>
+					</a>
+					<?}else{?>
+						<img src="<?php echo $basePath; ?>/images/social_media/<? echo $imageUp; ?>"/>
+					<?}?>
+					</span>
+					<span><b id="downR1"><? echo $countRelevance0; ?></b></span>
+					<span id="down1">
+					<?if($categoryRelevanceStatus!=0){?>
+					<a href="javascript:void(0);" onclick="relAndWorthCustomization(0,<? echo $this->categoryId; ?>,1,<?echo $this->countRelevance1; ?>,<?echo $this->countRelevance0; ?>,<? echo $categoryRelevanceStatus; ?>)">
+						<img src="<?php echo $basePath; ?>/images/social_media/<? echo $imageDown; ?>"/>
+					</a>
+					<?}else{?>
+						<img src="<?php echo $basePath; ?>/images/social_media/<? echo $imageDown; ?>"/>
+					<?}?>
+					</span>
+				</div>
+				<div class="img_sp_inline">
+					<?
+						if($categoryWorthStatus==1){
+							$imageWUp="upparrow_disable.png";
+							$imageWDown="downarrow_enable.png";
+						}else if($categoryWorthStatus==0){
+							$imageWUp="upparrow.png";
+							$imageWDown="downarrow.png";
+						}else{
+							$imageWUp="upparrow.png";
+							$imageWDown="downarrow_enable.png";
+						}
+						
+						if($this->countWorth1==0){
+							$countWorth1='0';
+						}else{
+							$countWorth1=$this->countWorth1;
+						}
+						if($this->countWorth0==0){
+							$countWorth0='0';
+						}else{
+							$countWorth0=$this->countWorth0;
+						}
+					?>
+					
+					<img src="<?php echo $basePath; ?>/images/social_media/star.png" style="width:15px;"/>
+					<span>&nbsp;Worth: <b id="upR0"><?echo $countWorth1; ?></b></span>
+					<span id="up0">
+					<?if($categoryWorthStatus!=1){?>
+					<a href="javascript:void(0);" onclick="relAndWorthCustomization(1,<? echo $this->categoryId; ?>,0,<?echo $this->countWorth1; ?>,<?echo $this->countWorth0; ?>,<? echo $categoryWorthStatus; ?>)">
+						<img src="<?php echo $basePath; ?>/images/social_media/<? echo $imageWUp; ?>"/>
+					</a>
+					<?}else{?>
+						<img src="<?php echo $basePath; ?>/images/social_media/<? echo $imageWUp; ?>"/>
+					<?}?>
+					</span>
+					
+					<span><b id="downR0"><?echo $countWorth0; ?></b></span>
+					<span id="down0">
+					<?if($categoryWorthStatus!=0){?>
+					<a href="javascript:void(0);" onclick="relAndWorthCustomization(0,<? echo $this->categoryId; ?>,0,<?echo $this->countWorth1; ?>,<?echo $this->countWorth0; ?>,<? echo $categoryWorthStatus; ?>)">
+						<img src="<?php echo $basePath; ?>/images/social_media/<? echo $imageWDown; ?>"/>
+					</a>
+					<?}else{?>
+						<img src="<?php echo $basePath; ?>/images/social_media/<? echo $imageWDown; ?>"/>
+					<?}?>
+					</span>
+				</div>
+			</div>
+			<div class="add_comment_by_author category_text"> 
+				<p>
+					<?php if( isset($this->main_cat_name) &&  $this->main_cat_name!="")
+					{
+						echo $this->main_cat_name; ?> >> <?php echo $this->sub_cat_name ?> >> <?php echo $this->cat_name;
+					}?>
+				</p>
+			</div>
+			<div class="view_vertical_relavence_btn_circle">
+				<a href="#" id="double_arrow_down"><img src="<?php echo $basePath; ?>/images/social_media/double_arrow_up.png"/></a>
+				<a href="#" id="double_arrow_up"><img src="<?php echo $basePath; ?>/images/social_media/double_arrow_down.png"/></a>
+				<input type="hidden" id="view_vertical_hid_id" value="1"/>
+			</div>
+			<div class="clearfix"></div>
+			<div class="share_btn_report">
+				<a href="javascript:void(0);" onclick="Javascript:custReportPopUpShow();">Report</a>
+			</div>
+			<div class="share_btn">
+				<a href="javascript:void(0);" onclick="openCloseShareCus()">Share</a>
+			</div>
+			<div class="share_btn_hello">
+				<p style="color:#227CEC">Ctrl+click to multi select</p>
+			</div>
+			<div class="share_btn_unselect">
+				<a href="javascript:void(0);" onclick="removeMSelection()">UnSelect</a>
+			</div>
+			<div id="social_sharing_btn">
+				<div class="addthis_sharing_toolbox" style="display:none">
+				</div>
+			</div>
+			<input type="hidden" id="countOpenCloseShare" value="0">
+	</div>
+	</div>
+</div>
+
+<div class="body_main_container">
+<div class="view_vertical_hg">
+<div class="">
+<div class="loadDemoImg" style="margin-left: 50%;margin-top: 25%;"><img src="<?php echo $basePath; ?>/images/loading.gif"></div>
+<div id="drag-drop-demo" class="demo drag-drop-demo" style="display:none">
+<?  foreach($this->databoxLinksGrid as $key=>$databoxLinksGrids){
+	if($key==0){?>
+		<input type="hidden" value="<?echo $databoxLinksGrids->user_id;?>" id="category_user_id">
+		<input type="hidden" value="<?echo $databoxLinksGrids->category_id;?>" id="category_id">
+	<?}
+	if($this->data==0){ 
+		$titleclass="img_title_pos_ab";
+		$descriptionclass="img_desc_pos_ab";
+?>
+		<div class="window items007" id="dragDropWindow<?echo $key+1;?>">
+		<span id="data_<?echo $key+1;?>">
+			<? if(strpos($databoxLinksGrids->link, "https://") !== false || strpos($databoxLinksGrids->link, "http://") !== false){
+				$url=$databoxLinksGrids->link;
+			}else{
+				$url='http://'.$databoxLinksGrids->link;
+			}?>
+			<a href="<?echo $url;?>" target="_blank">
+				<p class="link_title"><? if(isset($databoxLinksGrids->link)){
+					if(strlen($databoxLinksGrids->link)>40){
+						echo substr($databoxLinksGrids->link,0,40) . '...'; 
+					}else{
+						echo $databoxLinksGrids->link; 
+					}}?></p>
+			</a>
+				<div class="cbrg  <?php if(isset($mainclass)){ echo $mainclass; }?>">
+					<div><?php $videoHeightReduce = false;
+						$imageSocialAlone="";
+						$valueSocialAlone=0;
+						if(isset($databoxLinksGrids->image) && $databoxLinksGrids->image!=null){
+							if(strpos($databoxLinksGrids->image, "montage_default_images") !== false){
+								if(isset($databoxLinksGrids->title) && $databoxLinksGrids->title!=""){
+									if(isset($databoxLinksGrids->description) && $databoxLinksGrids->description!="no Description"){
+										$fixHeight=120;
+										$fixWidth=120;
+									}
+								}else{
+									$imageSocialAlone="margin-top:28%;margin-bottom:28%;";
+									$fixHeight=120;
+									$fixWidth=120;
+									$valueSocialAlone=1;
+								}
+							}else{
+								if(isset($databoxLinksGrids->description) && $databoxLinksGrids->description!="no Description"){
+									if(strlen($databoxLinksGrids->description)>250){
+										$fixHeight=174;
+										$fixWidth=299;
+									}else{
+										if(strlen($databoxLinksGrids->description)>200){
+											$fixHeight=189;
+											$fixWidth=299;
+										}else if(strlen($databoxLinksGrids->description)>160){
+											$fixHeight=200;
+											$fixWidth=299;
+										}else if(strlen($databoxLinksGrids->description)>120){
+											$fixHeight=212;
+											$fixWidth=299;
+										}else if(strlen($databoxLinksGrids->description)>80){
+											$fixHeight=228;
+											$fixWidth=299;
+										}else if(strlen($databoxLinksGrids->description)>40){
+											$fixHeight=242;
+											$fixWidth=299;
+										}
+									}								
+								}else{
+									if(isset($databoxLinksGrids->title) && $databoxLinksGrids->title!=""){
+										$fixHeight=260;
+										$fixWidth=299;
+									}else{
+										$fixHeight=289;
+										$fixWidth=299;
+										$videoHeightReduce = true;
+									}
+								}
+							}
+							$imageLink=$databoxLinksGrids->image;
+						}else{
+							$imageLink=$basePath.'/images/social_media/noimage.png';
+						}
+						?>
+						<?php
+							if($databoxLinksGrids->is_video==1)
+							{
+						?>
+								<div id="dragDropWindow<?echo $key+1;?>image" class="<?php if(isset($subclass)){ echo $subclass; }?>" >
+									<iframe width="<?php if(isset($fixWidth))echo $fixWidth; ?>" style="<? echo $imageSocialAlone; ?>" height="<?php if(isset($fixHeight)){ if($videoHeightReduce){echo $fixHeight-20;} else{echo $fixHeight;}}; ?>"  
+											src="<?echo $databoxLinksGrids->iframe_src;?>" 
+											frameborder="0" allowfullscreen>
+									</iframe>
+								</div>
+						<?php
+							}
+							else
+							{
+						?>
+								<a href="<?echo $url;?>" target="_blank">
+								<div id="dragDropWindow<?echo $key+1;?>image" class="<?php if(isset($subclass)){ echo $subclass; }?>" >
+									<img width="<?php if(isset($fixWidth))echo $fixWidth; ?>" style="<? echo $imageSocialAlone; ?>" height="<?php if(isset($fixHeight))echo $fixHeight; ?>"  src="<? echo $imageLink;?>"/>
+								</div>
+								</a>
+						<?php
+							}
+						?>
+						<?php if(isset($databoxLinksGrids->title) && $databoxLinksGrids->title!=""){?>
+						<div class="<?php if(isset($titleclass)){ echo $titleclass; }?>">
+							<h3 id="dragDropWindow<?echo $key+1;?>title"><a class="home_anchor_black" href="<?echo $url;?>" target="_blank">
+								<?
+									if(strlen($databoxLinksGrids->title)>20){
+										echo substr($databoxLinksGrids->title,0,20) . '...'; 
+									}else{
+										echo $databoxLinksGrids->title; 
+									}
+								?>
+							</a></h3>
+						</div>
+						<?} $parahid=""; 
+						if(isset($databoxLinksGrids->description) && $databoxLinksGrids->description!="no Description"){?>
+						<div class="<?php if(isset($descriptionclass)){ echo $descriptionclass; }?>">
+							<p id="dragDropWindow<?echo $key+1;?>dec">
+								<?php 
+									if(strlen($databoxLinksGrids->description)>250){
+										echo substr($databoxLinksGrids->description,0,250) . '<a href="'.$url.'" target="_blank">...Read more</a>'; 
+										$parahid=1;
+									}else{
+										echo $databoxLinksGrids->description; 
+										$parahid=0;
+									}
+								?>
+							</p>
+							
+						</div>
+						<?}?>
+						<input type="hidden" id="dragDropWindow<?echo $key+1;?>para" value="<? echo $parahid; ?>">
+						<input type="hidden" id="valueSocialAlone<?echo $key+1;?>" value="<? echo $valueSocialAlone; ?>">
+						<input type="hidden" id="dragDropWindow<?echo $key+1;?>ld_id" value="<?echo $databoxLinksGrids->link_details_id	?>">
+						<p id="dragDropWindow<?echo $key+1;?>url" style="display:none"><?echo $url ?></p>
+					</div>
+					<!--
+					<div class="aut_n">
+						<p>Author: <?php if(isset($databoxLinksGrids->web_author)){ echo $databoxLinksGrids->web_author; }?></p>
+					</div>
+					<div class="update_today">
+						<p>Updated:<?php if(isset($databoxLinksGrids->last_updated_date)){ echo $databoxLinksGrids->last_updated_date; }?></p>
+					</div>
+					-->
+				</div>
+			</span>
+			</div>			
+		<? //}
+	}else{
+		echo $databoxLinksGrids->div_html;
+	}
+	
+}?>
+<div style="width:5000px"></div>
+</div>
+
+</div>
+</div>
+</div>
+<?if($this->data==0){?>
+<input type="hidden" id="incrId" value="<?echo count($this->databoxLinksGrid)?>">
+<?}else{?>
+<input type="hidden" id="incrId" value="<?echo $databoxLinksGrids->count_divs;?>">
+<?}?>
+
+
+<!-- Cat Desc CKEditor Pop Up -->
+<div id="pop-up-cat-description" class="pop-up-display-content conform_popup_content">
+	<div class="montage_desc">
+		<h4>Please provide your description</h4>
+		<p><textarea class="text_pad" id="catDescCkeditor"></textarea></p>
+	</div>
+	<p>
+		<a class="larg_btn" href="javascript:void(0);" onclick="catDescCkEditorCancel();">CANCEL</a>
+		<a class="larg_btn" href="javascript:void(0);" onclick="saveCustCatDesc();">SAVE</a>
+	</p>
+</div>
+<!-- Cat Desc CKEditor Pop Up End -->
+
+
+<!-- Comment CKEditor Pop Up -->
+<div id="pop-up-comment" class="pop-up-display-content conform_popup_content">
+	<div class="montage_desc">
+		<h4>Please provide your comment</h4>
+		<p><textarea class="text_pad" id="commentCkeditor"></textarea></p>
+	</div>
+	<p>
+		<a class="larg_btn" href="javascript:void(0);" onclick="custCommentCkEditorCancel();">CANCEL</a>
+		<a class="larg_btn" href="javascript:void(0);" onclick="showActualComment();">SAVE</a>
+	</p>
+</div>
+<!-- Comment CKEditor Pop Up End -->
+
+<!-- Report Pop Up -->
+<div id="pop-up-report" class="pop-up-display-content conform_popup_content">
+	<div class="report_bg">
+		<div><input type="radio" value="1" name="Personel" checked><span>&nbsp;Spam Content</span></div>
+		<div><input type="radio" value="2" name="Personel"><span>&nbsp;Abusive / hateful content</span></div>
+		<div><input type="radio" value="3" name="Personel"><span>&nbsp;Nude / Vulgar Open content</span></div>
+		<div><input type="radio" value="4" name="Personel"><span>&nbsp;Personal defamatory content</span></div>
+		<div class="report_mar_t"><input value="5" type="radio" name="Personel"><span>&nbsp;Other</span></div>
+		<div><textarea id="personel_text" placeholder="Mention your concern in Plain text"></textarea></div>
+		<div class="report_btn"><a href="javascript:void(0)" onClick="Javascript:custReportSend(<? echo $this->categoryId; ?>);">SUBMIT</a></div>
+		<p id="repMessage"></p>
+		<div style="clear:both;"></div>
+	</div>
+</div>
+<!-- Report Pop Up End -->
+
+<input type="hidden" id="viewPageYes" value="0" />
+<input type="hidden" id="viewPageChanged" value="0" />
+<input type="hidden" id="commentMode" value="0" />
+<input type="hidden" id="catDescCkEditorYes" value="0" />
+<input type="hidden" id="catDescChanged" value="0" />
+
+<input type="hidden" id="basePath" name="basePath" value="<?php echo $basePath;?>" />
+<input type="hidden" id="baseUrl"  name="baseUrl" value="<?php echo $baseUrl;?>" />
+
+<script src="<?php echo $basePath; ?>/js/grid/ui.multidraggable.js"></script>
+<script>
+var scrollleft="";
+var commMinAllowedWidth = 0;
+var commMinAllowedHeight = 0;
+var commScrollHTracker = false;
+var commScrollVTracker = false;
+var category_user_id=$('#category_user_id').val();
+var category_id=$('#category_id').val();
+<?if(isset($_SESSION['usersinfo']->userId)){?>
+<?if($this->data==0){?>
+	var totalUrls=<? echo count($this->databoxLinksGrid); ?>;
+<?}else{?>
+	var totalUrls=<? echo $databoxLinksGrids->count_divs; ?>;
+<?}?>
+if(category_user_id==<?echo $_SESSION['usersinfo']->userId;?>){
+	$('.share_btn_hello').show();
+	$('.share_btn_unselect').show();
+	$('.add_comment_btn_left a').css('display','inline-block');
+	$('#categoryDescLink').show();
+	
+// Code added by bhargava for opening link only on double click if customization allowed
+	$.fn.hasAncestor = function(a)
+	{
+		return this.filter(function(){
+			return !!$(this).closest(a).length;
+		});
+	};
+
+	// For post titles :
+	$("a:has(p.link_title)").each(function()
+	{
+		var currLinkHrefVal = "";
+		if( $(this).attr('href').trim() != "" )
+		{
+			currLinkHrefVal = $(this).attr('href').trim();
+		}
+		// console.log( "href " + currLinkHrefVal );
+		$(this).removeAttr('href');
+		$(this).removeAttr("target");
+		$(this).css( "cursor","pointer" );
+		
+		$(this).dblclick(function()
+		{
+			if( currLinkHrefVal.trim() != "" )
+			{
+				window.open( currLinkHrefVal,'_blank' );
+			}
+		});
+	});
+	
+	// For post images :
+	for( var imageDivNum=1; imageDivNum <= totalUrls; imageDivNum++ )
+	{
+		var currimageDivId = "dragDropWindow" + imageDivNum + "image";
+		$('a').has('div#'+currimageDivId).each(function()
+		{
+			var currImgLinkHrefVal = "";
+			if( $(this).attr('href').trim() != "" )
+			{
+				currImgLinkHrefVal = $(this).attr('href').trim();
+				// console.log( "imgAHref " + currImgLinkHrefVal );
+			}
+			$(this).removeAttr('href');
+			$(this).removeAttr("target");
+			$(this).css( "cursor","pointer" );
+		
+			$(this).dblclick(function()
+			{
+				if( currImgLinkHrefVal.trim() != "" )
+				{
+					window.open( currImgLinkHrefVal,'_blank' );
+				}
+			});
+		});
+		
+		var currTitleHtId = "dragDropWindow" + imageDivNum + "title";
+		$("a").hasAncestor("h3#"+currTitleHtId).each(function()
+		{
+			var currTitleLinkHrefVal = "";
+			if( $(this).attr('href').trim() != "" )
+			{
+				currTitleLinkHrefVal = $(this).attr('href').trim();
+				// console.log( "TitleAHref " + currTitleLinkHrefVal );
+			}
+			$(this).removeAttr('href');
+			$(this).removeAttr("target");
+			$(this).css( "cursor","pointer" );
+		
+			$(this).dblclick(function()
+			{
+				if( currTitleLinkHrefVal.trim() != "" )
+				{
+					window.open( currTitleLinkHrefVal,'_blank' );
+				}
+			});
+		});
+	}
+// End Code added by bhargava.
+
+	for(var i=1;i<=totalUrls;i++){
+		var valueSocialAlone=$('#valueSocialAlone'+i).val();
+		if(valueSocialAlone==0){
+			$("#dragDropWindow"+i).resizable({
+				resize: function(event, div) {
+					// Bhargav added: The following is to control comment.
+					var ridDiv=div.element.context.id;
+					if( $('#'+ridDiv).attr('class').indexOf('items007') == -1 )
+					{
+						$('#'+ridDiv).addClass( "cust_comm_overflow" );
+						if( commScrollHTracker )
+						{
+							if( div.size.height <= commMinAllowedHeight )
+							{
+								div.size.height = commMinAllowedHeight;
+							}
+							else
+							{
+								commScrollHTracker = false;
+								commScrollVTracker = false;
+							}
+						}
+						else
+						{
+							if( commScrollVTracker )
+							{
+								commScrollHTracker = true;
+								commMinAllowedHeight = div.size.height + 5;
+								div.size.height = commMinAllowedHeight;
+							}
+						}
+
+						if( commScrollVTracker )
+						{
+							if( div.size.width <= commMinAllowedWidth )
+							{
+								div.size.width = commMinAllowedWidth;
+							}
+							else
+							{
+								commScrollVTracker = false;
+								commScrollHTracker = false;
+							}
+						}
+						else
+						{
+							if( commScrollHTracker )
+							{
+								commScrollVTracker = true;
+								commMinAllowedWidth = div.size.width + 5;
+								div.size.width = commMinAllowedWidth;
+							}
+						}
+
+						if( document.getElementById(ridDiv).scrollHeight - $('#'+ridDiv).innerHeight() > 5  )
+						{
+							if( ! commScrollHTracker )
+							{
+								commScrollHTracker = true;
+								commMinAllowedHeight = div.size.height + 5;
+								div.size.height = commMinAllowedHeight;
+							}
+						}
+						if( document.getElementById(ridDiv).scrollWidth - $('#'+ridDiv).innerWidth() > 5  )
+						{
+							if( ! commScrollVTracker )
+							{
+								commScrollVTracker = true;
+								commMinAllowedWidth = div.size.width + 5;
+								div.size.width = commMinAllowedWidth;
+							}
+						}
+					}
+					// End Added by bhargav.
+				},
+				stop: function( event, div ) {
+					$('#viewPageChanged').val( 1 );
+					var orgWidth="";
+					var fixHeight="";
+					var fixWidth="";
+					var idDiv=div.element.context.id;
+					var idDivClass=$('#'+idDiv).attr('class');
+					var paraHidValue=$('#'+idDiv+'para').val();
+					var targeturl=$('#'+idDiv+'url').html();
+					if(idDivClass.indexOf('items007') > -1){
+						var ld_id=$('#'+idDiv+'ld_id').val();
+						$.ajax({
+							url		: 	BASE_URL+'/databox/view-vertical',
+							type	: 	"POST",
+							data	:	{ld_id:ld_id},
+							success	: function(data) {
+								var tmpImg = new Image();
+								tmpImg.src=data.image;
+								$(tmpImg).one('load',function(){
+								  orgWidth = tmpImg.width;
+								});
+								var videoHeightReduce = false;
+								if( data.para != "no Description")
+								{
+									if(data.para.length>250){
+										fixHeight=174;
+										fixWidth=299;
+									}else if(data.para.length>200){
+										fixHeight=189;
+										fixWidth=299;
+									}else if(data.para.length>160){
+										fixHeight=200;
+										fixWidth=299;
+									}else if(data.para.length>120){
+										fixHeight=212;
+										fixWidth=299;
+									}else if(data.para.length>80){
+										fixHeight=228;
+										fixWidth=299;
+									}else if(data.para.length>40){
+										fixHeight=242;
+										fixWidth=299;
+									}
+									else
+									{
+										fixHeight=265;
+										fixWidth=299;
+									}
+								}
+								else
+								{
+									if( data.title != "")
+									{
+										fixHeight=260;
+										fixWidth=299;
+									}
+									else
+									{
+										fixHeight=289;
+										fixWidth=299;
+										videoHeightReduce = true;
+									}
+								}
+								var titlee=data.title;
+								if(div.element.context.style.width>='500px'){
+									if(data.isVideo == 1)
+									{
+										var fixH = fixHeight;
+										if( videoHeightReduce )
+										{
+											fixH = parseInt(fixHeight)-parseInt("20");
+										}
+										$('#'+idDiv+'image').html('<iframe width="400px" height="'+fixH+'" src="'+data.iframeSrc+'" frameborder="0" allowfullscreen></iframe>');
+									}
+									else
+									{
+										if(data.image.indexOf('montage_default_images') > -1){
+											$('#'+idDiv+'image').html('<img style="margin-top:14%;margin-bottom:14%;" width="120px" height="120px" src="'+data.image+'">');
+										}else{
+											if(orgWidth<=1000){
+												$('#'+idDiv+'image').html('<img width="400px" height="'+fixHeight+'" src="'+data.image+'">');
+											}
+										}
+									}
+									if(titlee.length<=100){
+										$('#'+idDiv+'title').html(titlee);
+									}else{
+										$('#'+idDiv+'title').html(titlee.substr(0, 100)+'...');
+									}
+									if(data.para!='no Description'){
+										if(data.para.length<=500){
+											$('#'+idDiv+'dec').html(data.para);
+										}else{
+											var content=data.para;
+											var textShow = content.substr(0, 500);
+											$('#'+idDiv+'dec').html(textShow+'<a href="'+targeturl+'" target="_blank">...Read more</a>');
+										}
+									}
+								}else if(div.element.context.style.width>='400px'){
+									if(data.isVideo == 1)
+									{
+										var fixH = fixHeight;
+										if( videoHeightReduce )
+										{
+											fixH = parseInt(fixHeight)-parseInt("20");
+										}
+										$('#'+idDiv+'image').html('<iframe width="390px" height="'+fixH+'" src="'+data.iframeSrc+'" frameborder="0" allowfullscreen></iframe>');
+									}
+									else
+									{
+										if(data.image.indexOf('montage_default_images') > -1){
+											$('#'+idDiv+'image').html('<img style="margin-top:20%;margin-bottom:20%;" width="120px" height="120px" src="'+data.image+'">');
+										}else{
+											if(orgWidth>=300){
+												$('#'+idDiv+'image').html('<img width="390px" height="'+fixHeight+'" src="'+data.image+'">');
+											}
+										}
+									}
+									if(titlee.length<=50){
+										$('#'+idDiv+'title').html(titlee);
+									}else{
+										$('#'+idDiv+'title').html(titlee.substr(0, 50)+'...');
+									}
+									if(data.para!='no Description'){
+										if(data.para.length<=350){
+											$('#'+idDiv+'dec').html(data.para);
+										}else{
+											var content=data.para;
+											var textShoww = content.substr(0, 350);
+											$('#'+idDiv+'dec').html(textShoww+'<a href="'+targeturl+'" target="_blank">...Read more</a>');
+										}
+									}
+								}else{
+									if(data.isVideo == 1)
+									{
+										var fixH = fixHeight;
+										if( videoHeightReduce )
+										{
+											fixH = parseInt(fixHeight)-parseInt("20");
+										}
+										$('#'+idDiv+'image').html('<iframe width="299px" height="'+fixH+'" src="'+data.iframeSrc+'" frameborder="0" allowfullscreen></iframe>');
+									}
+									else
+									{
+										if(data.image.indexOf('montage_default_images') > -1){
+											$('#'+idDiv+'image').html('<img style="margin-top:28%;margin-bottom:28%;" width="120px" height="120px" src="'+data.image+'">');
+										}else{
+											$('#'+idDiv+'image').html('<img width="299px" height="'+fixHeight+'" src="'+data.image+'">');
+										}
+									}
+									if(titlee.length<=20){
+										$('#'+idDiv+'title').html(titlee);
+									}else{
+										$('#'+idDiv+'title').html(titlee.substr(0, 20)+'...');
+									}
+									if(data.para!='no Description'){
+										if(data.para.length<=250){
+											$('#'+idDiv+'dec').html(data.para);
+										}else{
+											var content=data.para;
+											var textShoww = content.substr(0, 250);
+											$('#'+idDiv+'dec').html(textShoww+'<a href="'+targeturl+'" target="_blank">...Read more</a>');
+										}
+									}
+								}
+							}
+						});
+					}
+					else
+					{
+						$('#'+idDiv).removeClass( "cust_comm_overflow" );
+					}
+				}
+			});
+		}
+	}
+	//jsPlumb.ready(function() {
+		<?if($this->data==0){?>
+		var topp=87;
+		var leftt=0;
+		for(var i=1;i<=<? echo count($this->databoxLinksGrid); ?>;i++){
+			//jsPlumb.draggable("dragDropWindow"+i, {
+			$("#dragDropWindow"+i).multidraggable({
+				axis:'x',
+				start: function(event, ui) { $(this).css("z-index", 979); },
+				drag: function(event, ui) {
+					$('#viewPageChanged').val( 1 );
+				},
+				stop: function(event, ui) { $(this).css("z-index", ""); }
+			});
+			$('#dragDropWindow'+i).css('top',topp+'px');
+			$('#dragDropWindow'+i).css('left',leftt+'px');
+			//$('#dragDropWindow'+i).css('width','321px');
+			if(i%100==0){
+				topp=topp+356+60;
+				leftt=0;
+			}else{
+				leftt=leftt+240+90;
+			}
+		}
+		<?}else{?>
+		for(var i=1;i<=<? echo $databoxLinksGrids->count_divs; ?>;i++){
+			//jsPlumb.draggable("dragDropWindow"+i, {
+			$("#dragDropWindow"+i).multidraggable({
+				axis:'x',
+				start: function(event, ui) { $(this).css("z-index", 979); },
+				drag: function(event, ui) {
+					$('#viewPageChanged').val( 1 );
+				},
+				stop: function(event, ui) { $(this).css("z-index", ""); }
+			});
+		}
+		<?}?>
+		$('.loadDemoImg').hide();
+		$('.demo').show();
+	//});
+	
+}else{
+	$('#categoryDescLink').remove();
+	<?if($this->data!=0){?>
+		for(var i=1;i<=<? echo $databoxLinksGrids->count_divs; ?>;i++){
+			$('#deleteComment'+i).remove();
+		}
+	<?}else{?>
+		var topp=87;
+		var left=0;
+		for(var i=1;i<=<? echo count($this->databoxLinksGrid); ?>;i++){
+			$('#dragDropWindow'+i).css('left',left+'px');
+			$('#dragDropWindow'+i).css('top',topp+'px');
+			$('#dragDropWindow'+i).css('width','321px');
+			if(i%100==0){
+				topp=topp+356+60;
+				left=0;
+			}else{
+				left=left+240+90;
+			}
+		}
+	<?}?>
+	$('.loadDemoImg').hide();
+	$('.demo').show();
+	$('.add_comment_btn_left').remove();
+}
+<?}else{?>
+$('#categoryDescLink').remove();
+<?if($this->data==0){?>
+	var topp=87;
+	var left=0;
+	for(var i=1;i<=<? echo count($this->databoxLinksGrid); ?>;i++){
+		$('#dragDropWindow'+i).css('left',left+'px');
+		$('#dragDropWindow'+i).css('top',topp+'px');
+		$('#dragDropWindow'+i).css('width','321px');
+		if(i%100==0){
+			topp=topp+356+60;
+			left=0;
+		}else{
+			left=left+240+90;
+		}
+	}
+<?}else{?>
+for(var i=1;i<=<? echo $databoxLinksGrids->count_divs; ?>;i++){
+	$('#deleteComment'+i).remove();
+}
+<?}?>
+$('.loadDemoImg').hide();
+$('.demo').show();
+$('.add_comment_btn_left').remove();
+<?}?>
+</script>
+<script>
+  $(document).ready(function() {
+	  var updateViewsCountAjaxUrl = BASE_URL + "/databox/update-views-count";
+			$.ajax
+			({
+			  url: updateViewsCountAjaxUrl,
+			  type: "POST",
+			  data:{categoryId:category_id},
+			  dataType: "json",
+			  success: function(data)
+			  {
+				
+			  }
+			});
+	/* $('.view_vertical_relavence_btn_circle').click(function() {
+		var ver_hid_id = $('#view_vertical_hid_id').val();
+		if(ver_hid_id==1){
+			$('.view_vertical_hg').css('margin-top','135px');
+			$('.add_comment_bg').css('height','105px')
+			$('#catDescIntro').hide();
+			$('#fullCatDesc').show();
+			$('#double_arrow_down').hide();
+			$('#double_arrow_up').show();
+			$('#view_vertical_hid_id').val(0);
+		}
+		else
+		{
+			$('.view_vertical_hg').css('margin-top','135px');
+			$('.add_comment_bg').css('height','68px')
+			$('#fullCatDesc').hide();
+			$('#catDescIntro').show();
+			$('#double_arrow_down').show();
+			$('#double_arrow_up').hide();
+			$('#view_vertical_hid_id').val(1);
+		}
+	});
+	$('.footer_global').css('position','fixed');
+	$('.footer_global').css('z-index','1000');
+	$('.view_vertical_hg').css('margin-top','136px');
+	//$('.demo').css('height',($(window).height()-150)+'px');
+	$('body').css('overflow','hidden');
+	$('body').css('overflow-x','auto');
+	$('body').css('overflow-y','hidden');
+	
+	var catDescIntroDiv = document.getElementById('catDescIntro');
+	if( catDescIntroDiv.scrollWidth > catDescIntroDiv.clientWidth )
+	{
+		var fullDescParaHtml = "";
+		fullDescParaHtml += '<span id="categoryDescripton">' + $.trim($("#fullDescPara").html().replace(/&nbsp;/g,'')) + '</span>&nbsp;';
+		fullDescParaHtml += '<span id="categoryDescLink" style="display:none;"><a href="Javascript:void(0);" id="catDescAnchor" onclick="catDescCkEditorShow();">Edit</a></span>';
+		$('#fullDescPara').html( fullDescParaHtml );
+		
+		$('#double_arrow_up').hide();
+		$('.view_vertical_relavence_btn_circle').css('display','inline-block');
+
+		if( $('.add_comment_btn_left a').is(':visible') )
+		{
+			$('#categoryDescLink').show();
+		}
+	}
+	else
+	{
+		var catDescAnchorLbl = "Set Description";
+		if( parseInt($.trim($("#fullDescPara").html().replace(/&nbsp;/g,'')).length) > parseInt("0") )
+		{
+			catDescAnchorLbl = "Edit";
+		}
+		var catDescIntroDivHtml = "";
+		var catDescIntroDivHtml = '<span id="categoryDescripton">' + $.trim($("#fullDescPara").html().replace(/&nbsp;/g,'')) + '</span>&nbsp;'; 
+		catDescIntroDivHtml += '<span id="categoryDescLink" style="display:none;"><a href="Javascript:void(0);" id="catDescAnchor" onclick="catDescCkEditorShow();">'+catDescAnchorLbl+'</a></span>';
+		$('#catDescIntro').html( catDescIntroDivHtml );
+
+		if( $('.add_comment_btn_left a').is(':visible') )
+		{
+			$('#categoryDescLink').show();
+		}
+	}
+	var nicesxCatDesc = $("#fullCatDesc").niceScroll({touchbehavior:false,cursorcolor:"#acacac",cursoropacitymax:0.6,autohidemode:false ,cursorwidth:8});
+	nicesxCatDesc.resize();*/
+
+  });
+  $(function(){
+   $(window).scroll(function(){
+		scrollleft=$(window).scrollLeft();
+   });
+});
+  
+</script>
+
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5461ef997855b9fa" async="async"></script>

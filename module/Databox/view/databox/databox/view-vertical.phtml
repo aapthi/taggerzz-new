@@ -1,0 +1,508 @@
+<style>
+.items007{
+	min-height:324px;
+	max-height:400px;
+	min-width:300px;
+	max-width:580px;
+}
+</style>
+
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="<?php echo $basePath; ?>/css/new_css/gridstack.min.css"/>
+
+<?php 
+global $layoutTitle;
+global $layoutUrl;
+global $layoutImage;
+global $layoutDescription;
+$layoutUrl=$baseUrl.$_SERVER['REDIRECT_URL'];
+$layoutTitle = $this->hashName . " | " . $this->categoryTitle;
+$layoutImage=$basePath.'/images/project/categoryImages/'.$this->ImageNumber .'.jpg';
+$layoutDescription = "";
+if( isset($this->categoryDescripton) )
+{
+	if( strlen($this->categoryDescripton) > 600 )
+	{
+		$layoutDescription = substr($this->categoryDescripton,0,600) . '...';
+	}
+	else
+	{
+		$layoutDescription = $this->categoryDescripton;
+	}
+}
+global $isPrivateBox;
+if( isset($this->isPrivateDatabox) && ($this->isPrivateDatabox == 0) )
+{
+	// echo "<pre>";print_r($this->isPrivateDatabox);exit;
+	$isPrivateBox = "Yes";
+}
+if( isset($this->boxKeywords) && trim($this->boxKeywords) != "" )
+{
+	global $layoutKeywords;
+	$layoutKeywords = $this->boxKeywords;
+}
+
+$currBoxCatUid = 0;
+if( isset($this->displayedCategoryUserId) )
+{
+	$currBoxCatUid = $this->displayedCategoryUserId;
+}
+?><body>
+
+<div id="mainContainerWrapper" class="mainContainerWrapper">
+	<section id="secCustomizeDatabox">
+		<div class="c_DivCustomizationWrapper">
+			
+			<div class="c_DivHashTag"><?php echo $this->hashName;?></div>
+			<div class="c_DivTitleWrapper">
+				<div class="c_DivTitle" style="display:none"><?php echo $this->categoryTitle; ?><button class="c_BtnEditTitle">EDIT</button></div>
+			</div>
+			<div class="c_DivHeaderCommentWrapper">
+				<div class="c_DivUserDetailsWrapper">
+					<span class="c_SpnUsername"><?php echo $this->displayedCatUName; ?> WROTE : </span>
+						<div class="c_DivCardUser">
+							<img src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $this->displayedUMontImage; ?>" class="imgUserImage" alt="" />
+						</div>
+				</div>
+				<div class="c_DivHeaderCommentRight">
+					<div  class="c_DivHeaderCommentRightTop">
+						<div id="catDescIntro" class="c_DivHeaderComment" style="display:none">
+							<?php if( ! is_null($this->categoryDescripton) ){ echo $this->categoryDescripton; }?>&nbsp;Edit
+						</div>
+						<div id="fullCatDesc" class="c_DivHeaderComment">
+							<p id="fullDescPara"><?php if( ! is_null($this->categoryDescripton) ){ echo $this->categoryDescripton; }?></p>
+						</div>
+						<div class="c_DownArrow" style="display:none">
+							<img src="<?php echo $basePath; ?>/img/downArrow.png" />
+						</div>
+					</div>
+					<div class="c_DivHeaderCommentRightBottom">
+						<a class="c_BtnReport" href="javascript:void(0);" onclick="Javascript:custReportPopUpShow();">Report</a>
+						<a class="c_BtnShare" href="javascript:void(0);" onclick="Javascript:openCloseShareCus()">Share</a>
+						<!--<a class="c_BtnAddComment" href="javascript:void(0);" onclick="custCommentCkEditorShow('',0);">Add Comment &nbsp;<img src="<?php echo $basePath; ?>/images/social_media/chatting.png"/></a>-->
+						<a class="c_BtnAddComment" id="add-new-widget" href="javascript:void(0);" style="display:none">Add Comment</a>
+						<a class="c_BtnPublish" id="tzPublishLink" href="javascript:void(0);" onclick="savePositions('<?echo $this->categoryId?>')" style="display:none">Publish</a>
+						<div class="addthis_sharing_toolbox" style="display:none">
+						</div>
+						<input type="hidden" id="countOpenCloseShare" value="0">
+					</div>
+					
+						
+				</div>
+			</div>
+			
+			<span id="pubDddContainer">
+				<?php if($this->data==0){?>
+					<div id="drag-drop-demo" class="grid-stack c_DivCardsWrapper"><?php $tzGsRowNum= 1;
+					
+					$tzDataGsX = 1;
+					$tzDataGsY = 0;
+					foreach($this->databoxLinksGrid as $key=>$databoxLinksGrids)
+					{
+						$xSet = 0;$ySet = 0;
+						if($key==0){?>
+						<input type="hidden" value="<?echo $databoxLinksGrids->user_id;?>" id="category_user_id">
+						<input type="hidden" value="<?echo $databoxLinksGrids->category_id;?>" id="category_id">
+						<?}
+						
+							$titleclass="img_title_pos_ab";
+							$descriptionclass="img_desc_pos_ab";
+						?>
+						<? if(strpos($databoxLinksGrids->link, "https://") !== false || strpos($databoxLinksGrids->link, "http://") !== false){
+							$url=$databoxLinksGrids->link;
+						}
+						else{
+							$url='http://'.$databoxLinksGrids->link;
+						}?>
+						<?php $videoHeightReduce = false;
+						$imageSocialAlone="";
+						$valueSocialAlone=0;
+						if(isset($databoxLinksGrids->image) && $databoxLinksGrids->image!=null){
+							$imageLink=$databoxLinksGrids->image;
+						}else{
+							$imageLink=$basePath.'/images/social_media/noimage.png';
+						}
+						?>
+						<div id="dragDropWindow<?echo $key+1;?>" class="grid-stack-item  c_DivCard"
+						<?php if( $tzGsRowNum % 3 == 0 ) { $xSet = $tzDataGsX;$tzDataGsX = 1;$ySet = $tzDataGsY;$tzDataGsY += 20; } else{ $xSet = $tzDataGsX;$tzDataGsX += 3;$ySet = $tzDataGsY; } ?> data-gs-x="<?php echo $xSet; ?>" data-gs-y="<?php echo $ySet; ?>" data-gs-height="20" data-gs-width="2">
+							<div class="grid-stack-item-content">
+									<?php
+								if($databoxLinksGrids->is_video==1)
+								{
+								?>
+								
+								<div class="c_DivCardImgWrapper"  >
+										<iframe  width="272px" height="272px" style="<? echo $imageSocialAlone; ?>" src="<?echo $databoxLinksGrids->iframe_src;?>" frameborder="0" allowfullscreen></iframe>
+								</div>
+								
+								<?php 
+								}else{
+								?>
+									<a href="<?echo $url;?>" target="_blank">
+									<div  class="c_DivCardImgWrapper">
+										<img class="c_DivCardImg" src="<?php echo $imageLink; ?>"/>
+									</div>
+									</a>
+								<?php } ?>	
+								
+								<?php if(isset($databoxLinksGrids->title) && $databoxLinksGrids->title!=""){?>
+									<div class="c_DivCardTitle" >
+										<?php if(strlen($databoxLinksGrids->title)>20){
+												echo substr($databoxLinksGrids->title,0,20) . '...'; 
+											}
+											else
+											{
+												echo $databoxLinksGrids->title;
+											}
+										?>
+									</div><?} $parahid="";
+								if(isset($databoxLinksGrids->description) && $databoxLinksGrids->description!="no Description"){?>
+								<div class="c_DivCardDescription" >
+								<?php
+									if(strlen($databoxLinksGrids->description)>250){
+										echo substr($databoxLinksGrids->description,0,250) . '<a href="'.$url.'" target="_blank">...Read more</a>';
+										$parahid=1;
+									}
+									else
+									{
+										echo $databoxLinksGrids->description;
+										$parahid=0;
+									}
+								?>
+								</div>
+								<?}?>
+								<div class="c_DivCardActions">
+									<div class="c_DivCardAction" id="divCollectThis<?php echo $key?>" >COLLECT THIS<input type="hidden" id="catLinkId<?php echo $key?>" value="<?echo $databoxLinksGrids->category_link_id; ?>"></div>
+									<div class="c_DivCardAction" id="divBookmarkThis<?php echo $key?>">BOOKMARK THIS<input type="hidden" id="currLink<?php echo $key?>" value="<?echo $databoxLinksGrids->link; ?>"></div>
+								</div>
+							</div>
+						</div>
+					<?php $tzGsRowNum++; } ?>
+					</div>
+				<?
+				}
+				else
+				{
+					foreach($this->databoxLinksGrid as $key=>$databoxLinksGrids)
+						echo $databoxLinksGrids->div_html;{?>
+					<?php }
+				}?>
+			</span>
+			
+			<h2>Facebook Reviews</h2><br/>
+			<div id="fb-root"></div>
+			<div class="fb-comments" data-href="<?php echo $layoutUrl; ?>" data-numposts="5"></div>
+
+		</div>
+	</section>
+
+</div>
+
+<div id="tempRemDiv" style="display:none;"></div>
+
+<script src="<?php echo $basePath; ?>/js/new_js/libs/jquery/jquery.js"></script>
+        <!-- DragDrop Plugin -->
+		
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+		
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+        <script src="<?php echo $basePath; ?>/js/new_js/gridstack.min.js"></script>
+        <!-- DragDrop Plugin End -->
+        <script src="<?php echo $basePath; ?>/js/new_js/jquery.nicescroll.min.js"></script>
+		<!-- Cat Desc CKEditor Pop Up -->
+<?if($this->data==0){?>
+<input type="hidden" id="incrId" value="<?echo count($this->databoxLinksGrid)?>">
+<?}else{?>
+<input type="hidden" id="incrId" value="<?echo $databoxLinksGrids->count_divs;?>">
+<?}?>
+
+<!-- Cat Desc CKEditor Pop Up -->
+<div id="pop-up-cat-description" class="pop-up-display-content conform_popup_content">
+	<div class="montage_desc">
+		<h4>Please provide your description</h4>
+		<p><textarea class="text_pad" id="catDescCkeditor"></textarea></p>
+	</div>
+	<p>
+		<a class="larg_btn" href="javascript:void(0);" onclick="catDescCkEditorCancel();">CANCEL</a>
+		<a class="larg_btn" href="javascript:void(0);" onclick="saveCustCatDesc();">SAVE</a>
+	</p>
+</div>
+<!-- Cat Desc CKEditor Pop Up End -->
+
+
+
+<!-- Comment CKEditor Pop Up -->
+<div id="pop-up-comment" class="pop-up-display-content conform_popup_content">
+	<div class="montage_desc">
+		<h4>Please provide your comment</h4>
+		<p><textarea class="text_pad" id="commentCkeditor"></textarea></p>
+	</div>
+	<p>
+		<a class="larg_btn" href="javascript:void(0);" onclick="custCommentCkEditorCancel();">CANCEL</a>
+		<a class="larg_btn" href="javascript:void(0);" onclick="showActualComment();">SAVE</a>
+	</p>
+</div>
+<!-- Comment CKEditor Pop Up End -->
+
+<!-- Report Pop Up -->
+<div id="pop-up-report" class="pop-up-display-content conform_popup_content">
+	<div class="report_bg">
+		<div><input type="radio" value="1" name="Personel" checked><span>&nbsp;Spam Content</span></div>
+		<div><input type="radio" value="2" name="Personel"><span>&nbsp;Abusive / hateful content</span></div>
+		<div><input type="radio" value="3" name="Personel"><span>&nbsp;Nude / Vulgar Open content</span></div>
+		<div><input type="radio" value="4" name="Personel"><span>&nbsp;Personal defamatory content</span></div>
+		<div class="report_mar_t"><input value="5" type="radio" name="Personel"><span>&nbsp;Other</span></div>
+		<div><textarea id="personel_text" placeholder="Mention your concern in Plain text"></textarea></div>
+		<div class="report_btn"><a href="javascript:void(0)" onClick="Javascript:custReportSend(<? echo $this->categoryId; ?>);">SUBMIT</a></div>
+		<p id="repMessage"></p>
+		<div style="clear:both;"></div>
+	</div>
+</div>
+<!-- Report Pop Up End -->
+
+<input type="hidden" id="viewPageYes" value="0" />
+<input type="hidden" id="viewPageChanged" value="0" />
+<input type="hidden" id="commentMode" value="0" />
+<input type="hidden" id="scrollHeight" value="0" />
+<input type="hidden" id="catDescCkEditorYes" value="0" />
+<input type="hidden" id="catDescChanged" value="0" />
+<input type="hidden" id="hiddenDec" value="<?php echo $this->categoryDescripton;?>" />
+
+<input type="hidden" id="basePath" name="basePath" value="<?php echo $basePath;?>" />
+<input type="hidden" id="baseUrl"  name="baseUrl" value="<?php echo $baseUrl;?>" />
+
+<script src="<?php echo $basePath; ?>/js/grid/ui.multidraggable.js"></script>
+<script src="<?php echo $basePath; ?>/js/crop/jquery.cropit.js"></script>
+<script src="<?php echo $basePath; ?>/js/popupwindow.js"></script>
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5461ef997855b9fa" async="async"></script>
+
+<script type="text/javascript">
+var i=0;
+	$(function () {
+	
+		$('.grid-stack').gridstack({
+			<?php
+				if( (! isset($_SESSION['usersinfo']) && !isset($_SESSION['usersinfo']->userId)) || (isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId) && isset($currBoxCatUid) && $_SESSION['usersinfo']->userId != $currBoxCatUid) )
+				{
+			?>
+					static_grid:true,
+			<?php
+				}
+			?>
+			min_width: 768,
+			item_class: 'grid-stack-item',
+			handle: '.grid-stack-item-content',
+			// one cell height
+			cell_height: 1,
+			// vertical gap size
+			vertical_margin: 20,
+			horizontal_margin: 10
+		});
+		 $('.grid-stack').gridstack({
+			 
+	// turns animation on
+  animate: false,
+
+  // if false it tells to do not initialize existing items
+  auto: true,
+
+  // amount of columns
+ width: 12,
+
+  // maximum rows amount
+height: 0, 
+
+  // widget class
+  item_class: 'grid-stack-item',
+
+  // class for placeholder
+  placeholder_class: 'grid-stack-placeholder',
+
+  // draggable handle selector
+  handle: '.grid-stack-item-content',
+
+  // one cell height
+  cell_height: 1,
+
+  // vertical gap size
+  vertical_margin: 20,
+
+  // if false it tells to do not initialize existing items
+ // auto: true,
+  
+  // minimal width.
+  min_width: 768,
+
+  // enable floating widgets
+  float: false,
+
+  // vertical gap size
+  vertical_margin: 20,
+
+  // if true the resizing handles are shown even the user is not hovering over the widget
+  always_show_resize_handle: false,
+
+  // allows to owerride jQuery UI draggable options
+  draggable: {handle: '.grid-stack-item-content', scroll: true, appendTo: 'body'},
+  // allows to owerride jQuery UI resizable options
+  resizable: {autoHide: true, handles: 'se'}
+		  });
+		  new function () {
+                this.items = [
+                    {x: 0, y: 0, width: 2, height: 6}
+                ];
+
+                this.grid = $('.grid-stack').data('gridstack');
+				
+                this.add_new_widget = function () {
+					i++;
+                    var node = this.items.pop() || {
+                                x: 0* Math.random(),
+                                y: 0* Math.random(),
+                                width: 2,
+                                height:6,
+								auto_position: true
+                            };
+							
+
+				var incrValue=$('#incrId').val();
+				var newValue=parseInt(incrValue)+1;
+				$('#incrId').val(newValue);
+				var commEditDelHtml = '<div id="deleteComment'+newValue+'" style="position:absolute;top:-23px;right:-1px;background:#f1f1f1;border:1px solid #bfc4c8;width:50px;"><span style="margin-right:10px;"><a href="javascript:void(0)"; onclick="editExistingComment('+newValue+')"><img src="'+BASE_PATH+'/images/social_media/edit_ico.png"/></a></span><a href="javascript:void(0)"; onclick="deleteComment('+newValue+')" style="color:#f97e76" title="Close">X</a></div>';
+
+				var newCommBoxHtml = '<div id="dragDropWindow'+newValue+'" class="c_DivCard grid-stack-item" data-gs-height="20"><div class="grid-stack-item-content">';
+				newCommBoxHtml += '<div class="c_DivCardStoryWrapper"><div class="c_DivCardStorytellerDetails">';
+				newCommBoxHtml += '<img class="c_DivCardStorytellerImg" src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $_SESSION['usersinfo']->montage_image; ?>"/>';
+				newCommBoxHtml += '<div class="c_DivCardStorytellerName">@STORYTELLER (<?php echo $_SESSION['usersinfo']->displayName; ?>)</div>';
+				newCommBoxHtml += '</div>';
+				newCommBoxHtml += '<div class="c_DivCardStory"><span id="data_'+newValue+'">'+newCommentText+'</span>'+commEditDelHtml+'</div>';
+				newCommBoxHtml += '</div>';
+				this.grid.add_widget($(newCommBoxHtml),node.x, node.y, node.width, node.height);
+                }.bind(this);
+				
+                // $('#add-new-widget').click(this.add_new_widget);
+				tzGridStackRef = this;
+				$('#add-new-widget').click(function(event)
+				{
+					custCommentCkEditorShow( '',0 );
+				});
+            };
+	});
+</script>		
+<script type="text/javascript">
+$(document).ready(function()
+{
+	// Collect this...
+	$("div[id^='divCollectThis']").each(function()
+	{
+		var divCollectThisId = parseInt(this.id.replace("divCollectThis", ""));
+		$('#divCollectThis'+divCollectThisId).click(function(event)
+		{
+			var catLinkId = $('#catLinkId'+divCollectThisId).val();
+			var currBoxUserId = $('#category_user_id').val();
+			// alert( "hello" + currBoxUserId );
+			
+			saveLinkCollection( catLinkId,currBoxUserId );
+		});
+	});
+	// End Collect this...
+	
+	// Own box allow customization options...
+	var showCustOtions = false;
+	var category_user_id=$('#category_user_id').val();
+	
+	var currUserId = 0;
+	<?php
+		if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId) )
+		{
+	?>
+			currUserId = '<?php echo $_SESSION['usersinfo']->userId; ?>';
+	<?php
+		}
+	?>
+
+	if( category_user_id == currUserId )
+	{
+		showCustOtions = true;
+		$('#add-new-widget').show();
+		$('#tzPublishLink').show();
+		$('.c_DownArrow').show();
+		$('.c_DivTitle').show();
+	}
+	else
+	{
+		$("div[id^='deleteComment']").each(function()
+		{
+			var editDelCommDivId = parseInt(this.id.replace("deleteComment", ""));
+			$('#deleteComment'+editDelCommDivId).remove();
+		});
+	}
+	// End Own box allow customization options...
+	
+	// Cat desc...
+	var catDescIntroDiv = document.getElementById('catDescIntro');
+	if($('#hiddenDec').val()!="" )
+	{
+		$('#catDescIntro').hide();
+		var fullDescParaHtml = "";
+		fullDescParaHtml += '<span id="categoryDescripton">' + $.trim($("#fullDescPara").html().replace(/&nbsp;/g,'')) + '</span>&nbsp;';
+		if( showCustOtions )
+		{
+			fullDescParaHtml += '<span id="categoryDescLink" style="display:none;"><a href="Javascript:void(0);" id="catDescAnchor" onclick="catDescCkEditorShow();">Edit</a></span>';
+		}
+		$('#fullDescPara').html( fullDescParaHtml );
+		if( showCustOtions )
+		{
+			$('#categoryDescLink').show();
+		}
+		else if( $('#categoryDescLink').length )
+		{
+			$('#categoryDescLink').remove();
+		}
+	}
+	else
+	{
+		var catDescIntroDivHtml = "";
+		var catDescAnchorLbl = "Set Description";
+
+		var catDescIntroDivHtml = '<span id="">' + $.trim($("#fullDescPara").html().replace(/&nbsp;/g,'')) + '</span>&nbsp;'; 
+
+		if( showCustOtions )
+		{
+			if( parseInt($.trim($("#fullDescPara").html().replace(/&nbsp;/g,'')).length) > parseInt("0") )
+			{
+				catDescAnchorLbl = "Edit";
+			}
+			catDescIntroDivHtml += '<span id="categoryDescLink" style="display:none;"><a href="Javascript:void(0);" id="catDescAnchor" onclick="catDescCkEditorShow();">'+catDescAnchorLbl+'</a></span>';
+		}
+
+		$('#catDescIntro').html( catDescIntroDivHtml );
+
+		if( showCustOtions )
+		{
+			$('#categoryDescLink').show();
+			$('#catDescIntro').show();
+		}
+		else if( $('#categoryDescLink').length )
+		{
+			$('#categoryDescLink').remove();
+		}
+	}
+	// End Cat desc...
+ });
+</script>		
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=608131635971702&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>        
+        
+    

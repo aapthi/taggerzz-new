@@ -1,0 +1,254 @@
+<?php if(!isset($_SESSION['usersinfo']) ){?>
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Taggerzz</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+		<link href="<?php echo $basePath; ?>/css/new_css/styles.css" rel="stylesheet" type="text/css" />
+		<?php
+//unset($_SESSION['sLoginFValue']);
+//unset($_SESSION['sLoginGValue']); exit;
+ global $facebook_login;
+	global $google_login;
+	global $facebookAppId;
+	if(!isset($_SESSION['usersinfo'])){
+	if(!isset($_SESSION['logoutStatus'])){
+		$_SESSION['logoutStatus']=0;
+		$value=0;
+	}else if(isset($_SESSION['logoutStatus']) && $_SESSION['logoutStatus']==1){
+		unset($_SESSION['logoutStatus']);
+		$value=1;
+	}else if(isset($_SESSION['logoutStatus']) && $_SESSION['logoutStatus']==0){
+		$value=0;
+	}
+	
+	if($value==0){
+?>
+<script type="text/javascript">
+function show_login_status(network, status)
+{
+	if (status)
+	{
+		if( $('#tpName').html() != ""  )
+		{
+			$('#socialLoginSecond').val( network );
+			return false;
+		}
+		if(network=='Facebook'){
+			var fbpromptfired = getTpCookie("fbpromptfired");
+			if( fbpromptfired != null && fbpromptfired != "" )
+			{
+				checkSecondTp();
+				return false;
+			}
+			$('#tpName').html( 'Facebook' );
+			$('#popUpConfirmTpLogin').popUpWindow({action: "open"});
+			document.cookie="fbpromptfired=yes";
+		}else if(network=='Google'){
+			var googlepromptfired = getTpCookie("googlepromptfired");
+			if( googlepromptfired != null && googlepromptfired != "" )
+			{
+				return false;
+			}
+			else
+			{
+				console.log( googlepromptfired );
+			}
+			$('#tpName').html( 'Google' );
+			$('#popUpConfirmTpLogin').popUpWindow({action: "open"});
+			document.cookie="googlepromptfired=yes";
+		}
+	}
+}
+</script>
+<script>
+window.fbAsyncInit = function(){
+	FB.init({ appId:'<?echo $facebookAppId;?>', status:true,  cookie:true, xfbml:true});
+	FB.getLoginStatus(function(response){
+		if (response.status != "unknown")
+		{
+			show_login_status("Facebook", true);
+		}else{
+			//show_login_status("Facebook", false);
+			checkGoogleLogin(2);
+		}
+	});
+};
+// Load the SDK Asynchronously
+(function(d){
+	var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+	js = d.createElement('script'); js.id = id; js.async = true;
+	js.src = "//connect.facebook.net/en_US/all.js";
+	d.getElementsByTagName('head')[0].appendChild(js);
+}(document));
+
+function checkGoogleLogin(valGoogle){
+	if(valGoogle==2){
+		$('#checkGoogleLogin1').val(valGoogle);
+		var googleValue=$('#checkGoogleLogin').val();
+		if(googleValue==1){
+			show_login_status( 'Google',true );
+		}
+	}else{
+		$('#checkGoogleLogin').val(valGoogle);
+		if(valGoogle==1){
+			$('#socialLoginSecond').val( 'Google' );
+		}
+	}
+}
+</script>
+<img style="display:none;"
+onload="checkGoogleLogin(1)"
+onerror="checkGoogleLogin(0)"
+src="https://accounts.google.com/CheckCookie?continue=https%3A%2F%2Fwww.google.com%2Fintl%2Fen%2Fimages%2Flogos%2Faccounts_logo.png&followup=https%3A%2F%2Fwww.google.com%2Fintl%2Fen%2Fimages%2Flogos%2Faccounts_logo.png&chtml=LoginDoneHtml&checkedDomains=youtube&checkConnection=youtube%3A291%3A1"
+/>
+<div id="fb-root"></div>
+<?}}?>
+<?php
+	$header=$this->action('Application\Controller\IndexController', 'headerAction',array('20','10'));
+		$baseUrl = $header->headerarray['baseUrl'];
+		$basePath = $header->headerarray['basePath'];
+	$loginDomAction=$this->action('Application\Controller\IndexController', 'logindomAction');
+	$socialOptions = $header->loginarray['options'];
+	?>
+    </head>
+    <body>
+        <div id="mainWrapper" class="mainWrapper landingpage">
+            <!--            Fixed Section-->
+            <section id="secFixedAspects">
+                <img id="imgBackgoundOverlay" class="imgBackground" src="<?php echo $basePath; ?>/img/imgLightBlueOverlay.png" alt="" />
+
+                <div id="divLoaderWrapper" class="divLoaderWrapper verticalCenterWrapper onTop defaultFont">
+                    <div id="divLoader" class="divLoader verticalCenterContainer">
+                        <div id="divLoaderText" class="divLoaderText verticalCenter textCenter">
+                            <img src="<?php echo $basePath; ?>/img/imgLogo.png" alt=""/> <br>
+                            <span id="spnLoaderText" class="spnLoaderText smallFont">Preparing awesome dashboard for you. Please wait...</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!--            Left Section-->
+            <section id="secLeftAspects" class="leftSticky verticalCenterWrapper">
+                <div id="divLeftWrapper" class="divLeftWrapper verticalCenterContainer whiteFont">
+                    <img id="imgLogo" class="imgLogo verticalCenter width100" src="<?php echo $basePath; ?>/img/imgLogo.png" alt="" /> <br>
+                    <div id="divLogoText" class="divLogoText">
+                        <span id="spnLogoText" class="verySmallFont spnLogoText">TAGGERZZ.COM IS A WEB PERSONALIZING &amp; IDEAS SHARING WEBSITE. GREAT HUB FOR GENERATING
+                            YOUR IDEAS BY HOT LINKS SHARING AND CUSTOMISING.</span>
+                    </div>
+                </div>
+            </section>
+
+            <!--            Center Section-->
+            <section id="secCenterAspects" class="secCenterAspects">
+                <div id="divCenterWrapper" class="divCenterWrapper verticalCenterWrapper">
+                    <div id="divCenter" class="divCenter verticalCenterContainer">
+                        <div id="divCenterText" class="divCenterText verticalCenter textCenter">
+                            <ul class="ulCenterSlide">
+                                <li>
+                                    <img class="imgCenterImage" src="<?php echo $basePath; ?>/img/c1.png" alt=""/> <br>
+                                    <span class="spnCenterText smallFont whiteFont">
+                                        Collect 100 web links per category, 1000 per user, recognizing 18 types of files.
+                                    </span>
+                                </li>
+                                <li>
+                                    <img  class="imgCenterImage" src="<?php echo $basePath; ?>/img/c2.png" alt=""/> <br>
+                                    <span class="spnCenterText smallFont whiteFont">Preparing awesome dashboard for you. Please wait...</span>
+                                </li>
+                                <li>
+                                    <img  class="imgCenterImage" src="<?php echo $basePath; ?>/img/c3.png" alt=""/> <br>
+                                    <span class="spnCenterText smallFont whiteFont">Preparing awesome dashboard for you. Please wait...</span>
+                                </li>
+                                <li>
+                                    <img  class="imgCenterImage" src="<?php echo $basePath; ?>/img/c4.png" alt=""/> <br>
+                                    <span class="spnCenterText smallFont whiteFont">Preparing awesome dashboard for you. Please wait...</span>
+                                </li>
+                                <li>
+                                    <img  class="imgCenterImage" src="<?php echo $basePath; ?>/img/c5.png" alt=""/> <br>
+                                    <span class="spnCenterText smallFont whiteFont">Preparing awesome dashboard for you. Please wait...</span>
+                                </li>
+                                <li>
+                                    <img  class="imgCenterImage" src="<?php echo $basePath; ?>/img/c6.png" alt=""/> <br>
+                                    <span class="spnCenterText smallFont whiteFont">Preparing awesome dashboard for you. Please wait...</span>
+                                </li>
+                                <li>
+                                    <img  class="imgCenterImage" src="<?php echo $basePath; ?>/img/c7.png" alt=""/> <br>
+                                    <span class="spnCenterText smallFont whiteFont">Preparing awesome dashboard for you. Please wait...</span>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!--            Right Section-->
+            <section id="secRightAspects" class="rightSticky onTopLessOne">
+                <div id="divRightWrapper" class="divRightWrapper">
+                    <img id="imgLeftArrowMark" class="imgLeftArrowMark rightSticky" src="<?php echo $basePath; ?>/img/imgLeftArrow.png" alt="" />
+                    <!--<div id="divTriangle" class="divTriangle">-->
+                    <!--</div>-->
+
+                    <div id="divLoginWrapper" class="divLoginWrapper rightSticky">
+                        <div id="divLoginSocial" class="divLoginSocial smallFont whiteFont fatFont textCenter largeFont">
+						<form class="" method="post" id="userLoginFormUrl" name="userLoginFormUrl" role="form" >
+								<div class="block">
+									<span class="fatFont">SIGNUP USING</span>
+								</div>
+								<div class="block">
+									<?php
+									foreach ($socialOptions->getEnabledProviders() as $provider) {
+									echo  $this->socialSignInButton($provider, $this->redirect,$basePath);
+									}
+									?>
+								</div>
+								<div class="block fatFont">
+									OR
+								</div>
+								<div class="block textLeft">
+									<label>Email</label> <br>
+									<input type="email" name="emailId" id="emailId" class="formField txtEmail"/>
+								</div>
+								<div class="block textLeft">
+									<label>Create a Password</label> <br>
+									<input type="password" name="userPassword" id="userPassword" class="formField txtPassword"/>
+								</div>
+								<input type="hidden" id="hid_log" name="hid_log" value="regChe">
+								<div class="block textCenter">
+									<button type="button" name="btnSignup" id="btnSignup" class="formField btnSignup" onClick="return checkLogin('regChe');" >SIGNUP</button>
+									<button type="button" name="backlogin" id="backlogin"  class="formField btnSignup"  onClick="return loginBackFunction();" >LOGIN</button>
+								</div>
+							</form>
+                            
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!--            Bottom Section-->
+            <section id="secFooterAspects" class="bottomSticky">
+                <div id="divFooterSentence" class="whiteFont">
+                    <span class="fatFont">1500</span> <span class="smallFont">HOT LINKS, PERSONALIZED AND SHARED,</span> <span class="fatFont">49</span> <span class="smallFont">Users</span>
+                </div>
+            </section>
+        </div>
+    </body>
+</html>
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/new_js/libs/jquery/jquery.js"></script>
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/new_js/custom.js"></script>
+<script>
+function loginBackFunction(){
+	window.location= BASE_URL + "/";
+	return false;
+}
+</script>
+<?}else{?>
+	<script> window.location=BASE_URL+ "/contentpage"; </script>
+<?}?>

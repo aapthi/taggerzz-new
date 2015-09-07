@@ -1,0 +1,46 @@
+<?
+global $browserDispPage;
+$browserDispPage='browserDisp';
+?>
+<body style="overflow:hidden">
+<div class="body_main_container cat_top">
+	<div class="body_middle_container">
+		<div class=" form_top">
+			<div class="row">
+				<div class="browser_sup_pos_ab">
+					<div class="browser_s_cen"><h3>Please update to  latest browser</h3>
+					<p>The site you are visiting can be better viewed using latest browsers.
+					</p>
+					<p>Please upgrade your browser to increase safety and your browsing experience.</p>
+					</div>
+					<div class="browser_support_images">
+						<a href="https://www.mozilla.org/en-US/firefox/new/" target="_blank"><img src="<?php echo $basePath; ?>/images/social_media/firefox-512.png"></a>
+						
+					<a href="https://www.google.co.in/chrome/browser/desktop/" target="_blank"><img src="<?php echo $basePath; ?>/images/social_media/Google_Chrome_icon_(2011).png"></a>
+					<a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie" target="_blank"><img src="<?php echo $basePath; ?>/images/social_media/ie9-10_512.png"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+<script>
+$(document).ready(function(){
+$(function browser_sup_pos_ab(){
+		$('.browser_sup_pos_ab').each(function(){
+			$(this).css('left',($(window).width()-$(this).outerWidth())/ 2 + 'px');
+			$(this).css('top',($(window).height()-$(this).outerHeight())/ 2 + 'px');
+		});
+		
+	});
+});
+$( window ).resize(function() {
+	$(function browser_sup_pos_ab(){
+		$('.browser_sup_pos_ab').each(function(){
+			$(this).css('left',($(window).width()-$(this).outerWidth())/ 2 + 'px');
+			$(this).css('top',($(window).height()-$(this).outerHeight())/ 2 + 'px');
+		});
+	});
+});
+</script>

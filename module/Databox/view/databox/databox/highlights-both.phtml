@@ -1,0 +1,129 @@
+
+<input type="hidden" id="basePath" name="basePath" value="<?php echo $basePath;?>" />
+<input type="hidden" id="baseUrl"  name="baseUrl" value="<?php echo $baseUrl;?>" />
+
+<input type="hidden" id="submitVal" name="submitVal" value="Go" />
+<input type="hidden" id="totalUrlsEntered" name="totalUrlsEntered" value="0" />
+<input type="hidden" id="allOkUrlCount" name="allOkUrlCount" value="0" />
+<input type="hidden" id="urlsDisplayCount" name="urlsDisplayCount" value="0" />
+<input type="hidden" id="submitClicked" name="submitClicked" value="0" />
+<input type="hidden" id="originalValue" name="originalValue" value="" />
+<input type="hidden" id="finalnvalidCount" name="finalnvalidCount" value="0" />
+
+
+<div class="body_main_container">
+	<div class="body_middle_container" style="margin-bottom:20px;">
+		<div class="upload_links">
+			<div class="manual_links_bg">
+				<div class="highlight_insert">
+					<h3>Insert links For&nbsp;<input type="text" id="highlightHtHolder" class="text_pad highlight_first_input" placeholder="#yourhighlightingtopic" onBlur="Javascript:checkSpaces();"/>
+					&nbsp;and:&nbsp;Title&nbsp;<input type="text" id="highlightTitleHolder" class="text_pad highlight_second_input" placeholder="My tite for the highlight..."/>
+					<a href="javascript:void(0)" class="larg_btn" id="uploadLink">upload Bookmark</a> or insert Manually
+					<form id="bookmarksUploadForm" method="post" enctype="multipart/form-data">
+						<input type="file" name="bookmarksFile" id="bookmarksFile" style="display:none;">
+						<input type="submit" name="uploadSubmitBtn" id="uploadSubmitBtn" value="Submit" style="display:none;">
+					</form>
+					</h3>
+				</div>
+				<div>
+					<div id="textBoxesGroup">
+						<div class="highlighted_links" id="textBoxDiv1">
+							<input class="brg_pad" type="text" placeholder="https://www.google.com/" autocomplete="on" id="textbox1" onBlur="resetUrlStatus(1)" />
+							&nbsp;<b id="video1"><img src="<?php echo $basePath; ?>/images/social_media/link_icon.png" /></b>
+							<span style="display:none" id="loadImg1"><img src="<?php echo $basePath; ?>/images/social_media/24x24_pg-loader-1.gif" /></span>
+							<span id="verifyImg1"></span>
+							<b id="rem1"></b>
+						</div>
+
+					</div>
+					<div class="clearfix"></div>
+					<div class="add_links">
+						<span id="totalUrlsSpan"><strong>0/100</strong></span> 
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="heighlights_img">
+					<a href="javascript:void(0)" id="catImageLink0">
+						<img id="uploadedCatImage0" src="<?php echo $basePath; ?>/images/social_media/upload_img.png"/>
+					</a>
+					<p>Your Uploaded Picture</p>
+				</div>
+				<div class="hightlights_keywords">
+					<h3>Your keywords<small>&nbsp;(Meta tags to boost page SEO)</small></h3>
+					<input type="text" class="brg_pad" id="metaTagsHolder" />
+				</div>
+				<form id="linksForm" name="linksForm" method="post" enctype="multipart/form-data">
+					<input type="hidden" id="highlightTitle" name="highlightTitle" />
+					<input type="hidden" id="highlightHashTag" name="highlightHashTag" />
+					<input type="file" name="highlightImageFile" id="highlightImageFile" style="display:none;">
+					<input type="hidden" id="highlightKeywords" name="highlightKeywords" />
+					<input type="hidden" id="custTypeId" name="settingId" value="0" />
+					<input type="hidden" id="imageId" name="imageId" value="0" />
+					<input type="hidden" id="typeImageCrop" name="typeImageCrop" value="0" />
+				</form>
+				<div style="margin-bottom:20px;"></div>
+				<div>
+					<a href="javascript:void(0)" id="ascendingLink">
+						<img id="ascendingImage" src="<?php echo $basePath; ?>/images/social_media/assending_disabled.png"/>
+					</a>
+					<a href="javascript:void(0)" id="horizontalLink">
+						<img id="horizontalImage" src="<?php echo $basePath; ?>/images/social_media/horizental_disabled.png"/>
+					</a>
+				</div>
+			</div>
+			<div class="highlights_btn">
+				<!--<a href="#">Save</a>&nbsp;&nbsp;-->
+				<div id="dcHtmlDiv"><a href="javascript:void(0);" id="highlightsContinue">Continue Customising</a></div>
+				<div id="dcInprogressDiv" style="display:none;"><img  style="vertical-align:middle;margin-right:3px;width:30px;" src="<?php echo $basePath; ?>/images/social_media/bx_loader.gif" />Saving Highlight...</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="bookmarksLoadingDiv" class="bookmarks_loading">
+	<div class="pop">
+		<img src="<?php echo $basePath; ?>/images/social_media/bx_loader.gif" />
+		<p>Fetching Your Bookmarks</p>
+	</div>
+</div>
+
+<!--Book Marks-->
+<div id="pop-up-bookmarks" ></div>
+<!--END-->
+
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/highlights-common.js"></script>
+
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/highlights-both.js"></script>
+
+<script>
+
+$(function() {
+	$('#pop-up-image-crop-new').cropit({
+		imageBackground: true
+	});
+	$('.export').click(function() {
+		var src = $('#pop-up-image-crop-new').cropit('export');
+		var catId=$('#userCategoryId').val();
+		var fetchUploadedUrl = BASE_URL+'/upload-montage-image';
+		var imageId=$('#imageId').val();
+		$("#l_i_c").show();
+		$.ajax({
+			type	: "POST",
+			url		: fetchUploadedUrl,
+			data	: { data: src,page:'high',catId:catId,imageId:imageId},
+			success: function(data){
+				$("#l_i_c").hide();
+				$('#pop-up-image-crop-new').popUpWindow({action: "close"});
+				$('#uploadedCatImage0').attr('src', src);
+				$('#typeImageCrop').val(1);
+				$('#imageId').val(data.imageId);
+				if(chkvalues==0){
+					chkvalues=2;
+				}
+			}
+		});
+		//window.open(imageData);
+	});
+});
+
+</script>

@@ -1,0 +1,263 @@
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/jquery.nicescroll.min.js"></script>
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/administrator-settings.js"></script>
+<style>
+	#boxscroll {
+	height: 200px;	
+}
+#boxscroll1{
+	height: 200px;	
+}
+#boxscroll2,#boxscroll3,#boxscroll4{
+	height: 200px;	
+}
+#boxscroll2 input[type='text']{
+	border:1px solid #c1cfd9;
+	width:87%;
+	padding:4px 4px 4px 7px;
+	font-family: "sinkin_sans400_regular", sans-serif;
+	font-size:1em;
+	font-style:italic;
+}
+#boxscroll2 img{
+	cursor: pointer;
+	vertical-align:middle;
+	width:30px; 
+	height:30px;
+}
+.tab_btn{
+	border-left:1px solid #e8e7e7;
+	border-right:1px solid #e8e7e7;
+	border-bottom:1px solid #e8e7e7;
+	margin:0;
+	padding-left:8px;
+	padding-right:8px;
+	padding-top:5px;
+	padding-bottom:5px;
+}
+.tab_btn .visit_btn{
+	float:left;
+}
+.tab_btn .remove_hide_btn{
+	float:right;
+}
+.tab_button{
+	border:1px solid #ccc;
+	padding:3px 10px 3px 10px;
+	font-size:0.7em;
+	color:#535353;
+	background:#e6e5e5;
+}
+.tab_pos_re{
+	position:relative;
+}
+.tab_pos_ab{
+	font-size:2em;
+	position:absolute;
+	right:10px;
+	top:0;
+	color:#a8a8a8;
+}
+</style>
+		<div class="body_main_container  admin_setings pos_relative">
+			<div class="body_middle_container">
+				<div class="highlights_top_height_start">
+				<div class="votesandrates">
+					<h1>Everything we need</h1>
+				</div>				
+					
+				</div>
+			</div>
+		</div>
+		<div class="body_main_container  pos_relative">
+			<div class="body_middle_container">
+				<div id="pvtDataboxPopup" class="pop-up-display-content conform_popup_content">
+					<p>This is private Databox.</p>
+					<p>Please change this to public databox and then set prior order.</p>
+					<p><a id="pvtDataboxLink" class="larg_btn" href="javascript:void(0);">OK</a></p>
+				</div>
+				<div style="margin-bottom:20px;">
+				<div class="admin_brg">
+					<table id="customers">
+						<tr>
+							<th class="tab_pos_re">USERS<span class="tab_pos_ab">&#9662;</span></th>
+							<th class="tab_pos_re">DATABOXES<span class="tab_pos_ab">&#9662;</span></th>
+							<th class="tab_pos_re">HIGHLIGHTS <span class="tab_pos_ab">&#9662;</span></th>
+							<th class="tab_pos_re">MONTAGE <span class="tab_pos_ab">&#9662;</span></th>
+							<th class="tab_pos_re">WARNING <span class="tab_pos_ab">&#9662;</span></th>
+						  </tr>
+						  <tr>
+							<td width="25%" style="padding:0;">
+								<div id="boxscroll2" class="users_ajax"> 
+									<p  style="padding:0;line-height:0"><input type="text" id="search" name="search" placeholder="SEARCH USER"><img  src="<?php echo $basePath; ?>/images/go_search_btn.png" onClick="Javascript:searchUsers();"/></p>
+										<?php 
+											$userId="";
+											if(count($this->getAllUsers)!=0){
+										?>
+											<div id="users_0">										
+												<?foreach($this->getAllUsers as $key=>$users){ 
+												if($key==0){
+													$active='search_user_active';
+													$userId=$users->user_id;
+												}else{
+													$active='';
+												}
+												?>
+												<p id="list_user_<? echo $users->user_id;  ?>" class="<?echo $active;?> search_user_pad">
+													<a href="javascript:void(0)" onClick="Javascript:viewUserBoxes(<? echo $users->user_id;  ?>);"><? echo $users->display_name;?></a>
+												</p>
+												<?}?>
+											</div>
+										<?}else{?>
+										<p>Not Found!</p>
+										<?}?>
+								</div>
+								<input type="hidden" id="activeDataboxId" value="0" />
+								<input type="hidden" id="activeDataboxType" value="0" />
+								<input type="hidden" id="activeExistingOrder" value="0" />
+								<input type="hidden" id="activeSettingId" value="0" />
+								<input type="hidden" id="activeBoxType" value="0" />
+								<input type="hidden" id="activeHighlightId" value="0" />
+								<input type="hidden" id="activeHighEo" value="0" />
+								<input type="hidden" id="activeHighBoxType" value="0" />
+								<input type="hidden" id="activeHighSettingId" value="0" />
+								<input type="hidden" id="montageActivated" value="0" />
+								<input type="hidden" id="activeUserId" name="activeUserId" value="<?echo $userId;?>">
+							</td>
+								<td>
+									<div id="boxscroll3" class="ajax_databox"> 
+										<?php $countd=0; if(count($this->getDataboxAndHighlights)!=0){foreach($this->getDataboxAndHighlights as $data){
+											if($data['category_highlight']==1){
+											$countd++;
+										?>
+										<p id="p_databox_<? echo $data['category_id'];?>" onClick="Javascript:setActiveDbValues(<? echo $data['category_id'];?>,<? echo $data['category_type'];?>,<? echo $data['databoxes_prior_order'];?>,<? echo $data['setting_id'];?>,<? echo $data['status'];?>,1 );">
+											<? echo $data['user_hashname'];?>
+										</p>
+										<?}}}if($countd==0){?>
+											<p>Not Found!</p>
+										<?}?>
+									</div>
+								</td>
+								<td>
+									<div id="boxscroll4" class="ajax_high">
+										<?php $count=0; if(count($this->getDataboxAndHighlights)!=0){foreach($this->getDataboxAndHighlights as $data){
+											if($data['category_highlight']==2){
+											$count++;
+										?>
+										<p id="p_highlight_<? echo $data['category_id'];?>" onClick="Javascript:setActiveHighValues(<? echo $data['category_id'];?>,<? echo $data['highlights_prior_order'];?>,<? echo $data['setting_id'];?>,<? echo $data['status'];?>,2 );">>
+											<? echo $data['user_hashname'];?>
+										</p>
+										<?}}}if($count==0){?>
+											<p>Not Found!</p>
+										<?}?>
+									</div>
+								</td>
+								<td id="ajax_hash_name">
+									<?if($this->montage_hash_name!=""){?>
+										<p id="montageHashName" onClick="activateHashName();"><? echo '#'.$this->montage_hash_name; ?></p>
+									<?}else{?>
+										<p>Not Found!</p>
+									<?}?>
+								</td>
+								<td id="ajax_reports">
+									<p>THREATENED LINKS</p>
+									<p>LINK FARMS</p>
+									<p>REPORTED</p>
+								</td>
+						  </tr>
+					</table>
+				</div>
+				<div class="tab_btn">
+					<div class="visit_btn"><a href="#" onClick="Javascript:visitSelectedBox();" class="tab_button">VISIT</a>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="tab_button">PRIOR ORDER ></a>&nbsp;&nbsp
+						<select style="width:75px;padding:3px 5px 3px 5px;border:1px solid #ddd" id="dataBoxPriorOrder" onChange="Javascript:callDbSetFunc();">
+							<option value="0">Select</option>
+							<? for($boxCount=1; $boxCount <= 100; $boxCount++)
+							{?>
+								<option value="<? echo $boxCount;?>"><? echo $boxCount;?></option>
+							<?}?>
+						</select> 
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="tab_button">PRIOR ORDER ></a>&nbsp;&nbsp
+						<select style="width:75px;padding:3px 5px 3px 5px;border:1px solid #ddd" id="highlightPriorOrder" onChange="Javascript:callDbHighSetFunc();">
+							<option value="0">Select</option>
+							<? for($boxCount=1; $boxCount <= 100; $boxCount++)
+							{?>
+								<option value="<? echo $boxCount;?>"><? echo $boxCount;?></option>
+							<?}?>
+						</select> 
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="tab_button">PRIOR ORDER ></a>&nbsp;&nbsp
+						<select style="width:75px;padding:3px 5px 3px 5px;border:1px solid #ddd" id="montagePriorOrder" onChange="Javascript:callMontageSetFunc();">
+							<option value="0">Select</option>
+							<? for($boxCount=1; $boxCount <= 100; $boxCount++)
+							{?>
+								<option value="<? echo $boxCount;?>"><? echo $boxCount;?></option>
+							<?}?>
+						</select> 
+					</div>
+					<div class="remove_hide_btn">
+						<a href="Javascript:void(0);" class="tab_button" onClick="Javascript:removeUsers('remove');">REMOVE</a>
+						&nbsp;<a href="Javascript:void(0);" id="hideLink" class="tab_button" onClick="Javascript:removeUsers('hide');">HIDE</a>
+					</div>
+					<input type="hidden" id="totalDivs" name="totalDivs" value="<? echo $this->getTotalAllUsers; ?>">
+					<input type="hidden" id="lastDiv" name="lastDiv" value="0">
+					<input type="hidden" id="searchValue" name="searchValue" value="0">
+					<input type="hidden" id="hid_user_id" name="hid_user_id" value="<?php echo $this->user_id;?>">
+					<div class="clearfix"></div>
+				</div>
+
+					<div class="admin_brg" id="boxscroll">			
+						<table id="customers">
+							  <tr>
+								<th>Recieved reports</th>
+								<th>Reported user</th>
+								<th>By User</th>
+								<th>By IP</th>
+							  </tr>
+							  <?php
+								$reportCount = 1;
+								if( count($this->adminUserReports)!=0 )
+								{
+									foreach( $this->adminUserReports as $currentReport )
+									{
+								?><tr <?php if( $reportCount % 2 != 0 ){?> class="alt" <?php }?>>
+								<td><?php echo $currentReport["report_content"] ?></td>
+								<td><?php echo $currentReport["reportedUserDName"] ?></td>
+								<td><?php echo $currentReport["reportedByUserDName"] ?></td>
+								<td><?php echo $currentReport["reported_by_ip"] ?></td>
+							  </tr>
+							<?php $reportCount++;}?>
+							<?php } ?>
+						</table>
+					</div>
+
+					<div class="admin_brg" id="boxscroll5">			
+						<table id="customers">
+							  <tr>
+								<th>Contact Subject</th>
+								<th>Contact Content</th>
+							  </tr>
+							  <?php
+								$contactCount = 1;
+								if( count($this->contactContents)!=0 )
+								{
+									foreach( $this->contactContents as $currentContact )
+									{
+								?><tr <?php if( $contactCount % 2 != 0 ){?> class="alt" <?php }?>>
+								<td><?php echo $currentContact["mail_subject"] ?></td>
+								<td><?php echo $currentContact["mail_content"] ?></td>
+							  </tr>
+							<?php $contactCount++;}?>
+							<?php } ?>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+<script>
+  $(document).ready(function() {
+  
+    var nicesx = $("#boxscroll,#boxscroll1,#boxscroll2,#boxscroll3,#boxscroll4,#boxscroll5").niceScroll({touchbehavior:false,cursorcolor:"#acacac",cursoropacitymax:0.6,cursorwidth:8});
+    
+  });
+  
+</script>
+	

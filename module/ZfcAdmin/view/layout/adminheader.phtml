@@ -1,0 +1,75 @@
+<?php
+	$header=$this->action('Application\Controller\IndexController', 'headerAction',array('20','10'));
+	$baseUrl = $header->headerarray['baseUrl'];
+	$basePath = $header->headerarray['basePath'];
+?>
+<script> 
+	var BASE_URL = '<?php echo $baseUrl;?>';
+	var BASE_PATH = '<?php echo $basePath;?>';
+</script>
+<link href="<?php echo $basePath; ?>/css/sugarcake.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo $basePath; ?>/css/default.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/jquery-172.min.js"></script>
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/jquery-172-ui.min.js"></script>
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/scroller_/facescroll.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/css/allfont.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/css/nexus_menu/component.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/css/nano_scroller/general.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/css/popupwindow.css" />
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/scroller_/modernizr.custom.29473.js"></script>
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/scroller_/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/scroller_/jquery.mousewheel.js"></script>
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/popupwindow.js"></script>
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/admin-login.js"></script>
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/search-admin.js"></script>
+<script type="text/javascript" charset="utf-8">
+function logOut(value)
+{
+	var logoutUrl = '<?php echo $baseUrl; ?>' + "/admin/admin-logout";
+	$.ajax({
+		url: logoutUrl,
+		success: function(data){
+			window.location='<?php echo $baseUrl.'/admin'; ?>';	
+		}
+	});	
+}
+</script>
+<div class="wrapper">
+	<div class="header_main">
+		<div class="header_block">
+			<div class="main_logo">
+				<a href="javascript:void(0)" onClick="window.location='<?php echo $baseUrl; ?>'"><img src="<?php echo $basePath; ?>/images/taggerzz_logo_n.png" width="128" height="52" /></a>
+			</div>
+			<div class="login_block">
+				<?php if( isset($_SESSION['admininfo']) ) { ?>
+					<div class="welcome_message">
+						<div class="message_display_block">
+							<div>
+								<p style="text-align:center">Welcome back,</p><p id="headerDisplayName"><?php echo $_SESSION['admininfo']->displayName; ?></p>
+							</div>
+							<?
+							if(isset($_SESSION['admininfo']->montage_image)){
+								$image=$basePath.'/images/project/montageImages/small/'.$_SESSION['admininfo']->montage_image;
+							}else{
+								$image=$basePath.'/images/social_media/profilesmall.png';
+							}
+							?>
+							<img id="headerImage1" src="<?php echo $image; ?>"/>
+						</div>
+						<div class="clearfix"></div>
+						<div class="tg_montag_menu">
+							<ul>
+								<li><a href="<?php echo $baseUrl; ?>" target="_blank" >Go To Front End</a></li>
+								<li><a href="javascript:void(0)" onClick="Javascript:logOut('admin');" >Logout</a></li>
+							</ul>
+						</div>
+					  <div class="clearfix"></div>
+					</div>
+				<?php } else { ?>
+					<div class="email_login_home">
+						<a id="open-pop-up-1" href="#pop-up-1" class="link_email_login">Admin login</a>
+					</div>
+				<?php } ?>
+			</div>
+		</div>
+	</div>

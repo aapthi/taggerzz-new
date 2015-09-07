@@ -1,0 +1,16 @@
+<div style="float:left; padding-right:16px;"><?php echo $this->gravatar($this->zfcUserIdentity()->getEmail()) ?></div>
+<h3><?php echo $this->translate('Hello'); ?>, <?php echo $this->zfcUserDisplayName() ?>!</h3>
+<a href="javascript:void(0);" onclick="sessionOut()">[<?php echo $this->translate('Sign Out'); ?>]</a>
+<div style="clear:both;"></div>
+<script type="text/javascript">
+function sessionOut(){
+	$.ajax({
+		url: '/users/logout',
+		success: function(data){
+			if(data.output=='success'){
+				window.location='/';
+			}
+		}
+	});
+}
+</script>

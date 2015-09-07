@@ -1,0 +1,238 @@
+<style>
+.addthis_sharing_toolbox{
+	float:right !important;
+	 position: relative;
+	z-index:1000 !important;
+}
+</style>
+<input type="hidden" id="basePath" name="basePath" value="<?php echo $basePath;?>" />
+<input type="hidden" id="baseUrl"  name="baseUrl" value="<?php echo $baseUrl;?>" />
+<input type="hidden" id="totalValue" name="totalValue" />
+<input type="hidden" id="votepageSearched" value="0" />
+<input type="hidden" id="currentShareCatId" value="0" />
+
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5461ef997855b9fa" async="async"></script>
+<input type="hidden" id="loggedInStatus" <?php if( isset($_SESSION['usersinfo']) ) {?>value="loggedIn"<?php } ?> />
+<div class="votings_ratings highlights_top_height_start">
+	<div class="body_middle_container">
+		<div>
+		<div class="votesandrates">
+			<h1>votings & ratings</h1>
+		</div>				
+		</div>
+	</div>
+</div>
+<div>	
+<div class="highlights_search pos_relative">
+	<div class="body_middle_container input_container2">
+		<h4 style="float:left;">Search highlight:</h4>
+		<div style="float:right;">
+		<input type="text" Placeholder="#Myhighlight" id="searchTermHolder"/>
+		<a href="Javascript:void(0);" id="hgltsSearchLink" onClick="Javascript:searchHighlights();">
+			<img width="30" height="30" src="<?php echo $basePath; ?>/images/go_search_btn.png">
+		</a>
+		</div>
+		<div style="clearfix"></div>
+	</div>
+</div>
+</div>
+<div class="body_main_container  pos_relative">
+	<form id="searchHighlightsFrm" method="POST" >
+		<input type="hidden" id="hgltsSearchTerm" name="hgltsSearchTerm" />
+	</form>
+	<div class="body_middle_container" style="margin-top:160px;margin-bottom:20px;">
+		<?php
+		if( isset($this->userHighlightsArray) )
+		{
+			if( count($this->userHighlightsArray) == 0 )
+			{
+			?>
+				<center>No highlights found.</center>
+			<?php
+			}
+			else
+			{
+			?>
+				<div id="highlightsMainDiv">
+			<?php
+				foreach( $this->userHighlightsArray as $key=>$values )
+				{
+					$catImageUrl=explode(".",$values['category_image']);
+					$catImageUrll=$catImageUrl[0];
+				?><div class="social_icon_display" id="hglitsContentDiv<?php echo $values['category_id']; ?>">
+						<input type="hidden" id="hgltHashTag<?php echo $values['category_id']; ?>" value="<?php echo $values['user_hashname']; ?>" />
+						<div class="social_network_highlights" id="social_icons-1">
+							<h4><a href="Javascript:void(0);" id="highlightDisplayLink<?php echo $values['category_id']; ?>" onClick="Javascript:displayHighlightView(<?php echo $values['category_id']; ?>,'<?php echo $values['user_hashname']; ?>','<?php echo $values['category_title']; ?>',<?php echo $values['setting_id']; ?>,'<?php echo $catImageUrll; ?>');"><?php echo $values['user_hashname']; ?></a></h4>
+							<div class="question_ask">
+								<div class="link_w"><p><b>what’s in?:</b>
+								<?php
+								foreach( $values['links'] as $linkNum=>$linkInfo )
+								{
+									if(strpos($linkInfo['link'], "https://") !== false || strpos($linkInfo['link'], "http://") !== false){
+										$urlHref=$linkInfo['link'];
+									}else{
+										$urlHref='http://'.$linkInfo['link'];
+									}
+			
+									if( $linkInfo["link_validity_status"] == 1 )
+									{
+										foreach( $values['linkTitles'] as $linkDetailNum=>$linkDetailInfo )
+										{
+											if( $linkInfo["category_link_id"] == $linkDetailInfo["link_id"] )
+											{
+												$linkTitle = "";
+												if( $linkDetailInfo["title"] != "" )
+												{
+													$linkTitle = $linkDetailInfo["title"];
+												}
+												else
+												{
+													$linkTitle = "No Title";
+												}
+												?><a href="<?php echo $urlHref;?>" target="_blank"> <?php echo $linkTitle . ",";?></a><?php
+											}
+										}
+									}
+								}
+								?>
+								</p>
+								</div>
+							</div>
+							<div class="ad_keywords_w"><p><b>Added Keywords:</b> <?php echo $values['meta_tags']; ?></p></div>
+							<div class="social_network_links">
+								<p style="font-size:20px;"><?php echo count($values['links']); ?></p>
+								<p>LINKS</p>
+							</div>
+							<div class="social_network_icons">
+								<div id="voteLinksDiv<?php echo $values['category_id']; ?>">
+								<?php
+									if( $values['voteUp'] == 0 )
+									{
+								?>
+										<a href="JavaScript:void(0);" onClick="voteOnHighlight(1,<?php echo $values['category_id']; ?>);" ><img id="voteStatusImg<?php echo $values['category_id']; ?>" src="<?php echo $basePath; ?>/images/social_media/social_arrow_up.png" /></a><br/>
+										<b id="catVoteCount<?php echo $values['category_id']; ?>"><?php echo $values['NetVotes']; ?></b><br/>
+										<img src="<?php echo $basePath; ?>/images/social_media/social_arrow_down.png"/>
+								<?php
+									}
+									else if( $values['voteUp'] == 1 )
+									{
+								?>
+										<img src="<?php echo $basePath; ?>/images/social_media/social_arrow_up_disable.png"/><br/>
+										<b id="catVoteCount<?php echo $values['category_id']; ?>"><?php echo $values['NetVotes']; ?></b><br/>
+										<a href="JavaScript:void(0);" onClick="voteOnHighlight(0,<?php echo $values['category_id']; ?>);"><img id="voteStatusImg<?php echo $values['category_id']; ?>" src="<?php echo $basePath; ?>/images/social_media/social_arrow_down_enable.png" /></a>
+								<?php
+									}
+									else if( $values['voteUp'] == 2 )
+									{
+								?>
+										<a href="JavaScript:void(0);" onClick="voteOnHighlight(1,<?php echo $values['category_id']; ?>);"><img src="<?php echo $basePath; ?>/images/social_media/social_arrow_up.png"/></a><br/>
+										<b id="catVoteCount<?php echo $values['category_id']; ?>"><?php echo $values['NetVotes']; ?></b><br/>
+										<a href="JavaScript:void(0);" onClick="voteOnHighlight(0,<?php echo $values['category_id']; ?>);"><img src="<?php echo $basePath; ?>/images/social_media/social_arrow_down_enable.png"/></a>
+								<?php
+									}
+								?>
+								</div>
+							</div>
+							<div class="social_sharing">
+								<?php
+									if( isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId==$values['user_id']  )
+									{
+								?>
+									<a href="JavaScript:void(0);" onClick="deleteHighlight(<?php echo $values['category_id']; ?>);">Delete</a>
+									<a href="JavaScript:void(0);" onClick="editHighlight(<?php echo $values['category_id']; ?>);">Edit</a>
+								<?php
+									}
+								?>
+								<input type="hidden" id="moStatus<?php echo $values['category_id']; ?>" value="0" />
+								<a href="JavaScript:void(0);" id="highlightShareLink<?php echo $values['category_id']; ?>">Share</a>
+							</div>
+						</div>
+						<div>
+							<div class="addthis_sharing_toolbox" id="socialButtonsDiv<?php echo $values['category_id']; ?>" style="display:none;">
+							</div>
+						</div>
+					</div>
+				<?php
+				}
+				?>
+				</div>
+				<form id="editHighlightFrm" method="POST" >
+					<input type="hidden" id="categoryId"  name="categoryId" />
+				</form>
+			<?php
+			}
+		}?>
+	</div>
+</div>
+
+<div id="hgltsBackUpDiv" style="display:none;">
+</div>
+
+<input type="hidden" id="basePath" name="basePath" value="<?php echo $basePath;?>" />
+<input type="hidden" id="baseUrl"  name="baseUrl" value="<?php echo $baseUrl;?>" />
+
+<link rel="stylesheet" href="<?php echo $basePath; ?>/auto/jquery-ui.css">
+
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/login-ready.js"></script>
+
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/enlist-highlights.js"></script>
+
+<script>
+$(function() {
+	$("#searchTermHolder").autocomplete({	
+		source: function( request, response ) {
+			var keywordsss = $('#searchTermHolder').val();
+			var hashName='s';
+			$.ajax({
+				url		: BASE_URL+'/databox/search-high-hash-names',
+				dataType: "json",
+				type	: "POST",
+				data	:{value:keywordsss},
+				success: function( data ) {
+					if(data.output!=0) {		
+						response( $.map( data.searchHashNames, function( item ) {
+							return {
+								label: item.ref,
+							}
+						}));
+					}else{
+						$(".ui-autocomplete").css("display","none");
+					}
+				}				
+			});
+		},
+		minLength: 0,	
+		open: function(event, ui) {	
+			$("ul").removeClass("ui-widget-content");		
+			$(".ui-autocomplete").addClass("searchboxscroll2");					
+			$(".ui-autocomplete").css("z-index","1002 !important"); 	
+			$(".ui-autocomplete").css("position","fixed"); 
+			$(".ui-autocomplete").css("width","752px");			
+		},
+		select: function(event, ui) {
+			$("#searchTermHolder").val(ui.item.label); 
+			return false;
+		},
+		focus: function(event, ui) {
+			return false;
+		}			
+	});
+	$("#searchTermHolder").data( "autocomplete" )._renderItem = function( ul, item ) {
+		var hashname=item.label;		
+		 return $("<li><a data-value='"+item.label+"' onClick ='set_item(this.text);'>" + item.label + "</a></li>")
+		 .data("item.autocomplete", item)            
+		 .appendTo(ul);				
+	};
+});
+$("#searchTermHolder").live("keydown",".ui-corner-all",function(e){
+	if (e.keyCode == 13) {
+	   var hashValue=$("#searchTermHolder").val();
+	   set_item(hashValue);
+	}
+});
+$(document).ready(function() {
+  
+    var nicesx = $(".ui-autocomplete,.searchboxscroll2").niceScroll({touchbehavior:false,cursorcolor:"#acacac",cursoropacitymax:0.6,cursorwidth:8});
+    
+  });
+</script>

@@ -1,0 +1,15 @@
+<?if( isset($dashboard) )
+{
+	foreach($dashboard[$this->catId]['links'] as $key=>$links){
+	if($key>=$this->start && $key<=$this->end){
+	$link=explode('***',$links);
+	?>
+	<div class="column1">
+		<p><?echo substr($link[0],0,22) . '...';$url = $link[0];?></p>
+		<div><a href="Javascript:void(0);" onClick="window.open('<?php echo $link[0]; ?>');"><img src="<?php $validImage=@getimagesize($link[2]); if( isset($validImage[3]) && $validImage[3]!=""){echo $link[2];}else{ echo $basePath;?>/images/social_media/noimage.png<? } ?>"/></a></div>
+	</div>
+<?}}}
+else{?><script type="text/javascript">
+window.location = "/";
+</script><?php
+}?>

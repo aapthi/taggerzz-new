@@ -1,0 +1,91 @@
+<?php
+		$header=$this->action('Application\Controller\IndexController', 'headerAction',array('20','10'));
+		$baseUrl = $header->headerarray['baseUrl'];
+		$basePath = $header->headerarray['basePath'];
+?>
+<div class="body_main_container cat_top">
+	<div class="body_middle_container">
+		<div class=" form_top">
+			<div class="row">
+				<center>
+					<h4>
+					Welcome To Taggerzz Admin Panel
+					</h4>
+				</center>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="pop-up-1" class="pop-up-display-content">
+	<h1 class="tg_users_title">Admin Login</h1>
+	<input type="hidden" id="basePath" name="basePath" value="<?php echo $basePath;?>" />
+	<input type="hidden" id="baseUrl"  name="baseUrl" value="<?php echo $baseUrl;?>" />
+	<div class="tg_users_email_login">
+		<div class="tg_create_email">
+			<form class="" method="post" id="userLoginFormUrl" name="userLoginFormUrl" role="form">
+				<input type="hidden" id="categoryHighlight" name="categoryHighlight" value="0" />
+				<p>Email ID</p>
+				<input type="text" class="text_pad" name="emailId" id="emailId"/>
+				<p>Password</p>
+				<input type="password" class="text_pad" name="userPassword" id="userPassword"/>
+				<p class="tg_email_btn"><a href="javascript:void(0)" class="btn" onClick="Javascript:checkLogin();">CONTINUE</a><span id="userMessage" class="check_un_p">Checking Username,Password...</span></p>
+			</form>
+		</div>
+	</div>
+</div>
+	
+<script type="text/javascript">
+			jQuery(function(){ // on page DOM load
+		$('.container_main_cats_').alternateScroll();					
+		$('.content_home_highlights').alternateScroll();
+		//$('.main_categories').alternateScroll();
+		//$('#demo2').alternateScroll({ 'vertical-bar-class': 'styled-v-bar', 'hide-bars': false });	
+	});
+	
+	$(document).ready(function () {
+
+		$( "#emailId" ).keypress(function(event)
+		{
+			var keyCode = event.which;
+			if( parseInt(keyCode) == parseInt("13") )
+			{
+				$( "#userPassword" ).focus();
+			}
+		});
+
+		$( "#userPassword" ).keypress(function(event)
+		{
+			var keyCode = event.which;
+			if( parseInt(keyCode) == parseInt("13") )
+			{
+				checkLogin();
+			}
+		});
+
+    //basic pop-up
+    $('#open-pop-up-1').click(function(e) {
+        e.preventDefault();
+		$( "#emailId" ).val( "" );
+		$( "#userPassword" ).val( "" );
+        $('#pop-up-1').popUpWindow({action: "open"});
+    });
+	$('#open-pop-up-1').click();
+	$( "#emailId" ).focus();
+});
+</script>
+<!-----------JS Scripts----------->
+<!--Redeclare these functionalities somewhere else-->
+
+<!-- Scripts for social logins start --> 
+<script type="text/javascript">
+function openPopup(url)
+{
+	var left = Number((screen.width/2)-(500/2));
+	var top = Number((screen.height/2)-(500/2));
+	
+	var windowFeatures = 'channelmode=0,directories=0,fullscreen=0,location=0,menubar=0,resizable=0,scrollbars=0,status=0,width=500,height=450,top=' + top + ',left=' + left;
+	var newWindow = window.open(url, 'popWindow', windowFeatures);
+}
+</script>
+<!-- Scripts for social logins end --> 

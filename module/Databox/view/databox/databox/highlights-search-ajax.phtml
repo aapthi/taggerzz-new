@@ -1,0 +1,98 @@
+		<?php
+		if( isset($this->userHighlightsArray) )
+		{
+			if( count($this->userHighlightsArray) == 0 )
+			{
+			?>
+				<center>No matching highlights found.</center>
+			<?php
+			}
+			else
+			{
+				foreach( $this->userHighlightsArray as $key=>$values )
+				{
+					$catImageUrl=explode(".",$values['category_image']);
+					$catImageUrll=$catImageUrl[0];
+				?><div class="social_icon_display" id="hglitsContentDiv<?php echo $values['category_id']; ?>">
+						<input type="hidden" id="hgltHashTag<?php echo $values['category_id']; ?>" value="<?php echo $values['user_hashname']; ?>" />
+						<div class="social_network_highlights" id="social_icons-1">
+							<h4><a href="Javascript:void(0);" onClick="Javascript:displayHighlightView(<?php echo $values['category_id']; ?>,'<?php echo $values['user_hashname']; ?>','<?php echo $values['category_title']; ?>',<?php echo $values['setting_id']; ?>,'<?php echo $catImageUrll; ?>');"><?php echo $values['user_hashname']; ?></h4>
+							<div class="question_ask">
+								<div class="link_w"><p><b>what’s in?:</b>
+								<?php
+								foreach( $values['links'] as $linkNum=>$linkInfo )
+								{
+									if( $linkInfo["link_validity_status"] == 1 )
+									{
+										foreach( $values['linkTitles'] as $linkDetailNum=>$linkDetailInfo )
+										{
+											if( ($linkInfo["category_link_id"] == $linkDetailInfo["link_id"]) && ($linkDetailInfo["title"] != "") )
+											{
+												echo $linkDetailInfo["title"] . ":";
+											}
+										}
+										echo $linkInfo["link"] . ", ";
+									}
+								}
+								?>
+								</p>
+								</div>
+							</div>
+							<div class="ad_keywords_w"><p><b>Added Keywords:</b> <?php echo $values['meta_tags']; ?></p></div>
+							<div class="social_network_links">
+								<p style="font-size:20px;"><?php echo count($values['links']); ?></p>
+								<p>LINKS</p>
+							</div>
+							<div class="social_network_icons">
+								<div id="voteLinksDiv<?php echo $values['category_id']; ?>">
+								<?php
+									if( $values['voteUp'] == 0 )
+									{
+								?>
+										<a href="JavaScript:void(0);" onClick="voteOnHighlight(1,<?php echo $values['category_id']; ?>);" ><img id="voteStatusImg<?php echo $values['category_id']; ?>" src="<?php echo $basePath; ?>/images/social_media/social_arrow_up.png" /></a><br/>
+										<b id="catVoteCount<?php echo $values['category_id']; ?>"><?php echo $values['NetVotes']; ?></b><br/>
+										<img src="<?php echo $basePath; ?>/images/social_media/social_arrow_down.png"/>
+								<?php
+									}
+									else if( $values['voteUp'] == 1 )
+									{
+								?>
+										<img src="<?php echo $basePath; ?>/images/social_media/social_arrow_up_disable.png"/><br/>
+										<b id="catVoteCount<?php echo $values['category_id']; ?>"><?php echo $values['NetVotes']; ?></b><br/>
+										<a href="JavaScript:void(0);" onClick="voteOnHighlight(0,<?php echo $values['category_id']; ?>);"><img id="voteStatusImg<?php echo $values['category_id']; ?>" src="<?php echo $basePath; ?>/images/social_media/social_arrow_down_enable.png" /></a>
+								<?php
+									}
+									else if( $values['voteUp'] == 2 )
+									{
+								?>
+										<a href="JavaScript:void(0);" onClick="voteOnHighlight(1,<?php echo $values['category_id']; ?>);"><img src="<?php echo $basePath; ?>/images/social_media/social_arrow_up.png"/></a><br/>
+										<b id="catVoteCount<?php echo $values['category_id']; ?>"><?php echo $values['NetVotes']; ?></b><br/>
+										<a href="JavaScript:void(0);" onClick="voteOnHighlight(0,<?php echo $values['category_id']; ?>);"><img src="<?php echo $basePath; ?>/images/social_media/social_arrow_down_enable.png"/></a>
+								<?php
+									}
+								?>
+								</div>
+							</div>
+							<div class="social_sharing">
+								<?php
+									if( isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId==$values['user_id']  )
+									{
+								?>
+									<a href="JavaScript:void(0);" onClick="deleteHighlight(<?php echo $values['category_id']; ?>);">Delete</a>
+									<a href="JavaScript:void(0);" onClick="editHighlight(<?php echo $values['category_id']; ?>);">Edit</a>
+								<?php
+									}
+								?>
+								<input type="hidden" id="moStatus<?php echo $values['category_id']; ?>" value="0" />
+								<a href="JavaScript:void(0);" id="highlightShareLink<?php echo $values['category_id']; ?>">Share</a>
+							</div>
+						</div>
+						<div>
+							<div class="addthis_sharing_toolbox" id="socialButtonsDiv<?php echo $values['category_id']; ?>" style="display:none;">
+							</div>
+						</div>
+					</div>
+				<?php
+				}
+			}
+		}?>

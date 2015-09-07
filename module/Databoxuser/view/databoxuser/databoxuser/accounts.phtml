@@ -1,0 +1,428 @@
+<?php //echo "<pre>";print_r($this->getUserMessages);exit; ?>
+<link rel="stylesheet" media="(max-width: 799px)" href="<?php echo $basePath; ?>/css/new_css/styles-mobile.css" />
+<section id="secAccountSettings">
+                <div class="divAccountSettingsRow">
+                    <!-- Account Settings Block -->
+                    <div class="divAccountSettingsCard">
+                        <div class="divAccountSettingsHeading">
+                            Account Settings
+                        </div>
+                        <div class="divAccountSettingsForm">
+                            <label>
+                                Profile Name : 
+                            </label>
+							<input type="text" name="display_name" id="display_name" value="<?echo $this->userDetails->display_name;?>" onClick="acountChange()" placeholder="Set profile name"/>
+							<div class="acount_pos_abs"><p>Change</p><p><img onClick="profileEmpty();" src="<?php echo $basePath; ?>/images/social_media/edit_ico.png"/></p></div>
+                            <label>
+                                Password : 
+                            </label>
+							<input type="password" name="password" id="password" placeholder="Set password" onfocus="showConfirmPassword()" >
+							<p id="confirmLable" style="display: none;">
+								<label>
+                                Confirm Password : 
+								</label>
+								<input type="password" name="confirmPwd" id="confirmPwd" placeholder="confirm password">
+							</p>
+						<?php
+							if( $this->userDetails->email != "" )
+							{
+						?>
+								<label>
+									Email Id : 
+								</label>
+								<input type="text" name="email" id="email" readonly value="<?echo $this->userDetails->email;?>" readonly >
+						<?php
+							}
+						?>
+                           
+                        </div>
+                    </div>
+
+                    <!-- User Summary Block -->
+                    <div class="divUserSummaryCard">
+                        <div class="divUserSummaryHeading">
+                            User Summary
+                        </div>
+
+                        <div class="divUserSummaryRow">
+                            <div class="divPublicDataboxCount"><b><?echo $this->getPublicDataboxCount;?></b></div> Public Databoxes &nbsp;
+                            <div class="divPrivateDataboxCount"><b><?echo $this->getPrivateDataboxCount;?></b></div> Private Databoxes &nbsp;
+                        </div>
+
+                        <div class="divUserSummaryRow">
+								<img src="<?php echo $basePath; ?>/img/star.png"> Montage Tacked
+							<?if($_SESSION['usersinfo']->montage_paragraph!=""){?>
+								<img src="<?php echo $basePath; ?>/images/social_media/ok.png"/>
+							<?}else{?>
+								<b>x</b>
+							<?}?>
+                        </div>
+
+                        <div class="divUserSummaryRow">
+                            Total Keywords <div class="divTotalKeywordsCount"><?php echo $this->totalKeywords; ?></div> <small> (Public Databoxes) </small>
+                        </div>
+
+                        <div class="divUserSummaryRow">
+						<?php
+							$upTotal = 0;
+							$downTotal = 0;
+							if( $this->votesCountRow->countUp != null )
+							{
+								$upTotal = $this->votesCountRow->countUp;
+							}
+							if( $this->votesCountRow->countDown != null )
+							{
+								$downTotal = $this->votesCountRow->countDown;
+							}
+						?>
+                            <div class="divUserSummaryColumn">
+                                <div class="divUserSummarySubColumn">
+                                    <div class="divVotesCount"><?php echo $upTotal; ?></div> 
+                                    <div class="divVotesText"> Votes </div>
+                                </div>
+                                <div class="divUserSummarySubColumn">
+                                    <img src="<?php echo $basePath; ?>/img/thumbsUp.png" /> 
+                                </div>
+                            </div>
+
+
+                            <div class="divUserSummaryColumn">
+                                Response for posts
+                            </div>
+
+                            <div class="divUserSummaryColumn">
+                                <div class="divUserSummarySubColumn">
+                                    <img src="<?php echo $basePath; ?>/img/thumbsDown.png" /> 
+                                </div>
+
+                                <div class="divUserSummarySubColumn">
+                                    <div class="divVotesCount"><?php echo $downTotal; ?></div> 
+                                    <div class="divVotesText"> Votes </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="divUserSummaryRow">
+                            <div class="divTotalLinksCount"><?echo $this->getTotalLinks;?></div> Links Collected, Categorized, #Hashtagged
+                        </div>
+                    </div>
+                </div>
+
+                <div class="divAccountSettingsRow">
+                    <img src="<?php echo $basePath; ?>/img/emailVerified.png" class="imgEmailVerified" />
+                    <button  href="javascript:void(0);" onclick="changeAccountStatus(2,<?echo $this->userDetails->user_id;?>);" class="btnDeactivateAccount">DEACTIVATE ACCOUNT</button>
+                </div>
+                
+                <div class="divAccountSettingsRow">
+                    <button href="javascript:void(0);" onclick="updateUser(<?echo $this->userDetails->user_id;?>)" class="btnSaveAccount">SAVE</button><span id="deactiveLoad" style="display:none"><img src="<?php echo $basePath; ?>/images/social_media/loading.gif"></span>
+					<p id="updateMessage" style="color:green"></p>
+				</div>
+
+                <div class="divAccountSettingsRow">
+                    <div class="divCreatedCollectionsCard">
+                        <div class="divAccountSettingsHeading">
+                            CREATED COLLECTIONS 
+                            <small>(Databoxes &amp; Highlights)</small>
+                        </div>
+						
+                        <ul class="ulCreatedCollectionList">
+							<?foreach($this->allDataboxes as $allDataboxes)
+							{
+								$currBoxEditLink = $baseUrl . "/databox/createhashtag/publicdatabox/" . $allDataboxes['category_id'];
+								if( $allDataboxes['category_highlight'] == 2 )
+								{
+									$currBoxEditLink = $baseUrl . "/databox/createhashtag/highlight/" . $allDataboxes['category_id'];
+								}
+								else if( ! $allDataboxes['category_type'] )
+								{
+									$currBoxEditLink = $baseUrl . "/databox/createhashtag/privatedatabox/" . $allDataboxes['category_id'];
+								}
+							?>
+								<li class="liCreatedCollectionListItem"><div class="divCreatedCollectionText"><b><?php echo $allDataboxes['user_hashname'];?></b>, <?php echo $allDataboxes['category_title'];?></div><a class="aCollectedCollectionEdit" href="Javascript:void(0);" onClick="setEditingBoxId( '<?php echo $allDataboxes['category_id']; ?>','<?php echo $currBoxEditLink; ?>' );">EDIT</a></li>
+								
+							<?}?>
+                        </ul>
+                    </div>
+                </div>
+
+                <div  class="divAccountSettingsRow">
+                    <div class="divCreatedCollectionsCard">
+                        <div id="msgoto" class="divAccountSettingsHeading">
+                            MESSAGES
+                            <button onClick="composeMail()" class="btnComposeMessage">COMPOSE</button>
+                        </div>
+                        <ul class="ulCreatedCollectionList">
+							<? if(count($this->getUserMessages)!=0){$i=0;foreach($this->getUserMessages as $userMessages){
+								if($i==0){
+								$id=$userMessages['msg_id'];
+								$senderId=$userMessages['msg_sender_id'];
+								$username=$userMessages['display_name'];
+								$msg=$userMessages['message'];
+								$date=$userMessages['msg_sended_date'];
+								}
+								$i++;
+							?>
+							
+								<li class="liCreatedCollectionListItem"><div onClick="showMessage(<?php echo $userMessages['msg_id']?>)" class="divCreatedCollectionText"><a href="javaScript:void(0);"><?php echo $userMessages['msg_subject'];?></a></div><?php if($userMessages['msg_flag']=="0"){ ?><span id="statusFlag<?php echo $userMessages['msg_id']?>" onClick="messageChangeStatus(<?php echo $userMessages['msg_id']?>)" class="spnNewMessageLabel"><a href="javaScript:void(0);">New</a></span><? }else{ }?></li>
+							<?}}else{
+									echo "No Records";
+								}?>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="divAccountSettingsRow">
+                    <div class="divCreatedCollectionsCard">
+                        <div class="divCommentHeader">
+                            <div class="divCommentHeaderUsernameBlock">
+                                <div  id="divCommentUsername" class="divCommentUsername">
+                                   <!-- Username,-->
+								   <?php echo $username;?>,
+                                </div>
+                                wrote
+                            </div>
+                            <div id="divCommentTime" class="divCommentTime">
+                                <!--ON 06-02-2015, 2:22 AM-->
+								<?php echo $date;?>
+                            </div>
+                        </div>
+                        
+                        <div id="divCommentText" class="divCommentText">
+							<?php echo $msg;?>
+                        </div>
+                        
+                        <div id="divCommentControls" class="divCommentControls">
+                            <button id="btnCommentReply" onClick="replyTo('<?php echo $username;?>')" class="btnCommentReply">REPLY</button>
+                            <button id="btnCommentForward" onClick="forwardTo(<?php echo $senderId;?>)" class="btnCommentForward">FORWARD</button>
+                            <button id="btnCommentBlockUser" onClick="blockUser(<?php echo $senderId;?>)" class="btnCommentBlockUser">BLOCK USER</button>
+                            
+                            <button id="btnCommentReportSpam" class="btnCommentReportSpam">REPORT SPAM</button>
+                        </div>
+                        
+                        <div id="divReplyToWrapper" style="display:none;" class="divReplyToWrapper">
+                            <input type="text" id="txtReplyTo" class="txtReplyTo" placeholder="To: @Username" />
+							<input type="text" id="txtSubject" class="txtReplyTo" placeholder="Enter message subject" />
+                            <textarea id="textArea" class="txtReplyToText"></textarea>
+                            <div class="divReplyToControls">
+                                <div class="divReplyToMaxCharsText">( &ast; MAXIMUM 5000 CHARS )</div>
+                                <button onClick="insertMsg()" class="btnReplyToSend">SEND</button>
+                                <button onclick="resetForm()" class="btnReplyToCancel">CANCEL</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				<input type="hidden" id="hidUserName" value="<?php echo $username;?>">
+				<input type="hidden" id="hidmessage" value="<?php echo $msg;?>">
+				<input type="hidden" id="hidsenderid" value="1">
+				<input type="hidden" id="hidreceivedid" value="">
+            </section>
+</div>
+<script>
+$(document).ready(function(){
+  $("#display_name").click(function(){
+    $(".acount_pos_abs").show();
+  });
+});
+
+function setEditingBoxId( tzCreateEditBoxId,currBoxEditLink )
+{
+	if( setTzBoxId(tzCreateEditBoxId) )
+	{
+		window.location=currBoxEditLink;
+	}
+	else
+	{
+		alert( "Databox editing not available presently..." );
+		return false;
+	}
+}
+
+function acountChange(){
+	  $(".acount_pos_abs").hide();
+}
+function showConfirmPassword(){
+	  $("#confirmLable").show();
+}
+$(function() {
+ $('html').niceScroll();
+	$("#txtReplyTo").autocomplete({	
+		source: function( request, response ) {
+			var keywordsss = $('#txtReplyTo').val();
+			$.ajax({
+				url: BASE_URL+'/all-users-names-ajax',
+				dataType: "json",
+				type	: "POST",
+				data	:{value:keywordsss},
+				success: function( data ) {
+					if(data.output!=0) {		
+						response( $.map( data.usersAll, function( item ) {
+							return {
+								label: item.ref,
+							}
+						}));
+					}else{
+						$(".ui-autocomplete").css("display","none");
+					}
+				}				
+			});
+		},
+		
+	});
+});
+function blockUser(blocked_to_uid){
+	
+	if(typeof blocked_to_uid=="undefined"){
+		alert('No messages');return false;
+	}else{
+		$.ajax({
+			url: BASE_URL+'/check-blocked-user',
+			dataType: "json",
+			type	: "POST",
+			data	:{blocked_to_uid:blocked_to_uid},
+			success: function( data ) {
+					if(data.output==0) {		
+						$.ajax({
+							url: BASE_URL+'/insert-blocked-user',
+							dataType: "json",
+							type	: "POST",
+							data	:{blocked_to_uid:blocked_to_uid},
+							success: function( data ) {
+									if(data.output!=0) {		
+										alert('Inserted blocked User');
+									}
+							}				
+						});
+					}else {
+						alert('Already  blocked user');
+					}
+			}				
+		});
+	}
+}
+function composeMail(){
+	$("#divReplyToWrapper").show();
+	$("#txtReplyTo").val('');
+	$("#textArea").val('');
+	$('#txtSubject').val('');
+}
+function replyTo(id){
+		$("#divReplyToWrapper").show();
+		$("#textArea").val('');
+		var hidName=$("#hidUserName").val();
+		$("#txtReplyTo").val(hidName);
+}
+function forwardTo(id){
+		$("#divReplyToWrapper").show();
+	    $("#txtReplyTo").val('');
+		var hidmessage=$("#hidmessage").val();
+	    $("#textArea").val(hidmessage);
+}
+function profileEmpty(){
+		$("#display_name").val('');
+		$("#display_name").focus();
+		$(".acount_pos_abs").hide();
+}
+function messageChangeStatus(msgId){
+		$.ajax({
+				url: BASE_URL+'/change-message-status',
+				dataType: "json",
+				type	: "POST",
+				data	:{msgId:msgId},
+				success: function( data ) {
+						if(data.output!=0) {		
+							$('#statusFlag'+msgId).remove();
+						}
+				}				
+		});
+}
+function showMessage(msgId){
+		$.ajax({
+				url: BASE_URL+'/show-message-content',
+				dataType: "json",
+				type	: "POST",
+				data	:{msgId:msgId},
+				success: function( data ) {
+					
+					if(data.output!=0) {
+							var userName="";
+								userName=data.userName+',';
+                            var divCommentTime="";
+								divCommentTime='ON '+data.date;
+							var divCommentText="";
+								 divCommentText=data.msg;
+							var newDiv='<button onClick="replyTo('+data.sendedId+')" class="btnCommentReply">REPLY</button><button onClick="forwardTo('+data.sendedId+')" class="btnCommentForward">FORWARD</button><button onClick="blockUser('+data.sendedId+')" class="btnCommentBlockUser">BLOCK USER</button><button onClick="reportSpam('+data.sendedId+','+data.receiverId+')"class="btnCommentReportSpam">REPORT SPAM</button>';
+								$('#divCommentUsername').html('');
+								$('#divCommentUsername').html(userName);
+								$('#divCommentTime').html('');
+								$('#divCommentTime').html(divCommentTime);
+								$('#divCommentText').html('');
+								$('#divCommentText').html(divCommentText);
+								$('#divCommentControls').html('');
+								$('#divCommentControls').html(newDiv);
+								$('#hidUserName').val('');
+								$('#hidUserName').val(data.userName);
+								$('#hidmessage').val('');
+								$('#hidmessage').val(data.msg);
+								$('#hidsenderid').val('');
+								$('#hidsenderid').val(data.sendedId);
+								$('#hidreceivedid').val('');
+								$('#hidreceivedid').val(data.receiverId);
+								$("#txtReplyTo").val('');
+								$("#textArea").val('');
+					}
+					
+				}				
+		});
+		messageChangeStatus(msgId);
+}
+function insertMsg(){
+var email=$('#txtReplyTo').val();
+var msg_subject=$('#txtSubject').val();
+var message=$('#textArea').val();
+if(email==""){
+	alert('Enter username');return false;
+}
+if(msg_subject==""){
+	alert('Enter the message subject');return false;
+}
+if(message==""){
+	alert('Enter the message');return false;
+}
+	$.ajax({
+			url: BASE_URL+'/get-email-details',
+			dataType: "json",
+			type	: "POST",
+			data	:{email:email},
+			success: function( data ) {
+				if(data.output!=0) {
+				var msg_receiver_id=data.user_id;
+					$.ajax({
+						url: BASE_URL+'/insert-message',
+						dataType: "json",
+						type	: "POST",
+						data	:{msg_receiver_id:msg_receiver_id,msg_subject:msg_subject,message:message},
+						success: function( data ) {
+							if(data.output!=0) {
+								alert('Inserted Sucessfully');
+								$('#txtReplyTo').val('');
+								$('#txtSubject').val('');
+								$('#textArea').val('');
+							}
+						}			
+					});	
+				}else{
+					alert('No data is found');
+				}
+				
+			}	
+			
+	});
+
+
+		
+}
+function resetForm(){
+	  $("#txtReplyTo").val('');
+	  $("#textArea").val('');
+}
+</script>

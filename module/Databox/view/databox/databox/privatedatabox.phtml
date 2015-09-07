@@ -1,0 +1,230 @@
+
+<?php
+	$tzCatImage = $basePath . "/img/defaultImg.png";
+	if ( isset($this->editBoxId) && trim($this->editBoxId) != "" && is_numeric($this->editBoxId) && $this->editBoxId )
+	{
+		if( isset($this->tzCatImage) && trim($this->tzCatImage) != "" && $this->tzCatImage != "montage_default_img.png" )
+		{
+			$tzCatImage = $basePath . "/images/project/categoryImages/" . $this->tzCatImage;
+		}
+	}
+?>
+	<input type="hidden" id="basePath" name="basePath" value="<?php echo $basePath;?>" />
+	<input type="hidden" id="baseUrl"  name="baseUrl" value="<?php echo $baseUrl;?>" />
+
+	<input type="hidden" id="submitVal" name="submitVal" value="Go" />
+	<input type="hidden" id="privateSVal" name="submitVal" value="Go" />
+	<input type="hidden" id="publicSVal" name="submitVal" value="Go" />
+	<input type="hidden" id="totalUrlsEntered" name="totalUrlsEntered" value="0" />
+	<input type="hidden" id="allOkUrlCount" name="allOkUrlCount" value="0" />
+	<input type="hidden" id="urlsDisplayCount" name="urlsDisplayCount" value="0" />
+	<input type="hidden" id="submitClicked" name="submitClicked" value="0" />
+	<input type="hidden" id="originalValue" name="originalValue" value="" />
+	<input type="hidden" id="pvtCodeClicks" name="pvtCodeClicks" value="-1" />
+	<input type="hidden" id="finalnvalidCount" name="finalnvalidCount" value="0" />
+
+        <div id="mainContainerWrapper" class="mainContainerWrapper">
+
+            <!-- This div is to include the header.html page 
+            <div id='divIncludeContent'></div>-->
+			<form id="linksForm" name="linksForm" method="post" enctype="multipart/form-data">
+					<input type="hidden" id="formUseMode" name="formUseMode" value="2" />
+					<input type="hidden" id="editBoxId" name="editBoxId" value="<?php if ( isset($this->editBoxId) && trim($this->editBoxId) != "" ){ echo $this->editBoxId; }?>" />
+					<input type="hidden" id="categoryName" name="categoryName" value="" />
+					<input type="hidden" id="categoryHighlight" name="categoryHighlight" value="1" />
+					<input type="hidden" id="catTitle" name="categoryTitle" />
+					<input type="hidden" id="categoryType" name="categoryType" value="0" />
+					<input type="hidden" id="catHashTag" name="catHashTag" />
+					<input type="hidden" id="uniqueCode" name="uniqueCode" value="<?php if ( isset($this->secret_code) && trim($this->secret_code) != "" ){ echo $this->secret_code; }?>" />
+					<input type="file" name="catImageFile" id="catImageFile" style="display:none;">
+					<input type="hidden" id="hashNote" name="hashNote" />
+					<input type="hidden" id="metaTags" name="metaTags" value="<?php if ( isset($this->metaTags) && trim($this->metaTags) != "" ){ echo $this->metaTags; }?>" />
+					<input type="hidden" id="custTypeId" name="settingId" value="3" />
+					<input type="hidden" id="matureContent" name="matureContent" value="<?php if ( isset($this->mature_content) && trim($this->mature_content) != "" ){ echo $this->mature_content; }?>" />
+					<input type="hidden" id="notSafeForWork" name="notSafeForWork" value="<?php if ( isset($this->not_safe_for_work) && trim($this->not_safe_for_work) != "" ){ echo $this->not_safe_for_work; }?>" />
+					<input type="hidden" id="linkPostFormation" name="linkPostFormation" value="1" />
+					<input type="hidden" id="imageId" name="imageId" value="0" />
+					<input type="hidden" id="typeImageCrop" name="typeImageCrop" value="0" />
+					<input type="hidden" id="main_category" name="main_category" value="" />
+			</form>
+
+            <section id="secCreatePrivateDatabox">
+                <div id="divCreatePrivateDataboxWrapper" class="divCreatePrivateDataboxWrapper">
+                    <div class="heading">PRIVATE DATABOX</div>
+                    <div class="divCreatePrivateDataboxHashtag">
+                        <span class="">Hashtag </span>
+                        <input type="text" id='hashtagHolder' class='inptHashtag' placeholder="#hashtag" value="<?php if(isset($_SESSION['databox']->hashtag)){ echo $_SESSION['databox']->hashtag ;}?>" />
+                    </div>
+                    <div class="divCreatePrivateDataboxUniqueCode">
+                        <span class="">Unique Code </span>
+                        <input type="text" id='ucHolder' class='inptUniqueCode' placeholder="un1qu3c0d3" value="<?php if ( isset($this->secret_code) && trim($this->secret_code) != "" ){ echo $this->secret_code; }?>" /> <i onclick="refreshUcodeDatabox()" class="imgRefreshUniqueCode"></i>
+                    </div>
+                    <div class="divCreatePrivateDataboxTitle">
+                        <span class="">Title </span>
+                        <input type="text" id='titleHolder' class='inptTitle' placeholder="Title of the collection" value="<?php if(isset($_SESSION['databox']->hashtitle)){ echo $_SESSION['databox']->hashtitle ;}?>" />
+                    </div>
+					<span class="">Links </span><br />
+					<div id="textBoxesGroup"><?
+							if( isset($this->boxLinksArr) && count($this->boxLinksArr) > 0 )
+							{
+								$extraBoxUrlId = 0;
+								$urlId = 1;
+								foreach($boxLinksArr as $key=>$currBoxLink)
+								{
+									$currentLinkArray=explode("\t",$currBoxLink["current_db_info"]);
+									// echo count($currentLinkArray);
+									if( (!is_numeric ($currentLinkArray[1])) && (trim ($currentLinkArray[1]) != "") )
+									{
+										$url_id = 0;
+										if( $currentLinkArray[0] == 0 )
+										{
+											$url_id = $urlId++;
+										}
+										else
+										{
+											$url_id = $currentLinkArray[0];
+										}
+										$extraBoxUrlId = $url_id;
+										
+										// echo $currentLinkArray[1];
+										if($currentLinkArray[7]==0){
+											$imageValue='checkmark_wrong.png';
+										}else{
+											$imageValue='manage_checking.png';
+										}
+						?><div class='divCreatePrivateDataboxLinks' id="textBoxDiv<?echo $url_id;?>">
+											<input type="text" class="inptLinks" placeholder="Ex:- http://www.google.co.in" id="textbox<?echo $url_id;?>" value="<?echo $currentLinkArray[1];?>" onBlur="resetUrlStatus('<?echo $url_id;?>');" />
+											<span style="display:none" id="loadImg<?echo $url_id;?>"><img style="vertical-align:middle;width:15px;" src="<?php echo $basePath; ?>/img/bx_loader.gif" /></span>
+											<span id="verifyImg<?echo $url_id;?>"><img id="imgVerified<?echo $url_id;?>" src="<?php echo $basePath; ?>/img/<?echo $imageValue;?>" /></span>
+											<b id="rem<?echo $url_id;?>"><a href="javascript:void(0);" onClick="removeTextBox('<?php echo $url_id; ?>',1)"><img src="<?php echo $basePath; ?>/img/dashboard_delete.png" /></a></b>
+										</div><?
+									}
+								}?><div class='divCreatePrivateDataboxLinks' id="textBoxDiv<?php echo $extraBoxUrlId + 1; ?>">
+							<input type="text" class="inptLinks" placeholder="Ex:- http://www.google.co.in" id="textbox<?php echo $extraBoxUrlId + 1; ?>" onBlur="resetUrlStatus('<?php echo $extraBoxUrlId + 1; ?>');" />
+							<span style="display:none" id="loadImg<?php echo $extraBoxUrlId + 1; ?>"><img style="vertical-align:middle;width:15px;" src="<?php echo $basePath; ?>/img/bx_loader.gif" /></span>
+							<span id="verifyImg<?php echo $extraBoxUrlId + 1; ?>"></span>
+							<b id="rem<?php echo $extraBoxUrlId + 1; ?>"></b>
+						</div><?php }
+						else
+						{
+						?><div class='divCreatePrivateDataboxLinks' id="textBoxDiv1">
+							<input type="text" class="inptLinks" placeholder="Ex:- http://www.google.co.in" id="textbox1" onBlur="resetUrlStatus(1);" />
+							<span style="display:none" id="loadImg1"><img style="vertical-align:middle;width:15px;" src="<?php echo $basePath; ?>/img/bx_loader.gif" /></span>
+							<span id="verifyImg1"></span>
+							<b id="rem1"></b>
+						</div><?php } ?>
+                    </div>
+                    <div class="divCreatePrivateDataboxImage">
+                        <span class="">Image </span><span class="smallFont dimFontColor"> ( related to your collection / sharing )</span><br />
+                        <button class="primaryButton" id="cropBoxImage">UPLOAD IMAGE</button>
+                        <img src="<?php echo $tzCatImage; ?>" alt="" id="uploadedCatImage1" />
+                    </div>
+                    <div class="divCreatePrivateDataboxEmail">
+                        <span class="">Email-ID to receive private databox access details </span><br />
+                        <input type='text' class="inptEmail" placeholder="example@123.com" />
+                        <span class="">Continue Customising</span><br />
+						<div id="dcHtmlDiv"><input type="button" value="Save" id="databoxContinue" /></div>
+						<div id="dcInprogressDiv" style="display:none;"><img  style="vertical-align:middle;margin-right:3px;width:30px;" src="<?php echo $basePath; ?>/img/bx_loader.gif" />Saving Category...</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+		<!--Book Marks-->
+		<?php
+			if( $this->fetchedLinksCount > 0 )
+			{
+		?>
+				<div id="bookmarksLoadingDiv" class="bookmarks_loading">
+					<div class="pop">
+						<img src="<?php echo $basePath; ?>/images/social_media/bx_loader.gif" />
+						<p>Fetching Your Bookmarks</p>
+					</div>
+				</div>
+		<?php
+			}
+		?>
+		<div id="pop-up-bookmarks" >
+		<? echo $this->htmlBook; ?>
+		</div>
+		<!--END-->
+
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/popupwindow.js"></script>
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/databox-common.js"></script>
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/links-dready.js"></script>
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/alert-meassage.js"></script>
+
+<div id="pop-up-image-crop-new" class="pop-up-display-content conform_popup_content" style="margin-bottom:20px;">
+	<div class="pop_up_haeding close"><span onclick="selectCropImage();">Upload Image</span></div>
+	<input type="file" id="fileCropInp" name="fileCropInp" style="display:none;"  />
+	<div id="cropSrcImgContainer">
+		<img alt="Image appears here" src="" id="cropbox" />
+	</div>
+	<div class="jc_coords">
+		<form id="CropForm" method="post" >
+			<input type="hidden" id="x" name="x" />
+			<input type="hidden" id="y" name="y" />
+			<input type="hidden" id="w" name="w" />
+			<input type="hidden" id="h" name="h" />
+		</form>
+	</div>
+	<button class="export" onclick="checkCoords();" style="display:none">Crop</button><span id="l_i_c" style="display:none;margin-left:80%;"><img src="<?php echo $basePath; ?>/images/social_media/bx_loader.gif" /></span>
+</div>
+<input type="hidden" id="cropImage1" name="cropImage1" value="0" />
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/js/crop/jquery.Jcrop.min.css" />
+
+<script>
+	function updateCoords(c)
+	{
+		jQuery('#x').val(c.x);
+		jQuery('#y').val(c.y);
+		jQuery('#w').val(c.w);
+		jQuery('#h').val(c.h);
+	}
+	
+	function checkCoords()
+	{
+		if( parseInt(jQuery('#w').val()) > 0 )
+		{
+			$("#l_i_c").show();
+
+			var x=jQuery('#x').val();
+			var y=jQuery('#y').val();
+			var w=jQuery('#w').val();
+			var h=jQuery('#h').val();
+			
+			var existinImageId = $('#imageId').val();
+
+			var catImageBasicUploadUrl = BASE_URL+'/upload-montage-image';
+			var file_data = $('#fileCropInp').prop('files')[0];
+			var form_data = new FormData();
+			form_data.append('fileCropInp', file_data);
+			form_data.append('croppedX', x);
+			form_data.append('croppedY', y);
+			form_data.append('croppedNewWidth', w);
+			form_data.append('croppedNewHeight', h);
+			form_data.append('imageId',existinImageId);
+			$.ajax({
+				url: catImageBasicUploadUrl,
+				cache: false,
+				contentType: false,
+				processData: false,
+				data: form_data,                         
+				type: 'post',
+				dataType:'json',
+				success: function(data){
+					var newCatImageFullPath = BASE_PATH+'/images/project/categoryImages/'+data.imageId;
+					$("#l_i_c").hide();
+					$('#pop-up-image-crop-new').popUpWindow({action: "close"});
+					$('#uploadedCatImage1').attr('src', newCatImageFullPath);
+					$('#typeImageCrop').val(1);
+					$('#imageId').val(data.imageId);
+				}
+			});
+		}else{
+			alert('Please select a crop region then press submit.');
+		}
+	}
+	
+</script>

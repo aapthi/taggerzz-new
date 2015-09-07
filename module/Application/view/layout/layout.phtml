@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8">
+	<?php
+	global $homePageYes;
+	if( (strpos($_SERVER['REQUEST_URI'],'post-vertical') !== false) || (strpos($_SERVER['REQUEST_URI'],'pre-vertical') !== false || strpos($_SERVER['REQUEST_URI'],'pre-horizontal') !== false) || (strpos($_SERVER['REQUEST_URI'],'post-horizontal') !== false) ){
+		global $layoutTitle;
+		global $layoutImage;
+		global $layoutDescription;
+		global $layoutUrl;
+		global $layoutKeywords;
+	?>
+		<title><?php echo $layoutTitle; ?> - Taggerzz</title>
+		<meta name="keywords" content="<?php echo $layoutKeywords; ?>">
+		
+		<meta property="og:type" content="article">
+		<meta property="og:title" content="<? echo $layoutTitle; ?>">
+		<meta property="og:image" content="<? echo $layoutImage; ?>">
+		<meta property="og:image:width" content="200" />
+		<meta property="og:image:height" content="200" />
+		<meta property="og:description" content="<? echo $layoutDescription; ?>">  
+		<meta property="og:url" content="<? echo $layoutUrl; ?>">
+		<meta property="fb:app_id" content="608131635971702">
+	
+		
+	<?php } else if( strpos($_SERVER['REQUEST_URI'],'montage') !== false ){
+		global $layoutTitle;
+		if( $layoutTitle != "" ){?>
+			<title><?php echo $layoutTitle; ?></title>
+	<?php }else{?>
+	<title>Taggerzz | Present Your Favorites, Customize and Share #Hashtag Identify</title>
+	<?php }} else if( strpos($_SERVER['REQUEST_URI'],'user-collection') !== false ){
+		global $layoutTitle;
+		if( $layoutTitle != "" ){?>
+			<title><?php echo $layoutTitle; ?></title>
+	<?php } else {?>
+	<title>Taggerzz | Present Your Favorites, Customize and Share #Hashtag Identify</title>
+	<?php }} else if( isset($homePageYes) && $homePageYes == "Yes" ){?>
+	<title>Taggerzz | Present Your Favorites, Customize and Share #Hashtag Identify</title>
+	<meta name="keywords" content="Upload Bookmarks, share 20 different fileformat type direct links, Json and BAK bookmarks upload, Share Bookmarks, Hashtag Identify, Customize and share your Favorite Websites, Share Bookmarks anonymously, Share Bookmarks Socially, Social media Login, Present an Idea, Favorites, use your Long old useless bookmark files, Unique #Hashtagging, Absolute Search results, control your search Results, fabulous usage of Hashtagging">
+	<meta name="description" content="Create an Idea. Share your Knowledge or have fun sharing your favorites and Bookmarks. Upload hundreds of Links at a single Click. Customize, prioritize, Highlight your Own Unique Ideas, Share your friends Your Ideas, Favorites, Thoughts, Ideals by a single Hashtag search. Share major file types presenting Direct Links">
+	<?php } else if( strpos($_SERVER['REQUEST_URI'],'dashboard') !== false ){?>
+	<title>Your Dashboard, Total Management of your Web Links - taggerzz</title>
+	<?php } else if( strpos($_SERVER['REQUEST_URI'],'accounts') !== false ){?>
+	<title>Manage your account - taggerzz</title>
+	<?php } else if( strpos($_SERVER['REQUEST_URI'],'category-choice') !== false ){?>
+	<title>Create Your Collage, Upload Bookmark file & Hashtag your favorites - taggerzz</title>
+	<meta name="keywords" content="Share and Customize your Ideas, Unique Opinions, Break Propagandists, Stereotypes, Bring change by your Opinions, Present and Share your Opinion by Web Links, Collect Customize present and share by Hashtag">
+	<meta name="description" content="Upload your Bookmarks, Share your favorite Entertainment, Share your preferred Political Ideas">
+	<?php } else if( strpos($_SERVER['REQUEST_URI'],'enlist-highlights') !== false ){?>
+	<title>Highlights and Current on-going Affairs - taggerzz</title>
+	<meta name="keywords" content="Vote your preferred or valuable content">
+	<meta name="description" content="Vote a current affair, Vote a Highlight, Up Vote or Down vote a Issue">
+	<?php } else if( (strpos($_SERVER['REQUEST_URI'],'highlights-both') !== false) || (strpos($_SERVER['REQUEST_URI'],'edit-highlight') !== false) ){?>
+	<title>Post a Internet Highlight with your preferred Website Links - taggerzz</title>
+	<meta name="keywords" content="Create your Internet Highlight, Post a current Affair share with the world your Broader perspectives">
+	<meta name="description" content="Post a current affair, Post your Highlight, Share your exclusive Knowledge about a current Issue">
+	<?php } else if( (strpos($_SERVER['REQUEST_URI'],'predefined-both') !== false) || (strpos($_SERVER['REQUEST_URI'],'userdefined-both') !== false) || (strpos($_SERVER['REQUEST_URI'],'userdefined-bookmarks') !== false) ){?>
+	<title>Upload Bookmarks or Manually Insert your Web Links - taggerzz</title>
+	<meta name="keywords" content="Share and Customize your Ideas, Unique Opinions, Break Propagandists, Stereotypes, Bring change by your Opinions, Present and Share your Opinion by Web Links, Collect Customize present and share by Hashtag">
+	<meta name="description" content="Upload your Bookmarks, Share your favorite Entertainment, Share your preferred Political Ideas">
+	<?php } else {?>
+		<title id="enlist-title">Taggerzz | Present Your Favorites, Customize and Share #Hashtag Identify</title>
+	<?php } ?>
+	<?php
+		$header=$this->action('Application\Controller\IndexController', 'headerAction',array('20','10'));
+		$baseUrl = $header->headerarray['baseUrl'];
+		$basePath = $header->headerarray['basePath'];
+	?>
+	<link rel="shortcut icon" href="<?php echo $basePath?>/images/social_media/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="<?php echo $basePath?>/images/social_media/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<?php $page=basename($_SERVER['REQUEST_URI']); if($page=="intro"){
+
+		echo $this->content;
+	}else{?>
+	<?php include_once("analyticstracking.php") ?>
+	<? include "header.phtml"; ?>
+	<?php echo $this->content; ?>
+	<? include "footer.phtml"; ?> 
+	<? } ?>
+	

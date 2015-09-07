@@ -1,0 +1,323 @@
+<input type="hidden" id="loggedInStatus" <?php if( isset($_SESSION['usersinfo']) ) {?>value="loggedIn"<?php } ?> />
+<input type="hidden" id="postClicked" value="0" />
+<input type="hidden" id="nsfwMcClicked" value="0" />
+
+<input type="hidden" id="socialLoginSecond" value="" />
+<input type="hidden" id="homePageSection" value="1" />
+<input type="hidden" id="checkGoogleLogin" />
+<input type="hidden" id="checkGoogleLogin1" value="0" />
+
+<input type="hidden" id="highlightBoxesPerPage" value="5" />
+<input type="hidden" id="highlightBoxesOffset" value="0" />
+<input type="hidden" id="publicBoxesPerPage" value="10" />
+<input type="hidden" id="publicBoxesOffset" value="0" />
+<input type="hidden" id="montageBoxesPerPage" value="10" />
+<input type="hidden" id="montageBoxesOffset" value="0" />
+<input type="hidden" id="publicBoxesOn" value="1" />
+<input type="hidden" id="montageBoxesOn" value="1" />
+<input type="hidden" id="homepageSearched" value="0" />
+<input type="hidden" id="pboxesOnBeforeSearch" value="0" />
+
+<div class="clearfix"></div>
+
+            <section id="secHighlights" class="secHighlights">
+
+                <div id="divCardsHeading" class="divHeadingLabel">
+                    Highlights | Current Affairs
+                </div>
+
+                <div id="divHighlightsMainWrapper" class="divCardsMainWrapper">
+                    <div id="divNavLeftArrow" class="divNavLeftArrow"><img src="<?php echo $basePath; ?>/img/imgNavLeftArrow.png" alt="" /></div>
+
+                    <div id="divCardsWrapper" class="divCardsWrapper">
+						<?php if( isset($this->homehighlightBoxesArray) )
+					{foreach( $this->homehighlightBoxesArray as $key=>$currentBoxData ){
+						$viewUrl = "";
+						if( isset($_SESSION['usersinfo']) )
+						{
+							if($currentBoxData['settingId']==3){
+								$viewUrl = "post-vertical";
+							}else{
+								$viewUrl = "post-horizontal";
+							}
+						}
+						else
+						{
+							if($currentBoxData['settingId']==3){
+								$viewUrl = "pre-vertical";
+							}else{
+								$viewUrl = "pre-horizontal";
+							}
+						}
+						$displayCustomizationUrl = $baseUrl;
+						$catTitles = str_replace( "-","~",$currentBoxData["category_title"] );
+						$catTitle = str_replace( " ","-",$catTitles );
+						$catHashName = substr( $currentBoxData["user_hashname"],1 );
+						$catImageUrl=explode(".",$currentBoxData["category_image"]);
+						$catImageUrll=$catImageUrl[0];
+						$displayCustomizationUrl .= "/databox/" . $viewUrl . "/" . $currentBoxData["category_id"] . "+" . $catImageUrll . "+" . $catHashName . "+" . $catTitle;?>
+                        <div id="divCard-1" class="divCard" draggable="true">
+													<a href="<?php echo $displayCustomizationUrl; ?>" onClick='Javascript:displayCustomization(<?php echo $currentBoxData["category_id"]; ?>,"<?php echo $currentBoxData["user_hashname"]; ?>","<?php echo $currentBoxData["category_title"]; ?>",<? echo $currentBoxData['settingId']?>,"<? echo $catImageUrll?>");'>
+                            <div id="divCard-1-imageWrapper" class="divCardImageWrapper">
+                                <img id="Card-1-img" class="imgCardImage" src="<?php echo $basePath.'/images/project/categoryImages/'.$currentBoxData["category_image"]; ?>" alt="<?php echo $currentBoxData["user_hashname"]; ?>" />
+                                <div id="divCard-1-hashtag" class="divCardHashtag">
+                                   <?php echo $currentBoxData["user_hashname"]; ?>
+                                </div>
+                                <div id="Card-1-user" class="divCardUser">
+									<!--<img src="<?php echo $basePath; ?>/img/userImage.png" class="imgUserImage" alt="" />
+                                    <div class="divCardUserName">By: Arun Kolhapur</div>-->
+									<?php if($currentBoxData["montage_image"]!=""){?>
+									<img  src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $currentBoxData["montage_image"];?>" class="imgUserImage" alt="" />
+									<?php }else{ ?>
+									<img src="<?php echo $basePath; ?>/img/userImage.png" class="imgUserImage" alt="" />
+									<?php } ?>
+									<div class="divCardUserName">By: <?php echo $currentBoxData["display_name"];?></div><br/>
+									<div class="divCardUserName"><?php echo round($currentBoxData["NetVotes"],2);?>% liked</div>
+                                </div>
+                                <div id="divCard-1-sharedLinks" class="divCardSharedLinks">
+                                    <span class="fatFont"><?php echo $currentBoxData["categoryLinksCount"]; ?> HOT LINKS</span> collected and shared
+                                </div>
+                            </div>
+							</a>
+                            <div id="divCard-1-contentWrapper" class="divCardContentWrapper">
+                                <div id="divCard-1-views" class="divCardViews">
+                                    <img src="<?php echo $basePath; ?>/img/views.png" alt="" /> <?php if($currentBoxData["views_count"]!=""){echo $currentBoxData["views_count"]; }else { echo "0"; } ?> views 
+                                </div>
+								<!--<span><?php echo round($currentBoxData["NetVotes"],2);?>% liked</span>-->
+                                <div class="divCardLoveTrash">
+                                    <a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" /></a>  or <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1');"> <img src="<?php echo $basePath; ?>/img/trash.png" alt="" /></a>
+                                </div>
+                                <div id="divCardKeywords" class="divCardKeywords"><?php echo $currentBoxData["meta_tags"];?></div>
+
+                                <div id="divCard-1-title" class="divCardTitle">
+                                   <?php echo $currentBoxData["category_title"];?>
+                                </div>
+                                <div id="divCard-1-description" class="divCardDescription">
+                                    <?php if($currentBoxData["category_description"]!=""){
+										if(strlen($currentBoxData["category_description"])>155)
+										{
+											echo substr($currentBoxData["category_description"],0,155) . '...';
+										}
+										else
+										{
+											echo $currentBoxData["category_description"];
+										}
+									}?>
+                                </div>
+                            </div>
+                        </div>
+                        <?php } } ?>
+                   
+                    </div>
+
+                    <div id="divNavRightArrow" class="divNavRightArrow"><img src="<?php echo $basePath; ?>/img/imgNavRightArrow.png" alt="" /></div>
+                </div>
+            </section>
+
+            <section id="secDataboxes" class="secDataboxes">
+                <div id="divDataboxesHeading" class="divHeadingLabel">
+                   <a href="Javascript:void(0);" id="publicBoxesLink">Public Databoxes</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="Javascript:void(0);" id="memCollectionsLink">Members</a>
+                </div>
+				<div id="list_public_boxes" >
+                <div id="divDataboxWrapper" class="divCardsWrapper" data-columns>
+					<?php
+						if( isset($this->homePublicBoxesArray) )
+						{
+							foreach( $this->homePublicBoxesArray as $key=>$currentBoxData )
+							{
+								//echo "<pre>";print_r($this->homePublicBoxesArray);exit;
+								$showMcNsfwPopup = false;
+								if( (! isset($_SESSION['usersinfo'])) && (($currentBoxData["mature_content"] == 1) || ($currentBoxData["not_safe_for_work"] == 1)) )
+								{
+									$showMcNsfwPopup = true;
+								}
+								
+								$viewUrl = "";
+								if( isset($_SESSION['usersinfo']) )
+								{
+									if($currentBoxData['settingId']==3){
+										$viewUrl = "post-vertical";
+									}else{
+										$viewUrl = "post-horizontal";
+									}
+								}
+								else
+								{
+									if($currentBoxData['settingId']==3){
+										$viewUrl = "pre-vertical";
+									}else{
+										$viewUrl = "pre-horizontal";
+									}
+								}
+								$displayCustomizationUrl = $baseUrl;
+								$catTitles = str_replace( "-","~",$currentBoxData["category_title"] );
+								$catTitle = str_replace( " ","-",$catTitles );
+								$catHashName = substr( $currentBoxData["user_hashname"],1 );
+								$catImageUrl=explode(".",$currentBoxData["category_image"]);
+								$userImageUrl=$currentBoxData["image"];
+								$catImageUrll=$catImageUrl[0];
+								$displayCustomizationUrl .= "/databox/" . $viewUrl . "/" . $currentBoxData["category_id"] . "+" . $catImageUrll . "+" . $catHashName . "+" . $catTitle;?>
+								
+				    <div id="divDatabox-1" class="divCard" draggable="true">
+                        <div id="divDatabox-1-imageWrapper" class="divCardImageWrapper">
+							<?php if( $showMcNsfwPopup ){  ?><a href="javascript:void(0)" onClick='Javascript:displayNsfwMc(<?php echo $currentBoxData["category_id"]; ?>,"<?php echo $currentBoxData["user_hashname"]?>","<?php echo $currentBoxData["category_title"]; ?>",<? echo $currentBoxData["settingId"]?>,"<? echo $catImageUrll?>");'><img src="<?php echo $basePath; ?>/images/social_media/mature_content.jpg" width="234" height="302" /></a>
+							<?php } else { ?>
+                            <a href="<?php echo $displayCustomizationUrl; ?>"><img id="Databox-1-img" class="imgCardImage" alt="<?php echo $currentBoxData["user_hashname"]; ?>" src="<?php echo $basePath.'/images/project/categoryImages/'.$currentBoxData["category_image"]; ?>"/></a>
+							<?php } ?>
+                            <div id="divDatabox-1-hashtag" class="divCardHashtag">
+                              <a href="<?php echo $displayCustomizationUrl; ?>"><?php echo $currentBoxData["user_hashname"];?></a>
+                            </div>
+
+                            <div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">
+                                <span class="fatFont"><?php echo $currentBoxData["categoryLinksCount"]; ?> HOT LINKS</span> collected and shared
+                            </div>
+                            <div id="Card-1-user" class="divCardUser">
+								<?php if($currentBoxData["montage_image"]!=""){?>
+                                <img  src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $currentBoxData["montage_image"];?>" class="imgUserImage" alt="" />
+								<?php }else{ ?>
+								<img src="<?php echo $basePath; ?>/img/userImage.png" class="imgUserImage" alt="" />
+								<?php } ?>
+                                <div class="divCardUserName">By: <?php echo $currentBoxData["display_name"];?></div><br/>
+								<div class="divCardUserName"><?php echo round($currentBoxData["likes"],2);?>% liked</div>
+                            </div>
+                        </div>
+                        <div id="divDatabox-1-contentWrapper" class="divCardContentWrapper">
+                            <div id="divDatabox-1-views" class="divCardViews">
+                                <img src="<?php echo $basePath; ?>/img/views.png" alt="" /> <?php if($currentBoxData["views_count"]!=""){echo $currentBoxData["views_count"]; }else { echo "0"; } ?> views
+                            </div>
+							<!--<span><?php echo round($currentBoxData["likes"],2);?>% liked</span>-->
+                            <div class="divCardLoveTrash">
+                                <a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" /></a>  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" /></a>
+                            </div>
+                            <div id="divCardKeywords" class="divCardKeywords"><?php echo $currentBoxData["meta_tags"];?></div>
+
+                            <div id="divDatabox-1-title" class="divCardTitle">
+                                <?php echo $currentBoxData["category_title"];?>
+                            </div>
+                            <div id="divDatabox-1-description" class="divCardDescription">
+							<?php if($currentBoxData["category_description"]!=""){
+								if(strlen($currentBoxData["category_description"])>155)
+								{
+									echo substr($currentBoxData["category_description"],0,155) . '...';
+								}
+								else
+								{
+									echo $currentBoxData["category_description"];
+								}
+							}?>
+                            </div>
+                        </div>
+                    </div>
+						<?php } }?>
+                </div>
+				<div id="publicBoxesLoadingDiv" style="position:relative;display:none;" >
+				<div class="home_publicboxes_loading" >
+					<center><img src="<?php echo $basePath; ?>/images/social_media/bx_loader.gif" /></center>
+				</div>
+			</div>
+              </div>
+				<div id="publicBoxesDiv" style="display:none;">
+					</div>
+				<div id="memCollectionBoxesDiv" style="display:none;">
+					<div id="divDataboxWrapper" class="divCardsWrapper" data-columns>
+					<?php
+					if( isset($this->homeMontageBoxesArray) )
+					{
+					foreach( $this->homeMontageBoxesArray as $key=>$currentBoxData )
+					{
+					$viewUrl = "user-collection";
+					$displayUserCollectionUrl = $baseUrl;
+					$displayUserCollectionUrl .= "/" . $viewUrl . "/" . $currentBoxData["user_id"];?>
+					<div id="divDatabox-1" class="divCard">
+                        <div id="divDatabox-1-imageWrapper" class="divCardImageWrapper">
+							<?php 
+							$montageHashName="";
+								if( ! is_null($currentBoxData["montage_hash_name"]) && $currentBoxData["montage_hash_name"] != "" )
+								{
+								if(strlen($currentBoxData["montage_hash_name"])>25)
+								{
+								$montageHashName = substr($currentBoxData["montage_hash_name"],0,25) . '...';
+								}
+								else
+								{
+								$montageHashName = $currentBoxData["montage_hash_name"];
+								}}
+							if( ! is_null($currentBoxData["montage_main_image"]) && $currentBoxData["montage_main_image"] != "" )
+							{
+								$memberDisplayImage = $basePath.'/images/project/montageMainImage/'.$currentBoxData["montage_main_image"];
+							}else{
+									$memberDisplayImage = $basePath.'/images/project/montageImages/'.$currentBoxData["montage_image"];
+							}?>
+                            <img id="Databox-1-img" class="imgCardImage" alt="<?php echo $montageHashName; ?>" src="<?php echo $memberDisplayImage; ?>"/>
+							<div id="divDatabox-1-hashtag" class="divCardHashtag">
+								<?php echo $montageHashName; ?>
+                            </div>
+
+                            <div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">
+                                <span class="fatFont"><?php echo $currentBoxData["userWiseLinksCount"];?> HOT LINKS</span> collected and shared
+                            </div>
+                            <div id="Card-1-user" class="divCardUser">
+								<?php if($currentBoxData["image"]!=""){?>
+                                <img  src="<?php echo $currentBoxData["image"];?>" class="imgUserImage" alt="" />
+								<?php }else{ ?>
+								<img src="<?php echo $basePath; ?>/img/userImage.png" class="imgUserImage" alt="" />
+								<?php } ?>
+                                <div class="divCardUserName">By: <?php echo $currentBoxData["display_name"];?></div>
+                            </div>
+                        </div>
+                        <div id="divDatabox-1-contentWrapper" class="divCardContentWrapper">
+                           <!-- <div id="divDatabox-1-views" class="divCardViews">
+                                <img src="<?php echo $basePath; ?>/img/views.png" alt="" /> 120 views
+                            </div>
+                            <div class="divCardLoveTrash">
+                                <a href="#"><img src="<?php echo $basePath; ?>/img/love.png" alt="" /></a>  or  <img src="<?php echo $basePath; ?>/img/trash.png" alt="" />
+                            </div>-->
+                            <div id="divCardKeywords" class="divCardKeywords"><?php echo $currentBoxData["meta_tags"];?></div>
+
+                            <div id="divDatabox-1-title" class="divCardTitle">
+									<?php $montageTitle = "";
+									if( ! is_null($currentBoxData["montage_title"]) && $currentBoxData["montage_title"] != "" )
+									{
+										if(strlen($currentBoxData["montage_title"])>57)
+										{
+											$montageTitle = substr($currentBoxData["montage_title"],0,57) . '...';
+										}
+										else
+										{
+											$montageTitle = $currentBoxData["montage_title"];
+										}
+									}?>
+                                <?php echo $montageTitle;?>
+                            </div>
+                            <div id="divDatabox-1-description" class="divCardDescription">
+								<?php
+									if( ! is_null($currentBoxData["montage_paragraph"]) && $currentBoxData["montage_paragraph"] != "" )
+									{
+										if(strlen($currentBoxData["montage_paragraph"])>155)
+										{
+											echo $montageTitle = substr($currentBoxData["montage_paragraph"],0,155) . '...';
+										}
+										else
+										{
+											echo $montageTitle = $currentBoxData["montage_paragraph"];
+										}
+									}
+								?>
+                            </div>
+                        </div>
+                    </div>
+					<?php } }?>
+					</div>
+					</div>
+                </div>
+            </section>
+		</div>
+    </body>
+</html>
+<script>
+	$(document).ready(function() {
+		if($("#searchTermHolder").val()!=""){
+			$("#homeSearchLink" ).click();
+		}		
+	});
+</script>

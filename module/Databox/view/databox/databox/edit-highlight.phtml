@@ -1,0 +1,214 @@
+
+<?php
+	$linksCount = 0;
+	$urlsDisplayCount = 0;
+	$linksCount = count($this->linksArray);
+	$categoryId = "";
+	$userCategoryId = "";
+	$highlightHtHolder = "";
+	$highlightTitleHolder = "";
+	$uploadedCatImage0 = $basePath . "/images/social_media/upload_img.png";
+	$metaTagsHolder = "";
+	$settingId = "";
+	if( isset($this->editHighlightRow) )
+	{
+		$categoryId = $this->editHighlightRow->category_id;
+		$userCategoryId = $this->editHighlightRow->user_category_id;
+		$highlightHtHolder = $this->editHighlightRow->user_hashname;
+		$highlightTitleHolder = $this->editHighlightRow->category_title;
+		$catImageNumber=$this->editHighlightRow->category_image;
+		$uploadedCatImage0 = $basePath.'/images/project/categoryImages/'.$this->editHighlightRow->category_image;
+		$metaTagsHolder = $this->editHighlightRow->meta_tags;
+		$settingId = $this->editHighlightRow->setting_id;
+	}
+?>
+
+<input type="hidden" id="basePath" name="basePath" value="<?php echo $basePath;?>" />
+<input type="hidden" id="baseUrl"  name="baseUrl" value="<?php echo $baseUrl;?>" />
+
+<input type="hidden" id="submitVal" name="submitVal" value="Go" />
+<input type="hidden" id="totalUrlsEntered" name="totalUrlsEntered" value="0" />
+<input type="hidden" id="allOkUrlCount" name="allOkUrlCount" value="0" />
+<input type="hidden" id="submitClicked" name="submitClicked" value="0" />
+<input type="hidden" id="originalValue" name="originalValue" value="" />
+<input type="hidden" id="finalnvalidCount" name="finalnvalidCount" value="0" />
+
+<div class="body_main_container">
+	<div class="body_middle_container" style="margin-bottom:20px;">
+		<div class="upload_links">
+			<div class="manual_links_bg">
+				<div class="highlight_insert">
+					<h3>Insert links For&nbsp;<input type="text" id="highlightHtHolder" class="text_pad highlight_first_input" placeholder="#yourhighlightingtopic" value="<?php echo $highlightHtHolder; ?>" onBlur="Javascript:checkSpaces();" />
+					&nbsp;and:&nbsp;Title&nbsp;<input type="text" id="highlightTitleHolder" class="text_pad highlight_second_input" placeholder="My tite for the highlight..." value="<?php echo $highlightTitleHolder; ?>" />
+					<a href="javascript:void(0)" class="larg_btn" id="uploadLink">upload Bookmark</a> or insert Manually
+					<form id="bookmarksUploadForm" method="post" enctype="multipart/form-data">
+						<input type="file" name="bookmarksFile" id="bookmarksFile" style="display:none;">
+						<input type="submit" name="uploadSubmitBtn" id="uploadSubmitBtn" value="Submit" style="display:none;">
+					</form>
+					</h3>
+				</div>
+				<div>
+					<div id="textBoxesGroup">
+						<?php
+							if( isset($this->linksArray) )
+							{
+								$extraBoxUrlId = 0;
+								$urlId = 1;
+								foreach( $this->linksArray as $linkNum=>$linkInfo )
+								{
+									$url_id = 0;
+									if( $linkInfo["url_id"] == 0 )
+									{
+										$url_id = $urlId++;
+									}
+									else
+									{
+										$url_id = $linkInfo["url_id"];
+									}
+									$extraBoxUrlId = $url_id;?><div class="highlighted_links" id="textBoxDiv<?php echo $url_id; ?>">
+										<input class="brg_pad" type="text" placeholder="https://www.google.com/" autocomplete="on" id="textbox<?php echo $url_id; ?>" onBlur="resetUrlStatus(<?php echo $url_id; ?>)" value="<?php echo $linkInfo["link"]; ?>" />
+										&nbsp;<b id="video<?php echo $url_id; ?>"><img src="<?php echo $basePath; ?>/images/social_media/link_icon.png" /></b>
+										<span style="display:none" id="loadImg<?php echo $url_id; ?>"><img src="<?php echo $basePath; ?>/images/social_media/24x24_pg-loader-1.gif" /></span><?php $imgVerified = "checkmark.png";
+										if( $linkInfo["link_validity_status"] == 0 )
+										{
+											$imgVerified = "warning.png";
+										}
+										else
+										{
+											$urlsDisplayCount++;
+										}?><span id="verifyImg<?php echo $url_id; ?>"><img id="imgVerified<?php echo $url_id; ?>" src="<?php echo $basePath; ?>/images/social_media/<?php echo $imgVerified;?>"/></span>
+										<b id="rem<?php echo $url_id; ?>"><a href="Javascript:void(0);" onClick="removeTextBox('<?php echo $url_id; ?>',1)"><img src="<?php echo $basePath; ?>/images/social_media/delete.png" /></a></b>
+									</div><?php } ?><div class="highlighted_links" id="textBoxDiv<?php echo $extraBoxUrlId + 1; ?>">
+										<input class="brg_pad" type="text" placeholder="https://www.google.com/" autocomplete="on" id="textbox<?php echo $extraBoxUrlId + 1; ?>" onBlur="resetUrlStatus(<?php echo $extraBoxUrlId + 1; ?>)" value="" />
+										&nbsp;<b id="video<?php echo $extraBoxUrlId + 1; ?>"><img src="<?php echo $basePath; ?>/images/social_media/link_icon.png" /></b>
+										<span style="display:none" id="loadImg<?php echo $extraBoxUrlId + 1; ?>"><img src="<?php echo $basePath; ?>/images/social_media/24x24_pg-loader-1.gif" /></span>
+										<span id="verifyImg<?php echo $extraBoxUrlId + 1; ?>"></span>
+										<b id="rem<?php echo $extraBoxUrlId + 1; ?>"></b>
+									</div>
+								<?php
+							}
+						?>
+					</div>
+					<input type="hidden" id="urlsDisplayCount" name="urlsDisplayCount" value="<?php echo $urlsDisplayCount;?>" />
+					<div class="clearfix"></div>
+					<div class="add_links">
+						<span id="totalUrlsSpan"><strong><?php echo $linksCount; ?>/100</strong></span> 
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="heighlights_img">
+					<a href="javascript:void(0)" id="catImageLink0">
+						<img id="uploadedCatImage0" src="<?php echo $uploadedCatImage0; ?>"/>
+					</a>
+					<p>Your Uploaded Picture</p>
+				</div>
+				<div class="hightlights_keywords">
+					<h3>Your keywords<small>&nbsp;(Meta tags to boost page SEO)</small></h3>
+					<input type="text" class="brg_pad" id="metaTagsHolder" value="<?php echo $metaTagsHolder; ?>" />
+				</div>
+				<form id="linksForm" name="linksForm" method="post" enctype="multipart/form-data">
+					<input type="hidden" id="categoryId" name="categoryId" value="<?php echo $categoryId; ?>" />
+					<input type="hidden" id="userCategoryId" name="userCategoryId" value="<?php echo $userCategoryId; ?>" />
+					<input type="hidden" id="highlightTitle" name="highlightTitle" />
+					<input type="hidden" id="highlightHashTag" name="highlightHashTag" />
+					<input type="file" name="highlightImageFile" id="highlightImageFile" style="display:none;" >
+					<input type="hidden" id="hltImageSelected" name="hltImageSelected" value="0" />
+					<input type="hidden" id="highlightKeywords" name="highlightKeywords" />
+					<input type="hidden" id="custTypeId" name="settingId" value="<?php echo $settingId; ?>" />
+					<input type="hidden" id="imageId" name="imageId" value="0" />
+					<input type="hidden" id="imageIdd" name="imageIdd" value="<? echo $catImageNumber; ?>" />
+					<input type="hidden" id="imageIdOnload" name="imageIdOnload" value="<? echo $this->editHighlightRow->category_image; ?>" />
+					<input type="hidden" id="typeImageCrop" name="typeImageCrop" value="0" />
+					<input type="hidden" id="editHighLinksChanged" name="editHighLinksChanged" value="0" />
+				</form>
+				<div style="margin-bottom:20px;"></div>
+				<div>
+					<a href="javascript:void(0)" id="ascendingLink">
+						<?php
+							if( $settingId == 3 )
+							{
+						?>
+								<img id="ascendingImage" src="<?php echo $basePath; ?>/images/social_media/ascending.png"/>
+						<?php
+							}
+							else if( $settingId == 2 )
+							{
+						?>
+								<img id="ascendingImage" src="<?php echo $basePath; ?>/images/social_media/assending_disabled.png"/>
+						<?php
+							}
+						?>
+					</a>
+					<a href="javascript:void(0)" id="horizontalLink">
+						<?php
+							if( $settingId == 3 )
+							{
+						?>
+								<img id="horizontalImage" src="<?php echo $basePath; ?>/images/social_media/horizental_disabled.png"/>
+						<?php
+							}
+							else if( $settingId == 2 )
+							{
+						?>
+								<img id="horizontalImage" src="<?php echo $basePath; ?>/images/social_media/horizental.png"/>
+						<?php
+							}
+						?>
+					</a>
+				</div>
+			</div>
+			<div class="highlights_btn">
+				<!--<a href="#">Save</a>&nbsp;&nbsp;-->
+				<div id="dcHtmlDiv"><a href="javascript:void(0);" id="highlightsContinue">Continue Customising</a></div>
+				<div id="dcInprogressDiv" style="display:none;"><img  style="vertical-align:middle;margin-right:3px;width:30px;" src="<?php echo $basePath; ?>/images/social_media/bx_loader.gif" />Updating Highlight...</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="bookmarksLoadingDiv" class="bookmarks_loading">
+	<div class="pop">
+		<img src="<?php echo $basePath; ?>/images/social_media/bx_loader.gif" />
+		<p>Fetching Your Bookmarks</p>
+	</div>
+</div>
+
+<!--Book Marks-->
+<div id="pop-up-bookmarks" ></div>
+<!--END-->
+
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/highlights-common.js"></script>
+
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/edit-highlight.js"></script>
+<script>
+
+$(function() {
+	$('#pop-up-image-crop-new').cropit({
+		imageBackground: true
+	});
+	$('.export').click(function() {
+		var src = $('#pop-up-image-crop-new').cropit('export');
+		var catId=$('#userCategoryId').val();
+		var fetchUploadedUrl = BASE_URL+'/upload-montage-image';
+		var imageId=$('#imageId').val();
+		$("#l_i_c").show();
+		$.ajax({
+			type	: "POST",
+			url		: fetchUploadedUrl,
+			data	: { data: src,page:'editHigh',catId:catId,imageId:imageId},
+			success: function(data){
+				$("#l_i_c").hide();
+				$('#pop-up-image-crop-new').popUpWindow({action: "close"});
+				$('#uploadedCatImage0').attr('src', src);
+				$('#typeImageCrop').val(1);
+				$('#hltImageSelected').val(1);
+				$('#imageId').val(data.imageId);
+				if(chkvalues==0){
+					chkvalues=2;
+				}
+			}
+		});
+	});
+});
+
+</script>

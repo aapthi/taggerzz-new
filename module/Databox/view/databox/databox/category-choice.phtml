@@ -1,0 +1,142 @@
+<div class="body_main_container cat_top">
+	<input type="hidden" id="basePath" name="basePath" value="<?php echo $basePath;?>" />
+	<input type="hidden" id="baseUrl"  name="baseUrl" value="<?php echo $baseUrl;?>" />
+	<div class="body_middle_container">
+		<form id="predefinedCats" name="predefinedCats" method="post">
+			<input type="hidden" id="categoryName" name="categoryName" />
+			<div class="category_t">
+			<div class="alert_message" style="display:none;">
+			</div>
+			<h2>Please Select / Create your Databox with your interested hot links</h2>
+			<div class="row">
+				<div class="span2">
+					<p>Social Media</p>
+					<div>
+						<a href="javascript:void(0);" style="cursor:pointer" OnClick="Javascript:predefinedCategory( 'Social Media' );"><img src="<?php echo $basePath; ?>/images/social_media/socialmedia.png"/></a>
+					</div>
+				</div>
+				<div class="span2">
+					<p>Entertainment</p>
+					<div>
+						<a href="javascript:void(0);" style="cursor:pointer" OnClick="Javascript:predefinedCategory( 'Entertainment' );">
+						<img src="<?php echo $basePath; ?>/images/social_media/entertainment.png"/></a>
+					</div>
+				</div>
+				<div class="span2">
+					<p>Research</p>
+					<div>
+						<a href="javascript:void(0);" style="cursor:pointer" OnClick="Javascript:predefinedCategory( 'Research' );">
+						<img src="<?php echo $basePath; ?>/images/social_media/reserch.png"/></a>
+					</div>
+				</div>
+				<div class="span2">
+					<p>Education</p>
+					<div>
+						<a href="javascript:void(0);" style="cursor:pointer" OnClick="Javascript:predefinedCategory( 'Education' );">
+						<img src="<?php echo $basePath; ?>/images/social_media/education.png"/></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+		<div class="upload_bookmark_t">
+			<h2>Upload Your Bookmark files .BAK or .JSON OR #hashtag your collection, Category Type and Create</h2>
+			<div class="bookmark_input_left">
+				<form id="userCatForm" name="userCatForm" method="post" enctype="multipart/form-data">
+					<div class="upload275 brg_file_b pos_relative1">
+						<div class="new_Btn">BROWSE</div>
+						<input id="bookmarksFile" class="file_bro_btn" name="file" type="file" style="display:none;" /><span id="filename" class="pos_absolute_bro"></span>
+					</div>
+					<div class="spcify_title345">
+						<input autofocus class="brg_pad" type="text" id="hashTag" name="hashTag" onBlur="Javascript:checkCatChoiceSpaces();" placeholder="#hashtag"/>
+					</div>
+					<!--<div class="category225">
+						<input class="brg_pad" id="userCatName" name="userCatName" type="text" placeholder="In:Category"/>
+					</div>
+					<div class="create100">
+						<input type="submit" value="Create" />
+					</div>-->
+					<div class="clearfix"></div>
+					<div class="cat_t">
+						<div class="cat_heading">
+							<h3>For example: Animals & Pet Supplies >> Cat Supplies >> Cat Furniture</h3>
+						</div>
+						<div>
+							<input type="text" id="main_category" name="main_category" class="catgories_input_eq brg_pad" placeholder="Leading Category >>">
+						</div>
+						<div>
+							<input type="text" id="sub_category" name="sub_category" class="catgories_input_eq brg_pad" placeholder="Sub Category >>">
+						</div>
+						<div>
+							<input type="text" id="userCatName" name="userCatName" class="catgories_input_eq brg_pad" placeholder="in: Category">
+						</div>
+						<div class="clearfix"></div>
+						<div class="create100 cat_t cat_right_btn">
+							<input type="submit" value="Create" />
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</div>
+
+<div id="pop-up-max-count" class="pop-up-display-content conform_popup_content creat_limit">
+	<h4>Aplogies, Maximum 10 databoxes allowed.</h4>
+	<p class="public_cancel_m"><a class="larg_btn" href="javascript:void(0);">CANCEL</a>&nbsp;&nbsp;<a id="maxCountLink" class="larg_btn" href="javascript:void(0);">OK</a></p>
+</div>
+
+<link rel="stylesheet" href="<?php echo $basePath; ?>/auto/jquery-ui.css">
+
+
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/category-choice.js"></script>
+<script>
+$(function() {
+	var availableTags =<? echo json_encode($this->listSearchCategories);?>;
+	$( "#userCatName" ).autocomplete({
+		source: availableTags,
+		open: function(event, ui){
+			var $input = $(event.target),
+				$results = $input.autocomplete("widget"),
+				top = $results.position().top,
+				height = $results.height(),
+				inputHeight = $input.height(),
+				newTop = (top - height - inputHeight)-16;
+				$results.css("top", newTop + "px");
+				$results.css("background", '#FFF');
+		},
+	});
+	$( "#sub_category" ).autocomplete({
+		source: availableTags,
+		open: function(event, ui){
+			var $input = $(event.target),
+				$results = $input.autocomplete("widget"),
+				top = $results.position().top,
+				height = $results.height(),
+				inputHeight = $input.height(),
+				newTop = (top - height - inputHeight)-16;
+				$results.css("top", newTop + "px");
+				$results.css("background", '#FFF');
+		},
+	});
+	$( "#main_category" ).autocomplete({
+		source: availableTags,
+		open: function(event, ui){
+			var $input = $(event.target),
+				$results = $input.autocomplete("widget"),
+				top = $results.position().top,
+				height = $results.height(),
+				inputHeight = $input.height(),
+				newTop = (top - height - inputHeight)-16;
+				$results.css("top", newTop + "px");
+				$results.css("background", '#FFF');
+		},
+	});
+});
+$(document).ready(function() {
+  
+    var nicesx = $(".ui-widget-content").niceScroll({touchbehavior:false,cursorcolor:"#acacac",cursoropacitymax:0.6,cursorwidth:8});
+    
+  });
+</script>

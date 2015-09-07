@@ -1,0 +1,29 @@
+<?
+global $loginType;
+$loginType='emailLogin';
+global $step;
+$step=3;
+?>
+<div class="body_main_container cat_top">
+	<div class="body_middle_container">
+		<div class=" form_top">
+			<div class="row">
+				<center>
+					<p>
+					Thank you for verifying your email ID and joining
+					</p>
+					<p>with us to contribute Knowledge.
+					</p>
+					<p>
+					<a href="javascript:void(0);" onclick="gotoCategoryChoicePage('<?echo $this->encryptId;?>')">Continue</a>
+					</p>
+				</center>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+function gotoCategoryChoicePage(id){
+	window.location=BASE_URL+'/databoxuser/user-verified/'+id+'-<?echo $this->encryptedRand;?>'+'-LG';
+}
+</script>

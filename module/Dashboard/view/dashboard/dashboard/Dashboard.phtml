@@ -1,0 +1,263 @@
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/css/sugarcake.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/css/default.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/css/allfont.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/css/nexus_menu/component.css" />
+<script>
+$(document).ready(function () {
+$('#abc').html('<img src="<?php echo $basePath; ?>/images/social_media/bx_loader.gif">');
+$('#abc').show(3000);
+$('#abc').hide();
+$('.body_middle_container').show();
+});
+<?if(isset($_SESSION['updateDatabox']) && $_SESSION['updateDatabox']==1){?>
+$( document ).ready(function() {
+	$('.alert_message').html('Data box updated successfully');
+	$('.alert_message').show().delay(3000).fadeOut(function(){
+		$("div[id^='catLinksDiv']").each(function(){
+			var catLinksDivId = parseInt(this.id.replace("catLinksDiv", ""));
+			$('#catLinksDiv'+catLinksDivId).getNiceScroll().resize();
+		});
+	});
+});
+<? $_SESSION['updateDatabox']=0;} ?>
+<?if(isset($_SESSION['deleteDatabox']) && $_SESSION['deleteDatabox']==1){?>
+$( document ).ready(function() {
+	$('.alert_message').html('Data box deleted successfully');
+	$('.alert_message').show().delay(3000).fadeOut(function(){
+		$("div[id^='catLinksDiv']").each(function(){
+			var catLinksDivId = parseInt(this.id.replace("catLinksDiv", ""));
+			$('#catLinksDiv'+catLinksDivId).getNiceScroll().resize();
+		});
+	});
+});
+<? $_SESSION['deleteDatabox']=0;} ?>
+</script>
+
+<input type="hidden" id="originalValue" name="originalValue" value="" />
+<div class="body_main_container" >
+<div id="abc" style="left:50%;top:50%;position:absolute;"></div>
+	<div class="body_middle_container body_mar_b" style="display:none">
+		<div class="body_top_height_start">
+			<div class="manage_databox">
+				<?php if($this->totalDataboxes==10){?>
+					<h2>Manage my Databoxes</h2><strong>10/10</strong>
+				<?php }else{?>
+					<h2>Manage my Databoxes</h2><strong>0<?echo $this->totalDataboxes?>/10&nbsp;&nbsp;<a href="javascript:void(0);" onclick="goToLocation('/databox/category-choice')">Create</a></strong>
+				<?php }?>
+			</div>
+			<div class="clearfix"></div>
+			<div class="alert_message" style="display:none">
+				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+			</div>
+			<?foreach($this->dashboard as $key=>$dashboard){?>
+			<form id="dashBoardForm<?echo $key;?>" name="dashBoardForm<?echo $key;?>" action="<?php echo $baseUrl; ?>/update-dash-board" method="post" enctype="multipart/form-data">
+			<div class="databox_links_bg">
+				<div class="manage_bg">
+					<div class="manage_input">
+						<div class="mar_lr">
+							<?if($dashboard['category_type']==1){?>
+								<div id="publicToprivate<?echo $key;?>">
+									<input type="text" class="manage_textbox_pad" id="user_hashname<?echo $key;?>" name="user_hashname<?echo $key;?>" value="<?echo $dashboard['user_hashname']?>"/>
+									<p>
+										<span>Private</span><input type="checkbox" name="private-<?echo $key;?>" id="private-<?echo $key;?>" value="Private" onclick="changePublicPrivate('Private','<?echo $key;?>')" />
+									</p>
+								</div>
+							<?}else{?>
+							<div id="privateTopublic<?echo $key;?>">
+								<div class="text_row">
+									<div class="float_l">
+										<div class="privatedatabox">
+											<input type="text" class="manage_textbox_pad" id="user_hashname<?echo $key;?>" name="user_hashname<?echo $key;?>" value="<?echo $dashboard['user_hashname']?>"/>
+											<span id="ucodeTitle<?echo $key;?>" >&nbsp;Unique Code:&nbsp;</span>
+											<input type="text" class="manage_textbox_pad" id="secret_code<?echo $key;?>"  name="secret_code<?echo $key;?>" value="<?echo $dashboard['secret_code']?>">
+											<a id="ucodeAnchor<?echo $key;?>" href="javascript:void(0);"><img style="margin-top:5px;" src="<?php echo $basePath; ?>/images/social_media/refresh.png" onclick="refreshUcode('<?echo $key;?>')"/></a>
+											<input type="hidden" id="pvtCodeClicks<?echo $key;?>" value="-1" />
+											<span id="refreshingCodeDiv<?echo $key;?>" style="display:none;">
+												&nbsp;<img style="vertical-align:middle;width:15px;" src="<?php echo $basePath; ?>/images/social_media/bx_loader.gif" />
+											</span>
+										</div>
+									</div>
+									<p>
+										<span>Public</span><input type="checkbox" name="private-<?echo $key;?>" id="private-<?echo $key;?>" value="Public" onclick="changePublicPrivate('Public','<?echo $key;?>')"/>
+									</p>
+								</div>
+							</div>
+							<?}?>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="row">
+					<div class="mar_lr manage_links_t">
+						<div class="span722">
+							<div class="databox_overflow" id="catLinksDiv<?php echo $key; ?>">
+							<?	$urlCount = 0;
+								foreach($dashboard['current_db_info'] as $currentLinkInfo){
+								$currentLinkArray=explode("\t",$currentLinkInfo);
+								//echo count($currentLinkArray);
+								if( (!is_numeric ($currentLinkArray[1])) && (trim ($currentLinkArray[1]) != "") )
+								{
+									$urlCount++;
+									if($currentLinkArray[7]==0){
+										$imageValue='checkmark_wrong.png';
+									}else{
+										$imageValue='manage_checking.png';
+									}
+							?>
+								<div class="databox_links" id="textBoxDiv-<?php echo $key; ?>-<?echo $currentLinkArray[0];?>">
+									<input type="text" class="manage_textbox_pad" value="<?echo $currentLinkArray[1];?>" id="textbox-<?echo $key;?>-<?echo $currentLinkArray[0];?>" onBlur="Javascript:resetUrlStatus('<?echo $key;?>','<?echo $currentLinkArray[0];?>');" />
+									<span style="display:none" id="loadImg-<?php echo $key; ?>-<?echo $currentLinkArray[0];?>"><img style="vertical-align:middle;width:15px;" src="<?php echo $basePath; ?>/images/social_media/bx_loader.gif" /></span>
+									<span id="verifyImg-<?php echo $key; ?>-<?echo $currentLinkArray[0];?>"><img id="imgVerified-<?echo $key;?>-<?echo $currentLinkArray[0];?>" src="<?php echo $basePath; ?>/images/social_media/<?echo $imageValue;?>"/></span>
+									<b id="rem-<?echo $key;?>-<?echo $currentLinkArray[0];?>"><a href="Javascript:void(0);" onClick="removeTextBox('<?echo $key;?>','<?echo $currentLinkArray[0];?>',1)"><img src="<?php echo $basePath; ?>/images/social_media/dashboard_delete.png" /></a></b>
+								</div>
+							<?}}?>
+							</div>
+							<div class="databox_title">
+								<h3>DATABOX'S TITLE</h3>
+								<input type="text" class="manage_textbox_pad" id="category_title<?echo $key;?>" name="category_title<?echo $key;?>" value="<?echo $dashboard['category_title']?>"/>
+							</div>
+							<div class="databox_content">
+								<div class="text_row">
+									<div class="float_l"><h4>DATABOX'S CONTEXT</h4></div>
+									<div class="float_r"><h5>(Limited upto 3000 Chars)</h5></div>
+								</div>
+								<textarea class="manage_textbox_pad" id="catDescription<?echo $key;?>" maxlength="3000" name="catDescription<?echo $key;?>"><?echo $dashboard['category_description']?></textarea>
+								<div class="databox_content_btns">
+									<a href="javascript:void(0);" class="larg_btn" onclick="deleteDatabox(<?echo $dashboard['user_category_id'];?>)">Delete Databox</a>
+									<span id="disableEnable<?echo $key;?>"><a href="javascript:void(0);" class="larg_btn" onclick="disableDatabox(<?echo $key;?>,'0')">Disable comments</a></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="span220 acount_pos">
+						<div class="tg_rightbar_br tg_dashbord_rightbar_pr">
+							<div class="tg_dashbord_rightbar">
+								<h4><?echo $dashboard['user_hashname']?></h4>
+								<?if($dashboard['category_image']==null){?>
+									<input type="hidden" id="originialCatImage<?echo $key;?>" value="proimg.png" />
+									<img id="dataBoxImage<?echo $key;?>" src="<?php echo $basePath; ?>/images/social_media/proimg.png"/>
+								<?}else{?>
+									<input type="hidden" id="originialCatImage<?echo $key;?>" value="<?echo $dashboard['category_image']?>" />
+									<img id="dataBoxImage<?echo $key;?>" src="<?php echo $basePath.'/images/project/categoryImages/'.$dashboard['category_image']; ?>"/>
+								<?}?>
+							</div>
+							<!--<div class="tg_dashbord_rightbar_pa">
+								<a href="javascript:void(0);" class="tg_rightbar_btn"><?//echo $dashboard['totalLinks']?> Sources available</a>
+							</div>-->
+							<div class="dashboard_pos_abso_left"><p>>> Sources available >></p></div>
+							<div class="dashboard_pos_abso_right"><p><a href="javascript:void(0);"><?echo $dashboard['totalLinks']?></a></p></div>
+						</div>
+						<div class="tg_rightbar_link"><p><a href="javascript:void(0);" id="showBrowse<?echo $key;?>" onclick="showBrowseClick(<?echo $key;?>)" >Change Image</a><input style="display:none" type="file" name="change_image<?echo $key;?>" id="change_image<?echo $key;?>" onchange="showImage(this,<?echo $key;?>)"></p></div>
+						<div class="tg_rightbar_meta_keword ">
+							<h4>DATABOX'S META KEWORDS:</h4>
+							<?if($dashboard['category_type']==1){?>
+							<textarea class="manage_textbox_pad" id="meta_tags<?echo $key;?>" name="meta_tags<?echo $key;?>"><?echo $dashboard['meta_tags']?></textarea>
+							<?}else{?>
+							<textarea class="manage_textbox_pad" id="meta_tags<?echo $key;?>" name="meta_tags<?echo $key;?>" disabled></textarea>
+							<?}?>
+							<div style="margin-top:9px;">
+							<div class="text_row databox_content_btns">
+								<input type="hidden" id="urlsDisplayCount<?echo $key;?>" value="<?echo $urlCount;?>" />
+								<div class="float_l"><a href="javascript:void(0);" onclick="saveChanges(<?echo $key;?>)" class="larg_btn">SAVE CHANGES</a></div>
+								<div class="float_r" id="totalUrlsSpan<?echo $key;?>"><h5><?echo $urlCount;?>/100</h5></div>
+								<div class="clearfix"></div>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<input type="hidden" id="catCustLoseFlag<?echo $key;?>" value="0" />
+			<input type="hidden" id="catBoxesChanged<?echo $key;?>" name="catBoxesChanged<?echo $key;?>" value="0" />
+			<input type="hidden" id="databoxChanged<?echo $key;?>" value="0" />
+			<input type="hidden" id="originialCatHash<?echo $key;?>" value="<?echo $dashboard['user_hashname']?>" />
+			<input type="hidden" id="originialCatTitle<?echo $key;?>" value="<?echo $dashboard['category_title']?>" />
+			<input type="hidden" id="originialCatContext<?echo $key;?>" value="<?echo $dashboard['category_description']?>" />
+			<input type="hidden" id="originialKeywords<?echo $key;?>" value="<?echo $dashboard['meta_tags']?>" />
+			<input type="hidden" id="user_category_id-<?echo $key;?>" name="user_category_id-<?echo $key;?>"  value="<?echo $dashboard['user_category_id']?>" >
+			<input type="hidden" name="sendEmail<?echo $key;?>" class="text_pad" id="sendEmail<?echo $key;?>"/>
+			<input type="hidden" id="imageId<?echo $key;?>" name="imageId<?echo $key;?>" value="0" />
+			<input type="hidden" id="imageIdLoad<?echo $key;?>" name="imageIdLoad<?echo $key;?>" value="<? echo $dashboard['category_image']; ?>" />
+			<input type="hidden" id="typeImageCrop<?echo $key;?>" name="typeImageCrop<?echo $key;?>" value="0" />
+			</form>
+			<?}?>
+			<input type="hidden" id="categoryId" name="categoryId"  >
+			<input type="hidden" id="cropategoryId" name="cropcategoryId"  >
+			<input type="hidden" id="categoryIdImageCrop" name="categoryIdImageCrop"  >
+			<input type="hidden" id="key_words_hid" name="key_words_hid"  >
+		</div>
+	</div>
+</div>
+<div class="clearfix"></div>
+<?if($_SESSION['usersinfo']->email==""){?>
+<div id="pop-up-dashboard" class="pop-up-display-content conform_popup_content">
+	<p>
+		Your <b id="Public">Public</b> databox have been changed to "<b id="Private">private</b>" 
+		<b id="messagePrivate">up on confirming your "Unique code" and clicking on "Save"</b>
+		We will mail your accesing details to your email
+	</p>
+	<div class="conform_emai_id">
+		<p>Please provide your email ID</p>
+		<p><input type="text" name="sendEmail" class="text_pad" id="sendEmail"/></p>
+	</div>
+	<p>
+		<a class="larg_btn" href="javascript:void(0);" onclick="updateDatabox(1)">CONTINUE</a>
+	</p>
+</div>
+<?}else{?>
+<div id="pop-up-dashboard" class="pop-up-display-content conform_popup_content">
+	<p>
+		Your <b id="Public">Public</b> databox have been changed to "<b id="Private">private</b>"  
+		<b id="messagePrivate">up on confirming your "Unique code" and clicking on "Save"</b>
+		We will mail your accesing details to '<?echo $_SESSION['usersinfo']->email;?>'
+	</p>
+	<p class="public_cancel_m">
+		<a class="larg_btn" href="javascript:void(0);" onclick="updateDatabox(0)">CONTINUE</a>
+		&nbsp;&nbsp;<a class="larg_btn" href="javascript:void(0);">CANCEL</a>
+	</p>
+</div>
+<?}?>
+<input type="hidden" id="imageId" name="imageId" value="0" />
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/common-functions.js"></script>
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/popupwindow.js"></script>
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/dashboard-common.js"></script>
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/edit-dashboard.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/js/crop/cropit.css" />
+<script src="<?php echo $basePath; ?>/js/crop/jquery.cropit.js"></script>
+
+
+<script>
+$(function() {
+	$('#pop-up-image-crop-new').cropit({
+		imageBackground: true
+	});
+	$('.export').click(function() {
+		var imageData = $('#pop-up-image-crop-new').cropit('export');
+		var catId=$('#cropategoryId').val();
+		var fetchUploadedUrl = BASE_URL+'/upload-montage-image';
+		var imageId=$('#imageId'+catId).val();
+		$("#l_i_c").show();
+		$.ajax({
+			type	: "POST",
+			url		: fetchUploadedUrl,
+			data	: { data: imageData,page:'dash',catId:catId,imageId:imageId},
+			success: function(data){
+				$("#l_i_c").hide();
+				$('#pop-up-image-crop-new').popUpWindow({action: "close"});
+				$('#dataBoxImage'+catId).attr('src', imageData);
+				$('#imageId'+catId).val(data.imageId);
+				$('#imageId').val(data.imageId);
+				$('#typeImageCrop'+catId).val(1);
+				chkvalues=2;
+			}
+		});
+		//window.open(imageData);
+	});
+});
+</script>
+
+<script>
+    var nicesx = $(".databox_overflow").niceScroll({touchbehavior:false,cursorcolor:"#acacac",cursoropacitymax:0.6,cursorwidth:8});
+  $(document).ready(function() {
+  });
+</script>

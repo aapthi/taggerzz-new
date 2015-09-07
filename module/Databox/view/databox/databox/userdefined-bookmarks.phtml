@@ -1,0 +1,295 @@
+<input type="hidden" id="basePath" name="basePath" value="<?php echo $basePath;?>" />
+<input type="hidden" id="baseUrl"  name="baseUrl" value="<?php echo $baseUrl;?>" />
+
+<input type="hidden" id="submitVal" name="submitVal" value="Go" />
+<input type="hidden" id="privateSVal" name="submitVal" value="Go" />
+<input type="hidden" id="publicSVal" name="submitVal" value="Go" />
+<input type="hidden" id="totalUrlsEntered" name="totalUrlsEntered" value="<?php if( isset($this->links) ){ echo count($this->links); }else{ echo '0'; } ?>" />
+<input type="hidden" id="allOkUrlCount" name="allOkUrlCount" value="0" />
+<input type="hidden" id="urlsDisplayCount" name="urlsDisplayCount" value="0" />
+<input type="hidden" id="submitClicked" name="submitClicked" value="0" />
+<input type="hidden" id="originalValue" name="originalValue" value="" />
+<input type="hidden" id="pvtCodeClicks" name="pvtCodeClicks" value="-1" />
+<input type="hidden" id="finalnvalidCount" name="finalnvalidCount" value="0" />
+
+<div class="body_main_container">
+	<div class="body_middle_container">
+		<div class="upload_links">
+			<h2 class="links_h2_h">Uploading links from your Bookmark File ‘Bookmark.bak’ for <?php if( isset($this->hashTag) ) { echo $this->hashTag; } ?></h2>
+			<div  class="manual_bookmark_upload_links">
+				<a href="javascript:void(0)" class="btn" id="uploadLink" style="line-height:35px;">upload Bookmarks</a>
+				<form id="bookmarksUploadForm" method="post" enctype="multipart/form-data">
+					<input type="file" name="bookmarksFile" id="bookmarksFile" style="display:none;">
+					<input type="submit" name="uploadSubmitBtn" id="uploadSubmitBtn" value="Submit" style="display:none;">
+				</form>
+			</div>
+
+			<div>
+			<div id="textBoxesGroup">
+				<?php
+					if( isset($this->links) )
+					{
+						for( $urlNum = 0; $urlNum < count($this->links); $urlNum++ )
+						{
+						?>
+							<div class="add_links" id="textBoxDiv<?php echo $urlNum+1; ?>">
+								<input class="brg_pad" type="text" value="<?php echo $this->links[$urlNum]; ?>" placeholder="https://www.google.com/" id="textbox<?php echo $urlNum+1; ?>" onBlur="resetUrlStatus('<?php echo $urlNum+1; ?>')" /> 
+								&nbsp;<b id="video<?php echo $urlNum+1; ?>"><img src="<?php echo $basePath; ?>/images/social_media/link_icon.png" /></b>
+								<span style="display:none" id="loadImg<?php echo $urlNum+1; ?>"><img src="<?php echo $basePath; ?>/images/social_media/24x24_pg-loader-1.gif" /></span>
+								<span id="verifyImg<?php echo $urlNum+1; ?>"></span>
+								<b id="rem<?php echo $urlNum+1; ?>"><a href="Javascript:void(0);" onClick="removeTextBox('<?php echo $urlNum+1; ?>',1)"><img src="<?php echo $basePath; ?>/images/social_media/delete.png" /><a></b>
+							</div>
+						<?php
+						}
+						?>
+							<div class="add_links" id="textBoxDiv<?php echo $urlNum+1; ?>">
+								<input class="brg_pad" type="text" value="" placeholder="https://www.google.com/" id="textbox<?php echo $urlNum+1; ?>" onBlur="resetUrlStatus('<?php echo $urlNum+1; ?>')" /> 
+								&nbsp;<b id="video<?php echo $urlNum+1; ?>"><img src="<?php echo $basePath; ?>/images/social_media/link_icon.png" /></b>
+								<span style="display:none" id="loadImg<?php echo $urlNum+1; ?>"><img src="<?php echo $basePath; ?>/images/social_media/24x24_pg-loader-1.gif" /></span>
+								<span id="verifyImg<?php echo $urlNum+1; ?>"></span>
+								<b id="rem<?php echo $urlNum+1; ?>"></b>
+							</div>
+						<?php
+							}
+						?>
+			</div>
+			<div class="clearfix"></div>
+			<div class="add_links">
+				<span id="totalUrlsSpan"><strong>0/100</strong></span>
+			</div>
+			<div class="clearfix"></div>
+			</div>
+
+			<div class="upload_links_b">
+				<div id="pop-up-max-links" class="pop-up-display-content conform_popup_content">
+					<p>You have just added 100th Url for this Databox.</p>
+					<p>Total 100 Urls allowed for a Databox.</p>
+					<p><a id="maxLinksLink" class="larg_btn" href="javascript:void(0);">Ok</a></p>
+				</div>
+
+				<div class="user_accessing">
+					<a href="javascript:void(0);" id="private_btn" class="active_btn">Private</a>
+					<a href="javascript:void(0);" id="public_btn" class="public_btn">Public</a>
+				</div>
+				<?php
+					$categoriesText = "";
+					$cat1Added = 0;
+					$cat2Added = 0;
+					if( isset($this->main_category) && trim($this->main_category) != "" )
+					{
+						$categoriesText = $this->main_category;
+						$cat1Added = 1;
+					}
+					if( isset($this->sub_category) && trim($this->sub_category) != "" )
+					{
+						if( $cat1Added == 1 )
+						{
+							$categoriesText .= " >> " . $this->sub_category;
+						}
+						else
+						{
+							$categoriesText = $this->sub_category;
+						}
+						$cat2Added = 1;
+					}
+					if( ($cat1Added == 1 || $cat2Added == 1) && isset($this->userCatName) && trim($this->userCatName) != "" )
+					{
+						$categoriesText .= " >> " . $this->userCatName;
+					}
+					if( trim($categoriesText) != "" )
+					{
+				?>
+				<div class="cat_heading">
+					<h3 style="margin-top:30px"><?php echo $categoriesText; ?></h3>
+				</div>
+					<?}?>
+				<form id="linksForm" name="linksForm" method="post" enctype="multipart/form-data">
+					<input type="hidden" id="categoryName" name="categoryName" value="<?php if( isset($this->userCatName) ) { echo $this->userCatName; } ?>" />
+					<input type="hidden" id="catTitle" name="categoryTitle" />
+					<input type="hidden" id="categoryType" name="categoryType" value="0" />
+					<input type="hidden" id="catHashTag" name="catHashTag" value="<?php if( isset($this->hashTag) ) { echo $this->hashTag; } ?>" />
+					<input type="hidden" id="uniqueCode" name="uniqueCode" />
+					<input type="file" name="catImageFile" id="catImageFile" style="display:none;">
+					<input type="hidden" id="hashNote" name="hashNote" />
+					<input type="hidden" id="metaTags" name="metaTags" />
+					<input type="hidden" id="custTypeId" name="settingId" value="0" />
+					<input type="hidden" id="matureContent" name="matureContent" value="0" />
+					<input type="hidden" id="notSafeForWork" name="notSafeForWork" value="0" />
+					<input type="hidden" id="linkPostFormation" name="linkPostFormation" value="1" />
+					<input type="hidden" id="imageId" name="imageId" value="0" />
+					<input type="hidden" id="typeImageCrop" name="typeImageCrop" value="0" />
+					<input type="hidden" id="main_category" name="main_category" value="<?php if( isset($this->main_category) ) { echo $this->main_category; } ?>" />
+					<input type="hidden" id="sub_category" name="sub_category" value="<?php if( isset($this->sub_category) ) { echo $this->sub_category; } ?>" />
+				</form>
+				<div id="hideandshow_private">
+					<div class="user_accessing">
+					</div>
+					<div class="access_details">
+						<div>
+							<p>Your Hashtag</p>
+							<input class="hastag_w brg_pad" id="privateHtDisplay" type="text" readonly="readonly" disabled value="<?php if( isset($this->hashTag) ) { echo $this->hashTag; } ?>" />
+						</div>
+						<div>
+							<p>Generated Unique Code<a href="javascript:void(0);">
+								<img style="vertical-align:middle;margin-left:6px" src="<?php echo $basePath; ?>/images/social_media/refresh_black.png" onclick="refreshUcodeDatabox()"/></a>
+								<span id="refreshingCodeDiv" style="display:none;">
+									&nbsp;<img style="vertical-align:middle;width:15px;" src="<?php echo $basePath; ?>/images/social_media/bx_loader.gif" />
+								</span>
+							</p>
+							<input class="g_u_code_w brg_pad" id="ucHolder" type="text"/>
+						</div>
+					</div>
+					<div class="upload_text"><p>Upload a Picture for Your Databox / Collection</p></div>
+					<div class="databox_collections">
+						<div class="user_profile_pick">
+						<a href="javascript:void(0)" id="catImageLink0">
+							<div class="profile_brg">
+								<img id="uploadedCatImage0" src="<?php echo $basePath; ?>/images/social_media/profile_bookmark.png"/>
+							</div>
+							<p>ADJUST</p></a>
+						</div>
+						<div class="public_private_access">
+							<p>page title</p>
+							<input type="text" class="brg_pad" id="privateTitleHolder" />
+							<h3>Your content nature</h3>
+							<div class="check_brg">
+								<span>&nbsp;&nbsp;&nbsp;<input type="checkbox" id="mcPrivate" onClick="matureContentClicked( this.checked );mirrorPvtPub( this );" /> Mature content &nbsp;&nbsp;&nbsp;</span>
+								<span><input type="checkbox" id="nsfwPrivate" onClick="nsfwContentClicked( this.checked );mirrorPvtPub( this );" > NSFW (Not safe for work)</span>
+							</div>
+							<!--<h3>Link posts formation</h3>
+								<div class="check_brg">
+								<span>&nbsp;&nbsp;&nbsp;<input id="lpf1" type="radio" name="linksFormationPvt" checked onClick="setPostsFormation( 1 );mirrorPvtPub( this );"  /> uploaded / inserted Order &nbsp;&nbsp;&nbsp;</span>
+								<span><input id="lpf2" type="radio" name="linksFormationPvt" onClick="setPostsFormation( 2 );mirrorPvtPub( this );" /> Updated timing format</span>
+							</div>-->
+							<div id="pvtAccessDetailsDiv">
+								<h2>Recieve Your Accessing Details</h2>
+								<h3>Submit Email ID</h3>
+								<input type="text" class="brg_pad" id="mailDetailsTo" value="<?php if(isset($_SESSION['usersinfo']->email)){ echo $_SESSION['usersinfo']->email; }?>" style="width:325px;"/>
+								<a class="pri_pub_btn" href="Javascript:void(0);" id="mailAccessDetails">Send</a>
+								<span id="tickImage" style="display:none"><img style="margin-top:8px;" src="<?php echo $basePath; ?>/images/social_media/checkmark.png" /><span>
+							</div>
+							<div id="sendingDetailsDiv" style="display:none;">
+								<h4>Mailing Accessing Details<img style="margin-top:5px;" src="<?php echo $basePath; ?>/images/social_media/24x24_pg-loader-1.gif" /></h4>
+							</div>
+							<h1>Continue Customising of Formation</h1>
+							<div>
+								<a href="javascript:void(0)" id="ascendingLink0">
+									<img id="ascendingImage0" src="<?php echo $basePath; ?>/images/social_media/assending_disabled.png"/>
+								</a>
+								<a href="javascript:void(0)" id="horizontalLink0">
+									<img id="horizontalImage0" src="<?php echo $basePath; ?>/images/social_media/horizental_disabled.png"/>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="hideandshow_public" style="display:none;">
+					<div class="user_accessing">
+					</div>
+					<div class="access_details">
+						<div>
+							<p>Your Hashtag</p>
+							<input class="public_hashtag brg_pad" id="publicHtDisplay" type="text" readonly="readonly" disabled value="<?php if( isset($this->hashTag) ) { echo $this->hashTag; } ?>" />
+							&nbsp;<span style="display:none" id="checkingHashtag"><img src="<?php echo $basePath; ?>/images/social_media/24x24_pg-loader-1.gif" /><b>Checking hashtag availability...</b></span>
+						</div>
+					</div>
+					<div class="upload_text"><p>Upload a Picture for Your Databox / Collection</p></div>
+					<div class="databox_collections">
+						<div class="user_profile_pick">
+							<div class="profile_brg">
+								<!--<h5>&nbsp;#myhashtag</h5>-->
+								<a href="javascript:void(0)" id="catImageLink1">
+									<img id="uploadedCatImage1" src="<?php echo $basePath; ?>/images/social_media/profile_bookmark.png"/>
+								</a>
+							</div>
+							<p>ADJUST</p>
+						</div>
+						<div class="public_private_access">
+							<p>page title</p>
+							<input type="text" class="brg_pad" id="publicTitleHolder" />
+							<h3>Your content nature</h3>
+							<div class="check_brg">
+								<span>&nbsp;&nbsp;&nbsp;<input type="checkbox" id="mcPublic" onClick="matureContentClicked( this.checked );mirrorPvtPub( this );" /> Mature content &nbsp;&nbsp;&nbsp;</span>
+								<span><input type="checkbox" id="nsfwPublic" onClick="nsfwContentClicked( this.checked );mirrorPvtPub( this );" /> NSFW (Not safe for work)</span>
+							</div>
+							<!--<h3>Link posts formation</h3>
+							<div class="check_brg">
+								<span>&nbsp;&nbsp;&nbsp;<input id="lpf3" type="radio" name="linksFormationPub" checked onClick="setPostsFormation( 1 );mirrorPvtPub( this );" /> uploaded / inserted Order &nbsp;&nbsp;&nbsp;</span>
+								<span><input type="radio" id="lpf4" name="linksFormationPub" onClick="setPostsFormation( 2 );mirrorPvtPub( this );" /> Updated timing format</span>
+							</div>-->
+							<h1>Continue Customising of Formation</h1>
+							<div>
+								<a href="javascript:void(0)" id="ascendingLink1">
+									<img id="ascendingImage1" src="<?php echo $basePath; ?>/images/social_media/assending_disabled.png"/>
+								</a>
+								<a href="javascript:void(0)" id="horizontalLink1">
+									<img id="horizontalImage1" src="<?php echo $basePath; ?>/images/social_media/horizental_disabled.png"/>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="boost_keyword">
+						<h3>Your keywords (Meta tags to boost page SEO)</h3>
+						<input id="metaTagsHolder" type="text" />
+					</div>
+				</div>
+				<div class="highlights_btn">
+					<!--<a href="#">Save</a>&nbsp;&nbsp;-->
+					<div id="dcHtmlDiv"><a href="javascript:void(0);" id="databoxContinue">Continue Customising</a></div>
+					<div id="dcInprogressDiv" style="display:none;"><img  style="vertical-align:middle;margin-right:3px;width:30px;" src="<?php echo $basePath; ?>/images/social_media/bx_loader.gif" />Saving Category...</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="bookmarksLoadingDiv" class="bookmarks_loading">
+	<div class="pop">
+		<img src="<?php echo $basePath; ?>/images/social_media/bx_loader.gif" />
+		<p>Fetching Your Bookmarks</p>
+	</div>
+</div>
+
+<!--Book Marks-->
+<div id="pop-up-bookmarks" >
+<? echo $this->htmlBook;?>
+</div>
+<!--END-->
+
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/databox-common.js"></script>
+
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/userdefined-bookmarks.js"></script>
+
+<script>
+$("#bookmarksLoadingDiv").show();
+
+$(function() {
+	$('#pop-up-image-crop-new').cropit({
+		imageBackground: true
+	});
+	$('.export').click(function() {
+		var src = $('#pop-up-image-crop-new').cropit('export');
+		var fetchUploadedUrl = BASE_URL+'/upload-montage-image';
+		var imageId=$('#imageId').val();
+		$("#l_i_c").show();
+		$.ajax({
+			type	: "POST",
+			url		: fetchUploadedUrl,
+			data	: { data: src,page:'predefined',imageId:imageId},
+			success: function(data){
+				$("#l_i_c").show();
+				$('#pop-up-image-crop-new').popUpWindow({action: "close"});
+				$('#uploadedCatImage1').attr('src', src);
+				$('#uploadedCatImage0').attr('src', src);
+				$('#typeImageCrop').val(1);
+				$('#imageId').val(data.imageId);
+				if(chkvalues==0){
+					chkvalues=2;
+				}
+			}
+		});
+		//window.open(imageData);
+	});
+});
+
+</script>

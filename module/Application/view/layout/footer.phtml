@@ -1,0 +1,254 @@
+	</div>
+	<div class="clearfix"></div>
+	<!--<div class="footer_global">
+		<div class="footer_context">Taggerzz&nbsp(&copy;)&nbsp;2015.&nbsp;&nbsp;<a id="termsLink" class="home_anchor_black" href="<?php echo $baseUrl; ?>/display-terms" target="_blank">Terms</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a id="ppLink" class="home_anchor_black" href="<?php echo $baseUrl; ?>/display-privacy-policy" target="_blank">Privacy Policy</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a id="contactAdminLink" class="home_anchor_black" href="Javascript:void(0);" onclick="Javascript:contactPopUpShow();">Contact</a></div>
+	</div>-->
+
+<!--Alerts Popup-->
+<div id="pop-up-alerts" class="pop-up-display-content conform_popup_content">
+	<div class="montage_desc">
+		<h4><p id="alert_header_meassge"></p></h4>
+		<p id="alert_meassage"></p>
+	</div>
+	<p>
+		<a class="larg_btn" href="javascript:void(0);" onclick="alertsCancel()">OK</a>
+		<!--<a class="larg_btn" href="javascript:void(0);" onclick="sendReport()">OK</a>-->
+	</p>
+</div>
+<!-- Customization page Confirmation Alerts Popup --->
+<? global $pageLocation;?>
+<div id="confirm-pop-up-alerts" class="pop-up-display-content conform_popup_content">
+	<div class="montage_desc">
+		<h4><p id="confrim_alert_header_meassge"></p></h4>
+		<p id="confirm_alert_meassage"></p>
+	</div>
+	<p>
+		<a class="larg_btn" href="javascript:void(0);" onclick="alertsCancelc()">Cancel</a>
+		<a class="larg_btn" href="javascript:void(0);" onclick="confirmPopup('<? echo $pageLocation; ?>')">OK</a>
+	</p>
+</div>
+<input type="hidden" id="menu_loc_url" name="menu_loc_url" value="" />
+<input type="hidden" id="mousemiddle_event_menu" name="mousemiddle_event_menu" value="" />
+<!--END-->
+<script src="<?php echo $basePath; ?>/js/new_js/salvattore.min.js"></script>
+	<?php
+if( $_SERVER['REQUEST_URI']== "/taggerzz-new/trunk/" )
+	{
+		?>  
+<script src="<?php echo $basePath; ?>/js/new_js/custom.js"></script>
+	<?php } ?>
+<script src="<?php echo $basePath; ?>/js/popupwindow.js"></script>
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/login-ready.js"></script>
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/common-functions.js"></script>
+
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/alert-meassage.js"></script>
+
+
+<script>
+function setTzBoxId(tzCreateEditBoxId){
+	
+	$tzBoxIdSet = 0;
+	
+	$.ajax({
+			url: BASE_URL+'/databox/set-tz-box-id',
+			dataType: "json",
+			type	: "POST",
+			async:false,
+			data	:{tzCreateEditBoxId:tzCreateEditBoxId},
+			success: function( data ) {
+				$tzBoxIdSet = data.output;
+			}				
+	});
+	
+	return $tzBoxIdSet;
+}
+function closeCropPop(){
+	$('#pop-up-image-crop').css('display','none');
+}
+function selectCropImage(){
+	$('#fileCropInp').click();	
+}
+$('#fileCropInp').change(function(click)
+{
+	showCropButton(this);
+});
+function showCropButton(input)
+{
+	if( ! checkImageLoaded() )
+	{
+		return false;
+	}
+	$('.export').show();
+	var crop_width=0;
+	var crop_height=0;
+	var file, img;
+	if ((file = input.files[0])) {
+		img = new Image();
+		img.src = _URL.createObjectURL(file);
+		img.onload = function() {
+			crop_width=this.width;
+			crop_height=this.height;
+			cropImagePredefinedBothQ(crop_width,crop_height,img.src);
+		};
+	}
+}
+
+var jcropminLoaded = 0;
+
+function cropImagePredefinedBothQ(width,height,src)
+{
+	if( ! parseInt(jcropminLoaded) )
+	{
+		$('#cropbox').attr('src', src);
+		$.getScript( BASE_PATH+"/js/crop/jquery.Jcrop.min.js" ).done(function( script, textStatus )
+		{
+			jcropminLoaded = 1;
+			jQuery(function(){
+				jQuery('#cropbox').Jcrop({
+					aspectRatio: 1,
+					onSelect: updateCoords
+				});
+			});
+		});
+	}
+	else
+	{
+		$('#cropbox').remove();
+		
+		var cropBoxImg = $('<img src="" id="cropbox" alt="Image appears here" />');
+		$('#cropSrcImgContainer').empty().append(cropBoxImg);
+		
+		$('#cropbox').attr('src', src);
+		
+		jQuery(function(){
+			jQuery('#cropbox').Jcrop({
+				aspectRatio: 1,
+				onSelect: updateCoords
+			});
+		});
+	}
+}
+// Cancel alerts popupwindow
+function alertsCancel(){
+	$('#pop-up-alerts').popUpWindow({action: "close"});
+}
+function alertsCancelc(){
+	$('#confirm-pop-up-alerts').popUpWindow({action: "close"});
+}
+
+function custPageCancel(){
+	$('#confirm-pop-up-custpage').popUpWindow({action: "close"});
+}
+
+// Confirm alerts popUpWindow
+function confirmPopup(pageLocation){
+	var editBoxId=$('#editBoxId').val();
+	if(pageLocation==BASE_URL+'/databox/createhighlights/'+editBoxId || pageLocation==BASE_URL+'/databox/publicdatabox/'+editBoxId || pageLocation==BASE_URL+'/databox/privatedatabox/'+editBoxId || pageLocation==BASE_URL+'/databox/highlights-both' || pageLocation==BASE_URL+'/databox/edit-highlight' || pageLocation==BASE_URL+'/dashboard'){
+		var imageIddd=$('#imageId').val();
+	}
+	var fetchUploadedUrll = BASE_URL+'/upload-montage-image';
+	var mouseverify= $('#mousemiddle_event_menu').val();
+	if(imageIddd != "0"){
+		var menu_url=$('#menu_loc_url').val();
+		var menuUrlM= BASE_URL+menu_url;
+		if(mouseverify=='mousedownEvent'){	
+			var wi = window.open('about:blank', '_blank');
+		}
+		$.ajax({
+			type	: "POST",
+			url		: fetchUploadedUrll,
+			data	: { imageId:imageIddd, unlink:1, page:'pre' },
+			success: function(data){
+				if(data.output!=''){	
+					$('#confirm-pop-up-alerts').popUpWindow({action: "close"});
+					if(mouseverify=='mousedownEvent'){					
+						if(menu_url=='logout'){
+							logOut('');
+						}else{																
+							wi.location.href = menuUrlM;
+						}					
+					}else{
+						chkvalues=0;
+						goToLocation(menu_url);
+					}
+				}
+			}
+		});
+	}else{		
+		var menu_url=$('#menu_loc_url').val();
+		$('#confirm-pop-up-alerts').popUpWindow({action: "close"});	
+		if(mouseverify=='mousedownEvent'){
+			if(menu_url=='logout'){
+				logOut('');
+			}else{
+				var menuUrlM= BASE_URL+menu_url;				
+				window.open(menuUrlM);					
+			}			
+		}else{
+			chkvalues=0;
+			goToLocation(menu_url);
+		}
+	}
+}
+
+// Customization page Confirm alerts popUpWindow
+
+$(function() {
+ $('html').niceScroll();
+	if( $("#searchTermHolder").length )
+	{
+		$("#searchTermHolder").autocomplete({	
+			source: function( request, response ) {
+				var keywordsss = $('#searchTermHolder').val();
+				var hashName='s';
+				$.ajax({
+					url: BASE_URL+'/search-hash-names',
+					dataType: "json",
+					type	: "POST",
+					data	:{value:keywordsss},
+					success: function( data ) {
+						if(data.output!=0) {		
+							response( $.map( data.searchHashNames, function( item ) {
+								return {
+									label: item.ref,
+								}
+							}));
+						}else{
+							$(".ui-autocomplete").css("display","none");
+						}
+					}				
+				});
+			},
+			minLength: 0,	
+			open: function(event, ui) {	
+				$("ul").removeClass("ui-widget-content");		
+				$(".ui-autocomplete").addClass("searchboxscroll2");
+				if($("#loggedInStatus").val()=='loggedIn'){
+					$(".ui-autocomplete").css("width","460px; !important");
+				}else{
+					$(".ui-autocomplete").css("width","876px !important");
+				}			
+			},
+			select: function(event, ui) {
+				$("#searchTermHolder").val(ui.item.label); 
+				return false;
+			},
+			focus: function(event, ui) {
+				return false;
+			}			
+		});
+	}
+	$("#searchTermHolder").data( "autocomplete" )._renderItem = function( ul, item ) {
+		var hashname=item.label;		
+		 return $("<li><a data-value='"+item.label+"' onClick ='set_item(this.text);'>" + item.label + "</a></li>")
+		 .data("item.autocomplete", item)            
+		 .appendTo(ul);				
+	};
+	$("#searchTermHolder").live("keydown",".ui-corner-all",function(e){
+		if (e.keyCode == 13) {
+		   var hashValue=$("#searchTermHolder").val();
+		   set_item(hashValue);
+		}
+	});
+});
+</script>

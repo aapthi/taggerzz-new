@@ -1,0 +1,129 @@
+<?php
+	$formUseMode = "highlight";
+	if( isset($this->formUseMode) && trim($this->formUseMode) != "" )
+	{
+		$formUseMode = $this->formUseMode;
+	}
+?>
+	<input type="hidden" id="formUseMode" name="formUseMode" value="<?php echo $formUseMode;?>" />
+	<input type="hidden" id="editBoxId" name="editBoxId" value="<?php if ( isset($this->editBoxId) && trim($this->editBoxId) != "" ){ echo $this->editBoxId; }?>" />
+
+		<div id="mainContainerWrapper" class="mainContainerWrapper">
+
+            <!-- This div is to include the header.html page 	
+            <div id='divIncludeContent'></div>-->
+            
+            <section id="secUploadBookmarks">
+                <div id="divUploadBookmarksWrapper" class="divUploadBookmarksWrapper">
+                    <div class="heading">UPLOAD BOOKMARKS</div>                   
+						<div class="uploadBookmarksWrapper">
+							<span class="inline">Upload a bookmark file </span> <span class="smallFont dimFontColor"> ( supports chrome, firefox's .bak or .json files ) </span> <br />
+							<form id="bookmarks_id" method="post" enctype="multipart/form-data" >
+							<input type="file" class="inptUploadBookmarkFile"  id="bookmarksFile" name="file" /><br />
+							<span class="smallFont inline"> What's a bookmark file? <a href="" class="inline">Help videos</a></span> <br />
+							<button class="btnBlack right"  type="button" onClick="uploadFunction()" >UPLOAD (STEP 2)</button> <br /> <br />
+							</form>
+							<a href="Javascript:void(0)" class="right smallFont" onClick="continueAnywayFun()" >CONTINUE ANYWAY >></a>
+						</div>
+                </div>
+            </section>
+        </div>
+
+<script>
+$(document).ready(function()
+{
+	$('#bookmarksFile').change(function()
+	{
+		if( ! checkBkmrksUploaded() )
+		{
+			return false;
+		}
+		readBookMarksFile( this.files[0],function(e)
+		{
+			if( isBkmrsFileValid(e.target.result) )
+			{
+				var filename = $('#bookmarksFile').val();
+				//$('#filename').html(filename);
+			}
+			else
+			{
+				$('#pop-up-alerts').popUpWindow({action: "open"});	
+				$("#alert_header_meassge").html('');
+				$("#alert_meassage").html(invalid_bkmrks_file);
+				$('#bookmarksFile').value='';
+				$('#filename').html("");
+				return false;
+			}
+		});
+	});	
+});
+</script>
+<script>
+function uploadFunction(){
+	var formUseMode = $('#formUseMode').val();
+	
+	var bkmrksFormUrl = BASE_URL;
+
+	if( formUseMode == "privatedatabox" )
+	{
+		bkmrksFormUrl += "/databox/privatedatabox";
+	}
+	else if( formUseMode == "publicdatabox" )
+	{
+		bkmrksFormUrl += "/databox/publicdatabox";
+	}
+	else
+	{
+		bkmrksFormUrl += "/databox/createhighlights";
+	}
+
+	var editBoxId = $('#editBoxId').val();
+	bkmrksFormUrl += "/"+editBoxId;
+	if( editBoxId != "" && parseInt(editBoxId) > 0 )
+	{
+	}
+	
+
+	$('#bookmarks_id').attr( "action",bkmrksFormUrl );
+	$('#bookmarks_id').submit();
+	
+	return true;
+}
+
+function continueAnywayFun(){
+	var formUseMode = $('#formUseMode').val();
+	
+	var editBoxId = $('#editBoxId').val();
+
+	if( formUseMode == "privatedatabox" )
+	{
+		window.location= BASE_URL+"/databox/privatedatabox"+"/"+editBoxId;
+		if( editBoxId != "" && parseInt(editBoxId) > 0 )
+		{
+		}
+		else
+		{
+		}
+	}
+	else if( formUseMode == "publicdatabox" )
+	{
+		window.location= BASE_URL+"/databox/publicdatabox"+"/"+editBoxId;
+		if( editBoxId != "" && parseInt(editBoxId) > 0 )
+		{
+		}
+		else
+		{
+		}
+	}
+	else
+	{
+		window.location= BASE_URL+"/databox/createhighlights"+"/"+editBoxId;
+		if( editBoxId != "" && parseInt(editBoxId) > 0 )
+		{
+		}
+		else
+		{
+		}
+	}
+}
+</script>

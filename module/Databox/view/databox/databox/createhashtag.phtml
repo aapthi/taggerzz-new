@@ -1,0 +1,130 @@
+<?php
+	$formUseMode = "highlight";
+	if( isset($this->formUseMode) && trim($this->formUseMode) != "" )
+	{
+		$formUseMode = $this->formUseMode;
+	}
+?>
+	<input type="hidden" id="formUseMode" name="formUseMode" value="<?php echo $formUseMode;?>" />
+
+	<input type="hidden" id="editBoxId" name="editBoxId" value="<?php if ( isset($this->editBoxId) && trim($this->editBoxId) != "" ){ echo $this->editBoxId; }?>" />
+
+        <div id="mainContainerWrapper" class="mainContainerWrapper">
+
+            <!-- This div is to include the header.html page 
+            <div id='divIncludeContent'></div>-->
+            
+            <section id="secCreateHashtag">
+                <div id="divCreateHighlightWrapper" class="divCreateHighlightWrapper">
+                    <div class="heading">CREATE HASHTAG</div>
+                    <div class="createHashtagWrapper">
+						<form id="hashtagForm" method="post">
+							<span class="">Please specify your preferable #hashtag for the collection </span>
+							<input type="text" class="inptCreateHashtag" id="hashtagHolder"  name="hashtagHolder" placeholder="Ex:- #GodsDogs" value="<?php if ( isset($this->catHashTag) && trim($this->catHashTag) != "" ){ echo $this->catHashTag; }?>" /><br />
+							<span class=""> and an interesting title </span>
+							<input type="text" class="inptCreateTitle" id="hashtagTitle" name="hashtagTitle" placeholder="Ex:- All types of dog breeds" value="<?php if ( isset($this->categoryTitle) && trim($this->categoryTitle) != "" ){ echo $this->categoryTitle; }?>" /><br />
+							<button class="btnBlack right" type="button" onClick="goToUploadBkmrks()" >CONTINUE (STEP 1)</button>
+						</form>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+		<script type="text/javascript" src="<?php echo $basePath; ?>/js/popupwindow.js"></script>
+		
+<script>
+function goToUploadBkmrks()
+{
+	if( $("#hashtagHolder").length )
+	{
+		var hashtagHolder=$.trim( stripHtmlTags($("#hashtagHolder").val()).replace(/&nbsp;/g,'') );
+		hashtagHolder = hashtagHolder.trim();
+		$("#hashtagHolder").val( hashtagHolder );
+		if( hashtagHolder == "" || hashtagHolder == "#" )
+		{
+			$('#pop-up-alerts').popUpWindow({action: "open"});	
+			$("#alert_header_meassge").html('');
+			$("#alert_meassage").html(chk_hash_tag);
+			$("#hashtagHolder").focus();
+			return false;
+		}
+		hashtagHolder = $("#hashtagHolder").val().replace(/^\s+/, "");
+		hashtagHolder = hashtagHolder.replace(/\s+$/, "");
+		var spc = " ";
+		if( parseInt(hashtagHolder.indexOf(spc)) > parseInt("-1") )
+		{
+			$('#pop-up-alerts').popUpWindow({action: "open"});	
+			$("#alert_header_meassge").html('');
+			$("#alert_meassage").html(space_hash);
+			$("#hashtagHolder").focus();
+			return false;
+		}
+		var invalidHtCharacters = /[^a-z^A-Z^0-9^_^#]/;
+		if( invalidHtCharacters.test( hashtagHolder ) )
+		{
+			$('#pop-up-alerts').popUpWindow({action: "open"});	
+			$("#alert_header_meassge").html('');
+			$("#alert_meassage").html(chk_valid_hash_tag);
+			$("#hashtagHolder").focus();
+			return false;
+		}
+		var hashCount = (hashtagHolder.match(/#/g) || []).length;
+		if( parseInt(hashCount) > parseInt("1") || ((parseInt(hashCount) == parseInt("1")) && (hashtagHolder.charAt(0) != "#")) )
+		{
+			$('#pop-up-alerts').popUpWindow({action: "open"});	
+			$("#alert_header_meassge").html('');
+			$("#alert_meassage").html(hash_tag_allowed);
+			$("#hashtagHolder").focus();
+			return false;
+		}
+		if( hashtagHolder.charAt(0) != "#" )
+		{
+			$('#pop-up-alerts').popUpWindow({action: "open"});	
+			$("#alert_header_meassge").html('');
+			$("#alert_meassage").html(leading_hash);
+			$("#hashtagHolder").focus();
+			return false;
+		}
+	}
+	
+	if( $("#hashtagTitle").length )
+	{
+		var hashtagTitle=$.trim( stripHtmlTags($("#hashtagTitle").val()).replace(/&nbsp;/g,'') );
+		hashtagTitle = hashtagTitle.trim();
+		$("#hashtagTitle").val( hashtagTitle );
+		if( hashtagTitle == "" )
+		{
+			$('#pop-up-alerts').popUpWindow({action: "open"});	
+			$("#alert_header_meassge").html('');
+			$("#alert_meassage").html(category_title);
+			$("#hashtagTitle").focus();
+			return false;
+		}
+		var invalidTitleCharacters = /[^a-z^A-Z^0-9^ ]/;
+		if( invalidTitleCharacters.test( hashtagTitle ) )
+		{
+			$('#pop-up-alerts').popUpWindow({action: "open"});	
+			$("#alert_header_meassge").html('');
+			$("#alert_meassage").html(category_chk_title);
+			$("#hashtagTitle").focus();
+			return false;
+		}
+	}
+
+	var formUseMode = $('#formUseMode').val();
+	
+	var cHFormUrl = BASE_URL;
+	cHFormUrl += "/databox/bookmarks/"+formUseMode;
+
+	var editBoxId = $('#editBoxId').val();
+	cHFormUrl += "/"+editBoxId;
+	if( editBoxId != "" && parseInt(editBoxId) > 0 )
+	{
+	}
+	
+	$('#hashtagForm').attr( "action",cHFormUrl );
+	$('#hashtagForm').submit();
+}
+</script>
+		
