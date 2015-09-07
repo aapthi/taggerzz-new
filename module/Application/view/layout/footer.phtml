@@ -11,7 +11,7 @@
 		<p id="alert_meassage"></p>
 	</div>
 	<p>
-		<a class="larg_btn" href="javascript:void(0);" onclick="alertsCancel()">OK</a>
+		<a class="btn" href="javascript:void(0);" onclick="alertsCancel()">OK</a>
 		<!--<a class="larg_btn" href="javascript:void(0);" onclick="sendReport()">OK</a>-->
 	</p>
 </div>
@@ -23,8 +23,8 @@
 		<p id="confirm_alert_meassage"></p>
 	</div>
 	<p>
-		<a class="larg_btn" href="javascript:void(0);" onclick="alertsCancelc()">Cancel</a>
-		<a class="larg_btn" href="javascript:void(0);" onclick="confirmPopup('<? echo $pageLocation; ?>')">OK</a>
+		<a class="btn" href="javascript:void(0);" onclick="alertsCancelc()">Cancel</a>
+		<a class="btn" href="javascript:void(0);" onclick="confirmPopup('<? echo $pageLocation; ?>')">OK</a>
 	</p>
 </div>
 
@@ -34,8 +34,8 @@
 		<p id="confirm_alert_meassage2"></p>
 	</div>
 	<p>
-		<a class="larg_btn" href="javascript:void(0);" onclick="custPageCancel()">Cancel</a>
-		<a class="larg_btn" href="javascript:void(0);" onclick="custPageProceed()">OK</a>
+		<a class="btn" href="javascript:void(0);" onclick="custPageCancel()">Cancel</a>
+		<a class="btn" href="javascript:void(0);" onclick="custPageProceed()">OK</a>
 	</p>
 </div>
 
@@ -258,13 +258,14 @@ $(function() {
 				return false;
 			}			
 		});
-	}
-	$("#searchTermHolder").data( "autocomplete" )._renderItem = function( ul, item ) {
+		$("#searchTermHolder").data( "autocomplete" )._renderItem = function( ul, item ) {
 		var hashname=item.label;		
 		 return $("<li><a data-value='"+item.label+"' onClick ='set_item(this.text);'>" + item.label + "</a></li>")
 		 .data("item.autocomplete", item)            
 		 .appendTo(ul);				
 	};
+	}
+	
 	$("#searchTermHolder").live("keydown",".ui-corner-all",function(e){
 		if (e.keyCode == 13) {
 		   var hashValue=$("#searchTermHolder").val();
