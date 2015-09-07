@@ -1,0 +1,42 @@
+CREATE TABLE `cat_image` (
+  `image_id` int(11) NOT NULL AUTO_INCREMENT,
+  `status` tinyint(4) DEFAULT '1',
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`image_id`)
+)
+
+CREATE TABLE `js_plumb_grid` (
+  `js_plumb_grid` int(11) NOT NULL AUTO_INCREMENT,
+  `div_html` text,
+  `user_category_id` int(11) DEFAULT NULL,
+  `count_divs` int(11) DEFAULT NULL,
+  `status` tinyint(4) DEFAULT '0',
+  PRIMARY KEY (`js_plumb_grid`)
+) 
+
+ALTER TABLE `soverei3_tg`.`user_categories` ADD COLUMN `main_cat_tittle` VARCHAR(200) NULL AFTER `highlights_prior_order`, ADD COLUMN `sub_cat_tittle` VARCHAR(200) NULL AFTER `main_cat_tittle`; 
+
+
+// newly-added
+
+CREATE TABLE `block_user` (
+  `bid` int(11) NOT NULL AUTO_INCREMENT,
+  `block_by_uid` int(11) DEFAULT NULL,
+  `blocked_to_uid` int(11) DEFAULT NULL,
+  `status` tinyint(4) DEFAULT NULL,
+  `added_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`bid`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1
+
+CREATE TABLE `user_collections` (
+  `collection_id` int(11) NOT NULL AUTO_INCREMENT,
+  `collector_id` int(11) DEFAULT '0',
+  `category_link_id` int(11) DEFAULT '0',
+  `category_user_id` int(11) DEFAULT '0',
+  `status` tinyint(1) DEFAULT '1',
+  `created_date` datetime DEFAULT NULL,
+  `updated_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`collection_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1

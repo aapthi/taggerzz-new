@@ -1,0 +1,11 @@
+SetEnv APPLICATION_ENV local
+SetEnv ZF2_PATH C:/ZF2/library
+RewriteEngine On
+php_flag display_errors off
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+RewriteRule ^testzf(/.*)?$ index_zf2.php [NC,L]
+RewriteRule ^.*$ index.php [NC,L]
+Options -Indexes
