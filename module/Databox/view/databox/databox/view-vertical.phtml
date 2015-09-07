@@ -432,6 +432,20 @@ $(document).ready(function()
 		$('#tzPublishLink').show();
 		$('.c_DownArrow').show();
 		$('.c_DivTitle').show();
+		
+		$('.grid-stack').on('dragstop', function (event, ui) {
+			var grid = this;
+			var element = event.target;
+
+			$('#viewPageChanged').val( 1 );
+		});
+		
+		$('.grid-stack').on('resizestop', function (event, ui) {
+			var grid = this;
+			var element = event.target;
+			
+			$('#viewPageChanged').val( 1 );
+		});		
 	}
 	else
 	{

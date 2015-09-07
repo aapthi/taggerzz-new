@@ -162,7 +162,7 @@ function removeCss()
 				$("#confirm_alert_meassage1").html(cust_changes_alert);			
 				$("#confirm_alert_meassage2").html(cust_changes_leave_alert);			
 				$('#menu_loc_url').val( menuLocation );
-				$('#confirm-pop-up-alerts').popUpWindow({action: "open"});
+				$('#confirm-pop-up-custpage').popUpWindow({action: "open"});
 				if( window.location.href.indexOf("post-horizontal") > -1 )
 				{
 					$(".pop-up-content").css('position','fixed');

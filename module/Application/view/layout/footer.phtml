@@ -27,6 +27,19 @@
 		<a class="larg_btn" href="javascript:void(0);" onclick="confirmPopup('<? echo $pageLocation; ?>')">OK</a>
 	</p>
 </div>
+
+<div id="confirm-pop-up-custpage" class="pop-up-display-content conform_popup_content">
+	<div class="montage_desc">
+		<h4><p id="confirm_alert_meassage1"></p></h4>
+		<p id="confirm_alert_meassage2"></p>
+	</div>
+	<p>
+		<a class="larg_btn" href="javascript:void(0);" onclick="custPageCancel()">Cancel</a>
+		<a class="larg_btn" href="javascript:void(0);" onclick="custPageProceed()">OK</a>
+	</p>
+</div>
+
+
 <input type="hidden" id="menu_loc_url" name="menu_loc_url" value="" />
 <input type="hidden" id="mousemiddle_event_menu" name="mousemiddle_event_menu" value="" />
 <!--END-->
@@ -136,6 +149,14 @@ function alertsCancelc(){
 	$('#confirm-pop-up-alerts').popUpWindow({action: "close"});
 }
 
+function custPageProceed(){
+	$('#confirm-pop-up-custpage').popUpWindow({action: "close"});
+	if($('#menu_loc_url').val()=='logout'){
+		logOut('');
+	}else{																
+		window.location.href = BASE_URL + $('#menu_loc_url').val();
+	}					
+}
 function custPageCancel(){
 	$('#confirm-pop-up-custpage').popUpWindow({action: "close"});
 }
