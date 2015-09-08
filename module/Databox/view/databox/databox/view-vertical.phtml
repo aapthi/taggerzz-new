@@ -375,12 +375,22 @@ height: 0,
 				var commEditDelHtml = '<div id="deleteComment'+newValue+'" style="position:absolute;top:-23px;right:-1px;background:#f1f1f1;border:1px solid #bfc4c8;width:50px;"><span style="margin-right:10px;"><a href="javascript:void(0)"; onclick="editExistingComment('+newValue+')"><img src="'+BASE_PATH+'/images/social_media/edit_ico.png"/></a></span><a href="javascript:void(0)"; onclick="deleteComment('+newValue+')" style="color:#f97e76" title="Close">X</a></div>';
 
 				var newCommBoxHtml = '<div id="dragDropWindow'+newValue+'" class="c_DivCard grid-stack-item" data-gs-height="20"><div class="grid-stack-item-content">';
-				newCommBoxHtml += '<div class="c_DivCardStoryWrapper"><div class="c_DivCardStorytellerDetails">';
-				newCommBoxHtml += '<img class="c_DivCardStorytellerImg" src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $_SESSION['usersinfo']->montage_image; ?>"/>';
-				newCommBoxHtml += '<div class="c_DivCardStorytellerName">@STORYTELLER (<?php echo $_SESSION['usersinfo']->displayName; ?>)</div>';
-				newCommBoxHtml += '</div>';
-				newCommBoxHtml += '<div class="c_DivCardStory"><span id="data_'+newValue+'">'+newCommentText+'</span>'+commEditDelHtml+'</div>';
-				newCommBoxHtml += '</div>';
+
+				<?php
+					if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId) && isset($currBoxCatUid) && $_SESSION['usersinfo']->userId == $currBoxCatUid )
+					{
+				?>
+						newCommBoxHtml += '<div class="c_DivCardStoryWrapper"><div class="c_DivCardStorytellerDetails">';
+						newCommBoxHtml += '<img class="c_DivCardStorytellerImg" src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $_SESSION['usersinfo']->montage_image; ?>"/>';
+						newCommBoxHtml += '<div class="c_DivCardStorytellerName">@STORYTELLER (<?php echo $_SESSION['usersinfo']->displayName; ?>)</div>';
+						newCommBoxHtml += '</div>';
+						newCommBoxHtml += '<div class="c_DivCardStory"><span id="data_'+newValue+'">'+newCommentText+'</span>'+commEditDelHtml+'</div>';
+						newCommBoxHtml += '</div>';
+				<?php
+					}
+				?>
+
+						newCommBoxHtml += '</div></div>';
 				this.grid.add_widget($(newCommBoxHtml),node.x, node.y, node.width, node.height);
                 }.bind(this);
 				
@@ -469,9 +479,9 @@ $(document).ready(function()
 			fullDescParaHtml += '<span id="categoryDescLink" style="display:none;"><a href="Javascript:void(0);" id="catDescAnchor" onclick="catDescCkEditorShow();">Edit</a></span>';
 		}
 		$('#fullDescPara').html( fullDescParaHtml );
-		$('#catDescTopBtn').html("EDIT");
 		if( showCustOtions )
 		{
+			$('#catDescTopBtn').html("EDIT");
 			$('#categoryDescLink').show();
 		}
 		else if( $('#categoryDescLink').length )
