@@ -56,7 +56,7 @@ if( isset($this->displayedCategoryUserId) )
 			
 			<div class="c_DivHashTag"><?php echo $this->hashName;?></div>
 			<div class="c_DivTitleWrapper">
-				<div class="c_DivTitle" style="display:none"><?php echo $this->categoryTitle; ?><button class="c_BtnEditTitle">EDIT</button></div>
+				<div class="c_DivTitle" style="display:none"><?php echo $this->categoryTitle; ?><button id="catDescTopBtn" class="c_BtnEditTitle">EDIT</button></div>
 			</div>
 			<div class="c_DivHeaderCommentWrapper">
 				<div class="c_DivUserDetailsWrapper">
@@ -469,6 +469,7 @@ $(document).ready(function()
 			fullDescParaHtml += '<span id="categoryDescLink" style="display:none;"><a href="Javascript:void(0);" id="catDescAnchor" onclick="catDescCkEditorShow();">Edit</a></span>';
 		}
 		$('#fullDescPara').html( fullDescParaHtml );
+		$('#catDescTopBtn').html("EDIT");
 		if( showCustOtions )
 		{
 			$('#categoryDescLink').show();
@@ -491,6 +492,9 @@ $(document).ready(function()
 			{
 				catDescAnchorLbl = "Edit";
 			}
+			
+			$('#catDescTopBtn').html(catDescAnchorLbl.toUpperCase());
+			
 			catDescIntroDivHtml += '<span id="categoryDescLink" style="display:none;"><a href="Javascript:void(0);" id="catDescAnchor" onclick="catDescCkEditorShow();">'+catDescAnchorLbl+'</a></span>';
 		}
 
