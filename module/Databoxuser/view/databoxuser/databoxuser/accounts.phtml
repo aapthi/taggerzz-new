@@ -177,24 +177,24 @@
                             <div class="divCommentHeaderUsernameBlock">
                                 <div  id="divCommentUsername" class="divCommentUsername">
                                    <!-- Username,-->
-								   <?php echo $username;?>,
+								   <?php if(isset($username)){echo $username;}?>,
                                 </div>
                                 wrote
                             </div>
                             <div id="divCommentTime" class="divCommentTime">
                                 <!--ON 06-02-2015, 2:22 AM-->
-								<?php echo $date;?>
+								<?php if(isset($date)){echo $date;}?>
                             </div>
                         </div>
                         
                         <div id="divCommentText" class="divCommentText">
-							<?php echo $msg;?>
+							<?php if(isset($msg)){echo $msg;}?>
                         </div>
                         
                         <div id="divCommentControls" class="divCommentControls">
-                            <button id="btnCommentReply" onClick="replyTo('<?php echo $username;?>')" class="btnCommentReply">REPLY</button>
-                            <button id="btnCommentForward" onClick="forwardTo(<?php echo $senderId;?>)" class="btnCommentForward">FORWARD</button>
-                            <button id="btnCommentBlockUser" onClick="blockUser(<?php echo $senderId;?>)" class="btnCommentBlockUser">BLOCK USER</button>
+                            <button id="btnCommentReply" onClick="replyTo('<?php if(isset($username)){echo $username;}?>')" class="btnCommentReply">REPLY</button>
+                            <button id="btnCommentForward" onClick="forwardTo(<?php if(isset($senderId)){echo $senderId;}?>)" class="btnCommentForward">FORWARD</button>
+                            <button id="btnCommentBlockUser" onClick="blockUser(<?php if(isset($senderId)){echo $senderId;}?>)" class="btnCommentBlockUser">BLOCK USER</button>
                             
                             <button id="btnCommentReportSpam" class="btnCommentReportSpam">REPORT SPAM</button>
                         </div>
@@ -211,8 +211,8 @@
                         </div>
                     </div>
                 </div>
-				<input type="hidden" id="hidUserName" value="<?php echo $username;?>">
-				<input type="hidden" id="hidmessage" value="<?php echo $msg;?>">
+				<input type="hidden" id="hidUserName" value="<?php if(isset($username)){echo $username;}?>">
+				<input type="hidden" id="hidmessage" value="<?php if(isset($msg)){echo $msg;}?>">
 				<input type="hidden" id="hidsenderid" value="1">
 				<input type="hidden" id="hidreceivedid" value="">
             </section>
