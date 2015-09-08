@@ -173,6 +173,7 @@
 
                 <div class="divAccountSettingsRow">
                     <div class="divCreatedCollectionsCard">
+						<? if(count($this->getUserMessages)!=0){?>
                         <div class="divCommentHeader">
                             <div class="divCommentHeaderUsernameBlock">
                                 <div  id="divCommentUsername" class="divCommentUsername">
@@ -198,6 +199,7 @@
                             
                             <button id="btnCommentReportSpam" class="btnCommentReportSpam">REPORT SPAM</button>
                         </div>
+						<?php } ?>
                         
                         <div id="divReplyToWrapper" style="display:none;" class="divReplyToWrapper">
                             <input type="text" id="txtReplyTo" class="txtReplyTo" placeholder="To: @Username" />
