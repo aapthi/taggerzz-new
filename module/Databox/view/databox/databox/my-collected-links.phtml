@@ -177,14 +177,7 @@ var i=0;
 	$(function () {
 	
 		$('.grid-stack').gridstack({
-			<?php
-				if( (! isset($_SESSION['usersinfo']) && !isset($_SESSION['usersinfo']->userId)) || (isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId) && isset($currBoxCatUid) && $_SESSION['usersinfo']->userId != $currBoxCatUid) )
-				{
-			?>
-					static_grid:true,
-			<?php
-				}
-			?>
+			static_grid:true,
 			min_width: 768,
 			item_class: 'grid-stack-item',
 			handle: '.grid-stack-item-content',
