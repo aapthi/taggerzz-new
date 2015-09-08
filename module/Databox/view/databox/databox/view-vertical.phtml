@@ -56,7 +56,7 @@ if( isset($this->displayedCategoryUserId) )
 			
 			<div class="c_DivHashTag"><?php echo $this->hashName;?></div>
 			<div class="c_DivTitleWrapper">
-				<div class="c_DivTitle" style="display:none"><?php echo $this->categoryTitle; ?><button id="catDescTopBtn" class="c_BtnEditTitle">EDIT</button></div>
+				<div class="c_DivTitle" style="display:none"><?php echo $this->categoryTitle; ?><button id="catDescTopBtn" onclick="catDescCkEditorShow();" class="c_BtnEditTitle">EDIT</button></div>
 			</div>
 			<div class="c_DivHeaderCommentWrapper">
 				<div class="c_DivUserDetailsWrapper">
@@ -390,7 +390,8 @@ height: 0,
 					}
 				?>
 
-						newCommBoxHtml += '</div></div>';
+				newCommBoxHtml += '</div></div>';
+						
 				this.grid.add_widget($(newCommBoxHtml),node.x, node.y, node.width, node.height);
                 }.bind(this);
 				
@@ -481,8 +482,8 @@ $(document).ready(function()
 		$('#fullDescPara').html( fullDescParaHtml );
 		if( showCustOtions )
 		{
-			$('#catDescTopBtn').html("EDIT");
 			$('#categoryDescLink').show();
+			$('#catDescTopBtn').html("EDIT");
 		}
 		else if( $('#categoryDescLink').length )
 		{
@@ -503,9 +504,9 @@ $(document).ready(function()
 				catDescAnchorLbl = "Edit";
 			}
 			
-			$('#catDescTopBtn').html(catDescAnchorLbl.toUpperCase());
-			
 			catDescIntroDivHtml += '<span id="categoryDescLink" style="display:none;"><a href="Javascript:void(0);" id="catDescAnchor" onclick="catDescCkEditorShow();">'+catDescAnchorLbl+'</a></span>';
+
+			$('#catDescTopBtn').html(catDescAnchorLbl.toUpperCase());
 		}
 
 		$('#catDescIntro').html( catDescIntroDivHtml );

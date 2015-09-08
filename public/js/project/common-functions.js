@@ -2020,6 +2020,7 @@ function getDimensions(id) {
 			{
 				$('#catDescAnchor').html( "Edit" );
 			}
+			$('#catDescTopBtn').html($('#catDescAnchor').html().toUpperCase());
 		}
 		$('#pop-up-cat-description').popUpWindow({action: "close"});
 
