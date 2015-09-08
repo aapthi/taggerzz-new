@@ -1,12 +1,3 @@
-<style>
-.items007{
-	min-height:324px;
-	max-height:400px;
-	min-width:300px;
-	max-width:580px;
-}
-</style>
-
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="<?php echo $basePath; ?>/css/new_css/gridstack.min.css"/>
@@ -47,15 +38,19 @@ if( isset($this->boxKeywords) && trim($this->boxKeywords) != "" )
 <div id="mainContainerWrapper" class="mainContainerWrapper">
 	<section id="secCustomizeDatabox">
 		<div class="c_DivCustomizationWrapper">
-			
-			
-			
-			<span id="pubDddContainer">
-					<div id="drag-drop-demo" class="c_DivCardsWrapper grid-stack"><?php foreach($this->userCollectedLinksArr as $key=>$databoxLinksGrids){
-					// echo "<pre>";print_r($this->userCollectedLinksArr);exit;
+				<span id="pubDddContainer">
+				<?php if($this->data==0){?>
+					<div id="drag-drop-demo" class="grid-stack c_DivCardsWrapper"><?php $tzGsRowNum= 1;
+					
+					$tzDataGsX = 1;
+					$tzDataGsY = 0;
+					foreach($this->userCollectedLinksArr as $key=>$databoxLinksGrids)
+					{
+					//echo "<pre>";print_r($databoxLinksGrids);exit;
+						$xSet = 0;$ySet = 0;
 						if($key==0){?>
-						<input type="hidden" value="<?echo $databoxLinksGrids['user_id'];?>" id="category_user_id">
-						<input type="hidden" value="<?echo $databoxLinksGrids['category_id'];?>" id="category_id">
+						<input type="hidden" value="<?echo $databoxLinksGrids['collector_id'];?>" id="category_user_id">
+						<input type="hidden" value="<?echo $databoxLinksGrids['user_category_id'];?>" id="category_id">
 						<?}
 						
 							$titleclass="img_title_pos_ab";
@@ -76,7 +71,8 @@ if( isset($this->boxKeywords) && trim($this->boxKeywords) != "" )
 							$imageLink=$basePath.'/images/social_media/noimage.png';
 						}
 						?>
-						<div id="dragDropWindow<?echo $key+1;?>" class="c_DivCard grid-stack-item" data-gs-height="20" data-gs-width="2">
+						<div id="dragDropWindow<?echo $key+1;?>" class="grid-stack-item  c_DivCard"
+						<?php if( $tzGsRowNum % 3 == 0 ) { $xSet = $tzDataGsX;$tzDataGsX = 1;$ySet = $tzDataGsY;$tzDataGsY += 20; } else{ $xSet = $tzDataGsX;$tzDataGsX += 3;$ySet = $tzDataGsY; } ?> data-gs-x="<?php echo $xSet; ?>" data-gs-y="<?php echo $ySet; ?>" data-gs-height="20" data-gs-width="2">
 							<div class="grid-stack-item-content">
 									<?php
 								if($databoxLinksGrids['is_video']==1)
@@ -112,7 +108,7 @@ if( isset($this->boxKeywords) && trim($this->boxKeywords) != "" )
 								<div class="c_DivCardDescription" >
 								<?php
 									if(strlen($databoxLinksGrids['description'])>250){
-										echo substr($$databoxLinksGrids['description'],0,250) . '<a href="'.$url.'" target="_blank">...Read more</a>';
+										echo substr($databoxLinksGrids['description'],0,250) . '<a href="'.$url.'" target="_blank">...Read more</a>';
 										$parahid=1;
 									}
 									else
@@ -126,11 +122,17 @@ if( isset($this->boxKeywords) && trim($this->boxKeywords) != "" )
 								
 							</div>
 						</div>
-					<?php } ?>
+					<?php $tzGsRowNum++; } ?>
 					</div>
+				<?
+				}
+				else
+				{
+					foreach($this->databoxLinksGrid as $key=>$databoxLinksGrids)
+						echo $databoxLinksGrids['div_html'];{?>
+					<?php }
+				}?>
 			</span>
-			
-
 		</div>
 	</section>
 </div>
@@ -155,49 +157,7 @@ if( isset($this->boxKeywords) && trim($this->boxKeywords) != "" )
 <input type="hidden" id="incrId" value="<?echo $databoxLinksGrids['count_divs'];?>">
 <?}?>
 
-<!-- Cat Desc CKEditor Pop Up -->
-<div id="pop-up-cat-description" class="pop-up-display-content conform_popup_content">
-	<div class="montage_desc">
-		<h4>Please provide your description</h4>
-		<p><textarea class="text_pad" id="catDescCkeditor"></textarea></p>
-	</div>
-	<p>
-		<a class="larg_btn" href="javascript:void(0);" onclick="catDescCkEditorCancel();">CANCEL</a>
-		<a class="larg_btn" href="javascript:void(0);" onclick="saveCustCatDesc();">SAVE</a>
-	</p>
-</div>
-<!-- Cat Desc CKEditor Pop Up End -->
 
-
-
-<!-- Comment CKEditor Pop Up -->
-<div id="pop-up-comment" class="pop-up-display-content conform_popup_content">
-	<div class="montage_desc">
-		<h4>Please provide your comment</h4>
-		<p><textarea class="text_pad" id="commentCkeditor"></textarea></p>
-	</div>
-	<p>
-		<a class="larg_btn" href="javascript:void(0);" onclick="custCommentCkEditorCancel();">CANCEL</a>
-		<a class="larg_btn" href="javascript:void(0);" onclick="showActualComment();">SAVE</a>
-	</p>
-</div>
-<!-- Comment CKEditor Pop Up End -->
-
-<!-- Report Pop Up -->
-<div id="pop-up-report" class="pop-up-display-content conform_popup_content">
-	<div class="report_bg">
-		<div><input type="radio" value="1" name="Personel" checked><span>&nbsp;Spam Content</span></div>
-		<div><input type="radio" value="2" name="Personel"><span>&nbsp;Abusive / hateful content</span></div>
-		<div><input type="radio" value="3" name="Personel"><span>&nbsp;Nude / Vulgar Open content</span></div>
-		<div><input type="radio" value="4" name="Personel"><span>&nbsp;Personal defamatory content</span></div>
-		<div class="report_mar_t"><input value="5" type="radio" name="Personel"><span>&nbsp;Other</span></div>
-		<div><textarea id="personel_text" placeholder="Mention your concern in Plain text"></textarea></div>
-		<div class="report_btn"><a href="javascript:void(0)" onClick="Javascript:custReportSend(<? echo $this->categoryId; ?>);">SUBMIT</a></div>
-		<p id="repMessage"></p>
-		<div style="clear:both;"></div>
-	</div>
-</div>
-<!-- Report Pop Up End -->
 
 <input type="hidden" id="viewPageYes" value="0" />
 <input type="hidden" id="viewPageChanged" value="0" />
@@ -210,17 +170,22 @@ if( isset($this->boxKeywords) && trim($this->boxKeywords) != "" )
 <input type="hidden" id="basePath" name="basePath" value="<?php echo $basePath;?>" />
 <input type="hidden" id="baseUrl"  name="baseUrl" value="<?php echo $baseUrl;?>" />
 
-<script src="<?php echo $basePath; ?>/js/grid/ui.multidraggable.js"></script>
-<script src="<?php echo $basePath; ?>/js/crop/jquery.cropit.js"></script>
-<script src="<?php echo $basePath; ?>/js/popupwindow.js"></script>
-<script type="text/javascript" src="<?php echo $basePath; ?>/js/ckeditor/ckeditor.js"></script>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5461ef997855b9fa" async="async"></script>
 
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5461ef997855b9fa" async="async"></script>
 <script type="text/javascript">
 var i=0;
 	$(function () {
 	
 		$('.grid-stack').gridstack({
+			<?php
+				if( (! isset($_SESSION['usersinfo']) && !isset($_SESSION['usersinfo']->userId)) || (isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId) && isset($currBoxCatUid) && $_SESSION['usersinfo']->userId != $currBoxCatUid) )
+				{
+			?>
+					static_grid:true,
+			<?php
+				}
+			?>
+			min_width: 768,
 			item_class: 'grid-stack-item',
 			handle: '.grid-stack-item-content',
 			// one cell height
@@ -230,6 +195,7 @@ var i=0;
 			horizontal_margin: 10
 		});
 		 $('.grid-stack').gridstack({
+			 
 	// turns animation on
   animate: false,
 
@@ -240,7 +206,7 @@ var i=0;
  width: 12,
 
   // maximum rows amount
-height: 1, 
+height: 0, 
 
   // widget class
   item_class: 'grid-stack-item',
@@ -261,7 +227,7 @@ height: 1,
  // auto: true,
   
   // minimal width.
-  min_width: 100,
+  min_width: 768,
 
   // enable floating widgets
   float: false,
@@ -319,39 +285,12 @@ height: 1,
             };
 	});
 </script>		
-<script type="text/javascript">
-$(document).ready(function()
-{
-	<?php if($this->data==0){?>
-	var tzGsRowNum = 1;
-	var tzDataGsX = 1;
-	var tzDataGsY = 0;
-	$("div[id^='dragDropWindow']").each(function()
-	{
-		var dragDropWindowId = parseInt(this.id.replace("dragDropWindow", ""));
-		// console.log( $(this).attr("data-gs-y") );
-		
-
-		if( tzGsRowNum % 3 == 0 )
-		{
-			$(this).attr("data-gs-x",tzDataGsX);
-			tzDataGsX = 1;
-
-			$(this).attr("data-gs-y",tzDataGsY);
-			tzDataGsY += 20;
-		}
-		else
-		{
-			$(this).attr("data-gs-x",tzDataGsX);
-			tzDataGsX += 3;
-			
-			$(this).attr("data-gs-y",tzDataGsY);
-		}
-		
-		tzGsRowNum++;
-	});
-<?php } ?>	
- });
-</script>		
-        
-    
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=608131635971702&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>   
