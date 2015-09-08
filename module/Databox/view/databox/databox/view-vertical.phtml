@@ -280,6 +280,7 @@ if( isset($this->displayedCategoryUserId) )
 <script type="text/javascript" src="<?php echo $basePath; ?>/js/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5461ef997855b9fa" async="async"></script>
 
+
 <script type="text/javascript">
 var i=0;
 	$(function () {
@@ -468,6 +469,22 @@ $(document).ready(function()
 	}
 	// End Own box allow customization options...
 	
+	// Increment box view count
+	var category_id=$('#category_id').val();
+	var updateViewsCountAjaxUrl = BASE_URL + "/databox/update-views-count";
+	$.ajax
+	({
+	  url: updateViewsCountAjaxUrl,
+	  type: "POST",
+	  data:{categoryId:category_id},
+	  dataType: "json",
+	  success: function(data)
+	  {
+		
+	  }
+	});
+	// End Increment box view count
+
 	// Cat desc...
 	var catDescIntroDiv = document.getElementById('catDescIntro');
 	if($('#hiddenDec').val()!="" )
