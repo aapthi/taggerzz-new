@@ -3395,7 +3395,7 @@ class DataboxController extends AbstractActionController
 			}
 
 		}
-		$htmlBook.='<div style="position:absolute;bottom:11px;left:40px;"><b style="color:red">Total Selected Links</b> : <b id="selectedTotalBM">0</b></div><div style="position:absolute;bottom:11px;right:40px;"><a onclick="cancelBookMarksUrls()" class="larg_btn" href="javascript:void(0);">CANCEL</a>&nbsp;&nbsp;&nbsp;<a onclick="checkBookMarksUrls()" class="larg_btn" href="javascript:void(0);">UPLOAD</a></div>';
+		$htmlBook.='<div style="position:absolute;bottom:11px;left:40px;"><b style="color:red">Total Selected Links</b> : <b id="selectedTotalBM">0</b></div><div style="position:absolute;bottom:11px;right:40px;"><a onclick="cancelBookMarksUrls()" class="btn" href="javascript:void(0);">CANCEL</a>&nbsp;&nbsp;&nbsp;<a onclick="checkBookMarksUrls()" class="btn" href="javascript:void(0);">UPLOAD</a></div>';
 		return $htmlBook; 
 	}
 	//End
