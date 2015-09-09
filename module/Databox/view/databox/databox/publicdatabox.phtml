@@ -122,8 +122,8 @@
                         <label class="lblInpt"><input type='checkbox' class="inptChkContentNature"id="chkbxNsfw" <?php if ( isset($this->not_safe_for_work) && trim($this->not_safe_for_work) != "" && is_numeric($this->not_safe_for_work) && $this->not_safe_for_work == 1 ){?>checked<?php } ?> onClick="nsfwContentClicked( this.checked );" />NSFW ( Not Safe For Work )</label><br /> <br />
                         <span class="">Categorize your databox</span><br />
                         <input type='text' id="boxCategory" class="inptContentCategory" placeholder="Ex:- 'Space Travel Astronomers' " value="<?php if ( isset($this->metaTags) && trim($this->metaTags) != "" ){ echo $this->metaTags; }?>" />
-                        <span class="">Continue Customising</span><br />
-						<div id="dcHtmlDiv"><input type="button" value="Save" id="databoxContinue" /></div>
+						<div class="highlights_btn" id="dcHtmlDiv">
+						<a href="javascript:void(0)" id="databoxContinue" />Continue Customising</a></div>
 						<div id="dcInprogressDiv" style="display:none;"><img  style="vertical-align:middle;margin-right:3px;width:30px;" src="<?php echo $basePath; ?>/img/bx_loader.gif" />Saving Category...</div>
                     </div>
                 </div>

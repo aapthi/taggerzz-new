@@ -1039,9 +1039,22 @@ a {
       color: #06507e; }
 	  
 	  .highlights_btn{
-	margin-right: 8px;
-    margin-top: 10px;
+	margin-right: 60px;
+    margin-top: 24px;
     text-align: right;
 	}
+	.highlights_btn a {
+    background-image: linear-gradient(#f6f6f6, #fefefe, #e7e6e6);
+    border-radius: 4px;
+    box-shadow: 0 3px 6px -6px #000;
+    color: #5c5959;
+    font-family: "sinkin_sans400_regular",sans-serif;
+    font-size: 0.9em;
+    padding: 5px 15px;
+    text-transform: uppercase;
+}
+a {
+    text-decoration: none;
+}
 
 /*# sourceMappingURL=styles.css.map */
