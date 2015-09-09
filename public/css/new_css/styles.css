@@ -571,7 +571,7 @@ a {
           background: rgba(0, 0, 0, 0.5);
           margin: -6pt -5pt 0pt 0pt;
           padding: 3pt 10pt;
-          color: white; }
+          color: #c0c0c0; }
           .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardContentWrapper .divCardLoveTrash img {
             max-height: 10pt; }
         .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardContentWrapper .divCardKeywords {
@@ -651,7 +651,7 @@ a {
       background: rgba(0, 0, 0, 0.5);
       margin: -6pt -5pt 0pt 0pt;
       padding: 3pt 10pt;
-      color: white; }
+      color: #c0c0c0; }
       .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardLoveTrash img {
         max-height: 10pt; }
     .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardKeywords {
@@ -1037,5 +1037,11 @@ a {
     #secCustomizeDatabox .c_DivCard .c_DivCardStoryWrapper .c_DivCardStory {
       display: table-row;
       color: #06507e; }
+	  
+	  .highlights_btn{
+	margin-right: 8px;
+    margin-top: 10px;
+    text-align: right;
+	}
 
 /*# sourceMappingURL=styles.css.map */
