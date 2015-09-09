@@ -337,6 +337,7 @@ class DataboxController extends AbstractActionController
 		$mature_content = 0;
 		$not_safe_for_work = 0;
 		$tzCatImage = "";
+		$boxLinksArr= array();
 
 		if($this->params()->fromRoute('boxid', 0)!="")
 		{
