@@ -568,10 +568,10 @@ a {
           background: #fdce02;
           min-width: 40%; }
         .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardContentWrapper .divCardLoveTrash {
-          background: rgba(0, 0, 0, 0.5);
+          background: #c0c0c0;
           margin: -6pt -5pt 0pt 0pt;
           padding: 3pt 10pt;
-          color: #c0c0c0; }
+          color: white; }
           .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardContentWrapper .divCardLoveTrash img {
             max-height: 10pt; }
         .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardContentWrapper .divCardKeywords {
@@ -648,10 +648,10 @@ a {
       background: #fdce02;
       min-width: 40%; }
     .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardLoveTrash {
-      background: rgba(0, 0, 0, 0.5);
+      background: #c0c0c0;
       margin: -6pt -5pt 0pt 0pt;
       padding: 3pt 10pt;
-      color: #c0c0c0; }
+      color: white; }
       .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardLoveTrash img {
         max-height: 10pt; }
     .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardKeywords {
@@ -907,7 +907,7 @@ a {
 #secCustomizeDatabox .c_DivUserDetailsWrapper {
   vertical-align: top; }
 #secCustomizeDatabox .c_DivCardUser img {
-  background-image: url("../img/c_userBG.png");
+  background-image: url("../../img/c_userBG.png");
   background-repeat: no-repeat;
   background-size: contain;
   padding: 7pt 2pt; }
