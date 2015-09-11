@@ -241,8 +241,8 @@ if( isset($this->displayedCategoryUserId) )
 		<p><textarea class="text_pad" id="commentCkeditor"></textarea></p>
 	</div>
 	<p>
-		<a class="larg_btn" href="javascript:void(0);" onclick="custCommentCkEditorCancel();">CANCEL</a>
-		<a class="larg_btn" href="javascript:void(0);" onclick="showActualComment();">SAVE</a>
+		<a class="btn" href="javascript:void(0);" onclick="custCommentCkEditorCancel();">CANCEL</a>
+		<a class="btn" href="javascript:void(0);" onclick="showActualComment();">SAVE</a>
 	</p>
 </div>
 <!-- Comment CKEditor Pop Up End -->
@@ -373,7 +373,7 @@ height: 0,
 				var incrValue=$('#incrId').val();
 				var newValue=parseInt(incrValue)+1;
 				$('#incrId').val(newValue);
-				var commEditDelHtml = '<div id="deleteComment'+newValue+'" style="position:absolute;top:-23px;right:-1px;background:#f1f1f1;border:1px solid #bfc4c8;width:50px;"><span style="margin-right:10px;"><a href="javascript:void(0)"; onclick="editExistingComment('+newValue+')"><img src="'+BASE_PATH+'/images/social_media/edit_ico.png"/></a></span><a href="javascript:void(0)"; onclick="deleteComment('+newValue+')" style="color:#f97e76" title="Close">X</a></div>';
+				var commEditDelHtml = '<div id="deleteComment'+newValue+'" style="position:absolute;top:17px;right:11px;background:#f1f1f1;border:1px solid #bfc4c8;width:13px;"><span style="margin-right: -28px;"><a href="javascript:void(0)"; onclick="editExistingComment('+newValue+')"><img src="'+BASE_PATH+'/images/social_media/edit_ico.png"/></a></span><a href="javascript:void(0)"; onclick="deleteComment('+newValue+')" style="color:#f97e76" title="Close">X</a></div>';
 
 				var newCommBoxHtml = '<div id="dragDropWindow'+newValue+'" class="c_DivCard grid-stack-item" data-gs-height="20"><div class="grid-stack-item-content">';
 
