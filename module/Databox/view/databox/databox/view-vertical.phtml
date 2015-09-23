@@ -201,7 +201,16 @@ if( isset($this->displayedCategoryUserId) )
 				</div>
             </div>
 			<div id="commentsList">
-				
+				<?php if(count($this->getComments)!=0){$i=0;foreach($this->getComments as $key=>$getComments)
+					{
+						$i++;
+
+					?>
+					<div class=""><?php echo $getComments->databox_comment; &nbsp;&nbsp;&nbsp;&nbsp;if( $getComments->comment_user_id==$_SESSION['usersinfo']->userId){?><a href="#">Edit Comment</a> | <a href="#">Delete Comment</a><?php }else{}?></div>
+					<?php
+					}
+					}
+					?>
 			</div>
 		</div>
 	</section>
