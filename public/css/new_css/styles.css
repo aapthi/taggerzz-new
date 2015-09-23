@@ -1058,3 +1058,11 @@ a {
 }
 
 /*# sourceMappingURL=styles.css.map */
+
+.acount_pos_abs {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 7;
+    z-index: 10;
+}
