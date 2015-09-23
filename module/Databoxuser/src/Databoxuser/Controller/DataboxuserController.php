@@ -730,6 +730,40 @@ class DataboxuserController extends AbstractActionController
 			}
 		}
 	}
+	
+	public function dashboardAction(){
+			$baseUrls = $this->getServiceLocator()->get('config');
+			$baseUrlArr = $baseUrls['urls'];
+			$baseUrl = $baseUrlArr['baseUrl'];
+			$basePath = $baseUrlArr['basePath'];
+
+			//new added
+			$allDataboxes= $this->getUserCategoriesTable()->allDataboxes( $_SESSION['usersinfo']->userId)->toArray();
+			$getBlockUserDetails= $this->getBlockUserTable()->getBlockedIds();
+			$finalIds='';
+			foreach($getBlockUserDetails as $key=>$blockUser){
+				
+				if($blockUser->block_by_uid==$_SESSION['usersinfo']->userId){
+					$finalIds .='"'. $blockUser->blocked_to_uid.'"' . ',';
+				}
+				if($blockUser->blocked_to_uid==$_SESSION['usersinfo']->userId){
+						$finalIds.='"'.$blockUser->block_by_uid.'"' . ',';
+				}
+			}
+			$frnds= rtrim($finalIds,',');
+			$getUserMessages= $this->getUserMessagesTable()->getUserMessages( $_SESSION['usersinfo']->userId,$frnds)->toArray();
+			//End new added
+			//echo "<pre>";print_r($getUserMessages);
+			
+			return $view = new ViewModel(array(
+				'baseUrl' 						=> $baseUrl,
+				'basePath' 						=> $basePath,
+				'allDataboxes' 				    => $allDataboxes,
+				'getUserMessages' 				=> $getUserMessages
+			));
+			
+	}
+
 	public function accountsAction(){
 		if(isset($_POST['display_name'])){
 			$user_session = new Container('usersinfo');
@@ -767,23 +801,6 @@ class DataboxuserController extends AbstractActionController
 			$getTotalLinks = $this->getUserCategoriesTable()->getTotalLinks( $_SESSION['usersinfo']->userId);
 			$votesCountRow = $this->getRelevanceWorthVoteTable()->getVotesUpDownCount();
 			$keywordsRow = $this->getUserCategoriesTable()->getAllKeywords();
-			//new added
-			$allDataboxes= $this->getUserCategoriesTable()->allDataboxes( $_SESSION['usersinfo']->userId)->toArray();
-			$getBlockUserDetails= $this->getBlockUserTable()->getBlockedIds();
-			$finalIds='';
-			foreach($getBlockUserDetails as $key=>$blockUser){
-				
-				if($blockUser->block_by_uid==$_SESSION['usersinfo']->userId){
-					$finalIds .='"'. $blockUser->blocked_to_uid.'"' . ',';
-				}
-				if($blockUser->blocked_to_uid==$_SESSION['usersinfo']->userId){
-						$finalIds.='"'.$blockUser->block_by_uid.'"' . ',';
-				}
-			}
-			$frnds= rtrim($finalIds,',');
-			$getUserMessages= $this->getUserMessagesTable()->getUserMessages( $_SESSION['usersinfo']->userId,$frnds)->toArray();
-			//End new added
-			//echo "<pre>";print_r($getUserMessages);
 			//echo '<pre>'; print_r($keywordsRow); exit;
 			$totalKeywords = 0;
 			if( $keywordsRow->count() )
@@ -807,9 +824,7 @@ class DataboxuserController extends AbstractActionController
 				'getPrivateDataboxCount' 		=> $getPrivateDataboxCount->count(),
 				'getTotalLinks' 				=> $getTotalLinks->count(),
 				'votesCountRow' 				=> $votesCountRow,
-				'totalKeywords' 				=> $totalKeywords,
-				'allDataboxes' 				    => $allDataboxes,
-				'getUserMessages' 				=> $getUserMessages
+				'totalKeywords' 				=> $totalKeywords
 			));
 		}
 	}
