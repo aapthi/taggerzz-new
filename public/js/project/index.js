@@ -464,6 +464,7 @@ $(document).ready(function(){
 					//nicesscrollPublic.setScrollTop(0);
 				   windowtz.off('scroll',scrollPublicBoxesHandler);
 					$( "#publicBoxesOn" ).val( 0 );
+					$('html,body').animate({ scrollTop: $("#list_public_boxes").offset().top}, 1000);
 				}
 				else if( parseInt(data.zeroPublicBoxesFound) == parseInt("1") )
 				{
@@ -503,6 +504,7 @@ $(document).ready(function(){
 					$('#list_public_boxes').html( data.privateBoxHtml );
 					windowtz.off('scroll',scrollPublicBoxesHandler);
 					$( "#publicBoxesOn" ).val( 0 );
+					$('html,body').animate({ scrollTop: $("#list_public_boxes").offset().top}, 1000);
 				}
 				else if( parseInt(data.zeroPrivateBoxFound) == parseInt("1") )
 				{
