@@ -126,6 +126,16 @@ return array(
                             ),
                         ),
                     ),
+                    'dashboard' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route' => '/dashboard',
+                            'defaults' => array(
+                                'controller' => 'Databoxuser\Controller\Databoxuser',
+                                'action'     => 'dashboard',
+                            ),
+                        ),
+                    ),
                 ),
             ),
 			'accounts' => array(
