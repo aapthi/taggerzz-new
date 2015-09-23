@@ -206,7 +206,7 @@ if( isset($this->displayedCategoryUserId) )
 						$i++;
 
 					?>
-					<div class=""><?php echo $getComments->databox_comment; &nbsp;&nbsp;&nbsp;&nbsp;if( $getComments->comment_user_id==$_SESSION['usersinfo']->userId){?><a href="#">Edit Comment</a> | <a href="#">Delete Comment</a><?php }else{}?></div>
+					<div class=""><?php echo $getComments->databox_comment; if( $getComments->comment_user_id==$_SESSION['usersinfo']->userId){?><a href="#">Edit Comment</a> | <a href="#">Delete Comment</a><?php }else{}?></div>
 					<?php
 					}
 					}
