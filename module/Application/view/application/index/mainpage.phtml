@@ -160,9 +160,9 @@
 								
 				    <div id="divDatabox-1" class="divCard" draggable="true">
                         <div id="divDatabox-1-imageWrapper" class="divCardImageWrapper">
-							<?php if( $showMcNsfwPopup ){  ?><a href="javascript:void(0)" onClick='Javascript:displayNsfwMc(<?php echo $currentBoxData["category_id"]; ?>,"<?php echo $currentBoxData["user_hashname"]?>","<?php echo $currentBoxData["category_title"]; ?>",<? echo $currentBoxData["settingId"]?>,"<? echo $catImageUrll?>");'><img src="<?php echo $basePath; ?>/images/social_media/mature_content.jpg" width="234" height="302" /></a>
+							<?php if( $showMcNsfwPopup ){  ?><a href="javascript:void(0)" onClick='Javascript:displayNsfwMc(<?php echo $currentBoxData["category_id"]; ?>,"<?php echo $currentBoxData["user_hashname"]?>","<?php echo $currentBoxData["category_title"]; ?>",<? echo $currentBoxData["settingId"]?>,"<? echo $catImageUrll?>");'><img src="<?php echo $basePath; ?>/images/social_media/mature_content.jpg"  /></a>
 							<?php } else { ?>
-                            <a href="<?php echo $displayCustomizationUrl; ?>"><img id="Databox-1-img" class="imgCardImage" alt="<?php echo $currentBoxData["user_hashname"]; ?>" src="<?php echo $basePath.'/images/project/categoryImages/'.$currentBoxData["category_image"]; ?>"/></a>
+                            <a href="<?php echo $displayCustomizationUrl; ?>"><img id="Databox-1-img" class="" alt="<?php echo $currentBoxData["user_hashname"]; ?>" src="<?php echo $basePath.'/images/project/categoryImages/'.$currentBoxData["category_image"]; ?>"/></a>
 							<?php } ?>
                             <div id="divDatabox-1-hashtag" class="divCardHashtag">
                               <a href="<?php echo $displayCustomizationUrl; ?>"><?php echo $currentBoxData["user_hashname"];?></a>
