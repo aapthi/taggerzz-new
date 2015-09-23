@@ -539,7 +539,7 @@ function checkLogin(alChe)
 		  success: function(data) {
 			if( parseInt(data) == parseInt("1") )
 			{
-				alert("Incorrect password");
+				// alert("Incorrect password");
 				$('#userMessage2').html( "Incorrect password." );
 				return false;
 			}
