@@ -563,6 +563,16 @@ return array(
                             ),
                         ),
                     ),
+					 'insert-comment' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route' => '/insert-comment',
+                            'defaults' => array(
+                                'controller' => 'Databox\Controller\Databox',
+                                'action'     => 'insertComment',
+                            ),
+                        ),
+                    ),
                     'publicdatabox' => array(
                         'type'    => 'segment',
                         'options' => array(

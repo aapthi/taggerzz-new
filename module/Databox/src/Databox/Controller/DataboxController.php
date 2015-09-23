@@ -30,6 +30,7 @@ class DataboxController extends AbstractActionController
 	protected $userTable;
 	protected $databoxViewsTable;
 	protected $userCollectionsTable;
+	protected $databoxCommentsTable;
 	
 	protected $jsonLinksArray=array();
 	protected $jsonLinkNum = 0;
@@ -2922,6 +2923,8 @@ class DataboxController extends AbstractActionController
 			}
 			//End
 			//echo $countRelevance1 .'--'. $countRelevance0 .'--'. $countWorth1 .'--'. $countWorth0; exit;
+			//$getComments = $this->getDataboxCommentsTable()->getDataboxComments();
+			 //echo '<pre>'; print_r($getComments);exit;
 			return new ViewModel(array(				
 				'baseUrl' 					=> 	$baseUrl,
 				'basePath' 					=> 	$basePath,
@@ -3429,6 +3432,22 @@ class DataboxController extends AbstractActionController
             $this->userCollectionsTable = $sm->get('Databox\Model\UserCollectionsFactory');			
         }
         return $this->userCollectionsTable;
+    }
+	public function getDataboxCommentsTable()
+    {
+        if (!$this->databoxCommentsTable) {				
+            $sm = $this->getServiceLocator();
+            $this->databoxCommentsTable = $sm->get('Databox\Model\DataboxCommentsFactory');			
+        }
+        return $this->databoxCommentsTable;
+    }
+	public function insertCommentAction()
+    {
+		$insertComment = $this->getDataboxCommentsTable()->addComment($_POST);
+			return $view = new JsonModel(
+				array(
+					'output'			=>	1,
+				));
     }
 }
 

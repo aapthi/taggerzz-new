@@ -43,6 +43,8 @@ use Databox\Model\BlockUser;
 use Databox\Model\BlockUserTable;
 use Databox\Model\UserCollections;
 use Databox\Model\UserCollectionsTable;
+use Databox\Model\DataboxComments;
+use Databox\Model\DataboxCommentsTable;
 
 class Module implements
 	Feature\AutoloaderProviderInterface,
@@ -85,7 +87,8 @@ class Module implements
             	'Databox\Model\DataboxViewsFactory'=>'Databox\Factory\Model\DataboxViewsTableFactory',		
             	'Databox\Model\UserMessagesFactory'=>'Databox\Factory\Model\UserMessagesTableFactory',		
             	'Databox\Model\BlockUserFactory'=>'Databox\Factory\Model\BlockUserTableFactory',		
-            	'Databox\Model\UserCollectionsFactory'=>'Databox\Factory\Model\UserCollectionsTableFactory',		
+            	'Databox\Model\UserCollectionsFactory'=>'Databox\Factory\Model\UserCollectionsTableFactory',
+				'Databox\Model\DataboxCommentsFactory'=>'Databox\Factory\Model\DataboxCommentsTableFactory',	
 			),			
         );
     }

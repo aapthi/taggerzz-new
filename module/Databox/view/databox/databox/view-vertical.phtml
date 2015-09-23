@@ -190,10 +190,19 @@ if( isset($this->displayedCategoryUserId) )
 				}?>
 			</span>
 			
-			<h2>Facebook Reviews</h2><br/>
+			<!--<h2>Facebook Reviews</h2><br/>
 			<div id="fb-root"></div>
-			<div class="fb-comments" data-href="<?php echo $layoutUrl; ?>" data-numposts="5"></div>
-
+			<div class="fb-comments" data-href="<?php echo $layoutUrl; ?>" data-numposts="5"></div>-->
+			<h2>DataBox Reviews</h2>
+			<div class="">
+				<textarea id="message" class="" placeholder='Enter your comment'></textarea>
+				<div class="">
+					<button onClick="insertComment()" class="">COMMENT SEND</button>
+				</div>
+            </div>
+			<div id="commentsList">
+				
+			</div>
 		</div>
 	</section>
 
@@ -278,7 +287,7 @@ if( isset($this->displayedCategoryUserId) )
 <script src="<?php echo $basePath; ?>/js/crop/jquery.cropit.js"></script>
 <script src="<?php echo $basePath; ?>/js/popupwindow.js"></script>
 <script type="text/javascript" src="<?php echo $basePath; ?>/js/ckeditor/ckeditor.js"></script>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5461ef997855b9fa" async="async"></script>
+<!--<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5461ef997855b9fa" async="async"></script>-->
 
 
 <script type="text/javascript">
@@ -541,7 +550,7 @@ $(document).ready(function()
 	// End Cat desc...
  });
 </script>		
-<script>
+<!--<script>
 (function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
@@ -549,6 +558,32 @@ $(document).ready(function()
   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=608131635971702&version=v2.0";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
-</script>        
-        
+</script>--> 
+<script>       
+function insertComment(){
+	var comment=$('#message').val();
+	if(comment==""){
+		alert('Enter the comment');return false;
+	}
+	$.ajax({
+			url: BASE_URL+'/databox/insert-comment',
+			dataType: "json",
+			type	: "POST",
+			data	:{comment:comment},
+			success: function( data ) {
+				if(data.output!=0) {
+					$('#message').val('');
+					alert('comment inserted');
+				}else{
+					alert('No data is found');
+				}
+				
+			}	
+			
+	});
+
+
+		
+}
+</script>	       
     
