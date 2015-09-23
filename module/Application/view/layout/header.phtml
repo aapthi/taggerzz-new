@@ -180,7 +180,8 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
             <ul id="ulMenu" class="ulMenu">
                 <li> <a class="tag_chk  <?echo $homeActive; ?>" href="javascript:void(0);" onclick="goToLocation('/contentpage')">Home</a> </li>
 				<li> <a class="tag_chk  <?echo $montageActive; ?>" onClick="goToLocation('/montage')" href="javascript:void(0)" >My Profile</a></li>
-                <li> <a class="tag_chk <?echo $accountActive; ?>" href="javascript:void(0)" onClick="goToLocation('/accounts')">My account settings</a> </li>
+                <li> <a class="tag_chk <?echo $accountActive; ?>" href="javascript:void(0)" onClick="goToLocation('/accounts')">Account settings</a> </li>
+                <li> <a class="tag_chk <?echo $accountActive; ?>" href="javascript:void(0)" onClick="goToLocation('/databoxuser/dashboard')">Dashboard</a> </li>
                 <li> <a class="tag_chk " href="javascript:void(0)" onClick="goToLocation('logout')" >Logout</a> </li>
             </ul>
         </div>
@@ -320,8 +321,9 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
 			<input type="text" class="text_pad" name="emailId2" id="emailId2"/>
 			<p id="c_password">Password</p>
 			<input type="password" class="text_pad" name="userPassword2" id="userPassword2"/>
-			<p class="tg_email_btn"><button name="btnSubmit" id="btnSubmit" type="button" class="btn" onClick="return checkLogin('loginPopup');">CONTINUE</button><span id="userMessage2" style="display:none" class="check_un_p">Checking Username,Password...</span></p>
+			<p class="tg_email_btn"><button name="btnSubmit" id="btnSubmit" type="button" class="btn" onClick="return checkLogin('loginPopup');">CONTINUE</button></p>
 			<p class="tg_fp_btn"><a href="javascript:void(0)" id="forgot_password" class="home_anchor_black" onClick="Javascript:showFpEmailIdForm();"><b>Forgot Password?</b></a><span style="display:none"id="tgaccount"><span>Already have a Taggerzz account?</span>&nbsp;&nbsp;<a href="javascript:void(0);" class="home_anchor_black" onclick="loginWindow()"><b>Login</b></a></span></p>
+			<span class="tg_email_btn"><span id="userMessage2" style="display:none" class="check_un_p">Checking Username,Password...</span></span>
 			<input type="hidden" id="hid_log" name="hid_log" value="loginPopup">
 			<div class="crete_acc">
 				<p><span>Don't have an account</span>&nbsp;&nbsp;<a href="javascript:void(0);" onclick="signUpWindow()">Sign up now</a></p>
