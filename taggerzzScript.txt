@@ -7,8 +7,9 @@ CREATE TABLE `databox_comments` (
   `created_date` datetime DEFAULT NULL,
   `updated_date` datetime DEFAULT NULL,
   `comment_status` tinyint(4) DEFAULT NULL COMMENT '1-Active,0-Deactive',
+  `databox_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`databox_comment_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1
+)
 
 
 //End
