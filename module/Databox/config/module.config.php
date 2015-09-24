@@ -583,6 +583,16 @@ return array(
                             ),
                         ),
                     ),
+					'update-comment' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route' => '/update-comment',
+                            'defaults' => array(
+                                'controller' => 'Databox\Controller\Databox',
+                                'action'     => 'updateComment',
+                            ),
+                        ),
+                    ),
                     'publicdatabox' => array(
                         'type'    => 'segment',
                         'options' => array(

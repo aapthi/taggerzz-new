@@ -40,9 +40,9 @@ class DataboxCommentsTable
 		$resultSet = $this->tableGateway->selectWith($select);
 		return $resultSet;
 	}
-	public function updateComment( $commentId ){
+	public function updateCommentId( $commentId,$comment){
 		$data = array(
-			'databox_comment' =>'1'
+			'databox_comment' =>$comment
 		);	
 		$row=$this->tableGateway->update($data, array('databox_comment_id' => $commentId));
 		return $row;

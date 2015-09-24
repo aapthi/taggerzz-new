@@ -194,26 +194,30 @@ if( isset($this->displayedCategoryUserId) )
 			<div id="fb-root"></div>
 			<div class="fb-comments" data-href="<?php echo $layoutUrl; ?>" data-numposts="5"></div>-->
 			<h2>DataBox Reviews</h2>
-			
+			<?php if(isset($_SESSION['usersinfo']->userId)){?>
 			<div class="">
 				<textarea id="message" class="" placeholder='Enter your comment'></textarea>
 				<div class="">
-					<?php if(isset($_SESSION['usersinfo']->userId)){?>
-					<button onClick="insertComment()" class="">COMMENT SEND</button>
-					<?php } ?>
+					
+					<button id="commentSend" onClick="insertComment()" class="">COMMENT SEND</button>
+					<input type="hidden" id="hidSendComment" value="0" >
+					
 				</div>
             </div>
+			<?php } ?>
 			<div id="commentsList">
 				<?php if(count($this->getComments)!=0){$i=0;foreach($this->getComments as $key=>$getComments)
 					{
+					if($i==0){
+					?><input type="hidden" id="hidCommentId" value="<?php echo $getComments->databox_comment_id;?>">
+					<?php
+					}
 						$i++;
 
 					?>
-					<div id="comment<?php echo $getComments->databox_comment_id;?>"class=""><?php echo $getComments->databox_comment; if( $getComments->comment_user_id==$_SESSION['usersinfo']->userId){?><button onClick="editComment(<?php echo $getComments->databox_comment_id?>)" class="">Edit Comment</button> |<button id="deleteComment<?php echo $getComments->databox_comment_id;?>"onClick="deletedComment(<?php echo $getComments->databox_comment_id;?>)" class="">Delete Comment</button><?php }else{}?></div>
+					<div id="comment<?php echo $getComments->databox_comment_id;?>"class=""><span id="commText<?php echo $getComments->databox_comment_id;?>"><?php echo $getComments->databox_comment; ?></span><?php if( $getComments->comment_user_id==$_SESSION['usersinfo']->userId){?><button onClick="editComment('<?php echo $getComments->databox_comment_id?>','<?php echo $getComments->databox_comment; ?>')" class="">Edit Comment</button> |<button id="deleteComment<?php echo $getComments->databox_comment_id;?>"onClick="deletedComment(<?php echo $getComments->databox_comment_id;?>)" class="">Delete Comment</button><?php }else{}?></div>
 					<?php
 					}
-					?><input type="hidden" id="hidCommentId" value="<?php echo $getComments->databox_comment_id;?>">
-					<?php
 					}
 					?>
 					
@@ -575,6 +579,14 @@ $(document).ready(function()
 }(document, 'script', 'facebook-jssdk'));
 </script>--> 
 <script>       
+
+function editComment(id){
+	var editCommTxt = $('#commText'+id).html();
+	$('#message').val(editCommTxt);
+	$('#commentSend').html('Update Comment');
+	$('#hidSendComment').val(id);
+}
+
 function insertComment(){
 	var comment=$('#message').val();
 	var hidCommentId=$('#hidCommentId').val();
@@ -583,25 +595,54 @@ function insertComment(){
 	if(comment==""){
 		alert('Enter the comment');return false;
 	}
-	$.ajax({
-			url: BASE_URL+'/databox/insert-comment',
-			dataType: "json",
-			type	: "POST",
-			data	:{comment:comment},
-			success: function( data ) {
-				if(data.output!=0) {
-					var addHtml='';
-					$('#message').val('');
-					addHtml+='<div id="comment'+newValue+'" >';
-					addHtml+=comment;
-					addHtml+='<button onClick="editComment('+newValue+')" class="">Edit Comment</button> |<button onClick="deletedComment('+newValue+')" class="">Delete Comment</button></div>';
-					$('#commentsList').prepend(addHtml);
-					alert('comment inserted');
-				}else{
-					alert('No data is found');
-				}
-			}	
-	});	
+	var hid=$('#hidSendComment').val();
+	if(hid=='0'){
+		$.ajax({
+				url: BASE_URL+'/databox/insert-comment',
+				dataType: "json",
+				type	: "POST",
+				data	:{comment:comment},
+				success: function( data ) {
+					if(data.output!=0) {
+						var addHtml='';
+						$('#message').val('');
+						addHtml+='<div id="comment'+newValue+'"><span id="commText'+newValue+'">';
+						addHtml+=comment;
+						addHtml+='</span>';
+						addHtml+='<button onClick="editComment('+newValue+')" class="">Edit Comment</button> |<button onClick="deletedComment('+newValue+')" class="">Delete Comment</button></div>';
+						$('#commentsList').prepend(addHtml);
+						$('#hidSendComment').val('0');
+						alert('comment inserted');
+					}else{
+						alert('No data is found');
+					}
+				}	
+		});
+	}else{
+		$.ajax({
+				url: BASE_URL+'/databox/update-comment',
+				dataType: "json",
+				type	: "POST",
+				data	:{comment:comment,databox_comment_id:hid},
+				success: function( data ) {
+					if(data.output!=0) {
+						var addHtmlEdit='';
+						addHtmlEdit+='<div id="comment'+hid+'" ><span id="commText'+hid+'">';
+						addHtmlEdit+=comment;
+						addHtmlEdit+='</span>';
+						addHtmlEdit+='<button onClick="editComment('+hid+')" class="">Edit Comment</button> |<button onClick="deletedComment('+hid+')" class="">Delete Comment</button></div>';
+						$('#comment'+hid).html(addHtmlEdit);
+						$('#message').val('');
+						$('#commentSend').html('');
+						$('#commentSend').html('COMMENT SEND');
+						$('#hidSendComment').val('0');
+						alert('comment updated');
+					}else{
+						alert('No data is found');
+					}
+				}	
+		});
+	}	
 }
 function deletedComment(id){
 	$.ajax({

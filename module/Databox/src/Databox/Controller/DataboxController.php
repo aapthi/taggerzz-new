@@ -3458,6 +3458,14 @@ class DataboxController extends AbstractActionController
 					'output'			=>	1,
 				));
     }
+	public function updateCommentAction()
+    {
+		$update= $this->getDataboxCommentsTable()->updateCommentId($_POST['databox_comment_id'],$_POST['comment']);
+			return $view = new JsonModel(
+				array(
+					'output'			=>	1,
+				));
+    }
 }
 
 		
