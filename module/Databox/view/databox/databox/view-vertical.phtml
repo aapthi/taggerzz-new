@@ -215,7 +215,7 @@ if( isset($this->displayedCategoryUserId) )
 						$i++;
 
 					?>
-					<div id="comment<?php echo $getComments->databox_comment_id;?>"class=""><span id="commText<?php echo $getComments->databox_comment_id;?>"><?php echo $getComments->databox_comment; ?></span><?php if( $getComments->comment_user_id==$_SESSION['usersinfo']->userId){?><button onClick="editComment('<?php echo $getComments->databox_comment_id?>','<?php echo $getComments->databox_comment; ?>')" class="">Edit Comment</button> |<button id="deleteComment<?php echo $getComments->databox_comment_id;?>"onClick="deletedComment(<?php echo $getComments->databox_comment_id;?>)" class="">Delete Comment</button><?php }else{}?></div>
+					<div id="comment<?php echo $getComments->databox_comment_id;?>"class=""><span id="commText<?php echo $getComments->databox_comment_id;?>"><?php echo $getComments->databox_comment; ?></span><?php if( $getComments->comment_user_id==isset($_SESSION['usersinfo']->userId)){?><button onClick="editComment('<?php echo $getComments->databox_comment_id?>','<?php echo $getComments->databox_comment; ?>')" class="">Edit Comment</button> |<button id="deleteComment<?php echo $getComments->databox_comment_id;?>"onClick="deletedComment(<?php echo $getComments->databox_comment_id;?>)" class="">Delete Comment</button><?php }else{}?></div>
 					<?php
 					}
 					}
