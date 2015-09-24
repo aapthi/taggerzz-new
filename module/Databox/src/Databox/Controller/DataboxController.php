@@ -2923,7 +2923,7 @@ class DataboxController extends AbstractActionController
 			}
 			//End
 			//echo $countRelevance1 .'--'. $countRelevance0 .'--'. $countWorth1 .'--'. $countWorth0; exit;
-			$getComments = $this->getDataboxCommentsTable()->getDataboxComments();
+			$getComments = $this->getDataboxCommentsTable()->getDataboxComments($categoryId);
 			 //echo '<pre>'; print_r($getComments);exit;
 			return new ViewModel(array(				
 				'baseUrl' 					=> 	$baseUrl,

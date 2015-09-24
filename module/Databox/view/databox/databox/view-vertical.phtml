@@ -588,6 +588,7 @@ function editComment(id){
 }
 
 function insertComment(){
+	var databoxId='<?php echo $this->categoryId ?>';
 	var comment=$('#message').val();
 	var hidCommentId=$('#hidCommentId').val();
 	var newValue=parseInt(hidCommentId)+1;
@@ -601,7 +602,7 @@ function insertComment(){
 				url: BASE_URL+'/databox/insert-comment',
 				dataType: "json",
 				type	: "POST",
-				data	:{comment:comment},
+				data	:{comment:comment,category_id:databoxId},
 				success: function( data ) {
 					if(data.output!=0) {
 						var addHtml='';

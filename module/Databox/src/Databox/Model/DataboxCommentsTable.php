@@ -29,13 +29,15 @@ class DataboxCommentsTable
 				'created_date'     => date('Y-m-d H:i:s'), 
 				'updated_date'     => date('Y-m-d H:i:s'), 
 				'comment_status'   => 1,
+				'databox_id'  => $comment['category_id'],
 		);	
 		$resultset=$this->tableGateway->insert($data);
 		return $resultset;
 	}
-	public function getDataboxComments(){
+	public function getDataboxComments($categoryId){
 		$select = $this->tableGateway->getSql()->select();
 		$select->join('user', 'databox_comments.comment_user_id=user.user_id',array('*'),'left');
+		$select->where('databox_comments.databox_id="'.$categoryId.'"');
 		$select->order('databox_comments.databox_comment_id DESC');
 		$resultSet = $this->tableGateway->selectWith($select);
 		return $resultSet;
