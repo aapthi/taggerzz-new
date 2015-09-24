@@ -40,5 +40,17 @@ class DataboxCommentsTable
 		$resultSet = $this->tableGateway->selectWith($select);
 		return $resultSet;
 	}
+	public function updateComment( $commentId ){
+		$data = array(
+			'databox_comment' =>'1'
+		);	
+		$row=$this->tableGateway->update($data, array('databox_comment_id' => $commentId));
+		return $row;
+	}
+	public function deleteCommentId( $Id )
+    {	
+		$deleteCommentId=$this->tableGateway->delete(array('databox_comment_id' => $Id));
+		return $deleteCommentId;
+	}
 	
 }

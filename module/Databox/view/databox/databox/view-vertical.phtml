@@ -194,10 +194,13 @@ if( isset($this->displayedCategoryUserId) )
 			<div id="fb-root"></div>
 			<div class="fb-comments" data-href="<?php echo $layoutUrl; ?>" data-numposts="5"></div>-->
 			<h2>DataBox Reviews</h2>
+			
 			<div class="">
 				<textarea id="message" class="" placeholder='Enter your comment'></textarea>
 				<div class="">
+					<?php if(isset($_SESSION['usersinfo']->userId)){?>
 					<button onClick="insertComment()" class="">COMMENT SEND</button>
+					<?php } ?>
 				</div>
             </div>
 			<div id="commentsList">
@@ -206,11 +209,14 @@ if( isset($this->displayedCategoryUserId) )
 						$i++;
 
 					?>
-					<div class=""><?php echo $getComments->databox_comment; if( $getComments->comment_user_id==$_SESSION['usersinfo']->userId){?><a href="#">Edit Comment</a> | <a href="#">Delete Comment</a><?php }else{}?></div>
+					<div id="comment<?php echo $getComments->databox_comment_id;?>"class=""><?php echo $getComments->databox_comment; if( $getComments->comment_user_id==$_SESSION['usersinfo']->userId){?><button onClick="editComment(<?php echo $getComments->databox_comment_id?>)" class="">Edit Comment</button> |<button id="deleteComment<?php echo $getComments->databox_comment_id;?>"onClick="deletedComment(<?php echo $getComments->databox_comment_id;?>)" class="">Delete Comment</button><?php }else{}?></div>
 					<?php
 					}
+					?><input type="hidden" id="hidCommentId" value="<?php echo $getComments->databox_comment_id;?>">
+					<?php
 					}
 					?>
+					
 			</div>
 		</div>
 	</section>
@@ -571,6 +577,9 @@ $(document).ready(function()
 <script>       
 function insertComment(){
 	var comment=$('#message').val();
+	var hidCommentId=$('#hidCommentId').val();
+	var newValue=parseInt(hidCommentId)+1;
+	$('#hidCommentId').val(newValue);
 	if(comment==""){
 		alert('Enter the comment');return false;
 	}
@@ -581,18 +590,34 @@ function insertComment(){
 			data	:{comment:comment},
 			success: function( data ) {
 				if(data.output!=0) {
+					var addHtml='';
 					$('#message').val('');
+					addHtml+='<div id="comment'+newValue+'" >';
+					addHtml+=comment;
+					addHtml+='<button onClick="editComment('+newValue+')" class="">Edit Comment</button> |<button onClick="deletedComment('+newValue+')" class="">Delete Comment</button></div>';
+					$('#commentsList').prepend(addHtml);
 					alert('comment inserted');
 				}else{
 					alert('No data is found');
 				}
-				
 			}	
-			
+	});	
+}
+function deletedComment(id){
+	$.ajax({
+			url: BASE_URL+'/databox/delete-comment',
+			dataType: "json",
+			type	: "POST",
+			data	:{databox_comment_id:id},
+			success: function( data ) {
+				if(data.output!=0) {
+					$('#comment'+id).remove();
+					alert('comment deleted');
+				}else{
+					alert('No data is found');
+				}
+			}	
 	});
-
-
-		
 }
 </script>	       
     

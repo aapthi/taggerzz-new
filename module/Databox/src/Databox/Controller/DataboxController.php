@@ -3450,6 +3450,14 @@ class DataboxController extends AbstractActionController
 					'output'			=>	1,
 				));
     }
+	public function deleteCommentAction()
+    {
+		$deleteComment = $this->getDataboxCommentsTable()->deleteCommentId($_POST['databox_comment_id']);
+			return $view = new JsonModel(
+				array(
+					'output'			=>	1,
+				));
+    }
 }
 
 		

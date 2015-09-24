@@ -573,6 +573,16 @@ return array(
                             ),
                         ),
                     ),
+					'delete-comment' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route' => '/delete-comment',
+                            'defaults' => array(
+                                'controller' => 'Databox\Controller\Databox',
+                                'action'     => 'deleteComment',
+                            ),
+                        ),
+                    ),
                     'publicdatabox' => array(
                         'type'    => 'segment',
                         'options' => array(
