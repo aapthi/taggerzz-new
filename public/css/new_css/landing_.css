@@ -1,0 +1,37 @@
+@charset "utf-8";
+/* CSS Document */
+
+.side_image{
+	height:auto;
+	width:35%;
+	float:right;
+	margin-right:0.0em;
+	margin-top:0.0em;
+	opacity:0.5;
+/*	position:absolute; */
+	z-index:1;
+	}
+	
+	.img_logo{
+		height:auto;
+		width:100%;
+		float:left;
+		margin-top:0.00em;
+		margin-left:0.00em;
+		box-shadow:0.30em 0.20em 0.20em #666;
+		}
+		.ctrl_img_logo{
+			height:auto;
+			width:25.00em;
+			float:left;
+			margin-left:0.00em;
+			margin-top:-26.10em;
+			}
+	
+	.ctrl_right_sticky{
+		width:200px;
+		height:auto;
+		float:right;
+		margin-right:0.00em;
+		margin-top:0.00em;
+		}
