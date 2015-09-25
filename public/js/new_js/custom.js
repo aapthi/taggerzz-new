@@ -58,19 +58,69 @@ var hideLoader = function() {
     $('.divLoaderWrapper').css('z-index', '-1');
 };
 
+var startTimeMS = 0;  // EPOCH Time of event count started
+var timerSet = 0;
+var timerStep=10000;
+
+function getRemainingTime(){
+    return  timerStep - ( (new Date()).getTime() - startTimeMS );
+}
+
+
 slidesCount = $('.ulCenterSlide li').length;
+var currFadedOutImg = 7;
+var imgCounter = 0;
+
+var totalIdleTime = 0;
+var animationsStarted = false;
 
 var centerImageTransition = function() {
-    if (typeof counter === 'undefined' || counter == slidesCount) {
-        counter = 0;
-        prevCounter = slidesCount;
-    }
-
-    $('.ulCenterSlide li:nth-child(' + prevCounter + ')').fadeOut(1200, function() {
-        counter++;
-        $('.ulCenterSlide li:nth-child(' + counter + ')').fadeIn(1200, function() {
-            prevCounter = counter;
-            setTimeout(centerImageTransition, 7000);
-        });
+	var grt = getRemainingTime();
+	var tzTimeRemaining = 0;
+	if( timerSet )
+	{
+		tzTimeRemaining = grt;
+	}
+	if( ! animationsStarted )
+	{
+		animationsStarted = true;
+		$('.ulCenterSlide li:nth-child(' + currFadedOutImg + ')').fadeOut(1200, function() {
+			// console.log( "set " + totalIdleTime );
+			totalIdleTime = 0;
+			imgFadeIn();
+		});
+	}
+	
+	if( (parseInt(totalIdleTime) < parseInt("6000")) )
+	{
+		var funcReturn = true;
+		totalIdleTime += parseInt(tzTimeRemaining);
+		if( parseInt(totalIdleTime) >= parseInt("6000") || parseInt(totalIdleTime) >= parseInt("2200") )
+		{
+			funcReturn = false;
+		}
+		if( funcReturn )
+		{
+			return;
+		}
+	}
+    $('.ulCenterSlide li:nth-child(' + currFadedOutImg + ')').fadeOut(1200, function() {
+		totalIdleTime = 0;
+		imgFadeIn();
     });
 };
+
+function imgFadeIn()
+{
+	imgCounter++;
+	if( parseInt(imgCounter) > parseInt(slidesCount) )
+	{
+		imgCounter = 1;
+	}
+	currFadedOutImg = imgCounter;
+	$('.ulCenterSlide li:nth-child(' + imgCounter + ')').fadeIn(1200, function() {
+		startTimeMS = (new Date()).getTime()+2400;
+		setTimeout(centerImageTransition, 10000);
+		timerSet = 1;
+	});
+}
