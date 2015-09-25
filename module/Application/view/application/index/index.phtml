@@ -1,8 +1,15 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <?php if(!isset($_SESSION['usersinfo']) ){?>
-<head>
+    <head>
         <title>Taggerzz</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
+		
 	<?php
 //unset($_SESSION['sLoginFValue']);
 //unset($_SESSION['sLoginGValue']); exit;
@@ -125,6 +132,7 @@ src="https://accounts.google.com/CheckCookie?continue=https%3A%2F%2Fwww.google.c
 />
 <div id="fb-root"></div>
 <?}}?>
+
 <?php
 	$header=$this->action('Application\Controller\IndexController', 'headerAction',array('20','10'));
 		$baseUrl = $header->headerarray['baseUrl'];
@@ -136,7 +144,11 @@ src="https://accounts.google.com/CheckCookie?continue=https%3A%2F%2Fwww.google.c
 <input type="hidden" id="socialLoginSecond" value="" />
 <input type="hidden" id="checkGoogleLogin" />
 <input type="hidden" id="checkGoogleLogin1" value="0" />
-
+		
+        <!--
+		<link rel="stylesheet" media="(max-width: 799px)" href="<?php echo $basePath; ?>/css/new_css/styles-mobile.css" /> 
+        <link rel="stylesheet" href="<?php echo $basePath; ?>/css/new_css/styles.css" />
+		-->
     </head>
     <body>
         <div id="mainWrapper" class="mainWrapper">
@@ -144,6 +156,7 @@ src="https://accounts.google.com/CheckCookie?continue=https%3A%2F%2Fwww.google.c
             <section id="secFixedAspects">
                 <img id="imgBackgoundOverlay" class="imgBackground" src="<?php echo $basePath; ?>/img/imgLightBlueOverlay.png" alt="" />
 
+              
                 <div id="divLoaderWrapper" class="divLoaderWrapper">
                     <div id="divLoader" class="divLoader">
                         <div id="divLoaderText" class="divLoaderText">
@@ -153,23 +166,75 @@ src="https://accounts.google.com/CheckCookie?continue=https%3A%2F%2Fwww.google.c
                     </div>
                 </div>
             </section>
-
+            
             <!--            Left Section-->
-            <section id="secLeftAspects" class="secLeftAspects">
-                <div id="divLeftWrapper" class="divLeftWrapper">
-                    <img id="imgLogo" class="imgLogo verticalCenter width100" src="<?php echo $basePath; ?>/img/imgLogo.png" alt="" /> <br>
-                    <div id="divLogoText" class="divLogoText">
-                        <span id="spnLogoText" class="verySmallFont spnLogoText">TAGGERZZ.COM IS A WEB PERSONALIZING &amp; IDEAS SHARING WEBSITE. GREAT HUB FOR GENERATING
-                            YOUR IDEAS BY HOT LINKS SHARING AND CUSTOMISING.</span>
-                    </div>
-                </div>
-            </section>
-
             <!--            Center Section-->
-            <section id="secCenterAspects" class="secCenterAspects">
+          <div class="ctrl_right_sticky">
+               <div id="divLoginWrapper" class="divLoginWrapper rightSticky">
+                        <div id="divLoginSocial" class="divLoginSocial smallFont whiteFont fatFont textCenter largeFont">
+						<form class="" method="post" id="userLoginFormUrl1" name="userLoginFormUrl1" role="form" >
+                            <div class="block">
+                                <span class="fatFont">LOGIN USING</span>
+                            </div>
+                            <div class="block">
+								<?php
+								foreach ($socialOptions->getEnabledProviders() as $provider) {
+								echo  $this->socialSignInButton($provider, $this->redirect,$basePath);
+								}
+								?>
+								<!--
+                                <img id="imgFBLogin" class="imgSocialImage" src="<?php echo $basePath; ?>/img/imgFB.png" alt=""/>
+                                <img id="imgGPlusLogin" class="imgSocialImage" src="<?php echo $basePath; ?>/img/imgGPlus.png" alt=""/>
+								-->
+                            </div>
+                            <div class="block fatFont">
+                                OR
+                            </div>
+                            <div class="block textLeft">
+                                <label>Email</label> <br>
+								<!--
+                                <input type="email" name="txtEmail" id="txtEmail" class="formField txtEmail"/>
+								-->
+								<input type="email" name="emailId1" id="emailId1" class="formField txtEmail"/>
+                            </div>
+                            <div class="block textLeft">
+                                <label>Password</label> <br>
+								<!--
+                                <input type="password" name="txtPassword" id="txtPassword" class="formField txtPassword"/>
+								-->
+								<input type="password" name="userPassword1" id="userPassword1" class="formField txtPassword"/>
+                            </div>
+							<div class="block textLeft">
+								<label>Remember Me &nbsp;&nbsp;<input type="checkbox" name="remember_me" id="remember_me" value="" style="width:7% !important;"></label> 									
+							</div>
+                            <div class="block textRight">
+								<a href="javascript:void(0)" id="forgot_password"  onClick="Javascript:showFpEmailIdForm();">Forgot Password?</a>
+								<!--
+                                <button name="btnSubmit" id="btnSubmit" class="formField btnSubmit">SUBMIT</button>
+								-->
+								<button type="button" name="btnSubmit" id="btnSubmit" onClick="return checkLogin('loginChe');" class="formField btnSubmit">SUBMIT</button>
+                            </div>
+								<input type="hidden" id="hid_log" name="hid_log" value="logChe">
+                            <div class="block textCenter">
+                                <label>Don't have account with us? </label><br>
+								<!--
+                                <button name="btnSignup" id="btnSignup" class="formField btnSignup">SIGNUP</button>
+								-->
+								<button type="button" name="btnSignup" id="btnSignup" class="formField btnSignup" onClick="Javascript:sUpFunction();" >SIGNUP</button>
+                            </div>
+                            <div class="block">
+								<a href="<?php echo $baseUrl; ?>/contentpage">I'll do this later >></a>
+                            </div>
+							</form>
+                        </div>
+                    </div>
+</div>
+
+      <section id="secCenterAspects" class="secCenterAspects">
                 <div id="divCenterWrapper" class="divCenterWrapper verticalCenterWrapper">
                     <div id="divCenter" class="divCenter verticalCenterContainer">
-                        <div id="divCenterText" class="divCenterText verticalCenter textCenter">
+                    <div class="ctrl_img_logo"><img src="<?php echo $basePath; ?>/img/imgLogo.png" class="img_logo"></div>
+      <div id="divCenterText" class="divCenterText verticalCenter textCenter">
                             <ul class="ulCenterSlide">
                                 <li>
                                     <img class="imgCenterImage" src="<?php echo $basePath; ?>/img/c1.png" alt=""/> <br>
@@ -203,81 +268,43 @@ src="https://accounts.google.com/CheckCookie?continue=https%3A%2F%2Fwww.google.c
                                 </li>
                             </ul>
 
-                        </div>
+                        </div> 
                     </div>
                 </div>
             </section>
+
+            <div class="side_image">
+          <img src="<?php echo $basePath; ?>/img/imgLeftArrow.png"></div>
 
             <!--            Right Section-->
-            <section id="secRightAspects" class="rightSticky onTopLessOne">
-                <div id="divRightWrapper" class="divRightWrapper">
-                    <img id="imgLeftArrowMark" class="imgLeftArrowMark rightSticky" src="<?php echo $basePath; ?>/img/imgLeftArrow.png" alt="" />
-                    <!--<div id="divTriangle" class="divTriangle">-->
-                    <!--</div>-->
-
-                    <div id="divLoginWrapper" class="divLoginWrapper rightSticky">
-                        <div id="divLoginSocial" class="divLoginSocial smallFont whiteFont fatFont textCenter largeFont">
-						<form class="" method="post" id="userLoginFormUrl1" name="userLoginFormUrl1" role="form" >
-								<div class="block">
-									<span class="fatFont">LOGIN USING</span>
-								</div>
-								<div class="block">
-									<?php
-									foreach ($socialOptions->getEnabledProviders() as $provider) {
-									echo  $this->socialSignInButton($provider, $this->redirect,$basePath);
-									}
-									?>
-								</div>
-								<div class="block fatFont">
-									OR
-								</div>
-								<div class="block textLeft">
-									<label>Email</label> <br>
-									<input type="email" name="emailId1" id="emailId1" class="formField txtEmail"/>
-								</div>
-								<div class="block textLeft">
-									<label>Password</label> <br>
-									<input type="password" name="userPassword1" id="userPassword1" class="formField txtPassword"/>
-								</div>
-								<div class="block textLeft">
-									<label>Remember Me &nbsp;&nbsp;<input type="checkbox" name="remember_me" id="remember_me" value="" style="width:7% !important;"></label> 									
-								</div>
-								<div class="block textRight">
-									<a href="javascript:void(0)" id="forgot_password"  onClick="Javascript:showFpEmailIdForm();">Forgot Password?</a>
-									<!--<input type="button" name="btnSubmit" id="btnSubmit" onClick=" checkLogin('loginChe');" class="formField btnSubmit" value="SUBMIT">-->
-									<button type="button" name="btnSubmit" id="btnSubmit" onClick="return checkLogin('loginChe');" class="formField btnSubmit">SUBMIT</button>
-								</div>
-								<input type="hidden" id="hid_log" name="hid_log" value="logChe">
-								<div class="block textCenter">
-									<label>Don't have account with us? </label><br>
-									<button type="button" name="btnSignup" id="btnSignup" class="formField btnSignup" onClick="Javascript:sUpFunction();" >SIGNUP</button>
-								</div>
-								<div class="block">
-									<a href="<?php echo $baseUrl; ?>/contentpage">I'll do this later >></a>
-								</div>
-							</form>
-                            
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-
             <!--            Bottom Section-->
-            <section id="secFooterAspects" class="bottomSticky">
+        </div>
+        
+        <section id="secFooterAspects" class="bottomSticky">
                 <div id="divFooterSentence" class="whiteFont">
-                    <span class="fatFont"><?php echo $totalHotLinksCount;?></span> <span class="smallFont">HOT LINKS, PERSONALIZED AND SHARED,</span> <span class="fatFont"><?php echo $homeUsersCount;?></span> <span class="smallFont">Users</span>
+                    <span class="fatFont"><?php echo $totalHotLinksCount;?></span> <span class="smallFont">HOT LINKS, PERSONALIZED AND SHARED,</span> <span class="fatFont">49</span> <span class="smallFont">Users</span>
                 </div>
             </section>
-        </div>
+        
+        <script src="<?php echo $basePath; ?>/js/new_js/custom.js"></script>
+
 		<div id="popUpConfirmTpLogin" class="pop-up-display-content conform_popup_content">
-	<p>Do you want to continue with your <b id="tpName"></b> login ?</p><br/>
-	<p><a id="tpLoginLink" class="btn" href="Javascript:void(0);">CONTINUE</a>
-	&nbsp;&nbsp;<a id="tpNoLink" class="btn" href="Javascript:void(0);">NO</a></p>
-</div>
+			<p>Do you want to continue with your <b id="tpName"></b> login ?</p><br/>
+			<p><a id="tpLoginLink" class="btn" href="Javascript:void(0);">CONTINUE</a>
+			&nbsp;&nbsp;<a id="tpNoLink" class="btn" href="Javascript:void(0);">NO</a></p>
+		</div>
+
     </body>
 	
 <script>
+
+	function ianGetCookie(name) {
+	  var value = "; " + document.cookie;
+	  var parts = value.split("; " + name + "=");
+	  if (parts.length == 2) return parts.pop().split(";").shift();
+	}
+
+
 function sUpFunction(){
 	window.location=BASE_URL+ "/signup";
 }
@@ -328,6 +355,9 @@ $('#userPassword1').keypress(function(e) {
 	  }
   }); 
 </script>
+
+        <link rel="stylesheet" href="<?php echo $basePath; ?>/css/new_css/landing_.css" />        
+        <link rel="stylesheet" href="<?php echo $basePath; ?>/css/new_css/media-queries.css" />                
 <?}else{?>
 	<script> window.location=BASE_URL+ "/contentpage"; </script>
 <?}?>
