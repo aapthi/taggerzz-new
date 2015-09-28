@@ -201,6 +201,8 @@
 					<input type="hidden" id="lastDiv" name="lastDiv" value="0">
 					<input type="hidden" id="searchValue" name="searchValue" value="0">
 					<input type="hidden" id="hid_user_id" name="hid_user_id" value="<?php echo $this->user_id;?>">
+					<input type="hidden" id="searchValue2" name="searchValue2" value="0">
+					<input type="hidden" id="lastDiv2" name="lastDiv2" value="0">
 					<div class="clearfix"></div>
 				</div>
 
@@ -249,6 +251,55 @@
 							<?php } ?>
 						</table>
 					</div>
+					<div class="admin_brg">
+					<table id="customers">
+						<tr>
+							<th class="tab_pos_re">DATABOXES<span class="tab_pos_ab">&#9662;</span></th>
+							<th class="tab_pos_re">COMMENTS<span class="tab_pos_ab">&#9662;</span></th>
+							<th class="tab_pos_re">TYPE OF DATABOX<span class="tab_pos_ab">&#9662;</span></th>
+						 </tr>
+						  <tr>
+							<td width="25%" style="padding:0;">
+								<div id="boxscroll2" class="users_ajax1"> 
+									<p  style="padding:0;line-height:0"><input type="text" id="searchComment" name="searchComment" placeholder="SEARCH COMMENT"><img  src="<?php echo $basePath; ?>/images/go_search_btn.png" onClick="Javascript:searchDatabox();"/></p>
+										<?php 
+											$category_id="";
+											if(count($this->getAllCommentsDataboxes)!=0){
+										?>
+																			
+												<?foreach($this->getAllCommentsDataboxes as $key=>$CommentDataboxes){ 
+												if($key==0){
+													$active='search_user_active';
+													$category_id=$CommentDataboxes->category_id;
+												}else{
+													$active='';
+												}
+												?>
+											<div id="comments_<? echo $CommentDataboxes->category_id;  ?>">		
+												<p id="list_Comments_<? echo $CommentDataboxes->category_id;  ?>" class="<?echo $active;?> search_user_pad">
+													<a href="javascript:void(0)" onClick="Javascript:viewUserBoxes(<? echo $CommentDataboxes->category_id;  ?>);"><? echo $CommentDataboxes->user_hashname;?></a>
+												</p>
+												<?}?>
+											</div>
+										<?}else{?>
+										<p>Not Found!</p>
+										<?}?>
+								</div>
+							</td>
+								<td>
+									<div id="" class="ajax_databox"> 
+										
+									</div>
+								</td>
+								<td>
+									<div id="" class="ajax_databox"> 
+										
+									</div>
+								</td>
+								
+						  </tr>
+					</table>
+				</div>
 				</div>
 			</div>
 		</div>

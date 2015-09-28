@@ -717,5 +717,21 @@ class UserCategoriesTable
 		$result=$this->tableGateway->update($data, array('category_id' => $userCatDetails['category_id']));
 		return 	$result;
 	}
+	public function getCommentsAllDataboxes()
+    {
+		$select = $this->tableGateway->getSql()->select();
+		$select->join('category', 'user_categories.category_id=category.category_id',array('category_name','category_highlight','settingId'=>'category_type'),'left');
+		$select->where('user_categories.status="1"');
+		$resultSet = $this->tableGateway->selectWith($select);
+		return $resultSet;
+	}
+	public function getSearchDataboxComments($search)
+    {
+		$select = $this->tableGateway->getSql()->select();
+		$select->where->like( 'user_hashname', '%' . $search . '%' );
+		$resultSet = $this->tableGateway->selectWith($select);
+		$row = $resultSet;
+		return $row;
+	}
 	
 }

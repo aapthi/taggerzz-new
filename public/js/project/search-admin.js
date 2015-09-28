@@ -733,3 +733,21 @@
 			});
 		}
 	}
+	function searchDatabox(){
+		var search=$('#searchComment').val();
+		if(search==""){
+			alert('Search databox required');
+			return false;
+		}else{
+			$.ajax({
+				  url: BASE_URL+"/admin/search-ajax-databoxs",
+				  type: "POST",
+				  data:{search:search},
+				  success: function(data) {
+					$('.users_ajax1').html(data);
+					$('#searchValue2').val(1);
+					$('#lastDiv2').val(0);
+				  }
+			});
+		}
+	}

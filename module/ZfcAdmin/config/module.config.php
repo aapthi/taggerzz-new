@@ -209,6 +209,16 @@ return array(
 							),
 						),
 					),
+					'search-ajax-databoxs' => array(
+						'type' => 'literal',
+						'options' => array(
+							'route'    => '/search-ajax-databoxs',
+							'defaults' => array(
+								'controller' => 'ZfcAdmin\Controller\AdminController',
+								'action'     => 'searchAjaxDataboxs',
+							),
+						),
+					),
                 ),				
             ),	
         ),

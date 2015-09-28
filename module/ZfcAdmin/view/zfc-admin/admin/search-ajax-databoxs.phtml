@@ -1,0 +1,63 @@
+<?
+if($this->search=='0'){
+	$searchValue="";
+	$placeHolder='SEARCH DATABOX';
+}else{
+	$searchValue=$this->search;
+	$placeHolder='';
+}
+?>
+<p  style="padding:0;line-height:0"><input type="text" id="searchComment" name="searchComment" value="<? echo $searchValue; ?>" placeholder="<? echo $placeHolder; ?>"><img  id="searchImageAdmin" src="<?php echo $basePath; ?>/images/social_media/invalid_link.png" onClick="Javascript:allDatabox();"/></p>
+<?php 
+	$i=0;$j=0;
+	foreach($this->getAllCommentsDataboxes as $CommentsDataboxes){
+		if($i==0){
+			$j=0;
+		?>
+		<div id="comments_<?echo $j;?>">
+		<?}else{
+			if($i%5==0){
+				$j=$j+5;
+			?>
+			<div id="comments_<?echo $j;?>">
+			<?}
+		}
+		?>
+		
+			<p id="list_Comments_<? echo $CommentsDataboxes['category_id'];  ?>" class="search_user_pad">
+				<a href="javascript:void(0)" onClick="Javascript:viewUserBoxes(<? echo $CommentsDataboxes['category_id'];  ?>);"><? echo $CommentsDataboxes['user_hashname']?></a>
+			</p>
+		<?
+		$i++;
+		if($i%5==0){
+		?>
+		</div>
+		<?
+		}
+	}
+?>
+<script>
+function allDatabox(){
+	$("#searchComment").val("");
+	$.ajax({
+		  url: BASE_URL+"/admin/search-ajax-databoxs",
+		  type: "POST",
+		  data:{search:0},
+		  success: function(data) {
+			$('.users_ajax1').html(data);
+			$('#searchValue2').val(1);
+			$('#lastDiv2').val(0);
+			$('#searchImageAdmin2').attr('src',BASE_PATH+'/images/go_search_btn.png');
+			$('#searchImageAdmin2').attr('onclick','Javascript:searchDatabox();');
+		  }
+	});
+}
+$("#searchComment").keyup(function(){
+	if($("#searchComment").val()!=""){
+		$('#searchImageAdmin2').attr('src',BASE_PATH+'/images/go_search_btn.png');
+		$('#searchImageAdmin2').attr('onclick','Javascript:searchUsers();');
+	}else{
+		allDatabox();
+	}
+});
+</script>

@@ -77,6 +77,7 @@ class AdminController extends AbstractActionController
 		$adminUserReports = $this->getAdminReportsTable()->getAdminUserReports()->toArray();
 		$contactContents = $this->getAdminReportsTable()->getContactContents()->toArray();
 		
+		$getAllCommentsDataboxes = $this->getUserCategoriesTable()->getCommentsAllDataboxes();
 		return $view = new ViewModel(
 		array(
 			'baseUrl' 	   				=> $baseUrl,
@@ -87,7 +88,8 @@ class AdminController extends AbstractActionController
 			'getTotalAllUsers' 			=> count($getTotalAllUsers),
 			'user_id' 					=> $user_id,
 			'adminUserReports' 			=> $adminUserReports,
-			'contactContents' 			=> $contactContents
+			'contactContents' 			=> $contactContents,
+			'getAllCommentsDataboxes' 	=> $getAllCommentsDataboxes
 		));
 	}
 	public function ajaxDataAction(){
@@ -383,5 +385,25 @@ class AdminController extends AbstractActionController
         }
         return $this->adminReportsTable;
     }
+	public function searchAjaxDataboxsAction(){
+		$baseUrls = $this->getServiceLocator()->get('config');
+		$baseUrlArr = $baseUrls['urls'];
+		$baseUrl = $baseUrlArr['baseUrl'];
+		$basePath = $baseUrlArr['basePath'];
+		$search=$_POST['search'];
+		if($search=='0'){
+			$getAllCommentsDataboxes = $this->getUserCategoriesTable()->getCommentsAllDataboxes();
+		}else{
+			$getAllCommentsDataboxes = $this->getUserCategoriesTable()->getSearchDataboxComments($search);
+		}
+		$view = new ViewModel(
+		array(
+			'baseUrl' 	   				=> $baseUrl,
+			'basePath' 					=> $basePath,
+			'getAllCommentsDataboxes' 		=> $getAllCommentsDataboxes->toArray(),	
+			'search' 					=> $search,	
+			));
+		return $view->setTerminal(true);
+	}
 	
 }
