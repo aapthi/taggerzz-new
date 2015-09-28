@@ -421,7 +421,7 @@ class AdminController extends AbstractActionController
 		$countD=0;
 		if($getDataboxComments->count()){
 			foreach($getDataboxComments as $data){
-					$comments.='<p id="p_databox_comments_' . $data->databox_comment_id . '" >'.$data->databox_comment .'&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onClick="deleteComment('.$data->databox_comment_id.' )">DElETE</a></p>';
+					$comments.='<p id="p_databox_comments_' . $data->databox_comment_id . '" >'.$data->databox_comment .'&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" style="color:red;" onClick="deleteComment('.$data->databox_comment_id.' )">DElETE</a></p>';
 					$countD++;
 			}
 		}

@@ -293,7 +293,7 @@
 											$countd++;
 										?>
 										<p id="p_databox_comments_<? echo $data['databox_comment_id'];?>" >
-											<? echo $data['databox_comment'];?>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onClick="deleteComment(<? echo $data['databox_comment_id'];?>)">DElETE</a>
+											<? echo $data['databox_comment'];?>&nbsp;&nbsp;&nbsp;<a style="color:red;" href="javascript:void(0)" onClick="deleteComment(<? echo $data['databox_comment_id'];?>)">DElETE</a>
 										</p>
 										<?}}if($countd==0){?>
 											<p>Not Found!</p>
