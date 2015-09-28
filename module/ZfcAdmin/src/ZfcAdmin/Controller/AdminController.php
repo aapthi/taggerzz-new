@@ -16,6 +16,7 @@ class AdminController extends AbstractActionController
 	protected $userTable;
 	protected $userCategoriesTable;
 	protected $adminReportsTable;
+	protected $databoxCommentsTable;
 	
 	
 	public function indexAction(){
@@ -385,6 +386,14 @@ class AdminController extends AbstractActionController
         }
         return $this->adminReportsTable;
     }
+	public function getDataboxCommentsTable()
+    {
+        if (!$this->databoxCommentsTable) {				
+            $sm = $this->getServiceLocator();
+            $this->databoxCommentsTable = $sm->get('Databox\Model\DataboxCommentsFactory');			
+        }
+        return $this->databoxCommentsTable;
+    }
 	public function searchAjaxDataboxsAction(){
 		$baseUrls = $this->getServiceLocator()->get('config');
 		$baseUrlArr = $baseUrls['urls'];
@@ -405,5 +414,33 @@ class AdminController extends AbstractActionController
 			));
 		return $view->setTerminal(true);
 	}
+	public function ajaxCommentsAction(){
+		$comment_databox_id=$_POST['comment_databox_id'];
+		$getDataboxComments = $this->getDataboxCommentsTable()->getDataboxComments($comment_databox_id);
+		$comments="";
+		$countD=0;
+		if($getDataboxComments->count()){
+			foreach($getDataboxComments as $data){
+					$comments.='<p id="p_databox_comments_' . $data->databox_comment_id . '" >'.$data->databox_comment .'&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onClick="deleteComment('.$data->databox_comment_id.' )">DElETE</a></p>';
+					$countD++;
+			}
+		}
+		if($countD==0){
+			$comments.='<p>Not Found!</p>';
+		}
+		$view = new JsonModel(
+		array(
+			'comments' 				=> $comments
+		));
+		return $view;
+	}
+	public function deleteCommentAction()
+    {
+		$deleteComment = $this->getDataboxCommentsTable()->deleteCommentId($_POST['databox_comment_id']);
+			return $view = new JsonModel(
+				array(
+					'output'			=>	1,
+				));
+    }
 	
 }

@@ -751,3 +751,32 @@
 			});
 		}
 	}
+	function viewDataBoxComments(id){
+		var activeUserId=$('#activeCommentDataboxId').val();
+		$( "#list_Comments_"+activeUserId ).removeClass( "search_user_active" );
+		$( "#list_Comments_"+id ).addClass( "search_user_active" );
+		$.ajax({
+			  url: BASE_URL+"/admin/ajax-comments",
+			  type: "POST",
+			  data:{comment_databox_id:id},
+			  success: function(data) {
+				$('.ajax_comments').html(data.comments);
+				$('#activeCommentDataboxId').val(id);
+			  }
+		});
+	}
+	function deleteComment(id){
+		$.ajax({
+			  url: BASE_URL+"/admin/delete-comment",
+			  type: "POST",
+			  data:{databox_comment_id:id},
+			  success: function(data) {
+				  if(data.output!=0) {
+						$('#p_databox_comments_'+id).remove();
+						alert('comment deleted');
+					}else{
+						alert('No data is found');
+					}
+			  }
+		});
+    }

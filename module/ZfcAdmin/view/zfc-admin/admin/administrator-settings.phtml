@@ -256,7 +256,6 @@
 						<tr>
 							<th class="tab_pos_re">DATABOXES<span class="tab_pos_ab">&#9662;</span></th>
 							<th class="tab_pos_re">COMMENTS<span class="tab_pos_ab">&#9662;</span></th>
-							<th class="tab_pos_re">TYPE OF DATABOX<span class="tab_pos_ab">&#9662;</span></th>
 						 </tr>
 						  <tr>
 							<td width="25%" style="padding:0;">
@@ -276,8 +275,8 @@
 												}
 												?>
 											<div id="comments_<? echo $CommentDataboxes->category_id;  ?>">		
-												<p id="list_Comments_<? echo $CommentDataboxes->category_id;  ?>" class="<?echo $active;?> search_user_pad">
-													<a href="javascript:void(0)" onClick="Javascript:viewUserBoxes(<? echo $CommentDataboxes->category_id;  ?>);"><? echo $CommentDataboxes->user_hashname;?></a>
+												<p id="list_Comments_<? echo $CommentDataboxes->category_id;  ?>" class="<?echo $active;?>search_user_pad">
+													<a href="javascript:void(0)" onClick="Javascript:viewDataBoxComments(<? echo $CommentDataboxes->category_id;  ?>);"><? echo $CommentDataboxes->user_hashname;?></a>
 												</p>
 												<?}?>
 											</div>
@@ -285,18 +284,22 @@
 										<p>Not Found!</p>
 										<?}?>
 								</div>
+								<input type="hidden" id="activeCommentDataboxId" name="activeCommentDataboxId" value="<?echo $CommentDataboxes->category_id;?>">
 							</td>
 								<td>
-									<div id="" class="ajax_databox"> 
-										
+									<div id="boxscroll3" class="ajax_comments"> 
+										<?php $countd=0; if(count($this->getDataboxComments)!=0){foreach($this->getDataboxComments as $data){
+											
+											$countd++;
+										?>
+										<p id="p_databox_comments_<? echo $data['databox_comment_id'];?>" >
+											<? echo $data['databox_comment'];?>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onClick="deleteComment(<? echo $data['databox_comment_id'];?>)">DElETE</a>
+										</p>
+										<?}}if($countd==0){?>
+											<p>Not Found!</p>
+										<?}?>
 									</div>
 								</td>
-								<td>
-									<div id="" class="ajax_databox"> 
-										
-									</div>
-								</td>
-								
 						  </tr>
 					</table>
 				</div>
@@ -309,6 +312,5 @@
     var nicesx = $("#boxscroll,#boxscroll1,#boxscroll2,#boxscroll3,#boxscroll4,#boxscroll5").niceScroll({touchbehavior:false,cursorcolor:"#acacac",cursoropacitymax:0.6,cursorwidth:8});
     
   });
-  
 </script>
 	

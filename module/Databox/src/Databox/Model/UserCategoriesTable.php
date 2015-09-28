@@ -733,5 +733,4 @@ class UserCategoriesTable
 		$row = $resultSet;
 		return $row;
 	}
-	
 }

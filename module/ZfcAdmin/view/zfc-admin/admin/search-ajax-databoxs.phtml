@@ -25,7 +25,7 @@ if($this->search=='0'){
 		?>
 		
 			<p id="list_Comments_<? echo $CommentsDataboxes['category_id'];  ?>" class="search_user_pad">
-				<a href="javascript:void(0)" onClick="Javascript:viewUserBoxes(<? echo $CommentsDataboxes['category_id'];  ?>);"><? echo $CommentsDataboxes['user_hashname']?></a>
+				<a href="javascript:void(0)" onClick="Javascript:viewDataBoxComments(<? echo $CommentsDataboxes['category_id'];  ?>);"><? echo $CommentsDataboxes['user_hashname']?></a>
 			</p>
 		<?
 		$i++;
@@ -47,15 +47,15 @@ function allDatabox(){
 			$('.users_ajax1').html(data);
 			$('#searchValue2').val(1);
 			$('#lastDiv2').val(0);
-			$('#searchImageAdmin2').attr('src',BASE_PATH+'/images/go_search_btn.png');
-			$('#searchImageAdmin2').attr('onclick','Javascript:searchDatabox();');
+			$('#searchImageAdmin').attr('src',BASE_PATH+'/images/go_search_btn.png');
+			$('#searchImageAdmin').attr('onclick','Javascript:searchDatabox();');
 		  }
 	});
 }
 $("#searchComment").keyup(function(){
 	if($("#searchComment").val()!=""){
-		$('#searchImageAdmin2').attr('src',BASE_PATH+'/images/go_search_btn.png');
-		$('#searchImageAdmin2').attr('onclick','Javascript:searchUsers();');
+		$('#searchImageAdmin').attr('src',BASE_PATH+'/images/go_search_btn.png');
+		$('#searchImageAdmin').attr('onclick','Javascript:searchDatabox();');
 	}else{
 		allDatabox();
 	}

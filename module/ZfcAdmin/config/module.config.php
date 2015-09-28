@@ -219,6 +219,26 @@ return array(
 							),
 						),
 					),
+					'ajax-comments' => array(
+						'type' => 'literal',
+						'options' => array(
+							'route'    => '/ajax-comments',
+							'defaults' => array(
+								'controller' => 'ZfcAdmin\Controller\AdminController',
+								'action'     => 'ajaxComments',
+							),
+						),
+					),
+					'delete-comment' => array(
+						'type' => 'literal',
+						'options' => array(
+							'route'    => '/delete-comment',
+							'defaults' => array(
+								'controller' => 'ZfcAdmin\Controller\AdminController',
+								'action'     => 'deleteComment',
+							),
+						),
+					),
                 ),				
             ),	
         ),
