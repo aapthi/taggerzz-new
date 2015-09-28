@@ -734,6 +734,7 @@
 		}
 	}
 	function searchDatabox(){
+		$('.ajax_comments').html('');
 		var search=$('#searchComment').val();
 		if(search==""){
 			alert('Search databox required');

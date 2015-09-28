@@ -38,6 +38,7 @@ if($this->search=='0'){
 ?>
 <script>
 function allDatabox(){
+	$('.ajax_comments').html('');
 	$("#searchComment").val("");
 	$.ajax({
 		  url: BASE_URL+"/admin/search-ajax-databoxs",
@@ -57,6 +58,7 @@ $("#searchComment").keyup(function(){
 		$('#searchImageAdmin').attr('src',BASE_PATH+'/images/go_search_btn.png');
 		$('#searchImageAdmin').attr('onclick','Javascript:searchDatabox();');
 	}else{
+		$('.ajax_comments').html('');
 		allDatabox();
 	}
 });
