@@ -78,6 +78,19 @@ function setTzBoxId(tzCreateEditBoxId){
 function closeCropPop(){
 	$('#pop-up-image-crop').css('display','none');
 }
+
+function selectHighCropImage(){
+	$('.cropit-image-input').click();	
+}
+function showHighCropButton(){
+	if( ! checkHighImageLoaded() )
+	{
+		return false;
+	}
+	$('.export').show();	
+}
+
+
 function selectCropImage(){
 	$('#fileCropInp').click();	
 }
