@@ -67,6 +67,15 @@ img {
 .tsearch_input_w{
 	width:93% !important
 }
+.pop_up_haeding h3{
+	background:#eaeaea;
+	border-bottom:1px solid #ddd;
+	font-size:15px;
+	position:relative;
+	padding:5px;
+	text-align: left;
+	border-radius:4px 4px 0 0;
+}
 .divHeaderWrapper .divSearchBoxes .aSearch {
     background: #ddd url("../img/search.png");
     background-size: 17pt 17pt;
