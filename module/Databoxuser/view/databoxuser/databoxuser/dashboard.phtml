@@ -94,7 +94,7 @@
                             <div class="divReplyToControls">
                                 <div class="divReplyToMaxCharsText">( &ast; MAXIMUM 5000 CHARS )</div>
                                 <button onClick="insertMsg()" class="btnReplyToSend">SEND</button>
-                                <button onclick="resetForm()" class="btnReplyToCancel">CANCEL</button>
+                                <button onclick="cancelForm()" class="btnReplyToCancel">CANCEL</button>
                             </div>
                         </div>
                     </div>
@@ -292,8 +292,7 @@ if(message==""){
 
 		
 }
-function resetForm(){
-	  $("#txtReplyTo").val('');
-	  $("#textArea").val('');
+function cancelForm(){
+	  $("#divReplyToWrapper").hide();
 }
 </script>
