@@ -386,6 +386,9 @@ $(document).ready(function()
 				return false;
 			}
 			$('#pop-up-image-crop-new').popUpWindow({action: "open"});
+			$('.pop-up-content').css('border','0');
+			$('.close').css('right','0');
+			$('.close').css('top','0');
 		});
 	}
 

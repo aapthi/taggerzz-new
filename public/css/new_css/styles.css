@@ -260,7 +260,8 @@ input {
   width: 85%; }
 
 .width90, #secCreateHighlight .divCreateHighlightHashtag, #secCreateHashtag .divCreateHighlightHashtag, #secUploadBookmarks .divCreateHighlightHashtag, #secSelectDatabox .divCreateHighlightHashtag, #secCreateHighlight .divCreateHighlightTitle, #secCreateHashtag .divCreateHighlightTitle, #secUploadBookmarks .divCreateHighlightTitle, #secSelectDatabox .divCreateHighlightTitle, #secCreateHighlight .divCreateHighlightLinks .inptLinks, #secCreateHashtag .divCreateHighlightLinks .inptLinks, #secUploadBookmarks .divCreateHighlightLinks .inptLinks, #secSelectDatabox .divCreateHighlightLinks .inptLinks, #secCreateHighlight .divCreateHighlightNatureCategory .inptContentCategory, #secCreateHashtag .divCreateHighlightNatureCategory .inptContentCategory, #secUploadBookmarks .divCreateHighlightNatureCategory .inptContentCategory, #secSelectDatabox .divCreateHighlightNatureCategory .inptContentCategory, #secCreateHashtag .createHashtagWrapper .inptCreateHashtag, #secCreateHashtag .createHashtagWrapper .inptCreateTitle, #secCreatePrivateDatabox .divCreatePrivateDataboxHashtag, #secCreatePrivateDatabox .divCreatePrivateDataboxTitle, #secCreatePrivateDatabox .divCreatePrivateDataboxUniqueCode, #secCreatePrivateDatabox .divCreatePrivateDataboxLinks .inptLinks, #secCreatePrivateDatabox .divCreatePrivateDataboxEmail .inptEmail, #secCreatePublicDatabox .divCreatePublicDataboxHashtag, #secCreatePublicDatabox .divCreatePublicDataboxTitle, #secCreatePublicDatabox .divCreatePublicDataboxLinks .inptLinks, #secCreatePublicDatabox .divCreatePublicDataboxNatureCategory .inptContentCategory, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .ulCreatedCollectionList li .divCreatedCollectionText, #secCustomizeDatabox .c_DivHeaderComment {
-  width: 90%; }
+  width: 90%; border: 1px solid #c7c7c7;
+    padding: 5px !important; }
 
 .width95, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard {
   width: 95%; }
@@ -787,7 +788,9 @@ a {
   #secCreatePublicDatabox .divCreatePublicDataboxHashtag, #secCreatePublicDatabox .divCreatePublicDataboxTitle {
     display: table-row; }
     #secCreatePublicDatabox .divCreatePublicDataboxHashtag .inptHashtag, #secCreatePublicDatabox .divCreatePublicDataboxHashtag .inptTitle, #secCreatePublicDatabox .divCreatePublicDataboxTitle .inptHashtag, #secCreatePublicDatabox .divCreatePublicDataboxTitle .inptTitle {
-      width: 200%; }
+       border: 1px solid #c7c7c7;
+    padding: 5px;
+    width: 200%; }
     #secCreatePublicDatabox .divCreatePublicDataboxHashtag *, #secCreatePublicDatabox .divCreatePublicDataboxTitle * {
       display: table-cell;
       padding: 10pt; }

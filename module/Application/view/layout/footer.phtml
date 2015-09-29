@@ -5,14 +5,13 @@
 	</div>-->
 
 <!--Alerts Popup-->
-<div id="pop-up-alerts" class="pop-up-display-content conform_popup_content">
+<div id="pop-up-alerts" class="pop-up-display-content conform_popup_content" align="center">
 	<div class="montage_desc">
-		<h4><p id="alert_header_meassge"></p></h4>
+		<p id="alert_header_meassge"></p>
 		<p id="alert_meassage"></p>
 	</div>
 	<p>
 		<a class="btn" href="javascript:void(0);" onclick="alertsCancel()">OK</a>
-		<!--<a class="larg_btn" href="javascript:void(0);" onclick="sendReport()">OK</a>-->
 	</p>
 </div>
 <!-- Customization page Confirmation Alerts Popup --->
@@ -97,6 +96,9 @@ function selectCropImage(){
 $('#fileCropInp').change(function(click)
 {
 	showCropButton(this);
+	$('.pop-up.large').css('max-width','100%');
+	$('.pop-up.large').css('margin-left','0');
+	$('.pop-up').css('left','5%');
 });
 function showCropButton(input)
 {

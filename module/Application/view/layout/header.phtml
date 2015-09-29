@@ -304,7 +304,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
 	$socialOptions = $header->loginarray['options'];
 ?>
 
-<div id="pop-up-1" class="pop-up-display-content">
+<div id="pop-up-1" class="pop-up-display-content d">
 <h1 class="tg_users_title">Login Using one of your Social network</h1>
 <div class="tg_users_socila_login">
 <?php
@@ -336,7 +336,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
 			<input type="password" class="text_pad" name="userPassword2" id="userPassword2"/>
 			<p class="tg_email_btn"><button name="btnSubmit" id="btnSubmit" type="button" class="btn" onClick="return checkLogin('loginPopup');">CONTINUE</button></p>
 			<p class="tg_fp_btn"><a href="javascript:void(0)" id="forgot_password" class="home_anchor_black" onClick="Javascript:showFpEmailIdForm();"><b>Forgot Password?</b></a><span style="display:none"id="tgaccount"><span>Already have a Taggerzz account?</span>&nbsp;&nbsp;<a href="javascript:void(0);" class="home_anchor_black" onclick="loginWindow()"><b>Login</b></a></span></p>
-			<span class="tg_email_btn"><span id="userMessage2" style="display:none" class="check_un_p">Checking Username,Password...</span></span>
+			<span class="tg_email_btn"><span id="userMessage2" style="display:none;font-size:8pt;" class="check_un_p">Checking Username,Password...</span></span>
 			<input type="hidden" id="hid_log" name="hid_log" value="loginPopup">
 			<div class="crete_acc">
 				<p><span>Don't have an account</span>&nbsp;&nbsp;<a href="javascript:void(0);" onclick="signUpWindow()">Sign up now</a></p>
@@ -379,7 +379,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
 }
 .text_pad{
 	padding:6px 4px;
-	border:1px solid #c1cfd9;
+	border:1px solid #c7c7c7;
 }
 .home_anchor_black{
 	color:#000000;
@@ -392,7 +392,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
 .tg_fp_btn{
 	text-align:left;
 	position:relative;
-	bottom:15px;
+	bottom:22px;
 	width:80%;
 }
 .tg_fp_btn a:hover{
@@ -420,13 +420,14 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
     border: 1px solid #f97e76;
     color: #fff;
     letter-spacing: 1px;
-	padding:3px 3px;
+	padding:6px 24px;
     text-transform: uppercase;
 	text-align:center;
 	cursor:pointer;
 	/*line-height:40px;*/
 	font-size:10px;
 	 text-decoration: none;
+	 border-radius:2px;
 }
 </style>
 <script>
