@@ -2138,7 +2138,7 @@ class DataboxController extends AbstractActionController
 				if( $showMcNsfwPopup ){
 					$publicBoxesHtml .=	'<a href="javascript:void(0)" onClick="Javascript:displayNsfwMc(' .$currentBoxRow->category_id .','. $dispHashName .','. $currentBoxRow->category_title .','. $currentBoxRow->settingId .', '.$catImageUrll.'><img src="'.$basePath .'/images/social_media/mature_content.jpg" width="234" height="302" /></a>';
 				} else { 
-					$publicBoxesHtml .='<a href="'.$displayCustomizationUrl.'"><img id="Databox-1-img" class="imgCardImage" alt="'.$dispHashName.'" src="'.$basePath.'/images/project/categoryImages/'.$currentBoxRow->category_image .'"/></a>';
+					$publicBoxesHtml .='<a href="'.$displayCustomizationUrl.'"><img id="Databox-1-img" class="" alt="'.$dispHashName.'" src="'.$basePath.'/images/project/categoryImages/'.$currentBoxRow->category_image .'"/></a>';
 				}
 				$publicBoxesHtml .='<div id="divDatabox-1-hashtag" class="divCardHashtag"> <a href="'.$displayCustomizationUrl.'"> '.$dispHashName .' </a></div>';
 				$publicBoxesHtml .='<div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">';
@@ -2398,7 +2398,7 @@ class DataboxController extends AbstractActionController
 				if( $showMcNsfwPopup ){
 					$publicBoxesHtml .=	'<a href="javascript:void(0)" onClick="Javascript:displayNsfwMc(' .$currentBoxRow->category_id .','. $dispHashName .','. $currentBoxRow->category_title .','. $currentBoxRow->settingId .', '.$catImageUrll.'><img src="'.$basePath .'/images/social_media/mature_content.jpg" width="234" height="302" /></a>';
 				} else { 
-					$publicBoxesHtml .='<a href="'.$displayCustomizationUrl.'"><img id="Databox-1-img" class="imgCardImage" alt="'.$dispHashName.'" src="'.$basePath.'/images/project/categoryImages/'.$currentBoxRow->category_image .'"/></a>';
+					$publicBoxesHtml .='<a href="'.$displayCustomizationUrl.'"><img id="Databox-1-img" class="" alt="'.$dispHashName.'" src="'.$basePath.'/images/project/categoryImages/'.$currentBoxRow->category_image .'"/></a>';
 				}
 				$publicBoxesHtml .='<div id="divDatabox-1-hashtag" class="divCardHashtag"> <a href="'.$displayCustomizationUrl.'">'.$dispHashName .' </a></div>';
 				$publicBoxesHtml .='<div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">';
@@ -2545,7 +2545,7 @@ class DataboxController extends AbstractActionController
 				if( $showMcNsfwPopup ){
 					$privateBoxHtml .=	'<a href="javascript:void(0)" onClick="Javascript:displayNsfwMc(' .$currentBoxRow->category_id .','. $dispHashName .','. $currentBoxRow->category_title .','. $currentBoxRow->settingId .', '.$catImageUrll.'><img src="'.$basePath .'/images/social_media/mature_content.jpg" width="234" height="302" /></a>';
 				} else { 
-					$privateBoxHtml .='<a href="'.$displayCustomizationUrl.'"><img id="Databox-1-img" class="imgCardImage" alt="'.$dispHashName.'" src="'.$basePath.'/images/project/categoryImages/'.$currentBoxRow->category_image .'"/></a>';
+					$privateBoxHtml .='<a href="'.$displayCustomizationUrl.'"><img id="Databox-1-img" class="" alt="'.$dispHashName.'" src="'.$basePath.'/images/project/categoryImages/'.$currentBoxRow->category_image .'"/></a>';
 				}
 				$privateBoxHtml .='<div id="divDatabox-1-hashtag" class="divCardHashtag"> <a href="'.$displayCustomizationUrl.'">'.$dispHashName .' </a></div>';
 				$privateBoxHtml .='<div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">';
