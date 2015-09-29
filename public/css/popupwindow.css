@@ -47,6 +47,7 @@
     box-shadow:         0px 1px 10px 2px #ccc;
     min-height: 30px;
     padding: 34px;
+	border-radius:4px;
 }
 
 .pop-up-content .close,

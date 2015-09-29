@@ -186,7 +186,7 @@ input {
   font-size: 9.5pt; }
 
 .greyBackground, .secHighlights .divHeadingLabel, .secHighlights .divCardsMainWrapper, .secDataboxes .divHeadingLabel, .secDataboxes .divCardsWrapper, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .ulCreatedCollectionList li:nth-child(even), #secCustomizeDatabox .c_DivTitleWrapper, #secCustomizeDatabox .c_DivHeaderCommentWrapper {
-  background: rgba(0, 0, 0, 0.03); }
+  background:#fff; }
 
 .bottomSticky {
   position: absolute;
@@ -494,24 +494,30 @@ a {
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-bottom: 0px; }
   .secHighlights .divCardsMainWrapper {
-    margin: 5pt 0pt; }
+    margin: 0 0 20px }
     .secHighlights .divCardsMainWrapper .divNavLeftArrow {
       padding: 5% 0%;
       width: 3%;
-      cursor: pointer; }
+      cursor: pointer; 
+	  margin-top:20px;
+	  }
       .secHighlights .divCardsMainWrapper .divNavLeftArrow:hover {
         background: rgba(0, 0, 0, 0.1); }
     .secHighlights .divCardsMainWrapper .divNavRightArrow {
       padding: 5% 0%;
       width: 3%;
-      cursor: pointer; }
+      cursor: pointer; 
+	  margin-top:20px;
+	}
       .secHighlights .divCardsMainWrapper .divNavRightArrow:hover {
         background: rgba(0, 0, 0, 0.1); }
     .secHighlights .divCardsMainWrapper .divCardsWrapper {
       width: 94%;
       overflow-x: auto;
       white-space: nowrap;
-      overflow: hidden; }
+      overflow: hidden; 
+	  margin-top:20px;
+	}
       .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard {
         vertical-align: top;
         white-space: normal;

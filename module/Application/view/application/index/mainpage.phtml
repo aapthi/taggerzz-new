@@ -20,13 +20,13 @@
 
 <div class="clearfix"></div>
 
-            <section id="secHighlights" class="secHighlights">
+            <section id="secHighlights" class="secHighlights tmar_t">
 
                 <div id="divCardsHeading" class="divHeadingLabel">
                     Highlights | Current Affairs
                 </div>
 
-                <div id="divHighlightsMainWrapper" class="divCardsMainWrapper">
+                <div id="divHighlightsMainWrapper" class="divCardsMainWrapper tmar_b20">
                     <div id="divNavLeftArrow" class="divNavLeftArrow"><img src="<?php echo $basePath; ?>/img/imgNavLeftArrow.png" alt="" /></div>
 
                     <div id="divCardsWrapper" class="divCardsWrapper">
@@ -59,7 +59,7 @@
                         <div id="divCard-1" class="divCard" draggable="true">
 													<a href="<?php echo $displayCustomizationUrl; ?>" onClick='Javascript:displayCustomization(<?php echo $currentBoxData["category_id"]; ?>,"<?php echo $currentBoxData["user_hashname"]; ?>","<?php echo $currentBoxData["category_title"]; ?>",<? echo $currentBoxData['settingId']?>,"<? echo $catImageUrll?>");'>
                             <div id="divCard-1-imageWrapper" class="divCardImageWrapper">
-                                <img id="Card-1-img" class="imgCardImage" src="<?php echo $basePath.'/images/project/categoryImages/'.$currentBoxData["category_image"]; ?>" alt="<?php echo $currentBoxData["user_hashname"]; ?>" />
+                                <img id="Card-1-img" class="" src="<?php echo $basePath.'/images/project/categoryImages/'.$currentBoxData["category_image"]; ?>" alt="<?php echo $currentBoxData["user_hashname"]; ?>" />
                                 <div id="divCard-1-hashtag" class="divCardHashtag">
                                    <?php echo $currentBoxData["user_hashname"]; ?>
                                 </div>
@@ -113,7 +113,8 @@
                     <div id="divNavRightArrow" class="divNavRightArrow"><img src="<?php echo $basePath; ?>/img/imgNavRightArrow.png" alt="" /></div>
                 </div>
             </section>
-
+			<div class="clearfix"></div>
+			<div class="tmar_t20">
             <section id="secDataboxes" class="secDataboxes">
                 <div id="divDataboxesHeading" class="divHeadingLabel">
                    <a href="Javascript:void(0);" id="publicBoxesLink">Public Databoxes</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="Javascript:void(0);" id="memCollectionsLink">Members</a>
@@ -311,6 +312,7 @@
 					</div>
                 </div>
             </section>
+			</div>
 		</div>
     </body>
 </html>

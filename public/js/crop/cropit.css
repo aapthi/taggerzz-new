@@ -25,8 +25,8 @@
 		background-size: cover;
 		border: 5px solid #ccc;
 		border-radius: 3px;
-		width: 234px;
-		height: 302px;
+		width: 325px;
+		height: 250px;
 		cursor: move;
 		margin:15px auto;
 	}
@@ -79,6 +79,7 @@ input.cropit-image-zoom-input {
 	position:relative;
 	padding:5px;
 	text-align: left;
+	border-radius:4px 4px 0 0;
 }
 .cropit-image-background-container{
 	left:25% !important;
