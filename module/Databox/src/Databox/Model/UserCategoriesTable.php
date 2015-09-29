@@ -365,8 +365,8 @@ class UserCategoriesTable
 		$select->where( 'category.category_highlight="'. $categoryHighlight .'"' );
 		$select->where('user_categories.status="1"');
 		$select->where('user.status="1"');
-		$select->limit(intval($boxesPerPage));
-		$select->offset(intval($offset));
+		// $select->limit(intval($boxesPerPage));
+		// $select->offset(intval($offset));
 		$select->order('highlights_prior_order asc');
 		$select->order('NetVotes desc');
 		$select->order('category.category_id desc');
