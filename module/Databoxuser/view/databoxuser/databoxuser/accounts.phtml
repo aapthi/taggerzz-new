@@ -1,28 +1,32 @@
 <?php //echo "<pre>";print_r($this->getUserMessages);exit; ?>
 <link rel="stylesheet" media="(max-width: 799px)" href="<?php echo $basePath; ?>/css/new_css/styles-mobile.css" />
-<section id="secAccountSettings">
+<div class="tzcontainer_as">
+<div class="tmar_t125">
+<section id="secAccountSettings" class="tac_bg">
                 <div class="divAccountSettingsRow">
                     <!-- Account Settings Block -->
                     <div class="divAccountSettingsCard">
                         <div class="divAccountSettingsHeading">
                             Account Settings
                         </div>
-                        <div class="divAccountSettingsForm">
+                        <div class="divAccountSettingsForm" style="position:relative">
                             <label>
                                 Profile Name : 
                             </label>
 							<input type="text" name="display_name" id="display_name" value="<?echo $this->userDetails->display_name;?>" placeholder="Set profile name"/>
-							<div class="acount_pos_abs"><p>Change</p><p><img onClick="profileEmpty();" src="<?php echo $basePath; ?>/images/social_media/edit_ico.png"/></p></div>
+							<div class="acount_pos_abs" style="display:none;">
+							<div style="margin-top:5px;text-align:right;">
+							<p>Change</p>
+								<img onClick="profileEmpty();" src="<?php echo $basePath; ?>/images/social_media/edit_ico.png" style="padding:8px;"/></div>
+							</div>
                             <label>
                                 Password : 
                             </label>
 							<input type="password" name="password" id="password" placeholder="Set password" onfocus="showConfirmPassword()" >
-							<p id="confirmLable" style="display: none;">
-								<label>
+								<label id="confirmLable" style="display: none;">
                                 Confirm Password : 
 								</label>
-								<input type="password" name="confirmPwd" id="confirmPwd" placeholder="confirm password">
-							</p>
+								<input type="password" name="confirmPwd" id="confirmPwd" placeholder="confirm password" style="display: none;">
 						<?php
 							if( $this->userDetails->email != "" )
 							{
@@ -40,7 +44,7 @@
 
                     <!-- User Summary Block -->
                     <div class="divUserSummaryCard">
-                        <div class="divUserSummaryHeading">
+                        <div class="divUserSummaryHeading" align="center">
                             User Summary
                         </div>
 
@@ -108,7 +112,7 @@
                     </div>
                 </div>
 
-                <div class="divAccountSettingsRow">
+                <div class="divAccountSettingsRow tmar_t0">
                     <img src="<?php echo $basePath; ?>/img/emailVerified.png" class="imgEmailVerified" />
                     <button  href="javascript:void(0);" onclick="changeAccountStatus(2,<?echo $this->userDetails->user_id;?>);" class="btnDeactivateAccount">DEACTIVATE ACCOUNT</button>
                 </div>
@@ -118,6 +122,8 @@
 					<p id="updateMessage" style="color:green"></p>
 				</div>
             </section>
+</div>
+</div>
 </div>
 <script>
 $(document).ready(function(){
@@ -131,6 +137,7 @@ function acountChange(){
 }
 function showConfirmPassword(){
 	  $("#confirmLable").show();
+	  $("#confirmPwd").show();
 }
 function profileEmpty(){
 		$("#display_name").val('');

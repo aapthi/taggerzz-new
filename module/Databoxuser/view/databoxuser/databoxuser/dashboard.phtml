@@ -1,6 +1,7 @@
 <?php //echo "<pre>";print_r($this->getUserMessages);exit; ?>
-<link rel="stylesheet" media="(max-width: 799px)" href="<?php echo $basePath; ?>/css/new_css/styles-mobile.css" />
-<section id="secAccountSettings">
+<div class="tzcontainer_as tmar_b20">
+<div class="tmar_t125">
+<section id="secAccountSettings" class="tac_bg">
                 <div class="divAccountSettingsRow">
                     <div class="divCreatedCollectionsCard">
                         <div class="divAccountSettingsHeading">
@@ -21,7 +22,7 @@
 									$currBoxEditLink = $baseUrl . "/databox/createhashtag/privatedatabox/" . $allDataboxes['category_id'];
 								}
 							?>
-								<li class="liCreatedCollectionListItem"><div class="divCreatedCollectionText"><b><?php echo $allDataboxes['user_hashname'];?></b>, <?php echo $allDataboxes['category_title'];?></div><a class="aCollectedCollectionEdit" href="Javascript:void(0);" onClick="setEditingBoxId( '<?php echo $allDataboxes['category_id']; ?>','<?php echo $currBoxEditLink; ?>' );">EDIT</a></li>
+								<li class="liCreatedCollectionListItem"><div class="divCreatedCollectionText tdashboard_f"><?php echo $allDataboxes['user_hashname'];?>, <?php echo $allDataboxes['category_title'];?></div><a class="aCollectedCollectionEdit" href="Javascript:void(0);" onClick="setEditingBoxId( '<?php echo $allDataboxes['category_id']; ?>','<?php echo $currBoxEditLink; ?>' );">EDIT</a></li>
 								
 							<?}?>
                         </ul>
@@ -104,6 +105,8 @@
 				<input type="hidden" id="hidsenderid" value="1">
 				<input type="hidden" id="hidreceivedid" value="">
             </section>
+</div>
+</div>
 </div>
 <script>
 function setEditingBoxId( tzCreateEditBoxId,currBoxEditLink )
