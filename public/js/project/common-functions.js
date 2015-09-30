@@ -39,24 +39,24 @@ function removeCss()
 	}
 	
 // header-menu
-	$(document).on("mousedown", "a.tag_chk", function(e) {			
-			if( e.which == 2 ) {				
+	$(document).on("mousedown", "a.tag_chk", function(e) {	
+			if( e.which == 2 ) {
 				var removeHashvalue=this.text.split('#')['0'].trim().toLowerCase();
 				var hashMontage=this.text.trim().toLowerCase();
 				 var hashNameMontage=hashMontage.charAt(0);
 				if(removeHashvalue=='databox/my-collected-links'){
 					var m_url= BASE_URL +'/databox/my-collected-links';
-					var mm_url=	'databox/my-collected-links';			
+					var mm_url=	'/databox/my-collected-links';			
 				}else if(removeHashvalue=='home'){
 					var m_url= BASE_URL +'/';	
 					var mm_url=	'/';
 				}else if(removeHashvalue=='dashboard'){
-					var m_url= BASE_URL +'/dashboard';
-						var mm_url=	'/dashboard';	
+					var m_url= BASE_URL +'/databoxuser/dashboard';
+						var mm_url=	'/databoxuser/dashboard';	
 				}else if(hashNameMontage=='#'){
 					var m_url= BASE_URL +'/montage';
 					var mm_url=	'/montage';	
-				}else if(removeHashvalue=='my account'){
+				}else if(removeHashvalue=='accounts'){
 					var m_url= BASE_URL +'/accounts';
 					var mm_url=	'/accounts';	
 				}else if(removeHashvalue=='taggerzz.com'){
@@ -782,7 +782,7 @@ function checkSpaces()
 			if(newVoteValue==1){
 				var voteUpNew=parseInt(voteUp) + parseInt("1");
 			}else{
-				var voteUpNew=parseInt(voteUp) - parseInt("1");
+				var voteUpNew=parseInt(voteUp);
 			}
 			var like=(parseInt(voteUpNew)/(parseInt(rw_lh)+parseInt("1")))*100;
 			like = Math.round(like * 1000) / 1000;

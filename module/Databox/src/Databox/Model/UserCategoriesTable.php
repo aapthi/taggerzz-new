@@ -310,10 +310,19 @@ class UserCategoriesTable
 		$categoryType = 1;
 		$rw_lh = 1;
 		$notmature_safe = 0;
+		if(isset($_SESSION['usersinfo']->userId)){
+			$user_id=$_SESSION['usersinfo']->userId;
+		}else{
+			$user_id=$_SERVER['REMOTE_ADDR'];
+		}
 		$votesGroupSubQuerySelect = $this->rwvTg->getSql()->select();
 		$votesGroupSubQuerySelect->columns(array('NetVotes1' => new Expression('COALESCE((SUM(voteUp)/SUM(rw_lh)*100),0)'),'vupCatId'=>'category_id','voteUp1'=>new Expression('COALESCE(SUM(voteUp),0)'),'rw_lh1'=>new Expression('COALESCE(SUM(rw_lh),0)')));
 		$votesGroupSubQuerySelect->group('vupCatId');
 		$votesGroupSubQuerySelect->where('relevance_worth_vote.rw_lh="1"');
+		$votesGroupSubQuerySelect2 = $this->rwvTg->getSql()->select();
+		$votesGroupSubQuerySelect2->columns(array('userVoteUp1' =>'voteUp','uservupCatId'=>'category_id','uservoteDown1'=>'voteDown','userVoteId1'=>'user_id'));
+		$votesGroupSubQuerySelect2->where('relevance_worth_vote.rw_lh="1"');
+		$votesGroupSubQuerySelect2->where('relevance_worth_vote.user_id="'.$user_id.'"');
 		$select = $this->tableGateway->getSql()->select();
 		$select->join('category', 'user_categories.category_id=category.category_id',array('category_image','category_highlight','settingId'=>'category_type'),'left');
 		//newly added
@@ -322,6 +331,7 @@ class UserCategoriesTable
 		$select->join('user_details', 'user_details.user_id=user.user_id',array('image','montage_image'),'left');
 		$select->join('databox_views', 'user_categories.category_id=databox_views.category_id',array('views_count'),'left');
 		$select->join(array('rwvlf' => $votesGroupSubQuerySelect), 'user_categories.category_id=vupCatId',array('likes' => new Expression('COALESCE(NetVotes1,0)'),'vupCatId1'=>'vupCatId','voteUp'=>new Expression('COALESCE(voteUp1,0)'),'rw_lh'=>new Expression('COALESCE(rw_lh1,0)')),'left');
+		$select->join(array('rwvlf1' => $votesGroupSubQuerySelect2), 'user_categories.category_id=uservupCatId',array('userVoteUp' => 'userVoteUp1','uservupCatId1'=>'uservupCatId','uservoteDown'=>'uservoteDown1','userVoteId'=>'userVoteId1'),'left');
 		// newly added end
 		$select->where( 'user_categories.category_type="'. $categoryType .'"'  );
 		$select->where('user_categories.status="1"');
@@ -338,6 +348,11 @@ class UserCategoriesTable
 	public function getHomeHighlightBoxes( $boxesPerPage,$offset )
 	{
 		$categoryHighlight = 2;
+		if(isset($_SESSION['usersinfo']->userId)){
+			$user_id=$_SESSION['usersinfo']->userId;
+		}else{
+			$user_id=$_SERVER['REMOTE_ADDR'];
+		}
 		
 		// $rwvTg = new TableGateway('relevance_worth_vote', $this->tableGateway->getAdapter());
 		
@@ -348,6 +363,10 @@ class UserCategoriesTable
 		$votesGroupSubQuerySelect->columns(array('NetVotes1' => new Expression('COALESCE((SUM(voteUp)/SUM(rw_lh)*100),0)'),'vupCatId'=>'category_id','voteUp'=>'voteUp','rw_lh'=>'rw_lh'));
 		$votesGroupSubQuerySelect->group('vupCatId');
 		$votesGroupSubQuerySelect->where('relevance_worth_vote.rw_lh="1"');
+		$votesGroupSubQuerySelect2 = $this->rwvTg->getSql()->select();
+		$votesGroupSubQuerySelect2->columns(array('userVoteUp1' =>'voteUp','uservupCatId'=>'category_id','uservoteDown1'=>'voteDown','userVoteId1'=>'user_id'));
+		$votesGroupSubQuerySelect2->where('relevance_worth_vote.rw_lh="1"');
+		$votesGroupSubQuerySelect2->where('relevance_worth_vote.user_id="'.$user_id.'"');
 		
 		// echo "<pre>";print_r($votesGroupSubQuerySelect);exit;
 		// $resultSet1 = $rwvTg->selectWith($votesGroupSubQuerySelect);
@@ -356,6 +375,7 @@ class UserCategoriesTable
 		$select = $this->tableGateway->getSql()->select();
 		$select->join('category', 'user_categories.category_id=category.category_id',array('category_image','category_highlight','settingId'=>'category_type'),'left');
 		$select->join(array('rwvlf' => $votesGroupSubQuerySelect), 'user_categories.category_id=vupCatId',array('NetVotes' => new Expression('COALESCE(NetVotes1,0)'),'vupCatId1'=>'vupCatId','voteUp'=>'voteUp','rw_lh'=>'rw_lh'),'left');
+		$select->join(array('rwvlf1' => $votesGroupSubQuerySelect2), 'user_categories.category_id=uservupCatId',array('userVoteUp' => 'userVoteUp1','uservupCatId1'=>'uservupCatId','uservoteDown'=>'uservoteDown1','userVoteId'=>'userVoteId1'),'left');
 		//newly added query
 		//$select->join('user', 'user_categories.user_id=user.user_id',array('ustatus'=>'status'),'left');
 		$select->join('user', 'user_categories.user_id=user.user_id',array('display_name','ustatus'=>'status'),'left');
@@ -380,11 +400,20 @@ class UserCategoriesTable
 		$categoryType = 1;
 		$notmature_safe = 0;
 		$hashTerm = "#";
+		if(isset($_SESSION['usersinfo']->userId)){
+			$user_id=$_SESSION['usersinfo']->userId;
+		}else{
+			$user_id=$_SERVER['REMOTE_ADDR'];
+		}
 		//newly added
 		$votesGroupSubQuerySelect = $this->rwvTg->getSql()->select();
 		$votesGroupSubQuerySelect->columns(array('NetVotes1' => new Expression('COALESCE((SUM(voteUp)/SUM(rw_lh)*100),0)'),'vupCatId'=>'category_id','voteUp'=>'voteUp','rw_lh'=>'rw_lh'));
 		$votesGroupSubQuerySelect->group('vupCatId');
 		$votesGroupSubQuerySelect->where('relevance_worth_vote.rw_lh="1"');
+		$votesGroupSubQuerySelect2 = $this->rwvTg->getSql()->select();
+		$votesGroupSubQuerySelect2->columns(array('userVoteUp1' =>'voteUp','uservupCatId'=>'category_id','uservoteDown1'=>'voteDown','userVoteId1'=>'user_id'));
+		$votesGroupSubQuerySelect2->where('relevance_worth_vote.rw_lh="1"');
+		$votesGroupSubQuerySelect2->where('relevance_worth_vote.user_id="'.$user_id.'"');
 		//end
 		$select = $this->tableGateway->getSql()->select();
 		$select->join('category', 'user_categories.category_id=category.category_id',array('category_image','category_highlight','settingId'=>'category_type'),'left');
@@ -394,6 +423,7 @@ class UserCategoriesTable
 		$select->join('user_details', 'user_details.user_id=user.user_id',array('image','montage_image'),'left');
 		$select->join('databox_views', 'user_categories.category_id=databox_views.category_id',array('views_count'),'left');
 		$select->join(array('rwvlf' => $votesGroupSubQuerySelect), 'user_categories.category_id=vupCatId',array('likes' => new Expression('COALESCE(NetVotes1,0)'),'vupCatId1'=>'vupCatId','voteUp'=>new Expression('COALESCE(voteUp1,0)'),'rw_lh'=>new Expression('COALESCE(rw_lh1,0)')),'left');
+		$select->join(array('rwvlf1' => $votesGroupSubQuerySelect2), 'user_categories.category_id=uservupCatId',array('userVoteUp' => 'userVoteUp1','uservupCatId1'=>'uservupCatId','uservoteDown'=>'uservoteDown1','userVoteId'=>'userVoteId1'),'left');
 		//END
 		$select->where( 'user_categories.category_type="'. $categoryType .'"'  );
 		$select->where('user_categories.status="1"');
@@ -425,15 +455,25 @@ class UserCategoriesTable
 	public function getSearchPrivateBox( $searchTermHolder,$pvtUniqueCodeHolder )
 	{
 		$notmature_safe = 0;
+		if(isset($_SESSION['usersinfo']->userId)){
+			$user_id=$_SESSION['usersinfo']->userId;
+		}else{
+			$user_id=$_SERVER['REMOTE_ADDR'];
+		}
 		//newly added
 		$votesGroupSubQuerySelect = $this->rwvTg->getSql()->select();
 		$votesGroupSubQuerySelect->columns(array('NetVotes1' => new Expression('COALESCE((SUM(voteUp)/SUM(rw_lh)*100),0)'),'vupCatId'=>'category_id','voteUp'=>'voteUp','rw_lh'=>'rw_lh'));
 		$votesGroupSubQuerySelect->group('vupCatId');
 		$votesGroupSubQuerySelect->where('relevance_worth_vote.rw_lh="1"');
+		$votesGroupSubQuerySelect2 = $this->rwvTg->getSql()->select();
+		$votesGroupSubQuerySelect2->columns(array('userVoteUp1' =>'voteUp','uservupCatId'=>'category_id','uservoteDown1'=>'voteDown','userVoteId1'=>'user_id'));
+		$votesGroupSubQuerySelect2->where('relevance_worth_vote.rw_lh="1"');
+		$votesGroupSubQuerySelect2->where('relevance_worth_vote.user_id="'.$user_id.'"');
 		//end
 		$select = $this->tableGateway->getSql()->select();
 		$select->join('category', 'user_categories.category_id=category.category_id',array('category_image','category_highlight','settingId'=>'category_type'),'left');
 		$select->join(array('rwvlf' => $votesGroupSubQuerySelect), 'user_categories.category_id=vupCatId',array('likes' => new Expression('COALESCE(NetVotes1,0)'),'vupCatId1'=>'vupCatId','voteUp'=>new Expression('COALESCE(voteUp1,0)'),'rw_lh'=>new Expression('COALESCE(rw_lh1,0)')),'left');
+		$select->join(array('rwvlf1' => $votesGroupSubQuerySelect2), 'user_categories.category_id=uservupCatId',array('userVoteUp' => 'userVoteUp1','uservupCatId1'=>'uservupCatId','uservoteDown'=>'uservoteDown1','userVoteId'=>'userVoteId1'),'left');
 		//$select->join('user', 'user_categories.user_id=user.user_id',array('ustatus'=>'status'),'left');
 		//NEWLY ADDED
 		$select->join('user', 'user_categories.user_id=user.user_id',array('display_name','ustatus'=>'status'),'left');
