@@ -770,16 +770,23 @@ function checkSpaces()
 			  }
 		});
 	}
-	function likeDislikeCnt( newVoteValue,categoryId,rw_th )
+	function likeDislikeCnt( newVoteValue,categoryId,rw_th,voteUp,rw_lh )
 	{
-	    var voteUrl = BASE_URL + "/databox/vote-on-highlight";
+		var voteUrl = BASE_URL + "/databox/vote-on-highlight";
 		$.ajax({
 		  url: voteUrl,
 		  type: "POST",
 		  data:{type:newVoteValue,categoryId:categoryId,rw_th:rw_th},
 		  async: false,
 		  success: function(data) {
-			alert('thanks'); return false;
+			if(newVoteValue==1){
+				var voteUpNew=parseInt(voteUp) + parseInt("1");
+			}else{
+				var voteUpNew=parseInt(voteUp) - parseInt("1");
+			}
+			var like=(parseInt(voteUpNew)/(parseInt(rw_lh)+parseInt("1")))*100;
+			like = Math.round(like * 1000) / 1000;
+			$('#likes'+categoryId).html(like+'% liked');
 		  }
 		});	
 	}

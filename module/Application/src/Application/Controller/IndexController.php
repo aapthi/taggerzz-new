@@ -206,7 +206,7 @@ class IndexController extends AbstractActionController
 				}
 			}
 		}
-		//echo "<pre>";print_r($homePublicBoxesArray);exit;
+	//echo "<pre>";print_r($homePublicBoxesArray);exit;
 		foreach( $homehighlightBoxesArray as $key=>$values )
 		{
 			$homehighlightBoxesArray[$key]["categoryLinksCount"] = 0;

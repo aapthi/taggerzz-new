@@ -64,49 +64,7 @@
 					</div>
 				</div>
 				<div class="clearfix"></div>
-				<div class="" style="margin-top:1px;">
-					<div class="row">
-						<?
-						$image="";
-						if(strpos($_SESSION['usersinfo']->montage_main_image, "https://") !== false || strpos($_SESSION['usersinfo']->montage_main_image, "http://") !== false)
-					   { 
-							   $image=$_SESSION['usersinfo']->montage_main_image;
-					   }else{
-							$image=$basePath.'/images/project/montageMainImage/'.$_SESSION['usersinfo']->montage_main_image;
-					   }
-						if($_SESSION['usersinfo']->montage_main_image!=""){?>
-						<div class="span180">
-							<img id="MontageImage" src="<?php echo $image; ?>">
-							<div style="position:absolute;bottom:20px;left:25%;">
-								<p style="font-size:0.55em; text-decoration:underline;"><a href="javascript:void(0);" id="montagePic" onclick="updatemontageImage()">CHANGE YOUR PICTURE</a><input style="display:none" type="file" name="change_image" id="change_image"></P>
-							</div>
-						</div>
-						<?}else{?>
-							<form id="montageUploadForm" method="post" enctype="multipart/form-data">
-							<div class="span180" style="position:relative;">
-								<img id="MontageImage" src="<?php echo $basePath; ?>/images/social_media/profile_img.png"/>
-								<div style="position:absolute;bottom:20px;left:25%;">
-								<p style="font-size:0.55em; text-decoration:underline;"><a href="javascript:void(0);" id="montagePic" onclick="updatemontageImage()" >ADD YOUR PICTURE</a><input style="display:none" type="file" name="change_image" id="change_image"></P>
-							</div>
-							</div>
-							</form>
-						<?}?>
-							<div id="your_paragraph">
-							<?if($_SESSION['usersinfo']->montage_paragraph==""){
-								$montage_paragraph="";
-							?>
-							<div class="span700 profile_text_empty">
-									<div id="montagPara_Div_id1" class="montage_Paragraph_show"><a href="javascript:void(0);" title="Edit your paragraph" onclick="montagePopUp(3)"><img src="<?php echo $basePath; ?>/images/social_media/profile_empty.png" class="edit_paragraph_mon_empty"/></a><p>No Writing competition needed here</p></div>
-							</div>
-							<?}else{
-								$montage_paragraph=$_SESSION['usersinfo']->montage_paragraph;
-							?>
-							<div class="span700">
-								<div id="montagPara_Div_id" class="montage_Paragraph_show"><P><?echo $_SESSION['usersinfo']->montage_paragraph;?><span><a href="javascript:void(0);" title="Edit your paragraph" onclick="montagePopUp(3)" class="edit_paragraph_mon_empty">EDIT</a></SPAN></P></div>
-							</div>
-							<?}?>
-							</div>
-					</div>
+				
 				</div>
 			</div>
 			<div class="pos_absolute tg_media_b">
@@ -148,80 +106,7 @@
 					</div>
 				<?}}?>
 				</div>
-				<div class="text_row Previous">
-					<div class="float_l" id="prevPagination<?echo $key;?>" style="display:none">
-						<a href="javascript:void(0);" onclick="paginationLinks('0',<?echo $key;?>)" >
-							<img src="<?php echo $basePath; ?>/images/social_media/leftarrow.png"/>&nbsp;Previous
-						</a>
-					</div>
-					<?if($dashboard['totalLinks']>7){?>
-					<div class="float_r " id="nextPagination<?echo $key;?>">
-						<a href="javascript:void(0);" onclick="paginationLinks('1',<?echo $key;?>)">Next&nbsp;
-							<img src="<?php echo $basePath; ?>/images/social_media/rightarrow.png"/>
-						</a>
-					</div>
-					<?}?>
-				</div>
 				<div class="clearfix"></div>
-				<div class="pos_absolute montage_social_network_b">
-				<div class="montage_social_network_btn">
-					<p style="width:90px;"><img class="img_top" src="<?php echo $basePath; ?>/images/social_media/rightmark.png"/>&nbsp;relevance
-						<b class="pos_absolute" id="relevanceDiv<?php echo $key; ?>">
-							<?php
-								if( $dashboard['categoryRelevance'] == 0 )
-								{
-							?>
-									<a href="JavaScript:void(0);" onClick="voteRelevance(1,<?php echo $key; ?>);" ><img class="upparrow" src="<?php echo $basePath; ?>/images/social_media/upparrow.png" /></a>
-									<img class="downarrow" src="<?php echo $basePath; ?>/images/social_media/downarrow.png" />
-							<?php
-								}
-								else if( $dashboard['categoryRelevance'] == 1 )
-								{
-							?>
-									<img class="upparrow" src="<?php echo $basePath; ?>/images/social_media/upparrow_disable.png" />
-									<a href="JavaScript:void(0);" onClick="voteRelevance(0,<?php echo $key; ?>);"><img class="downarrow" src="<?php echo $basePath; ?>/images/social_media/downarrow_enable.png" /></a>
-							<?php
-								}
-								else if( $dashboard['categoryRelevance'] == 2 )
-								{
-							?>
-									<a href="JavaScript:void(0);" onClick="voteRelevance(1,<?php echo $key; ?>);" ><img class="upparrow" src="<?php echo $basePath; ?>/images/social_media/upparrow.png" /></a><br/>
-									<a href="JavaScript:void(0);" onClick="voteRelevance(0,<?php echo $key; ?>);"><img class="downarrow" src="<?php echo $basePath; ?>/images/social_media/downarrow_enable.png" /></a>
-							<?php
-								}
-							?>
-						</b>
-					</p>
-					<p style="width:70px;"><img class="img_top" src="<?php echo $basePath; ?>/images/social_media/star.png"/>&nbsp;worth
-						<b class="pos_absolute" id="worthDiv<?php echo $key; ?>">
-							<?php
-								if( $dashboard['categoryWorth'] == 0 )
-								{
-							?>
-									<a href="JavaScript:void(0);" onClick="voteWorth(1,<?php echo $key; ?>);" ><img class="upparrow" src="<?php echo $basePath; ?>/images/social_media/upparrow.png" /></a>
-									<img class="downarrow" src="<?php echo $basePath; ?>/images/social_media/downarrow.png" />
-							<?php
-								}
-								else if( $dashboard['categoryWorth'] == 1 )
-								{
-							?>
-									<img class="upparrow" src="<?php echo $basePath; ?>/images/social_media/upparrow_disable.png" />
-									<a href="JavaScript:void(0);" onClick="voteWorth(0,<?php echo $key; ?>);"><img class="downarrow" src="<?php echo $basePath; ?>/images/social_media/downarrow_enable.png" /></a>
-							<?php
-								}
-								else if( $dashboard['categoryWorth'] == 2 )
-								{
-							?>
-									<a href="JavaScript:void(0);" onClick="voteWorth(1,<?php echo $key; ?>);" ><img class="upparrow" src="<?php echo $basePath; ?>/images/social_media/upparrow.png" /></a><br/>
-									<a href="JavaScript:void(0);" onClick="voteWorth(0,<?php echo $key; ?>);"><img class="downarrow" src="<?php echo $basePath; ?>/images/social_media/downarrow_enable.png" /></a>
-							<?php
-								}
-							?>
-						</b>
-					</p>
-					<p style="width:80px;"><img class="img_top" src="<?php echo $basePath; ?>/images/social_media/eye.png"/>&nbsp;<a href="javascript:void(0);" onclick="montReportPopUpShow(<?php echo $key; ?>,<?echo $dashboard['user_id'];?>)">report</a></p>
-				</div>
-				</div>
 			</div>
 			<?}?>
 		

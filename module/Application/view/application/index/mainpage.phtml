@@ -32,6 +32,7 @@
                     <div id="divCardsWrapper" class="divCardsWrapper">
 						<?php if( isset($this->homehighlightBoxesArray) )
 					{foreach( $this->homehighlightBoxesArray as $key=>$currentBoxData ){
+					//echo "<pre>";print_r($currentBoxData);
 						$viewUrl = "";
 						if( isset($_SESSION['usersinfo']) )
 						{
@@ -72,7 +73,7 @@
 									<img src="<?php echo $basePath; ?>/img/userImage.png" class="imgUserImage" alt="" />
 									<?php } ?>
 									<div class="divCardUserName">By: <?php echo $currentBoxData["display_name"];?></div><br/>
-									<div class="divCardUserName"><?php echo round($currentBoxData["NetVotes"],2);?>% liked</div>
+									<div id="likes<?php echo $currentBoxData["category_id"];?>" class="divCardUserName"><?php echo round($currentBoxData["NetVotes"],2);?>% liked</div>
                                 </div>
                                 <div id="divCard-1-sharedLinks" class="divCardSharedLinks">
                                     <span class="fatFont"><?php echo $currentBoxData["categoryLinksCount"]; ?> HOT LINKS</span> collected and shared
@@ -85,7 +86,7 @@
                                 </div>
 								<!--<span><?php echo round($currentBoxData["NetVotes"],2);?>% liked</span>-->
                                 <div class="divCardLoveTrash">
-                                    <a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" /></a>  or <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1');"> <img src="<?php echo $basePath; ?>/img/trash.png" alt="" /></a>
+                                    <a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1','<?php echo $currentBoxData["voteUp"];?>','<?php echo $currentBoxData["rw_lh"];?>');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" /></a>  or <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1','<?php echo $currentBoxData["voteUp"];?>','<?php echo $currentBoxData["rw_lh"];?>');"> <img src="<?php echo $basePath; ?>/img/trash.png" alt="" /></a>
                                 </div>
                                 <div id="divCardKeywords" class="divCardKeywords"><?php echo $currentBoxData["meta_tags"];?></div>
 
@@ -179,7 +180,7 @@
 								<img src="<?php echo $basePath; ?>/img/userImage.png" class="imgUserImage" alt="" />
 								<?php } ?>
                                 <div class="divCardUserName">By: <?php echo $currentBoxData["display_name"];?></div><br/>
-								<div class="divCardUserName"><?php echo round($currentBoxData["likes"],2);?>% liked</div>
+								<div id="likes<?php echo $currentBoxData["category_id"];?>" class="divCardUserName"><?php echo round($currentBoxData["likes"],2);?>% liked</div>
                             </div>
                         </div>
                         <div id="divDatabox-1-contentWrapper" class="divCardContentWrapper">
@@ -188,7 +189,7 @@
                             </div>
 							<!--<span><?php echo round($currentBoxData["likes"],2);?>% liked</span>-->
                             <div class="divCardLoveTrash">
-                                <a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" /></a>  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" /></a>
+                                <a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1','<?php echo $currentBoxData["voteUp"];?>','<?php echo $currentBoxData["rw_lh"];?>');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" /></a>  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1','<?php echo $currentBoxData["voteUp"];?>','<?php echo $currentBoxData["rw_lh"];?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" /></a>
                             </div>
                             <div id="divCardKeywords" class="divCardKeywords"><?php echo $currentBoxData["meta_tags"];?></div>
 

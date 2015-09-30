@@ -311,18 +311,19 @@ class DashboardController extends AbstractActionController
 				'totalDataboxes'	=>	count($dashboard),
 				'privateCount'		=>	$privateCount,
 			));
-			if($_SESSION['usersinfo']->montage_hash_name==""){
+			/*if($_SESSION['usersinfo']->montage_hash_name==""){
 				return $view->setTemplate( "/dashboard/dashboard/Montage_First_Access.phtml" );
-			}else{
+			}else{*/
 				return $view->setTemplate( "/dashboard/dashboard/Montage.phtml" );
-			}
+			//}
 		}else{
 			$view = new ViewModel(
 			array(
 				'baseUrl' 	=> $baseUrl,
 				'basePath' 	=> $basePath,
 			));
-			return $view->setTemplate( "/dashboard/dashboard/Montage_Empty.phtml" );
+			//return $view->setTemplate( "/dashboard/dashboard/Montage_Empty.phtml" );
+			return $view->setTemplate( "/dashboard/dashboard/Montage.phtml" );
 		}
 	}
 	public function montageHashNameAction(){
