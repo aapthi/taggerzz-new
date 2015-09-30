@@ -97,14 +97,15 @@
 				<div class="montage_row" id="montageRow<?echo $key;?>">
 				<?foreach($dashboard['links'] as $links){
 					$count++;
-				if($count<=7){
+				//if($count<=7){
 					$link=explode('***',$links);
 					?>
 					<div class="column1">
 						<p><?echo substr($link[0],0,22) . '...';$url = $link[0];?></p>
 						<div><a href="<?php echo $url; ?>" target="_blank"><img src="<?php $validImage=getimagesize($link[2]); if($validImage[3]!=""){echo $link[2];}else{ echo $basePath;?>/images/social_media/noimage.png<? } ?>"/></a></div>
 					</div>
-				<?}}?>
+				<?//}?>
+				<?}?>
 				</div>
 				<div class="clearfix"></div>
 			</div>
