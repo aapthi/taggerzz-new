@@ -1159,11 +1159,8 @@ input:focus, input[type="text"]:focus{
 	font-family: "sinkin_sans400_regular", sans-serif;
 	color:#a7a5a5;
 }
-.tg_montage_t:first-child{
-	margin-top:20px;
-}
 .tg_montage_t{
-	margin-top:12px;
+margin-bottom:20px;
 }
 .tg_montage_t h3{
 	text-transform:uppercase;
@@ -1197,7 +1194,8 @@ input:focus, input[type="text"]:focus{
 [class*="column"] {
   float: left;
   min-height: 1px;
-  margin-left: 4px;
+  margin-left: 10px;
+  margin-bottom: 10px;
 }
 .column1{
 	width:136px;
@@ -1207,15 +1205,17 @@ input:focus, input[type="text"]:focus{
 	background:#ebeff4;
 	color:#222;
 	font-size:9px;
-	padding:2px;
+	padding:3px;
+	border-bottom:1px solid #c7c7c7;
 }
 .column1 div{
-	border:1px solid #c1cfd9;
+	border:1px solid #c7c7c7;
 	text-align:center;
 	height:130px;
+	border-radius:2px;
 }
 .column1 img{
-	height:128px;
+	height:112px;
 	width:134px;
 }
 .Previous img{

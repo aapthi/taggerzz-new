@@ -1,4 +1,3 @@
-
 <?php
 	$tzCatImage = $basePath . "/img/defaultImg.png";
 	if ( isset($this->editBoxId) && trim($this->editBoxId) != "" && is_numeric($this->editBoxId) && $this->editBoxId )
@@ -51,14 +50,14 @@
                 <div id="divCreateHighlightWrapper" class="divCreateHighlightWrapper">
                     <div class="heading">ADD LINKS</div>
                     <div class="divCreateHighlightHashtag">
-                        <span class="">Hashtag </span>
+                        <span>Hashtag </span>
                         <input type="text" id="hashtagHolder" class='inptHashtag' placeholder="#hashtag" value="<?php if(isset($_SESSION['databox']->hashtag)){ echo $_SESSION['databox']->hashtag ;}?>" />
                     </div>
                     <div class="divCreateHighlightTitle">
-                        <span class="">Title </span>
+                        <span>Title </span>
                         <input type="text" id='titleHolder' class='inptTitle' placeholder="Title of the collection" value="<?php if(isset($_SESSION['databox']->hashtitle)){ echo $_SESSION['databox']->hashtitle ;}?>" />
                     </div>
-					<span class="">Links </span><br />
+					 <div class="divCreateHighlightHashtag"><span style="padding:0 10px;">Links </span></div>
 					<div id="textBoxesGroup"><?
 							if( isset($this->boxLinksArr) && count($this->boxLinksArr) > 0 )
 							{
@@ -114,10 +113,10 @@
                         <button class="primaryButton" id="cropBoxImage">UPLOAD IMAGE</button>
                         <img src="<?php echo $tzCatImage; ?>" alt="" id="uploadedCatImage1"/>
                     </div>
-                    <div class="divCreateHighlightNatureCategory">
-                        <div class="highlights_btn" id="dcHtmlDiv">
-						<a href="javascript:void(0)" id="databoxContinue" />Continue Customising</a></div>
-						<div id="dcInprogressDiv" style="display:none;"><img  style="vertical-align:middle;margin-right:3px;width:30px;" src="<?php echo $basePath; ?>/img/bx_loader.gif" />Saving Category...</div>
+                    <div class="">
+                        <div class="" id="dcHtmlDiv">
+						<a href="javascript:void(0)" id="databoxContinue" class="btnBlack right"/>Continue Customising</a></div>
+						<div id="dcInprogressDiv" style="display:none;text-align:right"><img  style="vertical-align:middle;margin-right:3px;width:30px;" src="<?php echo $basePath; ?>/img/bx_loader.gif" />Saving Category...</div>
                     </div>
                 </div>
             </section>

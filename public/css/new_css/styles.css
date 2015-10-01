@@ -708,7 +708,7 @@ a {
   #secCreateHighlight .divCreateHighlightHashtag, #secCreateHashtag .divCreateHighlightHashtag, #secUploadBookmarks .divCreateHighlightHashtag, #secSelectDatabox .divCreateHighlightHashtag, #secCreateHighlight .divCreateHighlightTitle, #secCreateHashtag .divCreateHighlightTitle, #secUploadBookmarks .divCreateHighlightTitle, #secSelectDatabox .divCreateHighlightTitle {
     display: table-row; }
     #secCreateHighlight .divCreateHighlightHashtag .inptHashtag, #secCreateHashtag .divCreateHighlightHashtag .inptHashtag, #secUploadBookmarks .divCreateHighlightHashtag .inptHashtag, #secSelectDatabox .divCreateHighlightHashtag .inptHashtag, #secCreateHighlight .divCreateHighlightHashtag .inptTitle, #secCreateHashtag .divCreateHighlightHashtag .inptTitle, #secUploadBookmarks .divCreateHighlightHashtag .inptTitle, #secSelectDatabox .divCreateHighlightHashtag .inptTitle, #secCreateHighlight .divCreateHighlightTitle .inptHashtag, #secCreateHashtag .divCreateHighlightTitle .inptHashtag, #secUploadBookmarks .divCreateHighlightTitle .inptHashtag, #secSelectDatabox .divCreateHighlightTitle .inptHashtag, #secCreateHighlight .divCreateHighlightTitle .inptTitle, #secCreateHashtag .divCreateHighlightTitle .inptTitle, #secUploadBookmarks .divCreateHighlightTitle .inptTitle, #secSelectDatabox .divCreateHighlightTitle .inptTitle {
-      width: 200%; }
+      width: 200%; border:1px solid #c7c7c7;padding:5px; }
     #secCreateHighlight .divCreateHighlightHashtag *, #secCreateHashtag .divCreateHighlightHashtag *, #secUploadBookmarks .divCreateHighlightHashtag *, #secSelectDatabox .divCreateHighlightHashtag *, #secCreateHighlight .divCreateHighlightTitle *, #secCreateHashtag .divCreateHighlightTitle *, #secUploadBookmarks .divCreateHighlightTitle *, #secSelectDatabox .divCreateHighlightTitle * {
       display: table-cell;
       padding: 10pt; }
@@ -752,7 +752,7 @@ a {
   #secCreatePrivateDatabox .divCreatePrivateDataboxHashtag, #secCreatePrivateDatabox .divCreatePrivateDataboxTitle, #secCreatePrivateDatabox .divCreatePrivateDataboxUniqueCode {
     display: table-row; }
     #secCreatePrivateDatabox .divCreatePrivateDataboxHashtag .inptHashtag, #secCreatePrivateDatabox .divCreatePrivateDataboxHashtag .inptTitle, #secCreatePrivateDatabox .divCreatePrivateDataboxTitle .inptHashtag, #secCreatePrivateDatabox .divCreatePrivateDataboxTitle .inptTitle, #secCreatePrivateDatabox .divCreatePrivateDataboxUniqueCode .inptHashtag, #secCreatePrivateDatabox .divCreatePrivateDataboxUniqueCode .inptTitle {
-      width: 200%; }
+      width: 200%;border:1px solid #c7c7c7;padding:5px; }
     #secCreatePrivateDatabox .divCreatePrivateDataboxHashtag *, #secCreatePrivateDatabox .divCreatePrivateDataboxTitle *, #secCreatePrivateDatabox .divCreatePrivateDataboxUniqueCode * {
       display: table-cell;
       padding: 10pt; }
@@ -762,8 +762,8 @@ a {
       display: inline;
       cursor: pointer; }
     #secCreatePrivateDatabox .divCreatePrivateDataboxHashtag .inptUniqueCode, #secCreatePrivateDatabox .divCreatePrivateDataboxTitle .inptUniqueCode, #secCreatePrivateDatabox .divCreatePrivateDataboxUniqueCode .inptUniqueCode {
-      width: 80%;
-      display: inline; }
+      width: 78%;
+      display: inline; border:1px solid #c7c7c7;padding:5px; }
   #secCreatePrivateDatabox .divCreatePrivateDataboxLinks {
     background: #e0e8ed; }
     #secCreatePrivateDatabox .divCreatePrivateDataboxLinks img {

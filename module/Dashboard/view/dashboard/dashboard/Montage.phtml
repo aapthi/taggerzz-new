@@ -1,204 +1,42 @@
-<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/js/crop/cropit.css" />
-<link href="<?php echo $basePath; ?>/css/sugarcake.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo $basePath; ?>/css/default.css" rel="stylesheet" type="text/css" />
-<!--<script type="text/javascript" src="<?php echo $basePath; ?>/js/scroller_/facescroll.js"></script>-->
-<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/css/allfont.css" />
-<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/css/nexus_menu/component.css" />
-
-<div class="body_main_container mycolleection_bottom_bg pos_relative">
+	<div class="montage_container">
 		<div class="body_middle_container body_mar_b">
-			<div class="body_top_height_start">
-				<div class="text_row mycolleection">
-					<div id="hash_name">
-					<?if($_SESSION['usersinfo']->montage_hash_name==""){
-						$montage_hash_name="";
-					?>
-					<div class="float_l"><h1>#MONTAGE</h1></div>
-					<div class="float_l"><a href="javascript:void(0);" onclick="montagePopUp(1)" class="add_new_pick">ADD YOURS</a></div>
-					<?}else{
-						$montage_hash_name=$_SESSION['usersinfo']->montage_hash_name;
-						if(strlen($montage_hash_name)>30){
-							$montageLength=substr($montage_hash_name,0,30) . '..'; 
-						}else{
-							$montageLength=$montage_hash_name; 
-						}
-					?>
-					<div  class="float_l"><h1>#<?echo $montageLength;?></h1></div>
-					<div class="float_l"><a href="javascript:void(0);" onclick="montagePopUp(1)" title="Edit hash name" class="add_new_pick">EDIT</a></div>
-					<?}?>
-					</div>
-					<div  id="your_title" class="float_r montage_tit_show">
-					<?if($_SESSION['usersinfo']->montage_title==""){
-						$montage_title="";
-					?>
-					<h2><a href="javascript:void(0);" onclick="montagePopUp(2)" class="add_title">Add your Title here</a></h2>
-					<?}else{
-						$montage_title=$_SESSION['usersinfo']->montage_title;
-					?>
-					<h2><span><a href="javascript:void(0);" onclick="montagePopUp(2)" class="">EDIT TITLE&nbsp;&nbsp;&nbsp;&nbsp;</a></span><?echo $_SESSION['usersinfo']->montage_title;?></h2>
-					<?}
-						if( $montage_title != "" )
-						{
-							if( $montage_hash_name != "" )
-							{
-								global $layoutTitle;
-								$layoutTitle = $montage_hash_name . " | " . $montage_title . " - Taggerzz";
-							}
-							else
-							{
-								global $layoutTitle;
-								$layoutTitle = $montage_title . " - Taggerzz";
-							}
-						}
-						else if( $montage_hash_name != "" )
-						{
-							global $layoutTitle;
-							$layoutTitle = $montage_hash_name . " - Taggerzz";
-						}
-						else
-						{
-							global $layoutTitle;
-							$layoutTitle =  "Taggerzz - Collect.Connect.Tag and Share your Web-Data with Everyone and Any one";
-						}
-					?>
-					</div>
-				</div>
-				<div class="clearfix"></div>
-				
-				</div>
-			</div>
-			<div class="pos_absolute tg_media_b">
-			<div class="">
-			<?
-			$value=0;
-			if($this->totalDataboxes==10){
-				$value=10;
-			}else{
-				$value='0'.$this->totalDataboxes;
-			}
-			?>
-			<p><span class="medium_collection">My MEDIA COLLECTIONS</span><span class="media_count">&nbsp;<? echo $value;?>/10</span><span class="media_private_boxes">&nbsp;(<? echo $this->privateCount;?> PRIVATE)</span></P>
-		</div>
-		</div>
-		</div>
-	</div>
-<div class="body_main_container" style="margin-bottom:80px;">
-	<div class="body_middle_container body_mar_b">
+	<div class="body_main_container">
+		<div class="body_middle_container body_mar_b">
 		<?foreach($this->dashboard as $key=>$dashboard){$count=0;?>
-			<input type="hidden" id="totalCount<?echo $key;?>" name="totalCount<?echo $key;?>" value="<?echo $dashboard['totalLinks'];?>">
+		<input type="hidden" id="totalCount<?echo $key;?>" name="totalCount<?echo $key;?>" value="<?echo $dashboard['totalLinks'];?>">
 			<input type="hidden" id="presentCount<?echo $key;?>" name="presentCount<?echo $key;?>" value="7">
-			<div class="tg_montage_t">
+			<div class="tg_montage_t montage_brg_box">
+			<div class="montage_box_brg_title">
 				<div class="text_row">
 					<div class="float_l"><h3><?echo $dashboard['user_hashname']?><span>&nbsp;(<?echo $dashboard['totalLinks']?>/100)</span></h3></div>
-					<div class="float_r"><h3><?echo $dashboard['category_title']?></h3></div>
+					<div class="float_r"><P><?echo $dashboard['category_title']?></P></div>
 				</div><div class="clearfix"></div>
 			</div>
-			<div class="pos_relative colman_min_h">
+			<div class="pos_relative">
 				<div class="montage_row" id="montageRow<?echo $key;?>">
 				<?foreach($dashboard['links'] as $links){
-					$count++;
-				//if($count<=7){
+				$count++;
+				if($count){
 					$link=explode('***',$links);
 					?>
 					<div class="column1">
-						<p><?echo substr($link[0],0,22) . '...';$url = $link[0];?></p>
-						<div><a href="<?php echo $url; ?>" target="_blank"><img src="<?php $validImage=getimagesize($link[2]); if($validImage[3]!=""){echo $link[2];}else{ echo $basePath;?>/images/social_media/noimage.png<? } ?>"/></a></div>
+						<div><p><?echo substr($link[0],0,20) . '...';$url = $link[0];?></p>
+						<a href="<?php echo $url; ?>" target="_blank"><img src="<?php if($link[2]!=""){echo $link[2];}else{ echo $basePath;?>/images/social_media/noimage.png<? } ?>"/></a></div>
 					</div>
-				<?//}?>
-				<?}?>
+				<?}}?>
 				</div>
 				<div class="clearfix"></div>
 			</div>
+			</div>
 			<?}?>
-		
+		</div>
+	</div>
+		</div>
 	</div>
 </div>
 <div class="clearfix"></div>
-<div id="pop-up-hash" class="pop-up-display-content conform_popup_content">
-	<div class="montage_desc">
-		<h4>Please provide your montage hash name</h4>
-		<p><input type="text" name="montage_hash_name" class="text_pad" id="montage_hash_name" value="#<?echo $montage_hash_name;?>" /></p>
-	</div>
-	<p>
-		<a class="larg_btn" href="javascript:void(0);" onclick="montagePopUpClose(1)">CANCEL</a>
-		<a class="larg_btn" href="javascript:void(0);" onclick="saveMontage(1)">CONTINUE</a>
-	</p>
-	<p id="hashMessageError"></p>
-</div>
-<div id="pop-up-title" class="pop-up-display-content conform_popup_content">
-	<div class="montage_desc">
-		<h4>Please provide your title</h4>
-		<p><input type="text" name="montage_title" class="text_pad" id="montage_title" value="<?echo $montage_title;?>"/></p>
-	</div>
-	<p>
-		<a class="larg_btn" href="javascript:void(0);" onclick="montagePopUpClose(2)">CANCEL</a>
-		<a class="larg_btn" href="javascript:void(0);" onclick="saveMontage(2)">CONTINUE</a>
-	</p>
-	<p id="titleMessageError"></p>
-</div>
-<div id="pop-up-paragraph" class="pop-up-display-content conform_popup_content">
-	<div class="montage_desc">
-		<h4>Please provide your paragraph</h4>
-		<p><textarea  name="montage_paragraph" class="text_pad" id="montage_paragraph" ><?echo $montage_paragraph;?></textarea></p>
-	</div>
-	<p>
-		<a class="larg_btn" href="javascript:void(0);" onclick="montagePopUpClose(3)">CANCEL</a>
-		<a class="larg_btn" href="javascript:void(0);" onclick="saveMontage(3)">CONTINUE</a>
-	</p>
-	<p id="paragraphMessageError"></p>
-</div>
 <input type="hidden" id="hid_userid"  name="baseUrl" />
 <input type="hidden" id="hid_cat_id"  name="baseUrl" />
 <input type="hidden" id="category_user_id" value="0" />
-
-<!-- Report Pop Up -->
-<div id="pop-up-report" class="pop-up-display-content conform_popup_content">
-	<div class="report_bg">
-		<div><input type="radio" value="1" name="Personel" checked><span>&nbsp;Spam Content</span></div>
-		<div><input type="radio" value="2" name="Personel"><span>&nbsp;Abusive / hateful content</span></div>
-		<div><input type="radio" value="3" name="Personel"><span>&nbsp;Nude / Vulgar Open content</span></div>
-		<div><input type="radio" value="4" name="Personel"><span>&nbsp;Personal defamatory content</span></div>
-		<div class="report_mar_t"><input value="5" type="radio" name="Personel"><span>&nbsp;Other</span></div>
-		<div><textarea id="personel_text" placeholder="Mention your concern in Plain text"></textarea></div>
-		<div class="report_btn"><a href="javascript:void(0)" onClick="Javascript:montReportSend();">SUBMIT</a></div>
-		<p id="repMessage"></p>
-		<div style="clear:both;"></div>
-	</div>
-</div>
-<!-- Report Pop Up End -->
 <input type="hidden" id="report_id_hid" name="report_id_hid" value="0">
-<script type="text/javascript" src="<?php echo $basePath; ?>/js/ckeditor/ckeditor.js"></script>
-<script src="<?php echo $basePath; ?>/js/crop/jquery.cropit.js"></script>
-<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/montage.js"></script>
-
-<script>
-$('.edit_paragraph_mon_empty').click(function() {
-	CKEDITOR.replace( 'montage_paragraph', {
-});
-});
-$(function() {
-	$('#pop-up-image-crop-new').cropit({
-		imageBackground: true
-	});
-	$('.export').click(function() {
-		var src = $('#pop-up-image-crop-new').cropit('export');
-		var fetchUploadedUrl = BASE_URL+'/upload-montage-image';
-		var imageId='<? echo $_SESSION['usersinfo']->userId?>';
-		$("#l_i_c").show();
-		$.ajax({
-			type	: "POST",
-			url		: fetchUploadedUrl,
-			data	: { data: src,page:'montage',imageId:imageId},
-			success: function(data){
-				$("#l_i_c").hide();
-				$('#pop-up-image-crop-new').popUpWindow({action: "close"});
-				$('#MontageImage').attr('src',src);
-				$('#montagePic').html("CHANGE YOUR PICTURE");
-			}
-		});
-		//window.open(imageData);
-	});
-});
-
-</script>
-</script>

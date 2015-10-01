@@ -23,7 +23,7 @@
 	<input type="hidden" id="pvtCodeClicks" name="pvtCodeClicks" value="-1" />
 	<input type="hidden" id="finalnvalidCount" name="finalnvalidCount" value="0" />
 
-        <div id="mainContainerWrapper" class="mainContainerWrapper">
+        <div id="mainContainerWrapper" class="mainContainerWrapper tmar_t125">
 
             <!-- This div is to include the header.html page 
             <div id='divIncludeContent'></div>-->
@@ -63,7 +63,7 @@
                         <span class="">Title </span>
                         <input type="text" id='titleHolder' class='inptTitle' placeholder="Title of the collection" value="<?php if(isset($_SESSION['databox']->hashtitle)){ echo $_SESSION['databox']->hashtitle ;}?>" />
                     </div>
-					<span class="">Links </span><br />
+					<div class="divCreateHighlightHashtag"><span style="padding:0 10px;">Links </span></div>
 					<div id="textBoxesGroup"><?
 							if( isset($this->boxLinksArr) && count($this->boxLinksArr) > 0 )
 							{
@@ -122,10 +122,10 @@
                     <div class="divCreatePrivateDataboxEmail">
                         <span class="">Email-ID to receive private databox access details </span><br />
                         <input type='text' class="inptEmail" placeholder="example@123.com" />
-						<div class="highlights_btn" id="dcHtmlDiv">
-						<a href="javascript:void(0)" id="databoxContinue" />Continue Customising</a></div>
-						<div id="dcInprogressDiv" style="display:none;"><img  style="vertical-align:middle;margin-right:3px;width:30px;" src="<?php echo $basePath; ?>/img/bx_loader.gif" />Saving Category...</div>
                     </div>
+					<div  id="dcHtmlDiv">
+						<a href="javascript:void(0)" id="databoxContinue" class="btnBlack right"/>Continue Customising</a></div>
+						<div id="dcInprogressDiv" style="display:none;text-align:right"><img  style="vertical-align:middle;margin-right:3px;width:30px;" src="<?php echo $basePath; ?>/img/bx_loader.gif" />Saving Category...</div>
                 </div>
             </section>
         </div>
@@ -156,10 +156,11 @@
 <script type="text/javascript" src="<?php echo $basePath; ?>/js/alert-meassage.js"></script>
 
 <div id="pop-up-image-crop-new" class="pop-up-display-content conform_popup_content" style="margin-bottom:20px;">
-	<div class="pop_up_haeding close"><span onclick="selectCropImage();">Upload Image</span></div>
+	<div class="pop_up_haeding close"><h3>Please Upload Your Image</h3>
+	<span onclick="selectCropImage();">Upload Image</span></div>
 	<input type="file" id="fileCropInp" name="fileCropInp" style="display:none;"  />
-	<div id="cropSrcImgContainer">
-		<img alt="Image appears here" src="" id="cropbox" />
+	<div id="cropSrcImgContainer" style="min-height:300px;margin-top:30px;">
+		<img alt="" src="" id="cropbox" />
 	</div>
 	<div class="jc_coords">
 		<form id="CropForm" method="post" >

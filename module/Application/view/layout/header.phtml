@@ -132,7 +132,8 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
 	{
 		?>   
 		<div id="mainContainerWrapper" class="mainContainerWrapper">
-		 <section id="secHeader" class="tfix_header">
+		<div class="tfix_header">
+		 <section id="secHeader">
     <div id="divHeaderWrapper" class="width100 divHeaderWrapper">
         <div id="divMobileMenuWrapper" class="divMobileMenuWrapper">
             <img src="<?php echo $basePath; ?>/img/imgMenuCollapse.png" alt="" id="imgMenuCollapse" class="width25 autoPadding" />
@@ -154,7 +155,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
 						}
 					}
 				?>
-        <div id="divAccountInfo" class="divAccountInfo twidth_acinfo">
+        <div id="divAccountInfo" class="divAccountInfo twidth_acinfo tmar_t12">
             <div id="divProfileImage" class="inline-block">
                 <!--<img src="<?php //echo $basePath; ?>/img/imgFB.png" alt="" class="height100" />-->
                 <img height="60px" width="60px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $_SESSION['usersinfo']->montage_image; ?>" alt="" class="height100" />
@@ -164,7 +165,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
                  <span id="spnGreetingsText" class="block smallFont">Hello, </span>
                     <span id="spnUsername" class="block defaultFont"><?php echo $_SESSION['usersinfo']->displayName; ?></span>
                     <span id="spnMessages" class="block verySmallFont">[<?php if(isset($_SESSION['usersinfo']->userMessagesCount)){echo $_SESSION['usersinfo']->userMessagesCount ; }else{ echo '0';}?> <a href="/taggerzz-new/trunk/accounts#msgoto">Messages</a>, <span id="tzUserCollCountSpan"><?php if(isset($_SESSION['usersinfo']->collectionsCount)){echo $_SESSION['usersinfo']->collectionsCount; }else{ echo '0';}?></span>  <a href="javascript:void(0)" onClick="goToLocation('/my-collected-links')">Collections</a>]</span>
-                    <span id="spnCreateCollection" class="block smallFont highlightFont"><a href="#" class="highlightFont createCollection" id='createCollection'>+ Create Collection</a></span>
+                    <span id="spnCreateCollection" class="block smallFont highlightFont"><a href="#" class="highlightFont createCollection create_btn" id='createCollection'>+ Create Collection</a></span>
             </div>
         </div>
         <div id="divLogoWrapper" class="width30 marginallyCenter">
@@ -183,7 +184,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
                     <span id="spnGreetingsText" class="block smallFont">Hello, </span>
                     <span id="spnUsername" class="block defaultFont"><?php echo $_SESSION['usersinfo']->displayName; ?></span>
                     <span id="spnMessages" class="block verySmallFont">[<?php if(isset($_SESSION['usersinfo']->userMessagesCount)){echo $_SESSION['usersinfo']->userMessagesCount ; }else{ echo '0';}?> <a href="/taggerzz-new/trunk/accounts#msgoto">Messages</a>, <span id="tzUserCollCountSpan"><?php if(isset($_SESSION['usersinfo']->collectionsCount)){echo $_SESSION['usersinfo']->collectionsCount; }else{ echo '0';}?></span> <a href="javascript:void(0)" onClick="goToLocation('my-collected-links')">Collections</a>]</span>
-                    <span id="spnCreateCollection" class="block smallFont highlightFont"><a href="#" class="highlightFont createCollection" id='createCollection'>+ Create Collection</a></span>
+                    <span id="spnCreateCollection" class="block smallFont highlightFont"><a href="#" class="highlightFont createCollection create_btn" id='createCollection'>+ Create Collection</a></span>
                 </div>
             </div>
 			<div class="mar_b5">
@@ -222,14 +223,14 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
 					</div>
 				</div>
 				<?php
-				if( $_SERVER['REQUEST_URI']== "/taggerzz-new/trunk/contentpage" )
-				{
+				//if( $_SERVER['REQUEST_URI']== "/taggerzz-new/trunk/contentpage" )
+				//{
 				?> 
 				<div id="divSearchBoxes" class="divSearchBoxes tinput_s">
 						<input type="text" id="searchTermHolder" class="inptSearchHashTag tsearch_input_w tplaceholder_c" placeholder="Search by #hashtag"/>
 						<a href="Javascript:void(0);" id='homeSearchLink' class="aSearch "></a>
 				</div>
-				<?php } ?>
+				<?php// } ?>
 				<?
 					global $forgotPwdPage;
 					global $browserDispPage;
@@ -239,13 +240,13 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
 					if( $loginType == "emailLogin" )
 					{
 				?>
-						<p>LOGIN PROCESSING(<?echo $step;?> OF 3 STEPS)</p>
+						<!--<p>LOGIN PROCESSING(<?echo $step;?> OF 3 STEPS)</p>-->
 				<?php
 					}
 					else if( $forgotPwdPage == "Yes" )
 					{
 				?>
-						<p><strong>Forgot Password</strong></p>
+						<!--<p><strong>Forgot Password</strong></p>-->
 				<?php
 					}
 					else if( $browserDispPage == "browserDisp" )
@@ -270,6 +271,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
 				?>
 				</div>
 </section>
+</div>
 <section id="secModal" class="">
     <div class="divModalBlurBackground">
         <div class="divModalContentWrapper">
@@ -345,91 +347,6 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
 	</div>
 </div>
 </div>
-<style>
-.tg_users_title{
-	font-size:18px;
-	text-align:center;
-}
-.tg_users_socila_login{
-	margin-top:10px;
-	margin-bottom:10px;
-	border-bottom:1px solid #ccc;
-	text-align:center;
-}
-.tg_users_socila_login img:first-child{
-	margin-left:0px;
-	margin-bottom:8px;
-}
-.tg_users_socila_login img{
-	margin-left:20px !important;
-}
-.tg_users_email_login h1{
-	font-size:18px;
-	text-align:center;
-}
-.tg_create_email{
-	margin-top:10px;
-}
-.tg_create_email input{
-	width:100%;
-	margin-bottom:10px;
-}
-.tg_create_email p{
-	font-size:11px;
-}
-.text_pad{
-	padding:6px 4px;
-	border:1px solid #c7c7c7;
-}
-.home_anchor_black{
-	color:#000000;
-	 text-decoration: none;
-}
-.tg_email_btn{
-	text-align:right;
-	position:relative;
-}
-.tg_fp_btn{
-	text-align:left;
-	position:relative;
-	bottom:22px;
-	width:80%;
-}
-.tg_fp_btn a:hover{
-	color:#f74b40;
-}
-.crete_acc{
-	border-top:1px solid #ccc;
-	margin-top:5px;
-	text-align:center;
-}
-.crete_acc p{
-	padding-top:5px;
-	padding-bottom:5px;
-}
-.crete_acc a{
-	color:#000;
-	font-weight:bold;
-	 text-decoration: none;
-}
-.crete_acc a:hover{
-	color:#f74b40;
-}
-.btn {
-	background: none repeat scroll 0 0 #f97e76;
-    border: 1px solid #f97e76;
-    color: #fff;
-    letter-spacing: 1px;
-	padding:6px 24px;
-    text-transform: uppercase;
-	text-align:center;
-	cursor:pointer;
-	/*line-height:40px;*/
-	font-size:10px;
-	 text-decoration: none;
-	 border-radius:2px;
-}
-</style>
 <script>
 function goTohashtag(title){
 	if(title=="highlights"){

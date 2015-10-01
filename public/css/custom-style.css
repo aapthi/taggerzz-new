@@ -15,6 +15,9 @@ img {
 .tmar_t10{
 	margin-top:10px;
 }
+.tmar_t12{
+	margin-top:13px;
+}
 .tmar_t20{
 	margin-top:20px;
 }
@@ -47,6 +50,7 @@ img {
 	margin-bottom:30px;
 	border-bottom:1px solid #c7c7c7;
 	padding-bottom:10px;
+	width:100%;
 }
 .tmar_t{
 	margin-top:125px;
@@ -61,6 +65,16 @@ img {
 .twidth_acinfo{
 	width:21% !important;
 }
+.twidth_acinfo img{
+	border-radius:2px;
+}
+.twidth_acinfo .create_btn{
+	border: 1px solid #222;
+    border-radius: 2px;
+    padding: 2px 5px;
+	background:#222;
+	color:#fff;
+}
 .tmenufont_inc li a{
 	font-size:9pt;
 }
@@ -68,7 +82,7 @@ img {
 	margin-bottom:5px;
 }
 .tsearch_input_w{
-	width:50% !important
+	width:93% !important
 }
 .pop_up_haeding h3{
 	background:#eaeaea;
@@ -95,6 +109,133 @@ img {
 .tdashboard_f{
 	font-size:8pt;
 }
+/* montage page css */
+.montage_container{
+	width:86.3%;
+	margin:125px auto;
+}
+.montage_brg_box{
+	border:1px solid #c7c7c7;
+	border-radius:2px;
+}
+.montage_box_brg_title{
+	border-bottom: 1px solid #c7c7c7;
+    margin-bottom: 15px;
+    padding: 5px 7px;
+	background:#f8f8f8;
+}
+/* End */
+/* forgot Page css */
+.tfogotcontainer{
+	width:50%;
+	margin:0 auto;
+	padding:20px 0;
+}
+.tforgot_title h4{
+	border-bottom:1px solid #c7c7c7;
+	padding-bottom:6px;
+	padding-top:6px;
+	margin:0;
+	
+}
+.tforgot_p div:first-child{
+	margin-bottom:0;
+	margin-top:0;
+}
+.tforgot_p div{
+	margin-bottom:20px;
+	margin-top:20px;
+}
+.tforgot_inputbrg{
+	border:1px solid #c7c7c7;
+	padding:5px;
+	width:50%;
+}
+/* Header css put there*/
+.tg_users_title{
+	font-size:18px;
+	text-align:center;
+}
+.tg_users_socila_login{
+	margin-top:10px;
+	margin-bottom:10px;
+	border-bottom:1px solid #ccc;
+	text-align:center;
+}
+.tg_users_socila_login img:first-child{
+	margin-left:0px;
+	margin-bottom:8px;
+}
+.tg_users_socila_login img{
+	margin-left:20px !important;
+}
+.tg_users_email_login h1{
+	font-size:18px;
+	text-align:center;
+}
+.tg_create_email{
+	margin-top:10px;
+}
+.tg_create_email input{
+	width:100%;
+	margin-bottom:10px;
+}
+.tg_create_email p{
+	font-size:11px;
+}
+.text_pad{
+	padding:6px 4px;
+	border:1px solid #c7c7c7;
+}
+.home_anchor_black{
+	color:#000000;
+	 text-decoration: none;
+}
+.tg_email_btn{
+	text-align:right;
+	position:relative;
+}
+.tg_fp_btn{
+	text-align:left;
+	position:relative;
+	bottom:22px;
+	width:80%;
+}
+.tg_fp_btn a:hover{
+	color:#f74b40;
+}
+.crete_acc{
+	border-top:1px solid #ccc;
+	margin-top:5px;
+	text-align:center;
+}
+.crete_acc p{
+	padding-top:5px;
+	padding-bottom:5px;
+}
+.crete_acc a{
+	color:#000;
+	font-weight:bold;
+	 text-decoration: none;
+}
+.crete_acc a:hover{
+	color:#f74b40;
+}
+.btn {
+	background: none repeat scroll 0 0 #f97e76;
+    border: 1px solid #f97e76;
+    color: #fff;
+    letter-spacing: 1px;
+	padding:6px 24px;
+    text-transform: uppercase;
+	text-align:center;
+	cursor:pointer;
+	/*line-height:40px;*/
+	font-size:10px;
+	 text-decoration: none;
+	 border-radius:2px;
+}
+/* end */
 .divHeaderWrapper .divSearchBoxes .aSearch {
     background: #ddd url("../img/search.png");
     background-size: 17pt 17pt;
