@@ -360,7 +360,7 @@ class UserCategoriesTable
 		$votesGroupSubQuerySelect->columns(array('NetVotes1' => new Expression('COALESCE(SUM(voteUp)-SUM(voteDown),0)'),'vupCatId'=>'category_id'));
 		$votesGroupSubQuerySelect->group('vupCatId');*/
 		$votesGroupSubQuerySelect = $this->rwvTg->getSql()->select();
-		$votesGroupSubQuerySelect->columns(array('NetVotes1' => new Expression('COALESCE((SUM(voteUp)/SUM(rw_lh)*100),0)'),'vupCatId'=>'category_id','voteUp'=>'voteUp','rw_lh'=>'rw_lh'));
+		$votesGroupSubQuerySelect->columns(array('NetVotes1' => new Expression('COALESCE((SUM(voteUp)/SUM(rw_lh)*100),0)'),'vupCatId'=>'category_id','voteUp1'=>'voteUp','rw_lh1'=>'rw_lh'));
 		$votesGroupSubQuerySelect->group('vupCatId');
 		$votesGroupSubQuerySelect->where('relevance_worth_vote.rw_lh="1"');
 		$votesGroupSubQuerySelect2 = $this->rwvTg->getSql()->select();
@@ -374,7 +374,7 @@ class UserCategoriesTable
 	
 		$select = $this->tableGateway->getSql()->select();
 		$select->join('category', 'user_categories.category_id=category.category_id',array('category_image','category_highlight','settingId'=>'category_type'),'left');
-		$select->join(array('rwvlf' => $votesGroupSubQuerySelect), 'user_categories.category_id=vupCatId',array('NetVotes' => new Expression('COALESCE(NetVotes1,0)'),'vupCatId1'=>'vupCatId','voteUp'=>'voteUp','rw_lh'=>'rw_lh'),'left');
+		$select->join(array('rwvlf' => $votesGroupSubQuerySelect), 'user_categories.category_id=vupCatId',array('NetVotes' => new Expression('COALESCE(NetVotes1,0)'),'vupCatId1'=>'vupCatId','voteUp'=>'voteUp1','rw_lh'=>'rw_lh1'),'left');
 		$select->join(array('rwvlf1' => $votesGroupSubQuerySelect2), 'user_categories.category_id=uservupCatId',array('userVoteUp' => 'userVoteUp1','uservupCatId1'=>'uservupCatId','uservoteDown'=>'uservoteDown1','userVoteId'=>'userVoteId1'),'left');
 		//newly added query
 		//$select->join('user', 'user_categories.user_id=user.user_id',array('ustatus'=>'status'),'left');
@@ -407,7 +407,7 @@ class UserCategoriesTable
 		}
 		//newly added
 		$votesGroupSubQuerySelect = $this->rwvTg->getSql()->select();
-		$votesGroupSubQuerySelect->columns(array('NetVotes1' => new Expression('COALESCE((SUM(voteUp)/SUM(rw_lh)*100),0)'),'vupCatId'=>'category_id','voteUp'=>'voteUp','rw_lh'=>'rw_lh'));
+		$votesGroupSubQuerySelect->columns(array('NetVotes1' => new Expression('COALESCE((SUM(voteUp)/SUM(rw_lh)*100),0)'),'vupCatId'=>'category_id','voteUp1'=>'voteUp','rw_lh1'=>'rw_lh'));
 		$votesGroupSubQuerySelect->group('vupCatId');
 		$votesGroupSubQuerySelect->where('relevance_worth_vote.rw_lh="1"');
 		$votesGroupSubQuerySelect2 = $this->rwvTg->getSql()->select();
@@ -462,7 +462,7 @@ class UserCategoriesTable
 		}
 		//newly added
 		$votesGroupSubQuerySelect = $this->rwvTg->getSql()->select();
-		$votesGroupSubQuerySelect->columns(array('NetVotes1' => new Expression('COALESCE((SUM(voteUp)/SUM(rw_lh)*100),0)'),'vupCatId'=>'category_id','voteUp'=>'voteUp','rw_lh'=>'rw_lh'));
+		$votesGroupSubQuerySelect->columns(array('NetVotes1' => new Expression('COALESCE((SUM(voteUp)/SUM(rw_lh)*100),0)'),'vupCatId'=>'category_id','voteUp1'=>'voteUp','rw_lh1'=>'rw_lh'));
 		$votesGroupSubQuerySelect->group('vupCatId');
 		$votesGroupSubQuerySelect->where('relevance_worth_vote.rw_lh="1"');
 		$votesGroupSubQuerySelect2 = $this->rwvTg->getSql()->select();
