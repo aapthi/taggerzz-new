@@ -16,21 +16,17 @@ if($crop_montage_image!=""){
 <input type="hidden" id="basePath" name="basePath" value="<?php echo $basePath;?>" />
 <input type="hidden" id="baseUrl"  name="baseUrl" value="<?php echo $baseUrl;?>" />
 <input type="hidden" id="formUsageMode"  name="formUsageMode" value="<?php if( (! isset($emailId)) || ($emailId == "" ) ){?>socialLogin<?php }else{ ?>emailLogin<?php } ?>" />
-<div class="tmar_t125">
-	<div class="">
-		<div class="">
+<div class="tzcontainer_as">
+	<div class="tmar_t125">
+		<div class="tac_bg profile_pad">
 			<div class="row">
-				<div class="span5">
-					<div class="mar_l">
-						<div class="text_row">
-							<div class="float_l">
-								<h4 class="line_height">Please fill your details<?php if( (! isset($emailId)) || ($emailId == "" ) ){?>&nbsp;or&nbsp;<?php } ?></h4>
+				<div class="span6">
+							<div class="profile_title">
+								<h4>PLEASE FILL YOUR DETAILS<?php if( (! isset($emailId)) || ($emailId == "" ) ){?>&nbsp;or&nbsp;<?php } ?></h4>
 							</div>
 							<div class="float_r">
 								 <?php if( (! isset($emailId)) || ($emailId == "" )  ){?><div class="skip_btn" id="skipLinkDiv"><a href="<?php echo $baseUrl; ?>/databoxuser/skip-to-continue">Skip to Continue</a></div><?php } ?>
 							</div>
-							<div class="clearfix"></div>
-						</div>
 						<form class="insert" method="post" id="userDetailsForm" name="userDetailsForm" enctype="multipart/form-data">
 						  <p>
 							<label for="email">Profile Name</label>
@@ -67,10 +63,11 @@ if($crop_montage_image!=""){
 						  <?}?>
 						  <input type="file" name="accountPublicImageFile" id="accountPublicImageFile" style="display:none;" >
 						  </form>
-					</div>
 				</div>
 				<div class="span6">
-				<h3>UPLOAD PICTURE</h3>
+				<div class="profile_title">
+					<h4>UPLOAD PICTURE</h4>
+				</div>
 				<p>(for montage, thumb, montage box home display ) <span>Upload  minimum 300 X 300</span></p>
 					<div class="upload_picture">
 						<div class="montage_pick">
@@ -142,7 +139,7 @@ if($crop_montage_image!=""){
 	<div class="cropit-image-preview-container">
 		<div id="crop_heigh" class="cropit-image-preview"></div>
 	</div>
-	<p style="text-align:center"><input type="range" class="cropit-image-zoom-input" /></p>
+	<div style="text-align:center;margin-top:30px;"><input type="range" class="cropit-image-zoom-input" /></div>
 	<button class="export">Crop</button><span id="l_i_c" style="display:none;margin-left:80%;"><img src="<?php echo $basePath; ?>/images/social_media/bx_loader.gif" /></span>
 </div>
 <input type="hidden" id="cropImage1" name="cropImage1" value="0" />
@@ -200,9 +197,10 @@ function showCropButton(){
 
 
 $('#uploadedAccountImage1').click(function(event){
-	// crop_value_countt=0;
-	// $('#accountPublicImageFile').click();
 	$('#pop-up-image-crop-new').popUpWindow({action: "open"});
+	$('.pop-up-content').css('border','0');
+	$('.close').css('right','0');
+	$('.close').css('top','0');
 });	
 
 $("#accountPublicImageFile").change(function(click) {

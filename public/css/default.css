@@ -246,9 +246,8 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .span6 {
-  width:491px;
+  width:48%;
 }
-
 .span5 {
   width: 468px;
 }
@@ -297,15 +296,16 @@ a{
 	font-family: "sinkin_sans500_medium", sans-serif;
 }
 .insert input[type='text'], .insert input[type='password']{
-	margin-bottom:13px;
-	width:380px;
-	border:1px solid #bfc4c8;
-	padding:8px 4px;
+	border: 1px solid #c7c7c7;
+    margin-bottom: 13px;
+    padding: 5px;
+    width: 75%;
+	border-radius:2px;
 }
 .insert input[type='submit'] {
 	background: none repeat scroll 0 0 #f97e76;
     border: 1px solid #f97e76;
-	border-radius:1px;
+	border-radius:2px;
     color: #fff;
     letter-spacing: 1px;
     padding: 6px;
@@ -1290,7 +1290,6 @@ margin-bottom:20px;
 .span6 h3{
 	font-family: "sinkin_sans500_medium",sans-serif;
     font-size: 0.9em;
-	margin-top:-20px;
 }
 .span6 p{
 	font-family: "sinkin_sans500_medium",sans-serif;
