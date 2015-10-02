@@ -80,16 +80,17 @@
 	border: 1px solid #f97e76;
 	background:#f97e76;
     cursor: pointer;
-    font-size: 10px;
-    margin-top: 4px;
-    padding: 3px;
+    font-size: 10pt;
+    margin-top: 3px;
+    padding: 2px;
     position: absolute;
     right: 5px;
     text-align: center;
     top: 0;
     width: 100px;
 	color:#fff;
-	 border-radius: 2px;
+	border-radius: 2px;
+	text-transform:uppercase;
 }
 .pop-up .close a{
     font-size: 18px;

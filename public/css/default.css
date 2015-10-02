@@ -1,6 +1,6 @@
 
 /*font style*/
-@font-face {
+/*@font-face {
     font-family: 'sinkin_sans900_x_black';
     src: url('../images/fonts/SinkinSans-900XBlack-webfont.eot');
     src: url('../images/fonts/SinkinSans-900XBlack-webfont.eot?#iefix') format('embedded-opentype'),
@@ -116,8 +116,7 @@ font-family: 'Myriad Pro Condensed';
 font-style: normal;
 font-weight: normal;
 src: local('../images/fonts/Myriad Pro Condensed'), url('../images/fonts/MYRIADPRO-COND.woff') format('woff');
-}
-
+}*/
 /* end */
 /* scroll bar */
 
@@ -170,14 +169,12 @@ scrollbar[orient="vertical"] {
    color: #736f6f;  
 }
 body{
-	font-family: "sinkin_sans300_light", sans-serif;
-	font-size:0.9em;
+	font-family: 'Roboto', sans-serif;
+	 font-size: 10.5pt;
+	font-weight:400;
 }
 .clearfix {
   *zoom: 1;
-}
-h1,h2,h3,h4,h5,h6{
-	color:#222;
 }
 .clearfix:before,
 .clearfix:after {
@@ -287,13 +284,11 @@ a{
 	line-height:24px;
 	font-size:1.2em;
 	color:#222222;
-	font-family: "sinkin_sans500_medium", sans-serif;
 }
 .insert label{
 	display:block;
 	margin-bottom:2px;
 	font-size:1em;
-	font-family: "sinkin_sans500_medium", sans-serif;
 }
 .insert input[type='text'], .insert input[type='password']{
 	border: 1px solid #c7c7c7;
@@ -320,7 +315,7 @@ a{
 }
 .upload_picture p{
 	text-align:center;
-	font-size:0.6em;
+	font-size:8pt;
 	text-transform:uppercase;
 }
 .montage_pick{
@@ -429,7 +424,6 @@ a{
 .category_t h2{
 	font-size:1.2em;
 	color:#333;
-	font-family: "sinkin_sans300_light", sans-serif;
 }
 .category_t .span2{
 	margin-top:20px;
@@ -437,7 +431,6 @@ a{
 .span2 p{
 	font-size:1.1em;
 	color:#333;
-	font-family: "sinkin_sans300_light", sans-serif;
 	font-weight:bold;
 }
 .span2 img{
@@ -455,7 +448,6 @@ a{
 .upload_bookmark_t h2{
 	font-size:0.9em;
 	margin-bottom:5px;
-	font-family: "sinkin_sans300_light", sans-serif;
 }
 .brg_pad{
 	border:1px solid #c1cfd9;
@@ -505,7 +497,6 @@ a{
 	text-align:center;
 	cursor:pointer;
 	font-size:12px;
-	font-family: "sinkin_sans300_light", sans-serif;
 }
 /*Upload Links */
 .upload_links{
@@ -516,7 +507,6 @@ a{
 .upload_links h2{
 	font-size:19px;
 	color:#333;
-	font-family: "sinkin_sans300_light", sans-serif;
 }
 .add_links{
 	/*margin-top:12px;*/
@@ -550,7 +540,6 @@ a{
 	text-align:center;
 	cursor:pointer;
 	clear:both;
-	font-family: "sinkin_sans300_light", sans-serif;
 	font-size:12px;
 }
 .user_accessing{
@@ -568,7 +557,6 @@ a{
 	font-size:14px;
 	color:#222;
 	margin-bottom:3px;
-	font-family: "sinkin_sans700_bold", sans-serif;
 }
  .active_btn{
 	color:#333;
@@ -625,15 +613,12 @@ a{
 	font-size:10px;
 	margin-bottom:3px;
 	text-transform: uppercase;
-	font-family: "sinkin_sans300_light", sans-serif;
 }
 .access_details strong{
 	color:#222;
-	font-family: "sinkin_sans700_bold", sans-serif;
 	font-size:12px;
 }
  .text_ap{
-	font-family: "sinkin_sans700_bold", sans-serif;
 	font-size:14px;
 }
 .access_img_w{
@@ -677,12 +662,10 @@ a{
 .continue a{
 	color:#fff;
 	font-size:11.5px;
-	font-family: "sinkin_sans300_light", sans-serif;
 }
 .continue strong{
 	color:#fff;
 	font-size:15px;
-	font-family: "sinkin_sans600_semibold", sans-serif !important;
 }
 .upload_links_b{
 	margin-bottom:20px;
@@ -704,19 +687,6 @@ a{
 } 
 .bookmark_manual_insert .manual_bookmark_upload_links{
 	float:right;
-}
-.btn {
-	background: none repeat scroll 0 0 #f97e76;
-    border: 1px solid #f97e76;
-    color: #fff;
-    letter-spacing: 1px;
-	padding:3px 3px;
-    text-transform: uppercase;
-	text-align:center;
-	cursor:pointer;
-	/*line-height:40px;*/
-	font-size:10px;
-	font-family: "sinkin_sans600_semibold", sans-serif;
 }
 .manual_links_bg{
 	background:#e0e8ed;
@@ -746,7 +716,6 @@ a{
 	background:#f97e76;
 	text-align:center;
 	font-size:12px;
-	font-family: "sinkin_sans300_light", sans-serif;
 }
 
 #html_btn {
@@ -778,7 +747,6 @@ input:focus, input[type="text"]:focus{
     text-align: center;
     text-transform: uppercase;
 	font-size:10px;
-	font-family: "sinkin_sans400_regular", sans-serif;
 }
 .text_row:after {
   clear: both;
@@ -804,7 +772,6 @@ input:focus, input[type="text"]:focus{
 	float:left;
 	color: #5c5959;
     font-size: 19px;
-	font-family: "sinkin_sans700_bold", sans-serif;
 	text-transform:uppercase;
 }
 .manage_databox strong{
@@ -866,7 +833,6 @@ input:focus, input[type="text"]:focus{
 .databox_title h3{
 	font-size:14px;
 	margin-top:5px;
-	font-family: "sinkin_sans700_bold", sans-serif;
 	color:#5c5959;
 }
 .databox_title input{
@@ -875,13 +841,11 @@ input:focus, input[type="text"]:focus{
 .databox_content h4{
 	margin-top:10px;
 	font-size:11px;
-	font-family: "sinkin_sans700_bold", sans-serif;
 	color:#5c5959;
 }
 .databox_content h5{
 	margin-top:10px;
 	font-size:9px;
-	font-family: "sinkin_sans700_bold", sans-serif;
 	color:#5c5959;
 }
 .databox_content textarea{
@@ -949,7 +913,6 @@ input:focus, input[type="text"]:focus{
 .tg_rightbar_meta_keword h4{
 	font-size: 11px;
     margin-top: 17px;
-	font-family: "sinkin_sans700_bold", sans-serif;
 	color:#5c5959;
 }
 .tg_rightbar_meta_keword textarea{
@@ -969,10 +932,6 @@ input:focus, input[type="text"]:focus{
 }
 .privatedatabox_checked{
 	float:left;
-}
-.tg_users_title{
-	font-size:18px;
-	text-align:center;
 }
 .tg_users_socila_login{
 	margin-top:10px;
@@ -997,9 +956,6 @@ input:focus, input[type="text"]:focus{
 .tg_create_email input{
 	width:100%;
 	margin-bottom:10px;
-}
-.tg_create_email p{
-	font-size:11px;
 }
 .tg_email_btn{
 	text-align:right;
@@ -1034,7 +990,6 @@ input:focus, input[type="text"]:focus{
 	vertical-align:top;
 }
 .message_display_block p{
-	font-family: "sinkin_sans600_semibold", sans-serif;
 	color:#5c5959;
 	font-size:0.7em;
 	font-weight:bold;
@@ -1054,7 +1009,6 @@ input:focus, input[type="text"]:focus{
 	padding:0 10px;
 }
 .tg_montag_menu  li a{
-	font-family: "sinkin_sans400_regular", sans-serif;
 	text-transform:uppercase;
 	font-size:0.7em;
 	color:#5c5959;
@@ -1065,7 +1019,6 @@ input:focus, input[type="text"]:focus{
 }
 .mycolleection h2,.mycolleection h1{
 	font-size:1em;
-	font-family: "sinkin_sans700_bold", sans-serif;
 	color:#5c5959;
 }
 
@@ -1073,7 +1026,6 @@ input:focus, input[type="text"]:focus{
 	line-height:24px;
 	text-transform:uppercase;
 	font-size:0.75em;
-	font-family: "sinkin_sans400_regular", sans-serif;
 	color:#5c5959;
 }
 .span180{
@@ -1113,7 +1065,6 @@ input:focus, input[type="text"]:focus{
 }
 .span700 p{
 	font-size:0.9em;
-	font-family: "sinkin_sans200_x_light", sans-serif;
 	color:#5c5959;
 	line-height:22px;
 }
@@ -1146,17 +1097,14 @@ input:focus, input[type="text"]:focus{
 }
 .medium_collection{
 	font-size:14px;
-	font-family: "sinkin_sans500_medium", sans-serif;
 	color:#5c5959;
 }
 .media_count{
 	font-size:14px;
-	font-family: "sinkin_sans400_regular", sans-serif;
 	color:#a7a5a5;
 }
 .media_private_boxes{
 	font-size:11px;
-	font-family: "sinkin_sans400_regular", sans-serif;
 	color:#a7a5a5;
 }
 .tg_montage_t{
@@ -1164,17 +1112,12 @@ margin-bottom:20px;
 }
 .tg_montage_t h3{
 	text-transform:uppercase;
-	font-family: "sinkin_sans700_bold", sans-serif;
 	font-size:0.8em;
 	color:#5c5959;
 	margin-bottom:2px;
 }
 .tg_montage_t p{
-	text-transform:uppercase;
-	font-weight:bold;
-	font-size:12px;
 	color:#5c5959;
-	font-family: "sinkin_sans400_regular", sans-serif;
 }
 .montage_row {
   margin-left: -4px;
@@ -1204,18 +1147,17 @@ margin-bottom:20px;
 .column1 p{
 	background:#ebeff4;
 	color:#222;
-	font-size:9px;
+	font-size:11px;
 	padding:3px;
 	border-bottom:1px solid #c7c7c7;
 }
 .column1 div{
 	border:1px solid #c7c7c7;
-	text-align:center;
 	height:130px;
 	border-radius:2px;
 }
 .column1 img{
-	height:112px;
+	height:108px;
 	width:134px;
 }
 .Previous img{
@@ -1224,7 +1166,6 @@ margin-bottom:20px;
 }
 .Previous a{
 	font-size:12px;
-	font-family: "sinkin_sans400_regular", sans-serif;
 	color:#5c5959;
 	/*margin-top:10px;*/
 	line-height:40px;
@@ -1255,7 +1196,6 @@ margin-bottom:20px;
 }
 .montage_social_network_btn p{
 	display:inline-block;
-	font-family: "sinkin_sans400_regular", sans-serif;
 	font-size:9px;
 	color:#5c5959;
 	text-transform:uppercase;
@@ -1288,12 +1228,9 @@ margin-bottom:20px;
 	margin-top:-3px;
 }
 .span6 h3{
-	font-family: "sinkin_sans500_medium",sans-serif;
     font-size: 0.9em;
 }
 .span6 p{
-	font-family: "sinkin_sans500_medium",sans-serif;
-    font-size: 0.6em;
 	text-transform:uppercase;
 }
 .span6 span{
@@ -1327,33 +1264,25 @@ margin-bottom:20px;
 	text-align:center;
 }
 .create_databox h3{
-	font-family: "sinkin_sans500_medium",sans-serif;
 	font-size:0.8em;
 	color:#666;
 	text-transform:uppercase;
 	margin-bottom:8px;
 }
 .create_databox h4{
-	font-family: "sinkin_sans700_bold", sans-serif;
 	font-size:0.8em;
 	color:#444;
 	text-transform:uppercase;
 	margin-top:8px;
 }
 .create_databox h5{
-	font-family: "sinkin_sans700_bold", sans-serif;
 	font-size:0.7em;
 	color:#666;
 	text-transform:uppercase;
 	margin-top:8px;
 }
 .conform_popup_content p{
-	font-size:0.8em;
 	text-align:center;
-}
-.conform_popup_content a{
-	font-family: "sinkin_sans600_semibold", sans-serif;
-	font-size:0,8em;
 }
 .conform_emai_id{
 	margin-top:20px;
@@ -1367,7 +1296,6 @@ margin-bottom:20px;
 	margin-bottom:10px;
 }
 .number_count{	
-	font-family: "sinkin_sans400_regular", sans-serif;
 	font-size:1.2em !important;
 	font-weight:bold;
 }
@@ -1411,7 +1339,6 @@ margin-bottom:20px;
 .user_profile_pick p{
 	text-align:center;
 	font-size:0.6em;
-	font-family: "sinkin_sans500_medium",sans-serif;
 }
 .public_private_access{
 	float:left;
@@ -1430,13 +1357,11 @@ margin-bottom:20px;
 	width:400px;
 }
 .public_private_access h3{
-	font-family: "sinkin_sans700_bold", sans-serif;
 	font-size:0.7em;
 	text-transform:uppercase;
 	margin-top:5px;
 }
 .public_private_access h2{
-	font-family: "sinkin_sans700_bold", sans-serif;
 	font-size:0.8em;
 	text-transform:uppercase;
 	margin-top:10px;
@@ -1454,7 +1379,6 @@ margin-bottom:20px;
 	padding-bottom:4px;
 }
 .public_private_access h1{
-	font-family: "sinkin_sans600_semibold", sans-serif;
 	font-size:1em;
 	text-transform:uppercase;
 	margin-top:10px;
@@ -1469,7 +1393,6 @@ margin-bottom:20px;
     padding: 3px 6px;
     text-align: center;
     text-transform: uppercase;
-	font-family: "sinkin_sans400_regular", sans-serif;
 	font-size:0.8em;
 }
 .public_private_access img{
@@ -1477,7 +1400,6 @@ margin-bottom:20px;
 	margin-left:30px;
 }
 .boost_keyword h3{
-	font-family: "sinkin_sans700_bold", sans-serif;
 	font-size:0.8em;
 	text-transform:uppercase;
 }
@@ -1491,7 +1413,6 @@ margin-bottom:20px;
 	color:#5454545;
 }
 .span383 h3,.span590 h3{
-	font-family: "sinkin_sans700_bold", sans-serif;
 	font-size:1.2em;
 	text-transform:uppercase;
 	text-align:center;
@@ -1539,9 +1460,6 @@ margin-bottom:20px;
 	right:58px;
 	top:6px;
 }
-.done_font{
-	font-family: "sinkin_sans700_bold", sans-serif;font-size:0.9em;
-}
 .font_size{
 	font-size:0.6em;
 }
@@ -1569,7 +1487,6 @@ margin-bottom:20px;
 	display:block;
 	margin-bottom:2px;
 	font-size:1em;
-	font-family: "sinkin_sans500_medium", sans-serif;
 	color:#5c5959;
 	font-size:0.8em;
 }
@@ -1604,7 +1521,6 @@ margin-bottom:20px;
 	margin-top:18px;
 }
 .account_profile_title p{
-	font-family: "sinkin_sans500_medium",sans-serif;
     font-size: 0.5em;
 	text-transform:uppercase;
 }
@@ -1614,13 +1530,7 @@ margin-bottom:20px;
 .links_colleced p{
 	text-align:center;
 	margin-bottom:20px;
-	font-family: "sinkin_sans400_regular", sans-serif;
 	font-size:1.2em;
-}
-.upload_picture p{
-	 font-family: "sinkin_sans500_medium",sans-serif;
-    font-size: 0.6em;
-    text-transform: uppercase;
 }
 .account_profile_title span{
 	color:#f97e76
@@ -1630,7 +1540,6 @@ margin-bottom:20px;
 	margin-bottom:8px;
 }
 .votesandrates h1{
-	font-family: "sinkin_sans700_bold", sans-serif;
 	font-size:1.3em;
 	color:#5c5959;
 	text-transform:uppercase;
@@ -1671,7 +1580,6 @@ margin-bottom:20px;
 	z-index:982;
 }
 .highlights_search h2{
-	font-family: "sinkin_sans700_bold", sans-serif;
 	font-size:1em;
 	color:#5c5959;
 	text-transform:uppercase;
@@ -1693,7 +1601,6 @@ margin-bottom:20px;
 	padding-bottom:2px !important;
 }
 .social_network_highlights h4{
-	font-family: "sinkin_sans700_bold", sans-serif;
 	font-size:0.9em;
 	color:#5c5959;
 	text-transform:uppercase;
@@ -1705,11 +1612,9 @@ color:#0099ff;
 color:#333;
 }
 .social_network_highlights b{
-	font-family: "sinkin_sans700_bold", sans-serif;
 	color:#5c5959;
 }
 .social_network_highlights p{
-	font-family: "sinkin_sans500_medium",sans-serif;
 	font-size:0.6em;
 	text-transform:uppercase;
 	color:#5c5959;
@@ -1729,7 +1634,6 @@ color:#333;
 	text-align:center;
 }
 .social_network_links p{
-	font-family: "sinkin_sans700_bold", sans-serif;
 	color:#555;
 }
 .social_sharing{
@@ -1741,7 +1645,6 @@ color:#333;
 	background:#ddd;
 	color:#666;
 	padding:2px 10px;
-	font-family: "sinkin_sans400_regular", sans-serif;
 	font-size:0.7em;
 	text-transform:uppercase;
 }
@@ -1825,7 +1728,6 @@ color:#333;
 	padding-right:8px;
 }
 .hightlights_keywords h3{
-	font-family: "sinkin_sans700_bold", sans-serif;
 	font-size:0.8em;
 	color:#5c5959;
 	text-transform:uppercase;
@@ -1845,7 +1747,6 @@ color:#333;
 	background-image:linear-gradient(#f6f6f6, #fefefe, #e7e6e6);
 	padding:5px 15px;
 	color:#5c5959;
-	font-family: "sinkin_sans400_regular", sans-serif;
 	text-transform:uppercase;
 	font-size:0.8em;
 	box-shadow: 0 3px 6px -6px #000;
@@ -1863,7 +1764,6 @@ color:#333;
 }
 .home_searc_1{
 	border: 1px solid #e1e1e1;
-    font-family: "sinkin_sans300_light",sans-serif;
     font-size: 0.8em;
     height: 30px;
     margin-left: 0;
@@ -1874,7 +1774,6 @@ color:#333;
 }
 .home_searc_2{
 	border: 1px solid #e1e1e1;
-    font-family: "sinkin_sans300_light",sans-serif;
     font-size: 0.8em;
     height: 30px;
     margin-left: 0;
@@ -1909,7 +1808,6 @@ color:#333;
 .login_process p{
 	font-weight:bold;
 	color:#555;
-	font-family: "sinkin_sans400_regular", sans-serif;
 	font-size:0.8em;
 	text-transform:uppercase;
 }
@@ -1927,7 +1825,6 @@ color:#333;
 	padding-right:2px;
 }
 #customers {
-	font-family: "sinkin_sans400_regular", sans-serif;
     width: 100%;
     border-collapse: collapse;
 }
@@ -1950,7 +1847,6 @@ color:#333;
     background-color:#e6e5e5;
     color:#555;
 	text-transform:uppercase;
-	font-family: "sinkin_sans400_regular", sans-serif;
 }
 #customers tr.alt td {
      color:#555;
@@ -2013,9 +1909,6 @@ color:#333;
 }
 .admin_top{
 	margin-top:73px;
-}
-.montage_desc p{
-	margin-bottom:8px;
 }
 .montage_desc textarea,.montage_desc input{
 	width:100%;
@@ -2100,7 +1993,6 @@ color:#333;
 }
 
 .link_title {
-	font-family: "sinkin_sans400_regular", sans-serif;
 	font-size:0.6em;
 	color:#545454;
 	margin-bottom:2px;
@@ -2137,7 +2029,6 @@ color:#333;
 .cdescr p{
 	color:#7d7a7a;
 	font-size:0.9em;
-	font-family:"sinkin_sans200_x_light",sans-serif;
 }
 .aut_n{
 	position:absolute;
@@ -2145,7 +2036,6 @@ color:#333;
 	left:0;
 }
 .aut_n p,.update_today p{
-	font-family: "sinkin_sans700_bold", sans-serif;
 	font-size:0.65em;
 	color:#5c5959;
 	text-transform:capitalize;
@@ -2268,7 +2158,6 @@ color:#333;
 	display:none;
 }
 .home_pos_abso p{
-	font-family: 'Myriad Pro Semibold';
 	font-size:1em;
 	color:#111;
 }
@@ -2288,7 +2177,6 @@ color:#333;
 	display:none;
 }
 .home_pos_abso_left p{
-	font-family: 'Myriad Pro Semibold';
 	font-size:1em;
 	color:#111;
 	text-align:right;
@@ -2310,7 +2198,6 @@ color:#333;
 	display:none;
 }
 .home_pos_abso_right p{
-	font-family: 'Myriad Pro Semibold';
 	font-size:1em;
 	color:#111;
 	text-align:center;
@@ -2354,13 +2241,11 @@ color:#333;
 	display:none;
 }
 .heighlights_pos_abso_left p{
-	font-family: 'Myriad Pro Semibold';
 	font-size:1em;
 	color:#111;
 	text-align:right;
 }
 .heighlights_pos_abso_left_title p{
-	font-family: 'Myriad Pro Semibold';
 	font-size:1em;
 	color:#111;
 	text-align:left;
@@ -2382,7 +2267,6 @@ color:#333;
 	display:none;
 }
 .heighlights_pos_abso_right p{
-	font-family: 'Myriad Pro Semibold';
 	font-size:1em;
 	color:#111;
 	text-align:center;
@@ -2407,7 +2291,6 @@ color:#333;
 	width:auto;
 }
 .hashtag_pos_ab p{
-	font-family: 'Myriad Pro Semibold';
 	/*line-height:0;
 	margin-top:-17px;*/
 }
@@ -2476,7 +2359,6 @@ color:#333;
 	display:none;
 }
 .dashboard_pos_abso_left p{
-	font-family: 'Myriad Pro Semibold';
 	font-size:1em;
 	color:#111;
 	text-align:right;
@@ -2498,7 +2380,6 @@ color:#333;
 	display:none;
 }
 .dashboard_pos_abso_right p{
-	font-family: 'Myriad Pro Semibold';
 	font-size:1em;
 	color:#111;
 	text-align:center;
@@ -2548,7 +2429,6 @@ color:#333;
 	top:133px;
 	z-index:980;
 	width:100%;
-	font-family: "sinkin_sans400_regular", sans-serif;
 }
 .by_user_bg{
 	background: -webkit-linear-gradient(0deg, #faf9f9, #f8f8f7); 
@@ -2659,7 +2539,6 @@ color:#333;
 	line-height:24px;
 	text-transform:uppercase;
 	font-size:0.58em;
-	font-family: "sinkin_sans400_regular", sans-serif;
 	color:#5c5959;
 }
 
@@ -2926,7 +2805,6 @@ font-weight: bold;
 .privacy_policy_text p{
 	font-size:0.8em;
 	color:#5c5959;
-	font-family:"sinkin_sans300_light",sans-serif;
 }
 .privacy_policy_text h4{
 	margin-top:10px;
@@ -2939,11 +2817,9 @@ font-weight: bold;
 	list-style-type:none;
 }
 	.text_pos_cent{
-		 font-family: "sinkin_sans400_regular", sans-serif;
 		 -webkit-font-smoothing: antialiased;
 	}
 	.skip_center h3{
-		 font-family: "sinkin_sans400_regular", sans-serif;
 		 color:#5c5959;
 		 font-size:1.5em;
 	}

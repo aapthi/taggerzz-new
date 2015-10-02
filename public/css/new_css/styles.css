@@ -162,7 +162,7 @@ input {
   z-index: 7; }
 
 .fatFont, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .divCardHashtag, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardContentWrapper .divCardTitle, .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardHashtag, .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardTitle, #secAccountSettings .divAccountSettingsRow .divAccountSettingsCard .divAccountSettingsHeading, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divAccountSettingsHeading, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .divAccountSettingsHeading, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divUserSummaryHeading, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divPublicDataboxCount, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divPrivateDataboxCount, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divTotalKeywordsCount, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divTotalLinksCount, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divVotesCount, #secAccountSettings .divAccountSettingsRow .divCommentHeader .divCommentHeaderUsernameBlock .divCommentUsername, #secAccountSettings .divAccountSettingsRow .divCommentHeader .divCommentTime, #secAccountSettings .divAccountSettingsRow .divReplyToWrapper .divReplyToControls .divReplyToMaxCharsText, #secCustomizeDatabox .c_DivHashTag, #secCustomizeDatabox .c_SpnUsername, #secCustomizeDatabox .c_DivCard .c_DivCardActions, #secCustomizeDatabox .c_DivCard .c_DivCardStoryWrapper .c_DivCardStory {
-  font-family: sinkin_sans800_black; }
+  /*font-family: sinkin_sans800_black; nrch*/ }
 
 .whiteFont, .primaryButton, #secUploadBookmarks .uploadBookmarksWrapper .inptUploadBookmarkFile, #secAccountSettings .divAccountSettingsRow .btnSaveAccount, .btnBlack, .mainWrapper #secLeftAspects .divLeftWrapper, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .divCardUser .divCardUserName, .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardUser .divCardUserName, #secCustomizeDatabox .c_DivCard .c_DivCardStoryWrapper .c_DivCardStorytellerDetails .c_DivCardStorytellerName {
   color: white; }
@@ -174,19 +174,19 @@ input {
   color: rgba(34, 34, 34, 0.7); }
 
 .smallFont, .input-label, #secCreateHighlight .divCreateHighlightNatureCategory .lblInpt, #secCreateHashtag .divCreateHighlightNatureCategory .lblInpt, #secUploadBookmarks .divCreateHighlightNatureCategory .lblInpt, #secSelectDatabox .divCreateHighlightNatureCategory .lblInpt, #secCreatePrivateDatabox .divCreatePrivateDataboxEmail .lblInpt, #secCreatePublicDatabox .divCreatePublicDataboxNatureCategory .lblInpt, .divHeaderWrapper .divLeftSlideMenu, .divHeaderWrapper .divSearchBoxes input[type="text"], .secHighlights .divHeadingLabel, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .divCardUser .divCardUserName, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardContentWrapper .divCardLoveTrash, .secDataboxes .divHeadingLabel, .secDataboxes .divCardsWrapper .divCard, .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardUser .divCardUserName, .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardLoveTrash, .mainContainerWrapper #secModal .divModalBlurBackground .divModalContentWrapper .divModalBox .divModalDescription, #secSelectDatabox .divSelectDataboxContentWrapper .divSelectDatabox .divSelectDataboxDescription, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .ulCreatedCollectionList li .aCollectedCollectionEdit, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .ulCreatedCollectionList li .spnNewMessageLabel, #secAccountSettings .divAccountSettingsRow .divCommentHeader .divCommentTime, #secAccountSettings .divAccountSettingsRow .divCommentText, #secAccountSettings .divAccountSettingsRow .divReplyToWrapper .divReplyToControls .divReplyToMaxCharsText, #secCustomizeDatabox .c_BtnEditTitle, #secCustomizeDatabox .c_DivHeaderCommentWrapper, #secCustomizeDatabox .c_DivCard .c_DivCardDescription, #secCustomizeDatabox .c_DivCard .c_DivCardActions, #secCustomizeDatabox .c_DivCard .c_DivCardStoryWrapper .c_DivCardStorytellerDetails .c_DivCardStorytellerName, #secCustomizeDatabox .c_DivCard .c_DivCardStoryWrapper .c_DivCardStory {
-  font-size: 8pt; }
+  font-size:10.5pt; }
 
 .defaultFont, .mainWrapper .divLoaderWrapper, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .divCardUser .divCardUserName, .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardUser .divCardUserName {
-  font-family: arial; }
+  /*font-family: arial;* nrch */ }
 
 .verySmallFont, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardContentWrapper .divCardViews, .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardViews {
-  font-size: 6pt; }
+  font-size: 8pt; }
 
 .largeFont {
   font-size: 9.5pt; }
 
 .greyBackground, .secHighlights .divHeadingLabel, .secHighlights .divCardsMainWrapper, .secDataboxes .divHeadingLabel, .secDataboxes .divCardsWrapper, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .ulCreatedCollectionList li:nth-child(even), #secCustomizeDatabox .c_DivTitleWrapper, #secCustomizeDatabox .c_DivHeaderCommentWrapper {
-  background:#fff; }
+  background:#f9f9f9; }
 
 .bottomSticky {
   position: absolute;
@@ -257,7 +257,7 @@ input {
   width: 80%; }
 
 .width85, .divHeaderWrapper .divLeftSlideMenu, .divHeaderWrapper .divSearchBoxes, .mainContainerWrapper #secModal .divModalBlurBackground .divModalContentWrapper, #secSelectDatabox .divSelectDataboxContentWrapper {
-  width: 85%; }
+  width: 97.5%; }
 
 .width90, #secCreateHighlight .divCreateHighlightHashtag, #secCreateHashtag .divCreateHighlightHashtag, #secUploadBookmarks .divCreateHighlightHashtag, #secSelectDatabox .divCreateHighlightHashtag, #secCreateHighlight .divCreateHighlightTitle, #secCreateHashtag .divCreateHighlightTitle, #secUploadBookmarks .divCreateHighlightTitle, #secSelectDatabox .divCreateHighlightTitle, #secCreateHighlight .divCreateHighlightLinks .inptLinks, #secCreateHashtag .divCreateHighlightLinks .inptLinks, #secUploadBookmarks .divCreateHighlightLinks .inptLinks, #secSelectDatabox .divCreateHighlightLinks .inptLinks, #secCreateHighlight .divCreateHighlightNatureCategory .inptContentCategory, #secCreateHashtag .divCreateHighlightNatureCategory .inptContentCategory, #secUploadBookmarks .divCreateHighlightNatureCategory .inptContentCategory, #secSelectDatabox .divCreateHighlightNatureCategory .inptContentCategory, #secCreateHashtag .createHashtagWrapper .inptCreateHashtag, #secCreateHashtag .createHashtagWrapper .inptCreateTitle, #secCreatePrivateDatabox .divCreatePrivateDataboxHashtag, #secCreatePrivateDatabox .divCreatePrivateDataboxTitle, #secCreatePrivateDatabox .divCreatePrivateDataboxUniqueCode, #secCreatePrivateDatabox .divCreatePrivateDataboxLinks .inptLinks, #secCreatePrivateDatabox .divCreatePrivateDataboxEmail .inptEmail, #secCreatePublicDatabox .divCreatePublicDataboxHashtag, #secCreatePublicDatabox .divCreatePublicDataboxTitle, #secCreatePublicDatabox .divCreatePublicDataboxLinks .inptLinks, #secCreatePublicDatabox .divCreatePublicDataboxNatureCategory .inptContentCategory, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .ulCreatedCollectionList li .divCreatedCollectionText, #secCustomizeDatabox .c_DivHeaderComment {
   width: 90%; border: 1px solid #c7c7c7;
@@ -353,14 +353,16 @@ input {
   margin: 0px; }
 
 body {
-  font: 100% sinkin_sans300_light, Arial;
+  font-family: 'Roboto', sans-serif;
   color: rgba(0, 0, 0, 0.9);
   background: white;
-  overflow-x: hidden; }
+  overflow-x: hidden; 
+  font-weight:400;
+ }
 
 a {
   color: rgba(0, 0, 0, 0.9);
-  font-family: sinkin_sans300_light, Arial; }
+ /* font-family: sinkin_sans300_light, Arial;  nrch*/}
 
 .imgBackground, .mainWrapper {
   position: fixed;
@@ -478,7 +480,7 @@ a {
   .divHeaderWrapper .divLeftSlideMenu.mobile, .divHeaderWrapper .divLeftSlideMenu.divMobileMenuWrapper {
     z-index: -1; }
   .divHeaderWrapper .divSearchBoxes input[type="text"] {
-    font-family: sinkin_sans300_light, Arial; }
+    /* font-family: sinkin_sans300_light, Arial; nrch*/}
   .divHeaderWrapper .divSearchBoxes .inptSearchHashTag::-webkit-input-placeholder {
     color: #e56470; }
   .divHeaderWrapper .divSearchBoxes .aSearch {
@@ -549,8 +551,8 @@ a {
           background: white;
           min-width: 40%;
           text-decoration: none;
-          font-size: 8pt;
-          font-weight: bold; }
+          font-size: 10.5pt;
+		}
         .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .divCardUser {
           z-index: 2;
           top: 5%;
@@ -629,8 +631,7 @@ a {
       background: white;
       min-width: 40%;
       text-decoration: none;
-      font-size: 8pt;
-      font-weight: bold; }
+      font-size: 10.5pt;}
     .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardUser {
       z-index: 2;
       top: 5%;
@@ -662,7 +663,7 @@ a {
       .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardLoveTrash img {
         max-height: 10pt; }
     .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardKeywords {
-      font-size: 7.1pt; }
+      font-size: 9pt; }
     .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardTitle {
       border-bottom: 1px solid rgba(0, 0, 0, 0.15);
       padding-bottom: 5pt;
@@ -812,7 +813,7 @@ a {
     margin-bottom: 10pt;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
   #secAccountSettings .divAccountSettingsRow .divAccountSettingsCard .divAccountSettingsForm, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divAccountSettingsForm, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .divAccountSettingsForm {
-    font-size: 10pt; }
+    font-size: 10.5pt; }
     #secAccountSettings .divAccountSettingsRow .divAccountSettingsCard .divAccountSettingsForm *, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divAccountSettingsForm *, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .divAccountSettingsForm * {
       display: table-row; }
     #secAccountSettings .divAccountSettingsRow .divAccountSettingsCard .divAccountSettingsForm input, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divAccountSettingsForm input, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .divAccountSettingsForm input {
@@ -858,7 +859,7 @@ a {
   #secAccountSettings .divAccountSettingsRow .btnSaveAccount {
     margin: 0px 10pt; }
   #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard small {
-    font-family: arial;
+    /*font-family: arial; nrch*/
     font-size: 12pt; }
   #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .ulCreatedCollectionList {
     list-style: none;

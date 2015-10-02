@@ -20,7 +20,7 @@
 
 <div class="clearfix"></div>
 
-            <section id="secHighlights" class="secHighlights tmar_t">
+            <section id="secHighlights" class="secHighlights mainpage_firstdivbg tmar_t">
 
                 <div id="divCardsHeading" class="divHeadingLabel">
                     Highlights & Current Affairs
@@ -29,7 +29,7 @@
                 <div id="divHighlightsMainWrapper" class="divCardsMainWrapper tmar_b20">
                     <div id="divNavLeftArrow" class="divNavLeftArrow"><img src="<?php echo $basePath; ?>/img/imgNavLeftArrow.png" alt="" /></div>
 
-                    <div id="divCardsWrapper" class="divCardsWrapper">
+                    <div id="divCardsWrapper" class="divCardsWrapper" style="min-height:310px;">
 						<?php if( isset($this->homehighlightBoxesArray) )
 					{foreach( $this->homehighlightBoxesArray as $key=>$currentBoxData ){
 					//echo "<pre>";print_r($currentBoxData);
@@ -126,9 +126,10 @@
 
                     <div id="divNavRightArrow" class="divNavRightArrow"><img src="<?php echo $basePath; ?>/img/imgNavRightArrow.png" alt="" /></div>
                 </div>
+					<div class="clearfix"></div>
             </section>
 			<div class="clearfix"></div>
-			<div class="tmar_t20">
+			<div class="tmar_t20 pad_lr">
             <section id="secDataboxes" class="secDataboxes">
                 <div id="divDataboxesHeading" class="divHeadingLabel">
                    <a href="Javascript:void(0);" id="publicBoxesLink">Public Databoxes</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="Javascript:void(0);" id="memCollectionsLink">Members</a>
@@ -346,6 +347,7 @@
 	$(document).ready(function() {
 		if($("#searchTermHolder").val()!=""){
 			$("#homeSearchLink" ).click();
-		}		
+		}
+		$('body').css('background','#f8f8f8');
 	});
 </script>

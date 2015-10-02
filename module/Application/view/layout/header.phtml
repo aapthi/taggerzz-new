@@ -83,6 +83,7 @@ function logOut(value)
 	});	
 }
 </script>
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 	<?php
 if( $_SERVER['REQUEST_URI']== "/taggerzz-new/trunk/" )
 	{
@@ -155,17 +156,17 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
 						}
 					}
 				?>
-        <div id="divAccountInfo" class="divAccountInfo twidth_acinfo tmar_t12">
+        <div id="divAccountInfo" class="divAccountInfo twidth_acinfo" style="padding-left:36px;margin-top:4px;">
             <div id="divProfileImage" class="inline-block">
                 <!--<img src="<?php //echo $basePath; ?>/img/imgFB.png" alt="" class="height100" />-->
-                <img height="60px" width="60px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $_SESSION['usersinfo']->montage_image; ?>" alt="" class="height100" />
+                <img height="60px" width="62px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $_SESSION['usersinfo']->montage_image; ?>" alt="" class="height100" />
             </div>
 
             <div id="divProfileDetails" class="inline-block tphoto_links tphoto_links">
                  <span id="spnGreetingsText" class="block smallFont">Hello, </span>
                     <span id="spnUsername" class="block defaultFont"><?php echo $_SESSION['usersinfo']->displayName; ?></span>
                     <span id="spnMessages" class="block verySmallFont">[<?php if(isset($_SESSION['usersinfo']->userMessagesCount)){echo $_SESSION['usersinfo']->userMessagesCount ; }else{ echo '0';}?> <a href="/taggerzz-new/trunk/databoxuser/dashboard#msgoto">Messages</a>, <span id="tzUserCollCountSpan"><?php if(isset($_SESSION['usersinfo']->collectionsCount)){echo $_SESSION['usersinfo']->collectionsCount; }else{ echo '0';}?></span>  <a href="javascript:void(0)" onClick="goToLocation('/databox/my-collected-links')">Collections</a>]</span>
-                    <span id="spnCreateCollection" class="block smallFont highlightFont"><a href="#" class="highlightFont createCollection create_btn" id='createCollection'>+ Create Collection</a></span>
+                    <span id="spnCreateCollection" class="block smallFont highlightFont tmar_t9"><a href="#" class="highlightFont createCollection create_btn" id='createCollection'>+ Create Collection</a></span>
             </div>
         </div>
         <div id="divLogoWrapper" class="width30 marginallyCenter">
@@ -178,7 +179,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
             <div id="divAccountInfoMobile" class="divAccountInfo mobile">
                 <div id="divProfileImageMobile" class="divProfileImage ">
                     <!--<img src="<?php //echo $basePath; ?>/img/imgFB.png" alt="" class="height100" />-->
-					 <img height="60px" width="60px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $_SESSION['usersinfo']->montage_image; ?>" alt="" class="height100" />
+					 <img height="68px" width="68px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $_SESSION['usersinfo']->montage_image; ?>" alt="" class="height100" />
                 </div>
                 <div id="divProfileDetailsMobile" class="divProfileDetails">
                     <span id="spnGreetingsText" class="block smallFont">Hello, </span>
@@ -187,7 +188,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
                     <span id="spnCreateCollection" class="block smallFont highlightFont"><a href="#" class="highlightFont createCollection create_btn" id='createCollection'>+ Create Collection</a></span>
                 </div>
             </div>
-			<div class="mar_b5">
+			<div class="mar_b5" style="margin-top:-20px;">
             <ul id="ulMenu" class="ulMenu tmenufont_inc">
                 <li> <a class="tag_chk  <?echo $homeActive; ?>" href="javascript:void(0);" onclick="goToLocation('/contentpage')">Home</a> </li>
 				<li> <a class="tag_chk  <?echo $montageActive; ?>" onClick="goToLocation('/montage')" href="javascript:void(0)" >My Profile</a></li>
@@ -200,13 +201,17 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
 		<div id="divSearchBoxes" class="divSearchBoxes tinput_s">
             <input type="text" id="searchTermHolder" class="inptSearchHashTag tplaceholder_c" value="<?if(isset($_REQUEST['serTag']) && $_REQUEST['serTag']!=""){echo '#'.$_REQUEST['serTag'];}else{}?>" placeholder="Search by #hashtag"/>
             <input type="text" id="pvtUniqueCodeHolder" class="inptSearchUniqueCode" placeholder="Search by private databox unique code" value="<?if(isset($_REQUEST['serCode']) && $_REQUEST['serCode']!=""){echo $_REQUEST['serCode'];}else{}?>"/>
-            <a href="Javascript:void(0);" id='homeSearchLink' class="aSearch" style="margin-top:1px;"></a>
+            <a href="Javascript:void(0);" id='homeSearchLink' class="aSearch"></a>
         </div>
 			<?php
 				} else { ?>
-					<div id="divLogoWrapper" class="width30 marginallyCenter">
+					<style>
+						.tmar_t{ padding-top: 75px;}
+						.tmar_t125{ margin-top: 95px;}
+					</style>
+					<div id="divLogoWrapper" class="width30 marginallyCenter withoutlogin_logo">
 						<div class="width100">
-							<a href="/taggerzz-new/trunk/contentpage"><img src="<?php echo $basePath; ?>/img/imgLogo.png" alt="" class="imgLogo width100" /></a>
+							<a href="/taggerzz-new/trunk/contentpage"><img src="<?php echo $basePath; ?>/img/imgLogo.png" alt="nagaraju" class="imgLogo width100" /></a>
 						</div>
 					</div>
 				<div id="divLeftSlideMenu" class="divLeftSlideMenu">
@@ -307,7 +312,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
 ?>
 
 <div id="pop-up-1" class="pop-up-display-content d">
-<h1 class="tg_users_title">Login Using one of your Social network</h1>
+<div class="tg_users_title">LOGIN USING ONE OF YOUR SOCIAL NETWORK</div>
 <div class="tg_users_socila_login">
 <?php
 	echo '<div class="pp-lg-buttons">';
@@ -319,9 +324,9 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
 
 </div>
 
-<div class="tg_users_email_login">
-	<h1>Or</h1>
-	<h1 id="email_id_c">Your email ID</h1>
+<div class="tg_users_email_login1">
+	<div class="tg_users_email_login">OR</div>
+	<div id="email_id_c" class="tg_users_email_login">YOUR EMAIL ID</div>
 	<div class="tg_create_email">
 		<form class="" method="post" id="userLoginFormUrl2" name="userLoginFormUrl2" role="form">
 			<input type="hidden" id="categoryHighlight" name="categoryHighlight" value="0" />
