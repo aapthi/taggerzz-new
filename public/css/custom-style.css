@@ -209,6 +209,7 @@ input{
     letter-spacing: 0.3px;
     text-align: center;
     text-transform: uppercase;
+	margin-top:15px;
 }
 .tg_users_socila_login{
 	margin-top:10px;
@@ -297,6 +298,25 @@ input{
 	margin-bottom:20px;
 	font-size:12pt;
 }
+.create_collection{
+	padding-top:25pt !important;
+}
+.create_collection a{
+	color:#565656 !important;
+}
+.create_collection img{
+	padding-top:5px;
+	padding-bottom:5px;
+}
+.heading_font_pt12{
+	font-size:12pt;
+}
+.small_font_pt10{
+	font-size:10pt !important;
+}
+.box_crete_color{
+	color:#333;
+}
 .divHeaderWrapper .divSearchBoxes .aSearch {
     background: #ddd url("../img/search.png");
     background-size: 17pt 17pt;
@@ -314,6 +334,11 @@ input{
 	.divHeaderWrapper .divSearchBoxes .aSearch {
 		 height: 21pt;
 	}
+}
+@-moz-document url-prefix() { 
+  .btnBlack {
+     margin-top: 10px;
+  }
 }
 @media (max-width: 767px){ 
 	[class*="span"] {

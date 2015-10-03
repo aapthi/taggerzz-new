@@ -53,14 +53,14 @@
                 <div id="divCreatePublicDataboxWrapper" class="divCreatePublicDataboxWrapper">
                     <div class="heading">PUBLIC DATABOX</div>
                     <div class="divCreatePublicDataboxHashtag">
-                        <span>Hashtag </span>
+                        <span class="box_crete_color">Hashtag </span>
                         <input type="text" id='hashtagHolder' class='inptHashtag' placeholder="#hashtag" value="<?php if(isset($_SESSION['databox']->hashtag)){ echo $_SESSION['databox']->hashtag ;}?>" />
                     </div>
                     <div class="divCreatePublicDataboxTitle">
-                        <span>Title </span>
+                        <span class="box_crete_color">Title </span>
                         <input type="text" id='titleHolder' class='inptTitle' placeholder="Title of the collection" value="<?php if(isset($_SESSION['databox']->hashtitle)){ echo $_SESSION['databox']->hashtitle ;}?>" />
                     </div>
-					<div class="divCreateHighlightHashtag"><span style="padding:0 10px;">Links </span></div>
+					<div class="divCreateHighlightHashtag"><span style="padding:0 10px;" class="box_crete_color">Links </span></div>
 					<div id="textBoxesGroup"><?
 							if( isset($this->boxLinksArr) && count($this->boxLinksArr) > 0 )
 							{
@@ -112,18 +112,18 @@
 						</div><?php } ?>
                     </div>
                     <div class="divCreatePublicDataboxImage">
-                        <span class="">Image </span><span class="smallFont dimFontColor"> ( related to your collection / sharing )</span><br />
+                        <span class="box_crete_color">Image </span><span class="smallFont dimFontColor"> ( related to your collection / sharing )</span><br />
                         <button class="primaryButton" id="cropBoxImage">UPLOAD IMAGE</button>
                         <img src="<?php echo $tzCatImage; ?>" alt="" id="uploadedCatImage1" />
                     </div>
                     <div class="divCreatePublicDataboxNatureCategory">
-                        <span class="">Your content's nature </span><br />
-                        <label class="lblInpt"><input type='checkbox' class="inptChkContentNature" id="chkbxMc" <?php if ( isset($this->mature_content) && trim($this->mature_content) != "" && is_numeric($this->mature_content) && $this->mature_content == 1 ){?>checked<?php } ?> onClick="matureContentClicked( this.checked );" /> Mature Content</label>
-                        <label class="lblInpt"><input type='checkbox' class="inptChkContentNature"id="chkbxNsfw" <?php if ( isset($this->not_safe_for_work) && trim($this->not_safe_for_work) != "" && is_numeric($this->not_safe_for_work) && $this->not_safe_for_work == 1 ){?>checked<?php } ?> onClick="nsfwContentClicked( this.checked );" /> NSFW ( Not Safe For Work )</label><br /> <br />
+                        <span class="box_crete_color">Your content's nature </span><br />
+                        <label class="lblInpt box_crete_color"><input type='checkbox' class="inptChkContentNature" id="chkbxMc" <?php if ( isset($this->mature_content) && trim($this->mature_content) != "" && is_numeric($this->mature_content) && $this->mature_content == 1 ){?>checked<?php } ?> onClick="matureContentClicked( this.checked );" /> Mature Content&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                        <label class="lblInpt box_crete_color"><input type='checkbox' class="inptChkContentNature"id="chkbxNsfw" <?php if ( isset($this->not_safe_for_work) && trim($this->not_safe_for_work) != "" && is_numeric($this->not_safe_for_work) && $this->not_safe_for_work == 1 ){?>checked<?php } ?> onClick="nsfwContentClicked( this.checked );" /> NSFW ( Not Safe For Work )</label><br /> <br />
                         <span class="">Categorize your databox</span><br />
                         <input type='text' id="boxCategory" class="inptContentCategory" placeholder="Ex:- 'Space Travel Astronomers' " value="<?php if ( isset($this->metaTags) && trim($this->metaTags) != "" ){ echo $this->metaTags; }?>" />
 						<div class="" id="dcHtmlDiv" style="margin-top:20px">
-						<a href="javascript:void(0)" id="databoxContinue" class="btnBlack" />Continue Customising</a></div>
+						<a href="javascript:void(0)" id="databoxContinue" class="btnBlack" />CONTINUE CUSTOMISING</a></div>
 						<div id="dcInprogressDiv" style="display:none;text-align:center"><img  style="vertical-align:middle;margin-right:3px;width:30px;" src="<?php echo $basePath; ?>/img/bx_loader.gif" />Saving Category...</div>
                     </div>
                 </div>

@@ -47,8 +47,7 @@
     box-shadow:         0px 1px 10px 2px #ccc;*/
     min-height: 30px;
     padding: 20px;
-	border-radius:4px;
-	border:3px solid #444;
+	border-radius:2px;
 }
 
 .pop-up-content .close,
@@ -71,8 +70,8 @@
 
 .pop-up .close {
     position:absolute;
-    right: -3px;
-    top: -3px;
+    right: 6px;
+    top: 5px;
 	width:100%;
     z-index: 99;
 }
@@ -97,7 +96,7 @@
     color: #d22;
     width: 24px;
     height: 24px;
-    background: url(../img/delete.png) no-repeat 0 0;
+    background: url(../img/close.png) no-repeat 0 0;
     display: inline-block;
 }
 .pop-up .close a:hover{

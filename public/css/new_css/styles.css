@@ -684,8 +684,8 @@ a {
         border: 1px solid rgba(0, 0, 0, 0.03);
         padding-top: 10pt; }
         .mainContainerWrapper #secModal .divModalBlurBackground .divModalContentWrapper .divModalClose {
-          right: 10pt;
-          top: 0pt;
+          right: 20pt;
+          top: -4pt;
           font-size: 20pt;
           cursor: pointer; }
         .mainContainerWrapper #secModal .divModalBlurBackground .divModalContentWrapper a {
@@ -701,9 +701,10 @@ a {
   margin-top: 12pt;
   display: table;
   background: #e0e8ed;
-  font-size: 10pt; }
+  font-size: 10.5pt; }
   #secCreateHighlight .heading, #secCreateHashtag .heading, #secUploadBookmarks .heading, #secSelectDatabox .heading {
-    padding-bottom: 10pt;
+    padding-bottom: 5pt;
+    margin-bottom: 5pt;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     font-size: 12pt; }
   #secCreateHighlight .divCreateHighlightHashtag, #secCreateHashtag .divCreateHighlightHashtag, #secUploadBookmarks .divCreateHighlightHashtag, #secSelectDatabox .divCreateHighlightHashtag, #secCreateHighlight .divCreateHighlightTitle, #secCreateHashtag .divCreateHighlightTitle, #secUploadBookmarks .divCreateHighlightTitle, #secSelectDatabox .divCreateHighlightTitle {
@@ -781,7 +782,7 @@ a {
   margin-top: 12pt;
   display: table;
   background: #e0e8ed;
-  font-size: 10pt; }
+  font-size: 10.5pt; }
   #secCreatePublicDatabox .heading {
     padding-bottom: 10pt;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
