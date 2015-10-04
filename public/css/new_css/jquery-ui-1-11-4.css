@@ -830,7 +830,7 @@ body .ui-tooltip {
 /* Component containers
 ----------------------------------*/
 .ui-widget {
-	font-size: 0.7em;
+	font-size: 10pt;
 }
 .ui-widget .ui-widget {
 	font-size: 1em;
@@ -882,7 +882,6 @@ body .ui-tooltip {
 .ui-state-focus,
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
-	border: 1px solid #999999;
 	/*background: #dadada url("images/ui-bg_glass_75_dadada_1x400.png") 50% 50% repeat-x;*/
 	font-weight: normal;
 	color: #212121;
@@ -1187,25 +1186,25 @@ body .ui-tooltip {
 .ui-corner-top,
 .ui-corner-left,
 .ui-corner-tl {
-	border-top-left-radius: 4px;
+	border-top-left-radius: 2px;
 }
 .ui-corner-all,
 .ui-corner-top,
 .ui-corner-right,
 .ui-corner-tr {
-	border-top-right-radius: 4px;
+	border-top-right-radius: 2px;
 }
 .ui-corner-all,
 .ui-corner-bottom,
 .ui-corner-left,
 .ui-corner-bl {
-	border-bottom-left-radius: 4px;
+	border-bottom-left-radius: 2px;
 }
 .ui-corner-all,
 .ui-corner-bottom,
 .ui-corner-right,
 .ui-corner-br {
-	border-bottom-right-radius: 4px;
+	border-bottom-right-radius: 2px;
 }
 
 /* Overlays */

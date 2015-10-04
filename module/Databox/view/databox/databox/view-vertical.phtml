@@ -8,7 +8,7 @@
 </style>
 
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+<!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">-->
 <link rel="stylesheet" href="<?php echo $basePath; ?>/css/new_css/gridstack.min.css"/>
 
 <?php 
@@ -48,18 +48,18 @@ if( isset($this->displayedCategoryUserId) )
 {
 	$currBoxCatUid = $this->displayedCategoryUserId;
 }
-?><body>
-
-<div id="mainContainerWrapper" class="mainContainerWrapper">
+?>
+<div class="" style="margin-top:95px;">
+<div class="c_DivHashTag customize_hashtagh1"><h1><?php echo $this->hashName;?></h1></div>
+<div class="c_DivTitleWrapper">
+<div class="c_DivTitle customize_hashtag_title"><h2><?php echo $this->categoryTitle; ?><!--<button id="catDescTopBtn" onclick="catDescCkEditorShow();" class="c_BtnEditTitle">EDIT</button>--></h2></div>
+</div>
+</div>
+<div id="mainContainerWrapper" class="mainContainerWrapper" style="width:95%;margin:0 auto;">
 	<section id="secCustomizeDatabox">
 		<div class="c_DivCustomizationWrapper">
-			
-			<div class="c_DivHashTag"><?php echo $this->hashName;?></div>
-			<div class="c_DivTitleWrapper">
-				<div class="c_DivTitle" style="display:none"><?php echo $this->categoryTitle; ?><button id="catDescTopBtn" onclick="catDescCkEditorShow();" class="c_BtnEditTitle">EDIT</button></div>
-			</div>
-			<div class="c_DivHeaderCommentWrapper">
-				<div class="c_DivUserDetailsWrapper">
+			<div class="c_DivHeaderCommentWrapper tmar_t20">
+				<div class="c_DivUserDetailsWrapper tmar_t5">
 					<span class="c_SpnUsername"><?php echo $this->displayedCatUName; ?> WROTE : </span>
 						<div class="c_DivCardUser">
 							<img width="32px" height="42px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $this->displayedUMontImage; ?>" class="imgUserImage" alt="" />
@@ -70,8 +70,8 @@ if( isset($this->displayedCategoryUserId) )
 						<div id="catDescIntro" class="c_DivHeaderComment" style="display:none">
 							<?php if( ! is_null($this->categoryDescripton) ){ echo $this->categoryDescripton; }?>&nbsp;Edit
 						</div>
-						<div id="fullCatDesc" class="c_DivHeaderComment">
-							<p id="fullDescPara"><?php if( ! is_null($this->categoryDescripton) ){ echo $this->categoryDescripton; }?></p>
+						<div id="fullCatDesc" class="c_DivHeaderComment customize_full_w">
+							<div id="fullDescPara" class="pad_lrtb"><?php if( ! is_null($this->categoryDescripton) ){ echo $this->categoryDescripton; }?></div>
 						</div>
 						<div class="c_DownArrow" style="display:none">
 							<img src="<?php echo $basePath; ?>/img/downArrow.png" />
@@ -94,9 +94,9 @@ if( isset($this->displayedCategoryUserId) )
 			
 			<span id="pubDddContainer">
 				<?php if($this->data==0){?>
-					<div id="drag-drop-demo" class="grid-stack c_DivCardsWrapper"><?php $tzGsRowNum= 1;
+					<div id="drag-drop-demo" class="grid-stack c_DivCardsWrapper customize_w"><?php $tzGsRowNum= 1;
 					
-					$tzDataGsX = 1;
+					$tzDataGsX = 0;
 					$tzDataGsY = 0;
 					foreach($this->databoxLinksGrid as $key=>$databoxLinksGrids)
 					{
@@ -125,7 +125,7 @@ if( isset($this->displayedCategoryUserId) )
 						}
 						?>
 						<div id="dragDropWindow<?echo $key+1;?>" class="grid-stack-item  c_DivCard"
-						<?php if( $tzGsRowNum % 3 == 0 ) { $xSet = $tzDataGsX;$tzDataGsX = 1;$ySet = $tzDataGsY;$tzDataGsY += 20; } else{ $xSet = $tzDataGsX;$tzDataGsX += 3;$ySet = $tzDataGsY; } ?> data-gs-x="<?php echo $xSet; ?>" data-gs-y="<?php echo $ySet; ?>" data-gs-height="20" data-gs-width="2">
+						<?php if( $tzGsRowNum % 4 == 0 ) { $xSet = $tzDataGsX;$tzDataGsX = 0;$ySet = $tzDataGsY;$tzDataGsY += 20; } else{ $xSet = $tzDataGsX;$tzDataGsX += 2;$ySet = $tzDataGsY; } ?> data-gs-x="<?php echo $xSet; ?>" data-gs-y="<?php echo $ySet; ?>" data-gs-height="18" data-gs-width="2">
 							<div class="grid-stack-item-content">
 									<?php
 								if($databoxLinksGrids->is_video==1)
@@ -172,7 +172,7 @@ if( isset($this->displayedCategoryUserId) )
 								?>
 								</div>
 								<?}?>
-								<div class="c_DivCardActions">
+								<div class="c_DivCardActions collect_bookmark_pos_ab">
 									<div class="c_DivCardAction" id="divCollectThis<?php echo $key?>" >COLLECT THIS<input type="hidden" id="catLinkId<?php echo $key?>" value="<?echo $databoxLinksGrids->category_link_id; ?>"></div>
 									<div class="c_DivCardAction" id="divBookmarkThis<?php echo $key?>">BOOKMARK THIS<input type="hidden" id="currLink<?php echo $key?>" value="<?echo $databoxLinksGrids->link; ?>"></div>
 								</div>
@@ -310,6 +310,7 @@ if( isset($this->displayedCategoryUserId) )
 
 
 <script type="text/javascript">
+$('body').css('background','#f6f6f6')
 var i=0;
 	$(function () {
 	
