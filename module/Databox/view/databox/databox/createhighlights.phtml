@@ -115,7 +115,7 @@
                     </div>
 					<div class="divCreateHighlightImage">
 						<span class="">Categorize your databox</span><br />
-                        <input type='text' id="boxCategory" class="inptContentCategory input_pad5" placeholder="Ex:- 'Space Travel Astronomers' " value="" />
+                        <input type='text' id="boxCategory" class="inptContentCategory input_pad5" placeholder="Ex:- 'Space Travel Astronomers' " value="<?php if ( isset($this->metaTags) && trim($this->metaTags) != "" ){ echo $this->metaTags; }?>" />
 					</div>
                     <div class="">
                         <div class="" id="dcHtmlDiv">
