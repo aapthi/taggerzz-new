@@ -32,6 +32,9 @@ button{
 input{
 	font-size:10.5pt;
 }
+.active_menu{
+	color:#fc4242;
+}
 .error_display_c{
 	color:red;
 }
@@ -358,11 +361,12 @@ input{
 	background-position:center;
 	background-repeat:no-repeat;
     width: 30pt;
-    height: 22pt;
+    /*height: 22pt;*/
     margin-left: 0;
 	border-bottom:1px solid #c7c7c7;
 	border-top:1px solid #c7c7c7;
 	border-right:1px solid #c7c7c7;
+	padding:1px 0;
 }
 /* customization css */
 .customize_w{
