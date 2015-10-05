@@ -492,6 +492,8 @@ function checkLogin(alChe)
 			$('#userMessage').show();
 			$('#userMessage').html( "Checking Username,Password..." );
 		}else if(alChe == 'loginPopup'){
+			$('#userMessage2').removeClass( "tg_email_btn error_display_c" );
+			$('#userMessage2').addClass( "tg_email_btn success_display_c" );
 			var emailId = $.trim( stripHtmlTags($('#emailId2').val()).replace(/&nbsp;/g,'') );
 			$('#emailId2').val( emailId );
 			if( emailId == "" )
@@ -539,7 +541,8 @@ function checkLogin(alChe)
 		  success: function(data) {
 			if( parseInt(data) == parseInt("1") )
 			{
-				// alert("Incorrect password");
+				$('#userMessage2').removeClass( "tg_email_btn success_display_c" );
+				$('#userMessage2').addClass( "tg_email_btn error_display_c" );
 				$('#userMessage2').html( "Incorrect password." );
 				return false;
 			}
