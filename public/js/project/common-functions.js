@@ -1,9 +1,13 @@
 
 $(document).keyup(function(e) {
   if (e.keyCode == 27){// esc
-	if( $('.pop-up-close-trigger').length )
+	if( $('.pop-up-close-trigger').length && ! $('.pop_up_haeding').length )
 	{
 		$('#pop-up-1').popUpWindow({action: "close"});
+	}
+	else if( $('.pop_up_haeding').length )
+	{
+		$('#pop-up-image-crop-new').popUpWindow({action: "close"});
 	}
   }
 });
