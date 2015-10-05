@@ -1,7 +1,4 @@
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="<?php echo $basePath; ?>/css/new_css/gridstack.min.css"/>
-
 <?php 
 global $layoutTitle;
 global $layoutUrl;
@@ -35,14 +32,14 @@ if( isset($this->boxKeywords) && trim($this->boxKeywords) != "" )
 }
 ?><body>
 
-<div id="mainContainerWrapper" class="mainContainerWrapper">
+<div id="mainContainerWrapper" class="mainContainerWrapper" style="width:95%;margin:125px auto;">
 	<section id="secCustomizeDatabox">
 		<div class="c_DivCustomizationWrapper">
 				<span id="pubDddContainer">
 				<?php if($this->data==0){?>
-					<div id="drag-drop-demo" class="grid-stack c_DivCardsWrapper"><?php $tzGsRowNum= 1;
+					<div id="drag-drop-demo" class="grid-stack c_DivCardsWrapper customize_w"><?php $tzGsRowNum= 1;
 					
-					$tzDataGsX = 1;
+					$tzDataGsX = 0;
 					$tzDataGsY = 0;
 					foreach($this->userCollectedLinksArr as $key=>$databoxLinksGrids)
 					{
@@ -72,7 +69,7 @@ if( isset($this->boxKeywords) && trim($this->boxKeywords) != "" )
 						}
 						?>
 						<div id="dragDropWindow<?echo $key+1;?>" class="grid-stack-item  c_DivCard"
-						<?php if( $tzGsRowNum % 3 == 0 ) { $xSet = $tzDataGsX;$tzDataGsX = 1;$ySet = $tzDataGsY;$tzDataGsY += 20; } else{ $xSet = $tzDataGsX;$tzDataGsX += 3;$ySet = $tzDataGsY; } ?> data-gs-x="<?php echo $xSet; ?>" data-gs-y="<?php echo $ySet; ?>" data-gs-height="20" data-gs-width="2">
+						<?php if( $tzGsRowNum % 4 == 0 ) { $xSet = $tzDataGsX;$tzDataGsX = 0;$ySet = $tzDataGsY;$tzDataGsY += 20; } else{ $xSet = $tzDataGsX;$tzDataGsX += 2;$ySet = $tzDataGsY; } ?> data-gs-x="<?php echo $xSet; ?>" data-gs-y="<?php echo $ySet; ?>" data-gs-height="18" data-gs-width="2">
 							<div class="grid-stack-item-content">
 									<?php
 								if($databoxLinksGrids['is_video']==1)
@@ -173,6 +170,7 @@ if( isset($this->boxKeywords) && trim($this->boxKeywords) != "" )
 
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5461ef997855b9fa" async="async"></script>
 <script type="text/javascript">
+$('body').css('background','#f6f6f6')
 var i=0;
 	$(function () {
 	

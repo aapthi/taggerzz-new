@@ -1823,7 +1823,7 @@ function custReportPopUpShow()
 		$('#repMessage').html('');
 		$("#personel_text").val('');
 		$('input:radio[name=Personel]:first').attr('checked', true);
-		$('#pop-up-report').popUpWindow({action: "open"});
+		$('#pop-up-report').popUpWindow({action: "open",size:"small"});
 		//$('.pop-up-content').css('background','none');
 		$('.pop-up-content').css('box-shadow','none');
 	}

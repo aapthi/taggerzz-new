@@ -67,7 +67,7 @@ if( isset($this->displayedCategoryUserId) )
 				</div>
 				<div class="c_DivHeaderCommentRight">
 					<div  class="c_DivHeaderCommentRightTop">
-						<div id="catDescIntro" class="c_DivHeaderComment" style="display:none">
+						<div id="catDescIntro" class="c_DivHeaderComment customize_full_w" style="display:none" align="center">
 							<?php if( ! is_null($this->categoryDescripton) ){ echo $this->categoryDescripton; }?>&nbsp;Edit
 						</div>
 						<div id="fullCatDesc" class="c_DivHeaderComment customize_full_w">
@@ -189,46 +189,13 @@ if( isset($this->displayedCategoryUserId) )
 					<?php }
 				}?>
 			</span>
-			
-			<!--<h2>Facebook Reviews</h2><br/>
-			<div id="fb-root"></div>
-			<div class="fb-comments" data-href="<?php echo $layoutUrl; ?>" data-numposts="5"></div>-->
-			<h2>DataBox Reviews</h2>
-			<?php if(isset($_SESSION['usersinfo']->userId)){?>
-			<div class="">
-				<textarea id="message" class="" placeholder='Enter your comment'></textarea>
-				<div class="">
-					
-					<button id="commentSend" onClick="insertComment()" class="">COMMENT SEND</button>
-					<input type="hidden" id="hidSendComment" value="0" >
-					
-				</div>
-            </div>
-			<?php } ?>
-			<div id="commentsList">
-				<?php if(count($this->getComments)!=0){$i=0;foreach($this->getComments as $key=>$getComments)
-					{
-					if($i==0){
-					?><input type="hidden" id="hidCommentId" value="<?php echo $getComments->databox_comment_id;?>">
-					<?php
-					}
-						$i++;
-
-					?>
-					<div id="comment<?php echo $getComments->databox_comment_id;?>"class=""><span id="commText<?php echo $getComments->databox_comment_id;?>"><?php echo $getComments->databox_comment; ?></span><?php if( isset($_SESSION['usersinfo']->userId)){if($getComments->comment_user_id==$_SESSION['usersinfo']->userId){?><button onClick="editComment('<?php echo $getComments->databox_comment_id?>','<?php echo $getComments->databox_comment; ?>')" class="">Edit Comment</button> |<button id="deleteComment<?php echo $getComments->databox_comment_id;?>"onClick="deletedComment(<?php echo $getComments->databox_comment_id;?>)" class="">Delete Comment</button><?php }}else{}?></div>
-					<?php
-					}
-					}
-					?>
-					
-			</div>
 		</div>
 	</section>
-
+	<div class="clearfix"></div>
 </div>
-
-<div id="tempRemDiv" style="display:none;"></div>
-
+<div id="tempRemDiv" style="display:none;"><div class="clearfix"></div></div>
+<div class="clearfix"></div>
+<?php include('databox-reviews.phtml');?>
 <script src="<?php echo $basePath; ?>/js/new_js/libs/jquery/jquery.js"></script>
         <!-- DragDrop Plugin -->
 		
@@ -276,15 +243,15 @@ if( isset($this->displayedCategoryUserId) )
 <!-- Comment CKEditor Pop Up End -->
 
 <!-- Report Pop Up -->
-<div id="pop-up-report" class="pop-up-display-content conform_popup_content">
-	<div class="report_bg">
+	<div id="pop-up-report" class="pop-up-display-content conform_popup_content">
+	<div class="report_bgg">
 		<div><input type="radio" value="1" name="Personel" checked><span>&nbsp;Spam Content</span></div>
 		<div><input type="radio" value="2" name="Personel"><span>&nbsp;Abusive / hateful content</span></div>
 		<div><input type="radio" value="3" name="Personel"><span>&nbsp;Nude / Vulgar Open content</span></div>
 		<div><input type="radio" value="4" name="Personel"><span>&nbsp;Personal defamatory content</span></div>
 		<div class="report_mar_t"><input value="5" type="radio" name="Personel"><span>&nbsp;Other</span></div>
 		<div><textarea id="personel_text" placeholder="Mention your concern in Plain text"></textarea></div>
-		<div class="report_btn"><a href="javascript:void(0)" onClick="Javascript:custReportSend(<? echo $this->categoryId; ?>);">SUBMIT</a></div>
+		<div align="right"><a href="javascript:void(0)" class="btn" onClick="Javascript:custReportSend(<? echo $this->categoryId; ?>);">SUBMIT</a></div>
 		<p id="repMessage"></p>
 		<div style="clear:both;"></div>
 	</div>
@@ -523,7 +490,7 @@ $(document).ready(function()
 		fullDescParaHtml += '<span id="categoryDescripton">' + $.trim($("#fullDescPara").html().replace(/&nbsp;/g,'')) + '</span>&nbsp;';
 		if( showCustOtions )
 		{
-			fullDescParaHtml += '<span id="categoryDescLink" style="display:none;"><a href="Javascript:void(0);" id="catDescAnchor" onclick="catDescCkEditorShow();">Edit</a></span>';
+			fullDescParaHtml += '<span id="categoryDescLink" style="display:none;"><a href="Javascript:void(0);" id="catDescAnchor" onclick="catDescCkEditorShow();" class="set_d_btn">Edit</a></span>';
 		}
 		$('#fullDescPara').html( fullDescParaHtml );
 		if( showCustOtions )
@@ -539,7 +506,7 @@ $(document).ready(function()
 	else
 	{
 		var catDescIntroDivHtml = "";
-		var catDescAnchorLbl = "Set Description";
+		var catDescAnchorLbl = "<img  width='100px' src='<?php echo $basePath; ?>/img/profile_empty.png' title='Set Description'/>";
 
 		var catDescIntroDivHtml = '<span id="">' + $.trim($("#fullDescPara").html().replace(/&nbsp;/g,'')) + '</span>&nbsp;'; 
 
@@ -608,10 +575,11 @@ function insertComment(){
 					if(data.output!=0) {
 						var addHtml='';
 						$('#message').val('');
-						addHtml+='<div id="comment'+newValue+'"><span id="commText'+newValue+'">';
+						addHtml+='<div id="comment'+newValue+'"><div class="row tmar_b20"><div class="rimg_left"><img  width="40px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $_SESSION['usersinfo']->montage_image; ?>" alt="" class="height100" /></div><div class="rcontenleft"><div class="name_c"><?php echo $_SESSION['usersinfo']->displayName; ?></div><span id="commText'+newValue+'">';
 						addHtml+=comment;
 						addHtml+='</span>';
-						addHtml+='<button onClick="editComment('+newValue+')" class="">Edit Comment</button> |<button onClick="deletedComment('+newValue+')" class="">Delete Comment</button></div>';
+						addHtml+='<br/>';
+						addHtml+='<div class="comment_btns_pos_ab"><button onClick="editComment('+newValue+')" class="comment_edit_btn">Edit</button> <button onClick="deletedComment('+newValue+')" class="comment_delete_btn">Delete </button></div></div><div class="clearfix"></div></div></div>';
 						$('#commentsList').prepend(addHtml);
 						$('#hidSendComment').val('0');
 						alert('comment inserted');

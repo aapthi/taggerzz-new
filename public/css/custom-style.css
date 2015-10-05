@@ -404,6 +404,95 @@ input{
 	border-bottom:1px solid #c7c7c7;
 	font-weight:normal;
 }
+.report_bgg input{
+	vertical-align:baseline;
+	margin-bottom:8px;
+}
+.report_bgg span{
+	margin-top:5px;
+}
+.report_bgg textarea{
+	border:1px solid #c7c7c7;
+	width:100%;
+	margin-bottom:18px;
+	padding:5px;
+	box-sizing:border-box;	
+}
+.tdatabox_reviews{
+	background:#fff;
+	width:100%;
+	padding:10px;
+	border-top:1px solid #c7c7c7;
+}
+.databox_reviews_w97{
+	width:97%;
+	margin:0 auto;
+}
+.tdatabox_reviews h2{
+	font-size:18pt;
+	font-weight:normal;
+	margin-bottom:10px;
+}
+.tdatabox_reviews textarea{
+	width:98%;
+	border:1px solid #c7c7c7;
+	padding:5px;
+	box-sizing:border-box;
+	min-height:70px;
+}
+.comment_btn_bg{
+	width:97.1%;
+	background:#f8f8f8;
+	border-bottom:1px solid #c7c7c7;
+	border-left:1px solid #c7c7c7;
+	border-right:1px solid #c7c7c7;
+	padding:5px;
+	text-align:right;
+	margin-bottom:10px;
+}
+.comment_btn_bg .btn{
+	padding:3px 24px !important;
+}
+.rimg_left{
+	float:left;
+	width:4%;
+}
+.rimg_left img{
+	border-radius:2px;
+}
+.rcontenleft{
+	width:90%;
+	float:left;
+	margin-left:10px;
+	color:#565656;
+	position:relative;
+}
+.name_c{
+	color:#fc4242;
+	margin-bottom:5px;
+}
+.comment_btns_pos_ab{
+	position:absolute;
+	top:0;
+	right:0;
+}
+.comment_edit_btn{
+	background:#227cec;
+	border:1px solid #227cec;
+	border-radius:2px;
+	color:#fff;
+	cursor:pointer;
+}
+.comment_delete_btn{
+	background:red;
+	border:1px solid red;
+	border-radius:2px;
+	color:#fff;
+	cursor:pointer;
+}
+.set_d_btn{
+	color:#227cec;
+}
 /* Browser Problem css */
 @media screen and (-webkit-min-device-pixel-ratio:0) { 
 	.divHeaderWrapper .divSearchBoxes .aSearch {
