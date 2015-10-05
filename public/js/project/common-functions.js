@@ -2991,7 +2991,7 @@ function getTpCookie(name) {
 	$(".tg_users_title").text('Signup Using one of your Social network');
 	$("#email_id_c").text('Signup using your email address');
 	$("#c_password").text('Create a Password');
-	$(".btn").text('SIGN UP');
+	$("#btnSubmit").text('SIGN UP');
 	$(".crete_acc").fadeOut(100);
 	$("#tgaccount").fadeIn(600);
 	$("#forgot_password").fadeOut(100);
@@ -3000,7 +3000,7 @@ function loginWindow(){
 	$(".tg_users_title").text('Login Using one of your Social network');
 	$("#email_id_c").text('Your email ID');
 	$("#c_password").text('Password');
-	$(".btn").text('CONTINUE');
+	$("#btnSubmit").text('CONTINUE');
 	$("#tgaccount").hide();
 	$(".crete_acc").fadeIn(600);
 	$("#forgot_password").fadeIn(600);
