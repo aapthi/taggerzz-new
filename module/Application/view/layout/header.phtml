@@ -7,7 +7,7 @@
 		$homeActive			='';
 		$hintingOnActive		='';
 		$createActive		='';
-		if($_SERVER['REQUEST_URI']=='/taggerzz-new/trunk/dashboard'){
+		if($_SERVER['REQUEST_URI']=='/taggerzz-new/trunk/databoxuser/dashboard'){
 			$dashBoardActive='active_menu';
 			
 		}else if($_SERVER['REQUEST_URI']=='/taggerzz-new/trunk/montage'){
@@ -76,7 +76,7 @@ function logOut(value)
 			}else{
 				if(data.output=='success')
 				{
-					window.location='<? echo $this->Url('home');?>';
+					window.location='<? echo $this->Url('mainpage');?>';
 				}
 			}
 		}
@@ -190,10 +190,10 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
             </div>
 			<div class="mar_b5" style="margin-top:-20px;">
             <ul id="ulMenu" class="ulMenu tmenufont_inc">
-                <li> <a class="tag_chk  <?echo $homeActive; ?>" href="javascript:void(0);" onclick="goToLocation('/contentpage')">Home</a> </li>
-				<li> <a class="tag_chk  <?echo $montageActive; ?>" onClick="goToLocation('/montage')" href="javascript:void(0)" >My Profile</a></li>
-                <li> <a class="tag_chk <?echo $accountActive; ?>" href="javascript:void(0)" onClick="goToLocation('/accounts')">Account settings</a> </li>
-                <li> <a class="tag_chk <?echo $accountActive; ?>" href="javascript:void(0)" onClick="goToLocation('/databoxuser/dashboard')">Dashboard</a> </li>
+                <li> <a class="tag_chk  <?php echo $homeActive; ?>" href="javascript:void(0);" onclick="goToLocation('/contentpage')">Home</a> </li>
+				<li> <a class="tag_chk  <?php echo $montageActive; ?>" onClick="goToLocation('/montage')" href="javascript:void(0)" >My Profile</a></li>
+                <li> <a class="tag_chk <?php echo $accountActive; ?>" href="javascript:void(0)" onClick="goToLocation('/accounts')">Account settings</a> </li>
+                <li> <a class="tag_chk <?php echo $dashBoardActive; ?>" href="javascript:void(0)" onClick="goToLocation('/databoxuser/dashboard')">Dashboard</a> </li>
                 <li> <a class="tag_chk " href="javascript:void(0)" onClick="goToLocation('logout')" >Logout</a> </li>
             </ul>
 			</div>

@@ -50,7 +50,7 @@ function removeCss()
 				}else if(removeHashvalue=='home'){
 					var m_url= BASE_URL +'/';	
 					var mm_url=	'/';
-				}else if(removeHashvalue=='dashboard'){
+				}else if(removeHashvalue=='databoxuser/dashboard'){
 					var m_url= BASE_URL +'/databoxuser/dashboard';
 						var mm_url=	'/databoxuser/dashboard';	
 				}else if(hashNameMontage=='#'){
