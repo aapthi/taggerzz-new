@@ -268,8 +268,8 @@ a{
 	text-decoration:none;
 }
 .skip_btn {
-	background: none repeat scroll 0 0 #f97e76;
-    border: 1px solid #f97e76;
+	background: none repeat scroll 0 0 #fc4242;
+    border: 1px solid #fc4242;
     color: #fff;
     letter-spacing: 1px;
     padding: 3px 9px;
@@ -298,8 +298,8 @@ a{
 	border-radius:2px;
 }
 .insert input[type='submit'] {
-	background: none repeat scroll 0 0 #f97e76;
-    border: 1px solid #f97e76;
+	background: none repeat scroll 0 0 #fc4242;
+    border: 1px solid #fc4242;
 	border-radius:2px;
     color: #fff;
     letter-spacing: 1px;
@@ -488,8 +488,8 @@ a{
 }
 .create100 input[type='submit']{
 	width:100px;
-	background: none repeat scroll 0 0 #f97e76;
-    border: 1px solid #f97e76;
+	background: none repeat scroll 0 0 #fc4242;
+    border: 1px solid #fc4242;
     color: #fff;
     letter-spacing: 1px;
     padding: 3px;
@@ -531,8 +531,8 @@ a{
 }
 .add_links  input[type='submit']{
 	width:180px;
-	background: none repeat scroll 0 0 #f97e76;
-    border: 1px solid #f97e76;
+	background: none repeat scroll 0 0 #fc4242;
+    border: 1px solid #fc4242;
     color: #fff;
     letter-spacing: 1px;
    padding:8px 4px;
@@ -636,8 +636,8 @@ a{
 }
 .access_details .save{
 	width:60px;
-	background: none repeat scroll 0 0 #f97e76;
-    border: 1px solid #f97e76;
+	background: none repeat scroll 0 0 #fc4242;
+    border: 1px solid #fc4242;
     color: #fff;
     letter-spacing: 1px;
 	padding:5px 4px;
@@ -649,8 +649,8 @@ a{
 }
 .continue{
 	width:247px;
-	background: none repeat scroll 0 0 #f97e76;
-    border: 1px solid #f97e76;
+	background: none repeat scroll 0 0 #fc4242;
+    border: 1px solid #fc4242;
     color: #fff;
     letter-spacing: 1px;
 	padding:6px 4px;
@@ -709,11 +709,11 @@ a{
 	border:1px solid #c1cfd9
 }
 .new_Btn {
-    border:1px solid #f97e76;
+    border:1px solid #fc4242;
     color:#fff;
 	width:90px;
 	padding:1px;
-	background:#f97e76;
+	background:#fc4242;
 	text-align:center;
 	font-size:12px;
 }
@@ -737,8 +737,8 @@ input:focus, input[type="text"]:focus{
 	margin-right:8px;
 }
 .larg_btn{
-	background: none repeat scroll 0 0 #f97e76;
-    border: 1px solid #f97e76;
+	background: none repeat scroll 0 0 #fc4242;
+    border: 1px solid #fc4242;
     color: #fff;
     cursor: pointer;
     letter-spacing: 1px;
@@ -1234,7 +1234,7 @@ margin-bottom:20px;
 	text-transform:uppercase;
 }
 .span6 span{
-	color:#f97e76;
+	color:#fc4242;
 }
 .profile_text_empty{
 	border:1px solid #d6d6d6;
@@ -1384,8 +1384,8 @@ margin-bottom:20px;
 	margin-top:10px;
 }
 .pri_pub_btn{
-	background: none repeat scroll 0 0 #f97e76;
-    border: 1px solid #f97e76;
+	background: none repeat scroll 0 0 #fc4242;
+    border: 1px solid #fc4242;
     color: #fff;
     cursor: pointer;
     letter-spacing: 1px;
@@ -1533,7 +1533,7 @@ margin-bottom:20px;
 	font-size:1.2em;
 }
 .account_profile_title span{
-	color:#f97e76
+	color:#fc4242
 }
 .account_div_mar_tb{
 	margin-top:8px;
@@ -2787,7 +2787,7 @@ font-weight: bold;
 .report_btn a{
 	float:right;
 	padding:5px 10px;
-	background:#f97e76;
+	background:#fc4242;
 	color:#fff;
 	margin-top:5px;
 	text-decoration:none;

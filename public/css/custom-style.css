@@ -86,7 +86,7 @@ input{
 }
 .withoutlogin_logo{
 	position:absolute;
-	top:9px;
+	top:17px;
 	left:36px;
 }
 .tfix_header{
@@ -104,6 +104,24 @@ input{
 	border-bottom:1px solid #c7c7c7;
 	padding-bottom:12px;
 	width:100%;
+}
+.tlogin_bg{	
+	background:#fc4242;
+	padding:2px 5px;
+	color:#fff;
+	border-radius:0 0 2px 2px;
+}
+.tlogin_bg:hover{
+	color:#fff !important;
+}
+.tsignup_bg{	
+	background:#222;
+	padding:2px 5px;
+	color:#fff;
+	border-radius:0 0 2px 2px;
+}
+.tsignup_bg:hover{
+	color:#fff !important;
 }
 .pad_lr{
 	padding-left:25px;
@@ -144,7 +162,7 @@ input{
 	font-size:10.5pt;
 }
 .mar_b5{
-	margin-bottom:5px;
+	margin-bottom:8px;
 }
 .tsearch_input_w{
 	width:75% !important
@@ -294,8 +312,8 @@ input{
 	color:#f74b40;
 }
 .btn {
-	background: none repeat scroll 0 0 #f97e76;
-    border: 1px solid #f97e76;
+	background: none repeat scroll 0 0 #fc4242;
+    border: 1px solid #fc4242;
     color: #fff;
     letter-spacing: 1px;
 	padding:6px 24px;

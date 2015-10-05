@@ -317,8 +317,8 @@ input {
   display: block; }
 
 .primaryButton, #secUploadBookmarks .uploadBookmarksWrapper .inptUploadBookmarkFile, #secAccountSettings .divAccountSettingsRow .btnSaveAccount {
-  border: 1px solid #f97e76;
-  background: #f97e76;
+  border: 1px solid #fc4242;
+  background: #fc4242;
   cursor: pointer; }
 
 .btnBlack {
@@ -439,7 +439,7 @@ a {
   right: 5%; }
   .divLoginWrapper .btnSubmit {
     border: none;
-    background: #f97e76;
+    background: #fc4242;
     padding: 3pt 8pt;
     color: white; }
   .divLoginWrapper .btnSignup {

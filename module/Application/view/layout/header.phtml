@@ -208,12 +208,14 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
 					<style>
 						.tmar_t{ padding-top: 75px;}
 						.tmar_t125{ margin-top: 95px;}
+						.horizontalMenu li:not(:last-child)::after, .divHeaderWrapper .divLeftSlideMenu li:not(:last-child)::after{content:'';}
 					</style>
 					<div id="divLogoWrapper" class="width30 marginallyCenter withoutlogin_logo">
 						<div class="width100">
 							<a href="/taggerzz-new/trunk/contentpage"><img src="<?php echo $basePath; ?>/img/imgLogo.png" alt="nagaraju" class="imgLogo width100" /></a>
 						</div>
 					</div>
+				<div>
 				<div id="divLeftSlideMenu" class="divLeftSlideMenu">
 					<div id="divAccountInfoMobile" class="divAccountInfo mobile">
 					</div>
@@ -221,11 +223,12 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
 					<ul id="ulMenu" class="ulMenu">
 							<!--<li><a href="<?php echo $baseUrl; ?>/signup">SignUp</a></li>
 							<li><a href="<?php echo $baseUrl; ?>">SignIn</a></li>-->
-							<li><a href="/taggerzz-new/trunk/contentpage" class="link_email_login">HOME</a></li>
-							<li><a id="open-pop-up-1" href="javascript:void(0);" onclick="loginWindow()" class="link_email_login">LOGIN</a></li>
-						<li><a id="signup-pop-up" href="javascript:void(0);" onclick="signUpWindow()" class="link_email_login">SIGN UP</a></li>
+							<!--<li><a href="/taggerzz-new/trunk/contentpage" class="link_email_login">HOME</a></li>-->
+							<li><a id="open-pop-up-1" href="javascript:void(0);" onclick="loginWindow()" class="link_email_login tlogin_bg">LOGIN</a></li>
+						<li><a id="signup-pop-up" href="javascript:void(0);" onclick="signUpWindow()" class="link_email_login tsignup_bg">SIGN UP</a></li>
 					</ul>
 					</div>
+				</div>
 				</div>
 				<?php
 				//if( $_SERVER['REQUEST_URI']== "/taggerzz-new/trunk/contentpage" )
