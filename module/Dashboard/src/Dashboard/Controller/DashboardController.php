@@ -457,17 +457,40 @@ class DashboardController extends AbstractActionController
 					
 					list($width,$height)=getimagesize($uploadedfile);
 					
-					$newwidth=150;
-					$newheight=150;
-					
 					$tmp=imagecreatetruecolor($croppedNewWidth,$croppedNewHeight);
 					imagecopyresampled($tmp,$src,0,0,$croppedX,$croppedY,$croppedNewWidth,$croppedNewHeight,$croppedNewWidth,$croppedNewHeight);
 
-					$filename='./public/images/project/categoryImages/'.$montageImage.'.'.$extension;
-					imagejpeg($tmp,$filename,100);
-					imagedestroy($tmp);
-					imagedestroy($src);
-					
+					// Code for minimum width with aspect ratio.
+					$minAllowedWidth=300;
+					if( $croppedNewWidth < $minAllowedWidth )
+					{
+						$originalWidth = $croppedNewWidth;
+						$originalHeight = $croppedNewHeight;
+						
+						$tzCropRatio = 0;
+						$tzCropRatio = $originalHeight / $originalWidth;
+
+						$croppedNewWidth = $minAllowedWidth;
+						$croppedNewHeight = $croppedNewWidth * $tzCropRatio;
+						
+						$tmp1=imagecreatetruecolor($croppedNewWidth,$croppedNewHeight);
+						imagecopyresampled($tmp1,$tmp,0,0,0,0,$croppedNewWidth,$croppedNewHeight,$originalWidth,$originalHeight);
+						
+						$filename='./public/images/project/categoryImages/'.$montageImage.'.'.$extension;
+						imagejpeg($tmp1,$filename,100);
+						imagedestroy($tmp);
+						imagedestroy($tmp1);
+						imagedestroy($src);
+					}
+					else
+					{
+						$filename='./public/images/project/categoryImages/'.$montageImage.'.'.$extension;
+						imagejpeg($tmp,$filename,100);
+						imagedestroy($tmp);
+						imagedestroy($src);
+					}
+					// End Code for minimum width with aspect ratio.
+
 					$imageName=$montageImage.'.'.$extension;
 					
 					if( isset($_POST['imageId']) && $_POST['imageId']!=0 )
