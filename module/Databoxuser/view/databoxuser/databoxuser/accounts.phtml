@@ -9,6 +9,21 @@
                         <div class="divAccountSettingsHeading heading_font_pt12">
                             ACCOUNT SETTINGS
                         </div>
+						<div class="edit_pick_img">
+								<div class="file-input-wrapper">
+									<?
+										$montage_image="";
+										if(strpos($_SESSION['usersinfo']->montage_image, "https://") !== false || strpos($_SESSION['usersinfo']->montage_image, "http://") !== false) 
+									   { 
+											   $montage_image=$_SESSION['usersinfo']->montage_image;
+									   }else{
+											$montage_image=$basePath.'/images/project/montageImages/'.$_SESSION['usersinfo']->montage_image;
+									   }
+									
+									?>
+									<img id="uploadedAccountImage1" src="<?php echo $montage_image; ?>" class="btn-file-input" width="50px"/> <span>Edit Your Picture</span>
+								</div>
+						</div>
                         <div class="divAccountSettingsForm" style="position:relative">
                             <label>
                                 Profile Name : 
@@ -109,44 +124,6 @@
                         <div class="divUserSummaryRow">
                             <div class="divTotalLinksCount"><?echo $this->getTotalLinks;?></div> Links Collected, Categorized, #Hashtagged
                         </div>
-					<div class="account_profile_title">
-					<p><b>UPLOAD PICTURE</b> &nbsp;(for montage, thumb, montage box home display ) <span>Upload  minimum 300 X 300</span></p>
-					</div>
-					<div class="upload_picture">
-						<div class="montage_pick">
-							<div class="file-input-wrapper">
-							<h5>&nbsp;#mycollections</h5>
-								<?
-									$montage_image="";
-									if(strpos($_SESSION['usersinfo']->montage_image, "https://") !== false || strpos($_SESSION['usersinfo']->montage_image, "http://") !== false) 
-								   { 
-										   $montage_image=$_SESSION['usersinfo']->montage_image;
-								   }else{
-										$montage_image=$basePath.'/images/project/montageImages/'.$_SESSION['usersinfo']->montage_image;
-								   }
-								
-								?>
-								<img id="uploadedAccountImage1" src="<?php echo $montage_image; ?>" class="btn-file-input" />
-							</div>
-						</div>
-						<p><a href="javascript:void(0);" onclick="adjustImageCrop()">ADJUST</a></p>
-					</div>
-					<div class="upload_picture">
-						<div class="thumb_pick">
-							<div class="file-input-wrapper-2 imagePreview" id="mediumImage">
-								<img id="uploadedAccountImage2" src="<?php echo $montage_image; ?>" class="btn-file-input" />
-							</div>
-						</div>
-						<!--<p>Adjust</p>-->
-					</div>
-					<div class="upload_picture">
-						<div class="montage_box_pick">
-							<div class="file-input-wrapper-3 imagePreview" id="samllImage">
-								<img id="uploadedAccountImage3" src="<?php echo $montage_image; ?>" class="btn-file-input" />
-							</div>
-						</div>
-						<!--<p>Adjust</p>-->
-					</div>
                     </div>
                 </div>
 

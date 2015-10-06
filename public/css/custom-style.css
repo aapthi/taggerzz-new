@@ -499,6 +499,21 @@ input{
 .current_affairs .divCard{
 	width:20% !important;
 }
+.edit_pick_img{
+	border:1px solid #c7c7c7;
+	padding:5px;
+	background:#fff;
+	width:48%;
+	border-radius:2px;
+}
+.edit_pick_img img{
+	border-radius:2px;
+}
+.edit_pick_img span{
+	margin-left:10px;
+	font-size:12pt;
+	color:#00afd1;
+}
 /* Browser Problem css */
 @media screen and (-webkit-min-device-pixel-ratio:0) { 
 	.divHeaderWrapper .divSearchBoxes .aSearch {
@@ -519,6 +534,7 @@ input{
     -webkit-box-sizing: border-box;
        -moz-box-sizing: border-box;
             box-sizing: border-box;
+			margin-bottom:20px;
   }
 	.insert input[type="text"], .insert input[type="password"]{
 		width:95% !important;
@@ -536,5 +552,8 @@ input{
 	}
 	.tfix_header{
 		padding-bottom:0;
+	}
+	.edit_pick_img{
+		width:89%;
 	}
 }

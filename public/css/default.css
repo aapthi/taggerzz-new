@@ -1029,15 +1029,17 @@ input:focus, input[type="text"]:focus{
 	color:#5c5959;
 }
 .span180{
-	width:175px;
+	width:12%;
 	height:160px;
 	text-align:center;
 	border:1px solid #d6d6d6;
 	position:relative;
+	border-radius:2px;
 }
 .span180 img{
-	width:174px;
-	height:158px;
+	width:100%;
+	height:100%;
+	border-radius:2px;
 }
 .profile_edit_po_ab{
 	position:absolute;
@@ -1061,12 +1063,10 @@ input:focus, input[type="text"]:focus{
 	display:block;
 }
 .span700{
-	width:785px;
+	width:84.2%;
 }
 .span700 p{
-	font-size:0.9em;
-	color:#5c5959;
-	line-height:22px;
+	color:#565656;
 }
 .mycolleection_bottom_bg{
 	background: rgb(255,255,255); /* Old browsers */
@@ -1240,6 +1240,7 @@ margin-bottom:20px;
 	border:1px solid #d6d6d6;
 	height:160px;
 	text-align:center;
+	border-radius:2px;
 }
 .profile_text_empty img{
 	padding-top:10px;
@@ -1247,16 +1248,16 @@ margin-bottom:20px;
 	height:120px;
 }
 .add_new_pick{
-	font-size:0.6em;
+	font-size:9pt;
 	margin-left:5px;
-	margin-top:5px;
-	line-height:24px;
+	line-height:18px;
 	text-decoration:underline;
-	color:#222;
+	color:#00afd1;
 }
 .add_title{
 	text-decoration:underline;
-	color:#222;
+	color:#00afd1;
+	margin-right:6px;
 }
 .create_databox{
 	margin-top:20px;
@@ -2536,10 +2537,10 @@ color:#333;
 	cursor:pointer;
 }
 .montage_tit_show h2{
-	line-height:24px;
-	text-transform:uppercase;
-	font-size:0.58em;
-	color:#5c5959;
+    font-size: 9pt;
+    font-weight: normal;
+    line-height: 24px;
+    text-transform: uppercase;
 }
 
 @-webkit-keyframes fadeInLeft {
