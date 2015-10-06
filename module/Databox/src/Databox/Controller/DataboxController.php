@@ -2161,9 +2161,9 @@ class DataboxController extends AbstractActionController
 				$publicBoxesHtml .='<div id="divCardLoveTrash'.$currentBoxRow->category_id.'" class="divCardLoveTrash">';
 				if((isset($_SESSION['usersinfo']->userId )&& $currentBoxRow->userVoteId==$_SESSION['usersinfo']->userId) || $currentBoxRow->userVoteId==$_SERVER['REMOTE_ADDR']){
 					if($currentBoxRow->userVoteUp=='1'){
-						$publicBoxesHtml .=	'<a href="Javascript:void(0);" ><img src="'. $basePath .'/img/love.png" alt="" /></a>  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'.$basePath .'/img/trash.png" alt="" /></a>';
+						$publicBoxesHtml .=	'<img src="'. $basePath .'/img/love_ok.png" alt="" />  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'.$basePath .'/img/trash.png" alt="" /></a>';
 					}else if($currentBoxRow->uservoteDown=='1'){	
-						$publicBoxesHtml .=	'<a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'. $basePath .'/img/love.png" alt="" /></a>  or  <a href="Javascript:void(0);" ><img src="'.$basePath .'/img/trash.png" alt="" /></a>';
+						$publicBoxesHtml .=	'<a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'. $basePath .'/img/love.png" alt="" /></a>  or  <img src="'.$basePath .'/img/untrash.png" alt="" />';
 					}
 				}else{	
 						$publicBoxesHtml .=	'<a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'. $basePath .'/img/love.png" alt="" /></a>  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'.$basePath .'/img/trash.png" alt="" /></a>';
@@ -2429,9 +2429,9 @@ class DataboxController extends AbstractActionController
 				$publicBoxesHtml .='<div id="divCardLoveTrash'.$currentBoxRow->category_id.'" class="divCardLoveTrash">';
 				if((isset($_SESSION['usersinfo']->userId )&& $currentBoxRow->userVoteId==$_SESSION['usersinfo']->userId) || $currentBoxRow->userVoteId==$_SERVER['REMOTE_ADDR']){
 					if($currentBoxRow->userVoteUp=='1'){
-						$publicBoxesHtml .=	'<a href="Javascript:void(0);" ><img src="'. $basePath .'/img/love.png" alt="" /></a>  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'.$basePath .'/img/trash.png" alt="" /></a>';
+						$publicBoxesHtml .=	'<img src="'. $basePath .'/img/love_ok.png" alt="" />  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'.$basePath .'/img/trash.png" alt="" /></a>';
 					}else if($currentBoxRow->uservoteDown=='1'){	
-						$publicBoxesHtml .=	'<a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'. $basePath .'/img/love.png" alt="" /></a>  or  <a href="Javascript:void(0);" ><img src="'.$basePath .'/img/trash.png" alt="" /></a>';
+						$publicBoxesHtml .=	'<a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'. $basePath .'/img/love.png" alt="" /></a>  or  <img src="'.$basePath .'/img/untrash.png" alt="" />';
 					}
 				}else{	
 						$publicBoxesHtml .=	'<a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'. $basePath .'/img/love.png" alt="" /></a>  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'.$basePath .'/img/trash.png" alt="" /></a>';
@@ -2585,9 +2585,9 @@ class DataboxController extends AbstractActionController
 				$privateBoxHtml .='<div id="divCardLoveTrash'.$currentBoxRow->category_id.'" class="divCardLoveTrash">';
 				if((isset($_SESSION['usersinfo']->userId )&& $currentBoxRow->userVoteId==$_SESSION['usersinfo']->userId) || $currentBoxRow->userVoteId==$_SERVER['REMOTE_ADDR']){
 					if($currentBoxRow->userVoteUp=='1'){
-						$privateBoxHtml .=	'<a href="Javascript:void(0);" ><img src="'. $basePath .'/img/love.png" alt="" /></a>  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'.$basePath .'/img/trash.png" alt="" /></a>';
+						$privateBoxHtml .=	'<img src="'. $basePath .'/img/love_ok.png" alt="" />  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'.$basePath .'/img/trash.png" alt="" /></a>';
 					}else if($currentBoxRow->uservoteDown=='1'){	
-						$privateBoxHtml .=	'<a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'. $basePath .'/img/love.png" alt="" /></a>  or  <a href="Javascript:void(0);" ><img src="'.$basePath .'/img/trash.png" alt="" /></a>';
+						$privateBoxHtml .=	'<a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'. $basePath .'/img/love.png" alt="" /></a>  or  <img src="'.$basePath .'/img/untrash.png" alt="" />';
 					}
 				}else{	
 						$privateBoxHtml .=	'<a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'. $basePath .'/img/love.png" alt="" /></a>  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'.$basePath .'/img/trash.png" alt="" /></a>';

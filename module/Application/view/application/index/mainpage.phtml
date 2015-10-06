@@ -88,10 +88,10 @@
                                 <div id="divCardLoveTrash<?php echo $currentBoxData["category_id"];?>" class="divCardLoveTrash">
 									<?php if((isset($_SESSION['usersinfo']->userId )&& $currentBoxData["userVoteId"]==$_SESSION['usersinfo']->userId) || $currentBoxData["userVoteId"]==$_SERVER['REMOTE_ADDR']){
 									if($currentBoxData["userVoteUp"]=='1'){?>
-									<a href="Javascript:void(0);" ><img src="<?php echo $basePath; ?>/img/love.png" alt="" /></a>  or <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1','<?php echo $currentBoxData["voteUp"];?>','<?php echo $currentBoxData["rw_lh"];?>');"> <img src="<?php echo $basePath; ?>/img/trash.png" alt="" /></a>
+									<img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" />  or <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1','<?php echo $currentBoxData["voteUp"];?>','<?php echo $currentBoxData["rw_lh"];?>');"> <img src="<?php echo $basePath; ?>/img/trash.png" alt="" /></a>
 									<?php
 									}else if($currentBoxData["uservoteDown"]=='1'){?>
-									<a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1','<?php echo $currentBoxData["voteUp"];?>','<?php echo $currentBoxData["rw_lh"];?>');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" /></a>  or <a href="Javascript:void(0);" > <img src="<?php echo $basePath; ?>/img/trash.png" alt="" /></a>
+									<a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1','<?php echo $currentBoxData["voteUp"];?>','<?php echo $currentBoxData["rw_lh"];?>');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" /></a>  or <img src="<?php echo $basePath; ?>/img/untrash.png" alt="" />
 									<?php
 									}}else{
 									?>
@@ -205,10 +205,10 @@
                             <div id="divCardLoveTrash<?php echo $currentBoxData["category_id"];?>" class="divCardLoveTrash">
 								<?php if((isset($_SESSION['usersinfo']->userId )&& $currentBoxData["userVoteId"]==$_SESSION['usersinfo']->userId) || $currentBoxData["userVoteId"]==$_SERVER['REMOTE_ADDR']){
 									if($currentBoxData["userVoteUp"]=='1'){?>
-									<a href="Javascript:void(0);"><img src="<?php echo $basePath; ?>/img/love.png" alt="" /></a>  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1','<?php echo $currentBoxData["voteUp"];?>','<?php echo $currentBoxData["rw_lh"];?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" /></a>
+									<img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" />  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1','<?php echo $currentBoxData["voteUp"];?>','<?php echo $currentBoxData["rw_lh"];?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" /></a>
 									<?php
 									}else if($currentBoxData["uservoteDown"]=='1'){?>
-									<a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1','<?php echo $currentBoxData["voteUp"];?>','<?php echo $currentBoxData["rw_lh"];?>');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" /></a>  or  <a href="Javascript:void(0);" ><img src="<?php echo $basePath; ?>/img/trash.png" alt="" /></a>
+									<a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1','<?php echo $currentBoxData["voteUp"];?>','<?php echo $currentBoxData["rw_lh"];?>');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" /></a>  or  <img src="<?php echo $basePath; ?>/img/untrash.png" alt="" />
 									<?php
 									}}else{
 									?>
