@@ -253,6 +253,7 @@
 					{
 					foreach( $this->homeMontageBoxesArray as $key=>$currentBoxData )
 					{
+					//echo "<pre>";print_r($currentBoxData);
 					$viewUrl = "user-collection";
 					$displayUserCollectionUrl = $baseUrl;
 					$displayUserCollectionUrl .= "/" . $viewUrl . "/" . $currentBoxData["user_id"];?>
@@ -276,19 +277,20 @@
 							}else{
 									$memberDisplayImage = $basePath.'/images/project/montageImages/'.$currentBoxData["montage_image"];
 							}?>
-                            <img id="Databox-1-img" class="" alt="<?php echo $montageHashName; ?>" src="<?php echo $memberDisplayImage; ?>"/>
+                            <a href="<?php echo $displayUserCollectionUrl; ?>" onClick="Javascript:displayUserCollection(<?php echo $currentBoxData["user_id"]; ?>)" >
+							<img id="Databox-1-img" class="" alt="<?php echo $montageHashName; ?>" src="<?php echo $memberDisplayImage; ?>"/>
+							<?php if( ! is_null($currentBoxData["montage_hash_name"]) && $currentBoxData["montage_hash_name"] != "" ){?>
 							<div id="divDatabox-1-hashtag" class="divCardHashtag">
 								<?php echo $montageHashName; ?>
                             </div>
-
+							<?php } ?>
+							</a>
                             <div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">
                                 <span class="fatFont"><?php echo $currentBoxData["userWiseLinksCount"];?> HOT LINKS</span> collected and shared
                             </div>
                             <div id="Card-1-user" class="divCardUser">
 								<?php if($currentBoxData["image"]!=""){?>
                                 <img  src="<?php echo $currentBoxData["image"];?>" class="imgUserImage" alt="" />
-								<?php }else{ ?>
-								<img src="<?php echo $basePath; ?>/img/userImage.png" class="imgUserImage" alt="" />
 								<?php } ?>
                                 <div class="divCardUserName">By: <?php echo $currentBoxData["display_name"];?></div>
                             </div>
