@@ -3,107 +3,102 @@
 	<div class="">
 	<div class="mycolleection">
 		<div id="hash_name">
-		<?if($this->montageHashName==""){$montage_hash_name="";?>
-		<div class="float_l"><h1>#MONTAGE</h1></div>
-		<?if( isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId==$this->ucUserId){?>
-		<div class="float_l"><a href="javascript:void(0);" onclick="montagePopUp(1)" class="add_new_pick">ADD YOURS</a></div>
-		<?}}else{
-			$montage_hash_name=$this->montageHashName;
-			if(strlen($montage_hash_name)>30){
-				$montageLength=substr($montage_hash_name,0,30) . '..'; 
-			}else{
-				$montageLength=$montage_hash_name; 
-			}
-		?>
-		<div  class="float_l"><h1>#<?echo $montageLength;?></h1></div>
-		<?if( isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId==$this->ucUserId){?>
-		<div class="float_l"><a href="javascript:void(0);" onclick="montagePopUp(1)" title="Edit hash name" class="add_new_pick">EDIT</a></div>
-		<?}}?>
+		<?if($_SESSION['usersinfo']->montage_hash_name==""){
+						$montage_hash_name="";
+					?>
+					<div class="float_l"><h1>#MONTAGE</h1></div>
+					<div class="float_l"><a href="javascript:void(0);" onclick="montagePopUp(1)" class="add_new_pick">ADD YOURS</a></div>
+					<?}else{
+						$montage_hash_name=$_SESSION['usersinfo']->montage_hash_name;
+						if(strlen($montage_hash_name)>30){
+							$montageLength=substr($montage_hash_name,0,30) . '..'; 
+						}else{
+							$montageLength=$montage_hash_name; 
+						}
+					?>
+					<div  class="float_l"><h1>#<?echo $montageLength;?></h1></div>
+					<div class="float_l"><a href="javascript:void(0);" onclick="montagePopUp(1)" title="Edit hash name" class="add_new_pick">EDIT</a></div>
+					<?}?>
 		</div>
 		<div  id="your_title" class="float_r montage_tit_show">
-		<?if($this->montageTitle==""){$montage_title="";?>
-		<?if( isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId==$this->ucUserId){?>
-		<h2><a href="javascript:void(0);" onclick="montagePopUp(2)" class="add_title">Add your Title here</a></h2>
-		<? }else {?><h2>&nbsp;</h2>
-		<?}}else{
-			$montage_title=$this->montageTitle;
-		?>
-		<h2><?if( isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId==$this->ucUserId){?><span><a href="javascript:void(0);" onclick="montagePopUp(2)" class="">EDIT TITLE&nbsp;&nbsp;&nbsp;&nbsp;</a></span><? } ?><?echo $montage_title;?></h2>
-		<?}
-			if( $montage_title != "" )
-			{
-				if( $montage_hash_name != "" )
-				{
-					global $layoutTitle;
-					$layoutTitle = $montage_hash_name . " | " . $montage_title . " - Taggerzz";
-				}
-				else
-				{
-					global $layoutTitle;
-					$layoutTitle = $montage_title . " - Taggerzz";
-				}
-			}
-			else if( $montage_hash_name != "" )
-			{
-				global $layoutTitle;
-				$layoutTitle = $montage_hash_name . " - Taggerzz";
-			}
-			else
-			{
-				global $layoutTitle;
-				$layoutTitle =  "Taggerzz - Collect.Connect.Tag and Share your Web-Data with Everyone and Any one";
-			}
-		?>
+					<?if($_SESSION['usersinfo']->montage_title==""){
+						$montage_title="";
+					?>
+					<h2><a href="javascript:void(0);" onclick="montagePopUp(2)" class="add_title">Add your Title here</a></h2>
+					<?}else{
+						$montage_title=$_SESSION['usersinfo']->montage_title;
+					?>
+					<h2><span><a href="javascript:void(0);" onclick="montagePopUp(2)" class="">EDIT TITLE&nbsp;&nbsp;&nbsp;&nbsp;</a></span><?echo $_SESSION['usersinfo']->montage_title;?></h2>
+					<?}
+						if( $montage_title != "" )
+						{
+							if( $montage_hash_name != "" )
+							{
+								global $layoutTitle;
+								$layoutTitle = $montage_hash_name . " | " . $montage_title . " - Taggerzz";
+							}
+							else
+							{
+								global $layoutTitle;
+								$layoutTitle = $montage_title . " - Taggerzz";
+							}
+						}
+						else if( $montage_hash_name != "" )
+						{
+							global $layoutTitle;
+							$layoutTitle = $montage_hash_name . " - Taggerzz";
+						}
+						else
+						{
+							global $layoutTitle;
+							$layoutTitle =  "Taggerzz - Collect.Connect.Tag and Share your Web-Data with Everyone and Any one";
+						}
+					?>
 		</div>
 	</div>
 	<div class="clearfix"></div>
 	<div class="" style="margin-top:1px;">
 		<div class="row">
-			<?
-			$ucDispImage = "";
-			if( ! is_null($this->montageMainImage) && $this->montageMainImage != "" )
-			{
-				if(strpos($this->montageMainImage, "https://") !== false || strpos($this->montageMainImage, "http://") !== false)
-				{
-					$ucDispImage=$this->montageMainImage;
-				}
-				else
-				{
-					$ucDispImage=$basePath.'/images/project/montageMainImage/'.$this->montageMainImage;
-				}
-			}
-			else if( ! is_null($this->montageImage) && $this->montageImage != "" )
-			{
-				if(strpos($this->montageImage, "https://") !== false || strpos($this->montageImage, "http://") !== false)
-				{
-					$ucDispImage=$this->montageImage;
-				}
-				else
-				{
-					$ucDispImage=$basePath.'/images/project/montageImages/'.$this->montageImage;
-				}
-			}
-			if( $ucDispImage == "" )
-			{
-				$ucDispImage = $basePath.'/images/social_media/profile_img.png';
-			}?><div class="span180">
-					<img src="<?php echo $ucDispImage; ?>">
-				</div>
-				<div id="your_paragraph">
-					<?if($this->montageParagraph==""){
-						$montage_paragraph="";
-					?>
-					<div class="span700 profile_text_empty">
-							<div id="montagPara_Div_id1" class="montage_Paragraph_show"><?if( isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId==$this->ucUserId){?><a href="javascript:void(0);" title="Edit your paragraph" onclick="montagePopUp(3)"><? } ?><img src="<?php echo $basePath; ?>/images/social_media/profile_empty.png" class="edit_paragraph_mon_empty"/><?if( isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId==$this->ucUserId){?></a><p>No Writing competition needed here</p><? } else { ?><p>&nbsp;</p><? } ?></div>
-					</div>
-					<?}else{
-						$montage_paragraph=$this->montageParagraph;
-					?>
-					<div class="span700">
-						<div id="montagPara_Div_id" class="montage_Paragraph_show"><P><?echo $this->montageParagraph?><?if( isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId==$this->ucUserId){?><span><a href="javascript:void(0);" title="Edit your paragraph" onclick="montagePopUp(3)" class="edit_paragraph_mon_empty">EDIT</a></SPAN><? } ?></P></div>
-					</div>
-					<?}?>
-				</div>
+						<?
+						$image="";
+						if(strpos($_SESSION['usersinfo']->montage_main_image, "https://") !== false || strpos($_SESSION['usersinfo']->montage_main_image, "http://") !== false)
+					   { 
+							   $image=$_SESSION['usersinfo']->montage_main_image;
+					   }else{
+							$image=$basePath.'/images/project/montageMainImage/'.$_SESSION['usersinfo']->montage_main_image;
+					   }
+						if($_SESSION['usersinfo']->montage_main_image!=""){?>
+						<div class="span180">
+							<img id="MontageImage" src="<?php echo $image; ?>">
+							<div style="position:absolute;bottom:20px;left:25%;">
+								<p style="font-size:0.55em; text-decoration:underline;"><a href="javascript:void(0);" id="montagePic" onclick="updatemontageImage()">CHANGE YOUR PICTURE</a><input style="display:none" type="file" name="change_image" id="change_image"></P>
+							</div>
+						</div>
+						<?}else{?>
+							<form id="montageUploadForm" method="post" enctype="multipart/form-data">
+							<div class="span180" style="position:relative;">
+								<img id="MontageImage" src="<?php echo $basePath; ?>/images/social_media/profile_img.png"/>
+								<div style="position:absolute;bottom:20px;left:25%;">
+								<p style="font-size:0.55em; text-decoration:underline;"><a href="javascript:void(0);" id="montagePic" onclick="updatemontageImage()" >ADD YOUR PICTURE</a><input style="display:none" type="file" name="change_image" id="change_image"></P>
+							</div>
+							</div>
+							</form>
+						<?}?>
+							<div id="your_paragraph">
+							<?if($_SESSION['usersinfo']->montage_paragraph==""){
+								$montage_paragraph="";
+							?>
+							<div class="span700 profile_text_empty">
+									<div id="montagPara_Div_id1" class="montage_Paragraph_show"><a href="javascript:void(0);" title="Edit your paragraph" onclick="montagePopUp(3)"><img src="<?php echo $basePath; ?>/images/social_media/profile_empty.png" class="edit_paragraph_mon_empty"/></a><p>No Writing competition needed here</p></div>
+							</div>
+							<?}else{
+								$montage_paragraph=$_SESSION['usersinfo']->montage_paragraph;
+							?>
+							<div class="span700">
+								<div id="montagPara_Div_id" class="montage_Paragraph_show"><P><?echo $_SESSION['usersinfo']->montage_paragraph;?><span><a href="javascript:void(0);" title="Edit your paragraph" onclick="montagePopUp(3)" class="edit_paragraph_mon_empty">EDIT</a></SPAN></P></div>
+							</div>
+							<?}?>
+							</div>
 		</div>
 	</div>
 </div>
@@ -148,10 +143,72 @@
 	</div>
 </div>
 <div class="clearfix"></div>
+<div id="pop-up-hash" class="pop-up-display-content conform_popup_content">
+	<div class="montage_desc">
+		<h4>Please provide your montage hash name</h4>
+		<p><input type="text" name="montage_hash_name" class="text_pad" id="montage_hash_name" value="#<?echo $montage_hash_name;?>" /></p>
+	</div>
+	<p>
+		<a class="larg_btn" href="javascript:void(0);" onclick="montagePopUpClose(1)">CANCEL</a>
+		<a class="larg_btn" href="javascript:void(0);" onclick="saveMontage(1)">CONTINUE</a>
+	</p>
+	<p id="hashMessageError"></p>
+</div>
+<div id="pop-up-title" class="pop-up-display-content conform_popup_content">
+	<div class="montage_desc">
+		<h4>Please provide your title</h4>
+		<p><input type="text" name="montage_title" class="text_pad" id="montage_title" value="<?echo $montage_title;?>"/></p>
+	</div>
+	<p>
+		<a class="larg_btn" href="javascript:void(0);" onclick="montagePopUpClose(2)">CANCEL</a>
+		<a class="larg_btn" href="javascript:void(0);" onclick="saveMontage(2)">CONTINUE</a>
+	</p>
+	<p id="titleMessageError"></p>
+</div>
+<div id="pop-up-paragraph" class="pop-up-display-content conform_popup_content">
+	<div class="montage_desc">
+		<h4>Please provide your paragraph</h4>
+		<p><textarea  name="montage_paragraph" class="text_pad" id="montage_paragraph" ><?echo $montage_paragraph;?></textarea></p>
+	</div>
+	<p>
+		<a class="larg_btn" href="javascript:void(0);" onclick="montagePopUpClose(3)">CANCEL</a>
+		<a class="larg_btn" href="javascript:void(0);" onclick="saveMontage(3)">CONTINUE</a>
+	</p>
+	<p id="paragraphMessageError"></p>
+</div>
 <input type="hidden" id="hid_userid"  name="baseUrl" />
 <input type="hidden" id="hid_cat_id"  name="baseUrl" />
 <input type="hidden" id="category_user_id" value="0" />
-<input type="hidden" id="report_id_hid" name="report_id_hid" value="0">
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/ckeditor/ckeditor.js"></script>
+<script src="<?php echo $basePath; ?>/js/crop/jquery.cropit.js"></script>
+<script type="text/javascript" src="<?php echo $basePath; ?>/js/project/montage.js"></script>
 <script>
-	//$('body').css('background','#f5f5f5');
+$('.edit_paragraph_mon_empty').click(function() {
+	CKEDITOR.replace( 'montage_paragraph', {
+});
+});
+$(function() {
+	$('#pop-up-image-crop-new').cropit({
+		imageBackground: true
+	});
+	$('.export').click(function() {
+		var src = $('#pop-up-image-crop-new').cropit('export');
+		var fetchUploadedUrl = BASE_URL+'/upload-montage-image';
+		var imageId='<? echo $_SESSION['usersinfo']->userId?>';
+		$("#l_i_c").show();
+		$.ajax({
+			type	: "POST",
+			url		: fetchUploadedUrl,
+			data	: { data: src,page:'montage',imageId:imageId},
+			success: function(data){
+				$("#l_i_c").hide();
+				$('#pop-up-image-crop-new').popUpWindow({action: "close"});
+				$('#MontageImage').attr('src',src);
+				$('#montagePic').html("CHANGE YOUR PICTURE");
+			}
+		});
+		//window.open(imageData);
+	});
+});
+
 </script>
