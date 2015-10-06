@@ -493,6 +493,12 @@ input{
 .set_d_btn{
 	color:#227cec;
 }
+.width15{
+	width: 16.5%;
+}
+.current_affairs .divCard{
+	width:20% !important;
+}
 /* Browser Problem css */
 @media screen and (-webkit-min-device-pixel-ratio:0) { 
 	.divHeaderWrapper .divSearchBoxes .aSearch {
@@ -514,10 +520,21 @@ input{
        -moz-box-sizing: border-box;
             box-sizing: border-box;
   }
-  .insert input[type="text"], .insert input[type="password"]{
-	width:95% !important;
-  }
-  .withoutlogin_logo{
-	position:relative;
-  }
+	.insert input[type="text"], .insert input[type="password"]{
+		width:95% !important;
+	}
+	.withoutlogin_logo{
+		position:relative;
+		top:0;
+	}
+	.current_affairs .divCard{
+		width:auto !important;
+	}
+	.divHeaderWrapper .divSearchBoxes .aSearch{
+		width:24px;
+		border-bottom:none;
+	}
+	.tfix_header{
+		padding-bottom:0;
+	}
 }

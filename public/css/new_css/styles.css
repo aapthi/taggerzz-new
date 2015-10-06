@@ -599,10 +599,14 @@ a {
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-bottom: 0px; }
   .secDataboxes #divDataboxWrapper[data-columns]::before {
-    content: '4 .left.width25'; }
+    content: '5 .left.width20'; }
   @media screen and (min-width: 1500px) {
     .secDataboxes #divDataboxWrapper[data-columns]::before {
       content: '5 .left.width20'; } }
+	 @media only screen and (min-width: 1824px) {
+		.secDataboxes #divDataboxWrapper[data-columns]::before {
+      content: '6 .left.width15'; }
+	}
   .secDataboxes .divCardsWrapper .divCard {
     background: white;
     overflow: hidden;
