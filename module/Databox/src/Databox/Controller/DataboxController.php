@@ -3331,7 +3331,7 @@ class DataboxController extends AbstractActionController
 		$linkUrl = "";
 		$linkTitle = "";
 		foreach($bookMarksArray as $keyB=>$userBook){
-			$htmlBook.='<p style="font-size:0.8em;"><input type="checkbox" id="main-0" value="main">&nbsp;&nbsp;<b>'.$keyB.'</b></p>';
+			$htmlBook.='<p style="font-size:9pt;color:#444;"><input type="checkbox" id="main-0" value="main">&nbsp;&nbsp;<b>'.$keyB.'</b></p>';
 			foreach($userBook as $keyy=>$linkUri){
 				if(is_numeric($keyy)){
 					if(isset($linkUri['uri'])){
@@ -3358,10 +3358,10 @@ class DataboxController extends AbstractActionController
 								$linkTitle=trim($linkUri['uri']['name']);
 							}
 						}
-						$htmlBook.='<p style="margin-left:20px;font-size:0.8em;"><input type="checkbox" class="uriClass" id="main-'.$keyy.'"  value="'.$linkUrl.'">&nbsp;&nbsp;'.$linkTitle.'</p>';
+						$htmlBook.='<p style="margin-left:20px;font-size:9pt;color:#444;"><input type="checkbox" class="uriClass" id="main-'.$keyy.'"  value="'.$linkUrl.'">&nbsp;&nbsp;'.$linkTitle.'</p>';
 					}
 				}else{
-					$htmlBook.='<p style="margin-left:20px;font-size:0.8em;"><input type="checkbox" id="main-cat-'.$keyy.'" value="cat-'.$keyy.'" >&nbsp;&nbsp;<b>'.$keyy.'</b></p>';
+					$htmlBook.='<p style="margin-left:20px;font-size:9pt;color:#444;"><input type="checkbox" id="main-cat-'.$keyy.'" value="cat-'.$keyy.'" >&nbsp;&nbsp;<b>'.$keyy.'</b></p>';
 					foreach($linkUri as $cat=>$category){
 						if(is_numeric($cat)){
 							if(isset($category['uri'])){
@@ -3388,10 +3388,10 @@ class DataboxController extends AbstractActionController
 										$linkTitle=trim($category['uri']['name']);
 									}
 								}
-								$htmlBook.='<p style="margin-left:40px;font-size:0.8em;"><input type="checkbox" class="uriClass" id="main-cat-'.$keyy.'-'.$cat.'" value="'.$linkUrl.'">&nbsp;&nbsp;'.$linkTitle.'</p>';
+								$htmlBook.='<p style="margin-left:40px;font-size:9pt;color:#444;"><input type="checkbox" class="uriClass" id="main-cat-'.$keyy.'-'.$cat.'" value="'.$linkUrl.'">&nbsp;&nbsp;'.$linkTitle.'</p>';
 							}
 						}else{
-							$htmlBook.='<p style="margin-left:40px;font-size:0.8em;"><input type="checkbox" id="main-cat-'.$keyy.'-subcat-'.$cat.'" value="subcat-'.$cat.'-'.$keyy.'" >&nbsp;&nbsp;<b>'.$cat.'</b></p>';
+							$htmlBook.='<p style="margin-left:40px;font-size:9pt;color:#444;"><input type="checkbox" id="main-cat-'.$keyy.'-subcat-'.$cat.'" value="subcat-'.$cat.'-'.$keyy.'" >&nbsp;&nbsp;<b>'.$cat.'</b></p>';
 							foreach($category as $subcat=>$subcategory){
 								if(isset($subcategory['uri'])){
 									$linkUrl = "";
@@ -3417,7 +3417,7 @@ class DataboxController extends AbstractActionController
 											$linkTitle=trim($subcategory['uri']['name']);
 										}
 									}
-									$htmlBook.='<p style="margin-left:60px;font-size:0.8em;"><input type="checkbox" class="uriClass" id="main-cat-'.$keyy.'-subcat-'.$cat.'-'.$subcat.'" value="'.$linkUrl.'">&nbsp;&nbsp;'.$linkTitle.'</p>';
+									$htmlBook.='<p style="margin-left:60px;font-size:9pt;color:#444;"><input type="checkbox" class="uriClass" id="main-cat-'.$keyy.'-subcat-'.$cat.'-'.$subcat.'" value="'.$linkUrl.'">&nbsp;&nbsp;'.$linkTitle.'</p>';
 								}
 							}
 						}
@@ -3426,7 +3426,7 @@ class DataboxController extends AbstractActionController
 			}
 
 		}
-		$htmlBook.='<div style="position:absolute;bottom:11px;left:40px;"><b style="color:red">Total Selected Links</b> : <b id="selectedTotalBM">0</b></div><div style="position:absolute;bottom:11px;right:40px;"><a onclick="cancelBookMarksUrls()" class="btn" href="javascript:void(0);">CANCEL</a>&nbsp;&nbsp;&nbsp;<a onclick="checkBookMarksUrls()" class="btn" href="javascript:void(0);">UPLOAD</a></div>';
+		$htmlBook.='<div style="position:absolute;bottom:0;left:40px;"><b style="color:#227cec">Total Selected Links</b> : <b id="selectedTotalBM">0</b></div><div style="position:absolute;bottom:11px;right:40px;"><a onclick="cancelBookMarksUrls()" class="btn" href="javascript:void(0);">CANCEL</a>&nbsp;&nbsp;&nbsp;<a onclick="checkBookMarksUrls()" class="btn" href="javascript:void(0);">UPLOAD</a></div>';
 		return $htmlBook; 
 	}
 	//End
