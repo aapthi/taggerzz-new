@@ -571,6 +571,11 @@ margin-top:4px;
 .home_title_des_s{
 	font-size:10pt;
 }
+.home_heightlight_des_p{
+	border-top: 1px solid #ddd;
+    margin-top: 8px;
+    padding-top: 5px;
+}
 
 /* Browser Problem css */
 @media screen and (-webkit-min-device-pixel-ratio:0) { 

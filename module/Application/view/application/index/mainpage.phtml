@@ -81,10 +81,13 @@
                                 <div id="divCard-1-sharedLinks" class="divCardSharedLinks">
                                     <span class="fatFont"><?php echo $currentBoxData["categoryLinksCount"]; ?> HOT LINKS</span> collected and shared
                                 </div>
+								<div class="divbrg_f"></div>
+							<div class="divbrg_s"></div>
+							<div style="clear:both;"></div>
                             </div>
 							</a>
                             <div id="divCard-1-contentWrapper" class="divCardContentWrapper">
-                                <div id="divCard-1-views" class="divCardViews">
+                                <div id="divCard-1-views" class="divCardViews views_w">
                                     <img src="<?php echo $basePath; ?>/img/views.png" alt="" /> <?php if($currentBoxData["views_count"]!=""){echo $currentBoxData["views_count"]; }else { echo "0"; } ?> views 
                                 </div>
 								<!--<span><?php echo round($currentBoxData["NetVotes"],2);?>% liked</span>-->
@@ -104,12 +107,13 @@
 								?>
                                     
                                 </div>
-                                <div id="divCardKeywords" class="divCardKeywords"><?php echo $currentBoxData["meta_tags"];?></div>
-
-                                <div id="divCard-1-title" class="divCardTitle">
-                                   <?php echo $currentBoxData["category_title"];?>
+								<div id="divCard-1-title" class="divCardTitle">
+                                   <h2 class="home_title_d"><?php echo $currentBoxData["category_title"];?></h2>
                                 </div>
-                                <div id="divCard-1-description" class="divCardDescription">
+                                <div id="divCardKeywords" class="divCardKeywords">
+								<h3 class="home_keyword_h3"><?php echo $currentBoxData["meta_tags"];?></h3>
+							</div>
+                                <div id="divCard-1-description" class="divCardDescription home_title_des_s home_heightlight_des_p">
                                     <?php if($currentBoxData["category_description"]!=""){
 										if(strlen($currentBoxData["category_description"])>155)
 										{

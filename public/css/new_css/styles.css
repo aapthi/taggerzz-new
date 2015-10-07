@@ -570,13 +570,17 @@ a {
           .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .divCardUser .divCardUserName {
             padding: 3.5pt;
             background: black;
-            overflow: hidden; }
+            overflow: hidden;
+			border-radius:2px 0 0 2px;
+			}
         .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .divCardSharedLinks {
           z-index: 1;
           bottom: 10%;
           right: 0%;
-          background: #fdce02;
-          min-width: 40%; }
+          background: #fff;
+          min-width: 40%;
+		  padding:5px;
+		  }
         .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardContentWrapper .divCardLoveTrash {
           background: #c0c0c0;
           margin: -6pt -5pt 0pt 0pt;
@@ -585,7 +589,9 @@ a {
           .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardContentWrapper .divCardLoveTrash img {
             max-height: 10pt; }
         .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardContentWrapper .divCardKeywords {
-          font-size: 7.1pt; }
+          font-size: 8pt;
+		  color:#565656;
+		  }
         .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardContentWrapper .divCardTitle {
           border-bottom: 1px solid rgba(0, 0, 0, 0.15);
           padding-bottom: 5pt;
