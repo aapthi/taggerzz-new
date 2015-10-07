@@ -799,7 +799,7 @@ function checkSpaces()
 				var voteUpNew=parseInt(voteUp);
 			}
 			var like=(parseInt(voteUpNew)/(parseInt(rw_lh)+parseInt("1")))*100;
-			like = Math.round(like * 1000) / 1000;
+			like = Math.round(like * 100) / 100;
 			$('#likes'+categoryId).html(like+'% liked');
 			var rw_lh1=(parseInt(rw_lh)+parseInt("1"));
 			if(newVoteValue==1){
