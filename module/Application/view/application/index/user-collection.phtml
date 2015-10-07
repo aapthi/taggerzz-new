@@ -120,8 +120,9 @@
 		<div class="tmar_t20">
 	<div class="body_main_container">
 		<div class="body_middle_container body_mar_b">
+		<?php if($this->dashboard!=""){?>
 		<?foreach($this->dashboard as $key=>$dashboard){$count=0;?>
-		<input type="hidden" id="totalCount<?echo $key;?>" name="totalCount<?echo $key;?>" value="<?echo $dashboard['totalLinks'];?>">
+			<input type="hidden" id="totalCount<?echo $key;?>" name="totalCount<?echo $key;?>" value="<?echo $dashboard['totalLinks'];?>">
 			<input type="hidden" id="presentCount<?echo $key;?>" name="presentCount<?echo $key;?>" value="7">
 			<div class="tg_montage_t montage_brg_box">
 			<div class="montage_box_brg_title">
@@ -133,20 +134,26 @@
 			<div class="pos_relative">
 				<div class="montage_row" id="montageRow<?echo $key;?>">
 				<?foreach($dashboard['links'] as $links){
-				$count++;
+					$count++;
 				if($count){
 					$link=explode('***',$links);
 					?>
 					<div class="column1">
-						<div><p><?echo substr($link[0],0,20) . '...';$url = $link[0];?></p>
-						<a href="<?php echo $url; ?>" target="_blank"><img src="<?php if($link[2]!=""){echo $link[2];}else{ echo $basePath;?>/images/social_media/noimage.png<? } ?>"/></a></div>
+						<p><?echo substr($link[0],0,22) . '...';$url = $link[0];?></p>
+						<div><a href="<?php echo $url; ?>" target="_blank"><img src="<?php echo $link[2]; ?>"/></a></div>
 					</div>
 				<?}}?>
 				</div>
 				<div class="clearfix"></div>
 			</div>
 			</div>
-			<?}?>
+			<?}}else{?>
+			<h3>no donuts. <br/>No Databoxes created :/</h3>
+			<a href="#" class="highlightFont createCollection create_btn" id='createCollection'><img src="<?php echo $basePath; ?>/images/social_media/databox_create.png"/></a>
+			<h4>CLICK THE DONUT TO CREATE</h4>
+			<h5>this particular page won’t be shown as databox <br/>
+			unless you have at least 2 created public databoxes</h5>
+			<?php } ?>
 		</div>
 	</div>
 		</div>
@@ -197,23 +204,6 @@
 	<p id="paragraphMessageError"></p>
 </div>
 <? } ?>
-
-<!-- Report Pop Up -->
-<div id="pop-up-report" class="pop-up-display-content conform_popup_content">
-	<div class="report_bg">
-		<div><input type="radio" value="1" name="Personel" checked><span>&nbsp;Spam Content</span></div>
-		<div><input type="radio" value="2" name="Personel"><span>&nbsp;Abusive / hateful content</span></div>
-		<div><input type="radio" value="3" name="Personel"><span>&nbsp;Nude / Vulgar Open content</span></div>
-		<div><input type="radio" value="4" name="Personel"><span>&nbsp;Personal defamatory content</span></div>
-		<div class="report_mar_t"><input value="5" type="radio" name="Personel"><span>&nbsp;Other</span></div>
-		<div><textarea id="personel_text" placeholder="Mention your concern in Plain text"></textarea></div>
-		<div class="report_btn"><a href="javascript:void(0)" onClick="Javascript:montReportSend();">SUBMIT</a></div>
-		<p id="repMessage"></p>
-		<div style="clear:both;"></div>
-	</div>
-</div>
-<!-- Report Pop Up End -->
-
 <input type="hidden" id="basePath" name="basePath" value="<?php echo $basePath;?>" />
 <input type="hidden" id="baseUrl"  name="baseUrl" value="<?php echo $baseUrl;?>" />
 <input type="hidden" id="hid_userid"  name="baseUrl" />
