@@ -120,7 +120,7 @@
 		<div class="tmar_t20">
 	<div class="body_mar_b">
 		<div class="body_mar_b">
-		<?php if($this->dashboard==""){?>
+		<?php if($this->dashboard!=""){?>
 		<?foreach($this->dashboard as $key=>$dashboard){$count=0;?>
 			<input type="hidden" id="totalCount<?echo $key;?>" name="totalCount<?echo $key;?>" value="<?echo $dashboard['totalLinks'];?>">
 			<input type="hidden" id="presentCount<?echo $key;?>" name="presentCount<?echo $key;?>" value="7">
