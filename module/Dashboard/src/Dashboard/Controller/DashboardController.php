@@ -520,7 +520,7 @@ class DashboardController extends AbstractActionController
 					{
 						if(isset($_POST['imageId']) && $_POST['imageId']!=0 )
 						{
-							// @unlink('./public/images/project/categoryImages/'.$_POST['imageId']);
+							@unlink('./public/images/project/categoryImages/'.$_POST['imageId']);
 						}
 					}
 				}else{
