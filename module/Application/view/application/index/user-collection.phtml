@@ -118,9 +118,9 @@
 	
 	
 		<div class="tmar_t20">
-	<div class="body_main_container">
-		<div class="body_middle_container body_mar_b">
-		<?php if($this->dashboard!=""){?>
+	<div class="body_mar_b">
+		<div class="body_mar_b">
+		<?php if($this->dashboard==""){?>
 		<?foreach($this->dashboard as $key=>$dashboard){$count=0;?>
 			<input type="hidden" id="totalCount<?echo $key;?>" name="totalCount<?echo $key;?>" value="<?echo $dashboard['totalLinks'];?>">
 			<input type="hidden" id="presentCount<?echo $key;?>" name="presentCount<?echo $key;?>" value="7">
@@ -139,8 +139,8 @@
 					$link=explode('***',$links);
 					?>
 					<div class="column1">
-						<p><?echo substr($link[0],0,22) . '...';$url = $link[0];?></p>
-						<div><a href="<?php echo $url; ?>" target="_blank"><img src="<?php echo $link[2]; ?>"/></a></div>
+						<div><p><?echo substr($link[0],0,22) . '...';$url = $link[0];?></p>
+						<a href="<?php echo $url; ?>" target="_blank"><img src="<?php echo $link[2]; ?>"/></a></div>
 					</div>
 				<?}}?>
 				</div>
@@ -148,11 +148,13 @@
 			</div>
 			</div>
 			<?}}else{?>
-			<h3>no donuts. <br/>No Databoxes created :/</h3>
-			<a href="#" class="highlightFont createCollection create_btn" id='createCollection'><img src="<?php echo $basePath; ?>/images/social_media/databox_create.png"/></a>
-			<h4>CLICK THE DONUT TO CREATE</h4>
-			<h5>this particular page won’t be shown as databox <br/>
-			unless you have at least 2 created public databoxes</h5>
+			<div align="center">
+				<h3>no donuts. <br/>No Databoxes created :/</h3>
+				<a href="#" class="highlightFont createCollection create_btn" id='createCollection'><img src="<?php echo $basePath; ?>/images/social_media/databox_create.png"/></a>
+				<h4>CLICK THE DONUT TO CREATE</h4>
+				<h5>this particular page won’t be shown as databox <br/>
+				unless you have at least 2 created public databoxes</h5>
+			</div>
 			<?php } ?>
 		</div>
 	</div>

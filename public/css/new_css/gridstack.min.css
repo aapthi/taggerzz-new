@@ -32,7 +32,7 @@
     top: 0;
 /* left:10px; *//* right:10px; */
     bottom: 0;
-    width: auto;
+    width: 100%; /* nch auto*/
     z-index: 0 !important;
     overflow-x: hidden;
     overflow-y: auto;

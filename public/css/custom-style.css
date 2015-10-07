@@ -404,6 +404,16 @@ input{
 	border-bottom:1px solid #c7c7c7;
 	font-weight:normal;
 }
+.wrote_img_w{
+	float:left;
+	width:15%;
+}
+.wrote_p{
+	float:left;width:85%;
+}
+.cust_p_img img{
+margin-top:4px;
+}
 .report_bgg input{
 	vertical-align:baseline;
 	margin-bottom:8px;
@@ -525,10 +535,43 @@ input{
 .likes_percentage{
 	background:#fff !important;
 	color:#333 !important;
-	border:1px solid #ddd;
+	border-left:1px solid #ddd;
+	border-top:1px solid #ddd;
+	border-bottom:1px solid #ddd;
 	border-radius:2px 0 0 2px;
 	padding:4px 20px !important;
 }
+.views_w{
+	width:160px !important;
+}
+.divbrg_f{
+	border-bottom:4px solid #ff6700;width:50%;float:left;
+}
+.divbrg_s{
+	border-bottom:4px solid #8fbe1b;width:50%;float:right;
+}
+.home_de_brg_t{
+	border-top:1px solid #ddd;
+	padding-top:5px;
+	margin-top:10px;
+}
+.home_title_d{
+	font-weight:normal;
+	font-size:11pt;
+	color:#000;
+	border-top:1px solid #ddd;
+	margin-top:10px;
+	padding-top:5px;
+}
+.home_keyword_h3{
+	font-weight:normal;
+	font-size:8pt;
+	color:#565656;
+}
+.home_title_des_s{
+	font-size:10pt;
+}
+
 /* Browser Problem css */
 @media screen and (-webkit-min-device-pixel-ratio:0) { 
 	.divHeaderWrapper .divSearchBoxes .aSearch {
@@ -574,5 +617,13 @@ input{
 	}
 	.edit_pick_img{
 		width:89%;
+	}
+	.wrote_img_w{
+		float:none;
+		width:100%;
+	}
+	.wrote_p{
+		float:none;
+		width:100%;
 	}
 }

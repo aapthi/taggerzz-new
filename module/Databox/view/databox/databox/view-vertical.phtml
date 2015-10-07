@@ -59,39 +59,45 @@ if( isset($this->displayedCategoryUserId) )
 	<section id="secCustomizeDatabox">
 		<div class="c_DivCustomizationWrapper">
 			<div class="c_DivHeaderCommentWrapper tmar_t20">
-				<div class="c_DivUserDetailsWrapper tmar_t5">
-					<span class="c_SpnUsername"><?php echo $this->displayedCatUName; ?> WROTE : </span>
-						<div class="c_DivCardUser">
-							<img width="32px" height="42px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $this->displayedUMontImage; ?>" class="imgUserImage" alt="" />
-						</div>
+				<div>
+				<div class="wrote_img_w">
+					<div class="c_DivUserDetailsWrapper tmar_t5">
+						<span class="c_SpnUsername"><?php echo $this->displayedCatUName; ?> WROTE : </span>
+							<div class="pdatabox_profile cust_p_img">
+								<img style="width:34px;height:34px;padding:4px 2px;" src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $this->displayedUMontImage; ?>" class="imgUserImage" alt="" />
+							</div>
+					</div>
 				</div>
-				<div class="c_DivHeaderCommentRight">
-					<div  class="c_DivHeaderCommentRightTop">
-						<div id="catDescIntro" class="c_DivHeaderComment customize_full_w" style="display:none" align="center">
-							<?php if( ! is_null($this->categoryDescripton) ){ echo $this->categoryDescripton; }?>&nbsp;Edit
-						</div>
-						<div id="fullCatDesc" class="c_DivHeaderComment customize_full_w">
-							<div id="fullDescPara" class="pad_lrtb"><?php if( ! is_null($this->categoryDescripton) ){ echo $this->categoryDescripton; }?></div>
+				<div class="wrote_p">
+					<div class="">
+						<div  class="c_DivHeaderCommentRightTop" style="border:1px solid #c7c7c7;">
+							<div id="catDescIntro" class="" style="display:none" align="center">
+								<?php if( ! is_null($this->categoryDescripton) ){ echo $this->categoryDescripton; }?>&nbsp;Edit
+							</div>
+							<div id="fullCatDesc" class="">
+								<div id="fullDescPara" class="pad_lrtb"><?php if( ! is_null($this->categoryDescripton) ){ echo $this->categoryDescripton; }?></div>
+							</div>
 						</div>
 						<div class="c_DownArrow" style="display:none">
-							<img src="<?php echo $basePath; ?>/img/downArrow.png" />
+								<img src="<?php echo $basePath; ?>/img/downArrow.png" />
+							</div>
+						<div class="c_DivHeaderCommentRightBottom">
+							<a class="c_BtnReport" href="javascript:void(0);" onclick="Javascript:custReportPopUpShow();">Report</a>
+							<a class="c_BtnShare" href="javascript:void(0);" onclick="Javascript:openCloseShareCus()">Share</a>
+							<!--<a class="c_BtnAddComment" href="javascript:void(0);" onclick="custCommentCkEditorShow('',0);">Add Comment &nbsp;<img src="<?php echo $basePath; ?>/images/social_media/chatting.png"/></a>-->
+							<a class="c_BtnAddComment" id="add-new-widget" href="javascript:void(0);" style="display:none">Add Comment</a>
+							<a class="c_BtnPublish" id="tzPublishLink" href="javascript:void(0);" onclick="savePositions('<?echo $this->categoryId?>')" style="display:none">Publish</a>
+							<div class="addthis_sharing_toolbox" style="display:none">
+							</div>
+							<input type="hidden" id="countOpenCloseShare" value="0">
 						</div>
-					</div>
-					<div class="c_DivHeaderCommentRightBottom">
-						<a class="c_BtnReport" href="javascript:void(0);" onclick="Javascript:custReportPopUpShow();">Report</a>
-						<a class="c_BtnShare" href="javascript:void(0);" onclick="Javascript:openCloseShareCus()">Share</a>
-						<!--<a class="c_BtnAddComment" href="javascript:void(0);" onclick="custCommentCkEditorShow('',0);">Add Comment &nbsp;<img src="<?php echo $basePath; ?>/images/social_media/chatting.png"/></a>-->
-						<a class="c_BtnAddComment" id="add-new-widget" href="javascript:void(0);" style="display:none">Add Comment</a>
-						<a class="c_BtnPublish" id="tzPublishLink" href="javascript:void(0);" onclick="savePositions('<?echo $this->categoryId?>')" style="display:none">Publish</a>
-						<div class="addthis_sharing_toolbox" style="display:none">
-						</div>
-						<input type="hidden" id="countOpenCloseShare" value="0">
-					</div>
-					
 						
+							
+					</div>
+				</div>
+				<div style="clear:both;"></div>
 				</div>
 			</div>
-			
 			<span id="pubDddContainer">
 				<?php if($this->data==0){?>
 					<div id="drag-drop-demo" class="grid-stack c_DivCardsWrapper customize_w"><?php $tzGsRowNum= 1;
@@ -160,8 +166,8 @@ if( isset($this->displayedCategoryUserId) )
 								if(isset($databoxLinksGrids->description) && $databoxLinksGrids->description!="no Description"){?>
 								<div class="c_DivCardDescription" >
 								<?php
-									if(strlen($databoxLinksGrids->description)>250){
-										echo substr($databoxLinksGrids->description,0,250) . '<a href="'.$url.'" target="_blank">...Read more</a>';
+									if(strlen($databoxLinksGrids->description)>200){
+										echo substr($databoxLinksGrids->description,0,200) . '<a href="'.$url.'" target="_blank">...Read more</a>';
 										$parahid=1;
 									}
 									else
@@ -171,14 +177,23 @@ if( isset($this->displayedCategoryUserId) )
 									}
 								?>
 								</div>
-								<?}?>
-								<div class="c_DivCardActions collect_bookmark_pos_ab">
+								<?}
+									$tzWidth = 0;
+									$tzIncludeClass = false;
+									list($tzWidth, $height, $type, $attr) = getimagesize($imageLink);
+									if($tzWidth != "" && $tzWidth > 300)
+									{
+										$tzIncludeClass = true;
+									}
+								?>
+								<div class="c_DivCardActions <?php if( $tzIncludeClass ){?> collect_bookmark_pos_ab <?php } ?>">
 									<div class="c_DivCardAction" id="divCollectThis<?php echo $key?>" >COLLECT THIS<input type="hidden" id="catLinkId<?php echo $key?>" value="<?echo $databoxLinksGrids->category_link_id; ?>"></div>
 									<div class="c_DivCardAction" id="divBookmarkThis<?php echo $key?>">BOOKMARK THIS<input type="hidden" id="currLink<?php echo $key?>" value="<?echo $databoxLinksGrids->link; ?>"></div>
 								</div>
 							</div>
 						</div>
-					<?php $tzGsRowNum++; } ?>
+					<?php $tzGsRowNum++; ?>
+					<?php } ?>
 					</div>
 				<?
 				}

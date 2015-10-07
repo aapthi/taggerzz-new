@@ -558,15 +558,15 @@ a {
           z-index: 2;
           top: 5%;
           right: 0%;
-          max-width: 50%;
+          max-width: 60%;
           margin: 0 0;
           padding: 0 0;
           display: none; }
           .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .divCardUser img {
             width: 25pt;
-            height: 25pt;
+            height: 24pt;
             margin: 0 0;
-            padding: 0 0; }
+            padding: 9px 2px; }
           .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .divCardUser .divCardUserName {
             padding: 3.5pt;
             background: black;
@@ -636,7 +636,9 @@ a {
       background: white;
       min-width: 40%;
       text-decoration: none;
-      font-size: 10.5pt;}
+      font-size: 10.5pt;
+	  border-radius:0 2px 2px 0;
+	  }
     .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardUser {
       z-index: 2;
       top: 5%;
@@ -653,16 +655,24 @@ a {
       .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardUser .divCardUserName {
         padding: 3.5pt;
         background: black;
-        overflow: hidden; }
+        overflow: hidden;
+		border-radius:2px 0 0 2px;
+		}
     .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardSharedLinks {
+	  padding:5px;
       z-index: 2;
       bottom: 10%;
       right: 0%;
-      background: #fdce02;
-      min-width: 40%; }
+      background: #fff;
+      min-width: 40%; 
+	  border-radius:2px 0 0 2px;
+	  border-left:1px solid #eee;
+	  border-bottom:1px solid #eee;
+	  border-top:1px solid #eee;
+	 }
     .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardLoveTrash {
       background: #c0c0c0;
-      margin: -6pt -5pt 0pt 0pt;
+      margin: -5pt -5pt 0pt 0pt;
       padding: 3pt 10pt;
       color: white; }
       .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardLoveTrash img {

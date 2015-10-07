@@ -67,13 +67,16 @@
                                 <div id="Card-1-user" class="divCardUser">
 									<!--<img src="<?php echo $basePath; ?>/img/userImage.png" class="imgUserImage" alt="" />
                                     <div class="divCardUserName">By: Arun Kolhapur</div>-->
+									<div class="divCardUserName">By: <?php echo $currentBoxData["display_name"];?></div>
 									<?php if($currentBoxData["montage_image"]!=""){?>
-									<img  src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $currentBoxData["montage_image"];?>" class="imgUserImage" alt="" />
+									<div class="pdatabox_profile">
+										<img  src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $currentBoxData["montage_image"];?>" class="imgUserImage" alt="" />
+									</div><br/>
 									<?php }else{ ?>
 									<img src="<?php echo $basePath; ?>/img/userImage.png" class="imgUserImage" alt="" />
 									<?php } ?>
-									<div class="divCardUserName">By: <?php echo $currentBoxData["display_name"];?></div><br/>
-									<div id="likes<?php echo $currentBoxData["category_id"];?>" class="divCardUserName"><?php echo round($currentBoxData["NetVotes"],2);?>% liked</div>
+									<div id="likes<?php echo $currentBoxData["category_id"];?>" class="divCardUserName likes_percentage">
+									<h2><?php echo round($currentBoxData["NetVotes"],2);?>% liked</h2></div>
                                 </div>
                                 <div id="divCard-1-sharedLinks" class="divCardSharedLinks">
                                     <span class="fatFont"><?php echo $currentBoxData["categoryLinksCount"]; ?> HOT LINKS</span> collected and shared
@@ -198,9 +201,13 @@
 								<?php } ?>
 								<div id="likes<?php echo $currentBoxData["category_id"];?>" class="divCardUserName likes_percentage"><h2><?php echo round($currentBoxData["likes"],2);?>% liked</h2></div>
                             </div>
+							<div class="divbrg_f"></div>
+							<div class="divbrg_s"></div>
+							<div style="clear:both;"></div>
                         </div>
                         <div id="divDatabox-1-contentWrapper" class="divCardContentWrapper">
-                            <div id="divDatabox-1-views" class="divCardViews">
+						<div>
+                            <div id="divDatabox-1-views" class="divCardViews views_w">
                                 <img src="<?php echo $basePath; ?>/img/views.png" alt="" /> <?php if($currentBoxData["views_count"]!=""){echo $currentBoxData["views_count"]; }else { echo "0"; } ?> views
                             </div>
 							<!--<span><?php echo round($currentBoxData["likes"],2);?>% liked</span>-->
@@ -219,12 +226,14 @@
 									}
 								?>
                             </div>
-                            <div id="divCardKeywords" class="divCardKeywords"><?php echo $currentBoxData["meta_tags"];?></div>
-
-                            <div id="divDatabox-1-title" class="divCardTitle">
-                                <?php echo $currentBoxData["category_title"];?>
                             </div>
-                            <div id="divDatabox-1-description" class="divCardDescription">
+                            <div id="divDatabox-1-title" class="divCardTitle">
+                                <h2 class="home_title_d"><?php echo $currentBoxData["category_title"];?></h2>
+                            </div>
+							 <div id="divCardKeywords" class="divCardKeywords">
+								<h3 class="home_keyword_h3"><?php echo $currentBoxData["meta_tags"];?></h3>
+							 </div>
+                            <div id="divDatabox-1-description" class="divCardDescription home_de_brg_t home_title_des_s">
 							<?php if($currentBoxData["category_description"]!=""){
 								if(strlen($currentBoxData["category_description"])>155)
 								{
@@ -247,7 +256,7 @@
 			</div>
               </div>
 				<div id="publicBoxesDiv" style="display:none;">
-					</div>
+				</div>
 				<div id="memCollectionBoxesDiv" style="display:none;">
 					<div id="divDataboxWrapper" class="divCardsWrapper" data-columns>
 					<?php
