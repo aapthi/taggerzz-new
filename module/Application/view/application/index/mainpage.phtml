@@ -188,13 +188,15 @@
                                 <span class="fatFont"><?php echo $currentBoxData["categoryLinksCount"]; ?> HOT LINKS</span> collected and shared
                             </div>
                             <div id="Card-1-user" class="divCardUser">
+							<div class="divCardUserName">By: <?php echo $currentBoxData["display_name"];?></div>
 								<?php if($currentBoxData["montage_image"]!=""){?>
-                                <img  src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $currentBoxData["montage_image"];?>" class="imgUserImage" alt="" />
+                               <div class="pdatabox_profile">
+								<img  src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $currentBoxData["montage_image"];?>" class="imgUserImage" alt="" />
+							   </div><br/>
 								<?php }else{ ?>
 								<img src="<?php echo $basePath; ?>/img/userImage.png" class="imgUserImage" alt="" />
 								<?php } ?>
-                                <div class="divCardUserName">By: <?php echo $currentBoxData["display_name"];?></div><br/>
-								<div id="likes<?php echo $currentBoxData["category_id"];?>" class="divCardUserName"><?php echo round($currentBoxData["likes"],2);?>% liked</div>
+								<div id="likes<?php echo $currentBoxData["category_id"];?>" class="divCardUserName likes_percentage"><h2><?php echo round($currentBoxData["likes"],2);?>% liked</h2></div>
                             </div>
                         </div>
                         <div id="divDatabox-1-contentWrapper" class="divCardContentWrapper">

@@ -505,6 +505,7 @@ input{
 	background:#fff;
 	width:48%;
 	border-radius:2px;
+	margin-bottom:5px;
 }
 .edit_pick_img img{
 	border-radius:2px;
@@ -514,10 +515,28 @@ input{
 	font-size:12pt;
 	color:#00afd1;
 }
+.pdatabox_profile{
+  background-image: url("../img/c_userBG.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width:38px;
+  height: 44px;
+}
+.likes_percentage{
+	background:#fff !important;
+	color:#333 !important;
+	border:1px solid #ddd;
+	border-radius:2px 0 0 2px;
+	padding:4px 20px !important;
+}
 /* Browser Problem css */
 @media screen and (-webkit-min-device-pixel-ratio:0) { 
 	.divHeaderWrapper .divSearchBoxes .aSearch {
-		 height: 21pt;
+		 height: 19.5pt;
+	}
+	button:active,button:focus {
+		outline: none;
+		border: none;
 	}
 }
 @-moz-document url-prefix() { 

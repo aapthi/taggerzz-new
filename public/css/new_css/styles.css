@@ -641,14 +641,14 @@ a {
       z-index: 2;
       top: 5%;
       right: 0%;
-      max-width: 50%;
+      max-width: 60%;
       margin: 0 0;
       padding: 0 0;
       display: none; }
       .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardUser img {
         width: 25pt;
         height: 25pt;
-        margin: 0 0;
+        margin: 9px 2px;
         padding: 0 0; }
       .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardUser .divCardUserName {
         padding: 3.5pt;
