@@ -362,10 +362,10 @@ class DashboardController extends AbstractActionController
 			$baseUrlArr = $baseUrls['urls'];
 			$baseUrl 	= $baseUrlArr['baseUrl'];
 			$basePath 	= $baseUrlArr['basePath'];
-			if($_POST['page']!='montage'){
-				$getImageId = $this->getCatImageTable()->addImage();
-				$montageImage=$getImageId;
-			}
+
+			$getImageId = $this->getCatImageTable()->addImage();
+			$montageImage=$getImageId;
+
 			$imageName="";
 			$value="";
 			$croppedX = 0;
@@ -408,21 +408,21 @@ class DashboardController extends AbstractActionController
 				if($_POST['page']=='acc'){
 					define('UPLOAD_DIR', './public/images/project/montageImages/');
 					if($_POST['imageId']!=0){
-						unlink('./public/images/project/montageImages/'.$_POST['imageId']);
+						@unlink('./public/images/project/montageImages/'.$_POST['imageId']);
 					}
 				}else if($_POST['page']=='montage'){
 					define('UPLOAD_DIR', './public/images/project/montageMainImage/');
 					if($_POST['imageId']!=0){
-						unlink('./public/images/project/montageMainImage/'.$_POST['imageId'].'.jpg');
-						$montageImage=$_POST['imageId'];
+						@unlink('./public/images/project/montageMainImage/'.$_POST['imageId']);
 					}
 				}else{
 					define('UPLOAD_DIR', './public/images/project/categoryImages/');
 					if($_POST['imageId']!=0){
-						unlink('./public/images/project/categoryImages/'.$_POST['imageId']);
+						// @unlink('./public/images/project/categoryImages/'.$_POST['imageId']);
 					}
 				}
-				if(isset($_FILES) && isset($_FILES['fileCropInp']['name'])){
+				if(isset($_FILES) && isset($_FILES['fileCropInp']['name']))
+				{
 					if( isset($_POST['croppedNewWidth']) )
 					{
 						$croppedNewWidth = $_POST['croppedNewWidth'];
@@ -476,7 +476,16 @@ class DashboardController extends AbstractActionController
 						$tmp1=imagecreatetruecolor($croppedNewWidth,$croppedNewHeight);
 						imagecopyresampled($tmp1,$tmp,0,0,0,0,$croppedNewWidth,$croppedNewHeight,$originalWidth,$originalHeight);
 						
-						$filename='./public/images/project/categoryImages/'.$montageImage.'.'.$extension;
+						$filename="";
+						if( isset($_POST['page']) && $_POST['page']=='montage' )
+						{
+							$filename='./public/images/project/montageMainImage/'.$montageImage.'.'.$extension;
+						}
+						else
+						{
+							$filename='./public/images/project/categoryImages/'.$montageImage.'.'.$extension;
+						}
+
 						imagejpeg($tmp1,$filename,100);
 						imagedestroy($tmp);
 						imagedestroy($tmp1);
@@ -484,7 +493,15 @@ class DashboardController extends AbstractActionController
 					}
 					else
 					{
-						$filename='./public/images/project/categoryImages/'.$montageImage.'.'.$extension;
+						if( isset($_POST['page']) && $_POST['page']=='montage' )
+						{
+							$filename='./public/images/project/montageMainImage/'.$montageImage.'.'.$extension;
+						}
+						else
+						{
+							$filename='./public/images/project/categoryImages/'.$montageImage.'.'.$extension;
+						}
+
 						imagejpeg($tmp,$filename,100);
 						imagedestroy($tmp);
 						imagedestroy($src);
@@ -492,11 +509,19 @@ class DashboardController extends AbstractActionController
 					// End Code for minimum width with aspect ratio.
 
 					$imageName=$montageImage.'.'.$extension;
-					
-					if( isset($_POST['imageId']) && $_POST['imageId']!=0 )
-					{
-						@unlink('./public/images/project/categoryImages/'.$_POST['imageId']);
 
+					if( isset($_POST['page']) && $_POST['page']=='montage' )
+					{
+						$row = $this->getUserDetailsTable()->addMontageMainImage($_SESSION['usersinfo']->userId,$montageImage.'.jpg');
+						$user_session = new Container('usersinfo');
+						$user_session->montage_main_image=$montageImage.'.jpg';
+					}
+					else
+					{
+						if(isset($_POST['imageId']) && $_POST['imageId']!=0 )
+						{
+							// @unlink('./public/images/project/categoryImages/'.$_POST['imageId']);
+						}
 					}
 				}else{
 					$img = $_POST['data'];

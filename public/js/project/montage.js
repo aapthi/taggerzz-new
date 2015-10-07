@@ -1,7 +1,7 @@
 	$(document).ready(function () {
 		$("a[id^='montagePic']").each(function(){
 			$('#montagePic').click(function(event){
-				$('#change_image').click();
+				// $('#change_image').click();
 			});
 		});
 	});

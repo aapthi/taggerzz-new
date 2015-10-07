@@ -71,7 +71,7 @@
 						<div class="span180">
 							<img id="MontageImage" src="<?php echo $image; ?>">
 							<div style="position:absolute;bottom:20px;left:25%;">
-								<p style="font-size:0.55em; text-decoration:underline;"><a href="javascript:void(0);" id="montagePic" onclick="updatemontageImage()">CHANGE YOUR PICTURE</a><input style="display:none" type="file" name="change_image" id="change_image"></P>
+								<p style="font-size:0.55em; text-decoration:underline;"><a href="javascript:void(0);" id="montagePic">CHANGE YOUR PICTURE</a><input style="display:none" type="file" name="change_image" id="change_image"></P>
 							</div>
 						</div>
 						<?}else{?>
@@ -79,7 +79,7 @@
 							<div class="span180" style="position:relative;">
 								<img id="MontageImage" src="<?php echo $basePath; ?>/images/social_media/profile_img.png"/>
 								<div style="position:absolute;bottom:20px;left:25%;">
-								<p style="font-size:0.55em; text-decoration:underline;"><a href="javascript:void(0);" id="montagePic" onclick="updatemontageImage()" >ADD YOUR PICTURE</a><input style="display:none" type="file" name="change_image" id="change_image"></P>
+								<p style="font-size:0.55em; text-decoration:underline;"><a href="javascript:void(0);" id="montagePic" >ADD YOUR PICTURE</a><input style="display:none" type="file" name="change_image" id="change_image"></P>
 							</div>
 							</div>
 							</form>
@@ -183,39 +183,97 @@
 	</p>
 	<p id="paragraphMessageError"></p>
 </div>
+
+<div id="pop-up-image-crop-new" class="pop-up-display-content conform_popup_content" style="margin-bottom:20px;">
+	<div class="pop_up_haeding close"><h3>Please Upload Your Image</h3><span onclick="selectCropImage();">Upload Image</span></div>
+	<input type="file" id="fileCropInp" name="fileCropInp" style="display:none;"  />
+	<div id="cropSrcImgContainer" style="min-height:300px;margin-top:30px;">
+		<img alt="" src="" id="cropbox" />
+	</div>
+	<div class="jc_coords">
+		<form id="CropForm" method="post" >
+			<input type="hidden" id="x" name="x" />
+			<input type="hidden" id="y" name="y" />
+			<input type="hidden" id="w" name="w" />
+			<input type="hidden" id="h" name="h" />
+		</form>
+	</div>
+	<button class="export" onclick="checkCoords();" style="display:none">Crop</button><span id="l_i_c" style="display:none;margin-left:80%;"><img src="<?php echo $basePath; ?>/images/social_media/bx_loader.gif" /></span>
+</div>
+<input type="hidden" id="imageId" name="imageId" value="0" />
+<input type="hidden" id="cropImage1" name="cropImage1" value="0" />
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/js/crop/jquery.Jcrop.min.css" />
+
+
 <input type="hidden" id="hid_userid"  name="baseUrl" />
 <input type="hidden" id="hid_cat_id"  name="baseUrl" />
 <input type="hidden" id="category_user_id" value="0" />
 <script type="text/javascript" src="<?php echo $basePath; ?>/js/ckeditor/ckeditor.js"></script>
-<script src="<?php echo $basePath; ?>/js/crop/jquery.cropit.js"></script>
 <script type="text/javascript" src="<?php echo $basePath; ?>/js/project/montage.js"></script>
 <script>
 $('.edit_paragraph_mon_empty').click(function() {
 	CKEDITOR.replace( 'montage_paragraph', {
 });
 });
-$(function() {
-	$('#pop-up-image-crop-new').cropit({
-		imageBackground: true
-	});
-	$('.export').click(function() {
-		var src = $('#pop-up-image-crop-new').cropit('export');
-		var fetchUploadedUrl = BASE_URL+'/upload-montage-image';
-		var imageId='<? echo $_SESSION['usersinfo']->userId?>';
-		$("#l_i_c").show();
-		$.ajax({
-			type	: "POST",
-			url		: fetchUploadedUrl,
-			data	: { data: src,page:'montage',imageId:imageId},
-			success: function(data){
-				$("#l_i_c").hide();
-				$('#pop-up-image-crop-new').popUpWindow({action: "close"});
-				$('#MontageImage').attr('src',src);
-				$('#montagePic').html("CHANGE YOUR PICTURE");
-			}
-		});
-		//window.open(imageData);
-	});
-});
 
+	$('#montagePic').click(function(event)
+	{
+		$('#pop-up-image-crop-new').popUpWindow({action: "open"});
+		$('.pop-up-content').css('border','0');
+		$('.close').css('right','0');
+		$('.close').css('top','0');
+	});
+
+	function updateCoords(c)
+	{
+		jQuery('#x').val(c.x);
+		jQuery('#y').val(c.y);
+		jQuery('#w').val(c.w);
+		jQuery('#h').val(c.h);
+	}
+	
+	function checkCoords()
+	{
+		if( parseInt(jQuery('#w').val()) > 0 )
+		{
+			$("#l_i_c").show();
+
+			var x=jQuery('#x').val();
+			var y=jQuery('#y').val();
+			var w=jQuery('#w').val();
+			var h=jQuery('#h').val();
+			
+			var existinImageId = $('#imageId').val();
+
+			var catImageBasicUploadUrl = BASE_URL+'/upload-montage-image';
+			var file_data = $('#fileCropInp').prop('files')[0];
+			var form_data = new FormData();
+			form_data.append('fileCropInp', file_data);
+			form_data.append('croppedX', x);
+			form_data.append('croppedY', y);
+			form_data.append('croppedNewWidth', w);
+			form_data.append('croppedNewHeight', h);
+			form_data.append('imageId',existinImageId);
+			form_data.append('page',"montage");
+			$.ajax({
+				url: catImageBasicUploadUrl,
+				cache: false,
+				contentType: false,
+				processData: false,
+				data: form_data,                         
+				type: 'post',
+				dataType:'json',
+				success: function(data){
+					var newCatImageFullPath = BASE_PATH+'/images/project/montageMainImage/'+data.imageId;
+					$("#l_i_c").hide();
+					$('#pop-up-image-crop-new').popUpWindow({action: "close"});
+					$('#MontageImage').attr('src', newCatImageFullPath);
+					$('#imageId').val(data.imageId);
+				}
+			});
+		}else{
+			alert('Please select a crop region then press submit.');
+		}
+	}
+	
 </script>

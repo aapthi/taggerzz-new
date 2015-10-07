@@ -1,11 +1,13 @@
 
 <?php
+	$imageIdVal = 0;
 	$tzCatImage = $basePath . "/img/defaultImg.png";
 	if ( isset($this->editBoxId) && trim($this->editBoxId) != "" && is_numeric($this->editBoxId) && $this->editBoxId )
 	{
 		if( isset($this->tzCatImage) && trim($this->tzCatImage) != "" && $this->tzCatImage != "montage_default_img.png" )
 		{
 			$tzCatImage = $basePath . "/images/project/categoryImages/" . $this->tzCatImage;
+			$imageIdVal = $this->tzCatImage;
 		}
 	}
 ?>
@@ -44,7 +46,7 @@
 					<input type="hidden" id="matureContent" name="matureContent" value="<?php if ( isset($this->mature_content) && trim($this->mature_content) != "" ){ echo $this->mature_content; }?>" />
 					<input type="hidden" id="notSafeForWork" name="notSafeForWork" value="<?php if ( isset($this->not_safe_for_work) && trim($this->not_safe_for_work) != "" ){ echo $this->not_safe_for_work; }?>" />
 					<input type="hidden" id="linkPostFormation" name="linkPostFormation" value="1" />
-					<input type="hidden" id="imageId" name="imageId" value="0" />
+					<input type="hidden" id="imageId" name="imageId" value="<?php if( isset($imageIdVal) ){ echo $imageIdVal; } ?>" />
 					<input type="hidden" id="typeImageCrop" name="typeImageCrop" value="0" />
 					<input type="hidden" id="main_category" name="main_category" value="" />
 			</form>
