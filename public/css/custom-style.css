@@ -107,6 +107,8 @@ input{
 	border-bottom:1px solid #c7c7c7;
 	padding-bottom:12px;
 	width:100%;
+	border-top:3px solid #00afd1;
+	
 }
 .tlogin_bg{	
 	background:#fc4242;
