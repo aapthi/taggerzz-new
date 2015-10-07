@@ -134,8 +134,8 @@ if($crop_montage_image!=""){
 	</div>
 </div>
 <div id="pop-up-image-crop-new" class="pop-up-display-content conform_popup_content" style="margin-bottom:20px;">
-	<div class="pop_up_haeding close"><h3>CROP IMAGE </h3><span onclick="selectCropImage();">Upload Image</span></div>
-	<input type="file" id="fileCropInp" class="cropit-image-input" style="display:none;" onchange="showCropButton()" />
+	<div class="pop_up_haeding close"><h3>CROP IMAGE </h3><span onclick="selectHighCropImage();">Upload Image</span></div>
+	<input type="file" id="HighCropInp" class="cropit-image-input" style="display:none;" onchange="showHighCropButton()" />
 	<div class="cropit-image-preview-container">
 		<div id="crop_heigh" class="cropit-image-preview"></div>
 	</div>
@@ -143,11 +143,40 @@ if($crop_montage_image!=""){
 	<button class="export">Crop</button><span id="l_i_c" style="display:none;margin-left:80%;"><img src="<?php echo $basePath; ?>/images/social_media/bx_loader.gif" /></span>
 </div>
 <input type="hidden" id="cropImage1" name="cropImage1" value="0" />
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/js/crop/cropit.css" />
 <script src="<?php echo $basePath; ?>/js/crop/jquery.cropit.js"></script>
 <script type="text/javascript" src="<?php echo $basePath; ?>/js/popupwindow.js"></script>
 <script type="text/javascript" src="<?php echo $basePath; ?>/js/project/user-login.js"></script>
 
 <script>
+
+function checkHighImageLoaded()
+{
+	var filename = $('#HighCropInp').val();
+	
+	var invalidExtension = false;
+	
+	if( filename.trim() != "" )
+	{
+		filename = filename.toLowerCase();
+		var fnameArray = filename.split( "." );
+		if( parseInt(fnameArray.length) > 0 )
+		{
+			if( (fnameArray[fnameArray.length-1] != "gif") && (fnameArray[fnameArray.length-1] != "jpg") && (fnameArray[fnameArray.length-1] != "jpeg") && (fnameArray[fnameArray.length-1] != "bmp") && (fnameArray[fnameArray.length-1] != "png") && (fnameArray[fnameArray.length-1] != "bpg") && (fnameArray[fnameArray.length-1] != "tiff") && (fnameArray[fnameArray.length-1] != "ppm") && (fnameArray[fnameArray.length-1] != "pgm") && (fnameArray[fnameArray.length-1] != "pbm") && (fnameArray[fnameArray.length-1] != "pnm") && (fnameArray[fnameArray.length-1] != "webp") )
+			{
+				invalidExtension = true;
+			}
+		}
+		if( invalidExtension )
+		{
+			alert( crop_input_valid_file );
+			$('#HighCropInp').value='';
+			return false;
+		}
+	}
+	return true;
+}
+
 $(function() {
 	$('#pop-up-image-crop-new').cropit({
 		imageBackground: true
