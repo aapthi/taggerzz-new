@@ -9,7 +9,7 @@
 
 <input type="hidden" id="highlightBoxesPerPage" value="5" />
 <input type="hidden" id="highlightBoxesOffset" value="0" />
-<input type="hidden" id="publicBoxesPerPage" value="10" />
+<input type="hidden" id="publicBoxesPerPage" value="2" />
 <input type="hidden" id="publicBoxesOffset" value="0" />
 <input type="hidden" id="montageBoxesPerPage" value="10" />
 <input type="hidden" id="montageBoxesOffset" value="0" />
@@ -261,6 +261,7 @@
               </div>
 				<div id="publicBoxesDiv" style="display:none;">
 				</div>
+				<!-- Members start -->
 				<div id="memCollectionBoxesDiv" style="display:none;">
 					<div id="divDataboxWrapper" class="divCardsWrapper" data-columns>
 					<?php
@@ -332,16 +333,17 @@
 											$montageTitle = $currentBoxData["montage_title"];
 										}
 									}?>
-                                <?php echo $montageTitle;?>
+                                <h2 class="home_title_d"><?php echo $montageTitle;?></h2>
                             </div>
-                            <div id="divDatabox-1-description" class="divCardDescription">
+                            <div id="divDatabox-1-description" class="divCardDescription home_title_des_s">
 								<?php
 									if( ! is_null($currentBoxData["montage_paragraph"]) && $currentBoxData["montage_paragraph"] != "" )
 									{
 										if(strlen($currentBoxData["montage_paragraph"])>155)
-										{
-											echo $montageTitle = substr($currentBoxData["montage_paragraph"],0,155) . '...';
-										}
+										{?>
+											
+												<?php echo $montageTitle = substr($currentBoxData["montage_paragraph"],0,155) . '...';?>
+										<?php }
 										else
 										{
 											echo $montageTitle = $currentBoxData["montage_paragraph"];
