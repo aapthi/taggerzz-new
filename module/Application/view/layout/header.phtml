@@ -154,11 +154,19 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
 							$hintingNewVal = 1;
 						}
 					}
-				?>
-        <div id="divAccountInfo" class="divAccountInfo twidth_acinfo" style="padding-left:36px;margin-top:4px;">
+					
+					$headerMontageImage="";
+					if( strpos($_SESSION['usersinfo']->montage_image, "https://" ) !== false || strpos($_SESSION['usersinfo']->montage_image, "http://") !== false )
+					{
+						$headerMontageImage=$_SESSION['usersinfo']->montage_image;
+					}
+					else
+					{
+						$headerMontageImage=$basePath.'/images/project/montageImages/'.$_SESSION['usersinfo']->montage_image;
+					}?><div id="divAccountInfo" class="divAccountInfo twidth_acinfo" style="padding-left:36px;margin-top:4px;">
             <div id="divProfileImage" class="inline-block">
                 <!--<img src="<?php //echo $basePath; ?>/img/imgFB.png" alt="" class="height100" />-->
-                <img height="60px" width="62px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $_SESSION['usersinfo']->montage_image; ?>" alt="" class="height100" />
+                <img height="60px" width="62px" src="<?php echo $headerMontageImage; ?>" alt="" class="height100" />
             </div>
 
             <div id="divProfileDetails" class="inline-block tphoto_links tphoto_links">
@@ -178,7 +186,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
             <div id="divAccountInfoMobile" class="divAccountInfo mobile">
                 <div id="divProfileImageMobile" class="divProfileImage ">
                     <!--<img src="<?php //echo $basePath; ?>/img/imgFB.png" alt="" class="height100" />-->
-					 <img height="68px" width="68px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $_SESSION['usersinfo']->montage_image; ?>" alt="" class="height100" />
+					 <img height="68px" width="68px" src="<?php echo $headerMontageImage; ?>" alt="" class="height100" />
                 </div>
                 <div id="divProfileDetailsMobile" class="divProfileDetails">
                     <span id="spnGreetingsText" class="block smallFont">Hello, </span>
