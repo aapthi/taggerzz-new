@@ -590,7 +590,7 @@ function insertComment(){
 					if(data.output!=0) {
 						var addHtml='';
 						$('#message').val('');
-						addHtml+='<div id="comment'+newValue+'"><div class="row tmar_b20"><div class="rimg_left"><img  width="40px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $_SESSION['usersinfo']->montage_image; ?>" alt="" class="height100" /></div><div class="rcontenleft"><div class="name_c"><?php echo $_SESSION['usersinfo']->displayName; ?></div><span id="commText'+newValue+'">';
+						addHtml+='<div id="comment'+newValue+'"><div class="row tmar_b20"><div class="rimg_left"><img  width="40px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php if(isset($_SESSION['usersinfo']->montage_image)){echo $_SESSION['usersinfo']->montage_image; }?>" alt="" class="height100" /></div><div class="rcontenleft"><div class="name_c"><?php if(isset($_SESSION['usersinfo']->displayName)){echo $_SESSION['usersinfo']->displayName;} ?></div><span id="commText'+newValue+'">';
 						addHtml+=comment;
 						addHtml+='</span>';
 						addHtml+='<br/>';
