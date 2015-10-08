@@ -37,6 +37,7 @@ class DataboxCommentsTable
 	public function getDataboxComments($categoryId){
 		$select = $this->tableGateway->getSql()->select();
 		$select->join('user', 'databox_comments.comment_user_id=user.user_id',array('*'),'left');
+		$select->join('user_details', 'user_details.user_id=user.user_id',array('*'),'left');
 		$select->where('databox_comments.databox_id="'.$categoryId.'"');
 		$select->order('databox_comments.databox_comment_id DESC');
 		$resultSet = $this->tableGateway->selectWith($select);

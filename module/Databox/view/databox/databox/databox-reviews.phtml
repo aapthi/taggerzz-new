@@ -22,9 +22,9 @@
 		?>
 		<div id="comment<?php echo $getComments->databox_comment_id;?>"class="">
 			<div class="row tmar_b20">
-			<div class="rimg_left"><img  width="55px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $_SESSION['usersinfo']->montage_image; ?>" alt="" class="height100" /></div>
+			<div class="rimg_left"><img  width="55px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $getComments->montage_image; ?>" alt="" class="height100" /></div>
 			<div class="rcontenleft">
-				<div class="name_c"><?php echo $_SESSION['usersinfo']->displayName; ?></div>
+				<div class="name_c"><?php echo $getComments->display_name; ?></div>
 				<span id="commText<?php echo $getComments->databox_comment_id;?>"><?php echo $getComments->databox_comment; ?></span>
 				
 				<?php if( isset($_SESSION['usersinfo']->userId)){if($getComments->comment_user_id==$_SESSION['usersinfo']->userId){?><br/>
