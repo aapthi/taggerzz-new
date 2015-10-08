@@ -433,19 +433,21 @@ $(document).ready(function(){
 		}
 		searchTermHolder = $("#searchTermHolder").val().replace(/^\s+/, "");
 		searchTermHolder = searchTermHolder.replace(/\s+$/, "");
-		$(document).ready(function() {
-			$(location).attr('href');
-			var pathname = window.location.pathname;
-			if(pathname!='/taggerzz-new/trunk/contentpage'){
-				var serTerm = search.substring(1, (search.length)); 
-				var serCode = $( "#pvtUniqueCodeHolder" ).val();
-				if(serCode==''){
-					window.location.href = BASE_URL +'/contentpage?serTag='+serTerm;
-				}else{
-					window.location.href = BASE_URL +'/contentpage?serTag='+serTerm+'&serCode='+serCode;
-				}
+		
+		$(location).attr('href');
+		var pathname = window.location.pathname;
+		if(pathname!='/taggerzz-new/trunk/contentpage'){
+			var serTerm = search.substring(1, (search.length)); 
+			var serCode = $( "#pvtUniqueCodeHolder" ).val();
+			var tzSearchUrl = "";
+			if(serCode==''){
+				tzSearchUrl = BASE_URL +'/contentpage?serTag='+serTerm;
+			}else{
+				tzSearchUrl = BASE_URL +'/contentpage?serTag='+serTerm+'&serCode='+serCode;
 			}
-		});
+			window.location.href = tzSearchUrl;
+		}
+		
 		var publicPrivate = 1;
 		var pvtUniqueCodeHolder = "";
 		if( $("#pvtUniqueCodeHolder").length )
