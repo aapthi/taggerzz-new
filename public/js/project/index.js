@@ -266,18 +266,44 @@ $(document).ready(function(){
 				//var preScrollTop = nicesxPublic.getScrollTop();
 				if( parseInt(data.montageBoxesAllLoaded) == parseInt("0") )
 				{
+					var cards = jQuery.parseJSON(data.cards);
+					jQuery.each(cards, function(index, value)
+					{
+						var item = document.createElement('div');
+						var grid = document.querySelector('#divDataboxWrapper');
+						salvattore['append_elements'](grid, [item]);
+						item.outerHTML = value;
+						// $("div#divDataboxWrapper").hasAncestor("div#list_public_boxes").html( $("div#divDataboxWrapper").hasAncestor("div#list_public_boxes").html() + data.publicBoxesHtml );
+						// $('#divDataboxWrapper').addClass('divCard');
+						// nicesxPublic.resize();
+						// nicesxPublic.setScrollTop(preScrollTop);
+					});
+					windowtz.on('scroll',scrollMontageBoxesHandler);
 					
-					$("div#divDataboxWrapper").hasAncestor("div#list_public_boxes").html( $("div#divDataboxWrapper").hasAncestor("div#list_public_boxes").html() + data.montageBoxesHtml );
-					$( ".container_main_cats_" ).on('scroll',scrollMontageBoxesHandler);
-					//nicesxPublic.resize();
-					//nicesxPublic.setScrollTop(preScrollTop);
+					// $("div#divDataboxWrapper").hasAncestor("div#list_public_boxes").html( $("div#divDataboxWrapper").hasAncestor("div#list_public_boxes").html() + data.montageBoxesHtml );
+					// $( ".container_main_cats_" ).on('scroll',scrollMontageBoxesHandler);
+					// nicesxPublic.resize();
+					// nicesxPublic.setScrollTop(preScrollTop);
 				}
 				else if( parseInt(data.montageBoxesAllLoaded) == parseInt("1") )
 				{
 					$( "#montageBoxesOn" ).val( 0 );
-					$("div#divDataboxWrapper").hasAncestor("div#list_public_boxes").html( $("div#divDataboxWrapper").hasAncestor("div#list_public_boxes").html() + data.montageBoxesHtml );
-					//nicesxPublic.resize();
-					//nicesxPublic.setScrollTop(preScrollTop);
+					var cards = jQuery.parseJSON(data.cards);
+					jQuery.each(cards, function(index, value)
+					{
+						var item = document.createElement('div');
+						var grid = document.querySelector('#divDataboxWrapper');
+						salvattore['append_elements'](grid, [item]);
+						item.outerHTML = value;
+						// $("div#divDataboxWrapper").hasAncestor("div#list_public_boxes").html( $("div#divDataboxWrapper").hasAncestor("div#list_public_boxes").html() + data.publicBoxesHtml );
+						// $('#divDataboxWrapper').addClass('divCard');
+						// nicesxPublic.resize();
+						// nicesxPublic.setScrollTop(preScrollTop);
+					});
+					
+					// $("div#divDataboxWrapper").hasAncestor("div#list_public_boxes").html( $("div#divDataboxWrapper").hasAncestor("div#list_public_boxes").html() + data.montageBoxesHtml );
+					// nicesxPublic.resize();
+					// nicesxPublic.setScrollTop(preScrollTop);
 				}
 			  },
 			});

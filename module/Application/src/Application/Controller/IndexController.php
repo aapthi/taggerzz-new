@@ -435,22 +435,25 @@ class IndexController extends AbstractActionController
 		$montageBoxesOffset = $_POST['montageBoxesOffset'];
 		// echo $montageBoxesOffset;exit;
 		$montageBoxesRs = $this->getUserDetailsTable()->getHomeMontageBoxes( $montageBoxesPerPage,$montageBoxesOffset );
+		// echo "<pre>";print_r($montageBoxesRs->count());exit;
 		//echo "<pre>"; print_r($montageBoxesRs->toArray()); exit;
 		$montageBoxesHtml = "";
+		$divCards = array();
 		$montageBoxesAllLoaded = 0;
 		if( $montageBoxesRs->count() == 0 )
 		{
 			$montageBoxesAllLoaded = 1;
 			$result = new JsonModel(array(
 				'montageBoxesAllLoaded' 	=>  $montageBoxesAllLoaded,
-				'montageBoxesHtml'			=>	$montageBoxesHtml
+				'cards'						=>	json_encode($divCards)
 			));	
 			return $result;
 		}
 		//$montageBoxesHtml.='<div id="divDataboxWrapper" class="divCardsWrapper" data-columns ="4">';
-		$montageBoxesHtml.='<div class="left width25">';
+		// $montageBoxesHtml.='<div class="left width25">';
 		foreach( $montageBoxesRs as $currentBoxRow )
 		{
+			$montageBoxesHtml1 = "";
 			$collectionCount = 0;
 			if( $collectionCount == 0 )
 			{
@@ -459,9 +462,9 @@ class IndexController extends AbstractActionController
 			$viewUrl = "user-collection";
 			$displayUserCollectionUrl = $baseUrl;
 			$displayUserCollectionUrl .= "/" . $viewUrl . "/" . $currentBoxRow->user_id;
-			$montageBoxesHtml.='<div class="publicsearchdatabox">';
-			$montageBoxesHtml.='<div id="divDatabox-1" class="divCard">';
-            $montageBoxesHtml.='<div id="divDatabox-1-imageWrapper" class="divCardImageWrapper">';
+			$montageBoxesHtml1.='<div class="publicsearchdatabox">';
+			$montageBoxesHtml1.='<div id="divDatabox-1" class="divCard">';
+            $montageBoxesHtml1.='<div id="divDatabox-1-imageWrapper" class="divCardImageWrapper">';
 			$montageHashName = "";
 			if( ! is_null($currentBoxRow->montage_hash_name) && $currentBoxRow->montage_hash_name != "" )
 			{
@@ -481,26 +484,26 @@ class IndexController extends AbstractActionController
 			{
 				$memberDisplayImage = $basePath.'/images/project/montageMainImage/'.$currentBoxRow->montage_main_image;
 			}
-			$montageBoxesHtml.='<img id="Databox-1-img" class="imgCardImage" alt="'.$montageHashName.'" src="'.$memberDisplayImage.' " />';
-			$montageBoxesHtml.='<div id="divDatabox-1-hashtag" class="divCardHashtag">'.$montageHashName.'</div>';
-			$montageBoxesHtml.='<div id="divDatabox-1-sharedLinks" class="divCardSharedLinks"><span class="fatFont"> '.$currentBoxRow->userWiseLinksCount .' HOT LINKS </span> collected and shared </div>';
-		    $montageBoxesHtml.='<div id="Card-1-user" class="divCardUser">';
+			$montageBoxesHtml1.='<img id="Databox-1-img" class="" alt="'.$montageHashName.'" src="'.$memberDisplayImage.' " />';
+			$montageBoxesHtml1.='<div id="divDatabox-1-hashtag" class="divCardHashtag">'.$montageHashName.'</div>';
+			$montageBoxesHtml1.='<div id="divDatabox-1-sharedLinks" class="divCardSharedLinks"><span class="fatFont"> '.$currentBoxRow->userWiseLinksCount .' HOT LINKS </span> collected and shared </div>';
+		    $montageBoxesHtml1.='<div id="Card-1-user" class="divCardUser">';
 				if($currentBoxRow->image!=""){
-					$montageBoxesHtml.='<img  src=" '.$currentBoxRow->image .'" class="imgUserImage" alt="" />';
+					$montageBoxesHtml1.='<img  src=" '.$currentBoxRow->image .'" class="imgUserImage" alt="" />';
 				}else{ 
-					$montageBoxesHtml.='<img src="'.$basePath .' /img/userImage.png" class="imgUserImage" alt="" />';
+					$montageBoxesHtml1.='<img src="'.$basePath .'/img/userImage.png" class="imgUserImage" alt="" />';
 				 }
-				$montageBoxesHtml.='<div class="divCardUserName">By: '. $currentBoxRow->display_name .' </div>';
-			$montageBoxesHtml.='</div>';
-			$montageBoxesHtml.='<div id="divDatabox-1-contentWrapper" class="divCardContentWrapper">';
+				$montageBoxesHtml1.='<div class="divCardUserName">By: '. $currentBoxRow->display_name .' </div>';
+			$montageBoxesHtml1.='</div>';
+			$montageBoxesHtml1.='<div id="divDatabox-1-contentWrapper" class="divCardContentWrapper">';
              /*$montageBoxesHtml.='<div id="divDatabox-1-views" class="divCardViews">';
-             $montageBoxesHtml.='<img src="'.$basePath .'/img/views.png" alt="" /> 120 views </div>';
-            $montageBoxesHtml.='<div class="divCardLoveTrash">';
-            $montageBoxesHtml.=' <a href="#"><img src="'.$basePath .'/img/love.png" alt="" /></a>  or  <img src="'. $basePath .'/img/trash.png" alt="" />';
-            $montageBoxesHtml.='</div>';*/
-            $montageBoxesHtml.= '<div id="divCardKeywords" class="divCardKeywords">Web Development, Javascript, JQuery, HTML</div>';
+             $montageBoxesHtml1.='<img src="'.$basePath .'/img/views.png" alt="" /> 120 views </div>';
+            $montageBoxesHtml1.='<div class="divCardLoveTrash">';
+            $montageBoxesHtml1.=' <a href="#"><img src="'.$basePath .'/img/love.png" alt="" /></a>  or  <img src="'. $basePath .'/img/trash.png" alt="" />';
+            $montageBoxesHtml1.='</div>';*/
+            // $montageBoxesHtml1.= '<div id="divCardKeywords" class="divCardKeywords">Web Development, Javascript, JQuery, HTML</div>';
 			/*$montageBoxesHtml .= '<div class="image_block_publick_databox"><a href="' . $displayUserCollectionUrl . '" onClick="Javascript:displayUserCollection( ' . $currentBoxRow->user_id . ' );"><img src= "'. $memberDisplayImage . '" width="234" height="302" /></a></div>';*/
-			$montageBoxesHtml .='<div id="divDatabox-1-title" class="divCardTitle">';
+			$montageBoxesHtml1 .='<div id="divDatabox-1-title" class="divCardTitle">';
 			if( ! is_null($currentBoxRow->montage_title) && $currentBoxRow->montage_title != "" )
 			{
 				if(strlen($currentBoxRow->montage_title)>57)
@@ -514,19 +517,24 @@ class IndexController extends AbstractActionController
 				
 			}
 				$montageTitle;
-			$montageBoxesHtml .= '</div>';
-			 $montageBoxesHtml .='<div id="divDatabox-1-description" class="divCardDescription">';
+			$montageBoxesHtml1 .= '<h2 class="home_title_d">' . $montageTitle .'</h2></div>';
+			 $montageBoxesHtml1 .='<div id="divDatabox-1-description" class="divCardDescription home_title_des_s">';
                                  $currentBoxRow->montage_paragraph;
-                           $montageBoxesHtml .= '</div>';
-                       $montageBoxesHtml .= '</div>';
-                  $montageBoxesHtml .=  '</div>';
+                           $montageBoxesHtml1 .= '</div>';
+                       $montageBoxesHtml1 .= '</div>';
+                  $montageBoxesHtml1 .=  '</div>';
+			$montageBoxesHtml1 .=  '</div>'; 
+			   array_push($divCards, $montageBoxesHtml1);
 			/*$montageBoxesHtml .= '<div class="home_pos_abso_left"><p>>> Listed Sources >> </p></div>';
 			$montageBoxesHtml .= '<div class="home_pos_abso_right"><p>' . $currentBoxRow->userWiseLinksCount . '</p></div>';
 
 			$montageBoxesHtml .= '</div></li>';*/
-			$montageBoxesHtml .=  '</div>'; 
 		}
-		 $montageBoxesHtml .=  '</div>';
+		
+		// echo "<pre>";print_r($divCards);
+		// exit;
+		
+		 // $montageBoxesHtml .=  '</div>';
 		 //echo "<pre>"; print_r($montageBoxesHtml); exit;
 		if( $montageBoxesRs->count() < $montageBoxesPerPage )
 		{
@@ -534,7 +542,8 @@ class IndexController extends AbstractActionController
 		}
 		$result = new JsonModel(array(					
 			'montageBoxesAllLoaded' =>  $montageBoxesAllLoaded,
-			'montageBoxesHtml'		=>	$montageBoxesHtml
+			'cards'					=>	json_encode($divCards)
+			// 'montageBoxesHtml'		=>	$montageBoxesHtml
 		));	
 		return $result;
 	}
