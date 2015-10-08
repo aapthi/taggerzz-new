@@ -15,7 +15,7 @@
 		}else if($_SERVER['REQUEST_URI']=='/taggerzz-new/trunk/accounts'){
 			$accountActive='active_menu';
 			
-		}else if($_SERVER['REQUEST_URI']=='/taggerzz-new/'){
+		}else if($_SERVER['REQUEST_URI']=='/taggerzz-new/trunk/contentpage'){
 			$homeActive='active_menu';
 			
 		}else if($_SERVER['REQUEST_URI']=='/taggerzz-new/trunk/hitting-on'){
@@ -235,7 +235,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
 				//{
 				?> 
 				<div id="divSearchBoxes" class="divSearchBoxes tinput_s">
-						<input type="text" id="searchTermHolder" class="inptSearchHashTag tsearch_input_w tplaceholder_c" placeholder="Search by #hashtag"/>
+						<input type="text" id="searchTermHolder" class="inptSearchHashTag tsearch_input_w tplaceholder_c" placeholder="Search by #hashtag" value="<?if(isset($_REQUEST['serTag']) && $_REQUEST['serTag']!=""){echo '#'.$_REQUEST['serTag'];}else{}?>"/>
 						<a href="Javascript:void(0);" id='homeSearchLink' class="aSearch "></a>
 				</div>
 				<?php // } ?>
