@@ -809,12 +809,12 @@ function checkSpaces()
 					var newTotalvoteUp=parseInt(TotalvoteUp) + parseInt("1");
 					var newTotalrw_lh=parseInt(Totalrw_lh) + parseInt("1");
 				} 
-				if(votingid==3){
+				if(votingid==0){
 					alert('b');
 					var newTotalvoteUp=parseInt(TotalvoteUp) + parseInt("1");
 					var newTotalrw_lh=parseInt(Totalrw_lh);
 				}
-				$('#voting-'+categoryId).val(1);
+				$('#voting-'+categoryId).val('1');
 			}
 			if(newVoteValue==0){
 				if(Totalrw_lh=="" || Totalrw_lh==0){
@@ -837,7 +837,7 @@ function checkSpaces()
 						var newTotalrw_lh=parseInt(Totalrw_lh) + parseInt("1");
 					}
 				}
-				$('#voting-'+categoryId).val(0);
+				$('#voting-'+categoryId).val('0');
 			}
 			alert(newTotalvoteUp);
 			alert(newTotalrw_lh);
