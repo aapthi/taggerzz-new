@@ -814,7 +814,7 @@ function checkSpaces()
 					var newTotalvoteUp=parseInt(TotalvoteUp) + parseInt("1");
 					var newTotalrw_lh=parseInt(Totalrw_lh);
 				}
-				$('#voting-'+categoryId).val('1');
+				
 			}
 			if(newVoteValue==0){
 				if(Totalrw_lh=="" || Totalrw_lh==0){
@@ -835,19 +835,20 @@ function checkSpaces()
 					alert('c');
 						var newTotalvoteUp=parseInt(TotalvoteUp);		
 						var newTotalrw_lh=parseInt(Totalrw_lh) + parseInt("1");
+						
 					}
 				}
-				$('#voting-'+categoryId).val('0');
+				
 			}
-			alert(newTotalvoteUp);
-			alert(newTotalrw_lh);
 			var like=(parseInt(newTotalvoteUp)/parseInt(newTotalrw_lh))*100;
 			like1 = Math.round(like * 100) / 100;
 			$('#likes'+categoryId).html(like1+'% liked');
 			if(newVoteValue==1){
 				var clickAppendHtml='<img src="'+BASE_URL+'/public/img/love_ok.png" alt="" />  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'+categoryId+',1,'+newTotalvoteUp+','+newTotalrw_lh+')"><img src="'+BASE_URL+'/public/img/trash.png" alt="" /></a>';
+				$('#voting-'+categoryId).val('1');
 			}else{
 				var clickAppendHtml='<a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'+categoryId+',1,'+newTotalvoteUp+','+newTotalrw_lh+')" ><img src="'+BASE_URL+'/public/img/love.png" alt="" /></a>  or  <img src="'+BASE_URL+'/public/img/untrash.png" alt="" />';
+				$('#voting-'+categoryId).val('0');
 			}
 			$('#divCardLoveTrash'+categoryId).html(clickAppendHtml);
 		  }
