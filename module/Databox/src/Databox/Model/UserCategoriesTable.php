@@ -360,7 +360,7 @@ class UserCategoriesTable
 		$votesGroupSubQuerySelect->columns(array('NetVotes1' => new Expression('COALESCE(SUM(voteUp)-SUM(voteDown),0)'),'vupCatId'=>'category_id'));
 		$votesGroupSubQuerySelect->group('vupCatId');*/
 		$votesGroupSubQuerySelect = $this->rwvTg->getSql()->select();
-		$votesGroupSubQuerySelect->columns(array('NetVotes1' => new Expression('COALESCE((SUM(voteUp)/SUM(rw_lh)*100),0)'),'vupCatId'=>'category_id','voteUp1'=>'voteUp','rw_lh1'=>'rw_lh'));
+		$votesGroupSubQuerySelect->columns(array('NetVotes1' => new Expression('COALESCE((SUM(voteUp)/SUM(rw_lh)*100),0)'),'vupCatId'=>'category_id','voteUp1'=>new Expression('COALESCE(SUM(voteUp),0)'),'rw_lh1'=>new Expression('COALESCE(SUM(rw_lh),0)')));
 		$votesGroupSubQuerySelect->group('vupCatId');
 		$votesGroupSubQuerySelect->where('relevance_worth_vote.rw_lh="1"');
 		$votesGroupSubQuerySelect2 = $this->rwvTg->getSql()->select();
@@ -391,7 +391,7 @@ class UserCategoriesTable
 		$select->order('NetVotes desc');
 		$select->order('category.category_id desc');
 		$resultSet = $this->tableGateway->selectWith($select);
-		//echo "<pre>";print_r($resultSet);exit;
+		// echo "<pre>";print_r($resultSet);exit;
 		return $resultSet;
 	}
 
