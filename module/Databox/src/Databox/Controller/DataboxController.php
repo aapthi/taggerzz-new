@@ -2152,6 +2152,11 @@ class DataboxController extends AbstractActionController
 				}else{	
 						$publicBoxesHtml .=	'<a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'. $basePath .'/img/love.png" alt="" /></a>  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'.$basePath .'/img/trash.png" alt="" /></a>';
 				}
+				$userVoteUpTz = "3";
+				if($currentBoxRow->userVoteUp!=""){
+					$userVoteUpTz = $currentBoxRow->userVoteUp;
+				}
+				$publicBoxesHtml .='<input type="hidden" id="voting'.$currentBoxRow->category_id.'" name="voting'.$currentBoxRow->category_id.'" value="'.$userVoteUpTz.'">';
 				$publicBoxesHtml .='</div>';
 				$publicBoxesHtml .='<div id="divDatabox-1-title" class="divCardTitle"> <h2 class="home_title_d">'. $currentBoxRow->category_title .
 				'</h2></div>';
@@ -2422,6 +2427,11 @@ class DataboxController extends AbstractActionController
 				}else{	
 						$publicBoxesHtml .=	'<a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'. $basePath .'/img/love.png" alt="" /></a>  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'.$basePath .'/img/trash.png" alt="" /></a>';
 				}
+				$userVoteUpTz = "3";
+				if($currentBoxRow->userVoteUp!=""){
+					$userVoteUpTz = $currentBoxRow->userVoteUp;
+				}
+				$publicBoxesHtml .='<input type="hidden" id="voting'.$currentBoxRow->category_id.'" name="voting'.$currentBoxRow->category_id.'" value="'.$userVoteUpTz.'">';
 				$publicBoxesHtml .='</div>';
 				$publicBoxesHtml .='<div id="divCardKeywords" class="divCardKeywords">';
 				$publicBoxesHtml .=$currentBoxRow->meta_tags;
@@ -2578,6 +2588,11 @@ class DataboxController extends AbstractActionController
 				}else{	
 						$privateBoxHtml .=	'<a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'. $basePath .'/img/love.png" alt="" /></a>  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'.$basePath .'/img/trash.png" alt="" /></a>';
 				}
+				$userVoteUpTz = "3";
+				if($currentBoxRow->userVoteUp!=""){
+					$userVoteUpTz = $currentBoxRow->userVoteUp;
+				}
+				$privateBoxHtml .='<input type="hidden" id="voting'.$currentBoxRow->category_id.'" name="voting'.$currentBoxRow->category_id.'" value="'.$userVoteUpTz.'">';
 				$privateBoxHtml .='</div>';
 				$privateBoxHtml .='<div id="divCardKeywords" class="divCardKeywords">'; 
 				$privateBoxHtml .=$currentBoxRow->meta_tags;

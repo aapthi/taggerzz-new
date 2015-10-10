@@ -786,11 +786,7 @@ function checkSpaces()
 	}
 	function likeDislikeCnt( newVoteValue,categoryId,rw_th,TotalvoteUp,Totalrw_lh )
 	{
-		var votingid=$('#voting-'+categoryId).val();
-		
-		alert(votingid);
-		alert(TotalvoteUp);
-		alert(Totalrw_lh);
+		var votingid=$('#voting'+categoryId).val();
 		var voteUrl = BASE_URL + "/databox/vote-on-highlight";
 		$.ajax({
 		  url: voteUrl,
@@ -800,17 +796,14 @@ function checkSpaces()
 		  success: function(data) {
 			if(newVoteValue==1){
 				if(votingid==3){
-				alert('c');
 					var newTotalvoteUp=parseInt(TotalvoteUp) + parseInt("1");
 					var newTotalrw_lh=parseInt(Totalrw_lh) + parseInt("1");
 				}
 				if(votingid==1){
-					alert('a');
 					var newTotalvoteUp=parseInt(TotalvoteUp) + parseInt("1");
 					var newTotalrw_lh=parseInt(Totalrw_lh) + parseInt("1");
 				} 
 				if(votingid==0){
-					alert('b');
 					var newTotalvoteUp=parseInt(TotalvoteUp) + parseInt("1");
 					var newTotalrw_lh=parseInt(Totalrw_lh);
 				}
@@ -818,21 +811,16 @@ function checkSpaces()
 			}
 			if(newVoteValue==0){
 				if(Totalrw_lh=="" || Totalrw_lh==0){
-				alert('newVoteValue==0');
 					var newTotalvoteUp=parseInt(TotalvoteUp);		
 					var newTotalrw_lh=parseInt(Totalrw_lh) + parseInt("1");
 				}else{
-				alert('newVoteValue==0 else');
 					if(votingid==1){
-					alert('a');
 						var newTotalvoteUp=parseInt(TotalvoteUp)- parseInt("1");		
 						var newTotalrw_lh=parseInt(Totalrw_lh);
 					}else if(votingid==0){
-					alert('b');
 						var newTotalvoteUp=parseInt(TotalvoteUp);		
 						var newTotalrw_lh=parseInt(Totalrw_lh);
 					}else{
-					alert('c');
 						var newTotalvoteUp=parseInt(TotalvoteUp);		
 						var newTotalrw_lh=parseInt(Totalrw_lh) + parseInt("1");
 						
@@ -845,10 +833,11 @@ function checkSpaces()
 			$('#likes'+categoryId).html(like1+'% liked');
 			if(newVoteValue==1){
 				var clickAppendHtml='<img src="'+BASE_URL+'/public/img/love_ok.png" alt="" />  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'+categoryId+',1,'+newTotalvoteUp+','+newTotalrw_lh+')"><img src="'+BASE_URL+'/public/img/trash.png" alt="" /></a>';
-				$('#voting-'+categoryId).val('1');
+				clickAppendHtml+='<input type="hidden" id="voting'+categoryId+'" name="voting'+categoryId+'" value="1">';
 			}else{
 				var clickAppendHtml='<a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'+categoryId+',1,'+newTotalvoteUp+','+newTotalrw_lh+')" ><img src="'+BASE_URL+'/public/img/love.png" alt="" /></a>  or  <img src="'+BASE_URL+'/public/img/untrash.png" alt="" />';
-				$('#voting-'+categoryId).val('0');
+				clickAppendHtml+='<input type="hidden" id="voting'+categoryId+'" name="voting'+categoryId+'" value="0">';
+
 			}
 			$('#divCardLoveTrash'+categoryId).html(clickAppendHtml);
 		  }
