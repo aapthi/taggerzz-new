@@ -197,8 +197,8 @@ function validateSettings( submitVal )
 				return false;
 			}
 			//var invalidTitleCharacters = /[^a-z^A-Z^0-9^ ]/;
-			var invalidTitleCharacters = /[^a-z^A-Z^0-9^,^]/;
-
+			var invalidTitleCharacters = /[^a-z^A-Z^0-9^, ]/;
+			
 			if( invalidTitleCharacters.test( boxCategory ) )
 			{
 				$('#pop-up-alerts').popUpWindow({action: "open"});	
