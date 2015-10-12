@@ -139,7 +139,7 @@
 			<div class="tmar_t20 pad_lr">
             <section id="secDataboxes" class="secDataboxes">
                 <div id="divDataboxesHeading" class="divHeadingLabel">
-                   <a href="Javascript:void(0);" id="publicBoxesLink">Public Databoxes</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="Javascript:void(0);" id="memCollectionsLink">Members</a>
+                   <a href="Javascript:void(0);" id="publicBoxesLink">Public Databoxes</a><?php if( isset($_SESSION['usersinfo']) ) {?>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="Javascript:void(0);" id="memCollectionsLink">Members</a><?php } ?>
                 </div>
 				<div id="list_public_boxes" >
                 <div id="divDataboxWrapper" class="divCardsWrapper" data-columns>
