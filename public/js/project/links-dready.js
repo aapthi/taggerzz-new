@@ -171,7 +171,7 @@ function validateSettings( submitVal )
 				$("#titleHolder").focus();
 				return false;
 			}
-			var invalidTitleCharacters = /[^a-z^A-Z^0-9^ ]/;
+			var invalidTitleCharacters = /[^a-z^A-Z^0-9^&^, ]/;
 			if( invalidTitleCharacters.test( titleHolder ) )
 			{
 				$('#pop-up-alerts').popUpWindow({action: "open"});	

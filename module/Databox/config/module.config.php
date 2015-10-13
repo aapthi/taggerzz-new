@@ -308,7 +308,7 @@ return array(
                         'options' => array(
                             'route' => '/post-vertical[/:id]',
 							'constraints' => array(
-							   'id' => '[%&;a-zA-Z0-9][%&+;a-zA-Z0-9_~-]*',
+							   'id' => '[%&;a-zA-Z0-9][%&+,;a-zA-Z0-9_~-]*',
 							),
                             'defaults' => array(
                                 'controller' => 'Databox\Controller\Databox',
@@ -321,7 +321,7 @@ return array(
                         'options' => array(
                             'route' => '/pre-vertical[/:id]',
 							'constraints' => array(
-							   'id' => '[%&;a-zA-Z0-9][%&+;a-zA-Z0-9_~-]*',
+							   'id' => '[%&;a-zA-Z0-9][%&+,;a-zA-Z0-9_~-]*',
 							),
                             'defaults' => array(
                                 'controller' => 'Databox\Controller\Databox',
