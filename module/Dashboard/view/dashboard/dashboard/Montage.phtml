@@ -1,13 +1,42 @@
 <link href="<?php echo $basePath; ?>/css/default.css" rel="stylesheet" type="text/css" />
 	<div class="montage_container">
 	<div class="">
-	<div class="mycolleection">
-		<div id="hash_name">
+	<div class="dash_pick_bg mycolleection">
+	<div class="" style="margin-top:1px;">
+		<div class="">
+						<?
+						$image="";
+						if(strpos($_SESSION['usersinfo']->montage_main_image, "https://") !== false || strpos($_SESSION['usersinfo']->montage_main_image, "http://") !== false)
+					   { 
+							   $image=$_SESSION['usersinfo']->montage_main_image;
+					   }else{
+							$image=$basePath.'/images/project/montageMainImage/'.$_SESSION['usersinfo']->montage_main_image;
+					   }
+						if($_SESSION['usersinfo']->montage_main_image!=""){?>
+						<div class="dash_board_profile_pick">
+							<img id="MontageImage" src="<?php echo $image; ?>">
+							<div style="position:absolute;bottom:20px;left:25%;">
+								<p style="font-size:0.55em; text-decoration:underline;"><a href="javascript:void(0);" id="montagePic">CHANGE YOUR PICTURE</a><input style="display:none" type="file" name="change_image" id="change_image"></P>
+							</div>
+						</div>
+						<?}else{?>
+							<form id="montageUploadForm" method="post" enctype="multipart/form-data">
+							<div class="dash_board_profile_pick" style="position:relative;">
+								<img id="MontageImage" src="<?php echo $basePath; ?>/images/social_media/profile_img.png"/>
+								<div style="position:absolute;bottom:20px;left:25%;">
+								<p style="font-size:0.55em; text-decoration:underline;"><a href="javascript:void(0);" id="montagePic" >ADD YOUR PICTURE</a><input style="display:none" type="file" name="change_image" id="change_image"></P>
+							</div>
+							</div>
+							</form>
+						<?}?>
+						
+		<!-- Hash name Start -->
+		<div id="hash_name" align="center">
 		<?if($_SESSION['usersinfo']->montage_hash_name==""){
 						$montage_hash_name="";
 					?>
-					<div class="float_l"><h1>#MONTAGE</h1></div>
-					<div class="float_l"><a href="javascript:void(0);" onclick="montagePopUp(1)" class="add_new_pick">ADD YOURS</a></div>
+					<div class=""><h1>#MONTAGE
+					<a href="javascript:void(0);" onclick="montagePopUp(1)" class="add_new_pick">ADD YOURS</a>
 					<?}else{
 						$montage_hash_name=$_SESSION['usersinfo']->montage_hash_name;
 						if(strlen($montage_hash_name)>30){
@@ -16,11 +45,15 @@
 							$montageLength=$montage_hash_name; 
 						}
 					?>
+					</h1></div>
 					<div  class="float_l"><h1>#<?echo $montageLength;?></h1></div>
 					<div class="float_l"><a href="javascript:void(0);" onclick="montagePopUp(1)" title="Edit hash name" class="add_new_pick">EDIT</a></div>
 					<?}?>
 		</div>
-		<div  id="your_title" class="float_r montage_tit_show">
+		<!-- Hash name End -->
+		
+		<!-- Title Start -->
+		<div  id="your_title" class="montage_tit_show">
 					<?if($_SESSION['usersinfo']->montage_title==""){
 						$montage_title="";
 					?>
@@ -28,7 +61,8 @@
 					<?}else{
 						$montage_title=$_SESSION['usersinfo']->montage_title;
 					?>
-					<h2><span><a href="javascript:void(0);" onclick="montagePopUp(2)" class="">EDIT TITLE&nbsp;&nbsp;&nbsp;&nbsp;</a></span><?echo $_SESSION['usersinfo']->montage_title;?></h2>
+					<h2><span><?echo $_SESSION['usersinfo']->montage_title;?><a href="javascript:void(0);" onclick="montagePopUp(2)" class="add_new_pick">&nbsp;&nbsp;&nbsp;&nbsp;
+					EDIT TITLE</a></span></h2>
 					<?}
 						if( $montage_title != "" )
 						{
@@ -55,46 +89,20 @@
 						}
 					?>
 		</div>
-	</div>
-	<div class="clearfix"></div>
-	<div class="" style="margin-top:1px;">
-		<div class="row">
-						<?
-						$image="";
-						if(strpos($_SESSION['usersinfo']->montage_main_image, "https://") !== false || strpos($_SESSION['usersinfo']->montage_main_image, "http://") !== false)
-					   { 
-							   $image=$_SESSION['usersinfo']->montage_main_image;
-					   }else{
-							$image=$basePath.'/images/project/montageMainImage/'.$_SESSION['usersinfo']->montage_main_image;
-					   }
-						if($_SESSION['usersinfo']->montage_main_image!=""){?>
-						<div class="span180">
-							<img id="MontageImage" src="<?php echo $image; ?>">
-							<div style="position:absolute;bottom:20px;left:25%;">
-								<p style="font-size:0.55em; text-decoration:underline;"><a href="javascript:void(0);" id="montagePic">CHANGE YOUR PICTURE</a><input style="display:none" type="file" name="change_image" id="change_image"></P>
-							</div>
-						</div>
-						<?}else{?>
-							<form id="montageUploadForm" method="post" enctype="multipart/form-data">
-							<div class="span180" style="position:relative;">
-								<img id="MontageImage" src="<?php echo $basePath; ?>/images/social_media/profile_img.png"/>
-								<div style="position:absolute;bottom:20px;left:25%;">
-								<p style="font-size:0.55em; text-decoration:underline;"><a href="javascript:void(0);" id="montagePic" >ADD YOUR PICTURE</a><input style="display:none" type="file" name="change_image" id="change_image"></P>
-							</div>
-							</div>
-							</form>
-						<?}?>
-							<div id="your_paragraph">
+		<!-- Title End -->
+		
+						
+							<div id="your_paragraph" class="dashboard_img_paragrap">
 							<?if($_SESSION['usersinfo']->montage_paragraph==""){
 								$montage_paragraph="";
 							?>
-							<div class="span700 profile_text_empty">
+							<div class="profile_text_empty">
 									<div id="montagPara_Div_id1" class="montage_Paragraph_show"><a href="javascript:void(0);" title="Edit your paragraph" onclick="montagePopUp(3)"><img src="<?php echo $basePath; ?>/images/social_media/profile_empty.png" class="edit_paragraph_mon_empty"/></a><p>No Writing competition needed here</p></div>
 							</div>
 							<?}else{
 								$montage_paragraph=$_SESSION['usersinfo']->montage_paragraph;
 							?>
-							<div class="span700">
+							<div class="">
 								<div id="montagPara_Div_id" class="montage_Paragraph_show"><P><?echo $_SESSION['usersinfo']->montage_paragraph;?><span><a href="javascript:void(0);" title="Edit your paragraph" onclick="montagePopUp(3)" class="edit_paragraph_mon_empty">EDIT</a></SPAN></P></div>
 							</div>
 							<?}?>
@@ -102,7 +110,7 @@
 		</div>
 	</div>
 </div>
-
+</div>
 
 
 

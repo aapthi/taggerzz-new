@@ -116,7 +116,7 @@ smaller than 560
 	width:100%;
 	position:relative;
 	margin-top:5.00em;
-    z-index: 5; }
+    z-index: 0; }
 
 
 
@@ -150,7 +150,7 @@ smaller than 560
 	width:100%;
 	position:relative;
 	margin-top:0.00em;	
-    z-index: 5; }
+   z-index: 0;}
 
 
 }
@@ -183,7 +183,7 @@ smaller than 560
 	width:100%;
 	position:relative;
 	margin-top:5.00em;
-    z-index: 5; }
+    z-index: 0; }
 
 }
 
@@ -235,7 +235,7 @@ smaller than 560
 	width:100%;
 	position:relative;
 	margin-top:0.00em;
-    z-index: 5; }
+    z-index: 0; }
 	
 }
 
@@ -263,7 +263,7 @@ smaller than 560
 	position:relative;
 	margin-top:0.00em;
 	margin-left:-5.00em;
-    z-index: 5; }
+    z-index: 0; }
 			
 }
 
@@ -293,7 +293,7 @@ smaller than 560
 	position:relative;
 	margin-top:0.00em;
 	margin-left:1.00em;
-    z-index: 5; }
+    z-index: 0; }
 
 }
 
@@ -323,7 +323,7 @@ smaller than 560
 	position:relative;
 	margin-top:0.00em;
 	margin-left:1.00em;
-    z-index: 5; }
+    z-index: 0; }
 
 }
 
@@ -350,7 +350,7 @@ smaller than 560
 	position:relative;
 	margin-top:0.00em;
 	margin-left:1.00em;
-    z-index: 5; }
+   z-index: 0; }
 	
 	#divFooterSentence{
 		float:left;
@@ -384,7 +384,7 @@ smaller than 560
 	position:relative;
 	margin-top:40.00em;
 	margin-left:8.00em;
-    z-index: 5; }
+    z-index: 0; }
 	
 	#divFooterSentence{
 		float:left;
@@ -418,7 +418,7 @@ smaller than 560
 	position:relative;
 	margin-top:30.00em;
 	margin-left:3.00em;
-    z-index: 5; }
+   z-index: 0; }
 	
 	
 		#divFooterSentence{
@@ -457,7 +457,7 @@ smaller than 560
 	position:relative;
 	margin-top:35.00em;
 	margin-left:5.00em;
-    z-index: 5; }
+   z-index: 0; }
 	
 		#divFooterSentence{
 		float:left;
@@ -491,7 +491,7 @@ smaller than 560
 	position:relative;
 	margin-top:35.00em;
 	margin-left:5.00em;
-    z-index: 5; }
+   z-index: 0; }
 	
 		#divFooterSentence{
 		float:left;
@@ -525,7 +525,7 @@ smaller than 560
 	position:relative;
 	margin-top:35.00em;
 	margin-left:5.00em;
-    z-index: 5; }
+    z-index: 0; }
 	
 		#divFooterSentence{
 		float:left;
@@ -559,7 +559,7 @@ smaller than 560
 	width:20%;
 	position:relative;
 	margin-top:35.00em;
-    z-index: 5; }
+    z-index: 0; }
 	
 		#divFooterSentence{
 		float:left;
@@ -599,7 +599,7 @@ smaller than 560
 	width:100%;
 	position:relative;
 	margin-top:35.00em;
-    z-index: 5; }
+    z-index: 0; }
 	
 		#divFooterSentence{
 		float:left;

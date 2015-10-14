@@ -234,6 +234,8 @@ input {
 
 .width30,#secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divUserSummaryRow .divUserSummaryColumn {
   width: 30%; }
+  #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divUserSummaryRow .divUserSummaryColumn {
+  width: 20% !important; } /* Above Line change today */
 .divHeaderWrapper .divSearchBoxes input[type="text"]{
 	width: 35%; 
 }  
@@ -527,7 +529,7 @@ a {
         white-space: normal;
         background: white;
         border: 1px solid rgba(0, 0, 0, 0.1);
-        cursor: move !important;
+        cursor: pointer !important;
         box-shadow: 0px 0px 1px 0px #ABABAB;
         -webkit-box-shadow: 0px 0px 1px 0px #ABABAB;
         -moz-box-shadow: 0px 0px 1px 0px #ABABAB;

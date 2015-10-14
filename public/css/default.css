@@ -1018,14 +1018,13 @@ input:focus, input[type="text"]:focus{
 	 padding-right:0;
 }
 .mycolleection h2,.mycolleection h1{
-	font-size:1em;
-	color:#5c5959;
+	font-size:14pt;
 }
 
 .mycolleection p{
 	line-height:24px;
 	text-transform:uppercase;
-	font-size:0.75em;
+	font-size:9pt;
 	color:#5c5959;
 }
 .span180{
@@ -1251,8 +1250,8 @@ margin-bottom:20px;
 	font-size:9pt;
 	margin-left:5px;
 	line-height:18px;
-	text-decoration:underline;
 	color:#00afd1;
+	font-weight:normal;
 }
 .add_title{
 	text-decoration:underline;
@@ -2394,7 +2393,7 @@ color:#333;
 }
 .edit_title_mon{
 	display:none;
-	color:#227cec;
+	color:#00afd1;
 	margin-left:5px;
 	font-size:0.8em;
 	text-decoration:underline;
@@ -2405,10 +2404,8 @@ color:#333;
 	display:none;
 }
 .montage_Paragraph_show a{
-	font-size:0.8em;
-	color:#227cec;
+	color:#00afd1;
 	margin-left:5px;
-	text-decoration:underline;
 }
 /*1/2/2014*/
 .adcomment_pos_ab{

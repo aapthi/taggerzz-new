@@ -30,44 +30,6 @@ and open the template in the editor.
 	if($value==0){
 ?>
 <script type="text/javascript">
-/*
-function show_login_status(network, status)
-{
-	if (status)
-	{
-		if( $('#tpName').html() != ""  )
-		{
-			$('#socialLoginSecond').val( network );
-			return false;
-		}
-		if(network=='Facebook'){
-			var fbpromptfired = getTpCookie("fbpromptfired");
-			if( fbpromptfired != null && fbpromptfired != "" )
-			{
-				checkSecondTp();
-				return false;
-			}
-			$('#tpName').html( 'Facebook' );
-			$('#popUpConfirmTpLogin').popUpWindow({action: "open"});
-			document.cookie="fbpromptfired=yes";
-		}else if(network=='Google'){
-			var googlepromptfired = getTpCookie("googlepromptfired");
-			if( googlepromptfired != null && googlepromptfired != "" )
-			{
-				return false;
-			}
-			else
-			{
-				console.log( googlepromptfired );
-			}
-			$('#tpName').html( 'Google' );
-			$('#popUpConfirmTpLogin').popUpWindow({action: "open"});
-			document.cookie="googlepromptfired=yes";
-		}
-	}
-}
-*/
-
 function show_login_status(network, status)
 {
 	if (status)
@@ -205,7 +167,7 @@ src="https://accounts.google.com/CheckCookie?continue=https%3A%2F%2Fwww.google.c
 								<input type="password" name="userPassword1" id="userPassword1" class="formField txtPassword"/>
                             </div>
 							<div class="block textLeft">
-								<label>Remember Me &nbsp;&nbsp;<input type="checkbox" name="remember_me" id="remember_me" value="" style="width:7% !important;"></label> 									
+								<label><input type="checkbox" name="remember_me" id="remember_me" value="" style="width:7% !important;">Remember Me</label> 									
 							</div>
                             <div class="block textRight">
 								<a href="javascript:void(0)" id="forgot_password"  onClick="Javascript:showFpEmailIdForm();">Forgot Password?</a>
@@ -233,7 +195,7 @@ src="https://accounts.google.com/CheckCookie?continue=https%3A%2F%2Fwww.google.c
       <section id="secCenterAspects" class="secCenterAspects">
                 <div id="divCenterWrapper" class="divCenterWrapper verticalCenterWrapper">
                     <div id="divCenter" class="divCenter verticalCenterContainer">
-                    <div class="ctrl_img_logo"><img src="<?php echo $basePath; ?>/img/imgLogo.png" class="img_logo"></div>
+                    <div class="ctrl_img_logo landing_logo"><img src="<?php echo $basePath; ?>/img/imgLogo.png" class="img_logo"></div>
       <div id="divCenterText" class="divCenterText verticalCenter textCenter">
                             <ul class="ulCenterSlide">
                                 <li>

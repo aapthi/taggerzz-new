@@ -2,7 +2,7 @@ body {
     font-family: "Roboto",sans-serif;
 	font-size:10.5pt;
     font-weight: 400;
-	color:rgba(0, 0, 0, 0.9);
+	color:#333;
 }
 .clearfix {
   *zoom: 1;
@@ -578,7 +578,35 @@ margin-top:4px;
     margin-top: 8px;
     padding-top: 5px;
 }
-
+.landing_logo{
+	background:#fff;
+	padding:5px;
+}
+.dash_board_profile_pick{
+	width:160px;
+	margin:0 auto;
+	border:1px solid #ddd;
+	text-align:center;
+}
+.dash_board_profile_pick img{
+	width:150px;
+	height:150px;
+	padding:5px;
+}
+.dashboard_img_paragrap{
+	text-align:center;
+	padding-left:30px;
+	padding-right:30px;
+	padding-top:10px;
+	padding-bottom:10px;
+	margin-top:10px;
+	border-top:1px solid #ddd;
+}
+.dash_pick_bg{
+	border:1px solid #ddd;
+	padding:10px 0;
+	background:#F9FFFF;
+}
 /* Browser Problem css */
 @media screen and (-webkit-min-device-pixel-ratio:0) { 
 	.divHeaderWrapper .divSearchBoxes .aSearch {
@@ -594,6 +622,11 @@ margin-top:4px;
      margin-top: 10px;
   }
 }
+ @media only screen and (min-width: 1824px) {
+	.withoutlogin_logo{
+		top:7px;
+	}
+ }
 @media (max-width: 767px){ 
 	[class*="span"] {
     display: block !important;
@@ -632,5 +665,14 @@ margin-top:4px;
 	.wrote_p{
 		float:none;
 		width:100%;
+	}
+	#secAccountSettings .divAccountSettingsRow .divAccountSettingsCard .divAccountSettingsHeading .btnComposeMessage, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divAccountSettingsHeading .btnComposeMessage, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .divAccountSettingsHeading .btnComposeMessage, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divUserSummaryHeading .btnComposeMessage{
+		right:10%;
+	}
+	#secAccountSettings .divAccountSettingsRow .divReplyToWrapper .divReplyToControls{
+		right:10%;
+	}
+	.smhide_m{
+		display:none !important;
 	}
 }
