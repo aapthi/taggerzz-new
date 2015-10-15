@@ -72,8 +72,6 @@
 									<div class="pdatabox_profile">
 										<img  src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $currentBoxData["montage_image"];?>" class="imgUserImage" alt="" />
 									</div><br/>
-									<?php }else{ ?>
-									<img src="<?php echo $basePath; ?>/img/userImage.png" class="imgUserImage" alt="" />
 									<?php } ?>
 									<div id="likes<?php echo $currentBoxData["category_id"];?>" class="divCardUserName likes_percentage">
 									<h2><?php echo round($currentBoxData["NetVotes"],2);?>% liked</h2></div>
@@ -200,8 +198,6 @@
                                <div class="pdatabox_profile">
 								<img  src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $currentBoxData["montage_image"];?>" class="imgUserImage" alt="" />
 							   </div><br/>
-								<?php }else{ ?>
-								<img src="<?php echo $basePath; ?>/img/userImage.png" class="imgUserImage" alt="" />
 								<?php } ?>
 								<div id="likes<?php echo $currentBoxData["category_id"];?>" class="divCardUserName likes_percentage"><h2><?php echo round($currentBoxData["likes"],2);?>% liked</h2></div>
                             </div>

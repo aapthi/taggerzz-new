@@ -43,6 +43,8 @@
 			<h1>#MONTAGE
 			<?if( isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId==$this->ucUserId){?>
 			<a href="javascript:void(0);" onclick="montagePopUp(1)" class="add_new_pick">ADD YOURS</a>
+			</h1>
+		</div>
 			<?}}else{
 				$montage_hash_name=$this->montageHashName;
 				if(strlen($montage_hash_name)>30){
@@ -51,9 +53,7 @@
 					$montageLength=$montage_hash_name; 
 				}
 			?>
-			</h1>
-		</div>
-		<div  align="center">
+		<div>
 			<h1>#<?echo $montageLength;?>
 				<?if( isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId==$this->ucUserId){?>
 				<a href="javascript:void(0);" onclick="montagePopUp(1)" title="Edit hash name" class="add_new_pick">EDIT</a>

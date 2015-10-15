@@ -32,8 +32,9 @@
 			<?if($_SESSION['usersinfo']->montage_hash_name==""){
 			$montage_hash_name="";
 			?>
-			<div class=""><h1>#MONTAGE
+			<div  class=""><h1>#MONTAGE
 			<a href="javascript:void(0);" onclick="montagePopUp(1)" class="add_new_pick">ADD YOURS</a>
+			</h1></div>
 			<?}else{
 			$montage_hash_name=$_SESSION['usersinfo']->montage_hash_name;
 			if(strlen($montage_hash_name)>30){
@@ -42,8 +43,8 @@
 			$montageLength=$montage_hash_name; 
 			}
 			?>
-			</h1></div>
-			<div align="center" ><h1>#<?echo $montageLength;?>
+			
+			<div ><h1>#<?echo $montageLength;?>
 				<a href="javascript:void(0);" onclick="montagePopUp(1)" title="Edit hash name" class="add_new_pick">EDIT</a>
 			</h1></div>
 			<?}?>

@@ -1305,7 +1305,7 @@ function saveMontage(typee){
 								var text1=text;
 							}
 							$('#pop-up-hash').popUpWindow({action: "close"});
-							$('#hash_name').html('<div  class="float_l"><h1>#'+text1+'</h1></div><div class="float_l"><a href="javascript:void(0);" onclick="montagePopUp(1)" title="Edit hash name" class="add_new_pick">EDIT</a></div>');
+							$('#hash_name').html('<div><h1>#'+text1+'<a href="javascript:void(0);" onclick="montagePopUp(1)" title="Edit hash name" class="add_new_pick">EDIT</a></h1></div>');
 							$('#montage_hash_name').val("#"+text);
 							if(text.length>15){
 								var text2 = text.substring(0,15)+'..';
@@ -1315,11 +1315,11 @@ function saveMontage(typee){
 							$('#myCollectionDisplay').html('#'+text2);
 						}else if(typee==2){
 							$('#pop-up-title').popUpWindow({action: "close"});
-							$('#your_title').html('<h2><span><a href="javascript:void(0);" onclick="montagePopUp(2)" class="">EDIT TITLE&nbsp;&nbsp;&nbsp;&nbsp;</a></span>'+text+'</h2>');
+							$('#your_title').html('<h2><span>'+text+'<a href="javascript:void(0);" onclick="montagePopUp(2)" class="add_new_pick">&nbsp;&nbsp;&nbsp;&nbsp;EDIT TITLE</a></span></h2>');
 							$('#montage_title').val(text);
 						}else{
 							$('#pop-up-paragraph').popUpWindow({action: "close"});
-							$('#your_paragraph').html('<div class="span700"><div id="montagPara_Div_id" class="montage_Paragraph_show"><P>'+text+'<span><a href="javascript:void(0);" title="Edit your paragraph" onclick="montagePopUp(3)" class="edit_paragraph_mon_empty">EDIT</a></span></P></div></div>');
+							$('#your_paragraph').html('<div class=""><div id="montagPara_Div_id" class="montage_Paragraph_show"><P>'+text+'<span><a href="javascript:void(0);" title="Edit your paragraph" onclick="montagePopUp(3)" class="edit_paragraph_mon_empty">EDIT</a></span></P></div></div>');
 							$('#montage_paragraph').val(text);
 						}
 					}
