@@ -2311,7 +2311,7 @@ class DataboxController extends AbstractActionController
 			));	
 			return $result;
 		}
-		$publicBoxesHtml.='<div id="divDataboxWrapper" class="divCardsWrapper" data-columns="4">';
+		$publicBoxesHtml.='<div id="divDataboxWrapper" class="divCardsWrapper" data-columns>';
 		foreach( $searchBoxesRs as $currentBoxRow )
 		{
 			$linksCount = 0;
@@ -2378,7 +2378,7 @@ class DataboxController extends AbstractActionController
 			$displayCustomizationUrl .= "/databox/" . $viewUrl . "/" . $currentBoxRow->category_id . "+" . $catImageUrll . "+" . $catHashName . "+" . $catTitle;
 			
 			//NEW Code
-			$publicBoxesHtml.='<div class="left width25">';
+			$publicBoxesHtml.='<div class="left width20">';
 			$publicBoxesHtml .= '<div id="divDatabox-1" class="divCard"><div id="divDatabox-1-imageWrapper" class="divCardImageWrapper">';
 				if( $showMcNsfwPopup ){
 					$publicBoxesHtml .=	'<a href="javascript:void(0)" onClick="Javascript:displayNsfwMc(' .$currentBoxRow->category_id .','. $dispHashName .','. $currentBoxRow->category_title .','. $currentBoxRow->settingId .', '.$catImageUrll.'><img src="'.$basePath .'/images/social_media/mature_content.jpg" width="234" height="302" /></a>';
@@ -2442,7 +2442,7 @@ class DataboxController extends AbstractActionController
 		  
 			//END
 		}
-		$publicBoxesHtml .='</div>';
+	    $publicBoxesHtml .='</div>';
 	   
 		$result = new JsonModel(array(					
 			'zeroPublicBoxesFound' 	=>  $zeroPublicBoxesFound,
