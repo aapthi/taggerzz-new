@@ -178,10 +178,22 @@
 <script>
 	function updateCoords(c)
 	{
+		var ratioW = $('#cropbox')[0].naturalWidth / $('#cropbox').width();
+		var ratioH = $('#cropbox')[0].naturalHeight / $('#cropbox').height();
+		
+		var currentRatio = Math.min(ratioW, ratioH);
+		
+        jQuery('#x').val(Math.round(c.x * currentRatio));
+        jQuery('#y').val(Math.round(c.y * currentRatio));
+        jQuery('#w').val(Math.round(c.w * currentRatio));
+        jQuery('#h').val(Math.round(c.h * currentRatio));
+		
+		/*
 		jQuery('#x').val(c.x);
 		jQuery('#y').val(c.y);
 		jQuery('#w').val(c.w);
 		jQuery('#h').val(c.h);
+		*/
 	}
 	
 	function checkCoords()
