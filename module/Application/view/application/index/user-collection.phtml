@@ -69,11 +69,11 @@
 		<?if($this->montageTitle==""){$montage_title="";?>
 		<?if( isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId==$this->ucUserId){?>
 		<h2><a href="javascript:void(0);" onclick="montagePopUp(2)" class="add_title">Add your Title here</a></h2>
-		<? }else {?><h2>&nbsp;</h2>
+		<? }else { ?><h2>&nbsp;</h2>
 		<?}}else{
 			$montage_title=$this->montageTitle;
 		?>
-		<h2><?if( isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId==$this->ucUserId){?><span> <?echo $montage_title;?><a href="javascript:void(0);" onclick="montagePopUp(2)" class="add_new_pick">&nbsp;&nbsp;&nbsp;&nbsp;EDIT TITLE</a></span><? } ?></h2>
+		<h2><?if( isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId==$this->ucUserId){?><span> <?echo $montage_title;?><a href="javascript:void(0);" onclick="montagePopUp(2)" class="add_new_pick">&nbsp;&nbsp;&nbsp;&nbsp;EDIT TITLE</a></span><? }else { ?><span> <?echo $montage_title; ?></span><?} ?></h2>
 		<?}
 			if( $montage_title != "" )
 			{
