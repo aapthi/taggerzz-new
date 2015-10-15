@@ -590,14 +590,13 @@ function insertComment(){
 					if(data.output!=0) {
 						var addHtml='';
 						$('#message').val('');
-						addHtml+='<div id="comment'+newValue+'"><div class="row tmar_b20"><div class="rimg_left"><img  width="40px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php if(isset($_SESSION['usersinfo']->montage_image)){echo $_SESSION['usersinfo']->montage_image; }?>" alt="" class="height100" /></div><div class="rcontenleft"><div class="name_c"><?php if(isset($_SESSION['usersinfo']->displayName)){echo $_SESSION['usersinfo']->displayName;} ?></div><span id="commText'+newValue+'">';
+						addHtml+='<div id="comment'+newValue+'"><div class="row tmar_b20"><div class="rimg_left"><img  width="55px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php if(isset($_SESSION['usersinfo']->montage_image)){echo $_SESSION['usersinfo']->montage_image; }?>" alt="" class="height100" /></div><div class="rcontenleft"><div class="name_c"><?php if(isset($_SESSION['usersinfo']->displayName)){echo $_SESSION['usersinfo']->displayName;} ?></div><span id="commText'+newValue+'">';
 						addHtml+=comment;
 						addHtml+='</span>';
 						addHtml+='<br/>';
-						addHtml+='<div class="comment_btns_pos_ab"><button onClick="editComment('+newValue+')" class="comment_edit_btn">Edit</button> <button onClick="deletedComment('+newValue+')" class="comment_delete_btn">Delete </button></div></div><div class="clearfix"></div></div></div>';
+						addHtml+='<div class="comment_btns_pos_ab"><button onClick="editComment('+newValue+')" class="comment_edit_btn">Edit</button> <button onClick="deletedComment('+newValue+')" class="comment_delete_btn">Delete </button></div></div></div><div class="clearfix"></div></div>';
 						$('#commentsList').prepend(addHtml);
 						$('#hidSendComment').val('0');
-						alert('comment inserted');
 					}else{
 						alert('No data is found');
 					}
@@ -612,16 +611,16 @@ function insertComment(){
 				success: function( data ) {
 					if(data.output!=0) {
 						var addHtmlEdit='';
-						addHtmlEdit+='<div id="comment'+hid+'" ><span id="commText'+hid+'">';
+						addHtmlEdit+='<div id="comment'+hid+'" ><div class="row tmar_b20"><div class="rimg_left"><img  width="55px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php if(isset($_SESSION['usersinfo']->montage_image)){echo $_SESSION['usersinfo']->montage_image; }?>" alt="" class="height100" /></div><div class="rcontenleft"><div class="name_c"><?php if(isset($_SESSION['usersinfo']->displayName)){echo $_SESSION['usersinfo']->displayName;} ?></div><span id="commText'+hid+'">';
 						addHtmlEdit+=comment;
 						addHtmlEdit+='</span>';
-						addHtmlEdit+='<button onClick="editComment('+hid+')" class="">Edit Comment</button> |<button onClick="deletedComment('+hid+')" class="">Delete Comment</button></div>';
+						addHtmlEdit+='<br/>';
+						addHtmlEdit+='<div class="comment_btns_pos_ab"><button onClick="editComment('+hid+')" class="comment_edit_btn">Edit</button> <button onClick="deletedComment('+hid+')" class="comment_delete_btn">Delete</button></div></div></div><div class="clearfix"></div></div>';
 						$('#comment'+hid).html(addHtmlEdit);
 						$('#message').val('');
 						$('#commentSend').html('');
 						$('#commentSend').html('COMMENT SEND');
 						$('#hidSendComment').val('0');
-						alert('comment updated');
 					}else{
 						alert('No data is found');
 					}
