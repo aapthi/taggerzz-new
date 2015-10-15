@@ -830,7 +830,7 @@ function checkSpaces()
 			}
 			var like=(parseInt(newTotalvoteUp)/parseInt(newTotalrw_lh))*100;
 			like1 = Math.round(like * 100) / 100;
-			$('#likes'+categoryId).html(like1+'% liked');
+			$('#likes'+categoryId).html('<h2>'+like1+'% liked</h2>');
 			if(newVoteValue==1){
 				var clickAppendHtml='<img src="'+BASE_URL+'/public/img/love_ok.png" alt="" />  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'+categoryId+',1,'+newTotalvoteUp+','+newTotalrw_lh+')"><img src="'+BASE_URL+'/public/img/trash.png" alt="" /></a>';
 				clickAppendHtml+='<input type="hidden" id="voting'+categoryId+'" name="voting'+categoryId+'" value="1">';

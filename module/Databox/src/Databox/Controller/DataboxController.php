@@ -2409,7 +2409,7 @@ class DataboxController extends AbstractActionController
 					$publicBoxesHtml .='<img src="'. $basePath .'/img/userImage.png" class="imgUserImage" alt="" />';
 				} 
 					$publicBoxesHtml .= ' <div class="divCardUserName">By: '. $currentBoxRow->display_name .' </div><br/>';
-					$publicBoxesHtml .= ' <div id="likes'.$currentBoxRow->category_id.'" class="divCardUserName">'.$roundLikes.' % liked</div>';
+					$publicBoxesHtml .= ' <div id="likes'.$currentBoxRow->category_id.'" class="divCardUserName likes_percentage"><h2>'.$roundLikes.' % liked</h2></div>';
 				$publicBoxesHtml .='</div>';
 			$publicBoxesHtml .=' </div>';
 			$publicBoxesHtml .='<div id="divDatabox-1-contentWrapper" class="divCardContentWrapper">';
@@ -2570,7 +2570,7 @@ class DataboxController extends AbstractActionController
 					$privateBoxHtml .='<img src="'. $basePath .'/img/userImage.png" class="imgUserImage" alt="" />';
 				} 
 					$privateBoxHtml .= ' <div class="divCardUserName">By: '. $currentBoxRow->display_name .' </div><br/>';
-					$privateBoxHtml .= ' <div  id="likes'.$currentBoxRow->category_id.'" class="divCardUserName">'. $roundLikes.' % liked</div>';
+					$privateBoxHtml .= ' <div  id="likes'.$currentBoxRow->category_id.'" class="divCardUserName likes_percentage"><h2>'. $roundLikes.' % liked</h2></div>';
 				$privateBoxHtml .='</div>';
 			$privateBoxHtml .=' </div>';
 			$privateBoxHtml .='<div id="divDatabox-1-contentWrapper" class="divCardContentWrapper">';
