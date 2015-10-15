@@ -2131,9 +2131,7 @@ class DataboxController extends AbstractActionController
 				$publicBoxesHtml .= ' <div class="divCardUserName">By: '. $currentBoxRow->display_name .' </div>';
 				if($currentBoxRow->montage_image !=""){
 					$publicBoxesHtml .=' <div class="pdatabox_profile"><img  src="'.$basePath.'/images/project/montageImages/'.$currentBoxRow->montage_image .'"  class="imgUserImage" alt="" /></div><br/>';
-				}else{ 
-					$publicBoxesHtml .='<img src="'. $basePath .'/img/userImage.png" class="imgUserImage" alt="" />';
-				} 
+				}
 				$publicBoxesHtml .= ' <div id="likes'.$currentBoxRow->category_id.'" class="divCardUserName likes_percentage"><h2>'.$roundLikes.'% liked</h2></div>';
 				$publicBoxesHtml .='</div>';
 				$publicBoxesHtml .=' <div class="divbrg_f"></div><div class="divbrg_s"></div><div style="clear:both;"></div></div>';
@@ -2378,19 +2376,7 @@ class DataboxController extends AbstractActionController
 			$catImageUrll=$catImageUrl[0];
 			$roundLikes=round($currentBoxRow->likes);
 			$displayCustomizationUrl .= "/databox/" . $viewUrl . "/" . $currentBoxRow->category_id . "+" . $catImageUrll . "+" . $catHashName . "+" . $catTitle;
-			/*if(  $showMcNsfwPopup  )
-			{
-				$publicBoxesHtml .= '<div class="hashtag_main_public_boxes hashtag_pos_ab"><p><a class="home_anchor_black" href="javascript:void(0)" onClick="Javascript:displayNsfwMc1( ' . $currentBoxRow->category_id . ','.$currentBoxRow->settingId .' );">' . $dispHashName . '</a></p></div>';
-				$publicBoxesHtml .= '<div class="image_block_publick_databox"><a href="javascript:void(0)" onClick="Javascript:displayNsfwMc1( ' . $currentBoxRow->category_id . ','.$currentBoxRow->settingId .' );"><img src= "' . $basePath . '/images/social_media/mature_content.jpg" width="234" height="302" /></a></div>';
-			}
-			else
-			{
-				$publicBoxesHtml .= '<div class="hashtag_main_public_boxes hashtag_pos_ab"><p><a class="home_anchor_black" href="' . $displayCustomizationUrl . '">' . $dispHashName . '</a></p></div>';
-				$publicBoxesHtml .= '<div class="image_block_publick_databox"><a href="' . $displayCustomizationUrl . '"><img src= "'.$basePath.'/images/project/categoryImages/' . $currentBoxRow->category_image . '" width="234" height="302" /></a></div>';
-				$publicBoxesHtml .= '<div class="home_pos_abso"><p><a class="home_anchor_black" href="' . $displayCustomizationUrl . '">'. $currentBoxRow->category_title . '</a></p></div>';
-				$publicBoxesHtml .= '<div class="home_pos_abso_left"><p>>> Listed Sources >> </p></div>';
-				$publicBoxesHtml .= '<div class="home_pos_abso_right"><p>' . $linksCount . '</p></div>';
-			}*/
+			
 			//NEW Code
 			$publicBoxesHtml.='<div class="left width25">';
 			$publicBoxesHtml .= '<div id="divDatabox-1" class="divCard"><div id="divDatabox-1-imageWrapper" class="divCardImageWrapper">';
@@ -2403,12 +2389,11 @@ class DataboxController extends AbstractActionController
 				$publicBoxesHtml .='<div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">';
 				$publicBoxesHtml .= '<span class="fatFont">'.$linksCount.' HOT LINKS </span> collected and shared</div>';
 				$publicBoxesHtml .='<div id="Card-1-user" class="divCardUser">';
+				$publicBoxesHtml .= ' <div class="divCardUserName">By: '. $currentBoxRow->display_name .' </div><br/>';
+
 				if($currentBoxRow->montage_image !=""){
-					$publicBoxesHtml .='<img  src="'.$basePath.'/images/project/montageImages/'.$currentBoxRow->montage_image .'"  class="imgUserImage" alt="" />';
-				}else{ 
-					$publicBoxesHtml .='<img src="'. $basePath .'/img/userImage.png" class="imgUserImage" alt="" />';
-				} 
-					$publicBoxesHtml .= ' <div class="divCardUserName">By: '. $currentBoxRow->display_name .' </div><br/>';
+					$publicBoxesHtml .='<div class="pdatabox_profile"><img  src="'.$basePath.'/images/project/montageImages/'.$currentBoxRow->montage_image .'"  class="imgUserImage" alt="" /></div><br/>';
+				}
 					$publicBoxesHtml .= ' <div id="likes'.$currentBoxRow->category_id.'" class="divCardUserName likes_percentage"><h2>'.$roundLikes.' % liked</h2></div>';
 				$publicBoxesHtml .='</div>';
 			$publicBoxesHtml .=' </div>';
@@ -2433,11 +2418,12 @@ class DataboxController extends AbstractActionController
 				}
 				$publicBoxesHtml .='<input type="hidden" id="voting'.$currentBoxRow->category_id.'" name="voting'.$currentBoxRow->category_id.'" value="'.$userVoteUpTz.'">';
 				$publicBoxesHtml .='</div>';
+				
+				$publicBoxesHtml .='<div id="divDatabox-1-title" class="divCardTitle"> '. $currentBoxRow->category_title .
+				'</div>';
 				$publicBoxesHtml .='<div id="divCardKeywords" class="divCardKeywords">';
 				$publicBoxesHtml .=$currentBoxRow->meta_tags;
 				$publicBoxesHtml .='</div>';
-				$publicBoxesHtml .='<div id="divDatabox-1-title" class="divCardTitle"> '. $currentBoxRow->category_title .
-				'</div>';
 			   $publicBoxesHtml .=' <div id="divDatabox-1-description" class="divCardDescription">';
 			   if($currentBoxRow->category_description !=""){
 					if(strlen($currentBoxRow->category_description)>160)
@@ -2563,13 +2549,11 @@ class DataboxController extends AbstractActionController
 				$privateBoxHtml .='<div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">';
 				$privateBoxHtml .= '<span class="fatFont">'.$linksCount.' HOT LINKS </span> collected and shared</div>';
 				$privateBoxHtml .='<div id="Card-1-user" class="divCardUser">';
-				
+				$privateBoxHtml .= ' <div class="divCardUserName">By: '. $currentBoxRow->display_name .' </div><br/>';
+
 				if($currentBoxRow->montage_image !=""){
-					$privateBoxHtml .='<img  src="'.$basePath.'/images/project/montageImages/'.$currentBoxRow->montage_image .'"  class="imgUserImage" alt="" />';
-				}else{ 
-					$privateBoxHtml .='<img src="'. $basePath .'/img/userImage.png" class="imgUserImage" alt="" />';
-				} 
-					$privateBoxHtml .= ' <div class="divCardUserName">By: '. $currentBoxRow->display_name .' </div><br/>';
+					$privateBoxHtml .='<div class="pdatabox_profile"><img  src="'.$basePath.'/images/project/montageImages/'.$currentBoxRow->montage_image .'"  class="imgUserImage" alt="" /></div><br/>';
+				}
 					$privateBoxHtml .= ' <div  id="likes'.$currentBoxRow->category_id.'" class="divCardUserName likes_percentage"><h2>'. $roundLikes.' % liked</h2></div>';
 				$privateBoxHtml .='</div>';
 			$privateBoxHtml .=' </div>';
@@ -2594,11 +2578,11 @@ class DataboxController extends AbstractActionController
 				}
 				$privateBoxHtml .='<input type="hidden" id="voting'.$currentBoxRow->category_id.'" name="voting'.$currentBoxRow->category_id.'" value="'.$userVoteUpTz.'">';
 				$privateBoxHtml .='</div>';
+				$privateBoxHtml .='<div id="divDatabox-1-title" class="divCardTitle"> '. $currentBoxRow->category_title .
+				'</div>';
 				$privateBoxHtml .='<div id="divCardKeywords" class="divCardKeywords">'; 
 				$privateBoxHtml .=$currentBoxRow->meta_tags;
 				$privateBoxHtml.='</div>';
-				$privateBoxHtml .='<div id="divDatabox-1-title" class="divCardTitle"> '. $currentBoxRow->category_title .
-				'</div>';
 			   $privateBoxHtml .=' <div id="divDatabox-1-description" class="divCardDescription">';
 			   if($currentBoxRow->category_description !=""){
 					if(strlen($currentBoxRow->category_description)>160)
