@@ -2523,6 +2523,11 @@ class DataboxController extends AbstractActionController
 			}else{
 				$viewsCount=$currentBoxRow->views_count;
 			}
+			$showMcNsfwPopup = false;
+			if( (! isset($_SESSION['usersinfo'])) && (($currentBoxRow->mature_content == 1) || ($currentBoxRow->not_safe_for_work == 1)) )
+			{
+				$showMcNsfwPopup = true;
+			}
 			$displayCustomizationUrl = $baseUrl;
 			$catTitles = str_replace( "-","~",$currentBoxRow->category_title );
 			$catTitle = str_replace( " ","-",$catTitles );
