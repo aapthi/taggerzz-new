@@ -2302,6 +2302,7 @@ class DataboxController extends AbstractActionController
 		//echo "<pre>";print_r($searchBoxesRs->toArray()); exit;
 		$publicBoxesHtml = "";
 		$zeroPublicBoxesFound = 0;
+		$divCards = array();
 		if( $searchBoxesRs->count() == 0 )
 		{
 			$zeroPublicBoxesFound = 1;
@@ -2311,7 +2312,7 @@ class DataboxController extends AbstractActionController
 			));	
 			return $result;
 		}
-		$publicBoxesHtml.='<div id="divDataboxWrapper" class="divCardsWrapper" data-columns>';
+		$publicBoxesHtml1='<div id="divDataboxWrapper" class="divCardsWrapper" data-columns>';
 		foreach( $searchBoxesRs as $currentBoxRow )
 		{
 			$linksCount = 0;
@@ -2378,75 +2379,77 @@ class DataboxController extends AbstractActionController
 			$displayCustomizationUrl .= "/databox/" . $viewUrl . "/" . $currentBoxRow->category_id . "+" . $catImageUrll . "+" . $catHashName . "+" . $catTitle;
 			
 			//NEW Code
-			$publicBoxesHtml.='<div class="left width20">';
-			$publicBoxesHtml .= '<div id="divDatabox-1" class="divCard"><div id="divDatabox-1-imageWrapper" class="divCardImageWrapper">';
+		    $publicBoxesHtml1 .='<div class="left width20">';
+			$publicBoxesHtml1 .= '<div id="divDatabox-1" class="divCard" draggable="true"><div id="divDatabox-1-imageWrapper" class="divCardImageWrapper">';
 				if( $showMcNsfwPopup ){
-					$publicBoxesHtml .=	'<a href="javascript:void(0)" onClick="Javascript:displayNsfwMc(' .$currentBoxRow->category_id .','. $dispHashName .','. $currentBoxRow->category_title .','. $currentBoxRow->settingId .', '.$catImageUrll.'><img src="'.$basePath .'/images/social_media/mature_content.jpg" width="234" height="302" /></a>';
+					$publicBoxesHtml1 .=	'<a href="javascript:void(0)" onClick="Javascript:displayNsfwMc(' .$currentBoxRow->category_id .','. $dispHashName .','. $currentBoxRow->category_title .','. $currentBoxRow->settingId .', '.$catImageUrll.'><img src="'.$basePath .'/images/social_media/mature_content.jpg" width="234" height="302" /></a>';
 				} else { 
-					$publicBoxesHtml .='<a href="'.$displayCustomizationUrl.'"><img id="Databox-1-img" class="" alt="'.$dispHashName.'" src="'.$basePath.'/images/project/categoryImages/'.$currentBoxRow->category_image .'"/></a>';
+					$publicBoxesHtml1 .='<a href="'.$displayCustomizationUrl.'"><img id="Databox-1-img" class="" alt="'.$dispHashName.'" src="'.$basePath.'/images/project/categoryImages/'.$currentBoxRow->category_image .'"/></a>';
 				}
-				$publicBoxesHtml .='<div id="divDatabox-1-hashtag" class="divCardHashtag"> <a href="'.$displayCustomizationUrl.'">'.$dispHashName .' </a></div>';
-				$publicBoxesHtml .='<div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">';
-				$publicBoxesHtml .= '<span class="fatFont">'.$linksCount.' HOT LINKS </span> collected and shared</div>';
-				$publicBoxesHtml .='<div id="Card-1-user" class="divCardUser">';
-				$publicBoxesHtml .= ' <div class="divCardUserName">By: '. $currentBoxRow->display_name .' </div><br/>';
+				$publicBoxesHtml1 .='<div id="divDatabox-1-hashtag" class="divCardHashtag"> <a href="'.$displayCustomizationUrl.'">'.$dispHashName .' </a></div>';
+				$publicBoxesHtml1 .='<div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">';
+				$publicBoxesHtml1 .= '<span class="fatFont">'.$linksCount.' HOT LINKS </span> collected and shared</div>';
+				$publicBoxesHtml1 .='<div id="Card-1-user" class="divCardUser">';
+				$publicBoxesHtml1 .= ' <div class="divCardUserName">By: '. $currentBoxRow->display_name .' </div>';
 
 				if($currentBoxRow->montage_image !=""){
-					$publicBoxesHtml .='<div class="pdatabox_profile"><img  src="'.$basePath.'/images/project/montageImages/'.$currentBoxRow->montage_image .'"  class="imgUserImage" alt="" /></div><br/>';
+					$publicBoxesHtml1 .='<div class="pdatabox_profile"><img  src="'.$basePath.'/images/project/montageImages/'.$currentBoxRow->montage_image .'"  class="imgUserImage" alt="" /></div><br/>';
 				}
-					$publicBoxesHtml .= ' <div id="likes'.$currentBoxRow->category_id.'" class="divCardUserName likes_percentage"><h2>'.$roundLikes.' % liked</h2></div>';
-				$publicBoxesHtml .='</div>';
-			$publicBoxesHtml .=' </div>';
-			$publicBoxesHtml .='<div id="divDatabox-1-contentWrapper" class="divCardContentWrapper">';
-				$publicBoxesHtml .='<div id="divDatabox-1-views" class="divCardViews">';
-					$publicBoxesHtml .='<img src="'. $basePath .'/img/views.png" alt="" /> '.$viewsCount.' views';
-			   $publicBoxesHtml .='</div>';
+					$publicBoxesHtml1 .= ' <div id="likes'.$currentBoxRow->category_id.'" class="divCardUserName likes_percentage"><h2>'.$roundLikes.' % liked</h2></div>';
+				$publicBoxesHtml1 .='</div>';
+				$publicBoxesHtml1 .=' <div class="divbrg_f"></div><div class="divbrg_s"></div><div style="clear:both;"></div></div>';
+			    $publicBoxesHtml1 .='<div id="divDatabox-1-contentWrapper" class="divCardContentWrapper"><div>';
+				$publicBoxesHtml1 .='<div id="divDatabox-1-views" class="divCardViews views_w">';
+					$publicBoxesHtml1 .='<img src="'. $basePath .'/img/views.png" alt="" /> '.$viewsCount.' views';
+			   $publicBoxesHtml1 .='</div>';
 			  // $publicBoxesHtml .='<span>'.$roundLikes.'% liked</span>';
-				$publicBoxesHtml .='<div id="divCardLoveTrash'.$currentBoxRow->category_id.'" class="divCardLoveTrash">';
+				$publicBoxesHtml1 .='<div id="divCardLoveTrash'.$currentBoxRow->category_id.'" class="divCardLoveTrash">';
 				if((isset($_SESSION['usersinfo']->userId )&& $currentBoxRow->userVoteId==$_SESSION['usersinfo']->userId) || $currentBoxRow->userVoteId==$_SERVER['REMOTE_ADDR']){
 					if($currentBoxRow->userVoteUp=='1'){
-						$publicBoxesHtml .=	'<img src="'. $basePath .'/img/love_ok.png" alt="" />  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'.$basePath .'/img/trash.png" alt="" /></a>';
+						$publicBoxesHtml1 .=	'<img src="'. $basePath .'/img/love_ok.png" alt="" />  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'.$basePath .'/img/trash.png" alt="" /></a>';
 					}else if($currentBoxRow->uservoteDown=='1'){	
-						$publicBoxesHtml .=	'<a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'. $basePath .'/img/love.png" alt="" /></a>  or  <img src="'.$basePath .'/img/untrash.png" alt="" />';
+						$publicBoxesHtml1 .=	'<a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'. $basePath .'/img/love.png" alt="" /></a>  or  <img src="'.$basePath .'/img/untrash.png" alt="" />';
 					}
 				}else{	
-						$publicBoxesHtml .=	'<a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'. $basePath .'/img/love.png" alt="" /></a>  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'.$basePath .'/img/trash.png" alt="" /></a>';
+						$publicBoxesHtml1 .=	'<a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'. $basePath .'/img/love.png" alt="" /></a>  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'.$basePath .'/img/trash.png" alt="" /></a>';
 				}
 				$userVoteUpTz = "3";
 				if($currentBoxRow->userVoteUp!=""){
 					$userVoteUpTz = $currentBoxRow->userVoteUp;
 				}
-				$publicBoxesHtml .='<input type="hidden" id="voting'.$currentBoxRow->category_id.'" name="voting'.$currentBoxRow->category_id.'" value="'.$userVoteUpTz.'">';
-				$publicBoxesHtml .='</div>';
+				$publicBoxesHtml1 .='<input type="hidden" id="voting'.$currentBoxRow->category_id.'" name="voting'.$currentBoxRow->category_id.'" value="'.$userVoteUpTz.'">';
+				$publicBoxesHtml1 .='</div></div>';
 				
-				$publicBoxesHtml .='<div id="divDatabox-1-title" class="divCardTitle"> '. $currentBoxRow->category_title .
-				'</div>';
-				$publicBoxesHtml .='<div id="divCardKeywords" class="divCardKeywords">';
-				$publicBoxesHtml .=$currentBoxRow->meta_tags;
-				$publicBoxesHtml .='</div>';
-			   $publicBoxesHtml .=' <div id="divDatabox-1-description" class="divCardDescription">';
+				$publicBoxesHtml1 .='<div id="divDatabox-1-title" class="divCardTitle"><h2 class="home_title_d"> '. $currentBoxRow->category_title .
+				'</h2></div>';
+				$publicBoxesHtml1 .='<div id="divCardKeywords" class="divCardKeywords"><h3 class="home_keyword_h3">';
+				$publicBoxesHtml1 .=$currentBoxRow->meta_tags;
+				$publicBoxesHtml1 .='</h3></div>';
+			   $publicBoxesHtml1 .=' <div id="divDatabox-1-description" class="divCardDescription home_de_brg_t home_title_des_s">';
 			   if($currentBoxRow->category_description !=""){
 					if(strlen($currentBoxRow->category_description)>160)
 					{
-						$publicBoxesHtml.= substr($currentBoxRow->category_description,0,160) . '...';
+						$publicBoxesHtml1.= substr($currentBoxRow->category_description,0,160) . '...';
 					}
 					else
 					{
-						$publicBoxesHtml.= $currentBoxRow->category_description;
+						$publicBoxesHtml1.= $currentBoxRow->category_description;
 					}
 				}
-			   $publicBoxesHtml .='</div>';
-			$publicBoxesHtml .='</div>';
-		    $publicBoxesHtml .='</div>';
-			 $publicBoxesHtml .='</div>';
+			   $publicBoxesHtml1 .='</div>';
+			$publicBoxesHtml1 .='</div>';
+		    $publicBoxesHtml1 .='</div>';
+			
+			$publicBoxesHtml1 .='</div>';
+			array_push($divCards, $publicBoxesHtml1);
 		  
 			//END
 		}
-	    $publicBoxesHtml .='</div>';
+	 $publicBoxesHtml1 .='</div>';
 	   
 		$result = new JsonModel(array(					
 			'zeroPublicBoxesFound' 	=>  $zeroPublicBoxesFound,
-			'publicBoxesHtml'		=>	$publicBoxesHtml
+			'publicBoxesHtml'		=>	$publicBoxesHtml1
 		));	
 		return $result;
 	}
