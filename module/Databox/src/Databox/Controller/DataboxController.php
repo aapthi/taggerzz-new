@@ -2379,7 +2379,7 @@ class DataboxController extends AbstractActionController
 			$displayCustomizationUrl .= "/databox/" . $viewUrl . "/" . $currentBoxRow->category_id . "+" . $catImageUrll . "+" . $catHashName . "+" . $catTitle;
 			
 			//NEW Code
-		    $publicBoxesHtml1 .='<div class="left width20">';
+		    $publicBoxesHtml1 .='<div class="left width20 remove_mobile_c" id="remove_mobile_c">';
 			$publicBoxesHtml1 .= '<div id="divDatabox-1" class="divCard" draggable="true"><div id="divDatabox-1-imageWrapper" class="divCardImageWrapper">';
 				if( $showMcNsfwPopup ){
 					$publicBoxesHtml1 .=	'<a href="javascript:void(0)" onClick="Javascript:displayNsfwMc(' .$currentBoxRow->category_id .','. $dispHashName .','. $currentBoxRow->category_title .','. $currentBoxRow->settingId .', '.$catImageUrll.'><img src="'.$basePath .'/images/social_media/mature_content.jpg" width="234" height="302" /></a>';

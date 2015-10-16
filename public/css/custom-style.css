@@ -675,4 +675,8 @@ margin-top:4px;
 	.smhide_m{
 		display:none !important;
 	}
+	.remove_mobile_c{
+		width:100% !important;
+		float:none !important;
+	}
 }
