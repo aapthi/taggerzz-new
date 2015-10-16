@@ -113,7 +113,7 @@
 	overflow: auto;
 }
 .ui-autocomplete {
-	position: absolute;
+	position: fixed; /* nch 10/16/2015*/
 	top: 0;
 	left: 0;
 	cursor: default;
