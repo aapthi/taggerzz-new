@@ -607,6 +607,13 @@ margin-top:4px;
 	padding:10px 0;
 	background:#F9FFFF;
 }
+.logo_martb5{
+	margin-top:5px;
+	margin-bottom:5px;
+}
+.margin_top_20{
+	margin-top:-20px;
+}
 /* Browser Problem css */
 @media screen and (-webkit-min-device-pixel-ratio:0) { 
 	.divHeaderWrapper .divSearchBoxes .aSearch {
@@ -678,5 +685,8 @@ margin-top:4px;
 	.remove_mobile_c{
 		width:100% !important;
 		float:none !important;
+	}
+	.margin_top_20{
+		margin-top:0;
 	}
 }

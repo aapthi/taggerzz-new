@@ -206,7 +206,7 @@ input {
   font-family: sinkin_sans800_black; }
 
 .whiteFont, .primaryButton, #secUploadBookmarks .uploadBookmarksWrapper .inptUploadBookmarkFile, #secAccountSettings .divAccountSettingsRow .btnSaveAccount, .btnBlack, .verticalMenu li a, .ulMenu li a, .ulMenu, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .divCardUser .divCardUserName, .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardUser .divCardUserName {
-  color: white; }
+  color: #333; }
 
 .highlightFont, .divHeaderWrapper .divSearchBoxes .inptSearchHashTag {
   color: #e56470; }
@@ -225,7 +225,7 @@ input {
   font-size: 11pt; }
 
 .verySmallFont, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardContentWrapper .divCardViews, .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardViews {
-  font-size: 6pt; }
+  font-size: 8pt; }
 
 .largeFont {
   font-size: 9.5pt; }
@@ -305,7 +305,7 @@ input {
   width: 80%; }
 
 .width85, #secModal .divModalBlurBackground .divModalContentWrapper .divModalBox, #secCreateHighlight .divCreateHighlightLinks .inptLinks, #secCreateHashtag .divCreateHighlightLinks .inptLinks, #secUploadBookmarks .divCreateHighlightLinks .inptLinks, #secSelectDatabox .divCreateHighlightLinks .inptLinks, #secSelectDatabox .divSelectDataboxContentWrapper, #secCreatePrivateDatabox .divCreatePrivateDataboxLinks .inptLinks, #secCreatePublicDatabox .divCreatePublicDataboxLinks .inptLinks {
-  width: 85%; }
+  width: 83%; }
 
 .width90, #secCreateHighlight .divCreateHighlightHashtag, #secCreateHashtag .divCreateHighlightHashtag, #secUploadBookmarks .divCreateHighlightHashtag, #secSelectDatabox .divCreateHighlightHashtag, #secCreateHighlight .divCreateHighlightTitle, #secCreateHashtag .divCreateHighlightTitle, #secUploadBookmarks .divCreateHighlightTitle, #secSelectDatabox .divCreateHighlightTitle, #secCreateHighlight .divCreateHighlightNatureCategory .inptContentCategory, #secCreateHashtag .divCreateHighlightNatureCategory .inptContentCategory, #secUploadBookmarks .divCreateHighlightNatureCategory .inptContentCategory, #secSelectDatabox .divCreateHighlightNatureCategory .inptContentCategory, #secCreateHashtag .createHashtagWrapper .inptCreateHashtag, #secCreateHashtag .createHashtagWrapper .inptCreateTitle, #secCreatePrivateDatabox .divCreatePrivateDataboxHashtag, #secCreatePrivateDatabox .divCreatePrivateDataboxTitle, #secCreatePrivateDatabox .divCreatePrivateDataboxUniqueCode, #secCreatePrivateDatabox .divCreatePrivateDataboxEmail .inptEmail, #secCreatePublicDatabox .divCreatePublicDataboxHashtag, #secCreatePublicDatabox .divCreatePublicDataboxTitle, #secCreatePublicDatabox .divCreatePublicDataboxNatureCategory .inptContentCategory, #secAccountSettings .divAccountSettingsRow .divAccountSettingsCard .divAccountSettingsForm input, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divAccountSettingsForm input, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .divAccountSettingsForm input, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .ulCreatedCollectionList li .divCreatedCollectionText {
   width: 90%; }
@@ -314,7 +314,7 @@ input {
   width: 95%; }
 
 .width100, .divLeftSlideMenu .divAccountInfo, .mainContainerWrapper, .secHighlights .divCardsMainWrapper, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .imgCardImage, .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .imgCardImage, #secModal .divModalBlurBackground, #secModal .divModalBlurBackground .divModalContentWrapper, #secModal .divModalBlurBackground .divModalContentWrapper .divModalBox .divModalDescription, #secCreateHighlight .divCreateHighlightImage, #secCreateHashtag .divCreateHighlightImage, #secUploadBookmarks .divCreateHighlightImage, #secSelectDatabox .divCreateHighlightImage, #secSelectDatabox .divSelectDataboxContentWrapper .divSelectDatabox, #secSelectDatabox .divSelectDataboxContentWrapper .divSelectDatabox .divSelectDataboxDescription, #secCreatePrivateDatabox .divCreatePrivateDataboxImage, #secCreatePublicDatabox .divCreatePublicDataboxImage, #secAccountSettings, #secAccountSettings .divAccountSettingsRow, #secAccountSettings .divAccountSettingsRow .divAccountSettingsCard .divAccountSettingsHeading, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divAccountSettingsHeading, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .divAccountSettingsHeading, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divUserSummaryHeading, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divUserSummaryRow, #secAccountSettings .divAccountSettingsRow .divReplyToWrapper .txtReplyTo, #secAccountSettings .divAccountSettingsRow .divReplyToWrapper .txtReplyToText {
-  width: 100%; }
+  width: 100%;box-sizing: border-box; }
 
 .height25 {
   height: 25%; }
@@ -372,7 +372,7 @@ input {
   margin: 0px auto; }
 
 .darkBackground, .divLeftSlideMenu, .divHeaderWrapper {
-  background-color: #222222; }
+  background-color: #eee; }
 
 .verticalMenu, .ulMenu {
   list-style: none;
@@ -457,7 +457,7 @@ body {
   top: 0px;
   left: 0px; }
   .divLeftSlideMenu .divAccountInfo {
-    color: white; }
+    color: #333; }
   .divLeftSlideMenu .divProfileDetails {
     line-height: 7pt; }
   .divLeftSlideMenu .divProfileImage {
@@ -481,7 +481,7 @@ body {
     background: url("../../img/searchWhite.png") no-repeat center center;
     background-size: 20pt 20pt;
     width: 20pt;
-    height: 20pt;
+    height: 20.5pt;
     margin-left: 5pt; }
 
 /* Cards Styling */
@@ -608,16 +608,22 @@ body {
       font-size: 8pt;
       font-weight: bold; }
     .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardUser {
-      z-index: 2;
-      bottom: 15%;
-      right: 2%;
-      max-width: 50%; }
+    margin: 0;
+    max-width: 60%;
+    padding: 0;
+    right: 0;
+    top: 5%;
+    z-index: 2; }
       .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardUser img {
         width: 25pt;
-        height: 25pt; }
+        height: 25pt;
+		margin:9px 2px;
+	}
       .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardUser .divCardUserName {
         background: black;
-        font-size: 7pt; }
+        font-size: 8pt; 
+		color:#fff;
+	}
     .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardSharedLinks {
       z-index: 2;
       bottom: 30%;
