@@ -689,4 +689,19 @@ margin-top:4px;
 	.margin_top_20{
 		margin-top:0;
 	}
+	.tlogin_bg,.tsignup_bg{
+		background:none;
+	}
+	.sm_share_btns{
+		margin-bottom:10px;
+		margin-top:5px;
+	}
+	.sm_share_btns a{
+	background: #ddd none repeat scroll 0 0;
+    border: 1px solid #ccc;
+    color: rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+    padding: 3px 8px !important;
+	text-decoration:none;
+}
 }
