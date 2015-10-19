@@ -564,6 +564,7 @@ $(document).ready(function()
 <script>       
 
 function editComment(id){
+    $('#message').focus();
 	var editCommTxt = $('#commText'+id).html();
 	$('#message').val(editCommTxt);
 	$('#commentSend').html('Update Comment');
@@ -638,6 +639,10 @@ function deletedComment(id){
 				if(data.output!=0) {
 					$('#comment'+id).remove();
 					alert('comment deleted');
+					$('#message').val('');
+					$('#commentSend').html('');
+					$('#commentSend').html('COMMENT SEND');
+					$('#hidSendComment').val('0');
 				}else{
 					alert('No data is found');
 				}
