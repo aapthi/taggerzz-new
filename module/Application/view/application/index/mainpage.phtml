@@ -105,12 +105,17 @@
 								?>
                                   <input type="hidden" id="voting<?php echo $currentBoxData["category_id"];?>" name="voting<?php echo $currentBoxData["category_id"];?>" value="<?php if($currentBoxData["userVoteUp"]!=""){echo $currentBoxData["userVoteUp"];}else{ echo "3";}  ?>">
                                 </div>
+								<?php if($currentBoxData["category_title"]!=""){?>
 								<div id="divCard-1-title" class="divCardTitle">
                                    <h2 class="home_title_d"><?php echo $currentBoxData["category_title"];?></h2>
                                 </div>
+								<?php } ?>
+								<?php if($currentBoxData["meta_tags"]!=""){?>
                                 <div id="divCardKeywords" class="divCardKeywords">
-								<h3 class="home_keyword_h3"><?php echo $currentBoxData["meta_tags"];?></h3>
-							</div>
+									<h3 class="home_keyword_h3"><?php echo $currentBoxData["meta_tags"];?></h3>
+								</div>
+								<?php } ?>
+								<?php if($currentBoxData["category_description"]!=""){?>
                                 <div id="divCard-1-description" class="divCardDescription home_title_des_s home_heightlight_des_p">
                                     <?php if($currentBoxData["category_description"]!=""){
 										if(strlen($currentBoxData["category_description"])>155)
@@ -123,6 +128,7 @@
 										}
 									}?>
                                 </div>
+								<?php } ?>
                             </div>
                         </div>
                         <?php } } ?>
@@ -228,13 +234,18 @@
                             <input type="hidden" id="voting<?php echo $currentBoxData["category_id"];?>" name="voting<?php echo $currentBoxData["category_id"];?>" value="<?php if($currentBoxData["userVoteUp"]!=""){echo $currentBoxData["userVoteUp"];}else{ echo "3";}  ?>">
 
 							</div>
-                            </div>
+                        </div>
+							<?php if($currentBoxData["category_title"]!=""){?>
                             <div id="divDatabox-1-title" class="divCardTitle">
                                 <h2 class="home_title_d"><?php echo $currentBoxData["category_title"];?></h2>
                             </div>
+							<?php } ?>
+							<?php if($currentBoxData["meta_tags"]!=""){?>
 							 <div id="divCardKeywords" class="divCardKeywords">
 								<h3 class="home_keyword_h3"><?php echo $currentBoxData["meta_tags"];?></h3>
 							 </div>
+							 <?php } ?>
+							 <?php if($currentBoxData["category_description"]!=""){?>
                             <div id="divDatabox-1-description" class="divCardDescription home_de_brg_t home_title_des_s">
 							<?php if($currentBoxData["category_description"]!=""){
 								if(strlen($currentBoxData["category_description"])>155)
@@ -247,6 +258,7 @@
 								}
 							}?>
                             </div>
+							<?php } ?>
                         </div>
                     </div>
 						<?php } }?>

@@ -599,9 +599,8 @@ a {
 		  color:#565656;
 		  }
         .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardContentWrapper .divCardTitle {
-          border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-          padding-bottom: 5pt;
-          margin-bottom: 5pt; }
+         /* border-bottom: 1px solid rgba(0, 0, 0, 0.15);*/
+          padding-bottom: 5pt; }
         .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardContentWrapper .divCardDescription {
           text-align: justify; }
 
@@ -692,9 +691,8 @@ a {
     .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardKeywords {
       font-size: 9pt; }
     .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardTitle {
-      border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-      padding-bottom: 5pt;
-      margin-bottom: 5pt; }
+      /*border-bottom: 1px solid rgba(0, 0, 0, 0.15);*/
+      padding-bottom: 5pt; }
     .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardDescription {
       text-align: justify; }
 

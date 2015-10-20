@@ -569,6 +569,8 @@ margin-top:4px;
 	font-weight:normal;
 	font-size:8pt;
 	color:#565656;
+	border-top:1px solid #ddd;
+	padding-top: 5pt;
 }
 .home_title_des_s{
 	font-size:10pt;
