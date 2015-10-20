@@ -12,6 +12,18 @@
 <link rel="stylesheet" href="<?php echo $basePath; ?>/css/new_css/gridstack-demo.css"/>
 <!--<link rel="stylesheet" href="<?php echo $basePath; ?>/css/new_css/gridstack.min.css"/>-->
 
+<style type="text/css">
+	.grid-stack {
+		background: lightgoldenrodyellow;
+	}
+
+	.grid-stack-item-content {
+		color: #2c3e50;
+		text-align: center;
+		background-color: #18bc9c;
+	}
+</style>
+
 <?php 
 global $layoutTitle;
 global $layoutUrl;
@@ -132,7 +144,7 @@ if( isset($this->displayedCategoryUserId) )
 							$imageLink=$basePath.'/images/social_media/noimage.png';
 						}
 						?>
-					<div id="dragDropWindow<?echo $key+1;?>" class="grid-stack-item c_DivCard" 
+					<div id="dragDropWindow<?echo $key+1;?>" class="grid-stack-item " 
 					<?php if( $tzGsRowNum % 3 == 0 ) { $xSet = $tzDataGsX;$tzDataGsX = 0;$ySet = $tzDataGsY;$tzDataGsY += 4; } else{ $xSet = $tzDataGsX;$tzDataGsX += 4;$ySet = $tzDataGsY; } ?> data-gs-x="<?php echo $xSet; ?>" data-gs-y="<?php echo $ySet; ?>" data-gs-width="4" data-gs-height="4">
 					<div class="grid-stack-item-content">
 									<?php
