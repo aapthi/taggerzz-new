@@ -1,16 +1,7 @@
-<style>
-.items007{
-	min-height:324px;
-	max-height:400px;
-	min-width:300px;
-	max-width:580px;
-}
-</style>
 
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="<?php echo $basePath; ?>/css/new_css/font-awesome-4-2-0-min.css">
+<link rel="stylesheet" href="<?php echo $basePath; ?>/css/new_css/bootstrap-3-3-0-min.css">
 <link rel="stylesheet" href="<?php echo $basePath; ?>/css/new_css/gridstack-demo.css"/>
-<!--<link rel="stylesheet" href="<?php echo $basePath; ?>/css/new_css/gridstack.min.css"/>-->
 
 <style type="text/css">
 	.grid-stack {
@@ -192,15 +183,8 @@ if( isset($this->displayedCategoryUserId) )
 								?>
 								</div>
 								<?}
-									$tzWidth = 0;
-									$tzIncludeClass = false;
-									list($tzWidth, $height, $type, $attr) = getimagesize($imageLink);
-									if($tzWidth != "" && $tzWidth > 300)
-									{
-										$tzIncludeClass = true;
-									}
 								?>
-								<div class="c_DivCardActions <?php if( $tzIncludeClass ){?> collect_bookmark_pos_ab <?php } ?>">
+								<div class="c_DivCardActions">
 									<div class="c_DivCardAction" id="divCollectThis<?php echo $key?>" >COLLECT THIS<input type="hidden" id="catLinkId<?php echo $key?>" value="<?echo $databoxLinksGrids->category_link_id; ?>"></div>
 									<div class="c_DivCardAction" id="divBookmarkThis<?php echo $key?>">BOOKMARK THIS<input type="hidden" id="currLink<?php echo $key?>" value="<?echo $databoxLinksGrids->link; ?>"></div>
 								</div>
@@ -227,12 +211,12 @@ if( isset($this->displayedCategoryUserId) )
 <div class="smhide_m"><?php include('databox-reviews.phtml');?></div>
         <!-- DragDrop Plugin -->
 		
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.0/jquery-ui.js"></script>
+    <script src="<?php echo $basePath; ?>/js/new_js/jquery-1-11-1-min.js"></script>
+    <script src="<?php echo $basePath; ?>/js/new_js/jquery-ui-1-11-0-min.js"></script>
 		
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+        <script src="<?php echo $basePath; ?>/js/new_js/bootstrap-3-3-0-min.js"></script>
+        <script src="<?php echo $basePath; ?>/js/new_js/underscore-1-7-0-min.js"></script>
+        <script src="<?php echo $basePath; ?>/js/new_js/jquery-easing-1-3-min.js"></script>
         <script src="<?php echo $basePath; ?>/js/new_js/gridstack-demo.js"></script>
         <!-- DragDrop Plugin End -->
         <script src="<?php echo $basePath; ?>/js/new_js/jquery.nicescroll.min.js"></script>
