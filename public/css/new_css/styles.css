@@ -699,7 +699,7 @@ a {
       text-align: justify; }
 
 .mainContainerWrapper {
-  overflow-x: hidden;   overflow-y: auto;}
+  overflow-x: hidden;   overflow-y: auto; padding-bottom:20px;}
   .mainContainerWrapper #secModal {
     display: none; }
     .mainContainerWrapper #secModal .divModalBlurBackground {

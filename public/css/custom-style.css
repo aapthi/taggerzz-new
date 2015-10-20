@@ -614,6 +614,37 @@ margin-top:4px;
 .margin_top_20{
 	margin-top:-20px;
 }
+.pad_10px{
+	padding-left:10px;
+	padding-right:10px;
+	padding-top:4px;
+}
+.collect_bookmark_this{
+	margin-top:10px;
+	position:absolute;
+	bottom:0;
+	width:100%;
+}
+.clear_book_collect_this{
+	clear:both;
+}
+.div_collect_this{
+	background:#aaa;
+	width:50%;
+	text-align:center;
+	float:left;
+	padding-top:6px;
+	padding-bottom:6px
+}
+.div_bookmark_this{
+	background:#aaa;
+	width:50%;
+	text-align:center;
+	float:left;
+	padding-top:6px;
+	padding-bottom:6px;
+}
+
 /* Browser Problem css */
 @media screen and (-webkit-min-device-pixel-ratio:0) { 
 	.divHeaderWrapper .divSearchBoxes .aSearch {

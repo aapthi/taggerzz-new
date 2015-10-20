@@ -1,17 +1,15 @@
 
 <link rel="stylesheet" href="<?php echo $basePath; ?>/css/new_css/font-awesome-4-2-0-min.css">
-<link rel="stylesheet" href="<?php echo $basePath; ?>/css/new_css/bootstrap-3-3-0-min.css">
+<!--<link rel="stylesheet" href="<?php echo $basePath; ?>/css/new_css/bootstrap-3-3-0-min.css">-->
 <link rel="stylesheet" href="<?php echo $basePath; ?>/css/new_css/gridstack-demo.css"/>
 
 <style type="text/css">
-	.grid-stack {
-		background: lightgoldenrodyellow;
-	}
-
+body{
+	background:#f2f2f2;
+}
 	.grid-stack-item-content {
-		color: #2c3e50;
-		text-align: center;
-		background-color: #18bc9c;
+		background-color: #fff;
+		border:1px solid #c7c7c7;
 	}
 </style>
 
@@ -53,7 +51,7 @@ if( isset($this->displayedCategoryUserId) )
 	$currBoxCatUid = $this->displayedCategoryUserId;
 }
 ?>
-<div class="" style="margin-top:95px;">
+<div class="" style="margin-top:102px;">
 <div class="c_DivHashTag customize_hashtagh1"><h1><?php echo $this->hashName;?></h1></div>
 <div class="c_DivTitleWrapper">
 <div class="c_DivTitle customize_hashtag_title"><h2><?php echo $this->categoryTitle; ?><!--<button id="catDescTopBtn" onclick="catDescCkEditorShow();" class="c_BtnEditTitle">EDIT</button>--></h2></div>
@@ -156,7 +154,8 @@ if( isset($this->displayedCategoryUserId) )
 								<?php } ?>	
 								
 								<?php if(isset($databoxLinksGrids->title) && $databoxLinksGrids->title!=""){?>
-									<div class="c_DivCardTitle" >
+									<div class="pad_10px">
+									<h5>
 										<?php if(strlen($databoxLinksGrids->title)>20){
 												echo substr($databoxLinksGrids->title,0,20) . '...'; 
 											}
@@ -165,9 +164,10 @@ if( isset($this->displayedCategoryUserId) )
 												echo $databoxLinksGrids->title;
 											}
 										?>
+										</h5>
 									</div><?} $parahid="";
 								if(isset($databoxLinksGrids->description) && $databoxLinksGrids->description!="no Description"){?>
-								<div class="c_DivCardDescription" >
+								<div class="pad_10px">
 								<?php
 									if(strlen($databoxLinksGrids->description)>200){
 										echo substr($databoxLinksGrids->description,0,200) . '<a href="'.$url.'" target="_blank">...Read more</a>';
@@ -182,9 +182,12 @@ if( isset($this->displayedCategoryUserId) )
 								</div>
 								<?}
 								?>
-								<div class="c_DivCardActions">
-									<div class="c_DivCardAction" id="divCollectThis<?php echo $key?>" >COLLECT THIS<input type="hidden" id="catLinkId<?php echo $key?>" value="<?echo $databoxLinksGrids->category_link_id; ?>"></div>
-									<div class="c_DivCardAction" id="divBookmarkThis<?php echo $key?>">BOOKMARK THIS<input type="hidden" id="currLink<?php echo $key?>" value="<?echo $databoxLinksGrids->link; ?>"></div>
+								<div class="collect_bookmark_this">
+								<div class="clear_book_collect_this">
+									<div class="div_collect_this" id="divCollectThis<?php echo $key?>" >COLLECT THIS<input type="hidden" id="catLinkId<?php echo $key?>" value="<?echo $databoxLinksGrids->category_link_id; ?>"></div>
+									<div class="div_bookmark_this" id="divBookmarkThis<?php echo $key?>">BOOKMARK THIS<input type="hidden" id="currLink<?php echo $key?>" value="<?echo $databoxLinksGrids->link; ?>">
+									</div>
+								</div>
 								</div>
 							</div>
 						</div>
