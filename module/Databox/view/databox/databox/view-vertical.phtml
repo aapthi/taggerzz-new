@@ -8,8 +8,9 @@
 </style>
 
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-<!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">-->
-<link rel="stylesheet" href="<?php echo $basePath; ?>/css/new_css/gridstack.min.css"/>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="<?php echo $basePath; ?>/css/new_css/gridstack-demo.css"/>
+<!--<link rel="stylesheet" href="<?php echo $basePath; ?>/css/new_css/gridstack.min.css"/>-->
 
 <?php 
 global $layoutTitle;
@@ -100,11 +101,12 @@ if( isset($this->displayedCategoryUserId) )
 			</div>
 			<span id="pubDddContainer">
 				<?php if($this->data==0){?>
-					<div id="drag-drop-demo" class="grid-stack c_DivCardsWrapper customize_w"><?php $tzGsRowNum= 1;
-					
+
+   <div id="drag-drop-demo" class="grid-stack c_DivCardsWrapper customize_wp" data-gs-width="12"><?php $tzGsRowNum= 1;
 					$tzDataGsX = 0;
 					$tzDataGsY = 0;
-					foreach($this->databoxLinksGrid as $key=>$databoxLinksGrids)
+					
+   					 foreach($this->databoxLinksGrid as $key=>$databoxLinksGrids)
 					{
 						$xSet = 0;$ySet = 0;
 						if($key==0){?>
@@ -130,9 +132,9 @@ if( isset($this->displayedCategoryUserId) )
 							$imageLink=$basePath.'/images/social_media/noimage.png';
 						}
 						?>
-						<div id="dragDropWindow<?echo $key+1;?>" class="grid-stack-item  c_DivCard"
-						<?php if( $tzGsRowNum % 4 == 0 ) { $xSet = $tzDataGsX;$tzDataGsX = 0;$ySet = $tzDataGsY;$tzDataGsY += 20; } else{ $xSet = $tzDataGsX;$tzDataGsX += 2;$ySet = $tzDataGsY; } ?> data-gs-x="<?php echo $xSet; ?>" data-gs-y="<?php echo $ySet; ?>" data-gs-height="18" data-gs-width="2">
-							<div class="grid-stack-item-content">
+					<div id="dragDropWindow<?echo $key+1;?>" class="grid-stack-item c_DivCard" 
+					<?php if( $tzGsRowNum % 3 == 0 ) { $xSet = $tzDataGsX;$tzDataGsX = 0;$ySet = $tzDataGsY;$tzDataGsY += 4; } else{ $xSet = $tzDataGsX;$tzDataGsX += 4;$ySet = $tzDataGsY; } ?> data-gs-x="<?php echo $xSet; ?>" data-gs-y="<?php echo $ySet; ?>" data-gs-width="4" data-gs-height="4">
+					<div class="grid-stack-item-content">
 									<?php
 								if($databoxLinksGrids->is_video==1)
 								{
@@ -211,15 +213,15 @@ if( isset($this->displayedCategoryUserId) )
 <div id="tempRemDiv" style="display:none;"><div class="clearfix"></div></div>
 <div class="clearfix"></div>
 <div class="smhide_m"><?php include('databox-reviews.phtml');?></div>
-<script src="<?php echo $basePath; ?>/js/new_js/libs/jquery/jquery.js"></script>
         <!-- DragDrop Plugin -->
 		
-        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.0/jquery-ui.js"></script>
 		
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-        <script src="<?php echo $basePath; ?>/js/new_js/gridstack.min.js"></script>
+        <script src="<?php echo $basePath; ?>/js/new_js/gridstack-demo.js"></script>
         <!-- DragDrop Plugin End -->
         <script src="<?php echo $basePath; ?>/js/new_js/jquery.nicescroll.min.js"></script>
 		<!-- Cat Desc CKEditor Pop Up -->
@@ -295,38 +297,24 @@ if( isset($this->displayedCategoryUserId) )
 $('body').css('background','#f6f6f6')
 var i=0;
 	$(function () {
-	
 		$('.grid-stack').gridstack({
-			<?php
-				if( (! isset($_SESSION['usersinfo']) && !isset($_SESSION['usersinfo']->userId)) || (isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId) && isset($currBoxCatUid) && $_SESSION['usersinfo']->userId != $currBoxCatUid) )
-				{
-			?>
-					static_grid:true,
-			<?php
-				}
-			?>
-			min_width: 768,
-			item_class: 'grid-stack-item',
-			handle: '.grid-stack-item-content',
-			// one cell height
-			cell_height: 1,
-			// vertical gap size
-			vertical_margin: 20,
-			horizontal_margin: 10
+		 width: 12
 		});
-		 $('.grid-stack').gridstack({
-			 
-	// turns animation on
+	});
+$(function () {
+  $('.grid-stack').gridstack({
+
+  // turns animation on
   animate: false,
 
   // if false it tells to do not initialize existing items
   auto: true,
 
   // amount of columns
- width: 12,
+  width: 12,
 
   // maximum rows amount
-height: 0, 
+  height: 0, 
 
   // widget class
   item_class: 'grid-stack-item',
@@ -338,13 +326,13 @@ height: 0,
   handle: '.grid-stack-item-content',
 
   // one cell height
-  cell_height: 1,
+  cell_height: 60,
 
   // vertical gap size
   vertical_margin: 20,
 
   // if false it tells to do not initialize existing items
- // auto: true,
+  auto: true,
   
   // minimal width.
   min_width: 768,
@@ -362,60 +350,75 @@ height: 0,
   draggable: {handle: '.grid-stack-item-content', scroll: true, appendTo: 'body'},
   // allows to owerride jQuery UI resizable options
   resizable: {autoHide: true, handles: 'se'}
-		  });
-		  new function () {
-                this.items = [
-                    {x: 0, y: 0, width: 2, height: 6}
-                ];
 
-                this.grid = $('.grid-stack').data('gridstack');
+  });
+  
+	<?php
+		if( (! isset($_SESSION['usersinfo']) && !isset($_SESSION['usersinfo']->userId)) || (isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId) && isset($currBoxCatUid) && $_SESSION['usersinfo']->userId != $currBoxCatUid) )
+		{
+	?>
+	  $('.grid-stack').data('gridstack').movable('.grid-stack-item', false);
+	  $('.grid-stack').data('gridstack').resizable('.grid-stack-item', false);
+	<?php
+		}
+	?>
+
+ 
+  new function () {
+		this.items = [
+			{x: 0, y: 0, width: 2, height: 2}
+		];
+
+		this.grid = $('.grid-stack').data('gridstack');
+		
+		this.add_new_widget = function () {
+			i++;
+			var node = this.items.pop() || {
+						x: 0* Math.random(),
+						y: 0* Math.random(),
+						width: 2,
+						height:2,
+						auto_position: true
+					};
+					
+
+		var incrValue=$('#incrId').val();
+		var newValue=parseInt(incrValue)+1;
+		$('#incrId').val(newValue);
+		var commEditDelHtml = '<div id="deleteComment'+newValue+'" style="position:absolute;top:17px;right:11px;background:#f1f1f1;border:1px solid #bfc4c8;width:13px;"><span style="margin-right: -28px;"><a href="javascript:void(0)"; onclick="editExistingComment('+newValue+')"><img src="'+BASE_PATH+'/images/social_media/edit_ico.png"/></a></span><a href="javascript:void(0)"; onclick="deleteComment('+newValue+')" style="color:#f97e76" title="Close">X</a></div>';
+
+		var newCommBoxHtml = '<div id="dragDropWindow'+newValue+'" class="c_DivCard grid-stack-item" data-gs-height="20"><div class="grid-stack-item-content">';
+
+		<?php
+			if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId) && isset($currBoxCatUid) && $_SESSION['usersinfo']->userId == $currBoxCatUid )
+			{
+		?>
+				newCommBoxHtml += '<div class="c_DivCardStoryWrapper"><div class="c_DivCardStorytellerDetails">';
+				newCommBoxHtml += '<img class="c_DivCardStorytellerImg" src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $_SESSION['usersinfo']->montage_image; ?>"/>';
+				newCommBoxHtml += '<div class="c_DivCardStorytellerName">@STORYTELLER (<?php echo $_SESSION['usersinfo']->displayName; ?>)</div>';
+				newCommBoxHtml += '</div>';
+				newCommBoxHtml += '<div class="c_DivCardStory"><span id="data_'+newValue+'">'+newCommentText+'</span>'+commEditDelHtml+'</div>';
+				newCommBoxHtml += '</div>';
+		<?php
+			}
+		?>
+
+		newCommBoxHtml += '</div></div>';
 				
-                this.add_new_widget = function () {
-					i++;
-                    var node = this.items.pop() || {
-                                x: 0* Math.random(),
-                                y: 0* Math.random(),
-                                width: 2,
-                                height:6,
-								auto_position: true
-                            };
-							
+		this.grid.add_widget($(newCommBoxHtml),node.x, node.y, node.width, node.height);
+		}.bind(this);
+		
+		// $('#add-new-widget').click(this.add_new_widget);
+		tzGridStackRef = this;
+		$('#add-new-widget').click(function(event)
+		{
+			custCommentCkEditorShow( '',0 );
+		});
+	};
+});
 
-				var incrValue=$('#incrId').val();
-				var newValue=parseInt(incrValue)+1;
-				$('#incrId').val(newValue);
-				var commEditDelHtml = '<div id="deleteComment'+newValue+'" style="position:absolute;top:17px;right:11px;background:#f1f1f1;border:1px solid #bfc4c8;width:13px;"><span style="margin-right: -28px;"><a href="javascript:void(0)"; onclick="editExistingComment('+newValue+')"><img src="'+BASE_PATH+'/images/social_media/edit_ico.png"/></a></span><a href="javascript:void(0)"; onclick="deleteComment('+newValue+')" style="color:#f97e76" title="Close">X</a></div>';
-
-				var newCommBoxHtml = '<div id="dragDropWindow'+newValue+'" class="c_DivCard grid-stack-item" data-gs-height="20"><div class="grid-stack-item-content">';
-
-				<?php
-					if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId) && isset($currBoxCatUid) && $_SESSION['usersinfo']->userId == $currBoxCatUid )
-					{
-				?>
-						newCommBoxHtml += '<div class="c_DivCardStoryWrapper"><div class="c_DivCardStorytellerDetails">';
-						newCommBoxHtml += '<img class="c_DivCardStorytellerImg" src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $_SESSION['usersinfo']->montage_image; ?>"/>';
-						newCommBoxHtml += '<div class="c_DivCardStorytellerName">@STORYTELLER (<?php echo $_SESSION['usersinfo']->displayName; ?>)</div>';
-						newCommBoxHtml += '</div>';
-						newCommBoxHtml += '<div class="c_DivCardStory"><span id="data_'+newValue+'">'+newCommentText+'</span>'+commEditDelHtml+'</div>';
-						newCommBoxHtml += '</div>';
-				<?php
-					}
-				?>
-
-				newCommBoxHtml += '</div></div>';
-						
-				this.grid.add_widget($(newCommBoxHtml),node.x, node.y, node.width, node.height);
-                }.bind(this);
-				
-                // $('#add-new-widget').click(this.add_new_widget);
-				tzGridStackRef = this;
-				$('#add-new-widget').click(function(event)
-				{
-					custCommentCkEditorShow( '',0 );
-				});
-            };
-	});
 </script>		
+
 <script type="text/javascript">
 $(document).ready(function()
 {
