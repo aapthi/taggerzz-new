@@ -55,19 +55,19 @@ function removeCss()
 				var removeHashvalue=this.text.split('#')['0'].trim().toLowerCase();
 				var hashMontage=this.text.trim().toLowerCase();
 				 var hashNameMontage=hashMontage.charAt(0);
-				if(removeHashvalue=='databox/my-collected-links'){
+				if(removeHashvalue=='collections'){
 					var m_url= BASE_URL +'/databox/my-collected-links';
 					var mm_url=	'/databox/my-collected-links';			
 				}else if(removeHashvalue=='home'){
 					var m_url= BASE_URL +'/';	
 					var mm_url=	'/';
-				}else if(removeHashvalue=='databoxuser/dashboard'){
+				}else if(removeHashvalue=='dashboard'){
 					var m_url= BASE_URL +'/databoxuser/dashboard';
 						var mm_url=	'/databoxuser/dashboard';	
-				}else if(hashNameMontage=='#'){
+				}else if(removeHashvalue=='my profile'){
 					var m_url= BASE_URL +'/montage';
 					var mm_url=	'/montage';	
-				}else if(removeHashvalue=='accounts'){
+				}else if(removeHashvalue=='account settings'){
 					var m_url= BASE_URL +'/accounts';
 					var mm_url=	'/accounts';	
 				}else if(removeHashvalue=='taggerzz.com'){
