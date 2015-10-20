@@ -2463,6 +2463,7 @@ function savePositions(categoryId){
 	
 	$('#tempRemDiv').html( pubDddContainerHtml );
 	$('#tempRemDiv .ui-icon-gripsmall-diagonal-se').remove();
+	$('#tempRemDiv .grid-stack-placeholder').remove();
 	
 	pubDddContainerHtml = $('#tempRemDiv').html();
 
