@@ -2156,13 +2156,16 @@ class DataboxController extends AbstractActionController
 				}
 				$publicBoxesHtml .='<input type="hidden" id="voting'.$currentBoxRow->category_id.'" name="voting'.$currentBoxRow->category_id.'" value="'.$userVoteUpTz.'">';
 				$publicBoxesHtml .='</div>';
-				$publicBoxesHtml .='<div id="divDatabox-1-title" class="divCardTitle"> <h2 class="home_title_d">'. $currentBoxRow->category_title .
-				'</h2></div>';
-				
-				$publicBoxesHtml .='<div id="divCardKeywords" class="divCardKeywords">';
-				$publicBoxesHtml .='<h3 class="home_keyword_h3">'.$currentBoxRow->meta_tags.'</h3>';
-				$publicBoxesHtml .='</div>';
-				
+				if($currentBoxRow->category_title !=""){
+					$publicBoxesHtml .='<div id="divDatabox-1-title" class="divCardTitle"> <h2 class="home_title_d">'. $currentBoxRow->category_title .
+					'</h2></div>';
+				}
+				if($currentBoxRow->meta_tags !=""){
+					$publicBoxesHtml .='<div id="divCardKeywords" class="divCardKeywords">';
+					$publicBoxesHtml .='<h3 class="home_keyword_h3">'.$currentBoxRow->meta_tags.'</h3>';
+					$publicBoxesHtml .='</div>';
+				}
+			    if($currentBoxRow->category_description !=""){
 			   $publicBoxesHtml .=' <div id="divDatabox-1-description" class="divCardDescription home_de_brg_t home_title_des_s">';
 			   if($currentBoxRow->category_description !=""){
 					if(strlen($currentBoxRow->category_description)>160)
@@ -2175,6 +2178,7 @@ class DataboxController extends AbstractActionController
 					}
 				}
 			   $publicBoxesHtml .='</div>';
+			   }
 			   $publicBoxesHtml .='</div>';
 		       $publicBoxesHtml .='</div>';
 			   $publicBoxesHtml .='</div>';
@@ -2418,12 +2422,16 @@ class DataboxController extends AbstractActionController
 				}
 				$publicBoxesHtml1 .='<input type="hidden" id="voting'.$currentBoxRow->category_id.'" name="voting'.$currentBoxRow->category_id.'" value="'.$userVoteUpTz.'">';
 				$publicBoxesHtml1 .='</div></div>';
-				
+				if($currentBoxRow->category_title !=""){
 				$publicBoxesHtml1 .='<div id="divDatabox-1-title" class="divCardTitle"><h2 class="home_title_d"> '. $currentBoxRow->category_title .
 				'</h2></div>';
+				}
+				if($currentBoxRow->meta_tags !=""){
 				$publicBoxesHtml1 .='<div id="divCardKeywords" class="divCardKeywords"><h3 class="home_keyword_h3">';
 				$publicBoxesHtml1 .=$currentBoxRow->meta_tags;
 				$publicBoxesHtml1 .='</h3></div>';
+				}
+				if($currentBoxRow->category_description !=""){
 			   $publicBoxesHtml1 .=' <div id="divDatabox-1-description" class="divCardDescription home_de_brg_t home_title_des_s">';
 			   if($currentBoxRow->category_description !=""){
 					if(strlen($currentBoxRow->category_description)>160)
@@ -2436,6 +2444,7 @@ class DataboxController extends AbstractActionController
 					}
 				}
 			   $publicBoxesHtml1 .='</div>';
+			   }
 			$publicBoxesHtml1 .='</div>';
 		    $publicBoxesHtml1 .='</div>';
 			
@@ -2576,11 +2585,17 @@ class DataboxController extends AbstractActionController
 				}
 				$privateBoxHtml .='<input type="hidden" id="voting'.$currentBoxRow->category_id.'" name="voting'.$currentBoxRow->category_id.'" value="'.$userVoteUpTz.'">';
 				$privateBoxHtml .='</div></div>';
-				$privateBoxHtml .='<div id="divDatabox-1-title" class="divCardTitle"><h2 class="home_title_d"> '. $currentBoxRow->category_title .
-				'</h2></div>';
+				if($currentBoxRow->category_title !=""){
+					$privateBoxHtml .='<div id="divDatabox-1-title" class="divCardTitle"><h2 class="home_title_d"> '. $currentBoxRow->category_title .
+					'</h2></div>';
+				}	
+				if($currentBoxRow->meta_tags !=""){
+				
 				$privateBoxHtml .='<div id="divCardKeywords" class="divCardKeywords"><h3 class="home_keyword_h3">'; 
 				$privateBoxHtml .=$currentBoxRow->meta_tags;
 				$privateBoxHtml.='</h3></div>';
+				}
+				if($currentBoxRow->category_description !=""){
 			   $privateBoxHtml .=' <div id="divDatabox-1-description" class="divCardDescription home_de_brg_t home_title_des_s">';
 			   if($currentBoxRow->category_description !=""){
 					if(strlen($currentBoxRow->category_description)>160)
@@ -2593,6 +2608,7 @@ class DataboxController extends AbstractActionController
 					}
 				}
 			   $privateBoxHtml .='</div>';
+			   }
 			$privateBoxHtml .='</div>';
 		    $privateBoxHtml .='</div>';
 			 $privateBoxHtml .='</div>';
