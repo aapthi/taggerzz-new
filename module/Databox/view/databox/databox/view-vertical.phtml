@@ -132,7 +132,7 @@ if( isset($this->displayedCategoryUserId) )
 						}
 						?>
 					<div id="dragDropWindow<?echo $key+1;?>" class="grid-stack-item " 
-					<?php if( $tzGsRowNum % 3 == 0 ) { $xSet = $tzDataGsX;$tzDataGsX = 0;$ySet = $tzDataGsY;$tzDataGsY += 4; } else{ $xSet = $tzDataGsX;$tzDataGsX += 4;$ySet = $tzDataGsY; } ?> data-gs-x="<?php echo $xSet; ?>" data-gs-y="<?php echo $ySet; ?>" data-gs-width="4" data-gs-height="4">
+					<?php if( $tzGsRowNum % 4 == 0 ) { $xSet = $tzDataGsX;$tzDataGsX = 0;$ySet = $tzDataGsY;$tzDataGsY += 3; } else{ $xSet = $tzDataGsX;$tzDataGsX += 3;$ySet = $tzDataGsY; } ?> data-gs-x="<?php echo $xSet; ?>" data-gs-y="<?php echo $ySet; ?>" data-gs-width="3" data-gs-height="4">
 					<div class="grid-stack-item-content">
 									<?php
 								if($databoxLinksGrids->is_video==1)
