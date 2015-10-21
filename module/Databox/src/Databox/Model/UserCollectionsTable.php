@@ -86,7 +86,11 @@ class UserCollectionsTable
 	}
 	public function getCheckCollectedLinks($category_link_id)
 	{
-		$userId=$_SESSION['usersinfo']->userId;
+		if(isset($_SESSION['usersinfo']->userId)){
+			$userId=$_SESSION['usersinfo']->userId;
+		}else {
+			$userId=$_SERVER['REMOTE_ADDR'];
+		}
 		$select = $this->tableGateway->getSql()->select();
 		$select->where('user_collections.collector_id="'.$userId.'"');
 		$select->where('user_collections.category_link_id="'.$category_link_id.'"');
