@@ -2988,25 +2988,37 @@ function getTpCookie(name) {
 	{
 		$.ajax({
 			type		:	'POST',
-			url			:  	BASE_URL+'/databox/my-collected-links',
+			url			:  	BASE_URL+'/databox/check-my-collected-links',
 			data		:	{catLinkId:catLinkId,currBoxUserId:currBoxUserId},
 			success: function(data){
-				if( data.output )
+				if( data.output==0 )
 				{
+					$.ajax({
+						type		:	'POST',
+						url			:  	BASE_URL+'/databox/my-collected-links',
+						data		:	{catLinkId:catLinkId,currBoxUserId:currBoxUserId},
+						success: function(data){
+							if( data.output )
+							{
+								$('#pop-up-alerts').popUpWindow({action: "open"});	
+								$("#alert_header_meassge").html('');
+								$("#alert_meassage").html(user_link_collected);
+								
+								if( $('#tzUserCollCountSpan').length && $('#tzUserCollCountSpan').html().trim() != "" )
+								{
+									var newCollCount = parseInt($('#tzUserCollCountSpan').html().trim()) + parseInt("1");
+									$('#tzUserCollCountSpan').html("").html(newCollCount);
+								}
+							}
+						}	
+					});
+				}else{
 					$('#pop-up-alerts').popUpWindow({action: "open"});	
 					$("#alert_header_meassge").html('');
-					$("#alert_meassage").html(user_link_collected);
-					
-					if( $('#tzUserCollCountSpan').length && $('#tzUserCollCountSpan').html().trim() != "" )
-					{
-						var newCollCount = parseInt($('#tzUserCollCountSpan').html().trim()) + parseInt("1");
-						$('#tzUserCollCountSpan').html("").html(newCollCount);
-					}
+					$("#alert_meassage").html('All Ready Collected This Link');
 				}
 			}
 		});
-			
-		return false;
 	}
 
 	function deleteLinkCollection( collection_id )

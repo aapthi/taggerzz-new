@@ -553,6 +553,16 @@ return array(
                             ),
                         ),
                     ),
+					'check-my-collected-links' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route' => '/check-my-collected-links',
+                            'defaults' => array(
+                                'controller' => 'Databox\Controller\Databox',
+                                'action'     => 'checkMyCollectedLinks',
+                            ),
+                        ),
+                    ),
 					 'set-tz-box-id' => array(
                         'type' => 'Literal',
                         'options' => array(

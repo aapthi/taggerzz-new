@@ -3231,7 +3231,20 @@ class DataboxController extends AbstractActionController
 			));
 		}
 	}
-
+	public function checkMyCollectedLinksAction()
+	{
+			$userCollectedLinksArr = $this->getUserCollectionsTable()->getCheckCollectedLinks($_POST['catLinkId']);
+			if( $userCollectedLinksArr->count() != 0 )
+			{
+				$output = 1;
+			}else{
+				$output = 0;
+			}
+			return $view = new JsonModel(
+			array(
+				'output'	=> $output
+			));
+	}
 	public function searchHighHashNamesAction(){
 		$hashNames="";
 		$getsearchHashNames = $this->getUserCategoriesTable()->getsearchHighHashNames($_POST['value']);

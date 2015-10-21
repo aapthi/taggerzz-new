@@ -84,4 +84,13 @@ class UserCollectionsTable
 		$resultSet = $this->tableGateway->selectWith($select);
 		return $resultSet;
 	}
+	public function getCheckCollectedLinks($category_link_id)
+	{
+		$userId=$_SESSION['usersinfo']->userId;
+		$select = $this->tableGateway->getSql()->select();
+		$select->where('user_collections.collector_id="'.$userId.'"');
+		$select->where('user_collections.category_link_id="'.$category_link_id.'"');
+		$resultSet = $this->tableGateway->selectWith($select);
+		return $resultSet;
+	}
 }
