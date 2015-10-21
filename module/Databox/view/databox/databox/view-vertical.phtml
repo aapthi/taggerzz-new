@@ -539,18 +539,15 @@ $(document).ready(function()
 			
 			catDescIntroDivHtml += '<span id="categoryDescLink" style="display:none;"><a href="Javascript:void(0);" id="catDescAnchor" onclick="catDescCkEditorShow();">'+catDescAnchorLbl+'</a></span>';
 		}
+		else
+		{
+			catDescIntroDivHtml += '<span id="categoryDescLink" style="display:none;">'+catDescAnchorLbl+'</span>';
+		}
 
 		$('#catDescIntro').html( catDescIntroDivHtml );
 
-		if( showCustOtions )
-		{
-			$('#categoryDescLink').show();
-			$('#catDescIntro').show();
-		}
-		else if( $('#categoryDescLink').length )
-		{
-			$('#categoryDescLink').remove();
-		}
+		$('#categoryDescLink').show();
+		$('#catDescIntro').show();
 	}
 	// End Cat desc...
  });
