@@ -50,8 +50,14 @@ if( isset($this->displayedCategoryUserId) )
 {
 	$currBoxCatUid = $this->displayedCategoryUserId;
 }
+
+$tzIsLoggedIn = false;
+if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
+{
+	$tzIsLoggedIn = true;
+}
 ?>
-<div class="" style="margin-top:102px;">
+<div <?php if( $tzIsLoggedIn ) { ?> style="margin-top:102px;"<?php }else{ ?> style="margin-top:70px;"<?php } ?> >
 <div class="c_DivHashTag customize_hashtagh1"><h1><?php echo $this->hashName;?></h1></div>
 <div class="c_DivTitleWrapper">
 <div class="c_DivTitle customize_hashtag_title"><h2><?php echo $this->categoryTitle; ?><!--<button id="catDescTopBtn" onclick="catDescCkEditorShow();" class="c_BtnEditTitle">EDIT</button>--></h2></div>
