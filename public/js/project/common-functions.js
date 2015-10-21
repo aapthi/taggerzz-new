@@ -2074,13 +2074,12 @@ function getDimensions(id) {
 
 			if( $.trim(custCatDescText) == "" )
 			{
-				$('#catDescAnchor').html( "Set Description" );
+				$('#catDescAnchor').html( "<img width='100px' src='"+BASE_PATH+"/img/profile_empty.png' title='Set Description' />" );
 			}
 			else
 			{
 				$('#catDescAnchor').html( "Edit" );
 			}
-			$('#catDescTopBtn').html($('#catDescAnchor').html().toUpperCase());
 		}
 		$('#pop-up-cat-description').popUpWindow({action: "close"});
 
@@ -3015,7 +3014,7 @@ function getTpCookie(name) {
 				}else{
 					$('#pop-up-alerts').popUpWindow({action: "open"});	
 					$("#alert_header_meassge").html('');
-					$("#alert_meassage").html('All Ready Collected This Link');
+					$("#alert_meassage").html('Already Collected This Link');
 				}
 			}
 		});
