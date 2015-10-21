@@ -505,13 +505,12 @@ $(document).ready(function()
 		fullDescParaHtml += '<span id="categoryDescripton">' + $.trim($("#fullDescPara").html().replace(/&nbsp;/g,'')) + '</span>&nbsp;';
 		if( showCustOtions )
 		{
-			fullDescParaHtml += '<span id="categoryDescLink" style="display:none;"><a href="Javascript:void(0);" id="catDescAnchor" onclick="catDescCkEditorShow();" class="set_d_btn">Edit</a></span>';
+			fullDescParaHtml += '<span id="categoryDescLink" style="display:none;"><a href="Javascript:void(0);" id="catDescAnchor" onclick="catDescCkEditorShow();" class="">Edit</a></span>';
 		}
 		$('#fullDescPara').html( fullDescParaHtml );
 		if( showCustOtions )
 		{
 			$('#categoryDescLink').show();
-			$('#catDescTopBtn').html("EDIT");
 		}
 		else if( $('#categoryDescLink').length )
 		{
@@ -533,8 +532,6 @@ $(document).ready(function()
 			}
 			
 			catDescIntroDivHtml += '<span id="categoryDescLink" style="display:none;"><a href="Javascript:void(0);" id="catDescAnchor" onclick="catDescCkEditorShow();">'+catDescAnchorLbl+'</a></span>';
-
-			$('#catDescTopBtn').html(catDescAnchorLbl.toUpperCase());
 		}
 
 		$('#catDescIntro').html( catDescIntroDivHtml );
