@@ -906,7 +906,7 @@ a {
     #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .ulCreatedCollectionList li .spnNewMessageLabel {
       background: rgba(0, 0, 0, 0.2); }
   #secAccountSettings .divAccountSettingsRow .divCommentHeader {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);margin-bottom:5px;padding-bottom:5px; }
     #secAccountSettings .divAccountSettingsRow .divCommentHeader .divCommentHeaderUsernameBlock .divCommentUsername {
       display: inline-block; }
   #secAccountSettings .divAccountSettingsRow .divCommentControls button {
@@ -914,7 +914,7 @@ a {
     margin-left: 0px; }
   #secAccountSettings .divAccountSettingsRow .divCommentControls .btnCommentReportSpam {
     position: absolute;
-    right: 5%; }
+    right: 12%; }
   #secAccountSettings .divAccountSettingsRow .divReplyToWrapper .txtReplyTo {
     border: 1px solid #c7c7c7;
     margin-bottom: 5pt;
@@ -1073,9 +1073,9 @@ a {
   #secCustomizeDatabox .c_DivCard .c_DivCardStoryWrapper {
     display: table;
     margin-top: 5pt;
-    background: black;
+    /*background: black;
     border-radius: 10pt;
-    border: 5pt solid rgba(134, 184, 206, 0.7); }
+    border: 5pt solid rgba(134, 184, 206, 0.7); */}
     #secCustomizeDatabox .c_DivCard .c_DivCardStoryWrapper .c_DivCardStorytellerDetails {
       display: table-row; }
       #secCustomizeDatabox .c_DivCard .c_DivCardStoryWrapper .c_DivCardStorytellerDetails .c_DivCardStorytellerImg {

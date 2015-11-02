@@ -138,14 +138,14 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 						}
 						?>
 					<div id="dragDropWindow<?echo $key+1;?>" class="grid-stack-item " 
-					<?php if( $tzGsRowNum % 4 == 0 ) { $xSet = $tzDataGsX;$tzDataGsX = 0;$ySet = $tzDataGsY;$tzDataGsY += 3; } else{ $xSet = $tzDataGsX;$tzDataGsX += 3;$ySet = $tzDataGsY; } ?> data-gs-x="<?php echo $xSet; ?>" data-gs-y="<?php echo $ySet; ?>" data-gs-width="3" data-gs-height="4">
+					<?php if( $tzGsRowNum % 4 == 0 ) { $xSet = $tzDataGsX;$tzDataGsX = 0;$ySet = $tzDataGsY;$tzDataGsY += 3; } else{ $xSet = $tzDataGsX;$tzDataGsX += 3;$ySet = $tzDataGsY; } ?> data-gs-x="<?php echo $xSet; ?>" data-gs-y="<?php echo $ySet; ?>" data-gs-width="3" data-gs-height="4" style="border:none;">
 					<div class="grid-stack-item-content">
 									<?php
 								if($databoxLinksGrids->is_video==1)
 								{
 								?>
 								
-								<div class="c_DivCardImgWrapper"  >
+								<div class="c_DivCardImgWrapper"  style="text-align:center">
 										<iframe  width="272px" height="272px" style="<? echo $imageSocialAlone; ?>" src="<?echo $databoxLinksGrids->iframe_src;?>" frameborder="0" allowfullscreen></iframe>
 								</div>
 								
@@ -153,7 +153,7 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 								}else{
 								?>
 									<a href="<?echo $url;?>" target="_blank">
-									<div  class="c_DivCardImgWrapper">
+									<div  class="c_DivCardImgWrapper" style="text-align:center">
 										<img class="c_DivCardImg" src="<?php echo $imageLink; ?>"/>
 									</div>
 									</a>
@@ -215,7 +215,8 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 </div>
 <div id="tempRemDiv" style="display:none;"><div class="clearfix"></div></div>
 <div class="clearfix"></div>
-<div class="smhide_m"><?php include('databox-reviews.phtml');?></div>
+<div class="smhide_m">
+<?php include('databox-reviews.phtml');?></div>
         <!-- DragDrop Plugin -->
 		
     <script src="<?php echo $basePath; ?>/js/new_js/jquery-1-11-1-min.js"></script>
@@ -388,9 +389,9 @@ $(function () {
 		var incrValue=$('#incrId').val();
 		var newValue=parseInt(incrValue)+1;
 		$('#incrId').val(newValue);
-		var commEditDelHtml = '<div id="deleteComment'+newValue+'" style="position:absolute;top:17px;right:11px;background:#f1f1f1;border:1px solid #bfc4c8;width:13px;"><span style="margin-right: -28px;"><a href="javascript:void(0)"; onclick="editExistingComment('+newValue+')"><img src="'+BASE_PATH+'/images/social_media/edit_ico.png"/></a></span><a href="javascript:void(0)"; onclick="deleteComment('+newValue+')" style="color:#f97e76" title="Close">X</a></div>';
+		var commEditDelHtml = '<div id="deleteComment'+newValue+'" style="position:absolute;top:2px;right:8px;background:#f1f1f1;width:13px;"><span style="margin-right: -28px;"><a href="javascript:void(0)"; onclick="editExistingComment('+newValue+')"><img src="'+BASE_PATH+'/images/social_media/edit_ico.png" title="Edit"/></a></span><a href="javascript:void(0)"; onclick="deleteComment('+newValue+')" style="color:#f97e76" title="Close">X</a></div>';
 
-		var newCommBoxHtml = '<div id="dragDropWindow'+newValue+'" class="c_DivCard grid-stack-item" data-gs-height="20"><div class="grid-stack-item-content">';
+		var newCommBoxHtml = '<div id="dragDropWindow'+newValue+'" class="c_DivCard grid-stack-item" data-gs-height="20" style="border:none;"><div class="grid-stack-item-content">';
 
 		<?php
 			if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId) && isset($currBoxCatUid) && $_SESSION['usersinfo']->userId == $currBoxCatUid )

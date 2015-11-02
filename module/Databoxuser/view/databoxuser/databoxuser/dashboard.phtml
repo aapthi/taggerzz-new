@@ -1,7 +1,8 @@
 <?php //echo "<pre>";print_r($this->getUserMessages);exit; ?>
 <div class="tzcontainer_as tmar_b20">
 <div class="tmar_t125">
-<section id="secAccountSettings" class="tac_bg">
+<section id="secAccountSettings">
+				<div class="tac_bg tmar_b20">
                 <div class="divAccountSettingsRow">
                     <div class="divCreatedCollectionsCard">
                         <div class="divAccountSettingsHeading heading_font_pt12">
@@ -28,10 +29,11 @@
                         </ul>
                     </div>
                 </div>
-
+                </div>
+				<div class="tac_bg ">
                 <div  class="divAccountSettingsRow">
                     <div class="divCreatedCollectionsCard">
-                        <div id="msgoto" class="divAccountSettingsHeading">
+                        <div id="msgoto" class="divAccountSettingsHeading heading_font_pt12">
                             MESSAGES
                             <button onClick="composeMail()" class="btnComposeMessage">COMPOSE</button>
                         </div>
@@ -99,6 +101,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
                 </div>
 				<input type="hidden" id="hidUserName" value="<?php if(isset($username)){echo $username;}?>">
 				<input type="hidden" id="hidmessage" value="<?php if(isset($msg)){echo $msg;}?>">
