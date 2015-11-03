@@ -508,6 +508,11 @@ margin-top:4px;
 .width15{
 	width: 16.5%;
 }
+.width45{
+	width: 45%;
+	margin:6px;
+	
+}
 .current_affairs .divCard{
 	width:20% !important;
 }
@@ -748,4 +753,6 @@ margin-top:4px;
     padding: 3px 8px !important;
 	text-decoration:none;
 }
+.secDataboxes #divDataboxWrapper[data-columns]::before {
+      content: '2 .left.width45'; }
 }
