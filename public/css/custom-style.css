@@ -513,6 +513,10 @@ margin-top:4px;
 	margin:6px;
 	
 }
+.width90{
+	width: 90%;
+	
+}
 .current_affairs .divCard{
 	width:20% !important;
 }
@@ -755,4 +759,8 @@ margin-top:4px;
 }
 .secDataboxes #divDataboxWrapper[data-columns]::before {
       content: '2 .left.width45'; }
+}
+@media (max-width: 480px) { 
+	.secDataboxes #divDataboxWrapper[data-columns]::before {
+      content: '1 .left.width90'; }
 }
