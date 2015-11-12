@@ -1,4 +1,45 @@
-
+function inivite_frnd(){
+	$('#inivite-alerts').popUpWindow({action: "open"});
+}
+function funnyInivite(){
+	var  emailId = $("#frnd_email").val();
+	if($("#frnd_email").val()==''){
+		alert('Enter a email id');
+		$('#frnd_email').focus();
+		return false;
+	}	
+	if( ! isInValidFormat(emailId)  )
+	{
+		alert( "Please enter email Id in valid format." );
+		$('#frnd_email').focus();
+		return false;
+	}
+	if($("#frnd_content").val()==''){
+		alert('Enter a comment');
+		$('#frnd_content').focus();
+		return false;	
+	}
+	$("#userMessage22").show();
+	if($("#exsits_email").val() == emailId){
+		$("#userMessage22").html('This email id your logged email.');	
+	}else{
+		$.ajax({
+			url: BASE_URL+'/databoxuser/inivite-friend',
+			dataType: "json",
+			type	: "POST",
+			async:false,
+			data	:{emailId:emailId,comment:$("#frnd_content").val()},
+			success: function( data ) {
+				if(data.output=='nice'){
+					$("#userMessage22").html('Sent successfully');
+				}else if(data.output=='cool'){
+					$("#userMessage22").html('You are already inivited this '+emailId+'.');
+				}
+				$("#frnd_content").val('');$("#frnd_email").val('');
+			}				
+		});
+	}
+}
 $(document).keyup(function(e) {
   if (e.keyCode == 27){// esc
 	if( $('.pop-up-close-trigger').length )

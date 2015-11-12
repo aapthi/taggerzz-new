@@ -4,22 +4,14 @@ $loginType='emailLogin';
 global $step;
 $step=3;
 ?>
-<div class="body_main_container cat_top">
-	<div class="body_middle_container">
-		<div class=" form_top">
-			<div class="row">
-				<center>
-					<p>
-					Thank you for verifying your email ID and joining
-					</p>
-					<p>with us to contribute Knowledge.
-					</p>
-					<p>
-					<a href="javascript:void(0);" onclick="gotoCategoryChoicePage('<?echo $this->encryptId;?>')">Continue</a>
-					</p>
-				</center>
-			</div>
-		</div>
+<link rel="stylesheet" type="text/css" href="<?php echo $basePath; ?>/css/default.css" />
+<div class="tfogotcontainer">
+	<div class="tmar_t125 tac_bg" style="padding:20px 0;">
+		<center>
+			<p class="tmar_b5">Thank you for verifying your email ID and joining</p>
+			<p class="tmar_b5">with us to contribute Knowledge.</p>
+			<p class="tmar_b5 highlight_c"><a href="javascript:void(0);" onclick="gotoCategoryChoicePage('<?echo $this->encryptId;?>')">Continue</a></p>
+		</center>
 	</div>
 </div>
 <script>

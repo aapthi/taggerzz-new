@@ -499,11 +499,26 @@ $(document).ready(function()
 	  dataType: "json",
 	  success: function(data)
 	  {
-		
+		console.log(data.output);
 	  }
 	});
 	// End Increment box view count
-
+	
+	// Activity Databox views   
+		var insertedActivityAjaxUrl = BASE_URL + "/databoxuser/record-activity-points";
+		$.ajax
+		({
+		  url: insertedActivityAjaxUrl,
+		  type: "POST",
+		  data:{databoxId:category_id,dataBoxOwner:category_user_id,activityType:'Databox viewer'},
+		  dataType: "json",
+		  success: function(data)
+		  {
+			
+		  }
+		});
+	//End
+	
 	// Cat desc...
 	var catDescIntroDiv = document.getElementById('catDescIntro');
 	if($('#hiddenDec').val()!="" )

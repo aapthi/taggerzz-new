@@ -18,6 +18,12 @@ use Databoxuser\Model\UserDetails;
 use Databoxuser\Model\UserDetailsTable;
 use Databoxuser\Model\ForgotPassword;
 use Databoxuser\Model\ForgotPasswordTable;
+use Databoxuser\Model\ActivityPoints;
+use Databoxuser\Model\ActivityPointsTable;
+use Databoxuser\Model\UserPoints;
+use Databoxuser\Model\UserPointsTable;
+use Databoxuser\Model\Invitations;
+use Databoxuser\Model\InvitationsTable;
 
 
 class Module implements 
@@ -46,6 +52,9 @@ class Module implements
     {
         return array(
             'factories' => array( 
+            	'Databoxuser\Model\InvitationsFactory'=>'Databoxuser\Factory\Model\InvitationsTableFactory',			
+            	'Databoxuser\Model\ActivityPointsFactory'=>'Databoxuser\Factory\Model\ActivityPointsTableFactory',			
+            	'Databoxuser\Model\UserPointsFactory'=>'Databoxuser\Factory\Model\UserPointsTableFactory',			
             	'Databoxuser\Model\UserFactory'=>'Databoxuser\Factory\Model\UserTableFactory',			
             	'Databoxuser\Model\UserDetailsFactory'=>'Databoxuser\Factory\Model\UserDetailsTableFactory',		
             	'Databoxuser\Model\LoginLinkExpiredFactory'=>'Databoxuser\Factory\Model\LoginLinkExpiredTableFactory',			

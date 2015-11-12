@@ -19,6 +19,9 @@ class DataboxuserController extends AbstractActionController
 	protected $userCollectionsTable;
 	protected $blockUserTable;
 	protected $userMessagesTable;
+	protected $activitypointsTable;
+	protected $userpointsTable;
+	protected $invitationsTable;
 
     public function indexAction()
 	{
@@ -134,13 +137,13 @@ class DataboxuserController extends AbstractActionController
 						if( (isset($userRow->userStatus)) && ($userRow->userStatus == 2) )
 						{
 							$user=array();
-							$user["userId"] = $userRow->user_id;
+							$user["userId"] = $userRow->u_user_id;
 							$user["status"] = "1";
 							$userRowUpdated = $this->getUserTable()->changeAccountStatus( $user );
 						}
 
 						$user_session = new Container('usersinfo');
-						$user_session->userId=$userRow->user_id;
+						$user_session->userId=$userRow->u_user_id;
 						$user_session->email=$emailId;
 						$user_session->displayName=$userRow->display_name;
 						$user_session->montage_hash_name=$userRow->montage_hash_name;
@@ -235,35 +238,47 @@ class DataboxuserController extends AbstractActionController
 		$basePath = $baseUrlArr['basePath'];
 
 		$dbuser_template = "";
-		
-		$getPublicDataboxCount = $this->getUserCategoriesTable()->getPublicDataboxCount( $_SESSION['usersinfo']->userId);
-		$getPrivateDataboxCount = $this->getUserCategoriesTable()->getPrivateDataboxCount( $_SESSION['usersinfo']->userId);
+		if(isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId!=''){
+			$user_id = $_SESSION['usersinfo']->userId;
+		}else{
+			$user_id = $_SESSION['Zend_Auth']->storage;
+		}
+		$getPublicDataboxCount = $this->getUserCategoriesTable()->getPublicDataboxCount( $user_id );
+		$getPrivateDataboxCount = $this->getUserCategoriesTable()->getPrivateDataboxCount( $user_id );
 		$publicprivatetotalcount=count($getPublicDataboxCount->toArray()) + count($getPrivateDataboxCount->toArray());
 		$getBlockUserDetails= $this->getBlockUserTable()->getBlockedIds();
 		$finalIds='';
 		foreach($getBlockUserDetails as $key=>$blockUser){
 
-			if($blockUser->block_by_uid==$_SESSION['usersinfo']->userId){
+			if($blockUser->block_by_uid==$user_id){
 				$finalIds .='"'. $blockUser->blocked_to_uid.'"' . ',';
 			}
-			if($blockUser->blocked_to_uid==$_SESSION['usersinfo']->userId){
+			if($blockUser->blocked_to_uid==$user_id){
 				$finalIds.='"'.$blockUser->block_by_uid.'"' . ',';
 			}
 		}
 		$frnds= rtrim($finalIds,',');
-		$userMessagesCount= count($this->getUserMessagesTable()->getUserMessages( $_SESSION['usersinfo']->userId,$frnds)->toArray());
-		$userCollectedLinksCount= $this->getUserCollectionsTable()->getCollectedLinksCount($_SESSION['usersinfo']->userId);
+		$userMessagesCount= count($this->getUserMessagesTable()->getUserMessages( $user_id,$frnds)->toArray());
+		$userCollectedLinksCount= $this->getUserCollectionsTable()->getCollectedLinksCount($user_id);
 		$collectionsCount=count($userCollectedLinksCount->toArray());
-		$row = $this->getUserDetailsTable()->checkDetailsRecorded($_SESSION['Zend_Auth']->storage);
+		$row = $this->getUserDetailsTable()->checkDetailsRecorded($user_id);
 		if( $row->countUser == 0 )
 		{
-			$user_details_id = $this->getUserDetailsTable()->addUserDetails( $_SESSION['Zend_Auth']->storage );
+			$user_details_id = $this->getUserDetailsTable()->addUserDetails( $user_id );
 			$userInfo['status']=1;
-			$userInfo['userId']=$_SESSION['Zend_Auth']->storage;
+			$userInfo['userId']=$user_id;
+			// Code for First Login With Facebook/Gmail
+			$activityTable = $this->getActivityPointsTable();
+			$firstTimeUser = $activityTable->getActivityFresh('freshUser');
+			if(count($firstTimeUser)>0){
+				$activityId = $firstTimeUser->activity_id;
+				$insertedId = $this->activityMethod($user_id,$activityId);
+			}
+			// End
 			$userRoww = $this->getUserTable()->changeAccountStatus( $userInfo );
-			$userRow = $this->getUserTable()->getUser( $_SESSION['Zend_Auth']->storage );
-			$getPublicDataboxCount = $this->getUserCategoriesTable()->getPublicDataboxCount( $_SESSION['usersinfo']->userId);
-			$getPrivateDataboxCount = $this->getUserCategoriesTable()->getPrivateDataboxCount( $_SESSION['usersinfo']->userId);
+			$userRow = $this->getUserTable()->getUser( $user_id );
+			$getPublicDataboxCount = $this->getUserCategoriesTable()->getPublicDataboxCount( $user_id);
+			$getPrivateDataboxCount = $this->getUserCategoriesTable()->getPrivateDataboxCount( $user_id);
 			$publicprivatetotalcount=count($getPublicDataboxCount->toArray()) + count($getPrivateDataboxCount->toArray());
 			$user_session = new Container('usersinfo');
 			$user_session->userId=$userRow->user_id;
@@ -282,9 +297,9 @@ class DataboxuserController extends AbstractActionController
 		}
 		else
 		{
-			$userRow = $this->getUserTable()->getUser( $_SESSION['Zend_Auth']->storage );
-			$getPublicDataboxCount = $this->getUserCategoriesTable()->getPublicDataboxCount( $_SESSION['usersinfo']->userId);
-			$getPrivateDataboxCount = $this->getUserCategoriesTable()->getPrivateDataboxCount( $_SESSION['usersinfo']->userId);
+			$userRow = $this->getUserTable()->getUser( $user_id );
+			$getPublicDataboxCount = $this->getUserCategoriesTable()->getPublicDataboxCount( $user_id);
+			$getPrivateDataboxCount = $this->getUserCategoriesTable()->getPrivateDataboxCount( $user_id);
 			$publicprivatetotalcount=count($getPublicDataboxCount->toArray()) + count($getPrivateDataboxCount->toArray());
 			$user_session = new Container('usersinfo');
 			$user_session->userId=$userRow->user_id;
@@ -711,13 +726,21 @@ class DataboxuserController extends AbstractActionController
 				$statusupdate = $this->getLoginLinkExpiredTable()->updateLoginLinkExpired( $decrypted );
 				$userInfo['userId']=$decrypted;
 				$userInfo['status']=1;
+				// Code for First Login With Taggerzz
+				$activityTable = $this->getActivityPointsTable();
+				$firstTimeUser = $activityTable->getActivityFresh('freshUser');
+				if(count($firstTimeUser)>0){
+					$activityId = $firstTimeUser->activity_id;
+					$insertedId = $this->activityMethod($decrypted,$activityId);
+				}
+				//End
 				$user_id = $this->getUserTable()->changeAccountStatus( $userInfo );
 				$view = new ViewModel(
 					array(
 						'baseUrl' 			=> $baseUrl,
 						'basePath' 			=> $basePath,
 						'encryptId'			=>	$userEnId,
-						'encryptedRand'		=>	$paramss[1]
+						'encryptedRand'		=>	$paramss[0]
 					));
 				return $view->setTemplate( "/databoxuser/databoxuser/login-step-three.phtml" );
 			}else{
@@ -730,7 +753,68 @@ class DataboxuserController extends AbstractActionController
 			}
 		}
 	}
-	
+	public function activityMethod($uid,$aid){
+		$userpointsTable = $this->getUserPointsTable();
+		$lastInsertedId = $userpointsTable->addUserPoints($uid,$aid);
+		return $lastInsertedId;
+	}
+	public function recordActivityPointsAction(){
+		$baseUrls 	= $this->getServiceLocator()->get('config');
+		$baseUrlArr = $baseUrls['urls'];
+		$baseUrl 	= $baseUrlArr['baseUrl'];
+		$basePath 	= $baseUrlArr['basePath'];
+		$activityId ='';
+		$activityTable = $this->getActivityPointsTable();
+		if(isset($_POST['activityType']) && $_POST['activityType']!=''){
+			$activity_name = $_POST['activityType'];
+			$activityMode = $activityTable->getActivityFresh($activity_name);
+			if(count($activityMode)>0){
+				$activityId = $activityMode->activity_id;
+			}
+		}
+		//Databox Responsed by other users
+		if(isset($_POST['dataBoxOwner']) && $_POST['dataBoxOwner']!=""){
+			if($_POST['dataBoxOwner']!=$_SESSION['usersinfo']->userId){
+				$dataBoxOwner = $_POST['dataBoxOwner'];
+				$acitvityInserted = $this->activityMethod($dataBoxOwner,$activityId);
+				if($acitvityInserted!=""){
+					$user_id = $_SESSION['usersinfo']->userId;
+					$activity_name = 'Databox owner';
+					$activityMode = $activityTable->getActivityFresh($activity_name);
+					if(count($activityMode)>0){
+						$activityId = $activityMode->activity_id;
+					}
+					$acitvityLasted = $this->activityMethod($user_id,$activityId);
+					if($acitvityLasted!=''){
+						return $view = new JsonModel(array(
+							'output' 	=> 1,
+						));
+					}
+				}
+			}
+		}
+	}
+	public function iniviteFriendAction(){
+		$baseUrls = $this->getServiceLocator()->get('config');
+		$baseUrlArr = $baseUrls['urls'];
+		$baseUrl = $baseUrlArr['baseUrl'];
+		$basePath = $baseUrlArr['basePath'];
+		$inivitTable = $this->getInvitationsTable();
+		$user_id = $_SESSION['usersinfo']->userId;
+		$email_id = $_POST['emailId'];
+		$comment = $_POST['comment'];
+		$alreadyInivited = $inivitTable->getInfo($email_id,$user_id);
+		if($alreadyInivited =='0'){
+			$insertId = $inivitTable->insertInivite($email_id,$comment,$user_id);
+			return $view = new JsonModel(array(
+				'output' 	=> 'nice',
+			));
+		}else{
+			return $view = new JsonModel(array(
+				'output' 	=> 'cool',
+			));
+		}	
+	}
 	public function dashboardAction(){
 			$baseUrls = $this->getServiceLocator()->get('config');
 			$baseUrlArr = $baseUrls['urls'];
@@ -1220,6 +1304,30 @@ class DataboxuserController extends AbstractActionController
             $this->userCollectionsTable = $sm->get('Databox\Model\UserCollectionsFactory');			
         }
         return $this->userCollectionsTable;
+    }
+	public function getActivityPointsTable()
+    {
+        if (!$this->activitypointsTable) {				
+            $sm = $this->getServiceLocator();
+            $this->activitypointsTable = $sm->get('Databoxuser\Model\ActivityPointsFactory');			
+        }
+        return $this->activitypointsTable;
+    }
+	public function getUserPointsTable()
+    {
+        if (!$this->userpointsTable) {				
+            $sm = $this->getServiceLocator();
+            $this->userpointsTable = $sm->get('Databoxuser\Model\UserPointsFactory');			
+        }
+        return $this->userpointsTable;
+    }
+	public function getInvitationsTable()
+    {
+        if (!$this->invitationsTable) {				
+            $sm = $this->getServiceLocator();
+            $this->invitationsTable = $sm->get('Databoxuser\Model\InvitationsFactory');			
+        }
+        return $this->invitationsTable;
     }
 	
 }

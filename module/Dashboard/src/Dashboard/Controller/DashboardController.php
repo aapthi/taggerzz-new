@@ -405,12 +405,12 @@ class DashboardController extends AbstractActionController
 				}
 				$imageName=$montageImage.'.'.$extension;
 			}else{
-				if($_POST['page']=='acc'){
+				if(isset($_POST['page']) && $_POST['page']=='acc'){
 					define('UPLOAD_DIR', './public/images/project/montageImages/');
 					if($_POST['imageId']!=0){
 						@unlink('./public/images/project/montageImages/'.$_POST['imageId']);
 					}
-				}else if($_POST['page']=='montage'){
+				}else if(isset($_POST['page']) && $_POST['page']=='montage'){
 					define('UPLOAD_DIR', './public/images/project/montageMainImage/');
 					if($_POST['imageId']!=0){
 						@unlink('./public/images/project/montageMainImage/'.$_POST['imageId']);

@@ -58,7 +58,7 @@ return array(
                         'options' => array(
                             'route' => '/user-verified[/:id]',
 							'constraints' => array(
-							   'id' => '[%&;a-zA-Z0-9][%&;a-zA-Z0-9_~-]*',
+							   'id'     => '[a-zA-Z][a-zA-Z0-9-=_-]*',
 							),
                             'defaults' => array(
                                 'controller' => 'Databoxuser\Controller\Databoxuser',
@@ -73,6 +73,26 @@ return array(
                             'defaults' => array(
                                 'controller' => 'Databoxuser\Controller\Databoxuser',
                                 'action'     => 'skipToContinue',
+                            ),
+                        ),
+                    ),
+					'record-activity-points' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route' => '/record-activity-points',
+                            'defaults' => array(
+                                'controller' => 'Databoxuser\Controller\Databoxuser',
+                                'action'     => 'recordActivityPoints',
+                            ),
+                        ),
+                    ),
+					'inivite-friend' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route' => '/inivite-friend',
+                            'defaults' => array(
+                                'controller' => 'Databoxuser\Controller\Databoxuser',
+                                'action'     => 'iniviteFriend',
                             ),
                         ),
                     ),

@@ -33,7 +33,7 @@ input{
 	font-size:10.5pt;
 }
 .active_menu{
-	color:#fc4242;
+	color:#fc4242 !important;
 }
 .error_display_c{
 	color:red;

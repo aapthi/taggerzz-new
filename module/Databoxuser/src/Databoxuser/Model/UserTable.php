@@ -84,7 +84,7 @@ class UserTable
 		$type = 1;
 		
 		$select = $this->tableGateway->getSql()->select();
-		$select->columns(array( "user_id" => 'user_id',"email" => 'email',"display_name" => 'display_name',"userStatus" => 'status'));
+		$select->columns(array( "u_user_id" => 'user_id',"email" => 'email',"display_name" => 'display_name',"userStatus" => 'status'));
 		$select->join('user_details', 'user_details.user_id=user.user_id',array('*'),'left');	
 		$select->where('user.email="'.$userInfo['email'].'"');
 		$select->where('user.password="'.$userInfo['password'].'"');
