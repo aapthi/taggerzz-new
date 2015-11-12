@@ -727,7 +727,15 @@ color:#ef4436;
  .hash_tag_color a:hover{
 color:#a12a30;
  }
-
+.das_brg_n .divCreatedCollectionText{
+	border:none !important;
+}
+.das_brg_n .liCreatedCollectionListItem{
+	border-bottom:1px solid rgba(0, 0, 0, 0.2);
+}
+.new_pad{
+	padding:3px 8px !important;
+}
 
 /* Browser Problem css */
 @media screen and (-webkit-min-device-pixel-ratio:0) { 
@@ -753,7 +761,20 @@ color:#a12a30;
 		.divHeaderWrapper .divSearchBoxes input[type="text"]{
 		width: 31%;
 		}
+	.secDataboxes #divDataboxWrapper[data-columns]::before {
+      content: '4 .left.width25'; }
+	.views_w {
+		width: 135px !important;
 	}
+}
+@media (min-width: 768px) and (max-width: 980px) { 
+	.twidth_acinfo{
+		width:27% !important;
+	}
+	.divHeaderWrapper .divSearchBoxes input[type="text"]{
+		width: 28%;
+		}
+ }
 @media (max-width: 767px){ 
 	[class*="span"] {
     display: block !important;
@@ -827,8 +848,8 @@ color:#a12a30;
 .secDataboxes #divDataboxWrapper[data-columns]::before {
       content: '2 .left.width45'; }
 	  .logo_home_new_size{
-	width:50% !important;
-}
+			width:50% !important;
+		}
 }
 @media (max-width: 480px) { 
 	.secDataboxes #divDataboxWrapper[data-columns]::before {

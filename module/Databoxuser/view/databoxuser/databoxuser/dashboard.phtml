@@ -2,7 +2,7 @@
 <div class="tzcontainer_as tmar_b20">
 <div class="tmar_t125">
 <section id="secAccountSettings">
-				<div class="tac_bg tmar_b20">
+				<div class="tac_bg tmar_b20 das_brg_n">
                 <div class="divAccountSettingsRow">
                     <div class="divCreatedCollectionsCard">
                         <div class="divAccountSettingsHeading heading_font_pt12">
@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 </div>
-				<div class="tac_bg ">
+				<div class="tac_bg das_brg_n">
                 <div  class="divAccountSettingsRow">
                     <div class="divCreatedCollectionsCard">
                         <div id="msgoto" class="divAccountSettingsHeading heading_font_pt12">
@@ -38,7 +38,6 @@
                             <button onClick="composeMail()" class="btnComposeMessage">COMPOSE</button>
                         </div>
                         <ul class="ulCreatedCollectionList">
-							<li class="liCreatedCollectionListItem">
 							<? if(count($this->getUserMessages)!=0){$i=0;foreach($this->getUserMessages as $userMessages){
 								if($i==0){
 								$id=$userMessages['msg_id'];
@@ -49,13 +48,13 @@
 								}
 								$i++;
 							?>
-							
-								<div onClick="showMessage(<?php echo $userMessages['msg_id']?>)" class="divCreatedCollectionText"><a href="javaScript:void(0);"><?php echo $userMessages['msg_subject'];?></a></div><?php if($userMessages['msg_flag']=="0"){ ?><span id="statusFlag<?php echo $userMessages['msg_id']?>" onClick="messageChangeStatus(<?php echo $userMessages['msg_id']?>)" class="spnNewMessageLabel"><a href="javaScript:void(0);">New</a></span><? }else{ }?>
+							<li class="liCreatedCollectionListItem">
+								<div onClick="showMessage(<?php echo $userMessages['msg_id']?>)" class="divCreatedCollectionText"><a href="javaScript:void(0);"><?php echo $userMessages['msg_subject'];?></a></div><?php if($userMessages['msg_flag']=="0"){ ?><span id="statusFlag<?php echo $userMessages['msg_id']?>"  onClick="messageChangeStatus(<?php echo $userMessages['msg_id']?>)" class="spnNewMessageLabel new_pad"><a href="javaScript:void(0);">New</a></span><? }else{ }?>
+							</li>
 							<?}}else{?>
 									<div  class="divCreatedCollectionText">No Records</div>
 									
 								<?}?>
-								</li>
                         </ul>
                     </div>
                 </div>
