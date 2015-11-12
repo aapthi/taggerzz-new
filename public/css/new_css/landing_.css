@@ -26,6 +26,8 @@
 			float:left;
 			margin-left:0.00em;
 			margin-top:-26.10em;
+			position:relative;
+			z-index:10;			
 			}
 	
 	.ctrl_right_sticky{

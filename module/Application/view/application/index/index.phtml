@@ -136,7 +136,7 @@ src="https://accounts.google.com/CheckCookie?continue=https%3A%2F%2Fwww.google.c
                         <div id="divLoginSocial" class="divLoginSocial smallFont whiteFont fatFont textCenter largeFont">
 						<form class="" method="post" id="userLoginFormUrl1" name="userLoginFormUrl1" role="form" >
                             <div class="block">
-                                <span class="fatFont">LOGIN USING</span>
+                                <span class="fatFont _footer_text_shadow">LOGIN USING</span>
                             </div>
                             <div class="block">
 								<?php
@@ -149,24 +149,24 @@ src="https://accounts.google.com/CheckCookie?continue=https%3A%2F%2Fwww.google.c
                                 <img id="imgGPlusLogin" class="imgSocialImage" src="<?php echo $basePath; ?>/img/imgGPlus.png" alt=""/>
 								-->
                             </div>
-                            <div class="block fatFont">
+                            <div class="block fatFont _footer_text_shadow">
                                 OR
                             </div>
-                            <div class="block textLeft">
+                            <div class="block textLeft _footer_text_shadow">
                                 <label>Email</label> <br>
 								<!--
                                 <input type="email" name="txtEmail" id="txtEmail" class="formField txtEmail"/>
 								-->
 								<input type="email" name="emailId1" id="emailId1" class="formField txtEmail"/>
                             </div>
-                            <div class="block textLeft">
+                            <div class="block textLeft _footer_text_shadow">
                                 <label>Password</label> <br>
 								<!--
                                 <input type="password" name="txtPassword" id="txtPassword" class="formField txtPassword"/>
 								-->
 								<input type="password" name="userPassword1" id="userPassword1" class="formField txtPassword"/>
                             </div>
-							<div class="block textLeft">
+							<div class="block textLeft _footer_text_shadow">
 								<label><input type="checkbox" name="remember_me" id="remember_me" value="" style="width:7% !important;">Remember Me</label> 									
 							</div>
                             <div class="block textRight">
@@ -174,10 +174,10 @@ src="https://accounts.google.com/CheckCookie?continue=https%3A%2F%2Fwww.google.c
 								<!--
                                 <button name="btnSubmit" id="btnSubmit" class="formField btnSubmit">SUBMIT</button>
 								-->
-								<button type="button" name="btnSubmit" id="btnSubmit" onClick="return checkLogin('loginChe');" class="formField btnSubmit">SUBMIT</button>
+								<button type="button" name="btnSubmit" id="btnSubmit" onClick="return checkLogin('loginChe');" class="formField btnSubmit _shadow_boxes">SUBMIT</button>
                             </div>
 								<input type="hidden" id="hid_log" name="hid_log" value="logChe">
-                            <div class="block textCenter">
+                            <div class="block textCenter _footer_text_shadow">
                                 <label>Don't have account with us? </label><br>
 								<!--
                                 <button name="btnSignup" id="btnSignup" class="formField btnSignup">SIGNUP</button>
@@ -244,7 +244,7 @@ src="https://accounts.google.com/CheckCookie?continue=https%3A%2F%2Fwww.google.c
         
         <section id="secFooterAspects" class="bottomSticky">
                 <div id="divFooterSentence" class="whiteFont">
-                    <span class="fatFont"><?php echo $totalHotLinksCount;?></span> <span class="smallFont">HOT LINKS, PERSONALIZED AND SHARED,</span> <span class="fatFont"><?php echo $homeUsersCount;?></span> <span class="smallFont">Users</span>
+                    <span class="fatFont intro_footer_text"><?php echo $totalHotLinksCount;?></span> <span class="smallFont _footer_text_shadow">HOT LINKS, PERSONALIZED AND SHARED,</span> <span class="fatFont  intro_footer_text"><?php echo $homeUsersCount;?></span> <span class="smallFont _footer_text_shadow">Users</span>
                 </div>
             </section>
         
