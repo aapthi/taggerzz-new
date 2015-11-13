@@ -137,7 +137,7 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 							$imageLink=$basePath.'/images/social_media/noimage.png';
 						}
 						?>
-					<div id="dragDropWindow<?echo $key+1;?>" class="grid-stack-item " 
+					<div id="dragDropWindow<?echo $key+1;?>" class="grid-stack-item" 
 					<?php if( $tzGsRowNum % 4 == 0 ) { $xSet = $tzDataGsX;$tzDataGsX = 0;$ySet = $tzDataGsY;$tzDataGsY += 3; } else{ $xSet = $tzDataGsX;$tzDataGsX += 3;$ySet = $tzDataGsY; } ?> data-gs-x="<?php echo $xSet; ?>" data-gs-y="<?php echo $ySet; ?>" data-gs-width="3" data-gs-height="4" style="border:none;">
 					<div class="grid-stack-item-content">
 									<?php
@@ -145,8 +145,8 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 								{
 								?>
 								
-								<div class="c_DivCardImgWrapper"  style="text-align:center">
-										<iframe  width="272px" height="272px" style="<? echo $imageSocialAlone; ?>" src="<?echo $databoxLinksGrids->iframe_src;?>" frameborder="0" allowfullscreen></iframe>
+								<div class="c_DivCardImgWrapper"   style="text-align:center">
+										<iframe  style="<? echo $imageSocialAlone; ?> width:100%; min-height:242px;" src="<?echo $databoxLinksGrids->iframe_src;?>" frameborder="0" allowfullscreen></iframe>
 								</div>
 								
 								<?php 
@@ -161,32 +161,32 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 								
 								<?php if(isset($databoxLinksGrids->title) && $databoxLinksGrids->title!=""){?>
 									<div class="pad_10px">
-									<h5>
-										<?php if(strlen($databoxLinksGrids->title)>20){
-												echo substr($databoxLinksGrids->title,0,20) . '...'; 
-											}
-											else
-											{
+									<h2>
+										 <?php //if(strlen($databoxLinksGrids->title)>20){
+												// echo substr($databoxLinksGrids->title,0,20) . '...'; 
+											// }
+											// else
+											// {
 												echo $databoxLinksGrids->title;
-											}
+											//}
 										?>
-										</h5>
+										</h2>
 									</div><?} $parahid="";
-								if(isset($databoxLinksGrids->description) && $databoxLinksGrids->description!="no Description"){?>
-								<div class="pad_10px">
+								// if(isset($databoxLinksGrids->description) && $databoxLinksGrids->description!="no Description"){?>
+								<!--<div class="pad_10px">
 								<?php
-									if(strlen($databoxLinksGrids->description)>200){
-										echo substr($databoxLinksGrids->description,0,200) . '<a href="'.$url.'" target="_blank">...Read more</a>';
-										$parahid=1;
-									}
-									else
-									{
-										echo $databoxLinksGrids->description;
-										$parahid=0;
-									}
+									// if(strlen($databoxLinksGrids->description)>200){
+										// echo substr($databoxLinksGrids->description,0,200) . '<a href="'.$url.'" target="_blank">...Read more</a>';
+										// $parahid=1;
+									// }
+									// else
+									// {
+										// echo $databoxLinksGrids->description;
+										// $parahid=0;
+									// }
 								?>
-								</div>
-								<?}
+								</div>-->
+								<?//}
 								?>
 								<div class="collect_bookmark_this">
 								<div class="clear_book_collect_this">
