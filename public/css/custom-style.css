@@ -526,6 +526,10 @@ margin-top:4px;
 	margin:6px;
 	
 }
+.width31{
+	padding: 1%;
+    width: 31%;
+}
 .width90{
 	width: 90%;
 	
@@ -759,7 +763,7 @@ color:#a12a30;
  }
  @media (max-width: 1024px) {
 		.divHeaderWrapper .divSearchBoxes input[type="text"]{
-		width: 31%;
+			width: 31%;
 		}
 	.secDataboxes #divDataboxWrapper[data-columns]::before {
       content: '4 .left.width25'; }
@@ -767,13 +771,33 @@ color:#a12a30;
 		width: 135px !important;
 	}
 }
-@media (min-width: 768px) and (max-width: 980px) { 
+@media (min-width: 768px) and (max-width: 980px) {
+	.secDataboxes #divDataboxWrapper[data-columns]::before {
+		content: '3 .left.width31'; 
+	  }
 	.twidth_acinfo{
 		width:27% !important;
 	}
 	.divHeaderWrapper .divSearchBoxes input[type="text"]{
 		width: 28%;
-		}
+	}
+ }
+ @media only screen and (device-width: 768px){
+	.tsearch_input_w {
+		width: 50% !important;
+	}
+	.withoutlogin_logo {
+		left: 80px;
+		position: absolute;
+		top: 1px;
+		width:190px;
+	}
+	.divHeaderWrapper .divSearchBoxes .aSearch{
+		padding:0.5px 0;
+	}
+	.tinput_s{
+		padding-top:15px;
+	}
  }
 @media (max-width: 767px){ 
 	[class*="span"] {
