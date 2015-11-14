@@ -606,6 +606,18 @@ function insertComment(){
 				data	:{comment:comment,category_id:databoxId},
 				success: function( data ) {
 					if(data.output!=0) {
+					// Added By Dileep;
+						if(parseInt(data.databoxCommentsCount)=='5'){
+							var databoxUser = data.databoxUser;
+							var insertedActivityAjaxUrl = BASE_URL + "/databoxuser/record-activity-points";
+							$.ajax({
+								url: insertedActivityAjaxUrl,
+								type: "POST",
+								data:{databoxId:databoxId,databoxUser:databoxUser,activityType:'CommentsLinks',comt:'cmtt'},
+								dataType: "json",
+								success: function(data) {}
+							});	
+						}						
 						var addHtml='';
 						$('#message').val('');
 						addHtml+='<div id="comment'+newValue+'"><div class="row tmar_b20"><div class="rimg_left"><img  width="55px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php if(isset($_SESSION['usersinfo']->montage_image)){echo $_SESSION['usersinfo']->montage_image; }?>" alt="" class="height100" /></div><div class="rcontenleft"><div class="name_c"><?php if(isset($_SESSION['usersinfo']->displayName)){echo $_SESSION['usersinfo']->displayName;} ?></div><span id="commText'+newValue+'">';

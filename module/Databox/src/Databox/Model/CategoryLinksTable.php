@@ -43,6 +43,13 @@ class CategoryLinksTable
 		$resultSet = $this->tableGateway->selectWith($select);
 		return $resultSet;
 	}
+	public function checkLinks($link)
+	{
+		$select = $this->tableGateway->getSql()->select();
+		$select->where('category_links.link="'.$link.'"');
+		$resultSet = $this->tableGateway->selectWith($select);
+		return $resultSet->count();
+	}
 	
 	public function getEditCategoryLinks( $user_category_id )
 	{

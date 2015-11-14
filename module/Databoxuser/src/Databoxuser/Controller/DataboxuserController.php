@@ -22,6 +22,8 @@ class DataboxuserController extends AbstractActionController
 	protected $activitypointsTable;
 	protected $userpointsTable;
 	protected $invitationsTable;
+	protected $categoryTable;
+	protected $categoryLinksTable;
 
     public function indexAction()
 	{
@@ -772,6 +774,13 @@ class DataboxuserController extends AbstractActionController
 				$activityId = $activityMode->activity_id;
 			}
 		}
+		//Comments Points For Fresh Databox
+		if(isset($_POST['comt']) && $_POST['comt']=='cmtt'){
+			$acitvityInserted = $this->activityMethod($_POST['databoxUser'],$activityId);
+			return $view = new JsonModel(array(
+				'output' 	=> 1,
+			));
+		}
 		//Databox Responsed by other users
 		if(isset($_POST['dataBoxOwner']) && $_POST['dataBoxOwner']!=""){
 			if($_POST['dataBoxOwner']!=$_SESSION['usersinfo']->userId){
@@ -791,7 +800,15 @@ class DataboxuserController extends AbstractActionController
 						));
 					}
 				}
+			}else{
+				return $view = new JsonModel(array(
+					'output' 	=> 'Sorry',
+				));
 			}
+		}else{
+			return $view = new JsonModel(array(
+				'output' 	=> 'Sorry',
+			));
 		}
 	}
 	public function iniviteFriendAction(){
@@ -1329,6 +1346,64 @@ class DataboxuserController extends AbstractActionController
         }
         return $this->invitationsTable;
     }
+	public function getCategoryTable()
+    {
+        if (!$this->categoryTable) {				
+            $sm = $this->getServiceLocator();
+            $this->categoryTable = $sm->get('Databox\Model\CategoryFactory');			
+        }
+        return $this->categoryTable;
+    }
+	public function getCategoryLinksTable()
+    {
+        if (!$this->categoryLinksTable) {				
+            $sm = $this->getServiceLocator();
+            $this->categoryLinksTable = $sm->get('Databox\Model\CategoryLinksFactory');			
+        }
+        return $this->categoryLinksTable;
+    }
+	public function cronFreshLinksAction(){
+		$baseUrls = $this->getServiceLocator()->get('config');
+		$baseUrlArr = $baseUrls['urls'];
+		$baseUrl = $baseUrlArr['baseUrl'];
+		$basePath = $baseUrlArr['basePath'];
+		$category_ids = $this->getCategoryTable()->getCategoryIds();
+		$cnt = 0;
+		if(count($category_ids)>0){
+			foreach($category_ids as $catid){
+				$cat_id = $catid->category_id;
+				$get_category_links = $this->getCategoryLinksTable()->getCategoryLinks( $cat_id );
+				if(count($get_category_links)>0){
+					foreach($get_category_links as $cat_links){
+						$checkLinks = $this->getCategoryLinksTable()->checkLinks($cat_links->link);
+						if($checkLinks==1){
+							$cnt++;
+						}
+					}
+					if($cnt>=50){
+						$userId = $catid->user_id;
+						$activity_name='FreshLinks';
+						$activityTable = $this->getActivityPointsTable();
+						$activityMode = $activityTable->getActivityFresh($activity_name);
+						if(count($activityMode)>0){
+							$activityId = $activityMode->activity_id;
+							$acitvityLasted = $this->activityMethod($userId,$activityId);
+							if($acitvityLasted!=0){
+								$update_cron_status = $this->getCategoryTable()->updateCronStatus( $cat_id );
+							}
+						}
+						echo "CRON Successfully....";exit;
+					}else{
+						echo "NO DATA FOUND";exit;
+					}
+				}else{
+					echo "NO DATA FOUND";exit;
+				}
+			}
+		}else{
+			echo "NO DATA FOUND";exit;
+		}
+	}
 	
 }
 

@@ -1155,6 +1155,7 @@ function validateLinks()
 				}
 			}
 		});
+		$("#links_cnt").val(minimumLinksCount);
 		if( parseInt(minimumLinksCount) < parseInt("5") )
 		{
 			$('#pop-up-alerts').popUpWindow({action: "open"});	

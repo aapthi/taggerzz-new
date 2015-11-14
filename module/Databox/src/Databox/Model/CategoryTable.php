@@ -20,13 +20,43 @@ class CategoryTable
         $this->tableGateway = $tableGateway;
 		$this->select = new Select();
     }
-
+	public function getCategoryIds(){
+		$select = $this->tableGateway->getSql()->select();
+		$select->join('user_categories', 'category.category_id=user_categories.category_id',array('user_id'),'left');
+		$select->where('fresh_databox="1"');
+		$select->where('cron_checking="1"');
+		$resultSet = $this->tableGateway->selectWith($select);
+		return $resultSet;
+	}
+	public function updateCronStatus($catid){
+		$data = array(
+			'cron_checking'       =>0,
+		);
+		$result=$this->tableGateway->update($data, array('category_id' => $catid));
+		return 	$result;
+	}
+	public function updateFreshStatus($catid){
+		$data = array(
+			'fresh_databox'       =>0,
+		);
+		$result=$this->tableGateway->update($data, array('category_id' => $catid));
+		return 	$result;
+	}
+	public function getInfo($catId){
+		$select = $this->tableGateway->getSql()->select();
+		$select->join('user_categories', 'category.category_id=user_categories.category_id',array('user_id'),'left');
+		$select->where('category.category_id="'.$catId.'"');
+		$resultSet = $this->tableGateway->selectWith($select);
+		return $resultSet->current();
+	}
 	public function addCategory($category)
     {	
 		$data = array(
 			'category_name' 	    => $category['categoryName'], 
 			'category_image' 	    => $category['categoryImage'], 
 			'category_type' 	    => $category['categoryType'], 	
+			'fresh_databox' 	    => $category['fresh_databox'], 	
+			'cron_checking' 	    => $category['cron_checking'],  	
 			'created_date' 	        => date('Y-m-d H:i:s'), 	
 			'status' 	            => "1",	
 			'category_highlight' 	=> $category['categoryHighlight']

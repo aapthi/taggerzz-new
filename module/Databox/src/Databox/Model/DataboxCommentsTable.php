@@ -55,5 +55,12 @@ class DataboxCommentsTable
 		$deleteCommentId=$this->tableGateway->delete(array('databox_comment_id' => $Id));
 		return $deleteCommentId;
 	}
-	
+	public function totalCommentsOfDataBox($catid){
+		$select = $this->tableGateway->getSql()->select();
+		$select->join('category', 'databox_comments.databox_id=category.category_id',array('*'),'left');
+		$select->where('category.fresh_databox="1"');
+		$select->where('databox_comments.databox_id="'. $catid .'"');
+		$resultSet = $this->tableGateway->selectWith($select);
+		return $resultSet->count();
+	}
 }

@@ -8,6 +8,16 @@ return array(
     // The following section is new and should be added to your file
     'router' => array(
         'routes' => array(
+			'cron-fresh-links' => array(
+				'type'    => 'Literal',
+				'options' => array(
+					'route' => '/cron-fresh-links',							
+					'defaults' => array(
+						'controller' => 'Databoxuser\Controller\Databoxuser',
+						'action'     => 'cronFreshLinks',
+					),
+				),
+			),
             'databoxuser' => array(
                 'type' => 'Literal',
                 'priority' => 1000,

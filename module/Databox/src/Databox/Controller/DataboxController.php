@@ -612,7 +612,7 @@ class DataboxController extends AbstractActionController
 
 		if( isset($_POST) )
 		{
-			//echo "<pre>";print_r($_POST);exit;
+			// echo "<pre>";print_r($_POST);exit;
 
 			$categoryType = $_POST['categoryType'];
 			$categoryImage = "";
@@ -626,7 +626,15 @@ class DataboxController extends AbstractActionController
 			$category["categoryType"] = $_POST['settingId'];
 			$category["categoryImage"] = $categoryImage;
 			$category["categoryHighlight"] = $_POST['categoryHighlight'];
-			 //echo "<pre>";print_r($category);exit;
+			//Added By dileep for Fresh Links
+			if(isset($_POST['links_cnt']) && $_POST['links_cnt']>=50){
+				$category["fresh_databox"] = '1';
+				$category["cron_checking"] = '1';
+			}else{
+				$category["fresh_databox"] = '0';
+				$category["cron_checking"] = '0';
+			}
+			// echo "<pre>";print_r($category);exit;
 			$userCatDetails=array();
 			$userCatDetails["categoryTitle"] = $_POST['categoryTitle'];
 			$userCatDetails["categoryVoteStatus"] = 2;
@@ -639,6 +647,7 @@ class DataboxController extends AbstractActionController
 			$userCatDetails["matureContent"] = $_POST['matureContent'];
 			$userCatDetails["notSafeForWork"] = $_POST['notSafeForWork'];
 			$userCatDetails["linkPostFormation"] = $_POST['linkPostFormation'];
+			
 
 			$userCatDetails["main_category"] = "";
 			$userCatDetails["sub_category"] = "";
@@ -3444,6 +3453,7 @@ class DataboxController extends AbstractActionController
 	//End
 	public function updateViewsCountAction()
 	{
+		$totCount = 0;
 		$updateViewsCountTable = $this->getDataboxViewsTable()->updateViewsCount($_POST['categoryId'])->count();
 		if($updateViewsCountTable==0){
 			$databoxViewsTable=	$this->getDataboxViewsTable()->insertDataboxUserId($_POST['categoryId']);
@@ -3480,11 +3490,25 @@ class DataboxController extends AbstractActionController
     }
 	public function insertCommentAction()
     {
-		$insertComment = $this->getDataboxCommentsTable()->addComment($_POST);
-			return $view = new JsonModel(
-				array(
-					'output'			=>	1,
-				));
+		$totCount = '';
+		$databoxUser = '';
+		 $insertComment = $this->getDataboxCommentsTable()->addComment($_POST);
+		if($insertComment>0){
+			$totCount =	$this->getDataboxCommentsTable()->totalCommentsOfDataBox($_POST['category_id']);
+			if($totCount=='5'){
+				$databoxInfo = $this->getCategoryTable()->getInfo( $_POST['category_id'] );	
+				if(count($databoxInfo)>0){
+					$databoxUser = $databoxInfo->user_id;
+					$update_fresh_status = $this->getCategoryTable()->updateFreshStatus( $_POST['category_id'] );
+				}
+			}
+		}
+		return $view = new JsonModel(
+		array(
+			'output'			=>	1,
+			'databoxCommentsCount'	=>	$totCount,
+			'databoxUser' =>$databoxUser
+		));
     }
 	public function deleteCommentAction()
     {
