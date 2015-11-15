@@ -40,6 +40,16 @@ return array(
                             ),
                         ),
                     ),
+					'insert-replay-comment' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route' => '/insert-replay-comment',
+                            'defaults' => array(
+                                'controller' => 'Databox\Controller\Databox',
+                                'action'     => 'insertReplayComment',
+                            ),
+                        ),
+                    ),
                     'userdefined-both' => array(
                         'type' => 'Literal',
                         'options' => array(

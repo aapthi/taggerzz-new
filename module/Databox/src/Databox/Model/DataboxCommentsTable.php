@@ -26,10 +26,24 @@ class DataboxCommentsTable
 		$data = array(
 				'comment_user_id'  => $_SESSION['usersinfo']->userId,
 				'databox_comment'  => $comment['comment'], 
+				'parent_comment_id'=> 0, 
 				'created_date'     => date('Y-m-d H:i:s'), 
 				'updated_date'     => date('Y-m-d H:i:s'), 
 				'comment_status'   => 1,
 				'databox_id'  => $comment['category_id'],
+		);	
+		$resultset=$this->tableGateway->insert($data);
+		return $resultset;
+	}
+	public function addReplyComment($comment){
+		$data = array(
+			'comment_user_id'  => $_SESSION['usersinfo']->userId,
+			'databox_comment'  => $comment['comment'], 
+			'parent_comment_id'=> $comment['parent_comt_id'], 
+			'created_date'     => date('Y-m-d H:i:s'), 
+			'updated_date'     => date('Y-m-d H:i:s'), 
+			'comment_status'   => 1,
+			'databox_id'  => $comment['category_id'],
 		);	
 		$resultset=$this->tableGateway->insert($data);
 		return $resultset;

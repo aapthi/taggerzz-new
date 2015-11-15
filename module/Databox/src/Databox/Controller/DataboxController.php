@@ -3510,6 +3510,28 @@ class DataboxController extends AbstractActionController
 			'databoxUser' =>$databoxUser
 		));
     }
+	public function insertReplayCommentAction()
+    {
+		$totCount = '';
+		$databoxUser = '';
+		 $insertComment = $this->getDataboxCommentsTable()->addReplyComment($_POST);
+		if($insertComment>0){
+			$totCount =	$this->getDataboxCommentsTable()->totalCommentsOfDataBox($_POST['category_id']);
+			if($totCount=='5'){
+				$databoxInfo = $this->getCategoryTable()->getInfo( $_POST['category_id'] );	
+				if(count($databoxInfo)>0){
+					$databoxUser = $databoxInfo->user_id;
+					$update_fresh_status = $this->getCategoryTable()->updateFreshStatus( $_POST['category_id'] );
+				}
+			}
+		}
+		return $view = new JsonModel(
+		array(
+			'output'			=>	1,
+			'databoxCommentsCount'	=>	$totCount,
+			'databoxUser' =>$databoxUser
+		));
+    }
 	public function deleteCommentAction()
     {
 		$deleteComment = $this->getDataboxCommentsTable()->deleteCommentId($_POST['databox_comment_id']);
