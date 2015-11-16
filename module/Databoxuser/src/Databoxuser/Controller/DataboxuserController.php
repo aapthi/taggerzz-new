@@ -282,13 +282,15 @@ class DataboxuserController extends AbstractActionController
 			$uEmail = $userRowI->email;
 			$inivitTable = $this->getInvitationsTable();
 			$inivtedEmailCheck = $inivitTable->inivtedEmailCheck($uEmail);
-			if($inivtedEmailCheck!=''){
-				$user_id = $inivtedEmailCheck->user_id;
-				$inivit_id = $inivtedEmailCheck->inivit_id;
+			if(count($inivtedEmailCheck)>=0){
 				$firstInvitations = $activityTable->getActivityFresh('Invitations');
 				$activityIdd = $firstInvitations->activity_id;
-				$lastInsertedId = $this->activityMethod($user_id,$activityIdd);
-				$updateStatusCheck = $inivitTable->updateStatus($inivit_id);
+				foreach($inivtedEmailCheck as $inivite){
+					$user_id = $inivite->user_id;
+					$inivit_id = $inivite->inivit_id;
+					$updateStatusCheck = $inivitTable->updateStatus($inivit_id);
+					$lastInsertedId = $this->activityMethod($user_id,$activityIdd);	
+				}				
 			}
 			// END
 			$userRoww = $this->getUserTable()->changeAccountStatus( $userInfo );
@@ -755,13 +757,15 @@ class DataboxuserController extends AbstractActionController
 				$uEmail = $userRowI->email;
 				$inivitTable = $this->getInvitationsTable();
 				$inivtedEmailCheck = $inivitTable->inivtedEmailCheck($uEmail);
-				if($inivtedEmailCheck!=''){
-					$user_id = $inivtedEmailCheck->user_id;
-					$inivit_id = $inivtedEmailCheck->inivit_id;
+				if(count($inivtedEmailCheck)>=0){
 					$firstInvitations = $activityTable->getActivityFresh('Invitations');
 					$activityIdd = $firstInvitations->activity_id;
-					$lastInsertedId = $this->activityMethod($user_id,$activityIdd);
-					$updateStatusCheck = $inivitTable->updateStatus($inivit_id);
+					foreach($inivtedEmailCheck as $inivite){
+						$user_id = $inivite->user_id;
+						$inivit_id = $inivite->inivit_id;
+						$updateStatusCheck = $inivitTable->updateStatus($inivit_id);
+						$lastInsertedId = $this->activityMethod($user_id,$activityIdd);	
+					}				
 				}
 				// END
 				$user_id = $this->getUserTable()->changeAccountStatus( $userInfo );

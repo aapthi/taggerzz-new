@@ -47,7 +47,7 @@ class InvitationsTable
 		$select->where('inivit_email="'.$emailid.'"');
 		$select->where('in_status="1"');
 		$resultSet = $this->tableGateway->selectWith($select);
-		$row = $resultSet->current();
+		$row = $resultSet;
 		return $row;
 	}
 	public function updateStatus($inivit_id){
