@@ -2955,8 +2955,16 @@ class DataboxController extends AbstractActionController
 			}
 			//End
 			//echo $countRelevance1 .'--'. $countRelevance0 .'--'. $countWorth1 .'--'. $countWorth0; exit;
-			$getComments = $this->getDataboxCommentsTable()->getDataboxComments($categoryId);
-			 //echo '<pre>'; print_r($getComments);exit;
+			$getCommentss = $this->getDataboxCommentsTable()->getDataboxComments($categoryId)->toArray();
+			$getComments =array();
+			foreach($getCommentss as $comment){
+				if($comment['parent_comment_id']!='' && $comment['parent_comment_id']!='0'){
+					$getComments[$comment['parent_comment_id']]['sub'][]=$comment;
+				}else{
+					$getComments[$comment['databox_comment_id']]=$comment;
+				}
+			}
+			// echo "<pre>";print_r($getComments);exit;
 			return new ViewModel(array(				
 				'baseUrl' 					=> 	$baseUrl,
 				'basePath' 					=> 	$basePath,
@@ -3527,14 +3535,14 @@ class DataboxController extends AbstractActionController
 		}
 		return $view = new JsonModel(
 		array(
-			'output'			=>	1,
+			'output'			=>	$insertComment,
 			'databoxCommentsCount'	=>	$totCount,
 			'databoxUser' =>$databoxUser
 		));
     }
 	public function deleteCommentAction()
     {
-		$deleteComment = $this->getDataboxCommentsTable()->deleteCommentId($_POST['databox_comment_id']);
+		$deleteComment = $this->getDataboxCommentsTable()->deleteCommentId($_POST['databox_comment_id'],$_POST['deR']);
 			return $view = new JsonModel(
 				array(
 					'output'			=>	1,

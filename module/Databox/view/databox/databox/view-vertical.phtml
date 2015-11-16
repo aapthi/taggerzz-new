@@ -662,57 +662,117 @@ function replyComment(id){
 	$('#replyDiv'+id).show();
 	$('#msg'+id).focus();	
 }
+function editReComment(id,pid){
+	$('#reComment'+id).hide();
+	$('#replyDiv'+pid).show();
+    $('#msg'+pid).focus();
+	var editCommTxt = $('#reCommText'+id).html();
+	$('#msg'+pid).val(editCommTxt);
+	$('#reCommentSend'+pid).html('Update Reply');
+	$('#hidUpReplySendComment').val(id);
+	$('#parentCid').val(pid);
+}
 function insertReplyComment(id){
 	if($('#msg'+id).val()==''){
 		alert('Enter a Reply');
 		$('#msg'+id).focus();
 		return false;
 	}
-	var databoxId='<?php echo $this->categoryId ?>';
-	var comment=$('#msg'+id).val();
-	$.ajax({
-		url: BASE_URL+'/databox/insert-replay-comment',
-		dataType: "json",
-		type	: "POST",
-		data	:{comment:comment,category_id:databoxId,parent_comt_id:id},
-		success: function( data ) {
-			if(data.output!=0) {
-			// Added By Dileep;
-				if(parseInt(data.databoxCommentsCount)=='5'){
-					var databoxUser = data.databoxUser;
-					var insertedActivityAjaxUrl = BASE_URL + "/databoxuser/record-activity-points";
-					$.ajax({
-						url: insertedActivityAjaxUrl,
-						type: "POST",
-						data:{databoxId:databoxId,databoxUser:databoxUser,activityType:'CommentsLinks',comt:'cmtt'},
-						dataType: "json",
-						success: function(data) {}
-					});	
-				}	
+	if($("#hidUpReplySendComment").val()!='0'){
+		var comment=$('#msg'+id).val();
+		var updateReCid=$("#hidUpReplySendComment").val();
+		var parentCid=$("#parentCid").val();
+		$.ajax({
+			url: BASE_URL+'/databox/update-comment',
+			dataType: "json",
+			type	: "POST",
+			data	:{comment:comment,databox_comment_id:updateReCid},
+			success: function( data ) {
+				$('#replyDiv'+parentCid).hide();
 				var addHtml='';
 				$('#msg'+id).val('');
-				addHtml+='<div id="comment'+newValue+'"><div class="row tmar_b20"><div class="rimg_left"><img  width="55px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php if(isset($_SESSION['usersinfo']->montage_image)){echo $_SESSION['usersinfo']->montage_image; }?>" alt="" class="height100" /></div><div class="rcontenleft"><div class="name_c"><?php if(isset($_SESSION['usersinfo']->displayName)){echo $_SESSION['usersinfo']->displayName;} ?></div><span id="commText'+newValue+'">';
+				addHtml+='<div id="reComment'+updateReCid+'"><div class="row tmar_b20"><div class="rimg_left"><img  width="55px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php if(isset($_SESSION['usersinfo']->montage_image)){echo $_SESSION['usersinfo']->montage_image; }?>" alt="" class="height100" /></div><div class="rcontenleft"><div class="name_c"><?php if(isset($_SESSION['usersinfo']->displayName)){echo $_SESSION['usersinfo']->displayName;} ?></div><span id="reCommText'+updateReCid+'">';
 				addHtml+=comment;
 				addHtml+='</span>';
 				addHtml+='<br/>';
-				addHtml+='<div class="comment_btns_pos_ab"><button onClick="editComment('+newValue+')" class="comment_edit_btn">Edit</button> <button onClick="deletedComment('+newValue+')" class="comment_delete_btn">Delete </button></div></div></div><div class="clearfix"></div></div>';
-				$('#replay_content').prepend(addHtml);
-				// $('#hidSendComment').val('0');
-			}else{
-				alert('No data is found');
+				addHtml+='<div class="comment_btns_pos_ab"><button onClick="editReComment('+updateReCid+','+parentCid+')" class="comment_edit_btn">Edit</button> <button onClick="deletedComment('+updateReCid+')" class="comment_delete_btn">Delete </button></div></div></div><div class="clearfix"></div></div>';
+				$('#reComment'+updateReCid).show();
+				$('#reCommentSend'+parentCid).html('SEND Reply');
+				$('#hidUpReplySendComment').val(0);
+				$('#parentCid').val(0);
+				$('#reComment'+updateReCid).html(addHtml);
 			}
-		}	
-	});
+		});
+	}else{
+		var databoxId='<?php echo $this->categoryId ?>';
+		var comment=$('#msg'+id).val();
+		$.ajax({
+			url: BASE_URL+'/databox/insert-replay-comment',
+			dataType: "json",
+			type	: "POST",
+			data	:{comment:comment,category_id:databoxId,parent_comt_id:id,upHidId:''},
+			success: function( data ) {
+				if(data.output!=0) {
+				var lastInsertId = data.output;
+				// Added By Dileep;
+					if(parseInt(data.databoxCommentsCount)=='5'){
+						var databoxUser = data.databoxUser;
+						var insertedActivityAjaxUrl = BASE_URL + "/databoxuser/record-activity-points";
+						$.ajax({
+							url: insertedActivityAjaxUrl,
+							type: "POST",
+							data:{databoxId:databoxId,databoxUser:databoxUser,activityType:'CommentsLinks',comt:'cmtt'},
+							dataType: "json",
+							success: function(data) {}
+						});	
+					}	
+					var addHtml='';
+					$('#msg'+id).val('');
+					$('#replyDiv'+id).hide();
+					$('#reComment'+lastInsertId).show();
+					addHtml+='<div id="reCommentsList'+lastInsertId+'" style="margin-left:5%;">';
+					addHtml+='<div id="reComment'+lastInsertId+'"><div class="row tmar_b20"><div class="rimg_left"><img  width="55px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php if(isset($_SESSION['usersinfo']->montage_image)){echo $_SESSION['usersinfo']->montage_image; }?>" alt="" class="height100" /></div><div class="rcontenleft"><div class="name_c"><?php if(isset($_SESSION['usersinfo']->displayName)){echo $_SESSION['usersinfo']->displayName;} ?></div><span id="reCommText'+lastInsertId+'">';
+					addHtml+=comment;
+					addHtml+='</span>';
+					addHtml+='<br/>';
+					addHtml+='<div class="comment_btns_pos_ab"><button onClick="editReComment('+lastInsertId+')" class="comment_edit_btn">Edit</button> <button onClick="deletedReComment('+lastInsertId+')" class="comment_delete_btn">Delete </button></div></div></div><div class="clearfix"></div></div></div>';
+					$('#insert_div').append(addHtml);
+				}else{
+					alert('No data is found');
+				}
+			}	
+		});
+	}
 }
 function deletedComment(id){
 	$.ajax({
 			url: BASE_URL+'/databox/delete-comment',
 			dataType: "json",
 			type	: "POST",
-			data	:{databox_comment_id:id},
+			data	:{databox_comment_id:id,deR:'comment'},
 			success: function( data ) {
 				if(data.output!=0) {
 					$('#comment'+id).remove();
+					alert('comment deleted');
+					$('#message').val('');
+					$('#commentSend').html('');
+					$('#commentSend').html('COMMENT SEND');
+					$('#hidSendComment').val('0');
+				}else{
+					alert('No data is found');
+				}
+			}	
+	});
+}
+function deletedReComment(id){
+	$.ajax({
+			url: BASE_URL+'/databox/delete-comment',
+			dataType: "json",
+			type	: "POST",
+			data	:{databox_comment_id:id,deR:'reply'},
+			success: function( data ) {
+				if(data.output!=0) {
+					$('#reCommentsList'+id).remove();
 					alert('comment deleted');
 					$('#message').val('');
 					$('#commentSend').html('');

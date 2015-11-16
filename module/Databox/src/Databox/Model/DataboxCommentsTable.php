@@ -32,8 +32,8 @@ class DataboxCommentsTable
 				'comment_status'   => 1,
 				'databox_id'  => $comment['category_id'],
 		);	
-		$resultset=$this->tableGateway->insert($data);
-		return $resultset;
+		$this->tableGateway->insert($data);		
+		return $this->tableGateway->lastInsertValue;
 	}
 	public function addReplyComment($comment){
 		$data = array(
@@ -45,15 +45,15 @@ class DataboxCommentsTable
 			'comment_status'   => 1,
 			'databox_id'  => $comment['category_id'],
 		);	
-		$resultset=$this->tableGateway->insert($data);
-		return $resultset;
+		$this->tableGateway->insert($data);		
+		return $this->tableGateway->lastInsertValue;
 	}
 	public function getDataboxComments($categoryId){
 		$select = $this->tableGateway->getSql()->select();
 		$select->join('user', 'databox_comments.comment_user_id=user.user_id',array('*'),'left');
 		$select->join('user_details', 'user_details.user_id=user.user_id',array('*'),'left');
 		$select->where('databox_comments.databox_id="'.$categoryId.'"');
-		$select->order('databox_comments.databox_comment_id DESC');
+		$select->order('databox_comments.databox_comment_id ASC');
 		$resultSet = $this->tableGateway->selectWith($select);
 		return $resultSet;
 	}
@@ -64,10 +64,15 @@ class DataboxCommentsTable
 		$row=$this->tableGateway->update($data, array('databox_comment_id' => $commentId));
 		return $row;
 	}
-	public function deleteCommentId( $Id )
+	public function deleteCommentId( $Id,$type )
     {	
-		$deleteCommentId=$this->tableGateway->delete(array('databox_comment_id' => $Id));
-		return $deleteCommentId;
+		if($type=='reply'){
+			$deleteCommentId=$this->tableGateway->delete(array('parent_comment_id' => $Id));
+			return $deleteCommentId;
+		}else{
+			$deleteCommentId=$this->tableGateway->delete(array('databox_comment_id' => $Id));
+			return $deleteCommentId;
+		}
 	}
 	public function totalCommentsOfDataBox($catid){
 		$select = $this->tableGateway->getSql()->select();
