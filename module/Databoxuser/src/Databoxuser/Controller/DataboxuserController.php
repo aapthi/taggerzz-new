@@ -278,7 +278,7 @@ class DataboxuserController extends AbstractActionController
 			}
 			// End
 			// Invitations
-			$userRowI = $this->getUserTable()->getUser( $decrypted );
+			$userRowI = $this->getUserTable()->getUser( $user_id );
 			$uEmail = $userRowI->email;
 			$inivitTable = $this->getInvitationsTable();
 			$inivtedEmailCheck = $inivitTable->inivtedEmailCheck($uEmail);
