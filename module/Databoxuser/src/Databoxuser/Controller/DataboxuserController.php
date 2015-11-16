@@ -277,6 +277,20 @@ class DataboxuserController extends AbstractActionController
 				$insertedId = $this->activityMethod($user_id,$activityId);
 			}
 			// End
+			// Invitations
+			$userRowI = $this->getUserTable()->getUser( $decrypted );
+			$uEmail = $userRowI->email;
+			$inivitTable = $this->getInvitationsTable();
+			$inivtedEmailCheck = $inivitTable->inivtedEmailCheck($uEmail);
+			if($inivtedEmailCheck!=''){
+				$user_id = $inivtedEmailCheck->user_id;
+				$inivit_id = $inivtedEmailCheck->inivit_id;
+				$firstInvitations = $activityTable->getActivityFresh('Invitations');
+				$activityIdd = $firstInvitations->activity_id;
+				$lastInsertedId = $this->activityMethod($user_id,$activityIdd);
+				$updateStatusCheck = $inivitTable->updateStatus($inivit_id);
+			}
+			// END
 			$userRoww = $this->getUserTable()->changeAccountStatus( $userInfo );
 			$userRow = $this->getUserTable()->getUser( $user_id );
 			$getPublicDataboxCount = $this->getUserCategoriesTable()->getPublicDataboxCount( $user_id);
@@ -736,6 +750,20 @@ class DataboxuserController extends AbstractActionController
 					$insertedId = $this->activityMethod($decrypted,$activityId);
 				}
 				//End
+				// Invitations
+				$userRowI = $this->getUserTable()->getUser( $decrypted );
+				$uEmail = $userRowI->email;
+				$inivitTable = $this->getInvitationsTable();
+				$inivtedEmailCheck = $inivitTable->inivtedEmailCheck($uEmail);
+				if($inivtedEmailCheck!=''){
+					$user_id = $inivtedEmailCheck->user_id;
+					$inivit_id = $inivtedEmailCheck->inivit_id;
+					$firstInvitations = $activityTable->getActivityFresh('Invitations');
+					$activityIdd = $firstInvitations->activity_id;
+					$lastInsertedId = $this->activityMethod($user_id,$activityIdd);
+					$updateStatusCheck = $inivitTable->updateStatus($inivit_id);
+				}
+				// END
 				$user_id = $this->getUserTable()->changeAccountStatus( $userInfo );
 				$view = new ViewModel(
 					array(

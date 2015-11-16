@@ -42,4 +42,19 @@ class InvitationsTable
 		$row = $resultSet->count();
 		return $row;
 	}
+	public function inivtedEmailCheck($emailid){
+		$select = $this->tableGateway->getSql()->select();
+		$select->where('inivit_email="'.$emailid.'"');
+		$select->where('in_status="1"');
+		$resultSet = $this->tableGateway->selectWith($select);
+		$row = $resultSet->current();
+		return $row;
+	}
+	public function updateStatus($inivit_id){
+		$data = array(
+			'in_status' 	      => "0",
+		);	
+		$row=$this->tableGateway->update($data, array('inivit_id' => $inivit_id));
+		return $row;
+	}
 }
