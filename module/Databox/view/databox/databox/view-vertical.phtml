@@ -188,13 +188,13 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 								</div>-->
 								<?//}
 								?>
-								<div class="collect_bookmark_this">
+								<center><div class="collect_bookmark_this">
 								<div class="clear_book_collect_this">
 									<div class="div_collect_this" id="divCollectThis<?php echo $key?>" >COLLECT THIS<input type="hidden" id="catLinkId<?php echo $key?>" value="<?echo $databoxLinksGrids->category_link_id; ?>"></div>
-									<div class="div_bookmark_this" id="divBookmarkThis<?php echo $key?>">BOOKMARK THIS<input type="hidden" id="currLink<?php echo $key?>" value="<?echo $databoxLinksGrids->link; ?>">
-									</div>
+									<!--<div class="div_bookmark_this" id="divBookmarkThis<?php //echo $key?>">BOOKMARK THIS<input type="hidden" id="currLink<?php //echo $key?>" value="<? //echo $databoxLinksGrids->link; ?>">
+									</div>-->
 								</div>
-								</div>
+								</div></center>
 							</div>
 						</div>
 					<?php $tzGsRowNum++; ?>
@@ -213,7 +213,33 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 	</section>
 	<div class="clearfix"></div>
 </div>
-<P style="text-align:center;font-weight:bold;color:#444;padding-bottom:5px;"><span class="comment_percent">00%</span> loved this collection,Did you found this collection Worthy and Relevant ?<button class="comment_yes_no">YES</button> or <button class="comment_yes_no">NO</button></P>
+<P style="text-align:center;font-weight:bold;color:#444;padding-bottom:5px;"><span id="totVP" class="comment_percent"><? if(isset($this->votePerLikeDis->NetVotes1)) { echo round($this->votePerLikeDis->NetVotes1,2);}else{ echo "00"; }?>%</span> loved this collection,Did you found this collection Worthy and Relevant ?
+<span id="l_d">
+<?php if(count($this->userStatusLD)>0){ if((isset($_SESSION['usersinfo']->userId )&& $this->userStatusLD->user_id==$_SESSION['usersinfo']->userId)){?>
+<?php if(isset($this->userStatusLD->voteUp) && $this->userStatusLD->voteUp=='1'){?>
+	<button class="comment_yes_no" style="cursor: pointer; cursor: hand;"  onClick="return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1');">NO</button>
+<?php } else if(isset($this->userStatusLD->voteDown) && $this->userStatusLD->voteDown=='1'){?>
+	<button class="comment_yes_no" style="cursor: pointer; cursor: hand;" onClick="return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1');">YES</button>
+<?php } else {?>
+	<button class="comment_yes_no" style="cursor: pointer; cursor: hand;" onClick="return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1');">YES</button>
+	<button class="comment_yes_no" style="cursor: pointer; cursor: hand;" onClick="return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1');">NO</button>
+<?php } } else if(isset($_SERVER['REMOTE_ADDR'])&& $this->userStatusLD->user_id==$_SERVER['REMOTE_ADDR']){?>
+<?php if(isset($this->userStatusLD->voteUp) && $this->userStatusLD->voteUp=='1'){?>
+	<button class="comment_yes_no" style="cursor: pointer; cursor: hand;"  onClick="return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1');">NO</button>
+<?php } else if(isset($this->userStatusLD->voteDown) && $this->userStatusLD->voteDown=='1'){?>
+	<button class="comment_yes_no" style="cursor: pointer; cursor: hand;" onClick="return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1');">YES</button>
+<?php } else { ?>
+	<button class="comment_yes_no" style="cursor: pointer; cursor: hand;" onClick="return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1');">YES</button>
+	<button class="comment_yes_no" style="cursor: pointer; cursor: hand;" onClick="return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1');">NO</button>
+<?php } }else{ ?>
+	<button class="comment_yes_no" style="cursor: pointer; cursor: hand;" onClick="return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1');">YES</button>
+	<button class="comment_yes_no" style="cursor: pointer; cursor: hand;" onClick="return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1');">NO</button>
+<?php } }else{?>
+	<button class="comment_yes_no" style="cursor: pointer; cursor: hand;" onClick="return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1');">YES</button>
+	<button class="comment_yes_no" style="cursor: pointer; cursor: hand;" onClick="return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1');">NO</button>
+<?php } ?>
+</span>
+</P>
 <div id="tempRemDiv" style="display:none;"><div class="clearfix"></div></div>
 <div class="clearfix"></div>
 <div class="smhide_m">
@@ -695,7 +721,7 @@ function insertReplyComment(id){
 				addHtml+=comment;
 				addHtml+='</span>';
 				addHtml+='<br/>';
-				addHtml+='<div class="comment_btns_pos_ab"><button onClick="editReComment('+updateReCid+','+parentCid+')" class="comment_edit_btn">Edit</button> <button onClick="deletedComment('+updateReCid+')" class="comment_delete_btn">Delete </button></div></div></div><div class="clearfix"></div></div>';
+				addHtml+='<div class="comment_btns_pos_ab"><button onClick="editReComment('+updateReCid+','+parentCid+')" class="comment_edit_btn">Edit</button> <button onClick="deletedReComment('+updateReCid+')" class="comment_delete_btn">Delete </button></div></div></div><div class="clearfix"></div></div>';
 				$('#reComment'+updateReCid).show();
 				$('#reCommentSend'+parentCid).html('SEND Reply');
 				$('#hidUpReplySendComment').val(0);
@@ -735,7 +761,7 @@ function insertReplyComment(id){
 					addHtml+=comment;
 					addHtml+='</span>';
 					addHtml+='<br/>';
-					addHtml+='<div class="comment_btns_pos_ab"><button onClick="editReComment('+lastInsertId+')" class="comment_edit_btn">Edit</button> <button onClick="deletedReComment('+lastInsertId+')" class="comment_delete_btn">Delete </button></div></div></div><div class="clearfix"></div></div></div>';
+					addHtml+='<div class="comment_btns_pos_ab"><button onClick="editReComment('+lastInsertId+','+id+')" class="comment_edit_btn">Edit</button> <button onClick="deletedReComment('+lastInsertId+')" class="comment_delete_btn">Delete </button></div></div></div><div class="clearfix"></div></div></div>';
 					$('#insert_div').append(addHtml);
 				}else{
 					alert('No data is found');
@@ -784,5 +810,33 @@ function deletedReComment(id){
 			}	
 	});
 }
+function likeDislikeCntV( newVoteValue,categoryId,rw_th )
+	{
+		var voteUrl = BASE_URL + "/databox/vote-on-highlight";
+		$.ajax({
+		  url: voteUrl,
+		  type: "POST",
+		  data:{type:newVoteValue,categoryId:categoryId,rw_th:rw_th},
+		  async: false,
+		  success: function(data) {
+			if(data.output == '1'){
+				if(data.totVotesPer=='0'){
+					var tot = '00%';
+				}else{
+					var tot = data.totVotesPer+'%';
+				}
+				if(newVoteValue=='1'){
+					var clickEv = "return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1')";
+					var likeDi='<button class="comment_yes_no" style="cursor: pointer; cursor: hand;" onClick="'+clickEv+'">NO</button>';
+				}else{
+					var clickEv = "return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1')";
+					var likeDi='<button class="comment_yes_no" style="cursor: pointer; cursor: hand;" onClick="'+clickEv+'">YES</button>';
+				}
+				$("#totVP").html(tot);
+				$("#l_d").html(likeDi);
+			}
+		  }
+		});
+	}
 </script>	       
     

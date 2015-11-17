@@ -1380,7 +1380,7 @@ class DataboxController extends AbstractActionController
 
     public function voteOnHighlightAction()
 	{
-		if( isset($_POST['categoryId']) )
+		if( isset($_POST['categoryId']) && $_POST['categoryId']!='')
 		{
 			$relevanceWorthVoteTable=$this->getServiceLocator()->get('Databox\Model\RelevanceWorthVoteFactory');	
 			$type = $_POST['type'];
@@ -1393,8 +1393,16 @@ class DataboxController extends AbstractActionController
 				$userId=$_SERVER['REMOTE_ADDR'];
 			}
 			$updatedRow = $relevanceWorthVoteTable->voteOnHighlight( $categoryId,$userId,$type,$rw_th );
+			$votePerLikeDis = $relevanceWorthVoteTable->votesPercentageAndLD($categoryId);
+			if(count($votePerLikeDis)>0){
+				$votePerLikeDisP = round($votePerLikeDis->NetVotes1,2);
+				$result = new JsonModel(array(	
+					'output'     =>'1',
+					'totVotesPer' 	 =>  $votePerLikeDisP
+				));	
+				return $result;
+			}
 		}
-		exit;
 	}
 
     public function voteOnRelevanceAction()
@@ -2965,6 +2973,9 @@ class DataboxController extends AbstractActionController
 				}
 			}
 			// echo "<pre>";print_r($getComments);exit;
+			// Added code for Relevance Worth Liked and Disliked By dileep
+			$votePerLikeDis = $relevanceWorthVoteTable->votesPercentageAndLD($categoryId);
+			$userStatusLD = $relevanceWorthVoteTable->userLikedDisLiked($categoryId);
 			return new ViewModel(array(				
 				'baseUrl' 					=> 	$baseUrl,
 				'basePath' 					=> 	$basePath,
@@ -2990,7 +3001,9 @@ class DataboxController extends AbstractActionController
 				'categoryDescripton' 		=> 	$categoryDescripton,
 				'isPrivateDatabox' 			=> 	$isPrivateDatabox,
 				'boxKeywords' 				=> 	$boxKeywords,
-				'getComments' 				=> 	$getComments
+				'getComments' 				=> 	$getComments,
+				'votePerLikeDis' 			=> 	$votePerLikeDis,
+				'userStatusLD' 			    => 	$userStatusLD
 			));
 		}
 	}

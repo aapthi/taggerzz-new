@@ -368,7 +368,7 @@ class UserCategoriesTable
 		$votesGroupSubQuerySelect2->where('relevance_worth_vote.rw_lh="1"');
 		$votesGroupSubQuerySelect2->where('relevance_worth_vote.user_id="'.$user_id.'"');
 		
-		// echo "<pre>";print_r($votesGroupSubQuerySelect);exit;
+		// echo "<pre>";print_r($votesGroupSubQuerySelect2);exit;
 		// $resultSet1 = $rwvTg->selectWith($votesGroupSubQuerySelect);
 		// echo "<pre>";print_r($resultSet1);exit;
 	

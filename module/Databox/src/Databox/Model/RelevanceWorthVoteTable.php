@@ -207,5 +207,26 @@ class RelevanceWorthVoteTable
 		$row = $resultSet->current();
 		return $row;
 	}
-	
+	public function votesPercentageAndLD($cat_id){
+		$select = $this->tableGateway->getSql()->select();
+		$select->columns(array('NetVotes1' => new Expression('COALESCE((SUM(voteUp)/SUM(rw_lh)*100),0)'),'vupCatId'=>'category_id','voteUp1'=>new Expression('COALESCE(SUM(voteUp),0)'),'rw_lh1'=>new Expression('COALESCE(SUM(rw_lh),0)')));
+		$select->where('relevance_worth_vote.rw_lh="1"');
+		$select->where('relevance_worth_vote.category_id="'.$cat_id.'"');
+		$select->group('relevance_worth_vote.category_id');
+		$resultSet = $this->tableGateway->selectWith($select);
+		return $resultSet->current();
+	}
+	public function userLikedDisLiked($cat_id){
+		if(isset($_SESSION['usersinfo']->userId)){
+			$userId=$_SESSION['usersinfo']->userId;
+		}else{
+			
+			$userId=$_SERVER['REMOTE_ADDR'];
+		}
+		$select = $this->tableGateway->getSql()->select();
+		$select->where('relevance_worth_vote.user_id="'.$userId.'"');
+		$select->where('relevance_worth_vote.category_id="'.$cat_id.'"');
+		$resultSet = $this->tableGateway->selectWith($select);
+		return $resultSet->current();
+	}
 }
