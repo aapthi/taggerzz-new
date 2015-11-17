@@ -66,13 +66,8 @@ class DataboxCommentsTable
 	}
 	public function deleteCommentId( $Id,$type )
     {	
-		if($type=='reply'){
-			$deleteCommentId=$this->tableGateway->delete(array('parent_comment_id' => $Id));
-			return $deleteCommentId;
-		}else{
-			$deleteCommentId=$this->tableGateway->delete(array('databox_comment_id' => $Id));
-			return $deleteCommentId;
-		}
+		$deleteCommentId=$this->tableGateway->delete(array('databox_comment_id' => $Id));
+		return $deleteCommentId;
 	}
 	public function totalCommentsOfDataBox($catid){
 		$select = $this->tableGateway->getSql()->select();

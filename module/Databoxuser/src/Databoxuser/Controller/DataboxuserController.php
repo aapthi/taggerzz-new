@@ -789,6 +789,10 @@ class DataboxuserController extends AbstractActionController
 	}
 	public function activityMethod($uid,$aid){
 		$userpointsTable = $this->getUserPointsTable();
+		$getLastActivity = $userpointsTable->lastActivity($uid);
+		if(count($getLastActivity)>0){
+			echo "<pre>";print_r($getLastActivity);exit;
+		}
 		$lastInsertedId = $userpointsTable->addUserPoints($uid,$aid);
 		return $lastInsertedId;
 	}

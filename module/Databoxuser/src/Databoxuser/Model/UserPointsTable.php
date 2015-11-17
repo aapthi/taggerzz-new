@@ -32,10 +32,11 @@ class UserPointsTable
 		$this->tableGateway->insert($data);		
 		return $this->tableGateway->lastInsertValue;
     }
-	public function getActivityFresh($a_name){
+	public function lastActivity($uid){
 		$select = $this->tableGateway->getSql()->select();
-		$select->where('a_name="'.$a_name.'"');
-		$select->where('a_status="1"');
+		$select->where('user_id="'.$uid.'"');
+		$select->where('up_status="1"');
+		$select->order('up_id DESC');
 		$resultSet = $this->tableGateway->selectWith($select);
 		$row = $resultSet->current();
 		return $row;
