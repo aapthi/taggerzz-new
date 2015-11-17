@@ -46,7 +46,7 @@
 				</div>			
 				<div class="clearfix"></div>
 			</div>
-			<? if(count($getComments['sub'])>0){ foreach($getComments['sub'] as $getCommentss){ ?>	
+			<? if(isset($getComments['sub']) && count($getComments['sub'])>0){ foreach($getComments['sub'] as $getCommentss){ ?>	
 				<span id="insert_div"></span>			
 				<div id="reCommentsList<? echo $getCommentss['databox_comment_id']; ?>" style="margin-left:5%;">
 					<div id="reComment<?php echo $getCommentss['databox_comment_id'];?>"class="">
