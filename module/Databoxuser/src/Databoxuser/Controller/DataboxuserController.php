@@ -175,6 +175,13 @@ class DataboxuserController extends AbstractActionController
 						$user_session->totalcount=$publicprivatetotalcount;
 						$user_session->userMessagesCount=$userMessagesCount;
 						$user_session->collectionsCount=$collectionsCount;
+						$userpointsTable = $this->getUserPointsTable();
+						$userPointss = $userpointsTable->loggedUserPoints($_SESSION['usersinfo']->userId);
+						$userPoints ='0';
+						if(count($userPointss)>0){
+							$userPoints = $userPointss->userPoints;
+						}
+						$user_session->rewardPoints=$userPoints;
 						$loginView = new ViewModel(
 							array(
 								'baseUrl' 	=> $baseUrl,
@@ -263,6 +270,12 @@ class DataboxuserController extends AbstractActionController
 		$userMessagesCount= count($this->getUserMessagesTable()->getUserMessages( $user_id,$frnds)->toArray());
 		$userCollectedLinksCount= $this->getUserCollectionsTable()->getCollectedLinksCount($user_id);
 		$collectionsCount=count($userCollectedLinksCount->toArray());
+		$userpointsTable = $this->getUserPointsTable();
+		$userPointss = $userpointsTable->loggedUserPoints($_SESSION['usersinfo']->userId);
+		$userPoints ='0';
+		if(count($userPointss)>0){
+			$userPoints = $userPointss->userPoints;
+		}	
 		$row = $this->getUserDetailsTable()->checkDetailsRecorded($user_id);
 		if( $row->countUser == 0 )
 		{
@@ -311,6 +324,7 @@ class DataboxuserController extends AbstractActionController
 			$user_session->totalcount=$publicprivatetotalcount;
 			$user_session->userMessagesCount=$userMessagesCount;
 			$user_session->collectionsCount=$collectionsCount;
+			$user_session->rewardPoints=$userPoints;
 			$dbuser_template = "/databoxuser/databoxuser/redirect-userlogin.phtml";
 		}
 		else
@@ -332,6 +346,7 @@ class DataboxuserController extends AbstractActionController
 			$user_session->totalcount=$publicprivatetotalcount;
 			$user_session->userMessagesCount=$userMessagesCount;
 			$user_session->collectionsCount=$collectionsCount;
+			$user_session->rewardPoints=$userPoints;
 
 			if( isset($_SESSION["urlRedirection"]) && $_SESSION["urlRedirection"] == "postHighlights" )
 			{
@@ -794,6 +809,15 @@ class DataboxuserController extends AbstractActionController
 			echo "<pre>";print_r($getLastActivity);exit;
 		}
 		$lastInsertedId = $userpointsTable->addUserPoints($uid,$aid);
+		if(isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId!=""){
+			$userpointsTable = $this->getUserPointsTable();
+			$userPointss = $userpointsTable->loggedUserPoints($_SESSION['usersinfo']->userId);
+			$userPoints ='0';
+			if(count($userPointss)>0){
+				$userPoints = $userPointss->userPoints;
+			}
+			$_SESSION['usersinfo']->rewardPoints=$userPoints;
+		}
 		return $lastInsertedId;
 	}
 	public function recordActivityPointsAction(){

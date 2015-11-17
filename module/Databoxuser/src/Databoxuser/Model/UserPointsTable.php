@@ -41,4 +41,13 @@ class UserPointsTable
 		$row = $resultSet->current();
 		return $row;
 	}
+	public function loggedUserPoints($uid){
+		$select = $this->tableGateway->getSql()->select();
+		$select->join('activity_points', 'activity_points.activity_id=user_points.activity_id',array('userPoints' => new Expression('COALESCE((SUM(activity_points.a_points)),0)')),'left');	
+		$select->where('user_points.user_id="'.$uid.'"');
+		$select->where('user_points.up_status="1"');
+		$select->group('user_points.user_id');
+		$resultSet = $this->tableGateway->selectWith($select);
+		return $resultSet->current();
+	}
 }
