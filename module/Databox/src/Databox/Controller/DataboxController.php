@@ -3526,7 +3526,7 @@ class DataboxController extends AbstractActionController
 		}
 		return $view = new JsonModel(
 		array(
-			'output'			=>	1,
+			'output'			=>	$insertComment,
 			'databoxCommentsCount'	=>	$totCount,
 			'databoxUser' =>$databoxUser
 		));

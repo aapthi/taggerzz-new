@@ -531,6 +531,7 @@ $(document).ready(function()
 	// End Increment box view count
 	
 	// Activity Databox views   
+	<? if(isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId!=""){?>	
 		var insertedActivityAjaxUrl = BASE_URL + "/databoxuser/record-activity-points";
 		$.ajax
 		({
@@ -543,6 +544,7 @@ $(document).ready(function()
 			
 		  }
 		});
+	<? } ?>
 	//End
 	
 	// Cat desc...
@@ -631,8 +633,9 @@ function insertComment(){
 				type	: "POST",
 				data	:{comment:comment,category_id:databoxId},
 				success: function( data ) {
-					if(data.output!=0) {
+					if(data.output!='0') {
 					// Added By Dileep;
+						var newValue = data.output;
 						if(parseInt(data.databoxCommentsCount)=='5'){
 							var databoxUser = data.databoxUser;
 							var insertedActivityAjaxUrl = BASE_URL + "/databoxuser/record-activity-points";
@@ -645,13 +648,18 @@ function insertComment(){
 							});	
 						}						
 						var addHtml='';
+						var addHtmlSub='';
 						$('#message').val('');
 						addHtml+='<div id="comment'+newValue+'"><div class="row tmar_b20"><div class="rimg_left"><img  width="55px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php if(isset($_SESSION['usersinfo']->montage_image)){echo $_SESSION['usersinfo']->montage_image; }?>" alt="" class="height100" /></div><div class="rcontenleft"><div class="name_c"><?php if(isset($_SESSION['usersinfo']->displayName)){echo $_SESSION['usersinfo']->displayName;} ?></div><span id="commText'+newValue+'">';
 						addHtml+=comment;
 						addHtml+='</span>';
 						addHtml+='<br/>';
-						addHtml+='<div class="comment_btns_pos_ab"><button onClick="editComment('+newValue+')" class="comment_edit_btn">Edit</button> <button onClick="deletedComment('+newValue+')" class="comment_delete_btn">Delete </button></div></div></div><div class="clearfix"></div></div>';
+						addHtml+='<div class="comment_btns_pos_ab"><button onClick="editComment('+newValue+')" class="comment_edit_btn">Edit</button> <button onClick="deletedComment('+newValue+')" class="comment_delete_btn">Delete </button>  <button onClick="replyComment('+newValue+')" class="comment_edit_btn">Reply</button></div></div></div><div class="clearfix"></div></div>';
+						addHtmlSub+='<div style="display:none;margin-left:8%;" id="replyDiv'+newValue+'">';
+						addHtmlSub+='<textarea id="msg'+newValue+'" class="" placeholder="Enter your replay"></textarea><div class="comment_btn_bg">';
+						addHtmlSub+='<button id="reCommentSend'+newValue+'" onClick="insertReplyComment('+newValue+')" class="btn">Reply SEND</button>';
 						$('#commentsList').prepend(addHtml);
+						$('#replyDiv'+newValue).append(addHtmlSub);
 						$('#hidSendComment').val('0');
 					}else{
 						alert('No data is found');
@@ -762,7 +770,7 @@ function insertReplyComment(id){
 					addHtml+='</span>';
 					addHtml+='<br/>';
 					addHtml+='<div class="comment_btns_pos_ab"><button onClick="editReComment('+lastInsertId+','+id+')" class="comment_edit_btn">Edit</button> <button onClick="deletedReComment('+lastInsertId+')" class="comment_delete_btn">Delete </button></div></div></div><div class="clearfix"></div></div></div>';
-					$('#insert_div').append(addHtml);
+					$('#insert_div'+lastInsertId).append(addHtml);
 				}else{
 					alert('No data is found');
 				}

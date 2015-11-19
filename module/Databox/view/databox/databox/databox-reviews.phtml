@@ -24,6 +24,8 @@
 									<button class="comment_edit_btn" onClick="editComment('<?php echo $getComments['databox_comment_id']?>','<?php echo $getComments['databox_comment']; ?>')">Edit</button> 
 									<button id="deleteComment<?php echo $getComments->databox_comment_id;?>" 
 									class="comment_delete_btn" onClick="deletedComment(<?php echo $getComments['databox_comment_id'];?>)">Delete </button>
+									<button id="replyComment<?php echo $getComments['databox_comment_id'];?>" 
+									class="comment_edit_btn" onClick="replyComment(<?php echo $getComments['databox_comment_id'];?>)">Reply</button>
 								</div>
 							<?php } else{ ?>
 								<div class="comment_btns_pos_ab">
@@ -31,7 +33,6 @@
 									class="comment_edit_btn" onClick="replyComment(<?php echo $getComments['databox_comment_id'];?>)">Reply</button>
 								</div>
 							<?}}else{}?>
-							<span id="replay_content"></span>
 							<div style="display:none;margin-left:8%;" id="replyDiv<?php echo $getComments['databox_comment_id'];?>">
 								<textarea id="msg<?php echo $getComments['databox_comment_id'];?>" class="" placeholder='Enter your replay'></textarea>
 								<div class="comment_btn_bg">
@@ -47,7 +48,7 @@
 				<div class="clearfix"></div>
 			</div>
 			<? if(isset($getComments['sub']) && count($getComments['sub'])>0){ foreach($getComments['sub'] as $getCommentss){ ?>	
-				<span id="insert_div"></span>			
+				<span id="insert_div<? echo $getCommentss['databox_comment_id']; ?>"></span>			
 				<div id="reCommentsList<? echo $getCommentss['databox_comment_id']; ?>" style="margin-left:5%;">
 					<div id="reComment<?php echo $getCommentss['databox_comment_id'];?>"class="">
 						<div class="row tmar_b20">
@@ -72,6 +73,7 @@
 			<? } ?>
 		<?php } }else{?>
 			<div id="commentsList"></div>
+			<span id="replay_content"></span>
 		<?} ?>
 	</div>
 </div>
