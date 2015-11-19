@@ -290,24 +290,25 @@ class DataboxuserController extends AbstractActionController
 			if(count($firstTimeUser)>0){
 				$activityId = $firstTimeUser->activity_id;
 				$insertedId = $this->activityMethod($user_id,$activityId);
+				// Invitations
+				if($insertedId>0){
+					$userRowI = $this->getUserTable()->getUser( $user_id );
+					$uEmail = $userRowI->email;
+					$inivitTable = $this->getInvitationsTable();
+					$inivtedEmailCheck = $inivitTable->inivtedEmailCheck($uEmail);
+					if(count($inivtedEmailCheck)>=0){
+						$firstInvitations = $activityTable->getActivityFresh('Invitations');
+						$activityIdd = $firstInvitations->activity_id;
+						foreach($inivtedEmailCheck as $inivite){
+							$user_idd = $inivite->user_id;
+							$inivit_id = $inivite->inivit_id;
+							$updateStatusCheck = $inivitTable->updateStatus($inivit_id);
+							$lastInsertedId = $this->activityMethod($user_idd,$activityIdd);	
+						}				
+					}
+				}
+				// End
 			}
-			// End
-			// Invitations
-			$userRowI = $this->getUserTable()->getUser( $user_id );
-			$uEmail = $userRowI->email;
-			$inivitTable = $this->getInvitationsTable();
-			$inivtedEmailCheck = $inivitTable->inivtedEmailCheck($uEmail);
-			if(count($inivtedEmailCheck)>=0){
-				$firstInvitations = $activityTable->getActivityFresh('Invitations');
-				$activityIdd = $firstInvitations->activity_id;
-				foreach($inivtedEmailCheck as $inivite){
-					$user_id = $inivite->user_id;
-					$inivit_id = $inivite->inivit_id;
-					$updateStatusCheck = $inivitTable->updateStatus($inivit_id);
-					$lastInsertedId = $this->activityMethod($user_id,$activityIdd);	
-				}				
-			}
-			// END
 			$userRoww = $this->getUserTable()->changeAccountStatus( $userInfo );
 			$userRow = $this->getUserTable()->getUser( $user_id );
 			$getPublicDataboxCount = $this->getUserCategoriesTable()->getPublicDataboxCount( $user_id);
@@ -734,7 +735,6 @@ class DataboxuserController extends AbstractActionController
 		$params=$this->params()->fromRoute('id', 0);
 		$paramss=explode("-",$params);
 		$userEnId=$paramss[0];
-		//$decrypted = my_number_decrypt($userEnId, $key);
 		$decrypted = base64_decode($userEnId);
 		if(isset($paramss[1])){
 			$userRow = $this->getUserTable()->getUser( $decrypted );
@@ -753,12 +753,10 @@ class DataboxuserController extends AbstractActionController
 				'baseUrl' 	=> $baseUrl,
 				'basePath' 	=> $basePath
 			));
-			//return $view->setTemplate( "/databoxuser/databoxuser/redirect-catchoice.phtml" );
 			return $this->redirect()->toUrl($baseUrl . '/contentpage');
 		}else{
 			$status = $this->getLoginLinkExpiredTable()->checkLinkExists( $decrypted );
-			if( ($status->count()!=0) && isset($status->buffer()->current()->status) && $status->current()->status==0 ){
-				$statusupdate = $this->getLoginLinkExpiredTable()->updateLoginLinkExpired( $decrypted );
+			if( ($status->count()!=0) && isset($status->buffer()->current()->status) && $status->current()->status==0 ){				
 				$userInfo['userId']=$decrypted;
 				$userInfo['status']=1;
 				// Code for First Login With Taggerzz
@@ -767,24 +765,27 @@ class DataboxuserController extends AbstractActionController
 				if(count($firstTimeUser)>0){
 					$activityId = $firstTimeUser->activity_id;
 					$insertedId = $this->activityMethod($decrypted,$activityId);
+					// Invitations
+					if($insertedId>0){
+						$userRowI = $this->getUserTable()->getUser( $decrypted );
+						$uEmail = $userRowI->email;
+						$inivitTable = $this->getInvitationsTable();
+						$inivtedEmailCheck = $inivitTable->inivtedEmailCheck($uEmail);
+						if(count($inivtedEmailCheck)>=0){
+							$firstInvitations = $activityTable->getActivityFresh('Invitations');
+							$activityIdd = $firstInvitations->activity_id;
+							foreach($inivtedEmailCheck as $inivite){
+								$user_id = $inivite->user_id;
+								$inivit_id = $inivite->inivit_id;
+								$updateStatusCheck = $inivitTable->updateStatus($inivit_id);
+								$lastInsertedId = $this->activityMethod($user_id,$activityIdd);	
+							}				
+						}
+					}
+					// END
 				}
 				//End
-				// Invitations
-				$userRowI = $this->getUserTable()->getUser( $decrypted );
-				$uEmail = $userRowI->email;
-				$inivitTable = $this->getInvitationsTable();
-				$inivtedEmailCheck = $inivitTable->inivtedEmailCheck($uEmail);
-				if(count($inivtedEmailCheck)>=0){
-					$firstInvitations = $activityTable->getActivityFresh('Invitations');
-					$activityIdd = $firstInvitations->activity_id;
-					foreach($inivtedEmailCheck as $inivite){
-						$user_id = $inivite->user_id;
-						$inivit_id = $inivite->inivit_id;
-						$updateStatusCheck = $inivitTable->updateStatus($inivit_id);
-						$lastInsertedId = $this->activityMethod($user_id,$activityIdd);	
-					}				
-				}
-				// END
+				$statusupdate = $this->getLoginLinkExpiredTable()->updateLoginLinkExpired( $decrypted );
 				$user_id = $this->getUserTable()->changeAccountStatus( $userInfo );
 				$view = new ViewModel(
 					array(
@@ -807,17 +808,24 @@ class DataboxuserController extends AbstractActionController
 	public function activityMethod($uid,$aid){
 		$lastInsertedId = 0;
 		$userpointsTable = $this->getUserPointsTable();
+		$minutes_lu = 0;
 		if(isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId!=""){
-			$user_id = $_SESSION['usersinfo']->userId;	
-			$getLastActivity = $userpointsTable->lastActivity($user_id);
-			$difference_in_seconds = 0;
-			
-			$time_diff = 0;
-			if(count($getLastActivity)>0){
-				$time_diff = time() - strtotime($getLastActivity->activity_dt);
+			$user_id = $_SESSION['usersinfo']->userId;
+			$getLastActivityLoggedU  = $userpointsTable->lastActivity($user_id);
+			$time_diff_Lu = 0;
+			if(count($getLastActivityLoggedU)>0){
+				$time_diff_Lu = time() - strtotime($getLastActivityLoggedU->activity_dt);
 			}
-			$minutes = floor($time_diff / 60);
-			if($minutes>1){
+			$minutes_lu = floor($time_diff_Lu / 60);
+		}
+		$getLastActivityDataboxU = $userpointsTable->lastActivity($uid);
+		$time_diff_Luu = 0;
+		if(count($getLastActivityDataboxU)>0){
+			$time_diff_Luu = time() - strtotime($getLastActivityDataboxU->activity_dt);
+		}
+		$minutes_luu = floor($time_diff_Luu / 60);
+		if($minutes_lu!='0'){
+			if(($minutes_lu>1) && ($minutes_luu>1)){
 				$lastInsertedId = $userpointsTable->addUserPoints($uid,$aid);
 				if(isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId!=""){
 					$userpointsTable = $this->getUserPointsTable();
@@ -828,6 +836,10 @@ class DataboxuserController extends AbstractActionController
 					}
 					$_SESSION['usersinfo']->rewardPoints=$userPoints;
 				}
+			}
+		}else{
+			if($minutes_luu>1){
+				$lastInsertedId = $userpointsTable->addUserPoints($uid,$aid);
 			}
 		}
 		return $lastInsertedId;
@@ -896,12 +908,24 @@ class DataboxuserController extends AbstractActionController
 		$user_id = $_SESSION['usersinfo']->userId;
 		$email_id = $_POST['emailId'];
 		$comment = $_POST['comment'];
+		global $iniviteFriendSubject;
+		global $iniviteFriendMessage;
 		$alreadyInivited = $inivitTable->getInfo($email_id,$user_id);
 		if($alreadyInivited =='0'){
 			$insertId = $inivitTable->insertInivite($email_id,$comment,$user_id);
-			return $view = new JsonModel(array(
-				'output' 	=> 'nice',
-			));
+			if($insertId>0){
+				$loggedEmail=$_SESSION['usersinfo']->email;
+				$loggedUserName=ucfirst($_SESSION['usersinfo']->displayName);
+				$iniviteFriendMessage = str_replace("<MESSAGE>",'Your friend '.$loggedUserName.' '.$loggedEmail.' inviting to Taggerzz', $iniviteFriendMessage);
+				$iniviteFriendMessage = str_replace("<SITELINK>",$baseUrl.'/', $iniviteFriendMessage);
+				$to=$email_id;
+				if(sendMail($to,$iniviteFriendSubject,$iniviteFriendMessage))
+				{
+					return $view = new JsonModel(array(
+						'output' 	=> 'nice',
+					));
+				}
+			}
 		}else{
 			return $view = new JsonModel(array(
 				'output' 	=> 'cool',
