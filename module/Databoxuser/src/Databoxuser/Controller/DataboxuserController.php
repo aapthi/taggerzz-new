@@ -805,18 +805,24 @@ class DataboxuserController extends AbstractActionController
 	public function activityMethod($uid,$aid){
 		$userpointsTable = $this->getUserPointsTable();
 		$getLastActivity = $userpointsTable->lastActivity($uid);
+		$difference_in_seconds = 0;
+		$lastInsertedId = 0;
+		$time_diff = 0;
 		if(count($getLastActivity)>0){
-			echo "<pre>";print_r($getLastActivity);exit;
+			$time_diff = time() - strtotime($getLastActivity->activity_dt);
 		}
-		$lastInsertedId = $userpointsTable->addUserPoints($uid,$aid);
-		if(isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId!=""){
-			$userpointsTable = $this->getUserPointsTable();
-			$userPointss = $userpointsTable->loggedUserPoints($_SESSION['usersinfo']->userId);
-			$userPoints ='0';
-			if(count($userPointss)>0){
-				$userPoints = $userPointss->userPoints;
+		$minutes = floor($time_diff / 60);
+		if($minutes>1){
+			$lastInsertedId = $userpointsTable->addUserPoints($uid,$aid);
+			if(isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId!=""){
+				$userpointsTable = $this->getUserPointsTable();
+				$userPointss = $userpointsTable->loggedUserPoints($_SESSION['usersinfo']->userId);
+				$userPoints ='0';
+				if(count($userPointss)>0){
+					$userPoints = $userPointss->userPoints;
+				}
+				$_SESSION['usersinfo']->rewardPoints=$userPoints;
 			}
-			$_SESSION['usersinfo']->rewardPoints=$userPoints;
 		}
 		return $lastInsertedId;
 	}
@@ -846,7 +852,7 @@ class DataboxuserController extends AbstractActionController
 			if($_POST['dataBoxOwner']!=$_SESSION['usersinfo']->userId){
 				$dataBoxOwner = $_POST['dataBoxOwner'];
 				$acitvityInserted = $this->activityMethod($dataBoxOwner,$activityId);
-				if($acitvityInserted!=""){
+				if($acitvityInserted!="0"){
 					$user_id = $_SESSION['usersinfo']->userId;
 					$activity_name = 'Databox owner';
 					$activityMode = $activityTable->getActivityFresh($activity_name);
@@ -854,11 +860,15 @@ class DataboxuserController extends AbstractActionController
 						$activityId = $activityMode->activity_id;
 					}
 					$acitvityLasted = $this->activityMethod($user_id,$activityId);
-					if($acitvityLasted!=''){
+					if($acitvityLasted!='0'){
 						return $view = new JsonModel(array(
 							'output' 	=> 1,
 						));
 					}
+				}else{
+					return $view = new JsonModel(array(
+						'output' 	=> 'Break Point',
+					));
 				}
 			}else{
 				return $view = new JsonModel(array(
