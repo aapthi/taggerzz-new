@@ -270,12 +270,14 @@ class DataboxuserController extends AbstractActionController
 		$userMessagesCount= count($this->getUserMessagesTable()->getUserMessages( $user_id,$frnds)->toArray());
 		$userCollectedLinksCount= $this->getUserCollectionsTable()->getCollectedLinksCount($user_id);
 		$collectionsCount=count($userCollectedLinksCount->toArray());
-		$userpointsTable = $this->getUserPointsTable();
-		$userPointss = $userpointsTable->loggedUserPoints($_SESSION['usersinfo']->userId);
-		$userPoints ='0';
-		if(count($userPointss)>0){
-			$userPoints = $userPointss->userPoints;
-		}	
+		//Added Points By Dileep
+			$userpointsTable = $this->getUserPointsTable();
+			$userPointss = $userpointsTable->loggedUserPoints($_SESSION['usersinfo']->userId);
+			$userPoints ='0';
+			if(count($userPointss)>0){
+				$userPoints = $userPointss->userPoints;
+			}	
+		// End
 		$row = $this->getUserDetailsTable()->checkDetailsRecorded($user_id);
 		if( $row->countUser == 0 )
 		{
@@ -803,25 +805,29 @@ class DataboxuserController extends AbstractActionController
 		}
 	}
 	public function activityMethod($uid,$aid){
-		$userpointsTable = $this->getUserPointsTable();
-		$getLastActivity = $userpointsTable->lastActivity($uid);
-		$difference_in_seconds = 0;
 		$lastInsertedId = 0;
-		$time_diff = 0;
-		if(count($getLastActivity)>0){
-			$time_diff = time() - strtotime($getLastActivity->activity_dt);
-		}
-		$minutes = floor($time_diff / 60);
-		if($minutes>1){
-			$lastInsertedId = $userpointsTable->addUserPoints($uid,$aid);
-			if(isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId!=""){
-				$userpointsTable = $this->getUserPointsTable();
-				$userPointss = $userpointsTable->loggedUserPoints($_SESSION['usersinfo']->userId);
-				$userPoints ='0';
-				if(count($userPointss)>0){
-					$userPoints = $userPointss->userPoints;
+		$userpointsTable = $this->getUserPointsTable();
+		if(isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId!=""){
+			$user_id = $_SESSION['usersinfo']->userId;	
+			$getLastActivity = $userpointsTable->lastActivity($user_id);
+			$difference_in_seconds = 0;
+			
+			$time_diff = 0;
+			if(count($getLastActivity)>0){
+				$time_diff = time() - strtotime($getLastActivity->activity_dt);
+			}
+			$minutes = floor($time_diff / 60);
+			if($minutes>1){
+				$lastInsertedId = $userpointsTable->addUserPoints($uid,$aid);
+				if(isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId!=""){
+					$userpointsTable = $this->getUserPointsTable();
+					$userPointss = $userpointsTable->loggedUserPoints($_SESSION['usersinfo']->userId);
+					$userPoints ='0';
+					if(count($userPointss)>0){
+						$userPoints = $userPointss->userPoints;
+					}
+					$_SESSION['usersinfo']->rewardPoints=$userPoints;
 				}
-				$_SESSION['usersinfo']->rewardPoints=$userPoints;
 			}
 		}
 		return $lastInsertedId;
@@ -1392,6 +1398,7 @@ class DataboxuserController extends AbstractActionController
         }
         return $this->userCollectionsTable;
     }
+	// Added By Dileep
 	public function getActivityPointsTable()
     {
         if (!$this->activitypointsTable) {				
