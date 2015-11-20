@@ -18,6 +18,7 @@ class IndexController extends AbstractActionController
 	protected  $userDetailsTable;
 	protected  $linkDetailsTable;
 	protected  $userTable;
+	protected  $userpointsTable;
 
 	public function setOptions(ModuleOptions $options)
     {
@@ -303,7 +304,16 @@ class IndexController extends AbstractActionController
 		$baseUrls = $this->getServiceLocator()->get('config');
 		$baseUrlArr = $baseUrls['urls'];
 		$baseUrl = $baseUrlArr['baseUrl'];
-		$basePath = $baseUrlArr['basePath'];	
+		$basePath = $baseUrlArr['basePath'];
+		$userPoints ='0';
+		if(isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId!=""){
+			$userpointsTable = $this->getUserPointsTable();
+			$userPointss = $userpointsTable->loggedUserPoints($_SESSION['usersinfo']->userId);
+			if(count($userPointss)>0){
+				$userPoints = $userPointss->userPoints;
+			}
+			$user_session->rewardPoints=$userPoints;
+		}		
 		return $this->layout()->setVariable(
 			"headerarray",array(
 				'baseUrl' 		=> 	$baseUrl,
@@ -798,6 +808,14 @@ class IndexController extends AbstractActionController
             $this->linkDetailsTable = $sm->get('Databox\Model\LinkDetailsFactory');			
         }
         return $this->linkDetailsTable;
+    }
+	public function getUserPointsTable()
+    {
+        if (!$this->userpointsTable) {				
+            $sm = $this->getServiceLocator();
+            $this->userpointsTable = $sm->get('Databoxuser\Model\UserPointsFactory');			
+        }
+        return $this->userpointsTable;
     }
 }
 
