@@ -48,28 +48,29 @@
 				<div class="clearfix"></div>
 			</div>
 			<? if(isset($getComments['sub']) && count($getComments['sub'])>0){ foreach($getComments['sub'] as $getCommentss){ ?>	
-				<span id="insert_div<? echo $getCommentss['databox_comment_id']; ?>"></span>			
-				<div id="reCommentsList<? echo $getCommentss['databox_comment_id']; ?>" style="margin-left:5%;">
-					<div id="reComment<?php echo $getCommentss['databox_comment_id'];?>"class="">
-						<div class="row tmar_b20">
-							<div class="rimg_left"><img  width="55px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $getCommentss['montage_image']; ?>" alt="" class="height100" /></div>
-							<div class="rcontenleft">
-								<div class="name_c"><?php echo $getCommentss['display_name']; ?></div>
-								<span id="reCommText<?php echo $getCommentss['databox_comment_id'];?>"><?php echo $getCommentss['databox_comment']; ?></span><br/>
-								<?php if(isset($_SESSION['usersinfo']->userId)){if($_SESSION['usersinfo']->userId==$getCommentss['comment_user_id']){?><br/>
-									<div class="comment_btns_pos_ab">
-										<button class="comment_edit_btn" onClick="editReComment('<?php echo $getCommentss['databox_comment_id']?>','<?php echo $getCommentss['parent_comment_id']; ?>')">Edit</button> 
-										<button id="deleteComment<?php echo $getCommentss['databox_comment_id'];?>" 
-										class="comment_delete_btn" onClick="deletedReComment(<?php echo $getCommentss['databox_comment_id'];?>)">Delete </button>
-									</div>
-								<?php }} else{}?>
+				<span id="insert_div<?php echo $getCommentss['parent_comment_id']; ?>">		
+					<div id="reCommentsList<? echo $getCommentss['databox_comment_id']; ?>" style="margin-left:5%;">
+						<div id="reComment<?php echo $getCommentss['databox_comment_id'];?>"class="">
+							<div class="row tmar_b20">
+								<div class="rimg_left"><img  width="55px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $getCommentss['montage_image']; ?>" alt="" class="height100" /></div>
+								<div class="rcontenleft">
+									<div class="name_c"><?php echo $getCommentss['display_name']; ?></div>
+									<span id="reCommText<?php echo $getCommentss['databox_comment_id'];?>"><?php echo $getCommentss['databox_comment']; ?></span><br/>
+									<?php if(isset($_SESSION['usersinfo']->userId)){if($_SESSION['usersinfo']->userId==$getCommentss['comment_user_id']){?><br/>
+										<div class="comment_btns_pos_ab">
+											<button class="comment_edit_btn" onClick="editReComment('<?php echo $getCommentss['databox_comment_id']?>','<?php echo $getCommentss['parent_comment_id']; ?>')">Edit</button> 
+											<button id="deleteComment<?php echo $getCommentss['databox_comment_id'];?>" 
+											class="comment_delete_btn" onClick="deletedReComment(<?php echo $getCommentss['databox_comment_id'];?>)">Delete </button>
+										</div>
+									<?php }} else{}?>
+								</div>
 							</div>
-						</div>
-					</div>			
-					<div class="clearfix"></div>
-				</div>
+						</div>			
+						<div class="clearfix"></div>
+					</div>
+				</span>	
 			<?}}else{?>
-				<span id="insert_div"></span>		
+				<span id="insert_div<?php echo $getCommentss['databox_comment_id']; ?>"></span>		
 			<? } ?>
 		<?php } }else{?>
 			<div id="commentsList"></div>
