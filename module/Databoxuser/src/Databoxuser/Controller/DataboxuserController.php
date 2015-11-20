@@ -252,6 +252,7 @@ class DataboxuserController extends AbstractActionController
 		}else{
 			$user_id = $_SESSION['Zend_Auth']->storage;
 		}
+		// echo "<pre>";print_r($user_id);exit;
 		$getPublicDataboxCount = $this->getUserCategoriesTable()->getPublicDataboxCount( $user_id );
 		$getPrivateDataboxCount = $this->getUserCategoriesTable()->getPrivateDataboxCount( $user_id );
 		$publicprivatetotalcount=count($getPublicDataboxCount->toArray()) + count($getPrivateDataboxCount->toArray());
@@ -272,7 +273,7 @@ class DataboxuserController extends AbstractActionController
 		$collectionsCount=count($userCollectedLinksCount->toArray());
 		//Added Points By Dileep
 			$userpointsTable = $this->getUserPointsTable();
-			$userPointss = $userpointsTable->loggedUserPoints($_SESSION['usersinfo']->userId);
+			$userPointss = $userpointsTable->loggedUserPoints($user_id);
 			$userPoints ='0';
 			if(count($userPointss)>0){
 				$userPoints = $userPointss->userPoints;
@@ -333,6 +334,7 @@ class DataboxuserController extends AbstractActionController
 		else
 		{
 			$userRow = $this->getUserTable()->getUser( $user_id );
+			// echo "<pre>";print_r($userRow);exit;
 			$getPublicDataboxCount = $this->getUserCategoriesTable()->getPublicDataboxCount( $user_id);
 			$getPrivateDataboxCount = $this->getUserCategoriesTable()->getPrivateDataboxCount( $user_id);
 			$publicprivatetotalcount=count($getPublicDataboxCount->toArray()) + count($getPrivateDataboxCount->toArray());
