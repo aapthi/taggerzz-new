@@ -10,9 +10,9 @@
 				</div>
 			</div>
 		<?php } ?>
+		<span id="comtDiv">
 		<?php if(count($this->getComments)!=0){foreach($this->getComments as $getComments){ 
 		?>
-			<div id="commentsList">
 				<div id="comment<?php echo $getComments['databox_comment_id'];?>"class="">
 					<div class="row tmar_b20">
 						<div class="rimg_left"><img  width="55px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $getComments['montage_image']; ?>" alt="" class="height100" /></div>
@@ -46,7 +46,6 @@
 					</div>
 				</div>			
 				<div class="clearfix"></div>
-			</div>
 			<? if(isset($getComments['sub']) && count($getComments['sub'])>0){ foreach($getComments['sub'] as $getCommentss){ ?>	
 				<span id="insert_div<?php echo $getCommentss['parent_comment_id']; ?>">		
 					<div id="reCommentsList<? echo $getCommentss['databox_comment_id']; ?>" style="margin-left:5%;">
@@ -70,11 +69,11 @@
 					</div>
 				</span>	
 			<?}}else{?>
-				<span id="insert_div<?php echo $getCommentss['databox_comment_id']; ?>"></span>		
+				<span id="insert_div<?php echo $getComments['databox_comment_id']; ?>"></span>		
 			<? } ?>
 		<?php } }else{?>
 			<div id="commentsList"></div>
-			<span id="replay_content"></span>
 		<?} ?>
+		</span>
 	</div>
 </div>

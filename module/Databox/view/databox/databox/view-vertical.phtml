@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" href="<?php echo $basePath; ?>/css/new_css/font-awesome-4-2-0-min.css">
 <!--<link rel="stylesheet" href="<?php echo $basePath; ?>/css/new_css/bootstrap-3-3-0-min.css">-->
 <link rel="stylesheet" href="<?php echo $basePath; ?>/css/new_css/gridstack-demo.css"/>
@@ -606,8 +605,71 @@ $(document).ready(function()
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 </script>--> 
-<script>       
-
+<script>   
+function insertComment(){
+	var databoxId='<?php echo $this->categoryId ?>';
+	var comment=$('#message').val();
+	var editHid = $('#hidSendComment').val();
+	if(comment==""){
+		alert('Enter the comment');return false;
+	}
+	if(editHid=='0'){
+		$.ajax({
+			url: BASE_URL+'/databox/insert-comment',
+			dataType: "json",
+			type	: "POST",
+			data	:{comment:comment,category_id:databoxId},
+			success: function( data ) {
+				if(data.output!='0') {
+					var newValue = data.output;
+					if(parseInt(data.databoxCommentsCount)=='5'){
+						var databoxUser = data.databoxUser;
+						var insertedActivityAjaxUrl = BASE_URL + "/databoxuser/record-activity-points";
+						$.ajax({
+							url: insertedActivityAjaxUrl,
+							type: "POST",
+							data:{databoxId:databoxId,databoxUser:databoxUser,activityType:'CommentsLinks',comt:'cmtt'},
+							dataType: "json",
+							success: function(data) {}
+						});	
+					}
+					$("#comtDiv").html('');
+					$("#comtDiv").append(data.comDiv);
+					$('#message').val('');
+				}else{
+					alert('No data is found');
+				}
+			}	
+		});
+	}else{
+		$.ajax({
+			url: BASE_URL+'/databox/update-comment',
+			dataType: "json",
+			type	: "POST",
+			data	:{comment:comment,databox_comment_id:editHid},
+			success: function( data ) {
+				if(data.output=='1'){
+					var addHtmlEdit='';
+					addHtmlEdit+='<div id="comment'+editHid+'" ><div class="row tmar_b20"><div class="rimg_left"><img  width="55px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php if(isset($_SESSION['usersinfo']->montage_image)){echo $_SESSION['usersinfo']->montage_image; }?>" alt="" class="height100" /></div><div class="rcontenleft"><div class="name_c"><?php if(isset($_SESSION['usersinfo']->displayName)){echo $_SESSION['usersinfo']->displayName;} ?></div><span id="commText'+editHid+'">';
+					addHtmlEdit+=comment;
+					addHtmlEdit+='</span>';
+					addHtmlEdit+='<br/>';
+					addHtmlEdit+='<div class="comment_btns_pos_ab"><button onClick="editComment('+editHid+')" class="comment_edit_btn">Edit</button> <button onClick="deletedComment('+editHid+')" class="comment_delete_btn">Delete</button> <button onClick="replyComment('+editHid+')" class="comment_edit_btn">Reply</button></div></div></div><div class="clearfix"></div></div>';
+					addHtmlEdit+='<div style="display:none;margin-left:8%;" id="replyDiv'+editHid+'">';
+					addHtmlEdit+='<textarea id="msg'+editHid+'" class="" placeholder="Enter your replay"></textarea>';
+					addHtmlEdit+='<div class="comment_btn_bg">';
+					addHtmlEdit+='<button id="reCommentSend'+editHid+'" onClick="insertReplyComment('+editHid+')" class="btn">Reply SEND</button>';
+					addHtmlEdit+='<input type="hidden" id="hidReplySendComment" value="0" ><input type="hidden" id="hidUpReplySendComment" value="0" ><input type="hidden" id="parentCid" value="0" ></div></div>';
+					$('#comment'+editHid).html(addHtmlEdit);
+					$('#message').val('');
+					$('#hidSendComment').val('0');
+					$('#commentSend').html('');
+					$('#commentSend').html('COMMENT SEND');
+				}
+			}
+		});
+	}
+}
 function editComment(id){
     $('#message').focus();
 	var editCommTxt = $('#commText'+id).html();
@@ -615,96 +677,32 @@ function editComment(id){
 	$('#commentSend').html('Update Comment');
 	$('#hidSendComment').val(id);
 }
-
-function insertComment(){
-	var databoxId='<?php echo $this->categoryId ?>';
-	var comment=$('#message').val();
-	var hidCommentId=$('#hidCommentId').val();
-	var newValue=parseInt(hidCommentId)+1;
-	$('#hidCommentId').val(newValue);
-	if(comment==""){
-		alert('Enter the comment');return false;
+function deletedComment(id){
+	if(confirm("Are you sure delete the comment!")){
+		$.ajax({
+			url: BASE_URL+'/databox/delete-comment',
+			dataType: "json",
+			type	: "POST",
+			data	:{databox_comment_id:id,deR:'comment'},
+			success: function( data ) {
+				if(data.output!=0) {
+					$('#comment'+id).remove();
+					$('#insert_div'+id).remove();
+					$('#message').val('');
+					$('#commentSend').html('');
+					$('#commentSend').html('COMMENT SEND');
+					$('#hidSendComment').val('0');
+				}else{
+					alert('No data is found');
+				}
+			}	
+		});
 	}
-	var hid=$('#hidSendComment').val();
-	if(hid=='0'){
-		$.ajax({
-				url: BASE_URL+'/databox/insert-comment',
-				dataType: "json",
-				type	: "POST",
-				data	:{comment:comment,category_id:databoxId},
-				success: function( data ) {
-					if(data.output!='0') {
-					// Added By Dileep;
-						var newValue = data.output;
-						if(parseInt(data.databoxCommentsCount)=='5'){
-							var databoxUser = data.databoxUser;
-							var insertedActivityAjaxUrl = BASE_URL + "/databoxuser/record-activity-points";
-							$.ajax({
-								url: insertedActivityAjaxUrl,
-								type: "POST",
-								data:{databoxId:databoxId,databoxUser:databoxUser,activityType:'CommentsLinks',comt:'cmtt'},
-								dataType: "json",
-								success: function(data) {}
-							});	
-						}						
-						var addHtml='';
-						$('#message').val('');
-						addHtml+='<div id="comment'+newValue+'"><div class="row tmar_b20"><div class="rimg_left"><img  width="55px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php if(isset($_SESSION['usersinfo']->montage_image)){echo $_SESSION['usersinfo']->montage_image; }?>" alt="" class="height100" /></div><div class="rcontenleft"><div class="name_c"><?php if(isset($_SESSION['usersinfo']->displayName)){echo $_SESSION['usersinfo']->displayName;} ?></div><span id="commText'+newValue+'">';
-						addHtml+=comment;
-						addHtml+='</span>';
-						addHtml+='<br/>';
-						addHtml+='<div class="comment_btns_pos_ab"><button onClick="editComment('+newValue+')" class="comment_edit_btn">Edit</button> <button onClick="deletedComment('+newValue+')" class="comment_delete_btn">Delete </button>  <button onClick="replyComment('+newValue+')" class="comment_edit_btn">Reply</button></div></div></div><div class="clearfix"></div></div>';
-						addHtml+='<div style="display:none;margin-left:8%;" id="replyDiv'+newValue+'">';
-						addHtml+='<textarea id="msg'+newValue+'" class="" placeholder="Enter your replay"></textarea><div class="comment_btn_bg">';
-						addHtml+='<button id="reCommentSend'+newValue+'" onClick="insertReplyComment('+newValue+')" class="btn">Reply SEND</button>';
-						addHtml+='<input type="hidden" id="hidReplySendComment" value="0" ><input type="hidden" id="hidUpReplySendComment" value="0" ><input type="hidden" id="parentCid" value="0" ></div></div><span id="insert_div'+newValue+'"></span>';
-						$('#commentsList').prepend(addHtml);
-						$('#hidSendComment').val('0');
-					}else{
-						alert('No data is found');
-					}
-				}	
-		});
-	}else{
-		$.ajax({
-				url: BASE_URL+'/databox/update-comment',
-				dataType: "json",
-				type	: "POST",
-				data	:{comment:comment,databox_comment_id:hid},
-				success: function( data ) {
-					if(data.output!=0) {
-						var addHtmlEdit='';
-						addHtmlEdit+='<div id="comment'+hid+'" ><div class="row tmar_b20"><div class="rimg_left"><img  width="55px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php if(isset($_SESSION['usersinfo']->montage_image)){echo $_SESSION['usersinfo']->montage_image; }?>" alt="" class="height100" /></div><div class="rcontenleft"><div class="name_c"><?php if(isset($_SESSION['usersinfo']->displayName)){echo $_SESSION['usersinfo']->displayName;} ?></div><span id="commText'+hid+'">';
-						addHtmlEdit+=comment;
-						addHtmlEdit+='</span>';
-						addHtmlEdit+='<br/>';
-						addHtmlEdit+='<div class="comment_btns_pos_ab"><button onClick="editComment('+hid+')" class="comment_edit_btn">Edit</button> <button onClick="deletedComment('+hid+')" class="comment_delete_btn">Delete</button></div></div></div><div class="clearfix"></div></div>';
-						$('#comment'+hid).html(addHtmlEdit);
-						$('#message').val('');
-						$('#commentSend').html('');
-						$('#commentSend').html('COMMENT SEND');
-						$('#hidSendComment').val('0');
-					}else{
-						alert('No data is found');
-					}
-				}	
-		});
-	}	
-}
+} 
 function replyComment(id){
 	$('#replyDiv'+id).show();
 	$('#msg'+id).focus();	
-}
-function editReComment(id,pid){
-	$('#reComment'+id).hide();
-	$('#replyDiv'+pid).show();
-    $('#msg'+pid).focus();
-	var editCommTxt = $('#reCommText'+id).html();
-	$('#msg'+pid).val(editCommTxt);
-	$('#reCommentSend'+pid).html('Update Reply');
-	$('#hidUpReplySendComment').val(id);
-	$('#parentCid').val(pid);
-}
+}  
 function insertReplyComment(id){
 	if($('#msg'+id).val()==''){
 		alert('Enter a Reply');
@@ -777,28 +775,19 @@ function insertReplyComment(id){
 		});
 	}
 }
-function deletedComment(id){
-	$.ajax({
-			url: BASE_URL+'/databox/delete-comment',
-			dataType: "json",
-			type	: "POST",
-			data	:{databox_comment_id:id,deR:'comment'},
-			success: function( data ) {
-				if(data.output!=0) {
-					$('#comment'+id).remove();
-					alert('comment deleted');
-					$('#message').val('');
-					$('#commentSend').html('');
-					$('#commentSend').html('COMMENT SEND');
-					$('#hidSendComment').val('0');
-				}else{
-					alert('No data is found');
-				}
-			}	
-	});
+function editReComment(id,pid){
+	$('#reComment'+id).hide();
+	$('#replyDiv'+pid).show();
+    $('#msg'+pid).focus();
+	var editCommTxt = $('#reCommText'+id).html();
+	$('#msg'+pid).val(editCommTxt);
+	$('#reCommentSend'+pid).html('Update Reply');
+	$('#hidUpReplySendComment').val(id);
+	$('#parentCid').val(pid);
 }
 function deletedReComment(id){
-	$.ajax({
+	if(confirm("Are you sure delete the reply!")){
+		$.ajax({
 			url: BASE_URL+'/databox/delete-comment',
 			dataType: "json",
 			type	: "POST",
@@ -806,44 +795,40 @@ function deletedReComment(id){
 			success: function( data ) {
 				if(data.output!=0) {
 					$('#reCommentsList'+id).remove();
-					alert('comment deleted');
 					$('#message').val('');
-					$('#commentSend').html('');
-					$('#commentSend').html('COMMENT SEND');
-					$('#hidSendComment').val('0');
 				}else{
 					alert('No data is found');
 				}
 			}	
-	});
-}
-function likeDislikeCntV( newVoteValue,categoryId,rw_th )
-	{
-		var voteUrl = BASE_URL + "/databox/vote-on-highlight";
-		$.ajax({
-		  url: voteUrl,
-		  type: "POST",
-		  data:{type:newVoteValue,categoryId:categoryId,rw_th:rw_th},
-		  async: false,
-		  success: function(data) {
-			if(data.output == '1'){
-				if(data.totVotesPer=='0'){
-					var tot = '00%';
-				}else{
-					var tot = data.totVotesPer+'%';
-				}
-				if(newVoteValue=='1'){
-					var clickEv = "return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1')";
-					var likeDi='<button class="comment_yes_no" style="cursor: pointer; cursor: hand;" onClick="'+clickEv+'">NO</button>';
-				}else{
-					var clickEv = "return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1')";
-					var likeDi='<button class="comment_yes_no" style="cursor: pointer; cursor: hand;" onClick="'+clickEv+'">YES</button>';
-				}
-				$("#totVP").html(tot);
-				$("#l_d").html(likeDi);
-			}
-		  }
 		});
 	}
+}
+function likeDislikeCntV( newVoteValue,categoryId,rw_th ){
+	var voteUrl = BASE_URL + "/databox/vote-on-highlight";
+	$.ajax({
+	  url: voteUrl,
+	  type: "POST",
+	  data:{type:newVoteValue,categoryId:categoryId,rw_th:rw_th},
+	  async: false,
+	  success: function(data) {
+		if(data.output == '1'){
+			if(data.totVotesPer=='0'){
+				var tot = '00%';
+			}else{
+				var tot = data.totVotesPer+'%';
+			}
+			if(newVoteValue=='1'){
+				var clickEv = "return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1')";
+				var likeDi='<button class="comment_yes_no" style="cursor: pointer; cursor: hand;" onClick="'+clickEv+'">NO</button>';
+			}else{
+				var clickEv = "return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1')";
+				var likeDi='<button class="comment_yes_no" style="cursor: pointer; cursor: hand;" onClick="'+clickEv+'">YES</button>';
+			}
+			$("#totVP").html(tot);
+			$("#l_d").html(likeDi);
+		}
+	  }
+	});
+}
 </script>	       
     
