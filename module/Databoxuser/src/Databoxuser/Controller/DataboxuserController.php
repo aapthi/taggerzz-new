@@ -750,6 +750,32 @@ class DataboxuserController extends AbstractActionController
 			$user_session->montage_image=$userRow->montage_image;
 			$user_session->montage_main_image=$userRow->montage_main_image;
 			$user_session->hinting_state=$userRow->hinting_state;
+			$userCollectedLinksCount= $this->getUserCollectionsTable()->getCollectedLinksCount($userRow->user_id);
+			$collectionsCount=count($userCollectedLinksCount->toArray());
+			$getBlockUserDetails= $this->getBlockUserTable()->getBlockedIds();
+			$finalIds='';
+			foreach($getBlockUserDetails as $key=>$blockUser){
+
+				if($blockUser->block_by_uid==$userRow->user_id){
+					$finalIds .='"'. $blockUser->blocked_to_uid.'"' . ',';
+				}
+				if($blockUser->blocked_to_uid==$userRow->user_id){
+					$finalIds.='"'.$blockUser->block_by_uid.'"' . ',';
+				}
+			}
+			$frnds= rtrim($finalIds,',');
+			$userMessagesCount= count($this->getUserMessagesTable()->getUserMessages( $userRow->user_id,$frnds)->toArray());
+			$user_session->totalcount=$publicprivatetotalcount;
+			$user_session->userMessagesCount=$userMessagesCount;
+			$user_session->collectionsCount=$collectionsCount;
+			$userpointsTable = $this->getUserPointsTable();
+			$userPointss = $userpointsTable->loggedUserPoints($userRow->user_id);
+			
+			$userPoints ='0';
+			if(count($userPointss)>0){
+				$userPoints = $userPointss->userPoints;
+			}
+			$user_session->rewardPoints=$userPoints;
 			$view = new ViewModel(
 			array(
 				'baseUrl' 	=> $baseUrl,
