@@ -3590,6 +3590,10 @@ class DataboxController extends AbstractActionController
     }
 	public function insertReplayCommentAction()
     {
+	$baseUrls = $this->getServiceLocator()->get('config');
+		$baseUrlArr = $baseUrls['urls'];
+		$baseUrl = $baseUrlArr['baseUrl'];
+		$basePath = $baseUrlArr['basePath'];
 		$totCount = '';
 		$databoxUser = '';
 		 $insertComment = $this->getDataboxCommentsTable()->addReplyComment($_POST);
@@ -3659,11 +3663,16 @@ class DataboxController extends AbstractActionController
 		array(
 			'output'			=>	$insertComment,
 			'databoxCommentsCount'	=>	$totCount,
-			'databoxUser' =>$databoxUser
+			'databoxUser' =>$databoxUser,
+			'comtDiv' =>	$html
 		));
     }
 	public function deleteCommentAction()
     {
+	$baseUrls = $this->getServiceLocator()->get('config');
+		$baseUrlArr = $baseUrls['urls'];
+		$baseUrl = $baseUrlArr['baseUrl'];
+		$basePath = $baseUrlArr['basePath'];
 		$deleteComment = $this->getDataboxCommentsTable()->deleteCommentId($_POST['databox_comment_id'],$_POST['deR']);
 		$getCommentss = $this->getDataboxCommentsTable()->getDataboxComments($_POST['category_id'])->toArray();
 		$getComments =array();
@@ -3725,6 +3734,10 @@ class DataboxController extends AbstractActionController
     }
 	public function updateCommentAction()
     {
+	$baseUrls = $this->getServiceLocator()->get('config');
+		$baseUrlArr = $baseUrls['urls'];
+		$baseUrl = $baseUrlArr['baseUrl'];
+		$basePath = $baseUrlArr['basePath'];
 		$update= $this->getDataboxCommentsTable()->updateCommentId($_POST['databox_comment_id'],$_POST['comment']);
 		$getCommentss = $this->getDataboxCommentsTable()->getDataboxComments($_POST['category_id'])->toArray();
 		$getComments =array();

@@ -646,7 +646,7 @@ function insertComment(){
 			url: BASE_URL+'/databox/update-comment',
 			dataType: "json",
 			type	: "POST",
-			data	:{comment:comment,databox_comment_id:editHid,category_id:databoxId},
+			data	:{comment:comment,databox_comment_id:editHid},
 			success: function( data ) {
 				if(data.output=='1'){
 					var addHtmlEdit='';
@@ -678,7 +678,7 @@ function editComment(id){
 	$('#hidSendComment').val(id);
 }
 function deletedComment(id){
-	var databoxId='<?php echo $this->categoryId ?>';
+var databoxId='<?php echo $this->categoryId ?>';
 	if(confirm("Are you sure delete the comment!")){
 		$.ajax({
 			url: BASE_URL+'/databox/delete-comment',
@@ -687,8 +687,14 @@ function deletedComment(id){
 			data	:{databox_comment_id:id,deR:'comment',category_id:databoxId},
 			success: function( data ) {
 				if(data.output!=0) {
+					// $('#comment'+id).remove();
+					// $('#insert_div'+id).remove();
 					$("#comtDiv").html('');
-					$("#comtDiv").append(data.comDiv);
+					$("#comtDiv").append(data.comtDiv);
+					$('#message').val('');
+					$('#commentSend').html('');
+					$('#commentSend').html('COMMENT SEND');
+					$('#hidSendComment').val('0');
 				}else{
 					alert('No data is found');
 				}
@@ -706,7 +712,6 @@ function insertReplyComment(id){
 		$('#msg'+id).focus();
 		return false;
 	}
-	var databoxId='<?php echo $this->categoryId ?>';
 	if($("#hidUpReplySendComment").val()!='0'){
 		var comment=$('#msg'+id).val();
 		var updateReCid=$("#hidUpReplySendComment").val();
@@ -715,10 +720,16 @@ function insertReplyComment(id){
 			url: BASE_URL+'/databox/update-comment',
 			dataType: "json",
 			type	: "POST",
-			data	:{comment:comment,databox_comment_id:updateReCid,category_id:databoxId},
+			data	:{comment:comment,databox_comment_id:updateReCid},
 			success: function( data ) {
-				$("#comtDiv").html('');
-				$("#comtDiv").append(data.comDiv);
+				$('#replyDiv'+parentCid).hide();
+				var addHtml='';
+				$('#msg'+id).val('');
+				addHtml+='<div id="reComment'+updateReCid+'"><div class="row tmar_b20"><div class="rimg_left"><img  width="55px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php if(isset($_SESSION['usersinfo']->montage_image)){echo $_SESSION['usersinfo']->montage_image; }?>" alt="" class="height100" /></div><div class="rcontenleft"><div class="name_c"><?php if(isset($_SESSION['usersinfo']->displayName)){echo $_SESSION['usersinfo']->displayName;} ?></div><span id="reCommText'+updateReCid+'">';
+				addHtml+=comment;
+				addHtml+='</span>';
+				addHtml+='<br/>';
+				addHtml+='<div class="comment_btns_pos_ab"><button onClick="editReComment('+updateReCid+','+parentCid+')" class="comment_edit_btn">Edit</button> <button onClick="deletedReComment('+updateReCid+')" class="comment_delete_btn">Delete </button></div></div></div><div class="clearfix"></div></div>';
 				$('#reComment'+updateReCid).show();
 				$('#reCommentSend'+parentCid).html('SEND Reply');
 				$('#hidUpReplySendComment').val(0);
@@ -727,6 +738,7 @@ function insertReplyComment(id){
 			}
 		});
 	}else{
+		var databoxId='<?php echo $this->categoryId ?>';
 		var comment=$('#msg'+id).val();
 		$.ajax({
 			url: BASE_URL+'/databox/insert-replay-comment',
@@ -752,8 +764,13 @@ function insertReplyComment(id){
 					$('#msg'+id).val('');
 					$('#replyDiv'+id).hide();
 					$('#reComment'+lastInsertId).show();
-					$("#comtDiv").html('');
-					$("#comtDiv").append(data.comDiv);
+					addHtml+='<div id="reCommentsList'+lastInsertId+'" style="margin-left:5%;">';
+					addHtml+='<div id="reComment'+lastInsertId+'"><div class="row tmar_b20"><div class="rimg_left"><img  width="55px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php if(isset($_SESSION['usersinfo']->montage_image)){echo $_SESSION['usersinfo']->montage_image; }?>" alt="" class="height100" /></div><div class="rcontenleft"><div class="name_c"><?php if(isset($_SESSION['usersinfo']->displayName)){echo $_SESSION['usersinfo']->displayName;} ?></div><span id="reCommText'+lastInsertId+'">';
+					addHtml+=comment;
+					addHtml+='</span>';
+					addHtml+='<br/>';
+					addHtml+='<div class="comment_btns_pos_ab"><button onClick="editReComment('+lastInsertId+','+id+')" class="comment_edit_btn">Edit</button> <button onClick="deletedReComment('+lastInsertId+')" class="comment_delete_btn">Delete </button></div></div></div><div class="clearfix"></div></div></div>';
+					$('#insert_div'+id).append(addHtml);
 				}else{
 					alert('No data is found');
 				}
@@ -772,17 +789,16 @@ function editReComment(id,pid){
 	$('#parentCid').val(pid);
 }
 function deletedReComment(id){
-	var databoxId='<?php echo $this->categoryId ?>';
 	if(confirm("Are you sure delete the reply!")){
 		$.ajax({
 			url: BASE_URL+'/databox/delete-comment',
 			dataType: "json",
 			type	: "POST",
-			data	:{databox_comment_id:id,deR:'reply',category_id:databoxId},
+			data	:{databox_comment_id:id,deR:'reply'},
 			success: function( data ) {
 				if(data.output!=0) {
-					$("#comtDiv").html('');
-					$("#comtDiv").append(data.comDiv);
+					$('#reCommentsList'+id).remove();
+					$('#message').val('');
 				}else{
 					alert('No data is found');
 				}

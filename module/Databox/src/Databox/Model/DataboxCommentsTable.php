@@ -68,7 +68,7 @@ class DataboxCommentsTable
     {	
 		if($type=='comment'){
 			$deleId = $this->tableGateway->delete(array('(parent_comment_id IN ('.$Id.'))'));
-			if($deleId>0){			
+			if($deleId>=0){			
 				$deleteCommentId=$this->tableGateway->delete(array('databox_comment_id' => $Id));
 				return $deleteCommentId;
 			}
