@@ -896,16 +896,16 @@ class DataboxuserController extends AbstractActionController
 		//Databox Responsed by other users
 		if(isset($_POST['dataBoxOwner']) && $_POST['dataBoxOwner']!=""){
 			if($_POST['dataBoxOwner']!=$_SESSION['usersinfo']->userId){
+				$user_id = $_SESSION['usersinfo']->userId;
 				$dataBoxOwner = $_POST['dataBoxOwner'];
-				$acitvityInserted = $this->activityMethod($dataBoxOwner,$activityId);
+				$acitvityInserted = $this->activityMethod($user_id,$activityId);
 				if($acitvityInserted!="0"){
-					$user_id = $_SESSION['usersinfo']->userId;
 					$activity_name = 'Databox owner';
 					$activityMode = $activityTable->getActivityFresh($activity_name);
 					if(count($activityMode)>0){
 						$activityId = $activityMode->activity_id;
 					}
-					$acitvityLasted = $this->activityMethod($user_id,$activityId);
+					$acitvityLasted = $this->activityMethod($dataBoxOwner,$activityId);
 					if($acitvityLasted!='0'){
 						return $view = new JsonModel(array(
 							'output' 	=> 1,
