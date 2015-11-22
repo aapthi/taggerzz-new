@@ -3590,7 +3590,7 @@ class DataboxController extends AbstractActionController
     }
 	public function insertReplayCommentAction()
     {
-	$baseUrls = $this->getServiceLocator()->get('config');
+	    $baseUrls = $this->getServiceLocator()->get('config');
 		$baseUrlArr = $baseUrls['urls'];
 		$baseUrl = $baseUrlArr['baseUrl'];
 		$basePath = $baseUrlArr['basePath'];
@@ -3607,64 +3607,11 @@ class DataboxController extends AbstractActionController
 				}
 			}
 		}
-		$getCommentss = $this->getDataboxCommentsTable()->getDataboxComments($_POST['category_id'])->toArray();
-		$getComments =array();
-		foreach($getCommentss as $comment){
-			if($comment['parent_comment_id']!='' && $comment['parent_comment_id']!='0'){
-				$getComments[$comment['parent_comment_id']]['sub'][]=$comment;
-			}else{
-				$getComments[$comment['databox_comment_id']]=$comment;
-			}
-		}
-		$html = '';
-		if(count($getComments)!=0){foreach($getComments as $getComments){ 
-			$html.='<div id="comment'.$getComments["databox_comment_id"].'" class="">';
-			$html.='<div class="row tmar_b20">';
-			$html.='<div class="rimg_left"><img  width="55px" src="'.$basePath.'/images/project/montageImages/'.$getComments["montage_image"].'" alt="" class="height100" /></div>';
-			$html.='<div class="rcontenleft">';
-			$html.='<div class="name_c">'.$getComments['display_name'].'</div>';
-			$html.='<span id="commText'. $getComments['databox_comment_id'].'">'.$getComments["databox_comment"].'</span><br/>';
-			if(isset($_SESSION['usersinfo']->userId)){if($_SESSION['usersinfo']->userId==$getComments['comment_user_id']){ 
-			$html.='<br/><div class="comment_btns_pos_ab">';
-			$html.='<button class="comment_edit_btn" onClick="editComment('.$getComments["databox_comment_id"].')">Edit</button>&nbsp;'; 
-			$html.='<button id="deleteComment'.$getComments["databox_comment_id"].'" class="comment_delete_btn" onClick="deletedComment('.$getComments["databox_comment_id"].')">Delete</button>&nbsp;';
-			$html.='<button id="replyComment'.$getComments["databox_comment_id"].'" class="comment_edit_btn" onClick="replyComment('.$getComments['databox_comment_id'].')">Reply</button></div>';
-			} else{ 
-			$html.='<div class="comment_btns_pos_ab">';
-			$html.='<button id="replyComment'.$getComments["databox_comment_id"].'" class="comment_edit_btn" onClick="replyComment('.$getComments["databox_comment_id"].')">Reply</button></div>';
-			}}
-			$html.='<div style="display:none;margin-left:8%;" id="replyDiv'.$getComments["databox_comment_id"].'">';
-			$html.='<textarea id="msg'.$getComments['databox_comment_id'].'" class="" placeholder="Enter your replay"></textarea>';
-			$html.='<div class="comment_btn_bg">';
-			$html.='<button id="reCommentSend'.$getComments["databox_comment_id"].'" onClick="insertReplyComment('.$getComments["databox_comment_id"].')" class="btn">Reply SEND</button>';
-			$html.='<input type="hidden" id="hidReplySendComment" value="0">';
-			$html.='<input type="hidden" id="hidUpReplySendComment" value="0" >';
-			$html.='<input type="hidden" id="parentCid" value="0"></div></div></div></div></div><div class="clearfix"></div>';
-			if(isset($getComments['sub']) && count($getComments['sub'])>0){ foreach($getComments['sub'] as $getCommentss){
-			$html.='<span id="insert_div'.$getCommentss["parent_comment_id"].'">';		
-			$html.='<div id="reCommentsList'.$getCommentss["databox_comment_id"].'" style="margin-left:5%;">';
-			$html.='<div id="reComment'.$getCommentss['databox_comment_id'].'"class="">';
-			$html.='<div class="row tmar_b20">';
-			$html.='<div class="rimg_left"><img  width="55px" src="<?php echo $basePath; ?>/images/project/montageImages/'.$getCommentss["montage_image"].'" alt="" class="height100" /></div>';
-			$html.='<div class="rcontenleft">';
-			$html.='<div class="name_c">'.$getCommentss['display_name'].'</div>';
-			$html.='<span id="reCommText'.$getCommentss['databox_comment_id'].'">'.$getCommentss['databox_comment'].'</span><br/>';
-			if(isset($_SESSION['usersinfo']->userId)){if($_SESSION['usersinfo']->userId==$getCommentss['comment_user_id']){
-			$html.='<br/><div class="comment_btns_pos_ab">';
-			$html.='<button class="comment_edit_btn" onClick="editReComment('.$getCommentss['databox_comment_id'].','.$getCommentss['parent_comment_id'].')">Edit</button>&nbsp;'; 
-			$html.='<button id="deleteComment'.$getCommentss["databox_comment_id"].'" class="comment_delete_btn" onClick="deletedReComment('. $getCommentss['databox_comment_id'].')">Delete </button>';
-			$html.='</div>';
-			}} else{}
-			$html.='</div></div></div><div class="clearfix"></div></div></span>';	
-		} } else {
-			$html.='<span id="insert_div'.$getComments["databox_comment_id"].'"></span>';
-		}}}
 		return $view = new JsonModel(
 		array(
 			'output'			=>	$insertComment,
 			'databoxCommentsCount'	=>	$totCount,
-			'databoxUser' =>$databoxUser,
-			'comtDiv' =>	$html
+			'databoxUser' =>$databoxUser
 		));
     }
 	public function deleteCommentAction()
@@ -3734,66 +3681,13 @@ class DataboxController extends AbstractActionController
     }
 	public function updateCommentAction()
     {
-	$baseUrls = $this->getServiceLocator()->get('config');
+		$baseUrls = $this->getServiceLocator()->get('config');
 		$baseUrlArr = $baseUrls['urls'];
 		$baseUrl = $baseUrlArr['baseUrl'];
 		$basePath = $baseUrlArr['basePath'];
-		$update= $this->getDataboxCommentsTable()->updateCommentId($_POST['databox_comment_id'],$_POST['comment']);
-		$getCommentss = $this->getDataboxCommentsTable()->getDataboxComments($_POST['category_id'])->toArray();
-		$getComments =array();
-		foreach($getCommentss as $comment){
-			if($comment['parent_comment_id']!='' && $comment['parent_comment_id']!='0'){
-				$getComments[$comment['parent_comment_id']]['sub'][]=$comment;
-			}else{
-				$getComments[$comment['databox_comment_id']]=$comment;
-			}
-		}
-		$html = '';
-		if(count($getComments)!=0){foreach($getComments as $getComments){ 
-			$html.='<div id="comment'.$getComments["databox_comment_id"].'" class="">';
-			$html.='<div class="row tmar_b20">';
-			$html.='<div class="rimg_left"><img  width="55px" src="'.$basePath.'/images/project/montageImages/'.$getComments["montage_image"].'" alt="" class="height100" /></div>';
-			$html.='<div class="rcontenleft">';
-			$html.='<div class="name_c">'.$getComments['display_name'].'</div>';
-			$html.='<span id="commText'. $getComments['databox_comment_id'].'">'.$getComments["databox_comment"].'</span><br/>';
-			if(isset($_SESSION['usersinfo']->userId)){if($_SESSION['usersinfo']->userId==$getComments['comment_user_id']){ 
-			$html.='<br/><div class="comment_btns_pos_ab">';
-			$html.='<button class="comment_edit_btn" onClick="editComment('.$getComments["databox_comment_id"].')">Edit</button>&nbsp;'; 
-			$html.='<button id="deleteComment'.$getComments["databox_comment_id"].'" class="comment_delete_btn" onClick="deletedComment('.$getComments["databox_comment_id"].')">Delete</button>&nbsp;';
-			$html.='<button id="replyComment'.$getComments["databox_comment_id"].'" class="comment_edit_btn" onClick="replyComment('.$getComments['databox_comment_id'].')">Reply</button></div>';
-			} else{ 
-			$html.='<div class="comment_btns_pos_ab">';
-			$html.='<button id="replyComment'.$getComments["databox_comment_id"].'" class="comment_edit_btn" onClick="replyComment('.$getComments["databox_comment_id"].')">Reply</button></div>';
-			}}
-			$html.='<div style="display:none;margin-left:8%;" id="replyDiv'.$getComments["databox_comment_id"].'">';
-			$html.='<textarea id="msg'.$getComments['databox_comment_id'].'" class="" placeholder="Enter your replay"></textarea>';
-			$html.='<div class="comment_btn_bg">';
-			$html.='<button id="reCommentSend'.$getComments["databox_comment_id"].'" onClick="insertReplyComment('.$getComments["databox_comment_id"].')" class="btn">Reply SEND</button>';
-			$html.='<input type="hidden" id="hidReplySendComment" value="0">';
-			$html.='<input type="hidden" id="hidUpReplySendComment" value="0" >';
-			$html.='<input type="hidden" id="parentCid" value="0"></div></div></div></div></div><div class="clearfix"></div>';
-			if(isset($getComments['sub']) && count($getComments['sub'])>0){ foreach($getComments['sub'] as $getCommentss){
-			$html.='<span id="insert_div'.$getCommentss["parent_comment_id"].'">';		
-			$html.='<div id="reCommentsList'.$getCommentss["databox_comment_id"].'" style="margin-left:5%;">';
-			$html.='<div id="reComment'.$getCommentss['databox_comment_id'].'"class="">';
-			$html.='<div class="row tmar_b20">';
-			$html.='<div class="rimg_left"><img  width="55px" src="<?php echo $basePath; ?>/images/project/montageImages/'.$getCommentss["montage_image"].'" alt="" class="height100" /></div>';
-			$html.='<div class="rcontenleft">';
-			$html.='<div class="name_c">'.$getCommentss['display_name'].'</div>';
-			$html.='<span id="reCommText'.$getCommentss['databox_comment_id'].'">'.$getCommentss['databox_comment'].'</span><br/>';
-			if(isset($_SESSION['usersinfo']->userId)){if($_SESSION['usersinfo']->userId==$getCommentss['comment_user_id']){
-			$html.='<br/><div class="comment_btns_pos_ab">';
-			$html.='<button class="comment_edit_btn" onClick="editReComment('.$getCommentss['databox_comment_id'].','.$getCommentss['parent_comment_id'].')">Edit</button>&nbsp;'; 
-			$html.='<button id="deleteComment'.$getCommentss["databox_comment_id"].'" class="comment_delete_btn" onClick="deletedReComment('. $getCommentss['databox_comment_id'].')">Delete </button>';
-			$html.='</div>';
-			}} else{}
-			$html.='</div></div></div><div class="clearfix"></div></div></span>';	
-		} } else {
-			$html.='<span id="insert_div'.$getComments["databox_comment_id"].'"></span>';
-		}}}
+		$update= $this->getDataboxCommentsTable()->updateCommentId($_POST['databox_comment_id'],$_POST['comment']);		
 		return $view = new JsonModel(array(
 			'output' =>	1,
-			'comtDiv' =>	$html,
 		));
     }
 }
