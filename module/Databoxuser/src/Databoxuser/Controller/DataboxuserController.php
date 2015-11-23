@@ -252,7 +252,6 @@ class DataboxuserController extends AbstractActionController
 		}else{
 			$user_id = $_SESSION['Zend_Auth']->storage;
 		}
-		// echo "<pre>";print_r($user_id);exit;
 		$getPublicDataboxCount = $this->getUserCategoriesTable()->getPublicDataboxCount( $user_id );
 		$getPrivateDataboxCount = $this->getUserCategoriesTable()->getPrivateDataboxCount( $user_id );
 		$publicprivatetotalcount=count($getPublicDataboxCount->toArray()) + count($getPrivateDataboxCount->toArray());
@@ -271,14 +270,6 @@ class DataboxuserController extends AbstractActionController
 		$userMessagesCount= count($this->getUserMessagesTable()->getUserMessages( $user_id,$frnds)->toArray());
 		$userCollectedLinksCount= $this->getUserCollectionsTable()->getCollectedLinksCount($user_id);
 		$collectionsCount=count($userCollectedLinksCount->toArray());
-		//Added Points By Dileep
-			$userpointsTable = $this->getUserPointsTable();
-			$userPointss = $userpointsTable->loggedUserPoints($user_id);
-			$userPoints ='0';
-			if(count($userPointss)>0){
-				$userPoints = $userPointss->userPoints;
-			}	
-		// End
 		$row = $this->getUserDetailsTable()->checkDetailsRecorded($user_id);
 		if( $row->countUser == 0 )
 		{
@@ -310,6 +301,14 @@ class DataboxuserController extends AbstractActionController
 				}
 				// End
 			}
+			//Added Points By Dileep
+				$userpointsTable = $this->getUserPointsTable();
+				$userPointss = $userpointsTable->loggedUserPoints($user_id);
+				$userPoints ='0';
+				if(count($userPointss)>0){
+					$userPoints = $userPointss->userPoints;
+				}	
+			// End
 			$userRoww = $this->getUserTable()->changeAccountStatus( $userInfo );
 			$userRow = $this->getUserTable()->getUser( $user_id );
 			$getPublicDataboxCount = $this->getUserCategoriesTable()->getPublicDataboxCount( $user_id);
@@ -333,6 +332,14 @@ class DataboxuserController extends AbstractActionController
 		}
 		else
 		{
+			//Added Points By Dileep
+				$userpointsTable = $this->getUserPointsTable();
+				$userPointss = $userpointsTable->loggedUserPoints($user_id);
+				$userPoints ='0';
+				if(count($userPointss)>0){
+					$userPoints = $userPointss->userPoints;
+				}	
+			// End
 			$userRow = $this->getUserTable()->getUser( $user_id );
 			// echo "<pre>";print_r($userRow);exit;
 			$getPublicDataboxCount = $this->getUserCategoriesTable()->getPublicDataboxCount( $user_id);
@@ -1500,7 +1507,7 @@ class DataboxuserController extends AbstractActionController
 		$cnt = 0;
 		if(count($category_ids)>0){
 			foreach($category_ids as $catid){
-				$cat_id = $catid->category_id;
+				echo $cat_id = $catid->category_id;
 				$get_category_links = $this->getCategoryLinksTable()->getCategoryLinks( $cat_id );
 				if(count($get_category_links)>0){
 					foreach($get_category_links as $cat_links){
@@ -1520,20 +1527,28 @@ class DataboxuserController extends AbstractActionController
 							if($acitvityLasted!=0){
 								$update_cron_status = $this->getCategoryTable()->updateCronStatus( $cat_id );
 							}
+							$userpointsTable = $this->getUserPointsTable();
+							$userPointss = $userpointsTable->loggedUserPoints($userId);
+							$userPoints ='0';
+							if(count($userPointss)>0){
+								$userPoints = $userPointss->userPoints;
+							}
+							if(isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId==$userId){
+								$_SESSION['usersinfo']->rewardPoints=$userPoints;
+							}
 						}
-						echo "CRON Successfully....";exit;
+						echo "CRON Successfully....";
 					}else{
-						echo "NO DATA FOUND";exit;
+						echo "NO DATA FOUND";
 					}
 				}else{
-					echo "NO DATA FOUND";exit;
+					echo "NO DATA FOUND";
 				}
-			}
+			}exit;
 		}else{
 			echo "NO DATA FOUND";exit;
 		}
 	}
-	
 }
 
 		
