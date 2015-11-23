@@ -281,4 +281,12 @@ class UserTable
 		$row = $resultSet;
 		return $row;
 	}
+	public function existsEmailChecking($email){
+		$select = $this->tableGateway->getSql()->select();
+		$select->where('user.email="'.$email.'"');
+		$select->where('user.status=1');
+		$resultSet = $this->tableGateway->selectWith($select);
+		$row = $resultSet->count();
+		return $row;
+	}
 }

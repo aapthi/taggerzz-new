@@ -341,7 +341,6 @@ class DataboxuserController extends AbstractActionController
 				}	
 			// End
 			$userRow = $this->getUserTable()->getUser( $user_id );
-			// echo "<pre>";print_r($userRow);exit;
 			$getPublicDataboxCount = $this->getUserCategoriesTable()->getPublicDataboxCount( $user_id);
 			$getPrivateDataboxCount = $this->getUserCategoriesTable()->getPrivateDataboxCount( $user_id);
 			$publicprivatetotalcount=count($getPublicDataboxCount->toArray()) + count($getPrivateDataboxCount->toArray());
@@ -945,27 +944,34 @@ class DataboxuserController extends AbstractActionController
 		$comment = $_POST['comment'];
 		global $iniviteFriendSubject;
 		global $iniviteFriendMessage;
-		$alreadyInivited = $inivitTable->getInfo($email_id,$user_id);
-		if($alreadyInivited =='0'){
-			$insertId = $inivitTable->insertInivite($email_id,$comment,$user_id);
-			if($insertId>0){
-				$loggedEmail=$_SESSION['usersinfo']->email;
-				$loggedUserName=ucfirst($_SESSION['usersinfo']->displayName);
-				$iniviteFriendMessage = str_replace("<MESSAGE>",'Your friend '.$loggedUserName.' '.$loggedEmail.' inviting to Taggerzz', $iniviteFriendMessage);
-				$iniviteFriendMessage = str_replace("<SITELINK>",$baseUrl.'/', $iniviteFriendMessage);
-				$to=$email_id;
-				if(sendMail($to,$iniviteFriendSubject,$iniviteFriendMessage))
-				{
-					return $view = new JsonModel(array(
-						'output' 	=> 'nice',
-					));
+		$registeredEmail = $this->getUserTable()->existsEmailChecking( $email_id );
+		if($registeredEmail>0){
+			$alreadyInivited = $inivitTable->getInfo($email_id,$user_id);
+			if($alreadyInivited =='0'){
+				$insertId = $inivitTable->insertInivite($email_id,$comment,$user_id);
+				if($insertId>0){
+					$loggedEmail=$_SESSION['usersinfo']->email;
+					$loggedUserName=ucfirst($_SESSION['usersinfo']->displayName);
+					$iniviteFriendMessage = str_replace("<MESSAGE>",'Your friend '.$loggedUserName.' '.$loggedEmail.' inviting to Taggerzz', $iniviteFriendMessage);
+					$iniviteFriendMessage = str_replace("<SITELINK>",$baseUrl.'/', $iniviteFriendMessage);
+					$to=$email_id;
+					if(sendMail($to,$iniviteFriendSubject,$iniviteFriendMessage))
+					{
+						return $view = new JsonModel(array(
+							'output' 	=> 'nice',
+						));
+					}
 				}
-			}
+			}else{
+				return $view = new JsonModel(array(
+					'output' 	=> 'cool',
+				));
+			}	
 		}else{
 			return $view = new JsonModel(array(
-				'output' 	=> 'cool',
+				'output' 	=> 'boom',
 			));
-		}	
+		}
 	}
 	public function dashboardAction(){
 			$baseUrls = $this->getServiceLocator()->get('config');

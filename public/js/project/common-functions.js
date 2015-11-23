@@ -34,6 +34,8 @@ function funnyInivite(){
 					$("#userMessage22").html('Sent successfully');
 				}else if(data.output=='cool'){
 					$("#userMessage22").html('You are already inivited this '+emailId+'.');
+				}else if(data.output=='boom'){
+					$("#userMessage22").html('Your invited email is already exsisted.');
 				}
 				$("#frnd_content").val('');$("#frnd_email").val('');
 			}				
