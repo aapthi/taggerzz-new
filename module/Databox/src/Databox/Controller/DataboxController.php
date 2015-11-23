@@ -3590,7 +3590,7 @@ class DataboxController extends AbstractActionController
     }
 	public function insertReplayCommentAction()
     {
-	    $baseUrls = $this->getServiceLocator()->get('config');
+		$baseUrls = $this->getServiceLocator()->get('config');
 		$baseUrlArr = $baseUrls['urls'];
 		$baseUrl = $baseUrlArr['baseUrl'];
 		$basePath = $baseUrlArr['basePath'];
@@ -3616,7 +3616,7 @@ class DataboxController extends AbstractActionController
     }
 	public function deleteCommentAction()
     {
-	$baseUrls = $this->getServiceLocator()->get('config');
+		$baseUrls = $this->getServiceLocator()->get('config');
 		$baseUrlArr = $baseUrls['urls'];
 		$baseUrl = $baseUrlArr['baseUrl'];
 		$basePath = $baseUrlArr['basePath'];
@@ -3673,10 +3673,10 @@ class DataboxController extends AbstractActionController
 		} } else {
 			$html.='<span id="insert_div'.$getComments["databox_comment_id"].'"></span>';
 		}}}
-		return $view = new JsonModel(
+			return $view = new JsonModel(
 				array(
 					'output'			=>	1,
-					'comtDiv' =>	$html,
+					'comDiv' =>$html
 				));
     }
 	public function updateCommentAction()
@@ -3685,7 +3685,7 @@ class DataboxController extends AbstractActionController
 		$baseUrlArr = $baseUrls['urls'];
 		$baseUrl = $baseUrlArr['baseUrl'];
 		$basePath = $baseUrlArr['basePath'];
-		$update= $this->getDataboxCommentsTable()->updateCommentId($_POST['databox_comment_id'],$_POST['comment']);		
+		$update= $this->getDataboxCommentsTable()->updateCommentId($_POST['databox_comment_id'],$_POST['comment']);
 		return $view = new JsonModel(array(
 			'output' =>	1,
 		));

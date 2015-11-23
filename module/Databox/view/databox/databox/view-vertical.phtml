@@ -678,7 +678,7 @@ function editComment(id){
 	$('#hidSendComment').val(id);
 }
 function deletedComment(id){
-var databoxId='<?php echo $this->categoryId ?>';
+	var databoxId='<?php echo $this->categoryId ?>';
 	if(confirm("Are you sure delete the comment!")){
 		$.ajax({
 			url: BASE_URL+'/databox/delete-comment',
@@ -687,10 +687,8 @@ var databoxId='<?php echo $this->categoryId ?>';
 			data	:{databox_comment_id:id,deR:'comment',category_id:databoxId},
 			success: function( data ) {
 				if(data.output!=0) {
-					// $('#comment'+id).remove();
-					// $('#insert_div'+id).remove();
 					$("#comtDiv").html('');
-					$("#comtDiv").append(data.comtDiv);
+					$("#comtDiv").html(data.comDiv);
 					$('#message').val('');
 					$('#commentSend').html('');
 					$('#commentSend').html('COMMENT SEND');
