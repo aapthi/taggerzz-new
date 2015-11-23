@@ -347,7 +347,7 @@ class DataboxuserController extends AbstractActionController
 			$getPublicDataboxCount = $this->getUserCategoriesTable()->getPublicDataboxCount( $user_id);
 			$getPrivateDataboxCount = $this->getUserCategoriesTable()->getPrivateDataboxCount( $user_id);
 			$publicprivatetotalcount=count($getPublicDataboxCount->toArray()) + count($getPrivateDataboxCount->toArray());
-				if(isset($_SESSION['usersinfo'])){
+			if(isset($_SESSION['usersinfo'])){
 				unset($_SESSION['usersinfo']);
 			}
 			$user_session = new Container('usersinfo');
