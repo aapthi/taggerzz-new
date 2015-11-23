@@ -314,6 +314,9 @@ class DataboxuserController extends AbstractActionController
 			$getPublicDataboxCount = $this->getUserCategoriesTable()->getPublicDataboxCount( $user_id);
 			$getPrivateDataboxCount = $this->getUserCategoriesTable()->getPrivateDataboxCount( $user_id);
 			$publicprivatetotalcount=count($getPublicDataboxCount->toArray()) + count($getPrivateDataboxCount->toArray());
+			if(isset($_SESSION['usersinfo'])){
+				unset($_SESSION['usersinfo']);
+			}
 			$user_session = new Container('usersinfo');
 			$user_session->userId=$userRow->user_id;
 			$user_session->email=$userRow->email;
@@ -344,6 +347,9 @@ class DataboxuserController extends AbstractActionController
 			$getPublicDataboxCount = $this->getUserCategoriesTable()->getPublicDataboxCount( $user_id);
 			$getPrivateDataboxCount = $this->getUserCategoriesTable()->getPrivateDataboxCount( $user_id);
 			$publicprivatetotalcount=count($getPublicDataboxCount->toArray()) + count($getPrivateDataboxCount->toArray());
+				if(isset($_SESSION['usersinfo'])){
+				unset($_SESSION['usersinfo']);
+			}
 			$user_session = new Container('usersinfo');
 			$user_session->userId=$userRow->user_id;
 			$user_session->email=$userRow->email;
@@ -945,7 +951,7 @@ class DataboxuserController extends AbstractActionController
 		global $iniviteFriendSubject;
 		global $iniviteFriendMessage;
 		$registeredEmail = $this->getUserTable()->existsEmailChecking( $email_id );
-		if($registeredEmail>0){
+		if($registeredEmail=='0'){
 			$alreadyInivited = $inivitTable->getInfo($email_id,$user_id);
 			if($alreadyInivited =='0'){
 				$insertId = $inivitTable->insertInivite($email_id,$comment,$user_id);

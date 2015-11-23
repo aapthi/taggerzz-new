@@ -1,8 +1,10 @@
 function inivite_frnd(){
+	$("#userMessage22").html('');
 	$('#inivite-alerts').popUpWindow({action: "open"});
 }
 function funnyInivite(){
 	var  emailId = $("#frnd_email").val();
+	$("#userMessage22").html('');
 	if($("#frnd_email").val()==''){
 		alert('Enter a email id');
 		$('#frnd_email').focus();
