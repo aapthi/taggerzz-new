@@ -852,7 +852,15 @@ function checkSpaces()
 					var newTotalvoteUp=parseInt(TotalvoteUp) + parseInt("1");
 					var newTotalrw_lh=parseInt(Totalrw_lh);
 				}
-				
+				var insertedActivityAjaxUrl = BASE_URL + "/databoxuser/record-activity-points";
+				$.ajax
+				({
+					url: insertedActivityAjaxUrl,
+					type: "POST",
+					data:{activityType:'Like Points'},
+					dataType: "json",
+					success: function(data) {}
+				});
 			}
 			if(newVoteValue==0){
 				if(Totalrw_lh=="" || Totalrw_lh==0){

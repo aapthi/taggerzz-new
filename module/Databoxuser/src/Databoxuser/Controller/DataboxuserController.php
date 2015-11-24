@@ -898,6 +898,21 @@ class DataboxuserController extends AbstractActionController
 				$activityId = $activityMode->activity_id;
 			}
 		}
+		//Likes
+		if(isset($_POST['activityType']) && $_POST['activityType']=='Like Points'){
+			if(isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId!=''){
+				$user_id = $_SESSION['usersinfo']->userId;
+				$acitvityInserted = $this->activityMethod($user_id,$activityId);
+				return $view = new JsonModel(array(
+					'output' 	=> 1,
+				));
+			}else{
+				return $view = new JsonModel(array(
+					'output' 	=> 0,
+				));
+			}
+		}
+		
 		//Comments Points For Fresh Databox
 		if(isset($_POST['comt']) && $_POST['comt']=='cmtt'){
 			$acitvityInserted = $this->activityMethod($_POST['databoxUser'],$activityId);

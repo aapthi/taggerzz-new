@@ -813,6 +813,19 @@ function likeDislikeCntV( newVoteValue,categoryId,rw_th ){
 	  async: false,
 	  success: function(data) {
 		if(data.output == '1'){
+			if(newVoteValue=='1'){
+				<?php if(isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId!=""){?>	
+					var insertedActivityAjaxUrl = BASE_URL + "/databoxuser/record-activity-points";
+					$.ajax
+					({
+						url: insertedActivityAjaxUrl,
+						type: "POST",
+						data:{activityType:'Like Points'},
+						dataType: "json",
+						success: function(data) {}
+					});
+				<?php } ?>
+			}	
 			if(data.totVotesPer=='0'){
 				var tot = '00%';
 			}else{
