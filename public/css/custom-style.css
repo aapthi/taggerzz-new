@@ -120,6 +120,45 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffeff0', end
 	border-top:3px solid #F7D5D2;
 	
 }
+.invite_f{
+	position: absolute;
+    right: 1%;
+    top: 10px;
+}
+.invite_f a{
+	background:#a12a30;
+	color:#fff;
+	padding:5px 10px;
+	text-transform:uppercase;
+	font-size: 13px;
+    font-weight: bold;
+}
+.reward_points{
+	background: #fff none repeat scroll 0 0;
+    border: 1px solid #c7c7c7;
+    bottom: 5px;
+    box-shadow: 2px 2px #ddd;
+    left: 1%;
+    padding: 1px 8px 3px;
+    position: absolute
+}
+.reward_points b{
+	font-size:18px;
+}
+.reward_points sub{
+	font-size: 12px;
+    font-weight: bold;
+    margin-left: 3px;
+    margin-right: 6px;
+}
+.reward_points a{
+	background:#a12a30;
+	color:#fff;
+	padding:3px 5px 3px 2px;
+	text-transform:uppercase;
+	font-size: 12px;
+    font-weight: bold;
+}
 .tlogin_bg{	
 	background:#fc4242;
 	padding:2px 5px;
@@ -748,7 +787,9 @@ color:#a12a30;
 .new_pad{
 	padding:3px 8px !important;
 }
-
+ .invite_hide,.rewards_hide{
+	display:none !important;
+ }
 /* Browser Problem css */
 @media screen and (-webkit-min-device-pixel-ratio:0) { 
 	.divHeaderWrapper .divSearchBoxes .aSearch {
@@ -807,6 +848,7 @@ color:#a12a30;
 		padding-top:15px;
 	}
  }
+
 @media (max-width: 767px){ 
 	[class*="span"] {
     display: block !important;
@@ -882,6 +924,21 @@ color:#a12a30;
 	  .logo_home_new_size{
 			width:50% !important;
 		}
+	.convert_btn {
+		background:#a12a30;
+		color:#fff !important;
+		padding:3px 5px 3px 2px;
+		text-transform:uppercase;
+		font-size: 12px;
+		font-weight: bold !important;
+		margin-left:5px;
+	}
+	.invite_f,.reward_points{
+		display:none;
+	}
+	.invite_hide,.rewards_hide{
+		display:block !important;
+	}
 }
 @media (max-width: 480px) { 
 	.secDataboxes #divDataboxWrapper[data-columns]::before {

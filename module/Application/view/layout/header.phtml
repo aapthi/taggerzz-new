@@ -135,6 +135,8 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
 		?>   
 		<div id="mainContainerWrapper" class="mainContainerWrapper">
 		<div class="tfix_header">
+		<div class="invite_f"><a class="tag_chk " href="javascript:void(0)" onClick="inivite_frnd()" >Invite Friends</a></div>
+		<div class="reward_points"><b><?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $_SESSION['usersinfo']->rewardPoints ; }else{ echo '0000';}?></b><sub>POINTS</sub><b>00</b><sub>INR, Worth</sub><a href="#"> Convert</a></div>
 		 <section id="secHeader">
     <div id="divHeaderWrapper" class="width100 divHeaderWrapper">
         <div id="divMobileMenuWrapper" class="divMobileMenuWrapper">
@@ -172,9 +174,9 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
             </div>
 
             <div id="divProfileDetails" class="inline-block tphoto_links tphoto_links">
-                 <span id="spnGreetingsText" class="block smallFont">Hello, </span>
-                    <span id="spnUsername" class="block defaultFont"><?php echo $_SESSION['usersinfo']->displayName; ?></span>
-                    <span id="spnMessages" class="block verySmallFont">[<?php if(isset($_SESSION['usersinfo']->userMessagesCount)){echo $_SESSION['usersinfo']->userMessagesCount ; }else{ echo '0';}?> <a href="/taggerzz-new/trunk/databoxuser/dashboard#msgoto">Messages</a>, <span id="tzUserCollCountSpan"><?php if(isset($_SESSION['usersinfo']->collectionsCount)){echo $_SESSION['usersinfo']->collectionsCount; }else{ echo '0';}?></span>  <a class="tag_chk" href="javascript:void(0)" onClick="goToLocation('/databox/my-collected-links')">Collections</a>,<?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $_SESSION['usersinfo']->rewardPoints ; }else{ echo '0';}?> <a href="javaScript:void(0);">Points</a>]</span>
+                 <span id="spnGreetingsText" class="block smallFont">Hello, <?php echo $_SESSION['usersinfo']->displayName; ?></span>
+                    <!--<span id="spnUsername" class="block defaultFont"></span>-->
+                    <span id="spnMessages" class="block verySmallFont">[<?php if(isset($_SESSION['usersinfo']->userMessagesCount)){echo $_SESSION['usersinfo']->userMessagesCount ; }else{ echo '0';}?> <a href="/taggerzz-new/trunk/databoxuser/dashboard#msgoto">Messages</a>, <span id="tzUserCollCountSpan"><?php if(isset($_SESSION['usersinfo']->collectionsCount)){echo $_SESSION['usersinfo']->collectionsCount; }else{ echo '0';}?></span>  <a class="tag_chk" href="javascript:void(0)" onClick="goToLocation('/databox/my-collected-links')">Collections</a>]</span>
                     <span id="spnCreateCollection" class="block smallFont highlightFont tmar_t9"><a href="#" class="highlightFont createCollection create_btn" id='createCollection'>+ Create Collection</a></span>
             </div>
         </div>
@@ -191,9 +193,9 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
 					 <img height="68px" width="68px" src="<?php echo $headerMontageImage; ?>" alt="" class="height100" />
                 </div>
                 <div id="divProfileDetailsMobile" class="divProfileDetails">
-                    <span id="spnGreetingsText" class="block smallFont">Hello, </span>
-                    <span id="spnUsername" class="block defaultFont"><?php echo $_SESSION['usersinfo']->displayName; ?></span>
-                    <span id="spnMessages" class="block verySmallFont">[<?php if(isset($_SESSION['usersinfo']->userMessagesCount)){echo $_SESSION['usersinfo']->userMessagesCount ; }else{ echo '0';}?> <a href="/taggerzz-new/trunk/databoxuser/dashboard#msgoto">Messages</a>, <span id="tzUserCollCountSpan"><?php if(isset($_SESSION['usersinfo']->collectionsCount)){echo $_SESSION['usersinfo']->collectionsCount; }else{ echo '0';}?></span>  <a class="tag_chk" href="javascript:void(0)" onClick="goToLocation('/databox/my-collected-links')">Collections</a>,<?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $_SESSION['usersinfo']->rewardPoints ; }else{ echo '0';}?> <a href="javaScript:void(0);">Points</a>]</span>
+                    <span id="spnGreetingsText" class="block smallFont">Hello, <?php echo $_SESSION['usersinfo']->displayName; ?></span>
+                    <!--<span id="spnUsername" class="block defaultFont"></span>-->
+                    <span id="spnMessages" class="block verySmallFont">[<?php if(isset($_SESSION['usersinfo']->userMessagesCount)){echo $_SESSION['usersinfo']->userMessagesCount ; }else{ echo '0';}?> <a href="/taggerzz-new/trunk/databoxuser/dashboard#msgoto">Messages</a>, <span id="tzUserCollCountSpan"><?php if(isset($_SESSION['usersinfo']->collectionsCount)){echo $_SESSION['usersinfo']->collectionsCount; }else{ echo '0';}?></span>  <a class="tag_chk" href="javascript:void(0)" onClick="goToLocation('/databox/my-collected-links')">Collections</a>]</span>
                     <span id="spnCreateCollection" class="block smallFont highlightFont"><a href="#" class="highlightFont createCollection create_btn" id='createCollection'>+ Create Collection</a></span>
                 </div>
             </div>
@@ -203,8 +205,9 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
 				<li> <a class="tag_chk  <?php echo $montageActive; ?>" onClick="goToLocation('/montage')" href="javascript:void(0)" >My Profile</a></li>
                 <li> <a class="tag_chk <?php echo $accountActive; ?>" href="javascript:void(0)" onClick="goToLocation('/accounts')">Account Settings</a> </li>
                 <li> <a class="tag_chk <?php echo $dashBoardActive; ?>" href="javascript:void(0)" onClick="goToLocation('/databoxuser/dashboard')">Dashboard</a> </li>
-                <li> <a class="tag_chk " href="javascript:void(0)" onClick="inivite_frnd()" >Inivite</a> </li>
-                <li> <a class="tag_chk " href="javascript:void(0)" onClick="goToLocation('logout')" >Logout</a> </li>
+                <li class="invite_hide"> <a class="tag_chk" href="javascript:void(0)" onClick="inivite_frnd()">Invite Friends</a> </li>
+                <li class="rewards_hide"> <b><?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $_SESSION['usersinfo']->rewardPoints ; }else{ echo '0000';}?></b> <sub>POINTS</sub> <b>00</b> <sub>INR, Worth</sub> <a href="#" class="convert_btn"> Convert</a></a> </li>
+				<li> <a class="tag_chk " href="javascript:void(0)" onClick="goToLocation('logout')" >Logout</a> </li>
             </ul>
 			</div>
         </div>
