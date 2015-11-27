@@ -731,6 +731,14 @@ color:#ef4436;
  .hash_tag_color a:hover{
 color:#a12a30;
  }
+ .hash_tag_color_r a{
+	color:#a12a30;
+	font-size:14pt; !important;
+ }
+ .hash_tag_color_r a:hover{
+	color:#ef4436;
+	font-size:14pt; !important;
+ }
 .das_brg_n .divCreatedCollectionText{
 	border:none !important;
 }

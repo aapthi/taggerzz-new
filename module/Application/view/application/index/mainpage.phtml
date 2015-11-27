@@ -61,8 +61,8 @@
 													<a href="<?php echo $displayCustomizationUrl; ?>" onClick='Javascript:displayCustomization(<?php echo $currentBoxData["category_id"]; ?>,"<?php echo $currentBoxData["user_hashname"]; ?>","<?php echo $currentBoxData["category_title"]; ?>",<? echo $currentBoxData['settingId']?>,"<? echo $catImageUrll?>");'>
                             <div id="divCard-1-imageWrapper" class="divCardImageWrapper">
                                 <img id="Card-1-img" class="" src="<?php echo $basePath.'/images/project/categoryImages/'.$currentBoxData["category_image"]; ?>" alt="<?php echo $currentBoxData["user_hashname"]; ?>" />
-                                <div id="divCard-1-hashtag" class="divCardHashtag hash_tag_color">
-                                   <?php echo $currentBoxData["user_hashname"]; ?>
+                                <div id="divCard-1-hashtag" class="divCardHashtag hash_tag_color_r">
+                                   <a href="javascript:void(0);"><?php echo $currentBoxData["user_hashname"]; ?></a>
                                 </div>
                                 <div id="Card-1-user" class="divCardUser">
 									<!--<img src="<?php echo $basePath; ?>/img/userImage.png" class="imgUserImage" alt="" />
@@ -112,7 +112,7 @@
 								<?php } ?>
 								<?php if($currentBoxData["meta_tags"]!=""){?>
                                 <div id="divCardKeywords" class="divCardKeywords">
-									<h3 class="home_keyword_h3"><?php echo $currentBoxData["meta_tags"];?></h3>
+									<h3 class="home_keyword_h3"><b>Category:</b> <?php echo $currentBoxData["meta_tags"];?></h3>
 								</div>
 								<?php } ?>
 								<?php if($currentBoxData["category_description"]!=""){?>
