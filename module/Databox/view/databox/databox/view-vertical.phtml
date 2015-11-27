@@ -171,21 +171,21 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 										?>
 										</h2>
 									</div><?} $parahid="";
-								// if(isset($databoxLinksGrids->description) && $databoxLinksGrids->description!="no Description"){?>
-								<!--<div class="pad_10px">
+								if(isset($databoxLinksGrids->description) && $databoxLinksGrids->description!="no Description"){?>
+								<div class="pad_10px">
 								<?php
-									// if(strlen($databoxLinksGrids->description)>200){
-										// echo substr($databoxLinksGrids->description,0,200) . '<a href="'.$url.'" target="_blank">...Read more</a>';
-										// $parahid=1;
-									// }
-									// else
-									// {
-										// echo $databoxLinksGrids->description;
-										// $parahid=0;
-									// }
+									if(strlen($databoxLinksGrids->description)>200){
+										echo substr($databoxLinksGrids->description,0,200) . '<a href="'.$url.'" target="_blank">...Read more</a>';
+										$parahid=1;
+									}
+									else
+									{
+										echo $databoxLinksGrids->description;
+										$parahid=0;
+									}
 								?>
-								</div>-->
-								<?//}
+								</div>
+								<?}
 								?>
 								<center><div class="collect_bookmark_this">
 								<div class="clear_book_collect_this">
