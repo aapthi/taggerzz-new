@@ -2141,7 +2141,7 @@ class DataboxController extends AbstractActionController
 				} else { 
 					$publicBoxesHtml .='<a href="'.$displayCustomizationUrl.'"><img id="Databox-1-img" class="" alt="'.$dispHashName.'" src="'.$basePath.'/images/project/categoryImages/'.$currentBoxRow->category_image .'"/></a>';
 				}
-				$publicBoxesHtml .='<div id="divDatabox-1-hashtag" class="divCardHashtag"> <a href="'.$displayCustomizationUrl.'"> '.$dispHashName .' </a></div>';
+				$publicBoxesHtml .='<div id="divDatabox-1-hashtag" class="divCardHashtag hash_tag_color"> <a href="'.$displayCustomizationUrl.'"> '.$dispHashName .' </a></div>';
 				$publicBoxesHtml .='<div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">';
 				$publicBoxesHtml .= '<span class="fatFont">'.$linksCount.' HOT LINKS </span> collected and shared</div>';
 				$publicBoxesHtml .='<div id="Card-1-user" class="divCardUser">';
@@ -2406,7 +2406,7 @@ class DataboxController extends AbstractActionController
 				} else { 
 					$publicBoxesHtml1 .='<a href="'.$displayCustomizationUrl.'"><img id="Databox-1-img" class="" alt="'.$dispHashName.'" src="'.$basePath.'/images/project/categoryImages/'.$currentBoxRow->category_image .'"/></a>';
 				}
-				$publicBoxesHtml1 .='<div id="divDatabox-1-hashtag" class="divCardHashtag"> <a href="'.$displayCustomizationUrl.'">'.$dispHashName .' </a></div>';
+				$publicBoxesHtml1 .='<div id="divDatabox-1-hashtag" class="divCardHashtag hash_tag_color"> <a href="'.$displayCustomizationUrl.'">'.$dispHashName .' </a></div>';
 				$publicBoxesHtml1 .='<div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">';
 				$publicBoxesHtml1 .= '<span class="fatFont">'.$linksCount.' HOT LINKS </span> collected and shared</div>';
 				$publicBoxesHtml1 .='<div id="Card-1-user" class="divCardUser">';
@@ -2570,7 +2570,7 @@ class DataboxController extends AbstractActionController
 				} else { 
 					$privateBoxHtml .='<a href="'.$displayCustomizationUrl.'"><img id="Databox-1-img" class="" alt="'.$dispHashName.'" src="'.$basePath.'/images/project/categoryImages/'.$currentBoxRow->category_image .'"/></a>';
 				}
-				$privateBoxHtml .='<div id="divDatabox-1-hashtag" class="divCardHashtag"> <a href="'.$displayCustomizationUrl.'">'.$dispHashName .' </a></div>';
+				$privateBoxHtml .='<div id="divDatabox-1-hashtag" class="divCardHashtag hash_tag_color"> <a href="'.$displayCustomizationUrl.'">'.$dispHashName .' </a></div>';
 				$privateBoxHtml .='<div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">';
 				$privateBoxHtml .= '<span class="fatFont">'.$linksCount.' HOT LINKS </span> collected and shared</div>';
 				$privateBoxHtml .='<div id="Card-1-user" class="divCardUser">';
