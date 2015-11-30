@@ -9,39 +9,70 @@ function funnyInivite(){
 		alert('Enter a email id');
 		$('#frnd_email').focus();
 		return false;
-	}	
-	if( ! isInValidFormat(emailId)  )
-	{
-		alert( "Please enter email Id in valid format." );
-		$('#frnd_email').focus();
-		return false;
 	}
+	var arrayEmails = new Array();
+	var emailArray = new Array();
+	arrayEmails = emailId.split(',');
+	var i=0;
+	for (i in arrayEmails ) {
+		var emailA = arrayEmails[i];
+		if( ! isInValidFormat(emailA)  )
+		{
+			alert('Please enter email Id in valid format  '+emailA+'.' );
+			$('#frnd_email').focus();
+			return false;
+		}
+		$("#userMessage22").show();
+		if($("#exsits_email").val() == emailA){
+			$("#userMessage22").html('This email id your logged email.'); 
+			return false;	
+		}
+		emailArray[i] = emailA;
+		i++;
+	}
+	var emailLen = emailArray.length;
 	if($("#frnd_content").val()==''){
 		alert('Enter a comment');
 		$('#frnd_content').focus();
 		return false;	
 	}
-	$("#userMessage22").show();
-	if($("#exsits_email").val() == emailId){
-		$("#userMessage22").html('This email id your logged email.');	
-	}else{
-		$.ajax({
-			url: BASE_URL+'/databoxuser/inivite-friend',
-			dataType: "json",
-			type	: "POST",
-			async:false,
-			data	:{emailId:emailId,comment:$("#frnd_content").val()},
-			success: function( data ) {
-				if(data.output=='nice'){
-					$("#userMessage22").html('Sent successfully');
-				}else if(data.output=='cool'){
-					$("#userMessage22").html('You are already inivited this '+emailId+'.');
-				}else if(data.output=='boom'){
-					$("#userMessage22").html('Your invited email is already exsisted.');
-				}
+    if(emailLen<=10){
+		var flag = true;
+		$("#hidemailidsTot").val(emailLen);
+		var j=0;
+		for(j in emailArray) {
+			var succssCnt = $("#successEmailsCnt").val();
+			var emailId = emailArray[j];
+			$.ajax({
+				url: BASE_URL+'/databoxuser/inivite-friend',
+				dataType: "json",
+				type	: "POST",
+				async:false,
+				data	:{emailId:emailId,comment:$("#frnd_content").val()},
+				success: function( data ) {
+					if(data.output=='nice'){
+						succssCnt +=1;
+						$("#successEmailsCnt").val(succssCnt);
+						$("#userMessage22").html('Sent successfully');
+					}else if(data.output=='cool'){
+						$("#userMessage22").html('You are already inivited this '+emailId+'.');
+						$('#frnd_email').focus();
+						flag=false;
+						return false;
+					}else if(data.output=='boom'){
+						$("#userMessage22").html('Your invited email is already exsisted '+emailId+'.'); 
+						$('#frnd_email').focus();
+						flag=false;
+						return false;
+					}
+				}				
+			});
+			if(flag==false){ break; }
+			j++;
+			if(succssCnt==$("#hidemailidsTot").val()){
 				$("#frnd_content").val('');$("#frnd_email").val('');
-			}				
-		});
+			}
+		}
 	}
 }
 $(document).keyup(function(e) {

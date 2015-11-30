@@ -137,7 +137,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
 		<div class="tfix_header">
 		<?php if( isset($_SESSION['usersinfo']->userId) &&  $_SESSION['usersinfo']->userId!=""){?>
 		<div class="invite_f"><a class="tag_chk " href="javascript:void(0)" onClick="inivite_frnd()" >Invite Friends</a></div>
-		<div class="reward_points"><b><?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $_SESSION['usersinfo']->rewardPoints ; }else{ echo '0000';}?></b><sub>POINTS</sub><b>00</b><sub>INR, Worth</sub><?php if(isset($_SESSION['usersinfo']->rewardPoints) && $_SESSION['usersinfo']->rewardPoints>=1000){?><a href="#"> Convert</a><?php } ?></div>
+		<div class="reward_points"><b><?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $_SESSION['usersinfo']->rewardPoints ; }else{ echo '0000';}?></b><sub>POINTS</sub><b>00</b><sub>INR, Worth</sub><a href="#" title="You can convert rewards points, only when you reach 1000 reward points."> Convert</a></div>
 		<? } ?> 
 		<section id="secHeader">
     <div id="divHeaderWrapper" class="width100 divHeaderWrapper">
@@ -208,7 +208,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
                 <li> <a class="tag_chk <?php echo $accountActive; ?>" href="javascript:void(0)" onClick="goToLocation('/accounts')">Account Settings</a> </li>
                 <li> <a class="tag_chk <?php echo $dashBoardActive; ?>" href="javascript:void(0)" onClick="goToLocation('/databoxuser/dashboard')">Dashboard</a> </li>
                 <li class="invite_hide"> <a class="tag_chk" href="javascript:void(0)" onClick="inivite_frnd()">Invite Friends</a> </li>
-                <li class="rewards_hide"> <b><?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $_SESSION['usersinfo']->rewardPoints ; }else{ echo '0000';}?></b> <sub>POINTS</sub> <b>00</b> <sub>INR, Worth</sub> <?php if(isset($_SESSION['usersinfo']->rewardPoints) && $_SESSION['usersinfo']->rewardPoints>=1000){?><a href="#"> Convert</a><?php } ?> </li>
+                <li class="rewards_hide"> <b><?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $_SESSION['usersinfo']->rewardPoints ; }else{ echo '0000';}?></b> <sub>POINTS</sub> <b>00</b> <sub>INR, Worth</sub><a href="#" title="You can convert rewards points, only when you reach 1000 reward points."> Convert</a></li>
 				<li> <a class="tag_chk " href="javascript:void(0)" onClick="goToLocation('logout')" >Logout</a> </li>
             </ul>
 			</div>
