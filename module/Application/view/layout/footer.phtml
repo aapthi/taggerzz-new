@@ -34,7 +34,6 @@
 </div>
 </div>
 <!-- End -->
-
 <!-- Customization page Confirmation Alerts Popup --->
 <? global $pageLocation;?>
 <div id="confirm-pop-up-alerts" class="pop-up-display-content conform_popup_content">
@@ -70,11 +69,12 @@
 <!--END-->
 <script src="<?php echo $basePath; ?>/js/new_js/salvattore.min.js"></script>
 	<?php
-if( $_SERVER['REQUEST_URI']== "/taggerzz-new/trunk/" )
+if( $_SERVER['REQUEST_URI']== "/" )
 	{
 		?>  
 <script src="<?php echo $basePath; ?>/js/new_js/custom.js"></script>
 	<?php } ?>
+
 <script src="<?php echo $basePath; ?>/js/popupwindow.js"></script>
 <script type="text/javascript" src="<?php echo $basePath; ?>/js/project/login-ready.js"></script>
 <script type="text/javascript" src="<?php echo $basePath; ?>/js/project/common-functions.js"></script>
@@ -147,10 +147,8 @@ function showCropButton(input)
 	}
 }
 
+
 var jcropminLoaded = 0;
-
-
-
 function cropImagePredefinedBothQ(width,height,src)
 {
 	if( ! parseInt(jcropminLoaded) )
@@ -259,6 +257,7 @@ $(function() {
  $('html').niceScroll();
 	if( $("#searchTermHolder").length )
 	{
+		var item='';
 		$("#searchTermHolder").autocomplete({	
 			source: function( request, response ) {
 				var keywordsss = $('#searchTermHolder').val();
@@ -299,19 +298,22 @@ $(function() {
 				return false;
 			}			
 		});
-		$("#searchTermHolder").data( "autocomplete" )._renderItem = function( ul, item ) {
-		var hashname=item.label;		
-		 return $("<li><a data-value='"+item.label+"' onClick ='set_item(this.text);'>" + item.label + "</a></li>")
-		 .data("item.autocomplete", item)            
-		 .appendTo(ul);				
-	};
-	}
-	
-	$("#searchTermHolder").live("keydown",".ui-corner-all",function(e){
-		if (e.keyCode == 13) {
-		   var hashValue=$("#searchTermHolder").val();
-		   set_item(hashValue);
+		if(item!=''){
+			$("#searchTermHolder").data( "autocomplete" )._renderItem = function( ul, item ) {
+				var hashname=item.label;		
+				 return $("<li><a data-value='"+item.label+"' onClick ='set_item(this.text);'>" + item.label + "</a></li>")
+				 .data("item.autocomplete", item)            
+				 .appendTo(ul);				
+			};
 		}
-	});
+	}
+	if(typeof($('#searchTermHolder').val())!='undefined' && $('#searchTermHolder').val()!=''){
+		$("#searchTermHolder").live("keydown",".ui-corner-all",function(e){
+		if (e.keyCode == 13) {
+			   var hashValue=$("#searchTermHolder").val();
+			   set_item(hashValue);
+			}
+		});
+	}
 });
 </script>
