@@ -417,7 +417,7 @@ $(function () {
 		$('#incrId').val(newValue);
 		var commEditDelHtml = '<div id="deleteComment'+newValue+'" style="position:absolute;top:2px;right:8px;background:#f1f1f1;width:13px;"><span style="margin-right: -28px;"><a href="javascript:void(0)"; onclick="editExistingComment('+newValue+')"><img src="'+BASE_PATH+'/images/social_media/edit_ico.png" title="Edit"/></a></span><a href="javascript:void(0)"; onclick="deleteComment('+newValue+')" style="color:#f97e76" title="Close">X</a></div>';
 
-		var newCommBoxHtml = '<div id="dragDropWindow'+newValue+'" class="c_DivCard grid-stack-item" data-gs-height="20" style="border:none;"><div class="grid-stack-item-content">';
+		var newCommBoxHtml = '<div id="dragDropWindow'+newValue+'" class="c_DivCard_cls_hide c_DivCard grid-stack-item" data-gs-height="20" style="border:none;"><div class="grid-stack-item-content">';
 
 		<?php
 			if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId) && isset($currBoxCatUid) && $_SESSION['usersinfo']->userId == $currBoxCatUid )

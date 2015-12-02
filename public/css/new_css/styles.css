@@ -1052,6 +1052,10 @@ a {
   min-width: 100%; }
 #secCustomizeDatabox .grid-stack-item.grid-stack-item[data-gs-max-width='10'] {
   max-width: 100%; }*/
+#secCustomizeDatabox .c_DivCard_cls_hide {
+  background:none !important;
+  cursor: pointer !important;
+  border:none !important; }
 #secCustomizeDatabox .c_DivCard {
   background:#fff;
   cursor: pointer;border:1px solid #c7c7c7; }

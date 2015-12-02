@@ -2179,7 +2179,7 @@ class DataboxController extends AbstractActionController
 				}
 				if($currentBoxRow->meta_tags !=""){
 					$publicBoxesHtml .='<div id="divCardKeywords" class="divCardKeywords">';
-					$publicBoxesHtml .='<h3 class="home_keyword_h3">'.$currentBoxRow->meta_tags.'</h3>';
+					$publicBoxesHtml .='<h3 class="home_keyword_h3"><b>Category:</b>'.$currentBoxRow->meta_tags.'</h3>';
 					$publicBoxesHtml .='</div>';
 				}
 			    if($currentBoxRow->category_description !=""){
@@ -2444,7 +2444,7 @@ class DataboxController extends AbstractActionController
 				'</h2></div>';
 				}
 				if($currentBoxRow->meta_tags !=""){
-				$publicBoxesHtml1 .='<div id="divCardKeywords" class="divCardKeywords"><h3 class="home_keyword_h3">';
+				$publicBoxesHtml1 .='<div id="divCardKeywords" class="divCardKeywords"><h3 class="home_keyword_h3"><b>Category:</b>';
 				$publicBoxesHtml1 .=$currentBoxRow->meta_tags;
 				$publicBoxesHtml1 .='</h3></div>';
 				}
@@ -2608,7 +2608,7 @@ class DataboxController extends AbstractActionController
 				}	
 				if($currentBoxRow->meta_tags !=""){
 				
-				$privateBoxHtml .='<div id="divCardKeywords" class="divCardKeywords"><h3 class="home_keyword_h3">'; 
+				$privateBoxHtml .='<div id="divCardKeywords" class="divCardKeywords"><h3 class="home_keyword_h3"><b>Category:</b>'; 
 				$privateBoxHtml .=$currentBoxRow->meta_tags;
 				$privateBoxHtml.='</h3></div>';
 				}
