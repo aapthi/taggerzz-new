@@ -1570,43 +1570,7 @@ class DataboxController extends AbstractActionController
 		}
 		$description = str_replace( PHP_EOL,"",$description );
 		
-		if( $image == "facebook"  )
-		{
-			$otherLogin = true;
-			if( $extensionsImgFlag )
-			{
-				$image = $basePath . "/images/social_media/noimage.png";
-			}
-			else
-			{
-				$image = $basePath . "/images/montage_default_images/montagefb.png";
-			}
-		}
-		else if( $image == "twitter"  )
-		{
-			$otherLogin = true;
-			if( $extensionsImgFlag )
-			{
-				$image = $basePath . "/images/social_media/noimage.png";
-			}
-			else
-			{
-				$image = $basePath . "/images/montage_default_images/montagetwitter.png";
-			}
-		}
-		else if( $image == "gplus"  )
-		{
-			$otherLogin = true;
-			if( $extensionsImgFlag )
-			{
-				$image = $basePath . "/images/social_media/noimage.png";
-			}
-			else
-			{
-				$image = $basePath . "/images/montage_default_images/google++.png";
-			}
-		}
-		else if( $image == "pdf"  )
+		if( $image == "pdf"  )
 		{
 			$otherLogin = true;
 			if( $extensionsImgFlag )
@@ -1738,8 +1702,26 @@ class DataboxController extends AbstractActionController
 				$image = $basePath . "/images/montage_default_images/adobe_Illustrator_file.png";
 			}
 		}
-		
-		
+		else 
+		{
+			$imageType ='';		
+			$urlsArrayy = array('facebook.com','twitter.com','plus.google.com','ssl.gstatic.com',
+			'airtel.in','amazon.co.uk','2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.com','about.com');
+			foreach($urlsArrayy as $urlName){
+				$otherLogin = true;
+				$comDomain = explode('.',$urlName);
+				$imageType = strtolower($comDomain[0]);
+				if( $image == $imageType ){ 
+					$image = $basePath . "/images/montage_default_images/".$imageType.".png";
+				}else if( $image != $imageType ){ 
+					if (strpos($image, $imageType) !== false) {  
+						$image = $basePath . "/images/montage_default_images/".$imageType.".png";
+					}
+				}else{
+					$image = $basePath . "/images/social_media/noimage.png";
+				}	
+			}
+		}
 		$keywords = "";
 		if( isset($answer["keywords"]) )
 		{
@@ -3538,10 +3520,19 @@ class DataboxController extends AbstractActionController
 			}
 		}
 		$html = '';
+		$headerMontageImage="";
+		if( strpos($_SESSION['usersinfo']->montage_image, "https://" ) !== false || strpos($_SESSION['usersinfo']->montage_image, "http://") !== false )
+		{
+			$headerMontageImage=$_SESSION['usersinfo']->montage_image;
+		}
+		else
+		{
+			$headerMontageImage=$basePath.'/images/project/montageImages/'.$_SESSION['usersinfo']->montage_image;
+		}
 		if(count($getComments)!=0){foreach($getComments as $getComments){ 
 			$html.='<div id="comment'.$getComments["databox_comment_id"].'" class="">';
 			$html.='<div class="row tmar_b20">';
-			$html.='<div class="rimg_left"><img  width="55px" src="'.$basePath.'/images/project/montageImages/'.$getComments["montage_image"].'" alt="" class="height100" /></div>';
+			$html.='<div class="rimg_left"><img  width="55px" src="'.$headerMontageImage.'" alt="" class="height100" /></div>';
 			$html.='<div class="rcontenleft">';
 			$html.='<div class="name_c">'.$getComments['display_name'].'</div>';
 			$html.='<span id="commText'. $getComments['databox_comment_id'].'">'.$getComments["databox_comment"].'</span><br/>';
@@ -3631,10 +3622,19 @@ class DataboxController extends AbstractActionController
 			}
 		}
 		$html = '';
+		$headerMontageImage="";
+		if( strpos($_SESSION['usersinfo']->montage_image, "https://" ) !== false || strpos($_SESSION['usersinfo']->montage_image, "http://") !== false )
+		{
+			$headerMontageImage=$_SESSION['usersinfo']->montage_image;
+		}
+		else
+		{
+			$headerMontageImage=$basePath.'/images/project/montageImages/'.$_SESSION['usersinfo']->montage_image;
+		}
 		if(count($getComments)!=0){foreach($getComments as $getComments){ 
 			$html.='<div id="comment'.$getComments["databox_comment_id"].'" class="">';
 			$html.='<div class="row tmar_b20">';
-			$html.='<div class="rimg_left"><img  width="55px" src="'.$basePath.'/images/project/montageImages/'.$getComments["montage_image"].'" alt="" class="height100" /></div>';
+			$html.='<div class="rimg_left"><img  width="55px" src="'.$headerMontageImage.'" alt="" class="height100" /></div>';
 			$html.='<div class="rcontenleft">';
 			$html.='<div class="name_c">'.$getComments['display_name'].'</div>';
 			$html.='<span id="commText'. $getComments['databox_comment_id'].'">'.$getComments["databox_comment"].'</span><br/>';

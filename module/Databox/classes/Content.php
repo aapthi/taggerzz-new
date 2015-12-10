@@ -106,19 +106,35 @@ class Content
 			$urlExtArr = explode( ".",$extensionUrl[count($extensionUrl)-1] );
 			$urlExtension = $urlExtArr[1];
 		}
+		// Dileep On 09-12-2015
 		
-		if (strpos($url, "facebook.com") !== false) {
-			$taggerzzImageInserted = true;
-            $images = "facebook";
-        }
-		else if (strpos($url, "twitter.com") !== false) {
-			$taggerzzImageInserted = true;
-            $images = "twitter";
-        }
-		else if (strpos($url, "plus.google.com") !== false) {
-			$taggerzzImageInserted = true;
-            $images = "gplus";
-        }
+		$urlsArray = array('facebook.com','twitter.com','plus.google.com',
+		'airtel.in','amazon.co.uk','2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.com','about.com');
+		$path = parse_url($url);
+		$domainPath = $path['host'];
+		foreach($urlsArray as $urlName){
+			if (strpos($domainPath, $urlName) !== false) { 
+				$comDomain = explode('.',$urlName);
+				$imageName = strtolower($comDomain[0]);
+				$taggerzzImageInserted = true;
+				$images = $imageName;
+			}
+		}
+		
+		// End
+		
+		// if (strpos($url, "facebook.com") !== false) {
+			// $taggerzzImageInserted = true;
+            // $images = "facebook";
+        // }
+		// else if (strpos($url, "twitter.com") !== false) {
+			// $taggerzzImageInserted = true;
+            // $images = "twitter";
+        // }
+		// else if (strpos($url, "plus.google.com") !== false) {
+			// $taggerzzImageInserted = true;
+            // $images = "gplus";
+        // }
 		
 		if( $urlExtension == "pdf" )
 		{
@@ -175,7 +191,6 @@ class Content
 			$taggerzzImageInserted = true;
             $images = "ai";
 		}
-		
 		if( $taggerzzImageInserted )
 		{
 			return $images;
