@@ -118,7 +118,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffeff0', end
 	padding-bottom:12px;
 	width:100%;
 	border-top:3px solid #F7D5D2;
+	height:95px;
 	
+}
+.logo_martb5 img{
+	width:200px;
 }
 .invite_f{
 	position: absolute;
