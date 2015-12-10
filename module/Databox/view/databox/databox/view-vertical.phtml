@@ -210,9 +210,7 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 			</span>
 		</div>
 	</section>
-	<div class="clearfix"></div>
-</div>
-<P style="text-align:center;font-weight:bold;color:#444;padding-bottom:5px;"><span id="totVP" class="comment_percent"><? if(isset($this->votePerLikeDis->NetVotes1)) { echo round($this->votePerLikeDis->NetVotes1,2);}else{ echo "00"; }?>%</span> loved this collection,Did you found this collection Worthy and Relevant ?
+	<P style="text-align:center;font-weight:bold;color:#444;padding-bottom:5px;"><span id="totVP" class="comment_percent"><? if(isset($this->votePerLikeDis->NetVotes1)) { echo round($this->votePerLikeDis->NetVotes1,2);}else{ echo "00"; }?>%</span> loved this collection,Did you found this collection Worthy and Relevant ?
 <span id="l_d">
 <?php if(count($this->userStatusLD)>0){ if((isset($_SESSION['usersinfo']->userId )&& $this->userStatusLD->user_id==$_SESSION['usersinfo']->userId)){?>
 <?php if(isset($this->userStatusLD->voteUp) && $this->userStatusLD->voteUp=='1'){?>
@@ -239,6 +237,8 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 <?php } ?>
 </span>
 </P>
+	<div class="clearfix"></div>
+</div>
 <div id="tempRemDiv" style="display:none;"><div class="clearfix"></div></div>
 <div class="clearfix"></div>
 <div class="smhide_m">
@@ -422,9 +422,18 @@ $(function () {
 		<?php
 			if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId) && isset($currBoxCatUid) && $_SESSION['usersinfo']->userId == $currBoxCatUid )
 			{
+				$headerMontageImage="";
+				if( strpos($_SESSION['usersinfo']->montage_image, "https://" ) !== false || strpos($_SESSION['usersinfo']->montage_image, "http://") !== false )
+				{
+					$headerMontageImage=$_SESSION['usersinfo']->montage_image;
+				}
+				else
+				{
+					$headerMontageImage=$basePath.'/images/project/montageImages/'.$_SESSION['usersinfo']->montage_image;
+				}
 		?>
 				newCommBoxHtml += '<div class="c_DivCardStoryWrapper"><div class="c_DivCardStorytellerDetails">';
-				newCommBoxHtml += '<img class="c_DivCardStorytellerImg" src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $_SESSION['usersinfo']->montage_image; ?>"/>';
+				newCommBoxHtml += '<img class="c_DivCardStorytellerImg" src="<?php echo $headerMontageImage; ?>"/>';
 				newCommBoxHtml += '<div class="c_DivCardStorytellerName">@STORYTELLER (<?php echo $_SESSION['usersinfo']->displayName; ?>)</div>';
 				newCommBoxHtml += '</div>';
 				newCommBoxHtml += '<div class="c_DivCardStory"><span id="data_'+newValue+'">'+newCommentText+'</span>'+commEditDelHtml+'</div>';
@@ -648,9 +657,20 @@ function insertComment(){
 			type	: "POST",
 			data	:{comment:comment,databox_comment_id:editHid},
 			success: function( data ) {
+				<?php
+					$headerMontageImage="";
+					if( strpos($_SESSION['usersinfo']->montage_image, "https://" ) !== false || strpos($_SESSION['usersinfo']->montage_image, "http://") !== false )
+					{
+						$headerMontageImage=$_SESSION['usersinfo']->montage_image;
+					}
+					else
+					{
+						$headerMontageImage=$basePath.'/images/project/montageImages/'.$_SESSION['usersinfo']->montage_image;
+					}
+				?>
 				if(data.output=='1'){
 					var addHtmlEdit='';
-					addHtmlEdit+='<div id="comment'+editHid+'" ><div class="row tmar_b20"><div class="rimg_left"><img  width="55px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php if(isset($_SESSION['usersinfo']->montage_image)){echo $_SESSION['usersinfo']->montage_image; }?>" alt="" class="height100" /></div><div class="rcontenleft"><div class="name_c"><?php if(isset($_SESSION['usersinfo']->displayName)){echo $_SESSION['usersinfo']->displayName;} ?></div><span id="commText'+editHid+'">';
+					addHtmlEdit+='<div id="comment'+editHid+'" ><div class="row tmar_b20"><div class="rimg_left"><img  width="55px" src="<?php echo $headerMontageImage;?>" alt="" class="height100" /></div><div class="rcontenleft"><div class="name_c"><?php if(isset($_SESSION['usersinfo']->displayName)){echo $_SESSION['usersinfo']->displayName;} ?></div><span id="commText'+editHid+'">';
 					addHtmlEdit+=comment;
 					addHtmlEdit+='</span>';
 					addHtmlEdit+='<br/>';
@@ -710,6 +730,17 @@ function insertReplyComment(id){
 		$('#msg'+id).focus();
 		return false;
 	}
+	<?php
+		$headerMontageImage="";
+		if( strpos($_SESSION['usersinfo']->montage_image, "https://" ) !== false || strpos($_SESSION['usersinfo']->montage_image, "http://") !== false )
+		{
+			$headerMontageImage=$_SESSION['usersinfo']->montage_image;
+		}
+		else
+		{
+			$headerMontageImage=$basePath.'/images/project/montageImages/'.$_SESSION['usersinfo']->montage_image;
+		}
+	?>
 	if($("#hidUpReplySendComment").val()!='0'){
 		var comment=$('#msg'+id).val();
 		var updateReCid=$("#hidUpReplySendComment").val();
@@ -723,7 +754,7 @@ function insertReplyComment(id){
 				$('#replyDiv'+parentCid).hide();
 				var addHtml='';
 				$('#msg'+id).val('');
-				addHtml+='<div id="reComment'+updateReCid+'"><div class="row tmar_b20"><div class="rimg_left"><img  width="55px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php if(isset($_SESSION['usersinfo']->montage_image)){echo $_SESSION['usersinfo']->montage_image; }?>" alt="" class="height100" /></div><div class="rcontenleft"><div class="name_c"><?php if(isset($_SESSION['usersinfo']->displayName)){echo $_SESSION['usersinfo']->displayName;} ?></div><span id="reCommText'+updateReCid+'">';
+				addHtml+='<div id="reComment'+updateReCid+'"><div class="row tmar_b20"><div class="rimg_left"><img  width="55px" src="<?php echo $headerMontageImage;?>" alt="" class="height100" /></div><div class="rcontenleft"><div class="name_c"><?php if(isset($_SESSION['usersinfo']->displayName)){echo $_SESSION['usersinfo']->displayName;} ?></div><span id="reCommText'+updateReCid+'">';
 				addHtml+=comment;
 				addHtml+='</span>';
 				addHtml+='<br/>';
@@ -763,7 +794,7 @@ function insertReplyComment(id){
 					$('#replyDiv'+id).hide();
 					$('#reComment'+lastInsertId).show();
 					addHtml+='<div id="reCommentsList'+lastInsertId+'" style="margin-left:5%;">';
-					addHtml+='<div id="reComment'+lastInsertId+'"><div class="row tmar_b20"><div class="rimg_left"><img  width="55px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php if(isset($_SESSION['usersinfo']->montage_image)){echo $_SESSION['usersinfo']->montage_image; }?>" alt="" class="height100" /></div><div class="rcontenleft"><div class="name_c"><?php if(isset($_SESSION['usersinfo']->displayName)){echo $_SESSION['usersinfo']->displayName;} ?></div><span id="reCommText'+lastInsertId+'">';
+					addHtml+='<div id="reComment'+lastInsertId+'"><div class="row tmar_b20"><div class="rimg_left"><img  width="55px" src="<?php echo $headerMontageImage;?>" alt="" class="height100" /></div><div class="rcontenleft"><div class="name_c"><?php if(isset($_SESSION['usersinfo']->displayName)){echo $_SESSION['usersinfo']->displayName;} ?></div><span id="reCommText'+lastInsertId+'">';
 					addHtml+=comment;
 					addHtml+='</span>';
 					addHtml+='<br/>';
