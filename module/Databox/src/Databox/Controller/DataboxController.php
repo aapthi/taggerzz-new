@@ -1747,7 +1747,7 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 'steampowered.com','stumbleupon.com','taboola.com','taobao.com','target.com','telegraph.co.uk','telegraphindia.com',
 'thefreedictionary.com','theguardian.com','thehindu.com','theladbible.com','themeforest.net','thepiratebay.cr','thesaurus.com',
 'tianya.cn','time.com','tmall.com','t-online.de','torrentz.eu','torrentz.in','toysrus.com','trello.com','tripadvisor.com',
-'tube8.com','tudou.com','tumblr.com','twitch.tv','twitter.com','udn.com','uk.businessinsider.com','uol.com.br','uploaded.net'
+'tube8.com','tudou.com','tumblr.com','twitch.tv','twitter.com','udn.com','uk.businessinsider.com','uol.com.br','uploaded.net',
 'upornia.com','ups.com','uptodown.com','usatoday.com','usps.com','varzesh3.com','verizonwireless.com','vice.com','vid.me',
 'vimeo.com','vk.com','w3schools.com','walmart.com','washingtonpost.com','weather.com','web.de','webmd.com','weebly.com',
 'weibo.com','wellsfargo.com','whatsapp.com','wikia.com','wikihow.com','wikimedia.org','wikipedia.com','wix.com',
