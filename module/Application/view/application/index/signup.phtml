@@ -244,6 +244,9 @@ src="https://accounts.google.com/CheckCookie?continue=https%3A%2F%2Fwww.google.c
 <script type="text/javascript" src="<?php echo $basePath; ?>/js/new_js/libs/jquery/jquery.js"></script>
 <script type="text/javascript" src="<?php echo $basePath; ?>/js/new_js/custom.js"></script>
 <script>
+$(document).ready(function() {
+	setInterval(function(){ $("#secFixedAspects").css({"display":"none"}); },2000);
+});
 function loginBackFunction(){
 	window.location= BASE_URL + "/";
 	return false;

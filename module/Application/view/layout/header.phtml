@@ -84,7 +84,7 @@ function logOut(value)
 </script>
 <link href='https://fonts.googleapis.com/css?family=Raleway:500' rel='stylesheet' type='text/css'>
 	<?php
-if( $_SERVER['REQUEST_URI']== "/taggerzz-new/trunk/" )
+if( $_SERVER['REQUEST_URI'] != "/taggerzz-new/trunk/" &&  $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/signup" )
 	{
 		?> 
 	<link rel="stylesheet" media="(max-width: 799px)" href="<?php echo $basePath; ?>/css/new_css/styles-mobile.css" />
@@ -104,7 +104,7 @@ if( $_SERVER['REQUEST_URI']== "/taggerzz-new/trunk/" )
 
 
 	<?php
-if( $_SERVER['REQUEST_URI'] != "/taggerzz-new/trunk/" )
+if( $_SERVER['REQUEST_URI'] != "/taggerzz-new/trunk/" &&  $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/signup" )
 	{
 	?> 
 
@@ -130,7 +130,7 @@ if( $_SERVER['REQUEST_URI'] != "/taggerzz-new/trunk/" )
 <script src="<?php echo $basePath; ?>/js/jquery.cookie.js"></script>
 
 <?php
-if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" )
+if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" && $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/signup" )
 	{
 		?>   
 		<div id="mainContainerWrapper" class="mainContainerWrapper">

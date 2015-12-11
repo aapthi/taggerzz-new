@@ -271,6 +271,7 @@ function sUpFunction(){
 	window.location=BASE_URL+ "/signup";
 }
 $(document).ready(function() {
+	setInterval(function(){ $("#secFixedAspects").css({"display":"none"}); },2000);
 	var remember = $.cookie('remember');
 	if (remember == 'true') 
 	{

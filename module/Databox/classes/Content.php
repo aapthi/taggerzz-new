@@ -167,7 +167,6 @@ class Content
 				$images = $imageName;
 			}
 		}
-		
 		// End
 		
 		// if (strpos($url, "facebook.com") !== false) {

@@ -635,12 +635,12 @@ function addTextBox( count,useMode )
 		{
 			totalUrlsPresent++;
 		});
-		if( parseInt(totalUrlsPresent) == parseInt("100") )
-		{
-			$('#pop-up-max-links').popUpWindow({action: "open"});
-		}
-		else
-		{
+		// if( parseInt(totalUrlsPresent) == parseInt("100") )
+		// {
+			// $('#pop-up-max-links').popUpWindow({action: "open"});
+		// }
+		// else
+		// {
 			var newBoxHandler = function(event)
 			{
 				var keyCode = event.which;
@@ -699,7 +699,7 @@ function addTextBox( count,useMode )
 					}
 				});
 			}
-		}
+		// }
 		
 		if( parseInt(useMode) == parseInt("0") )
 		{
