@@ -326,16 +326,11 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 <script type="text/javascript">
 $('body').css('background','#f6f6f6')
 var i=0;
-	$(function () {
-		$('.grid-stack').gridstack({
-		 width: 12
-		});
-	});
 $(function () {
   $('.grid-stack').gridstack({
 
   // turns animation on
-  animate: false,
+  animate: true,
 
   // if false it tells to do not initialize existing items
   auto: true,
