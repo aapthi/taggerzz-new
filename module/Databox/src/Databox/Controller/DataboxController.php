@@ -1757,19 +1757,29 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 			foreach($urlsArrayy as $urlName){
 				$otherLogin = true;
 				$comDomain = explode('.',$urlName);
+				// $imageType = $comDomain[0];
+				// if( $image == strtolower($imageType) ){ 
+					// $image = $basePath . "/images/montage_default_images/".strtolower($imageType).".png";
+				// }else if($image != $imageType){ 
+					// if(preg_match("/$imageType(\s|$|\.|\,)/", $image)) {  
+						// $image = $basePath . "/images/montage_default_images/".strtolower($imageType).".png";
+					// }
+				// }else{
+					// $image = $basePath . "/images/social_media/noimage.png";
+				// }
 				$imageType = $comDomain[0];
-				if( $image == strtolower($imageType) ){ 
-					$image = $basePath . "/images/montage_default_images/".strtolower($imageType).".png";
-				}else if($image != $imageType){ 
-					if(preg_match("/$imageType(\s|$|\.|\,)/", $image)) {  
-						$image = $basePath . "/images/montage_default_images/".strtolower($imageType).".png";
+				$strLo = strtolower($imageType);
+				if( $image == $strLo ){ 
+					$image = $basePath . "/images/montage_default_images/".$strLo.".png";
+				}else if($image != $strLo){ 
+					if(preg_match("/\.$strLo\.[A-Z]{2,4}/$image")) {  
+						$image = $basePath . "/images/montage_default_images/".$strLo.".png";
 					}
 				}else{
 					$image = $basePath . "/images/social_media/noimage.png";
 				}	
 			}
 		}
-		echo $image;exit;
 		$keywords = "";
 		if( isset($answer["keywords"]) )
 		{
