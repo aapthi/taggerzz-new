@@ -167,21 +167,6 @@ class Content
 				$images = $imageName;
 			}
 		}
-		// End
-		
-		// if (strpos($url, "facebook.com") !== false) {
-			// $taggerzzImageInserted = true;
-            // $images = "facebook";
-        // }
-		// else if (strpos($url, "twitter.com") !== false) {
-			// $taggerzzImageInserted = true;
-            // $images = "twitter";
-        // }
-		// else if (strpos($url, "plus.google.com") !== false) {
-			// $taggerzzImageInserted = true;
-            // $images = "gplus";
-        // }
-		
 		if( $urlExtension == "pdf" )
 		{
 			$taggerzzImageInserted = true;
