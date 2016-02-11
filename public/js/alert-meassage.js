@@ -38,7 +38,7 @@ var no_email_access='Please enter email id to mail access details.';
 var not_mailed='Not mailed.';
 var atleast_one_url='Please select atleast one url.';
 var cat_hash_tag='Please enter category hashtag.';
-var max_allowed_links='Maximum 100 links allowed.';
+var max_allowed_links='Maximum 50 links allowed.';
 // User create a data userboth....
 var fetching_urls='Error fetching urls.';
 var category_hash_not_available='Category hashtag not available.';

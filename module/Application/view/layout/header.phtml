@@ -6,22 +6,22 @@
 		$homeActive			='';
 		$hintingOnActive		='';
 		$createActive		='';
-		if($_SERVER['REQUEST_URI']=='/taggerzz-new/trunk/databoxuser/dashboard'){
+		if($_SERVER['REQUEST_URI']=='/dashboard'){
 			$dashBoardActive='active_menu';
 			
-		}else if($_SERVER['REQUEST_URI']=='/taggerzz-new/trunk/montage'){
+		}else if($_SERVER['REQUEST_URI']=='/montage'){
 			$montageActive='active_menu';
 			
-		}else if($_SERVER['REQUEST_URI']=='/taggerzz-new/trunk/accounts'){
+		}else if($_SERVER['REQUEST_URI']=='/accounts'){
 			$accountActive='active_menu';
 			
-		}else if($_SERVER['REQUEST_URI']=='/taggerzz-new/trunk/contentpage'){
+		}else if($_SERVER['REQUEST_URI']=='/contentpage'){
 			$homeActive='active_menu';
 			
-		}else if($_SERVER['REQUEST_URI']=='/taggerzz-new/trunk/hitting-on'){
+		}else if($_SERVER['REQUEST_URI']=='/hitting-on'){
 			$hintingOnActive='active_menu';
 			
-		}else if($_SERVER['REQUEST_URI']=='/taggerzz/databox/category-choice'){
+		}else if($_SERVER['REQUEST_URI']=='/databox/category-choice'){
 			$createActive='active_menu';
 			
 		}
@@ -84,7 +84,7 @@ function logOut(value)
 </script>
 <link href='https://fonts.googleapis.com/css?family=Raleway:500' rel='stylesheet' type='text/css'>
 	<?php
-if( $_SERVER['REQUEST_URI'] != "/taggerzz-new/trunk/" &&  $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/signup" )
+if( $_SERVER['REQUEST_URI'] != "/" &&  $_SERVER['REQUEST_URI']!= "/signup" )
 	{
 		?> 
 	<link rel="stylesheet" media="(max-width: 799px)" href="<?php echo $basePath; ?>/css/new_css/styles-mobile.css" />
@@ -104,7 +104,7 @@ if( $_SERVER['REQUEST_URI'] != "/taggerzz-new/trunk/" &&  $_SERVER['REQUEST_URI'
 
 
 	<?php
-if( $_SERVER['REQUEST_URI'] != "/taggerzz-new/trunk/" &&  $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/signup" )
+if( $_SERVER['REQUEST_URI'] != "/" &&  $_SERVER['REQUEST_URI']!= "/signup" )
 	{
 	?> 
 
@@ -130,7 +130,7 @@ if( $_SERVER['REQUEST_URI'] != "/taggerzz-new/trunk/" &&  $_SERVER['REQUEST_URI'
 <script src="<?php echo $basePath; ?>/js/jquery.cookie.js"></script>
 
 <?php
-if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" && $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/signup" )
+if( $_SERVER['REQUEST_URI']!= "/" && $_SERVER['REQUEST_URI']!= "/signup" )
 	{
 		?>   
 		<div id="mainContainerWrapper" class="mainContainerWrapper">
@@ -178,13 +178,13 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" && $_SERVER['REQUEST_URI']!
             <div id="divProfileDetails" class="inline-block tphoto_links tphoto_links">
                  <span id="spnGreetingsText" class="block smallFont">Hello, <?php echo $_SESSION['usersinfo']->displayName; ?></span>
                     <!--<span id="spnUsername" class="block defaultFont"></span>-->
-                    <span id="spnMessages" class="block verySmallFont">[<?php if(isset($_SESSION['usersinfo']->userMessagesCount)){echo $_SESSION['usersinfo']->userMessagesCount ; }else{ echo '0';}?> <a href="/taggerzz-new/trunk/databoxuser/dashboard#msgoto">Messages</a>, <span id="tzUserCollCountSpan"><?php if(isset($_SESSION['usersinfo']->collectionsCount)){echo $_SESSION['usersinfo']->collectionsCount; }else{ echo '0';}?></span>  <a class="tag_chk" href="javascript:void(0)" onClick="goToLocation('/databox/my-collected-links')">Collections</a>]</span>
+                    <span id="spnMessages" class="block verySmallFont">[<?php if(isset($_SESSION['usersinfo']->userMessagesCount)){echo $_SESSION['usersinfo']->userMessagesCount ; }else{ echo '0';}?> <a href="javascript:void(0)" onclick="goToLocation('/databoxuser/dashboard#msgoto')">Messages</a>, <span id="tzUserCollCountSpan"><?php if(isset($_SESSION['usersinfo']->collectionsCount)){echo $_SESSION['usersinfo']->collectionsCount; }else{ echo '0';}?></span>  <a class="tag_chk" href="javascript:void(0)" onClick="goToLocation('/databox/my-collected-links')">Web links collected</a>]</span>
                     <span id="spnCreateCollection" class="block smallFont highlightFont tmar_t9"><a href="#" class="highlightFont createCollection create_btn" id='createCollection'>+ Create Collection</a></span>
             </div>
         </div>
         <div id="divLogoWrapper" class="width30 marginallyCenter logo_home_new_size">
             <div class="width100 logo_martb5">
-                <a href="/taggerzz-new/trunk/contentpage"><img src="<?php echo $basePath; ?>/img/imgLogo.png" alt="" class="imgLogo width100" /></a>
+                <a href="javascript:void(0)" onclick="goToLocation('/contentpage')"><img src="<?php echo $basePath; ?>/img/imgLogo.png" alt="" class="imgLogo width100" /></a>
             </div> 
         </div>
         <div id="divLeftSlideMenu" class="divLeftSlideMenu">
@@ -197,7 +197,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" && $_SERVER['REQUEST_URI']!
                 <div id="divProfileDetailsMobile" class="divProfileDetails">
                     <span id="spnGreetingsText" class="block smallFont">Hello, <?php echo $_SESSION['usersinfo']->displayName; ?></span>
                     <!--<span id="spnUsername" class="block defaultFont"></span>-->
-                    <span id="spnMessages" class="block verySmallFont">[<?php if(isset($_SESSION['usersinfo']->userMessagesCount)){echo $_SESSION['usersinfo']->userMessagesCount ; }else{ echo '0';}?> <a href="/taggerzz-new/trunk/databoxuser/dashboard#msgoto">Messages</a>, <span id="tzUserCollCountSpan"><?php if(isset($_SESSION['usersinfo']->collectionsCount)){echo $_SESSION['usersinfo']->collectionsCount; }else{ echo '0';}?></span>  <a class="tag_chk" href="javascript:void(0)" onClick="goToLocation('/databox/my-collected-links')">Collections</a>]</span>
+                    <span id="spnMessages" class="block verySmallFont">[<?php if(isset($_SESSION['usersinfo']->userMessagesCount)){echo $_SESSION['usersinfo']->userMessagesCount ; }else{ echo '0';}?> <a href="javascript:void(0)" onclick="goToLocation('/databoxuser/dashboard#msgoto')">Messages</a>, <span id="tzUserCollCountSpan"><?php if(isset($_SESSION['usersinfo']->collectionsCount)){echo $_SESSION['usersinfo']->collectionsCount; }else{ echo '0';}?></span>  <a class="tag_chk" href="javascript:void(0)" onClick="goToLocation('/databox/my-collected-links')">Web links collected</a>]</span>
                     <span id="spnCreateCollection" class="block smallFont highlightFont"><a href="#" class="highlightFont createCollection create_btn" id='createCollection'>+ Create Collection</a></span>
                 </div>
             </div>
@@ -228,7 +228,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" && $_SERVER['REQUEST_URI']!
 					</style>
 					<div id="divLogoWrapper" class="width30 marginallyCenter withoutlogin_logo">
 						<div class="width100">
-							<a href="/taggerzz-new/trunk/contentpage"><img src="<?php echo $basePath; ?>/img/imgLogo.png" alt="nagaraju" class="imgLogo width100" /></a>
+							<a href="javascript:void(0)" onclick="goToLocation('/contentpage')"><img src="<?php echo $basePath; ?>/img/imgLogo.png" alt="nagaraju" class="imgLogo width100" /></a>
 						</div>
 					</div>
 				<div>

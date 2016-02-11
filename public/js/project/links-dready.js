@@ -434,10 +434,10 @@ function checkBookMarksUrls()
 			alert(atleast_one_url);
 			return false;
 		}
-		else if( parseInt(selectedBookmarksArray.length) > parseInt("100") )
+		else if( parseInt(selectedBookmarksArray.length) > parseInt("50") )
 		{
-			// alert(max_allowed_links);
-			// return false;
+			 alert(max_allowed_links);
+			 return false;
 		}
 		urlsLength = selectedBookmarksArray.length;
 			

@@ -856,14 +856,14 @@ class DataboxuserController extends AbstractActionController
 			if(count($getLastActivityLoggedU)>0){
 				$time_diff_Lu = time() - strtotime($getLastActivityLoggedU->activity_dt);
 			}
-			$minutes_lu = floor($time_diff_Lu / 60);
+			$minutes_lu = floor($time_diff_Lu / 10);
 		}
 		$getLastActivityDataboxU = $userpointsTable->lastActivity($uid);
 		$time_diff_Luu = 0;
 		if(count($getLastActivityDataboxU)>0){
 			$time_diff_Luu = time() - strtotime($getLastActivityDataboxU->activity_dt);
 		}
-		$minutes_luu = floor($time_diff_Luu / 60);
+		$minutes_luu = floor($time_diff_Luu / 10);
 		if($minutes_lu!='0'){
 			if(($minutes_lu>1) && ($minutes_luu>1)){
 				$lastInsertedId = $userpointsTable->addUserPoints($uid,$aid);
