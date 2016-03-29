@@ -22,7 +22,7 @@ var chk_sub_cat_name='Please enter sub category name.';
 // User databox creation page...
 var category_imgae = 'Please select category image.';
 var category_title = 'Please enter category title.';
-var category_chk_title = 'Special characters not allowed for title.';
+var category_chk_title = 'Special Characters are not allowed in Title.';
 var category_select_imgae = 'Please select category image.';
 var link_url_already_provided='This link was already provided.';
 var invaild_link_url='This link is invalid.';
@@ -31,6 +31,7 @@ var invalid_delete_links='Please delete the invalid links.';
 var minimum_valid_links='Please provide minimum 5 valid links.';
 var verifying_urls_alert ='Verifying urls,please wait.';
 var is_available_hash ='This public hashtag not available.';
+var image_restiction ='Dimentions of uploaded image have to be less than 1400X1400.';
 // User create a databox predefine...
 var select_customize='Please select customizing style.';
 var cat_unique_code='Category unique code not available.';

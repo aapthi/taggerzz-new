@@ -187,13 +187,16 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 								</div>
 								<?}
 								?>
+								<?php if( isset($_SESSION['usersinfo']->userId) &&  $_SESSION['usersinfo']->userId!=""){?>
 								<center><div class="collect_bookmark_this">
-								<div class="clear_book_collect_this">
-									<div class="div_collect_this" id="divCollectThis<?php echo $key?>" >COLLECT THIS<input type="hidden" id="catLinkId<?php echo $key?>" value="<?echo $databoxLinksGrids->category_link_id; ?>"></div>
-									<!--<div class="div_bookmark_this" id="divBookmarkThis<?php //echo $key?>">BOOKMARK THIS<input type="hidden" id="currLink<?php //echo $key?>" value="<? //echo $databoxLinksGrids->link; ?>">
-									</div>-->
-								</div>
-								</div></center>
+									<div class="clear_book_collect_this">
+										<div class="div_collect_this" id="divCollectThis<?php echo $key?>" >COLLECT THIS<input type="hidden" id="catLinkId<?php echo $key?>" value="<?echo $databoxLinksGrids->category_link_id; ?>"></div>
+										<!--<div class="div_bookmark_this" id="divBookmarkThis<?php //echo $key?>">BOOKMARK THIS<input type="hidden" id="currLink<?php //echo $key?>" value="<? //echo $databoxLinksGrids->link; ?>">
+										</div>-->
+									</div>
+									</div>
+								</center>
+								<?php } ?>
 							</div>
 						</div>
 					<?php $tzGsRowNum++; ?>

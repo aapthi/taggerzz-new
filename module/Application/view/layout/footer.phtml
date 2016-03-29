@@ -69,7 +69,7 @@
 <!--END-->
 <script src="<?php echo $basePath; ?>/js/new_js/salvattore.min.js"></script>
 	<?php
-if( $_SERVER['REQUEST_URI']== "/" )
+if( $_SERVER['REQUEST_URI']== "/taggerzz-new/trunk/" )
 	{
 		?>  
 <script src="<?php echo $basePath; ?>/js/new_js/custom.js"></script>
@@ -128,6 +128,7 @@ $('#fileCropInp').change(function(click)
 });
 function showCropButton(input)
 {
+
 	if( ! checkImageLoaded() )
 	{
 		return false;
@@ -151,6 +152,12 @@ function showCropButton(input)
 var jcropminLoaded = 0;
 function cropImagePredefinedBothQ(width,height,src)
 {
+	if(width > 1400 || height > 1400 ){
+		$('#pop-up-alerts').popUpWindow({action: "open"});	
+		$("#alert_header_meassge").html('');
+		$("#alert_meassage").html(box_category_empty);
+		$("#alert_meassage").html(image_restiction);return false;
+	}
 	if( ! parseInt(jcropminLoaded) )
 	{
 		$('#cropbox').attr('src', src);

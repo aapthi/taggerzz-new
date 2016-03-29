@@ -2209,7 +2209,7 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				}
 				if($currentBoxRow->meta_tags !=""){
 					$publicBoxesHtml .='<div id="divCardKeywords" class="divCardKeywords">';
-					$publicBoxesHtml .='<h3 class="home_keyword_h3"><b>Category:</b>'.$currentBoxRow->meta_tags.'</h3>';
+					$publicBoxesHtml .='<h3 class="home_keyword_h3"><b>Keywords: </b>'.$currentBoxRow->meta_tags.'</h3>';
 					$publicBoxesHtml .='</div>';
 				}
 			    if($currentBoxRow->category_description !=""){
@@ -2474,7 +2474,7 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				'</h2></div>';
 				}
 				if($currentBoxRow->meta_tags !=""){
-				$publicBoxesHtml1 .='<div id="divCardKeywords" class="divCardKeywords"><h3 class="home_keyword_h3"><b>Category:</b>';
+				$publicBoxesHtml1 .='<div id="divCardKeywords" class="divCardKeywords"><h3 class="home_keyword_h3"><b>Keywords: </b>';
 				$publicBoxesHtml1 .=$currentBoxRow->meta_tags;
 				$publicBoxesHtml1 .='</h3></div>';
 				}
@@ -2638,7 +2638,7 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				}	
 				if($currentBoxRow->meta_tags !=""){
 				
-				$privateBoxHtml .='<div id="divCardKeywords" class="divCardKeywords"><h3 class="home_keyword_h3"><b>Category:</b>'; 
+				$privateBoxHtml .='<div id="divCardKeywords" class="divCardKeywords"><h3 class="home_keyword_h3"><b>Keywords: </b>'; 
 				$privateBoxHtml .=$currentBoxRow->meta_tags;
 				$privateBoxHtml.='</h3></div>';
 				}

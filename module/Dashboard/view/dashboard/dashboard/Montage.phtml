@@ -33,7 +33,7 @@
 			<?if($_SESSION['usersinfo']->montage_hash_name==""){
 			$montage_hash_name="";
 			?>
-			<div  class=""><h1>#MONTAGE
+			<div  class=""><h1>#<a href="#">MONTAGE</a>
 			<a href="javascript:void(0);" onclick="montagePopUp(1)" class="add_new_pick">ADD YOURS</a>
 			</h1></div>
 			<?}else{
@@ -45,7 +45,7 @@
 			}
 			?>
 			
-			<div ><h1>#<?echo $montageLength;?>
+			<div ><h1>#<a href="#"><?echo $montageLength;?></a>
 				<a href="javascript:void(0);" onclick="montagePopUp(1)" title="Edit hash name" class="add_new_pick">EDIT</a>
 			</h1></div>
 			<?}?>
@@ -98,7 +98,7 @@
 			$montage_paragraph="";
 			?>
 			<div class="profile_text_empty">
-			<div id="montagPara_Div_id1" class="montage_Paragraph_show"><a href="javascript:void(0);" title="Edit your paragraph" onclick="montagePopUp(3)"><img src="<?php echo $basePath; ?>/images/social_media/profile_empty.png" class="edit_paragraph_mon_empty"/></a><p>No Writing competition needed here</p></div>
+			<div id="montagPara_Div_id1" class="montage_Paragraph_show"><a href="javascript:void(0);" title="Edit your paragraph" onclick="montagePopUp(3)"><img src="<?php echo $basePath; ?>/images/social_media/profile_empty.png" class="edit_paragraph_mon_empty"/></a><p>Set your Profile Description</p></div>
 			</div>
 			<?}else{
 			$montage_paragraph=$_SESSION['usersinfo']->montage_paragraph;

@@ -830,6 +830,7 @@ function displayUrlTotal( urlEntered )
 
 function verifySingleUrl( textboxId )
 	{
+		
 		var loadingvisibleCount1=0;
 		var allOkImgName = BASE_PATH + "/img/manage_checking.png";
 		var invalidImgName = BASE_PATH + "/img/checkmark_wrong.png";
@@ -885,6 +886,8 @@ function verifySingleUrl( textboxId )
 			}
 			if( ! isValid )
 			{
+				var addFocusId=	parseInt(textboxId)+parseInt("1");			
+				$('#textbox'+addFocusId).focus();
 				$('#textbox'+textboxId).attr('readonly', false);
 				$('#loadImg'+textboxId).hide();
 				$('#verifyImg'+textboxId).html('<img id="imgVerified' + textboxId + '" src="' + invalidImgName + '" />');
@@ -893,6 +896,8 @@ function verifySingleUrl( textboxId )
 
 			if( isValid )
 			{
+				var addFocusId=	parseInt(textboxId)+parseInt("1");			
+				$('#textbox'+addFocusId).focus();
 				$('#textbox'+textboxId).attr('readonly', false);
 				$('#loadImg'+textboxId).hide();
 				$('#verifyImg'+textboxId).html('<img id="imgVerified' + textboxId + '" src="' + allOkImgName + '" />');

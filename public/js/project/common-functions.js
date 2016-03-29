@@ -1389,7 +1389,7 @@ function saveMontage(typee){
 								var text1=text;
 							}
 							$('#pop-up-hash').popUpWindow({action: "close"});
-							$('#hash_name').html('<div><h1>#'+text1+'<a href="javascript:void(0);" onclick="montagePopUp(1)" title="Edit hash name" class="add_new_pick">EDIT</a></h1></div>');
+							$('#hash_name').html('<div><h1>#<a href="#">'+text1+'</a><a href="javascript:void(0);" onclick="montagePopUp(1)" title="Edit hash name" class="add_new_pick">EDIT</a></h1></div>');
 							$('#montage_hash_name').val("#"+text);
 							if(text.length>15){
 								var text2 = text.substring(0,15)+'..';
