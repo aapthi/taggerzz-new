@@ -1,5 +1,11 @@
+<?php
+	$header=$this->action('Application\Controller\IndexController', 'headerAction',array('20','10'));
+		$baseUrl = $header->headerarray['baseUrl'];
+		$basePath = $header->headerarray['basePath'];
+	
+	?>
 <div class="errorParentBx">
-  <p><img src="/images/404-banner.jpg" alt="" /></p>
+  <p><img src="<?php echo $basePath;?>/images/404-banner.jpg" alt="" /></p>
 <h1><?php echo $this->translate('A 404 error occurred') ?></h1>
 <h2><?php echo $this->message ?></h2>
 

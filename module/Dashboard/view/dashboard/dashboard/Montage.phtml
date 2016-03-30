@@ -117,14 +117,41 @@
 	<div class="body_mar_b tmar_t20">
 		<div class="body_mar_b">
 			<?php if($this->dashboard!=""){?>
-			<?foreach($this->dashboard as $key=>$dashboard){$count=0;?>
+			<?php foreach($this->dashboard as $key=>$dashboard){$count=0;
+				$viewUrl = "";
+				if( isset($_SESSION['usersinfo']) )
+				{
+					if($dashboard['settingId']==3){
+						$viewUrl = "post-vertical";
+					}else{
+						$viewUrl = "post-horizontal";
+					}
+				}
+				else
+				{
+					if($dashboard['settingId']==3){
+						$viewUrl = "pre-vertical";
+					}else{
+						$viewUrl = "pre-horizontal";
+					}
+				}
+				$displayCustomizationUrl = $baseUrl;
+				$catTitles = str_replace( "-","~",$dashboard["category_title"] );
+				$catTitle = str_replace( " ","-",$catTitles );
+				$catHashName = substr( $dashboard["user_hashname"],1 );
+				$catImageUrl=explode(".",$dashboard["category_image"]);
+				$userImageUrl=$dashboard["image"];
+				$catImageUrll=$catImageUrl[0];
+				$displayCustomizationUrl .= "/databox/" . $viewUrl . "/" . $dashboard["category_id"] . "+" . $catImageUrll . "+" . $catHashName . "+" . $catTitle;
+				//echo "<pre>";print_r($displayCustomizationUrl);exit;
+			?>
 			<input type="hidden" id="totalCount<?echo $key;?>" name="totalCount<?echo $key;?>" value="<?echo $dashboard['totalLinks'];?>">
 			<input type="hidden" id="presentCount<?echo $key;?>" name="presentCount<?echo $key;?>" value="7">
 			<div class="tg_montage_t montage_brg_box">
 				<div class="montage_box_brg_title">
 					<div class="text_row">
-						<div class="float_l"><h3><?echo $dashboard['user_hashname']?><span>&nbsp;(<?echo $dashboard['totalLinks']?>/100)</span></h3></div>
-						<div class="float_r"><P class="text_sub_title"><?echo $dashboard['category_title']?></P></div>
+						<div class="float_l"><h3><a href="<?php echo $displayCustomizationUrl;?>"><?echo $dashboard['user_hashname']?><span>&nbsp;(<?echo $dashboard['totalLinks']?>/100)</span></a></h3></div>
+						<div class="float_r"><P class="text_sub_title"><a href="<?php echo $displayCustomizationUrl;?>"><?echo $dashboard['category_title']?></a></P></div>
 					</div><div class="clearfix"></div>
 				</div>
 				<div class="pos_relative">

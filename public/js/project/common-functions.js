@@ -307,6 +307,17 @@ function updateUser(userId)
 		var password=$.trim( stripHtmlTags($('#password').val()).replace(/&nbsp;/g,'') );
 		var confirmpwd=$.trim( stripHtmlTags($('#confirmPwd').val()).replace(/&nbsp;/g,'') );
 		$('#display_name').val( display_name );
+		if($("#hide_me").prop('checked') == true){
+			var hide_me='1';
+		}else{
+			var hide_me='0';
+		}
+		alert(hide_me);
+		if($("#disable_messaging").prop('checked') == true){
+			var disable_messaging=1;
+		}else{
+			var disable_messaging=0;
+		}
 		if(display_name==""){	
 			$('#display_name').focus();
 			$('#pop-up-alerts').popUpWindow({action: "open"});	
@@ -341,7 +352,7 @@ function updateUser(userId)
 		$.ajax({
 			type		:	'POST',
 			url			:  	BASE_URL+'/accounts',
-			data		:	{userId:userId,display_name:display_name,password:password},
+			data		:	{userId:userId,display_name:display_name,password:password,hide_me:hide_me,disable_messaging:disable_messaging},
 			success: function(data){
 				$('#display_name').html('<label for="email">Profile Name:</label><input type="text" name="display_name" id="display_name" value="'+display_name+'" onClick="acountChange();"><div class="acount_pos_abs"><p>Change</p><p><img onClick="profileEmpty();" src="'+BASE_PATH+'/images/social_media/edit_ico.png"/></p></div>');
 				$('.acount_pos_abs').hide();
@@ -350,6 +361,14 @@ function updateUser(userId)
 				$('#passwordLable').html('<label for="email">Password:</label><input type="password" name="password" id="password" placeholder="reset your password" onfocus="showConfirmPassword()" >');
 				$('#headerDisplayName').html(display_name);
 				$('#updateMessage').show();
+				if(hide_me=='1'){
+					$('#emailLabel').hide();
+					$('#email').hide();
+				}else if(hide_me=='0'){
+					alert('hide_0');
+					$('#emailLabel').show();
+					$('#email').show();
+				}
 				$('#updateMessage').html('Updated sucessfully');
 				$('#updateMessage').delay(2000).fadeOut('slow');
 			}
@@ -2541,51 +2560,57 @@ function AddDiv(  commentText  ) {
 
 function savePositions(categoryId){
 
-	var incrId=$('#incrId').val();
-	var pubDddContainerHtml = $('#pubDddContainer').html();
-	
-	$('#tempRemDiv').html( pubDddContainerHtml );
-	$('#tempRemDiv .ui-icon-gripsmall-diagonal-se').remove();
-	$('#tempRemDiv .grid-stack-placeholder').remove();
-	
-	pubDddContainerHtml = $('#tempRemDiv').html();
-
-	$.ajax({
-		url		: 	BASE_URL+'/databox/view-vertical',
-		type	: 	"POST",
-		data	:	{DivHtml:pubDddContainerHtml,catId:categoryId,incrId:incrId,user_id:$('#category_user_id').val()},
-		success	: function(data) {
-			$('#tempRemDiv').empty();
+	var viewPageChanged=$('#viewPageChanged').val();
+	if(viewPageChanged!="1"){
+		alert('No changes made to publish');
+	}else{
 		
-			if( parseInt($('#catDescChanged').val()) == parseInt("1") )
-			{
-				var catNewDesc = $('#categoryDescripton').html();
-				$.ajax({
-					url		: 	BASE_URL+'/databox/update-cat-desc',
-					type	: 	"POST",
-					data	:	{categoryId:categoryId,catNewDesc:catNewDesc},
-					success	: function(data) {
-						$('#catDescChanged').val( 0 );
-						$('#viewPageChanged').val( 0 );
-						$('#pop-up-alerts').popUpWindow({action: "open"});	
-						$("#alert_header_meassge").html('');
-						$("#alert_meassage").html(saved_success);
-						$(".pop-up-content").css('position','fixed');
-						$(".pop-up-content").css('width','30%');
-					}
-				});
+		var incrId=$('#incrId').val();
+		var pubDddContainerHtml = $('#pubDddContainer').html();
+		
+		$('#tempRemDiv').html( pubDddContainerHtml );
+		$('#tempRemDiv .ui-icon-gripsmall-diagonal-se').remove();
+		$('#tempRemDiv .grid-stack-placeholder').remove();
+		
+		pubDddContainerHtml = $('#tempRemDiv').html();
+
+		$.ajax({
+			url		: 	BASE_URL+'/databox/view-vertical',
+			type	: 	"POST",
+			data	:	{DivHtml:pubDddContainerHtml,catId:categoryId,incrId:incrId,user_id:$('#category_user_id').val()},
+			success	: function(data) {
+				$('#tempRemDiv').empty();
+			
+				if( parseInt($('#catDescChanged').val()) == parseInt("1") )
+				{
+					var catNewDesc = $('#categoryDescripton').html();
+					$.ajax({
+						url		: 	BASE_URL+'/databox/update-cat-desc',
+						type	: 	"POST",
+						data	:	{categoryId:categoryId,catNewDesc:catNewDesc},
+						success	: function(data) {
+							$('#catDescChanged').val( 0 );
+							$('#viewPageChanged').val( 0 );
+							$('#pop-up-alerts').popUpWindow({action: "open"});	
+							$("#alert_header_meassge").html('');
+							$("#alert_meassage").html(saved_success);
+							$(".pop-up-content").css('position','fixed');
+							$(".pop-up-content").css('width','30%');
+						}
+					});
+				}
+				else if( parseInt($('#catDescChanged').val()) == parseInt("0") )
+				{
+					$('#viewPageChanged').val( 0 );
+					$('#pop-up-alerts').popUpWindow({action: "open"});	
+					$("#alert_header_meassge").html('');
+					$("#alert_meassage").html(saved_success);
+					$(".pop-up-content").css('position','fixed');
+					$(".pop-up-content").css('width','30%');
+				}
 			}
-			else if( parseInt($('#catDescChanged').val()) == parseInt("0") )
-			{
-				$('#viewPageChanged').val( 0 );
-				$('#pop-up-alerts').popUpWindow({action: "open"});	
-				$("#alert_header_meassge").html('');
-				$("#alert_meassage").html(saved_success);
-				$(".pop-up-content").css('position','fixed');
-				$(".pop-up-content").css('width','30%');
-			}
-		}
-	});
+		});
+	}
 	
 	
 }

@@ -131,6 +131,16 @@ class UserCategoriesTable
 		$resultSet = $this->tableGateway->selectWith($select);
 		return $resultSet;
 	}
+	public function getHighlightDataboxCount($userId){
+		$select = $this->tableGateway->getSql()->select();
+		$select->join('category', 'user_categories.category_id=category.category_id',array('category_name','category_image'),'left');
+		$select->where('user_categories.user_id="'.$userId.'"');
+		$select->where('user_categories.category_type="0"');
+		$select->where('user_categories.status="1"');
+		$select->where('category.category_highlight="2"');
+		$resultSet = $this->tableGateway->selectWith($select);
+		return $resultSet;
+	}
 	public function getTotalLinks( $userId ){
 		$select = $this->tableGateway->getSql()->select();
 		$select->join('category', 'user_categories.category_id=category.category_id',array('category_name','category_image'),'left');

@@ -1060,10 +1060,10 @@ class DataboxuserController extends AbstractActionController
 			$userRow = $this->getUserTable()->getUser( $_SESSION['usersinfo']->userId );
 			$getPublicDataboxCount = $this->getUserCategoriesTable()->getPublicDataboxCount( $_SESSION['usersinfo']->userId);
 			$getPrivateDataboxCount = $this->getUserCategoriesTable()->getPrivateDataboxCount( $_SESSION['usersinfo']->userId);
+			$getHiglightDataboxCount = $this->getUserCategoriesTable()->getHighlightDataboxCount( $_SESSION['usersinfo']->userId);
 			$getTotalLinks = $this->getUserCategoriesTable()->getTotalLinks( $_SESSION['usersinfo']->userId);
 			$votesCountRow = $this->getRelevanceWorthVoteTable()->getVotesUpDownCount();
 			$keywordsRow = $this->getUserCategoriesTable()->getAllKeywords();
-			//echo '<pre>'; print_r($keywordsRow); exit;
 			$totalKeywords = 0;
 			if( $keywordsRow->count() )
 			{
@@ -1081,6 +1081,7 @@ class DataboxuserController extends AbstractActionController
 				'basePath' 						=> $basePath,
 				'userDetails' 					=> $userRow,
 				'getPublicDataboxCount' 		=> $getPublicDataboxCount->count(),
+				'getHiglightDataboxCount' 		=> $getHiglightDataboxCount->count(),
 				'publicDataboxes' 		        => $getPublicDataboxCount,
 				'privateDataboxes' 		        => $getPrivateDataboxCount,
 				'getPrivateDataboxCount' 		=> $getPrivateDataboxCount->count(),

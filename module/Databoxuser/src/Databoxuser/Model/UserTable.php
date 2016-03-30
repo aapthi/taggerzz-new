@@ -115,8 +115,10 @@ class UserTable
 			}
 		}
 		$data = array(
-			'last_updated_date'   => date('Y-m-d H:i:s'),	
-			'display_name' 	      => $user['display_name'],
+			'last_updated_date'     => date('Y-m-d H:i:s'),	
+			'display_name' 	        => $user['display_name'],
+			'hide_me' 	            => $user['hide_me'],
+			'disable_messageing'    => $user['disable_messaging'],
 		);	
 		$row=$this->tableGateway->update($data, array('user_id' => $user['userId']));
 		return $row;
@@ -176,6 +178,9 @@ class UserTable
 		$select = $this->tableGateway->getSql()->select();
 		$select->where('type=1');
 		$select->where('status=1');
+		if($userId!="1"){
+		$select->where('disable_messageing=0');
+		}
 		$select->where->like( 'display_name', '%' . $search . '%' );
 		if($userId!=""){
 			$select->where('user.user_id NOT IN ('.$userId.')');
@@ -277,6 +282,7 @@ class UserTable
     {
 		$select = $this->tableGateway->getSql()->select();
 		$select->where('user.display_name="'.$email.'"');
+		$select->where('user.disable_messageing=0');
 		$resultSet = $this->tableGateway->selectWith($select);
 		$row = $resultSet;
 		return $row;

@@ -287,6 +287,9 @@ class DashboardController extends AbstractActionController
 						$dashboard[$databoxes->category_id]['categoryRelevance']=$categoryRelevanceStatus;
 						$dashboard[$databoxes->category_id]['categoryWorth']=$categoryWorthStatus;
 						$dashboard[$databoxes->category_id]['user_id']=$databoxes->user_id;
+						$dashboard[$databoxes->category_id]['category_id']=$databoxes->category_id;
+						$dashboard[$databoxes->category_id]['category_image']=$databoxes->category_image;
+						$dashboard[$databoxes->category_id]['settingId']=$databoxes->setting_id;
 				}else{
 					$count=1;
 					if($databoxes->category_type==0){
@@ -300,6 +303,10 @@ class DashboardController extends AbstractActionController
 					$dashboard[$databoxes->category_id]['categoryRelevance']=$categoryRelevanceStatus;
 					$dashboard[$databoxes->category_id]['categoryWorth']=$categoryWorthStatus;
 					$dashboard[$databoxes->category_id]['user_id']=$databoxes->user_id;
+					$dashboard[$databoxes->category_id]['category_id']=$databoxes->category_id;
+					$dashboard[$databoxes->category_id]['category_image']=$databoxes->category_image;
+					$dashboard[$databoxes->category_id]['settingId']=$databoxes->setting_id;
+
 				}
 			}
 			$_SESSION['montageLinks']=$dashboard;
