@@ -2562,7 +2562,9 @@ function savePositions(categoryId){
 
 	var viewPageChanged=$('#viewPageChanged').val();
 	if(viewPageChanged!="1"){
-		alert('No changes made to publish');
+		$('#pop-up-alerts').popUpWindow({action: "open"});	
+		$("#alert_header_meassge").html('');
+		$("#alert_meassage").html('No changes made to publish');
 	}else{
 		
 		var incrId=$('#incrId').val();

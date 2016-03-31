@@ -57,9 +57,9 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 }
 ?>
 <div <?php if( $tzIsLoggedIn ) { ?> style="margin-top:110px;"<?php }else{ ?> style="margin-top:72px;"<?php } ?> >
-<div class="c_DivHashTag customize_hashtagh1"><h1><?php echo $this->hashName;?></h1></div>
+<div class="c_DivHashTag customize_hashtagh1"><h1 onClick="saveDataboxName();"><?php echo $this->hashName;?></h1></div>
 <div class="c_DivTitleWrapper">
-<div class="c_DivTitle customize_hashtag_title"><h2><?php echo $this->categoryTitle; ?><!--<button id="catDescTopBtn" onclick="catDescCkEditorShow();" class="c_BtnEditTitle">EDIT</button>--></h2></div>
+<div class="c_DivTitle customize_hashtag_title"><h2 onClick="saveDataboxTitle();"><?php echo $this->categoryTitle; ?><!--<button id="catDescTopBtn" onclick="catDescCkEditorShow();" class="c_BtnEditTitle">EDIT</button>--></h2></div>
 </div>
 </div>
 <div id="mainContainerWrapper" class="mainContainerWrapper" style="width:95%;margin:0 auto;">
