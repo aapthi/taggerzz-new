@@ -2838,6 +2838,8 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 			$isPrivateDatabox = 1;
 			$boxKeywords="";
 			$catDescGot = 0;
+			$category_type = "";
+			$category_highlight = "";
 			if($this->params()->fromRoute('id', 0)!="")
 			{
 				$params=$this->params()->fromRoute('id', 0);
@@ -2879,12 +2881,16 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 			$data=1;
 			if(!$databoxLinksGridd->count()){
 				$databoxLinksGrids = $this->getLinkDetailsTable()->getDataboxGrid( $categoryId );
+
 				$databoxLinksGrid = $databoxLinksGrids->buffer();
 				$main_cat_name = $databoxLinksGrids->buffer()->current()->main_cat_tittle;
 				$sub_cat_name = $databoxLinksGrids->buffer()->current()->sub_cat_tittle;
 				$cat_name = $databoxLinksGrids->buffer()->current()->category_name;
 				$displayedCategoryUserId = $databoxLinksGrids->buffer()->current()->user_id;
 				$categoryDescripton = $databoxLinksGrids->buffer()->current()->category_description;
+				$category_type = $databoxLinksGrids->buffer()->current()->category_type;
+				$category_highlight = $databoxLinksGrids->buffer()->current()->category_highlight;
+				
 				if( ($databoxLinksGrids->buffer()->current()->boxPrivacy == 0) && ( ! is_null($databoxLinksGrids->buffer()->current()->secret_code) && (trim($databoxLinksGrids->buffer()->current()->secret_code) != "" ) ) )
 				{
 					$isPrivateDatabox = 0;
@@ -2901,6 +2907,9 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				$main_cat_name = "";
 				$sub_cat_name = "";
 				$cat_name = "";
+				$category_type = "";
+				$category_highlight = "";
+				
 			}
 			// echo '<pre>'; print_r($databoxLinksGrid);exit;
 			
@@ -2919,6 +2928,7 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 			if( $catDescGot == 0 )
 			{
 				$ucRow = $this->getUserCategoriesTable()->getEditHighlight( $categoryId );
+
 				$categoryDescripton = $ucRow->category_description;
 				$main_cat_name = $ucRow->main_cat_tittle;
 				$sub_cat_name = $ucRow->sub_cat_tittle;
@@ -3033,7 +3043,9 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				'boxKeywords' 				=> 	$boxKeywords,
 				'getComments' 				=> 	$getComments,
 				'votePerLikeDis' 			=> 	$votePerLikeDis,
-				'userStatusLD' 			    => 	$userStatusLD
+				'userStatusLD' 			    => 	$userStatusLD,
+				'category_type' 			=>  $category_type,
+				'category_highlight' 		=> 	$category_highlight
 			));
 		}
 	}
