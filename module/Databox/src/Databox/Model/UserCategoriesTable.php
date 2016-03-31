@@ -783,4 +783,22 @@ class UserCategoriesTable
 		$row = $resultSet;
 		return $row;
 	}
+	public function updateDataboxHashNames( $userCatDetails )
+	{	
+		$data = array(
+			'user_hashname'  => "#".$userCatDetails["text"], 
+			'updated_date' 	 => date('Y-m-d H:i:s')
+		);	
+		$result=$this->tableGateway->update($data, array('category_id' => $userCatDetails['categoryId']));
+		return 	$result;
+	}
+	public function updateDataboxHashTitle( $userCatDetails )
+	{	
+		$data = array(
+			'category_title' => $userCatDetails["text"], 
+			'updated_date' 	 => date('Y-m-d H:i:s')
+		);	
+		$result=$this->tableGateway->update($data, array('category_id' => $userCatDetails['categoryId']));
+		return 	$result;
+	}
 }

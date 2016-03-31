@@ -3738,6 +3738,21 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 			'output' =>	1,
 		));
     }
+	public function changeDataboxDetailsAction()
+    {
+		$baseUrls = $this->getServiceLocator()->get('config');
+		$baseUrlArr = $baseUrls['urls'];
+		$baseUrl = $baseUrlArr['baseUrl'];
+		$basePath = $baseUrlArr['basePath'];
+		if($_POST['type']=="1"){
+			$updateHashNames = $this->getUserCategoriesTable()->updateDataboxHashNames($_POST);
+		}else{
+			$updateHashNames = $this->getUserCategoriesTable()->updateDataboxHashTitle($_POST);
+		}
+		return $view = new JsonModel(array(
+			'output' =>	1,
+		));
+    }
 }
 
 		

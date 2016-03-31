@@ -57,9 +57,9 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 }
 ?>
 <div <?php if( $tzIsLoggedIn ) { ?> style="margin-top:110px;"<?php }else{ ?> style="margin-top:72px;"<?php } ?> >
-<div class="c_DivHashTag customize_hashtagh1"><h1 onClick="saveDataboxName();"><?php echo $this->hashName;?></h1></div>
+<div class="c_DivHashTag customize_hashtagh1" id="databoxHashNameId" ><h1 ><?php echo $this->hashName;?><button id="catHashNameBtn" style="display:none" onclick="databoxHash(1);" class="c_BtnEditTitle">EDIT</button></h1></div>
 <div class="c_DivTitleWrapper">
-<div class="c_DivTitle customize_hashtag_title"><h2 onClick="saveDataboxTitle();"><?php echo $this->categoryTitle; ?><!--<button id="catDescTopBtn" onclick="catDescCkEditorShow();" class="c_BtnEditTitle">EDIT</button>--></h2></div>
+<div class="c_DivTitle customize_hashtag_title"  id="databoxTitleId"><h2><?php echo $this->categoryTitle; ?><button id="catHashTitleBtn"  style="display:none" onclick="databoxHash(2);" class="c_BtnEditTitle">EDIT</button></h2></div>
 </div>
 </div>
 <div id="mainContainerWrapper" class="mainContainerWrapper" style="width:95%;margin:0 auto;">
@@ -324,6 +324,28 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 <script src="<?php echo $basePath; ?>/js/popupwindow.js"></script>
 <script type="text/javascript" src="<?php echo $basePath; ?>/js/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5461ef997855b9fa" async="async"></script>
+<div id="pop-up-databoxhash" class="pop-up-display-content conform_popup_content">
+	<div class="montage_desc">
+		<h4>Please provide your databox hash name</h4>
+		<p><input type="text" name="databox_hash_name" class="text_pad" id="databox_hash_name" value="<?php echo $this->hashName;?>" /></p>
+	</div>
+	<p>
+		<a class="btn" href="javascript:void(0);" onclick="databoxhashClose(1)">CANCEL</a>
+		<a class="btn" href="javascript:void(0);" onclick="saveDataboxhash(1)">CONTINUE</a>
+	</p>
+	<p id="databoxhashMessageError"></p>
+</div>
+<div id="pop-up-databoxhash_title" class="pop-up-display-content conform_popup_content">
+	<div class="montage_desc">
+		<h4>Please provide your databox title</h4>
+		<p><input type="text" name="databoxhash_title" class="text_pad" id="databoxhash_title" value="<?php echo $this->categoryTitle; ?>"/></p>
+	</div>
+	<p>
+		<a class="btn" href="javascript:void(0);" onclick="databoxhashClose(2)">CANCEL</a>
+		<a class="btn" href="javascript:void(0);" onclick="saveDataboxhash(2)">CONTINUE</a>
+	</p>
+	<p id="databoxTitleMessageError"></p>
+</div>
 
 
 <script type="text/javascript">
@@ -495,6 +517,8 @@ $(document).ready(function()
 		$('#tzPublishLink').show();
 		$('.c_DownArrow').show();
 		$('.c_DivTitle').show();
+		$('#catHashNameBtn').show();
+		$('#catHashTitleBtn').show();
 		
 		$('.grid-stack').on('dragstop', function (event, ui) {
 			var grid = this;
@@ -872,6 +896,91 @@ function likeDislikeCntV( newVoteValue,categoryId,rw_th ){
 		}
 	  }
 	});
+}
+function databoxHash(type){
+	if(type==1){
+		$('#databoxhashMessageError').html('');
+		$('#pop-up-databoxhash').popUpWindow({action: "open"});
+	}else if(type==2){
+		$('#databoxTitleMessageError').html('');
+		$('#pop-up-databoxhash_title').popUpWindow({action: "open"});
+	}
+}
+function databoxhashClose(type){
+	if(type==1){
+		$('#pop-up-databoxhash').popUpWindow({action: "close"});
+	}else if(type==2){
+		$('#pop-up-databoxhash_title').popUpWindow({action: "close"});
+	}
+}
+function saveDataboxhash(typee){
+	var databoxId='<?php echo $this->categoryId ?>';
+	if(typee==1){
+		var text=$('#databox_hash_name').val().trim();
+	}else if(typee==2){
+		var text=$('#databoxhash_title').val();
+	}
+	if(text==""){
+		if(typee==1){
+			$('#databoxhashMessageError').html('Please provide databox hash name');
+		}else if(typee==2){
+			$('#databoxTitleMessageError').html('Please provide databox title');
+		}
+	}else{
+		if(typee==1){
+			hashtagHolder = $("#databox_hash_name").val().replace(/^\s+/, "");
+			hashtagHolder = hashtagHolder.replace(/\s+$/, "");
+			var spc = " ";
+			if( parseInt(hashtagHolder.indexOf(spc)) > parseInt("-1") )
+			{
+				$('#databoxhashMessageError').html(space_hash);
+				$("#databox_hash_name").focus();
+				return false;
+			}
+			var invalidHtCharacters = /[^a-z^A-Z^0-9^#]/;
+			if( invalidHtCharacters.test( hashtagHolder ) )
+			{
+				$('#databoxhashMessageError').html(chk_valid_hash_tag);
+				$("#databox_hash_name").focus();
+				return false;
+			}
+			var hashCount = (hashtagHolder.match(/#/g) || []).length;
+			if( parseInt(hashCount) > parseInt("1") || ((parseInt(hashCount) == parseInt("1")) && (hashtagHolder.charAt(0) != "#")) )
+			{
+				$('#databoxhashMessageError').html(hash_tag_allowed);
+				$("#databox_hash_name").focus();
+				return false;
+			}
+			if( hashtagHolder.charAt(0) != "#" )
+			{
+				$('#databoxhashMessageError').html(leading_hash);
+				$("#databox_hash_name").focus();
+				return false;
+			}
+			text = hashtagHolder.substring( 1,parseInt(hashtagHolder.length) );
+		}
+			
+			$.ajax({
+				type		:	'POST',
+				url			:  	BASE_URL+'/databox/change-databox-details',
+				data		:	{text:text,categoryId:databoxId,type:typee},
+				success: function(data){
+					if(data.output==1){
+						if(typee==1){
+							$('#pop-up-databoxhash').popUpWindow({action: "close"});
+							$('#databoxHashNameId').html("");
+							$('#databoxHashNameId').html('<h1 >#'+text+'<button id="catDescTopBtn" onclick="databoxHash(1);" class="c_BtnEditTitle">EDIT</button></h1>');
+						}else if(typee==2){
+							$('#pop-up-databoxhash_title').popUpWindow({action: "close"});
+							$('#databoxTitleId').html("");
+							$('#databoxTitleId').html('<h2>'+text+'<button id="catDescTopBtn" onclick="databoxHash(2);" class="c_BtnEditTitle">EDIT</button></h2>');
+						}
+					}else{
+						alert('Not Updated');
+					}
+				}
+			});
+	}
 }
 </script>	       
     
