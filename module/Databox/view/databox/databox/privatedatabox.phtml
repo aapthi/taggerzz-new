@@ -46,6 +46,8 @@
 					<input type="hidden" id="imageId" name="imageId" value="0" />
 					<input type="hidden" id="typeImageCrop" name="typeImageCrop" value="0" />
 					<input type="hidden" id="main_category" name="main_category" value="" />
+					<input type="hidden" id="email" name="email" />
+					<input type="hidden" id="description123" name="description123" />
 			</form>
 
             <section id="secCreatePrivateDatabox">
@@ -63,7 +65,11 @@
                         <span class="">Title </span>
                         <input type="text" id='titleHolder' class='inptTitle' placeholder="Title of the collection" value="<?php if(isset($_SESSION['databox']->hashtitle)){ echo $_SESSION['databox']->hashtitle ;}?>" />
                     </div>
-					<div class="divCreateHighlightHashtag"><span style="padding:0 10px;">Links </span></div>
+					<div class="divCreatePublicDataboxHashtag">
+                        <span>Description </span>
+                        <input type="text" id='DescriptionTitle' name='DescriptionTitle' class='inptTitle' placeholder="Description" value="" />
+                    </div>
+					<div class="divCreateHighlightHashtag"><span style="padding:0 10px;" class="box_crete_color"><b id="linksCountPlus"><?php echo $this->countOfLinks;?></b> Links </span></div>
 					<div id="textBoxesGroup"><?
 							if( isset($this->boxLinksArr) && count($this->boxLinksArr) > 0 )
 							{
@@ -121,7 +127,7 @@
                     </div>
                     <div class="divCreatePrivateDataboxEmail">
                         <span class="">Email-ID to receive private databox access details </span><br />
-                        <input type='text' class="inptEmail" placeholder="example@123.com" />
+                        <input type='text' id="emailTo" name="emailTo" class="inptEmail" placeholder="example@123.com" />
                     </div>
 					<div  id="dcHtmlDiv">
 						<a href="javascript:void(0)" id="databoxContinue" class="btnBlack right"/>Continue Customising</a></div>

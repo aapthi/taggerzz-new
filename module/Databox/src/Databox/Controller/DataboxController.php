@@ -222,7 +222,8 @@ class DataboxController extends AbstractActionController
 		$not_safe_for_work = 0;
 		$tzCatImage = "";
 		$boxLinksArr= array();
-
+		$c="00";
+		
 		if($this->params()->fromRoute('boxid', 0)!="")
 		{
 			$currBoxId=$this->params()->fromRoute('boxid', 0);
@@ -279,6 +280,7 @@ class DataboxController extends AbstractActionController
 						$fp = fopen( $fileName, 'a' );
 						fwrite( $fp,$currentLinkContent );
 						fclose( $fp );
+						$c++;
 					}
 					// echo "<pre>";print_r($boxLinksArr);exit;
 				}
@@ -314,7 +316,8 @@ class DataboxController extends AbstractActionController
 			'metaTags' 	=> $metaTags,
 			'tzCatImage' => $tzCatImage,
 			'boxLinksArr' => $boxLinksArr,
-			'fetchedLinksCount' => $fetchedLinksCount
+			'fetchedLinksCount' => $fetchedLinksCount,
+			'countOfLinks' => $c
 		));
 	}
 	// Select databox
@@ -341,6 +344,7 @@ class DataboxController extends AbstractActionController
 		$not_safe_for_work = 0;
 		$tzCatImage = "";
 		$boxLinksArr= array();
+		$c="00";
 
 		if($this->params()->fromRoute('boxid', 0)!="")
 		{
@@ -374,13 +378,13 @@ class DataboxController extends AbstractActionController
 					}
 					
 					$boxLinksArr = $this->getUserCategoriesTable()->getBoxLinks( $editBoxId )->toArray();
-
 					$userId = $_SESSION['usersinfo']->userId;
 					@unlink( './public/databoxes/'.$userId.'.txt' );
 					
 					$urlId = 1;
 					foreach( $boxLinksArr as $key=>$currBoxLink )
 					{
+
 						$boxLinksArr[$key]["current_db_info"] = $currBoxLink["url_id"] . "\t" . $currBoxLink["link"] . "\t" . $currBoxLink["title"] . "\t" . $currBoxLink["image"] . "\t" . $currBoxLink["description"] . "\t" . $currBoxLink["web_author"] . "\t" . $currBoxLink["meta_content"] . "\t" . $currBoxLink["link_validity_status"] . "\t" . $currBoxLink["is_video"] . "\t" . $currBoxLink["iframe_src"];
 
 						$url_id = 0;
@@ -398,8 +402,9 @@ class DataboxController extends AbstractActionController
 						$fp = fopen( $fileName, 'a' );
 						fwrite( $fp,$currentLinkContent );
 						fclose( $fp );
+						$c++;
 					}
-					// echo "<pre>";print_r($boxLinksArr);exit;
+					 //echo "<pre>";print_r($c);exit;
 				}
 			}
 			else
@@ -433,7 +438,8 @@ class DataboxController extends AbstractActionController
 			'metaTags' 	=> $metaTags,
 			'tzCatImage' => $tzCatImage,
 			'boxLinksArr' => $boxLinksArr,
-			'fetchedLinksCount' => $fetchedLinksCount
+			'fetchedLinksCount' => $fetchedLinksCount,
+			'countOfLinks' => $c
 		));
 	}
 	
@@ -451,7 +457,7 @@ class DataboxController extends AbstractActionController
 		$secret_code="";
 		$tzCatImage = "";
 		$boxLinksArr= array();
-		
+		$c="00";
 		if($this->params()->fromRoute('boxid', 0)!="")
 		{
 			$currBoxId=$this->params()->fromRoute('boxid', 0);
@@ -509,6 +515,7 @@ class DataboxController extends AbstractActionController
 						$fp = fopen( $fileName, 'a' );
 						fwrite( $fp,$currentLinkContent );
 						fclose( $fp );
+						$c++;
 					}
 					// echo "<pre>";print_r($boxLinksArr);exit;
 				}
@@ -545,7 +552,8 @@ class DataboxController extends AbstractActionController
 			'metaTags' 	=> $metaTags,
 			'tzCatImage' => $tzCatImage,
 			'boxLinksArr' => $boxLinksArr,
-			'fetchedLinksCount' => $fetchedLinksCount
+			'fetchedLinksCount' => $fetchedLinksCount,
+			'countOfLinks' => $c
 		));
 	}
 	 public function indexAction()
@@ -605,7 +613,6 @@ class DataboxController extends AbstractActionController
 	*/
    public function displayAscendingAction()
 	{
-
 		$baseUrls = $this->getServiceLocator()->get('config');
 		$baseUrlArr = $baseUrls['urls'];
 		$baseUrl = $baseUrlArr['baseUrl'];
@@ -613,8 +620,6 @@ class DataboxController extends AbstractActionController
 
 		if( isset($_POST) )
 		{
-			// echo "<pre>";print_r($_POST);exit;
-
 			$categoryType = $_POST['categoryType'];
 			$categoryImage = "";
 			if($_POST['typeImageCrop']==0){
@@ -648,6 +653,7 @@ class DataboxController extends AbstractActionController
 			$userCatDetails["matureContent"] = $_POST['matureContent'];
 			$userCatDetails["notSafeForWork"] = $_POST['notSafeForWork'];
 			$userCatDetails["linkPostFormation"] = $_POST['linkPostFormation'];
+			$userCatDetails["category_description"] = $_POST['description123'];
 			
 
 			$userCatDetails["main_category"] = "";
@@ -665,13 +671,13 @@ class DataboxController extends AbstractActionController
 
 			if( isset($_POST['editBoxId']) && is_numeric($_POST['editBoxId']) && $_POST['editBoxId'] > 0 )
 			{
+
 				$category_id = $_POST['editBoxId'];
 				
 				$category["categoryId"] = $_POST['editBoxId'];
 				$userCatDetails["category_id"] = $_POST['editBoxId'];
 
 				$updatedCatRs = $this->getCategoryTable()->updateEditedBoxMain( $category,$_POST['typeImageCrop'] );
-				//echo "<pre>";print_r($updatedCatRs);exit;
 				$updatedCatDetailsRow = $this->getUserCategoriesTable()->updateEditedBoxDts( $userCatDetails );
 
 				$linkIdsArray=array();
@@ -728,6 +734,7 @@ class DataboxController extends AbstractActionController
 			}
 			else
 			{
+
 				$category_id = $this->getCategoryTable()->addCategory( $category );
 				$userCatDetails["category_id"] = $category_id;
 				$user_category_id = $this->getUserCategoriesTable()->addUserCategory( $userCatDetails,$_POST['categoryHighlight'] );
@@ -767,8 +774,8 @@ class DataboxController extends AbstractActionController
 				{
 					fclose($fhandle);
 				}
-				
-				if( isset($_SESSION['usersinfo']->email) )
+			}
+				if( isset($_POST['email']) )
 				{
 					if(isset($_SESSION["userTotBoxes"])){
 						$dxCount = $_SESSION["userTotBoxes"] + 1;
@@ -789,11 +796,14 @@ class DataboxController extends AbstractActionController
 					{
 						$databoxCreatedMessage = str_replace("<SECURITYCODE>",'Your Unique Code :&nbsp;&nbsp;'.$_POST['uniqueCode'], $databoxCreatedMessage);
 					}
-					$to=$_SESSION['usersinfo']->email;     
+					if($_POST['email']!=""){
+						$to=$_POST['email'];
+					}else{
+						$to=$_SESSION['usersinfo']->email;
+					}
 					$sentMail=sendMail($to,$databoxCreatedSubject,$databoxCreatedMessage);
 				}
-			}
-
+			
 			
 			$catHashTag=substr( $_POST['catHashTag'], 1 );
 			$categoryTitles=str_replace('-','~',$_POST['categoryTitle']);

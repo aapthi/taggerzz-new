@@ -213,6 +213,15 @@ function validateSettings( submitVal )
 		{
 			$('#uniqueCode').val( $('#ucHolder').val() );
 		}
+		
+		if( $("#emailTo").length )
+		{
+			$('#email').val( $('#emailTo').val() );
+		}
+		if( $("#DescriptionTitle").length )
+		{
+			$('#description123').val( $('#DescriptionTitle').val() );
+		}
 
 		$('#submitVal').val( "CStyle" );
 

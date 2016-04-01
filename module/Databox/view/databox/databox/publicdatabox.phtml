@@ -51,6 +51,8 @@
 					<input type="hidden" id="main_category" name="main_category" value="" />
 					<!-- Add By Dileep -->
 					<input type="hidden" id="links_cnt" name="links_cnt" value="0">
+					<input type="hidden" id="description123" name="description123" />
+
 			</form>
 
             <section id="secCreatePublicDatabox">
@@ -64,14 +66,21 @@
                         <span class="box_crete_color">Title </span>
                         <input type="text" id='titleHolder' class='inptTitle' placeholder="Title of the collection" value="<?php if(isset($_SESSION['databox']->hashtitle)){ echo $_SESSION['databox']->hashtitle ;}?>" />
                     </div>
-					<div class="divCreateHighlightHashtag"><span style="padding:0 10px;" class="box_crete_color">Links </span></div>
+					<div class="divCreatePublicDataboxHashtag">
+                        <span>Description </span>
+                        <input type="text" id='DescriptionTitle' name="DescriptionTitle" class='inptTitle' placeholder="Description" value="<?php if(isset($_SESSION['databox']->Description)){ echo $_SESSION['databox']->Description ;}?>" />
+                    </div>
+					
+					<div class="divCreateHighlightHashtag"><span style="padding:0 10px;" class="box_crete_color"><b id="linksCountPlus"><?php echo $this->countOfLinks;?></b> Links </span></div>
 					<div id="textBoxesGroup"><?
 							if( isset($this->boxLinksArr) && count($this->boxLinksArr) > 0 )
 							{
+
 								$extraBoxUrlId = 0;
 								$urlId = 1;
 								foreach($boxLinksArr as $key=>$currBoxLink)
 								{
+									
 									$currentLinkArray=explode("\t",$currBoxLink["current_db_info"]);
 									// echo count($currentLinkArray);
 									if( (!is_numeric ($currentLinkArray[1])) && (trim ($currentLinkArray[1]) != "") )
@@ -149,7 +158,7 @@
 			}
 		?>
 		<div id="pop-up-bookmarks" style="display:none;">
-		<? echo $this->htmlBook; ?>
+		<?php echo $this->htmlBook; ?>
 		</div>
 		<!--END-->
 

@@ -635,6 +635,8 @@ function addTextBox( count,useMode )
 		{
 			totalUrlsPresent++;
 		});
+		$("#linksCountPlus").html( parseInt(totalUrlsPresent - parseInt(1)) );
+
 		// if( parseInt(totalUrlsPresent) == parseInt("100") )
 		// {
 			// $('#pop-up-max-links').popUpWindow({action: "open"});
@@ -759,6 +761,8 @@ function removeTextBox( counter,mode )
 						if( imageName == "manage_checking.png" )
 						{
 							ticmarksCount++;
+							$("#linksCountPlus").html(ticmarksCount);
+							console.log(ticmarksCount);
 						}
 						if( imageName == "checkmark_wrong.png" ){
 							invalidlinksCount++;
@@ -1109,6 +1113,7 @@ function validateLinks()
 		var allVerified = true;
 		$("input[id^='textbox']").each(function()
 		{
+			
 			var textboxId = parseInt(this.id.replace("textbox", ""));
 			var value=$('#textbox'+textboxId).val().trim();
 			if( value != "" )
@@ -1140,6 +1145,7 @@ function validateLinks()
 		var minimumLinksCount = 0;
 		$("input[id^='textbox']").each(function()
 		{
+			
 			var textboxId = parseInt(this.id.replace("textbox", ""));
 			var value=$('#textbox'+textboxId).val().trim();
 			if( value != "" )
