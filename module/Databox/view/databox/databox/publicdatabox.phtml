@@ -124,7 +124,7 @@
                         <span class="box_crete_color">Your content's nature </span><br />
                         <label class="lblInpt box_crete_color"><input type='checkbox' class="inptChkContentNature" id="chkbxMc" <?php if ( isset($this->mature_content) && trim($this->mature_content) != "" && is_numeric($this->mature_content) && $this->mature_content == 1 ){?>checked<?php } ?> onClick="matureContentClicked( this.checked );" /> Mature Content&nbsp;&nbsp;&nbsp;&nbsp;</label>
                         <label class="lblInpt box_crete_color"><input type='checkbox' class="inptChkContentNature"id="chkbxNsfw" <?php if ( isset($this->not_safe_for_work) && trim($this->not_safe_for_work) != "" && is_numeric($this->not_safe_for_work) && $this->not_safe_for_work == 1 ){?>checked<?php } ?> onClick="nsfwContentClicked( this.checked );" /> NSFW ( Not Safe For Work )</label><br /> <br />
-                        <span class="">Categorize your databox</span><br />
+                        <span class="">Categorizing Keywords for your Databox/Highlight</span><br />
                         <input type='text' id="boxCategory" class="inptContentCategory" placeholder="Ex:- 'Space Travel Astronomers' " value="<?php if ( isset($this->metaTags) && trim($this->metaTags) != "" ){ echo $this->metaTags; }?>" />
 						<div class="" id="dcHtmlDiv" style="margin-top:20px">
 						<a href="javascript:void(0)" id="databoxContinue" class="btnBlack" />CONTINUE CUSTOMISING</a></div>

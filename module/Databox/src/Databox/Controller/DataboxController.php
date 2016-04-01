@@ -155,11 +155,12 @@ class DataboxController extends AbstractActionController
 	}
 	//Upload Bookmarks Action
 	public function bookmarksAction(){
-		
 		$baseUrls = $this->getServiceLocator()->get('config');
 		$baseUrlArr = $baseUrls['urls'];
 		$baseUrl = $baseUrlArr['baseUrl'];
 		$basePath = $baseUrlArr['basePath'];
+		unset($_SESSION['tzCreateEditBoxId']);
+		unset($_SESSION['databox']);
 
 		$databox_session = new Container('databox');
 		if($_POST){

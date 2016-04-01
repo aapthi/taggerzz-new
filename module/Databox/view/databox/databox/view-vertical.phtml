@@ -12,15 +12,18 @@ body{
 	}
 </style>
 <?php 
-	session_start();
-	$databox_session->hashtag= $this->hashName;
-	$databox_session->hashtitle= $this->categoryTitle;
+	unset($_SESSION['tzCreateEditBoxId']);
+	$_SESSION['databox']->hashtag = "";
+	$_SESSION['databox']->hashtag= $this->hashName;
+	$_SESSION['databox']->hashtitle= "";
+	$_SESSION['databox']->hashtitle= $this->categoryTitle;
+	$_SESSION["tzCreateEditBoxId"] = $this->categoryId;
 	$currBoxEditLink = $baseUrl . "/databox/publicdatabox/". $this->categoryId;
 	if( $this->category_highlight == 2 )
 	{
 		$currBoxEditLink = $baseUrl . "/databox/createhighlights/". $this->categoryId;
 	}
-	else if( ! $this->category_type )
+	if( isset($this->isPrivateDatabox) && ($this->isPrivateDatabox == 0) )
 	{
 		$currBoxEditLink = $baseUrl . "/databox/privatedatabox/". $this->categoryId;
 	}
@@ -107,7 +110,7 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 						<div class="sm_share_btns"><!-- Delete class only c_DivHeaderCommentRightBottom -->
 							<a class="c_BtnReport" href="javascript:void(0);" onclick="Javascript:custReportPopUpShow();">Report</a>
 							<a class="c_BtnShare" href="javascript:void(0);" onclick="Javascript:openCloseShareCus()">Share</a>
-							<a class="c_BtnShare1" href="<?php echo $currBoxEditLink; ?>">Edit</a>
+							<a class="c_BtnShare" style="display:none;" id="LinksEditButtonId" href="javascript:void(0);" onclick="Javascript:editTheDataBoxUrls('<?php echo $currBoxEditLink;?>');" >Links Edit</a>
 							
 							<!--<a class="c_BtnAddComment" href="javascript:void(0);" onclick="custCommentCkEditorShow('',0);">Add Comment &nbsp;<img src="<?php echo $basePath; ?>/images/social_media/chatting.png"/></a>-->
 							<a class="c_BtnAddComment" id="add-new-widget" href="javascript:void(0);" style="display:none">Add Comment</a>
@@ -537,6 +540,7 @@ $(document).ready(function()
 		$('.c_DivTitle').show();
 		$('#catHashNameBtn').show();
 		$('#catHashTitleBtn').show();
+		$('#LinksEditButtonId').show();
 		
 		$('.grid-stack').on('dragstop', function (event, ui) {
 			var grid = this;
@@ -999,6 +1003,12 @@ function saveDataboxhash(typee){
 				}
 			});
 	}
+}
+function editTheDataBoxUrls(redirectUrl){
+	var r = confirm("You loss your customization.");
+    if (r == true) {
+		 window.location = redirectUrl;
+    } 
 }
 </script>	       
     
