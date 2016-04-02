@@ -223,6 +223,8 @@ class DataboxController extends AbstractActionController
 		$tzCatImage = "";
 		$boxLinksArr= array();
 		$c="00";
+		$categoryDescription="";
+
 		
 		if($this->params()->fromRoute('boxid', 0)!="")
 		{
@@ -242,6 +244,7 @@ class DataboxController extends AbstractActionController
 				if( isset($catRow->user_hashname) )
 				{
 					$metaTags=$catRow->meta_tags;
+					$categoryDescription=$catRow->category_description;
 					if( isset($catRow->mature_content) && trim($catRow->mature_content) != "" && is_numeric($catRow->mature_content) )
 					{
 						$mature_content=$catRow->mature_content;
@@ -317,7 +320,8 @@ class DataboxController extends AbstractActionController
 			'tzCatImage' => $tzCatImage,
 			'boxLinksArr' => $boxLinksArr,
 			'fetchedLinksCount' => $fetchedLinksCount,
-			'countOfLinks' => $c
+			'countOfLinks' => $c,
+			'categoryDescription' => $categoryDescription
 		));
 	}
 	// Select databox
@@ -345,6 +349,7 @@ class DataboxController extends AbstractActionController
 		$tzCatImage = "";
 		$boxLinksArr= array();
 		$c="00";
+		$categoryDescription="";
 
 		if($this->params()->fromRoute('boxid', 0)!="")
 		{
@@ -364,6 +369,7 @@ class DataboxController extends AbstractActionController
 				if( isset($catRow->user_hashname) )
 				{
 					$metaTags=$catRow->meta_tags;
+					$categoryDescription=$catRow->category_description;
 					if( isset($catRow->mature_content) && trim($catRow->mature_content) != "" && is_numeric($catRow->mature_content) )
 					{
 						$mature_content=$catRow->mature_content;
@@ -439,7 +445,8 @@ class DataboxController extends AbstractActionController
 			'tzCatImage' => $tzCatImage,
 			'boxLinksArr' => $boxLinksArr,
 			'fetchedLinksCount' => $fetchedLinksCount,
-			'countOfLinks' => $c
+			'countOfLinks' => $c,
+			'categoryDescription' => $categoryDescription
 		));
 	}
 	
@@ -458,6 +465,8 @@ class DataboxController extends AbstractActionController
 		$tzCatImage = "";
 		$boxLinksArr= array();
 		$c="00";
+		$categoryDescription="";
+
 		if($this->params()->fromRoute('boxid', 0)!="")
 		{
 			$currBoxId=$this->params()->fromRoute('boxid', 0);
@@ -476,6 +485,7 @@ class DataboxController extends AbstractActionController
 				if( isset($catRow->user_hashname) )
 				{
 					$secret_code=$catRow->secret_code;
+					$categoryDescription=$catRow->category_description;
 					$metaTags=$catRow->meta_tags;
 					if( isset($catRow->mature_content) && trim($catRow->mature_content) != "" && is_numeric($catRow->mature_content) )
 					{
@@ -553,7 +563,8 @@ class DataboxController extends AbstractActionController
 			'tzCatImage' => $tzCatImage,
 			'boxLinksArr' => $boxLinksArr,
 			'fetchedLinksCount' => $fetchedLinksCount,
-			'countOfLinks' => $c
+			'countOfLinks' => $c,
+			'categoryDescription' => $categoryDescription
 		));
 	}
 	 public function indexAction()
