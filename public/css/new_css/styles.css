@@ -829,7 +829,7 @@ a {
     width: 200%; }
     #secCreatePublicDatabox .divCreatePublicDataboxHashtag *, #secCreatePublicDatabox .divCreatePublicDataboxTitle * {
       display: table-cell;
-      padding: 10pt; }
+      padding: 6pt; }
   #secCreatePublicDatabox .divCreatePublicDataboxLinks {
     background: #f8f8f8; }
     #secCreatePublicDatabox .divCreatePublicDataboxLinks img {
