@@ -211,8 +211,8 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" && $_SERVER['REQUEST_URI']!
 			</div>
         </div>
 		<div id="divSearchBoxes" class="divSearchBoxes tinput_s">
-            <input type="text" id="searchTermHolder" class="inptSearchHashTag tplaceholder_c" value="<?if(isset($_REQUEST['serTag']) && $_REQUEST['serTag']!=""){echo '#'.$_REQUEST['serTag'];}else{}?>" placeholder="Search by #hashtag"/>
-            <input type="text" id="pvtUniqueCodeHolder" class="inptSearchUniqueCode" placeholder="Search by private databox unique code" value="<?if(isset($_REQUEST['serCode']) && $_REQUEST['serCode']!=""){echo $_REQUEST['serCode'];}else{}?>"/>
+            <input type="text" id="searchTermHolder" class="inptSearchHashTag tplaceholder_c" value="<?if(isset($_REQUEST['serTag']) && $_REQUEST['serTag']!=""){echo '#'.$_REQUEST['serTag'];}else{}?>" placeholder="Search by #Hashtag for Public & Private Databox"/>
+            <input type="text" id="pvtUniqueCodeHolder" class="inptSearchUniqueCode" placeholder="Enter Private Databox's Unique Code" value="<?if(isset($_REQUEST['serCode']) && $_REQUEST['serCode']!=""){echo $_REQUEST['serCode'];}else{}?>"/>
             <a href="Javascript:void(0);" id='homeSearchLink' class="aSearch"></a>
         </div>
 			<?php
@@ -248,7 +248,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" && $_SERVER['REQUEST_URI']!
 				//{
 				?> 
 				<div id="divSearchBoxes" class="divSearchBoxes tinput_s">
-						<input type="text" id="searchTermHolder" class="inptSearchHashTag tsearch_input_w tplaceholder_c" placeholder="Search by #hashtag" value="<?if(isset($_REQUEST['serTag']) && $_REQUEST['serTag']!=""){echo '#'.$_REQUEST['serTag'];}else{}?>"/>
+						<input type="text" id="searchTermHolder" class="inptSearchHashTag tsearch_input_w tplaceholder_c" placeholder="Search by #Hashtag for Public & Private Databox" value="<?if(isset($_REQUEST['serTag']) && $_REQUEST['serTag']!=""){echo '#'.$_REQUEST['serTag'];}else{}?>"/>
 						<a href="Javascript:void(0);" id='homeSearchLink' class="aSearch "></a>
 				</div>
 				<?php // } ?>
