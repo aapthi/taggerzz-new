@@ -58,12 +58,12 @@
 			<?if($_SESSION['usersinfo']->montage_title==""){
 			$montage_title="";
 			?>
-			<h2><a href="javascript:void(0);" onclick="montagePopUp(2)" class="add_title">Add your Title here</a></h2>
+			<h3><a href="javascript:void(0);" onclick="montagePopUp(2)" class="add_title">Add your Title here</a></h3>
 			<?}else{
 			$montage_title=$_SESSION['usersinfo']->montage_title;
 			?>
-			<h2><span><?echo $_SESSION['usersinfo']->montage_title;?><a href="javascript:void(0);" onclick="montagePopUp(2)" class="add_new_pick">&nbsp;&nbsp;&nbsp;&nbsp;
-			EDIT TITLE</a></span></h2>
+			<h3><span><?echo $_SESSION['usersinfo']->montage_title;?><a href="javascript:void(0);" onclick="montagePopUp(2)" class="add_new_pick">&nbsp;&nbsp;&nbsp;&nbsp;
+			EDIT TITLE</a></span></h3>
 			<?}
 			if( $montage_title != "" )
 			{

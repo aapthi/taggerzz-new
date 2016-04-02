@@ -1115,7 +1115,13 @@ a {
 a {
     text-decoration: none;
 }
-
+.hashtagh2_size{
+	font-size:14.5px;
+	color:#000;
+}
+.h3_size{
+	font-size:10pt;
+}
 /*# sourceMappingURL=styles.css.map */
 
 .acount_pos_abs {
