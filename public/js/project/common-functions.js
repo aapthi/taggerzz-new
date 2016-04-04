@@ -312,7 +312,6 @@ function updateUser(userId)
 		}else{
 			var hide_me='0';
 		}
-		alert(hide_me);
 		if($("#disable_messaging").prop('checked') == true){
 			var disable_messaging=1;
 		}else{
@@ -365,7 +364,6 @@ function updateUser(userId)
 					$('#emailLabel').hide();
 					$('#email').hide();
 				}else if(hide_me=='0'){
-					alert('hide_0');
 					$('#emailLabel').show();
 					$('#email').show();
 				}

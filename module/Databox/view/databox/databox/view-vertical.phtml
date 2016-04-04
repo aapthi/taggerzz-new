@@ -211,7 +211,7 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 								<?php if( isset($_SESSION['usersinfo']->userId) &&  $_SESSION['usersinfo']->userId!=""){?>
 								<center><div class="collect_bookmark_this">
 									<div class="clear_book_collect_this">
-										<div class="div_collect_this" id="divCollectThis<?php echo $key?>" >COLLECT THIS<input type="hidden" id="catLinkId<?php echo $key?>" value="<?echo $databoxLinksGrids->category_link_id; ?>"></div>
+										<div class="div_collect_this" style="display:none;" id="divCollectThis<?php echo $key?>" >COLLECT THIS<input type="hidden" id="catLinkId<?php echo $key?>" value="<?echo $databoxLinksGrids->category_link_id; ?>"></div>
 										<!--<div class="div_bookmark_this" id="divBookmarkThis<?php //echo $key?>">BOOKMARK THIS<input type="hidden" id="currLink<?php //echo $key?>" value="<? //echo $databoxLinksGrids->link; ?>">
 										</div>-->
 									</div>
@@ -541,7 +541,8 @@ $(document).ready(function()
 		$('#catHashNameBtn').show();
 		$('#catHashTitleBtn').show();
 		$('#LinksEditButtonId').show();
-		
+		$('.div_collect_this').hide();
+
 		$('.grid-stack').on('dragstop', function (event, ui) {
 			var grid = this;
 			var element = event.target;
@@ -558,6 +559,7 @@ $(document).ready(function()
 	}
 	else
 	{
+		$('.div_collect_this').show();
 		$("div[id^='deleteComment']").each(function()
 		{
 			var editDelCommDivId = parseInt(this.id.replace("deleteComment", ""));

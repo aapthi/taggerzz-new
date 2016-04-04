@@ -1016,12 +1016,16 @@ class DataboxuserController extends AbstractActionController
 			$getUserMessages= $this->getUserMessagesTable()->getUserMessages( $_SESSION['usersinfo']->userId,$frnds)->toArray();
 			//End new added
 			//echo "<pre>";print_r($getUserMessages);
+			//newly added by sivareddy
+			$userInfo = $this->getUserTable()->getUser( $_SESSION['usersinfo']->userId );
+
 			
 			return $view = new ViewModel(array(
 				'baseUrl' 						=> $baseUrl,
 				'basePath' 						=> $basePath,
 				'allDataboxes' 				    => $allDataboxes,
-				'getUserMessages' 				=> $getUserMessages
+				'getUserMessages' 				=> $getUserMessages,
+				'userInfo' 				        => $userInfo
 			));
 			
 	}
