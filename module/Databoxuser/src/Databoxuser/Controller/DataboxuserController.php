@@ -154,6 +154,7 @@ class DataboxuserController extends AbstractActionController
 						$user_session->montage_image=$userRow->montage_image;
 						$user_session->montage_main_image=$userRow->montage_main_image;
 						$user_session->hinting_state=$userRow->hinting_state;
+						$user_session->disable_messageing=$userRow->disable_messageing;
 						$getPublicDataboxCount = $this->getUserCategoriesTable()->getPublicDataboxCount( $_SESSION['usersinfo']->userId);
 						$getPrivateDataboxCount = $this->getUserCategoriesTable()->getPrivateDataboxCount( $_SESSION['usersinfo']->userId);
 						$publicprivatetotalcount=count($getPublicDataboxCount->toArray()) + count($getPrivateDataboxCount->toArray());
@@ -327,6 +328,7 @@ class DataboxuserController extends AbstractActionController
 			$user_session->montage_image=$userRow->montage_image;
 			$user_session->montage_main_image=$userRow->montage_main_image;
 			$user_session->hinting_state=$userRow->hinting_state;
+			$user_session->disable_messageing=$userRow->disable_messageing;
 			$user_session->totalcount=$publicprivatetotalcount;
 			$user_session->userMessagesCount=$userMessagesCount;
 			$user_session->collectionsCount=$collectionsCount;
@@ -360,6 +362,7 @@ class DataboxuserController extends AbstractActionController
 			$user_session->montage_image=$userRow->montage_image;
 			$user_session->montage_main_image=$userRow->montage_main_image;
 			$user_session->hinting_state=$userRow->hinting_state;
+			$user_session->disable_messageing=$userRow->disable_messageing;
 			$user_session->totalcount=$publicprivatetotalcount;
 			$user_session->userMessagesCount=$userMessagesCount;
 			$user_session->collectionsCount=$collectionsCount;
@@ -762,6 +765,7 @@ class DataboxuserController extends AbstractActionController
 			$user_session->montage_image=$userRow->montage_image;
 			$user_session->montage_main_image=$userRow->montage_main_image;
 			$user_session->hinting_state=$userRow->hinting_state;
+			$user_session->disable_messageing=$userRow->disable_messageing;
 			$userCollectedLinksCount= $this->getUserCollectionsTable()->getCollectedLinksCount($userRow->user_id);
 			$collectionsCount=count($userCollectedLinksCount->toArray());
 			$getBlockUserDetails= $this->getBlockUserTable()->getBlockedIds();

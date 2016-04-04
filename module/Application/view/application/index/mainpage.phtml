@@ -64,10 +64,10 @@
                                 <div id="divCard-1-hashtag" class="divCardHashtag hash_tag_color_r">
                                    <a href="<?php echo $displayCustomizationUrl; ?>"><h2 class="hashtagh2_size"><?php echo $currentBoxData["user_hashname"]; ?></h2></a>
                                 </div>
-                                <div id="Card-1-user" class="divCardUser">
+                                <!--<div id="Card-1-user" class="divCardUser">
 									<!--<img src="<?php echo $basePath; ?>/img/userImage.png" class="imgUserImage" alt="" />
                                     <div class="divCardUserName">By: Arun Kolhapur</div>-->
-									<div class="divCardUserName">By: <?php echo $currentBoxData["display_name"];?></div>
+									<!--<div class="divCardUserName">By: <?php echo $currentBoxData["display_name"];?></div>
 									<?php if($currentBoxData["montage_image"]!=""){?>
 									<div class="pdatabox_profile">
 										<img  src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $currentBoxData["montage_image"];?>" class="imgUserImage" alt="" />
@@ -75,7 +75,7 @@
 									<?php } ?>
 									<div id="likes<?php echo $currentBoxData["category_id"];?>" class="divCardUserName likes_percentage">
 									<h2><?php echo round($currentBoxData["NetVotes"],2);?>% liked</h2></div>
-                                </div>
+                                </div>-->
                                 <div id="divCard-1-sharedLinks" class="divCardSharedLinks">
                                     <span class="fatFont"><?php echo $currentBoxData["categoryLinksCount"]; ?> HOT LINKS</span> collected and shared
                                 </div>
@@ -198,7 +198,7 @@
                             <div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">
                                 <span class="fatFont"><?php echo $currentBoxData["categoryLinksCount"]; ?> HOT LINKS</span> collected and shared
                             </div>
-                            <div id="Card-1-user" class="divCardUser">
+                           <!-- <div id="Card-1-user" class="divCardUser">
 							<div class="divCardUserName">By: <?php echo $currentBoxData["display_name"];?></div>
 								<?php if($currentBoxData["montage_image"]!=""){?>
                                <div class="pdatabox_profile">
@@ -206,7 +206,7 @@
 							   </div><br/>
 								<?php } ?>
 								<div id="likes<?php echo $currentBoxData["category_id"];?>" class="divCardUserName likes_percentage"><h2><?php echo round($currentBoxData["likes"],2);?>% liked</h2></div>
-                            </div>
+                            </div>-->
 							<div class="divbrg_f"></div>
 							<div class="divbrg_s"></div>
 							<div style="clear:both;"></div>

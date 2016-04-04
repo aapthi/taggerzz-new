@@ -127,7 +127,7 @@ if( $_SERVER['REQUEST_URI'] != "/taggerzz-new/trunk/" &&  $_SERVER['REQUEST_URI'
 <script src="<?php echo $basePath; ?>/js/jquery.cookie.js"></script>
 
 <?php
-if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" && $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/signup" )
+if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/"  )
 	{
 		?>   
 		<div id="mainContainerWrapper" class="mainContainerWrapper">
@@ -203,7 +203,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/" && $_SERVER['REQUEST_URI']!
                 <li> <a class="tag_chk  <?php echo $homeActive; ?>" href="javascript:void(0)" onclick="goToLocation('/contentpage')">Home</a> </li>
 				<li> <a class="tag_chk  <?php echo $montageActive; ?>" onClick="goToLocation('/montage')" href="javascript:void(0)" >My Profile</a></li>
                 <li> <a class="tag_chk <?php echo $accountActive; ?>" href="javascript:void(0)" onClick="goToLocation('/accounts')">Account Settings</a> </li>
-                <li> <a class="tag_chk <?php echo $dashBoardActive; ?>" href="javascript:void(0)" onClick="goToLocation('/databoxuser/dashboard')">Dashboard(<?php if(isset($_SESSION['usersinfo']->userMessagesCount)){echo "<span style='color:red;' >".$_SESSION['usersinfo']->userMessagesCount.'</span>' ; }else{ echo '<span style="color:red;" >0</span>';}?>)</a> </li>
+                <li> <a class="tag_chk <?php echo $dashBoardActive; ?>" href="javascript:void(0)" onClick="goToLocation('/databoxuser/dashboard')">Dashboard<?php if( isset($_SESSION['usersinfo']->disable_messageing) && $_SESSION['usersinfo']->disable_messageing == 0){?><span id="disable_messageing_headerId">(<?php if(isset($_SESSION['usersinfo']->userMessagesCount)){echo "<span style='color:red;' >".$_SESSION['usersinfo']->userMessagesCount.'</span>' ; }else{ echo '<span style="color:red;" >0</span>';}?>)</span><?php } ?></a></li>
                 <li class="invite_hide"> <a class="tag_chk" href="javascript:void(0)" onClick="inivite_frnd()">Invite Friends</a> </li>
                 <li class="rewards_hide"> <b><?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $_SESSION['usersinfo']->rewardPoints ; }else{ echo '0000';}?></b> <sub>POINTS</sub> <b>00</b> <sub>INR, Worth</sub><a href="#" title="Conversion is possible at 1000 points."> Convert</a></li>
 				<li> <a class="tag_chk " href="javascript:void(0)" onClick="goToLocation('logout')" >Logout</a> </li>

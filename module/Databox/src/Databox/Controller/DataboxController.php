@@ -2196,13 +2196,13 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				$publicBoxesHtml .='<div id="divDatabox-1-hashtag" class="divCardHashtag hash_tag_color"> <a href="'.$displayCustomizationUrl.'"> <h2 class="hashtagh2_size">'.$dispHashName .'</h2></a></div>';
 				$publicBoxesHtml .='<div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">';
 				$publicBoxesHtml .= '<span class="fatFont">'.$linksCount.' HOT LINKS </span> collected and shared</div>';
-				$publicBoxesHtml .='<div id="Card-1-user" class="divCardUser">';
-				$publicBoxesHtml .= ' <div class="divCardUserName">By: '. $currentBoxRow->display_name .' </div>';
-				if($currentBoxRow->montage_image !=""){
-					$publicBoxesHtml .=' <div class="pdatabox_profile"><img  src="'.$basePath.'/images/project/montageImages/'.$currentBoxRow->montage_image .'"  class="imgUserImage" alt="" /></div><br/>';
-				}
-				$publicBoxesHtml .= ' <div id="likes'.$currentBoxRow->category_id.'" class="divCardUserName likes_percentage"><h2>'.$roundLikes.'% liked</h2></div>';
-				$publicBoxesHtml .='</div>';
+				//$publicBoxesHtml .='<div id="Card-1-user" class="divCardUser">';
+				//$publicBoxesHtml .= ' <div class="divCardUserName">By: '. $currentBoxRow->display_name .' </div>';
+				//if($currentBoxRow->montage_image !=""){
+					//$publicBoxesHtml .=' <div class="pdatabox_profile"><img  src="'.$basePath.'/images/project/montageImages/'.$currentBoxRow->montage_image .'"  class="imgUserImage" alt="" /></div><br/>';
+				//}
+				//$publicBoxesHtml .= ' <div id="likes'.$currentBoxRow->category_id.'" class="divCardUserName likes_percentage"><h2>'.$roundLikes.'% liked</h2></div>';
+				//$publicBoxesHtml .='</div>';
 				$publicBoxesHtml .=' <div class="divbrg_f"></div><div class="divbrg_s"></div><div style="clear:both;"></div></div>';
 				$publicBoxesHtml .='<div id="divDatabox-1-contentWrapper" class="divCardContentWrapper">';
 				$publicBoxesHtml .='<div id="divDatabox-1-views" class="divCardViews views_w">';
@@ -2461,14 +2461,14 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				$publicBoxesHtml1 .='<div id="divDatabox-1-hashtag" class="divCardHashtag hash_tag_color"> <a href="'.$displayCustomizationUrl.'"><h2 class="hashtagh2_size">'.$dispHashName .'</h2></a></div>';
 				$publicBoxesHtml1 .='<div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">';
 				$publicBoxesHtml1 .= '<span class="fatFont">'.$linksCount.' HOT LINKS </span> collected and shared</div>';
-				$publicBoxesHtml1 .='<div id="Card-1-user" class="divCardUser">';
-				$publicBoxesHtml1 .= ' <div class="divCardUserName">By: '. $currentBoxRow->display_name .' </div>';
+				//$publicBoxesHtml1 .='<div id="Card-1-user" class="divCardUser">';
+				//$publicBoxesHtml1 .= ' <div class="divCardUserName">By: '. $currentBoxRow->display_name .' </div>';
 
-				if($currentBoxRow->montage_image !=""){
-					$publicBoxesHtml1 .='<div class="pdatabox_profile"><img  src="'.$basePath.'/images/project/montageImages/'.$currentBoxRow->montage_image .'"  class="imgUserImage" alt="" /></div><br/>';
-				}
-					$publicBoxesHtml1 .= ' <div id="likes'.$currentBoxRow->category_id.'" class="divCardUserName likes_percentage"><h2>'.$roundLikes.' % liked</h2></div>';
-				$publicBoxesHtml1 .='</div>';
+				//if($currentBoxRow->montage_image !=""){
+					//$publicBoxesHtml1 .='<div class="pdatabox_profile"><img  src="'.$basePath.'/images/project/montageImages/'.$currentBoxRow->montage_image .'"  class="imgUserImage" alt="" /></div><br/>';
+				//}
+					//$publicBoxesHtml1 .= ' <div id="likes'.$currentBoxRow->category_id.'" class="divCardUserName likes_percentage"><h2>'.$roundLikes.' % liked</h2></div>';
+				//$publicBoxesHtml1 .='</div>';
 				$publicBoxesHtml1 .=' <div class="divbrg_f"></div><div class="divbrg_s"></div><div style="clear:both;"></div></div>';
 			    $publicBoxesHtml1 .='<div id="divDatabox-1-contentWrapper" class="divCardContentWrapper"><div>';
 				$publicBoxesHtml1 .='<div id="divDatabox-1-views" class="divCardViews views_w">';
@@ -2625,14 +2625,14 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				$privateBoxHtml .='<div id="divDatabox-1-hashtag" class="divCardHashtag hash_tag_color"> <a href="'.$displayCustomizationUrl.'"><h2 class="hashtagh2_size">'.$dispHashName .'</h2> </a></div>';
 				$privateBoxHtml .='<div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">';
 				$privateBoxHtml .= '<span class="fatFont">'.$linksCount.' HOT LINKS </span> collected and shared</div>';
-				$privateBoxHtml .='<div id="Card-1-user" class="divCardUser">';
-				$privateBoxHtml .= ' <div class="divCardUserName">By: '. $currentBoxRow->display_name .' </div>';
+				//$privateBoxHtml .='<div id="Card-1-user" class="divCardUser">';
+				//$privateBoxHtml .= ' <div class="divCardUserName">By: '. $currentBoxRow->display_name .' </div>';
 
-				if($currentBoxRow->montage_image !=""){
-					$privateBoxHtml .='<div class="pdatabox_profile"><img  src="'.$basePath.'/images/project/montageImages/'.$currentBoxRow->montage_image .'"  class="imgUserImage" alt="" /></div><br/>';
-				}
-					$privateBoxHtml .= ' <div  id="likes'.$currentBoxRow->category_id.'" class="divCardUserName likes_percentage"><h2>'. $roundLikes.' % liked</h2></div>';
-				$privateBoxHtml .='</div>';
+				//if($currentBoxRow->montage_image !=""){
+					//$privateBoxHtml .='<div class="pdatabox_profile"><img  src="'.$basePath.'/images/project/montageImages/'.$currentBoxRow->montage_image .'"  class="imgUserImage" alt="" /></div><br/>';
+				//}
+					//$privateBoxHtml .= ' <div  id="likes'.$currentBoxRow->category_id.'" class="divCardUserName likes_percentage"><h2>'. $roundLikes.' % liked</h2></div>';
+				//$privateBoxHtml .='</div>';
 			$privateBoxHtml .='<div class="divbrg_f"></div><div class="divbrg_s"></div><div style="clear:both;"></div></div>';
 			$privateBoxHtml .='<div id="divDatabox-1-contentWrapper" class="divCardContentWrapper">';
 				$privateBoxHtml .='<div id="divDatabox-1-views" class="divCardViews views_w">';

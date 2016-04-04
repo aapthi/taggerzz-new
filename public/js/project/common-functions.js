@@ -367,6 +367,11 @@ function updateUser(userId)
 					$('#emailLabel').show();
 					$('#email').show();
 				}
+				if(disable_messaging == 1){
+					$('#disable_messageing_headerId').hide();
+				}else{
+					$('#disable_messageing_headerId').show();
+				}
 				$('#updateMessage').html('Updated sucessfully');
 				$('#updateMessage').delay(2000).fadeOut('slow');
 			}
