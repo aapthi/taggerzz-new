@@ -635,13 +635,14 @@ function addTextBox( count,useMode )
 		{
 			totalUrlsPresent++;
 		});
+		$("#linksCountPlus").html( parseInt(totalUrlsPresent - parseInt(1)) );
+
 		// if( parseInt(totalUrlsPresent) == parseInt("100") )
 		// {
 			// $('#pop-up-max-links').popUpWindow({action: "open"});
 		// }
 		// else
 		// {
-		
 			var newBoxHandler = function(event)
 			{
 				var keyCode = event.which;
@@ -700,7 +701,6 @@ function addTextBox( count,useMode )
 					}
 				});
 			}
-		
 		// }
 		
 		if( parseInt(useMode) == parseInt("0") )
@@ -761,6 +761,8 @@ function removeTextBox( counter,mode )
 						if( imageName == "manage_checking.png" )
 						{
 							ticmarksCount++;
+							$("#linksCountPlus").html(ticmarksCount);
+							console.log(ticmarksCount);
 						}
 						if( imageName == "checkmark_wrong.png" ){
 							invalidlinksCount++;
@@ -832,6 +834,7 @@ function displayUrlTotal( urlEntered )
 
 function verifySingleUrl( textboxId )
 	{
+		
 		var loadingvisibleCount1=0;
 		var allOkImgName = BASE_PATH + "/img/manage_checking.png";
 		var invalidImgName = BASE_PATH + "/img/checkmark_wrong.png";
@@ -887,6 +890,8 @@ function verifySingleUrl( textboxId )
 			}
 			if( ! isValid )
 			{
+				var addFocusId=	parseInt(textboxId)+parseInt("1");			
+				$('#textbox'+addFocusId).focus();
 				$('#textbox'+textboxId).attr('readonly', false);
 				$('#loadImg'+textboxId).hide();
 				$('#verifyImg'+textboxId).html('<img id="imgVerified' + textboxId + '" src="' + invalidImgName + '" />');
@@ -895,6 +900,8 @@ function verifySingleUrl( textboxId )
 
 			if( isValid )
 			{
+				var addFocusId=	parseInt(textboxId)+parseInt("1");			
+				$('#textbox'+addFocusId).focus();
 				$('#textbox'+textboxId).attr('readonly', false);
 				$('#loadImg'+textboxId).hide();
 				$('#verifyImg'+textboxId).html('<img id="imgVerified' + textboxId + '" src="' + allOkImgName + '" />');
@@ -1106,6 +1113,7 @@ function validateLinks()
 		var allVerified = true;
 		$("input[id^='textbox']").each(function()
 		{
+			
 			var textboxId = parseInt(this.id.replace("textbox", ""));
 			var value=$('#textbox'+textboxId).val().trim();
 			if( value != "" )
@@ -1137,6 +1145,7 @@ function validateLinks()
 		var minimumLinksCount = 0;
 		$("input[id^='textbox']").each(function()
 		{
+			
 			var textboxId = parseInt(this.id.replace("textbox", ""));
 			var value=$('#textbox'+textboxId).val().trim();
 			if( value != "" )
@@ -1157,7 +1166,6 @@ function validateLinks()
 				}
 			}
 		});
-		
 		$("#links_cnt").val(minimumLinksCount);
 		if( parseInt(minimumLinksCount) < parseInt("5") )
 		{
