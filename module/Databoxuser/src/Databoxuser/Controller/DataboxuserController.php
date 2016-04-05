@@ -1038,6 +1038,8 @@ class DataboxuserController extends AbstractActionController
 		if(isset($_POST['display_name'])){
 			$user_session = new Container('usersinfo');
 			$user_session->displayName=$_POST['display_name'];
+			$user_session->disable_messageing=$_POST['disable_messaging'];
+
 			$userRow = $this->getUserTable()->updateAccount( $_POST );
 			
 			if( trim($_POST['password']) != "" )
