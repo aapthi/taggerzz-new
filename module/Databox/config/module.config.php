@@ -613,6 +613,19 @@ return array(
                             ),
                         ),
                     ),
+					'change-databox-details' => array(
+                        'type'    => 'segment',
+                        'options' => array(
+                            'route' => '/change-databox-details[/:id]',
+							'constraints' => array(
+							   'id' => '[%&;a-zA-Z0-9][%&+;a-zA-Z0-9_~-]*',
+							),
+                            'defaults' => array(
+                                'controller' => 'Databox\Controller\Databox',
+                                'action'     => 'changeDataboxDetails',
+                            ),
+                        ),
+                    ),
                     'publicdatabox' => array(
                         'type'    => 'segment',
                         'options' => array(

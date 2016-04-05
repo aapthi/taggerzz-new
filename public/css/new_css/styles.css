@@ -745,7 +745,7 @@ a {
       width: 200%; border:1px solid #c7c7c7;padding:5px; }
     #secCreateHighlight .divCreateHighlightHashtag *, #secCreateHashtag .divCreateHighlightHashtag *, #secUploadBookmarks .divCreateHighlightHashtag *, #secSelectDatabox .divCreateHighlightHashtag *, #secCreateHighlight .divCreateHighlightTitle *, #secCreateHashtag .divCreateHighlightTitle *, #secUploadBookmarks .divCreateHighlightTitle *, #secSelectDatabox .divCreateHighlightTitle * {
       display: table-cell;
-      padding: 10pt; }
+      padding: 6pt; }
   #secCreateHighlight .divCreateHighlightLinks, #secCreateHashtag .divCreateHighlightLinks, #secUploadBookmarks .divCreateHighlightLinks, #secSelectDatabox .divCreateHighlightLinks {
     background: #f8f8f8; }
     #secCreateHighlight .divCreateHighlightLinks img, #secCreateHashtag .divCreateHighlightLinks img, #secUploadBookmarks .divCreateHighlightLinks img, #secSelectDatabox .divCreateHighlightLinks img {
@@ -789,7 +789,7 @@ a {
       width: 200%;border:1px solid #c7c7c7;padding:5px; }
     #secCreatePrivateDatabox .divCreatePrivateDataboxHashtag *, #secCreatePrivateDatabox .divCreatePrivateDataboxTitle *, #secCreatePrivateDatabox .divCreatePrivateDataboxUniqueCode * {
       display: table-cell;
-      padding: 10pt; }
+      padding: 6pt; }
     #secCreatePrivateDatabox .divCreatePrivateDataboxHashtag .imgRefreshUniqueCode, #secCreatePrivateDatabox .divCreatePrivateDataboxTitle .imgRefreshUniqueCode, #secCreatePrivateDatabox .divCreatePrivateDataboxUniqueCode .imgRefreshUniqueCode {
       background: url("../../img/refresh.png") no-repeat center center;
       background-size: 12pt auto;
@@ -829,7 +829,7 @@ a {
     width: 200%; }
     #secCreatePublicDatabox .divCreatePublicDataboxHashtag *, #secCreatePublicDatabox .divCreatePublicDataboxTitle * {
       display: table-cell;
-      padding: 10pt; }
+      padding: 6pt; }
   #secCreatePublicDatabox .divCreatePublicDataboxLinks {
     background: #f8f8f8; }
     #secCreatePublicDatabox .divCreatePublicDataboxLinks img {
@@ -1115,7 +1115,13 @@ a {
 a {
     text-decoration: none;
 }
-
+.hashtagh2_size{
+	font-size:14.5px;
+	color:#000;
+}
+.h3_size{
+	font-size:10pt;
+}
 /*# sourceMappingURL=styles.css.map */
 
 .acount_pos_abs {

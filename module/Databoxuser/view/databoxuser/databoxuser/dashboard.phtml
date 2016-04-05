@@ -1,4 +1,3 @@
-<?php //echo "<pre>";print_r($this->getUserMessages);exit; ?>
 <div class="tzcontainer_as tmar_b20">
 <div class="tmar_t125">
 <section id="secAccountSettings">
@@ -7,11 +6,37 @@
                     <div class="divCreatedCollectionsCard">
                         <div class="divAccountSettingsHeading heading_font_pt12">
                             CREATED COLLECTIONS 
-                            <small>(Databoxes &amp; Highlights)</small>
+                            <!--<small>(Databoxes &amp; Highlights)</small>-->
                         </div>
 						
                         <ul class="ulCreatedCollectionList">
-							<?foreach($this->allDataboxes as $allDataboxes)
+							
+							<h3>Public</h3>
+							<?php $pub=1;foreach($this->allDataboxes as $allDataboxes)
+							{
+								
+								$currBoxEditLink = $baseUrl . "/databox/createhashtag/publicdatabox/" . $allDataboxes['category_id'];
+								if( $allDataboxes['category_highlight'] == 2 )
+								{
+									$currBoxEditLink = $baseUrl . "/databox/createhashtag/highlight/" . $allDataboxes['category_id'];
+								}
+								else if( ! $allDataboxes['category_type'] )
+								{
+									$currBoxEditLink = $baseUrl . "/databox/createhashtag/privatedatabox/" . $allDataboxes['category_id'];
+								}
+								if($allDataboxes['category_highlight'] == 1 ){
+									if($allDataboxes['category_type']==1){
+										$pub++;
+							?>
+								<li class="liCreatedCollectionListItem"><div class="divCreatedCollectionText tdashboard_f"><h3 class="h3_size"><?php echo $allDataboxes['user_hashname'];?>, <?php echo $allDataboxes['category_title'];?></h3></div><a class="aCollectedCollectionEdit" href="Javascript:void(0);" onClick="setEditingBoxId( '<?php echo $allDataboxes['category_id']; ?>','<?php echo $currBoxEditLink; ?>' );">EDIT</a></li>
+							<?php }}}
+								if($pub==1){?>
+							<li class="liCreatedCollectionListItem"><div class="divCreatedCollectionText tdashboard_f"><h3 class="h3_size">NO PUBLIC BOXES</h3></div></li>
+							<?php }
+							?>
+							<h3>Private</h3>
+							
+							<?php $p=1; foreach($this->allDataboxes as $allDataboxes)
 							{
 								$currBoxEditLink = $baseUrl . "/databox/createhashtag/publicdatabox/" . $allDataboxes['category_id'];
 								if( $allDataboxes['category_highlight'] == 2 )
@@ -22,10 +47,42 @@
 								{
 									$currBoxEditLink = $baseUrl . "/databox/createhashtag/privatedatabox/" . $allDataboxes['category_id'];
 								}
+								if($allDataboxes['category_highlight'] == 1 ){
+									if($allDataboxes['category_type']==0){
+										$p++;
 							?>
-								<li class="liCreatedCollectionListItem"><div class="divCreatedCollectionText tdashboard_f"><?php echo $allDataboxes['user_hashname'];?>, <?php echo $allDataboxes['category_title'];?></div><a class="aCollectedCollectionEdit" href="Javascript:void(0);" onClick="setEditingBoxId( '<?php echo $allDataboxes['category_id']; ?>','<?php echo $currBoxEditLink; ?>' );">EDIT</a></li>
+								<li class="liCreatedCollectionListItem"><div class="divCreatedCollectionText tdashboard_f"><h3 class="h3_size"><?php echo $allDataboxes['user_hashname'];?>, <?php echo $allDataboxes['category_title'];?></h3></div><a class="aCollectedCollectionEdit" href="Javascript:void(0);" onClick="setEditingBoxId( '<?php echo $allDataboxes['category_id']; ?>','<?php echo $currBoxEditLink; ?>' );">EDIT</a></li>
+								<?php }}}
+								if($p==1){?>
+								<li class="liCreatedCollectionListItem"><div class="divCreatedCollectionText tdashboard_f"><h3 class="h3_size">NO PRIVATE BOXES</h3></div></li>
+								<?php }
+								?>
+							<h3>Heighlight</h3>
+							
+							<?php 
+							$h=1;
+							foreach($this->allDataboxes as $allDataboxes)
+							{
 								
-							<?}?>
+								$currBoxEditLink = $baseUrl . "/databox/createhashtag/publicdatabox/" . $allDataboxes['category_id'];
+								if( $allDataboxes['category_highlight'] == 2 )
+								{
+									$currBoxEditLink = $baseUrl . "/databox/createhashtag/highlight/" . $allDataboxes['category_id'];
+								}
+								else if( ! $allDataboxes['category_type'] )
+								{
+									$currBoxEditLink = $baseUrl . "/databox/createhashtag/privatedatabox/" . $allDataboxes['category_id'];
+								}
+								if($allDataboxes['category_highlight'] == 2 ){
+									if($allDataboxes['category_type']==0){
+										$h++;
+							?>
+								<li class="liCreatedCollectionListItem"><div class="divCreatedCollectionText tdashboard_f"><h3 class="h3_size"><?php echo $allDataboxes['user_hashname'];?>, <?php echo $allDataboxes['category_title'];?></h3></div><a class="aCollectedCollectionEdit" href="Javascript:void(0);" onClick="setEditingBoxId( '<?php echo $allDataboxes['category_id']; ?>','<?php echo $currBoxEditLink; ?>' );">EDIT</a></li>
+							<?php }}}
+								if($h==1 ){?>
+							<li class="liCreatedCollectionListItem"><div class="divCreatedCollectionText tdashboard_f"><h3 class="h3_size">NO HEIGHLIGHT BOXES</h3></div></li>
+							<?php }
+							?>
                         </ul>
                     </div>
                 </div>
@@ -33,7 +90,9 @@
 				<div class="tac_bg das_brg_n">
                 <div  class="divAccountSettingsRow">
                     <div class="divCreatedCollectionsCard">
-                        <div id="msgoto" class="divAccountSettingsHeading heading_font_pt12">
+                    <?php if($this->userInfo->disable_messageing!="1"){ ?>
+
+						<div id="msgoto" class="divAccountSettingsHeading heading_font_pt12">
                             MESSAGES
                             <button onClick="composeMail()" class="btnComposeMessage">COMPOSE</button>
                         </div>
@@ -48,15 +107,16 @@
 								}
 								$i++;
 							?>
-								<li class="liCreatedCollectionListItem">
-									<div onClick="showMessage(<?php echo $userMessages['msg_id']?>)" class="divCreatedCollectionText"><a href="javaScript:void(0);"><?php echo $userMessages['msg_subject'];?></a></div><?php if($userMessages['msg_flag']=="0"){ ?><span id="statusFlag<?php echo $userMessages['msg_id']?>" onClick="messageChangeStatus(<?php echo $userMessages['msg_id']?>)" class="spnNewMessageLabel"><a href="javaScript:void(0);">New</a></span><? }else{ }?>
-								</li>
-								
+							<li class="liCreatedCollectionListItem">
+								<div onClick="showMessage(<?php echo $userMessages['msg_id']?>)" class="divCreatedCollectionText"><a href="javaScript:void(0);"><?php echo $userMessages['msg_subject'];?></a></div><?php if($userMessages['msg_flag']=="0"){ ?><span id="statusFlag<?php echo $userMessages['msg_id']?>"  onClick="messageChangeStatus(<?php echo $userMessages['msg_id']?>)" class="spnNewMessageLabel new_pad"><a href="javaScript:void(0);">New</a></span><? }else{ }?>
+							</li>
 							<?}}else{?>
 									<div  class="divCreatedCollectionText">No Records</div>
-									
-								<?}?>
+							<?}?>
                         </ul>
+					<?php }else{ ?>
+						<div  class="divCreatedCollectionText">Personal Messaging has been disabled.Turn it on back </div>
+					<?php } ?>	
                     </div>
                 </div>
 

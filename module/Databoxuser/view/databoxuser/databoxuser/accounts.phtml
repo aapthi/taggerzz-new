@@ -1,4 +1,4 @@
-<?php //echo "<pre>";print_r($this->getUserMessages);exit; ?>
+<?php //echo "<pre>";print_r($this->userDetails);exit; ?>
 <link rel="stylesheet" media="(max-width: 799px)" href="<?php echo $basePath; ?>/css/new_css/styles-mobile.css" />
 <div class="tzcontainer_as">
 <div class="tmar_t125">
@@ -28,7 +28,7 @@
                             <label>
                                 Profile Name : 
                             </label>
-							<input type="text" name="display_name" id="display_name" value="<?echo $this->userDetails->display_name;?>" placeholder="Set profile name"/>
+							<input type="text" name="display_name" id="display_name"  value="<?echo $this->userDetails->display_name;?>" placeholder="Set profile name"/>
 							<div class="acount_pos_abs" style="display:none;">
 							<div style="margin-top:5px;text-align:right;">
 							<p>Change</p>
@@ -37,7 +37,7 @@
                             <label>
                                 Password : 
                             </label>
-							<input type="password" name="password" id="password" placeholder="Set password" onfocus="showConfirmPassword()" >
+							<input type="password" name="password" id="password"  placeholder="Set password" onfocus="showConfirmPassword()" >
 								<label id="confirmLable" style="display: none;">
                                 Confirm Password : 
 								</label>
@@ -45,27 +45,58 @@
 						<?php
 							if( $this->userDetails->email != "" )
 							{
+								if( $this->userDetails->hide_me != "1" )
+								{
 						?>
-								<label>
-									Email Id : 
-								</label>
-								<input type="text" name="email" id="email" readonly value="<?echo $this->userDetails->email;?>" readonly >
+						<label id="emailLabel" style="">
+							Email Id : 
+						</label>
+						<input type="text" style="" name="email" id="email"  readonly = "readonly" value="<?echo $this->userDetails->email;?>" readonly="readonly" >
 						<?php
-							}
+						}else{
 						?>
-                           
+						<label id="emailLabel" style="display:none;">
+							Email Id : 
+						</label>
+						<input type="text" style="display:none;" name="email" id="email"  readonly = "readonly" value="<?echo $this->userDetails->email;?>" readonly="readonly" >
+						<?php }
+						}
+						?>
+						<div>
+						<?php
+							if( $this->userDetails->hide_me != "1" )
+						{?>
+                            <input style="width:auto;" type="checkbox" name="hide_me" id="hide_me" > Hide Me 
+                        <?php }else{?>
+						      <input style="width:auto;" type="checkbox" name="hide_me" id="hide_me" checked > Hide Me 
+
+						<?php } ?>
+						</div>
+						
+						<div>
+						<?php
+							if( $this->userDetails->disable_messageing != "1" )
+						{?>
+                            <input style="width:auto;" type="checkbox" name="disable_messaging" id="disable_messaging" > Disable Personal messaging 
+                         <?php }else{?>
+							<input style="width:auto;" type="checkbox" name="disable_messaging" id="disable_messaging" checked > Disable Personal messaging 
+						 <?php } ?>
+						</div>
+						
+							  
                         </div>
                     </div>
 
                     <!-- User Summary Block -->
                     <div class="divUserSummaryCard">
                         <div class="divUserSummaryHeading heading_font_pt12" align="center">
-							USER SUMMARY
+							YOUR ACTIVITY
                         </div>
 
                         <div class="divUserSummaryRow">
                             <div class="divPublicDataboxCount"><b><?echo $this->getPublicDataboxCount;?></b></div> Public Databoxes &nbsp;
                             <div class="divPrivateDataboxCount"><b><?echo $this->getPrivateDataboxCount;?></b></div> Private Databoxes &nbsp;
+                            <div class="divPrivateDataboxCount"><b><?echo $this->getHiglightDataboxCount;?></b></div> Highlights &nbsp;
                         </div>
 
                         <div class="divUserSummaryRow">
@@ -122,7 +153,7 @@
                         </div>
 
                         <div class="divUserSummaryRow">
-                            <div class="divTotalLinksCount"><?echo $this->getTotalLinks;?></div> Links Collected, Categorized, #Hashtagged
+                            <h3><b><div class="divTotalLinksCount"><?echo $this->getTotalLinks;?></div> Links Collected, Categorized, #Hashtagged</h3></b>
                         </div>
                     </div>
                 </div>

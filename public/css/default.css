@@ -2533,8 +2533,8 @@ color:#333;
 	background:#eee;
 	cursor:pointer;
 }
-.montage_tit_show h2{
-    font-size: 9pt;
+.montage_tit_show h3{
+    font-size: 12pt;
     font-weight: normal;
     line-height: 24px;
     text-transform: uppercase;
