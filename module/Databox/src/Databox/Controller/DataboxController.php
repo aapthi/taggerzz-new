@@ -3779,8 +3779,12 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 		$baseUrl = $baseUrlArr['baseUrl'];
 		$basePath = $baseUrlArr['basePath'];
 		if($_POST['type']=="1"){
+			$_SESSION['databox']->hashtag = "";
+			$_SESSION['databox']->hashtag= $_POST['text'];
 			$updateHashNames = $this->getUserCategoriesTable()->updateDataboxHashNames($_POST);
 		}else{
+			$_SESSION['databox']->hashtitle= "";
+			$_SESSION['databox']->hashtitle= $_POST['text'];
 			$updateHashNames = $this->getUserCategoriesTable()->updateDataboxHashTitle($_POST);
 		}
 		return $view = new JsonModel(array(
