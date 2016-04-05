@@ -1,0 +1,29 @@
+
+<script src="http://connect.facebook.net/en_US/all.js"></script>
+<script type="text/javascript" charset="utf-8">
+FB.init({
+  appId  : '608131635971702',
+  status : true, 
+  cookie : true, 
+  xfbml  : true  
+});
+function sessionOut(){
+alert( "here" );
+FB.logout(function(){});
+	/*
+	  $.ajax({
+		url: '/users/logout',
+		success: function(data){
+			if(data.output=='success'){
+				window.location='/';
+			}
+		}
+	});
+	*/
+}
+</script>
+
+	<a  href="javascript:void(0);" onClick="sessionOut()">Logout</a>
+
+
+User exists,logged in.

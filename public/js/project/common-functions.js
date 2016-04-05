@@ -307,16 +307,6 @@ function updateUser(userId)
 		var password=$.trim( stripHtmlTags($('#password').val()).replace(/&nbsp;/g,'') );
 		var confirmpwd=$.trim( stripHtmlTags($('#confirmPwd').val()).replace(/&nbsp;/g,'') );
 		$('#display_name').val( display_name );
-		if($("#hide_me").prop('checked') == true){
-			var hide_me='1';
-		}else{
-			var hide_me='0';
-		}
-		if($("#disable_messaging").prop('checked') == true){
-			var disable_messaging=1;
-		}else{
-			var disable_messaging=0;
-		}
 		if(display_name==""){	
 			$('#display_name').focus();
 			$('#pop-up-alerts').popUpWindow({action: "open"});	
@@ -351,7 +341,7 @@ function updateUser(userId)
 		$.ajax({
 			type		:	'POST',
 			url			:  	BASE_URL+'/accounts',
-			data		:	{userId:userId,display_name:display_name,password:password,hide_me:hide_me,disable_messaging:disable_messaging},
+			data		:	{userId:userId,display_name:display_name,password:password},
 			success: function(data){
 				$('#display_name').html('<label for="email">Profile Name:</label><input type="text" name="display_name" id="display_name" value="'+display_name+'" onClick="acountChange();"><div class="acount_pos_abs"><p>Change</p><p><img onClick="profileEmpty();" src="'+BASE_PATH+'/images/social_media/edit_ico.png"/></p></div>');
 				$('.acount_pos_abs').hide();
@@ -360,18 +350,6 @@ function updateUser(userId)
 				$('#passwordLable').html('<label for="email">Password:</label><input type="password" name="password" id="password" placeholder="reset your password" onfocus="showConfirmPassword()" >');
 				$('#headerDisplayName').html(display_name);
 				$('#updateMessage').show();
-				if(hide_me=='1'){
-					$('#emailLabel').hide();
-					$('#email').hide();
-				}else if(hide_me=='0'){
-					$('#emailLabel').show();
-					$('#email').show();
-				}
-				if(disable_messaging == 1){
-					$('#disable_messageing_headerId').hide();
-				}else{
-					$('#disable_messageing_headerId').show();
-				}
 				$('#updateMessage').html('Updated sucessfully');
 				$('#updateMessage').delay(2000).fadeOut('slow');
 			}
@@ -1411,7 +1389,7 @@ function saveMontage(typee){
 								var text1=text;
 							}
 							$('#pop-up-hash').popUpWindow({action: "close"});
-							$('#hash_name').html('<div><h1>#<a href="#">'+text1+'</a><a href="javascript:void(0);" onclick="montagePopUp(1)" title="Edit hash name" class="add_new_pick">EDIT</a></h1></div>');
+							$('#hash_name').html('<div><h1>#'+text1+'<a href="javascript:void(0);" onclick="montagePopUp(1)" title="Edit hash name" class="add_new_pick">EDIT</a></h1></div>');
 							$('#montage_hash_name').val("#"+text);
 							if(text.length>15){
 								var text2 = text.substring(0,15)+'..';
@@ -2563,59 +2541,51 @@ function AddDiv(  commentText  ) {
 
 function savePositions(categoryId){
 
-	var viewPageChanged=$('#viewPageChanged').val();
-	if(viewPageChanged!="1"){
-		$('#pop-up-alerts').popUpWindow({action: "open"});	
-		$("#alert_header_meassge").html('');
-		$("#alert_meassage").html('No changes made to publish');
-	}else{
-		
-		var incrId=$('#incrId').val();
-		var pubDddContainerHtml = $('#pubDddContainer').html();
-		
-		$('#tempRemDiv').html( pubDddContainerHtml );
-		$('#tempRemDiv .ui-icon-gripsmall-diagonal-se').remove();
-		$('#tempRemDiv .grid-stack-placeholder').remove();
-		
-		pubDddContainerHtml = $('#tempRemDiv').html();
+	var incrId=$('#incrId').val();
+	var pubDddContainerHtml = $('#pubDddContainer').html();
+	
+	$('#tempRemDiv').html( pubDddContainerHtml );
+	$('#tempRemDiv .ui-icon-gripsmall-diagonal-se').remove();
+	$('#tempRemDiv .grid-stack-placeholder').remove();
+	
+	pubDddContainerHtml = $('#tempRemDiv').html();
 
-		$.ajax({
-			url		: 	BASE_URL+'/databox/view-vertical',
-			type	: 	"POST",
-			data	:	{DivHtml:pubDddContainerHtml,catId:categoryId,incrId:incrId,user_id:$('#category_user_id').val()},
-			success	: function(data) {
-				$('#tempRemDiv').empty();
-			
-				if( parseInt($('#catDescChanged').val()) == parseInt("1") )
-				{
-					var catNewDesc = $('#categoryDescripton').html();
-					$.ajax({
-						url		: 	BASE_URL+'/databox/update-cat-desc',
-						type	: 	"POST",
-						data	:	{categoryId:categoryId,catNewDesc:catNewDesc},
-						success	: function(data) {
-							$('#catDescChanged').val( 0 );
-							$('#viewPageChanged').val( 0 );
-							$('#pop-up-alerts').popUpWindow({action: "open"});	
-							$("#alert_header_meassge").html('');
-							$("#alert_meassage").html(saved_success);
-							$(".pop-up-content").css('position','fixed');
-							$(".pop-up-content").css('width','30%');
-						}
-					});
-				}
-				else if( parseInt($('#catDescChanged').val()) == parseInt("0") )
-				{
-					$('#viewPageChanged').val( 0 );
-					$('#pop-up-alerts').popUpWindow({action: "open"});	
-					$("#alert_header_meassge").html('');
-					$("#alert_meassage").html(saved_success);
-					$(".pop-up-content").css('position','fixed');
-					$(".pop-up-content").css('width','30%');
-				}
+	$.ajax({
+		url		: 	BASE_URL+'/databox/view-vertical',
+		type	: 	"POST",
+		data	:	{DivHtml:pubDddContainerHtml,catId:categoryId,incrId:incrId,user_id:$('#category_user_id').val()},
+		success	: function(data) {
+			$('#tempRemDiv').empty();
+		
+			if( parseInt($('#catDescChanged').val()) == parseInt("1") )
+			{
+				var catNewDesc = $('#categoryDescripton').html();
+				$.ajax({
+					url		: 	BASE_URL+'/databox/update-cat-desc',
+					type	: 	"POST",
+					data	:	{categoryId:categoryId,catNewDesc:catNewDesc},
+					success	: function(data) {
+						$('#catDescChanged').val( 0 );
+						$('#viewPageChanged').val( 0 );
+						$('#pop-up-alerts').popUpWindow({action: "open"});	
+						$("#alert_header_meassge").html('');
+						$("#alert_meassage").html(saved_success);
+						$(".pop-up-content").css('position','fixed');
+						$(".pop-up-content").css('width','30%');
+					}
+				});
 			}
-		});
-	}
+			else if( parseInt($('#catDescChanged').val()) == parseInt("0") )
+			{
+				$('#viewPageChanged').val( 0 );
+				$('#pop-up-alerts').popUpWindow({action: "open"});	
+				$("#alert_header_meassge").html('');
+				$("#alert_meassage").html(saved_success);
+				$(".pop-up-content").css('position','fixed');
+				$(".pop-up-content").css('width','30%');
+			}
+		}
+	});
 	
 	
 }

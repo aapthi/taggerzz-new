@@ -84,7 +84,7 @@ class UserTable
 		$type = 1;
 		
 		$select = $this->tableGateway->getSql()->select();
-		$select->columns(array( "u_user_id" => 'user_id',"email" => 'email',"display_name" => 'display_name',"disable_messageing" => 'disable_messageing',"userStatus" => 'status'));
+		$select->columns(array( "u_user_id" => 'user_id',"email" => 'email',"display_name" => 'display_name',"userStatus" => 'status'));
 		$select->join('user_details', 'user_details.user_id=user.user_id',array('*'),'left');	
 		$select->where('user.email="'.$userInfo['email'].'"');
 		$select->where('user.password="'.$userInfo['password'].'"');
@@ -115,10 +115,8 @@ class UserTable
 			}
 		}
 		$data = array(
-			'last_updated_date'     => date('Y-m-d H:i:s'),	
-			'display_name' 	        => $user['display_name'],
-			'hide_me' 	            => $user['hide_me'],
-			'disable_messageing'    => $user['disable_messaging'],
+			'last_updated_date'   => date('Y-m-d H:i:s'),	
+			'display_name' 	      => $user['display_name'],
 		);	
 		$row=$this->tableGateway->update($data, array('user_id' => $user['userId']));
 		return $row;
@@ -178,9 +176,6 @@ class UserTable
 		$select = $this->tableGateway->getSql()->select();
 		$select->where('type=1');
 		$select->where('status=1');
-		if($userId!="1"){
-		$select->where('disable_messageing=0');
-		}
 		$select->where->like( 'display_name', '%' . $search . '%' );
 		if($userId!=""){
 			$select->where('user.user_id NOT IN ('.$userId.')');
@@ -282,7 +277,6 @@ class UserTable
     {
 		$select = $this->tableGateway->getSql()->select();
 		$select->where('user.display_name="'.$email.'"');
-		$select->where('user.disable_messageing=0');
 		$resultSet = $this->tableGateway->selectWith($select);
 		$row = $resultSet;
 		return $row;

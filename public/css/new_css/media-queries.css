@@ -177,15 +177,8 @@ smaller than 560
 			margin-top:-15.50em;
 			margin-left:0.00em;
 			}
-/* Recent change 1/23/2016 */
-			@media screen and (-webkit-min-device-pixel-ratio:0) { 
- .ctrl_img_logo{
-			width:20.00em;						
-			margin-top:-21.50em;
-			margin-left:0.00em;
-	}
-}
-/* End */
+
+
 .divCenterText {
 	width:100%;
 	position:relative;

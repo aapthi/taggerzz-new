@@ -1,0 +1,19 @@
+<?php
+$socialSignIn = true;
+if ($socialSignIn) {
+        echo '<h3 class="sprited" >Login to Freshen Me</h3>
+		<div style="text-align: center; padding:15px 0px;"><img src="/images/site/connect-with.jpg" alt="" /></div>';
+        $socialSignIn = false;
+    }
+echo '<div>';
+foreach ($this->options->getEnabledProviders() as $provider) {
+    
+    echo  $this->socialSignInButton($provider, $this->redirect);
+}
+echo '</div><div style="text-align: center; padding:15px 0px;"><img src="/images/site/use-login-details.jpg" alt="" /></div>';
+
+if ($this->options->getSocialLoginOnly() == false) {
+    echo $this->zfcUserLogin;
+}
+?>
+<a id="close_x" class="close sprited" href="#">close</a>

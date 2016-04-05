@@ -51,11 +51,7 @@ class BlockUserTable
 	}
 	public function getBlockedIds(){
 		$select = $this->tableGateway->getSql()->select();
-		if(isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId!=''){
-			$userId = $_SESSION['usersinfo']->userId;
-		}else if(isset($_SESSION['Zend_Auth']->storage) && $_SESSION['Zend_Auth']->storage!=''){
-			$userId = $_SESSION['Zend_Auth']->storage;
-		}
+		$userId=$_SESSION['usersinfo']->userId;
 		$select->where(array('status' => 0));
 		$select->where
 		  ->NEST->

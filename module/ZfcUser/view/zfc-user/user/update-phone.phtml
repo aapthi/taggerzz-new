@@ -1,0 +1,6 @@
+<form action="/user/updatephone" method="post">
+	<input type="hidden" value="<? if( isset($this->social_email) ) { echo $this->social_email; } ?>" id="email" name="email" />
+	Area Prefix: <input type="text" id="areaprefix" name="areaprefix" />&nbsp;&nbsp;Phone : <input type="text" id="phone_number" name="phone_number" />
+	<input type="hidden" value="1" id="status" name="status" />	
+	<br><input type="button" value="Submit" onClick="Javascript:this.form.submit();" />	
+</form>

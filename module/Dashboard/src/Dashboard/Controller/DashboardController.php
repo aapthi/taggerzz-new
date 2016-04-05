@@ -287,9 +287,6 @@ class DashboardController extends AbstractActionController
 						$dashboard[$databoxes->category_id]['categoryRelevance']=$categoryRelevanceStatus;
 						$dashboard[$databoxes->category_id]['categoryWorth']=$categoryWorthStatus;
 						$dashboard[$databoxes->category_id]['user_id']=$databoxes->user_id;
-						$dashboard[$databoxes->category_id]['category_id']=$databoxes->category_id;
-						$dashboard[$databoxes->category_id]['category_image']=$databoxes->category_image;
-						$dashboard[$databoxes->category_id]['settingId']=$databoxes->setting_id;
 				}else{
 					$count=1;
 					if($databoxes->category_type==0){
@@ -303,10 +300,6 @@ class DashboardController extends AbstractActionController
 					$dashboard[$databoxes->category_id]['categoryRelevance']=$categoryRelevanceStatus;
 					$dashboard[$databoxes->category_id]['categoryWorth']=$categoryWorthStatus;
 					$dashboard[$databoxes->category_id]['user_id']=$databoxes->user_id;
-					$dashboard[$databoxes->category_id]['category_id']=$databoxes->category_id;
-					$dashboard[$databoxes->category_id]['category_image']=$databoxes->category_image;
-					$dashboard[$databoxes->category_id]['settingId']=$databoxes->setting_id;
-
 				}
 			}
 			$_SESSION['montageLinks']=$dashboard;
@@ -412,12 +405,12 @@ class DashboardController extends AbstractActionController
 				}
 				$imageName=$montageImage.'.'.$extension;
 			}else{
-				if(isset($_POST['page']) && $_POST['page']=='acc'){
+				if($_POST['page']=='acc'){
 					define('UPLOAD_DIR', './public/images/project/montageImages/');
 					if($_POST['imageId']!=0){
 						@unlink('./public/images/project/montageImages/'.$_POST['imageId']);
 					}
-				}else if(isset($_POST['page']) && $_POST['page']=='montage'){
+				}else if($_POST['page']=='montage'){
 					define('UPLOAD_DIR', './public/images/project/montageMainImage/');
 					if($_POST['imageId']!=0){
 						@unlink('./public/images/project/montageMainImage/'.$_POST['imageId']);

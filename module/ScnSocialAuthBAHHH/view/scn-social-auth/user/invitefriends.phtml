@@ -1,0 +1,336 @@
+<div id="fb-root"></div>
+<link href="/css/default.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
+if(!d.getElementById(id))
+{js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';
+fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
+<script type="text/javascript">
+function sendtoallInvitation()
+{
+	var selectedcount=$('.overflow_box :checkbox:checked').length;
+	if(selectedcount>='50')
+	{
+		alert("Please select 50 contacts only");return false;
+	}
+	if(selectedcount>'0')
+	{
+		var values = $('input:checkbox:checked.checkuser').map(function () {
+	  return this.value;
+		}).get();
+		<?if($this->provider=='Facebook'){?>
+			sendRequestToRecipients(values);		
+		<? }else if($this->provider=='Google'){ ?>
+			sendInvitation(values,'Google');
+		<? } else if($this->provider=='Twitter'){ ?>
+			sendInvitation(values,'Twitter');
+		<? }  ?>
+	}
+	else
+	{
+		alert("Please select atleast one contact");return false;
+	}
+//alert(values);return false;
+}
+$(function(){
+$("#selectall").on("change",function(){
+    $('.checkuser').prop("checked" , this.checked);
+});
+});
+function sendRequestToRecipients(userids) {
+  FB.ui({method: 'apprequests',
+    message: 'My Great Request',
+    to: userids
+  }, requestCallback);
+  return sendInvitation(userids,'Facebook');
+}
+function requestCallback(response)
+{
+    if(response && response.request_ids) {
+         // Here, requests have been sent, facebook gives you the ids of all requests
+         console.log(response);
+         location.href='/invitefriends';
+    } else {
+         // No requests sent, you can do what you want (like...nothing, and stay on the page).
+    }
+}
+function followuser(userid,displayname)
+{
+	$.ajax({			
+		type:"POST",
+		datatype:"json",
+		url:'/business/addfollowers',
+		data:{id:userid,type:'0',type:"0",follow_type:"1"},
+			success:function(data){
+						$.ajax({			
+							type:"POST",
+							url:'/scnauth/suggestedfollowersajax',
+								success:function(data){
+										alert("You are added as follower to "+displayname); 			
+										$("#followerslist").html(data);
+										}
+											
+						});
+					
+			}
+			});	
+}
+
+</script>
+<div>
+<div class="container_fb pad_t10">
+<ul class="inviteurFriendsts">
+<?if($this->provider==''){?>
+<li><a href="/invitefriends/Facebook"><img src="/images/invite-with-facebook.png"></a></li>
+<li><a href="/invitefriends/Google"><img src="/images/invite-with-google.png"></a></li>
+<li><a href="/invitefriends/twitter"><img src="/images/invite-with-twitter.png"></a></li></ul>
+<?}?>
+<div class="clearfix"></div>
+</div>
+<div class="container_fb" >
+<div class="floatleft inviteList">
+<div class="innerList innerLst1">
+<div id="friend_list">
+<div class="mar_t10 invite_friend">
+<?if(ucfirst($this->provider)=='Google' || ucfirst($this->provider=='Facebook') || ucfirst($this->provider=='Twitter')){
+	if(count($user_contacts))
+	{?>
+		
+		<div class="invite_box">
+		<input type="checkbox" id="selectall" name="selectall" style="max-width: 220px !important; "/>
+		<input type="text" id="search" name="search" placeholder="Type here to search"/>
+		<?if($this->provider=='twitter'){?>
+		<a class="zs-invite-fb-btn btn mar_t10 float_r"  href='https://twitter.com/intent/tweet?tweet_id=<? echo $user_contacts[0]->identifier;?>&url=http://freshme.com' >Invite</a>
+		<? } else { ?>
+		<a class="zs-invite-fb-btn btn mar_t10 float_r"  href='javascript:void(0);' onclick='sendtoallInvitation()' >Invite </a>
+		<? } ?>
+		</div>
+		<ul class="overflow_box fbInviteFriendsListUsr" style="margin-top: 15px;">
+			<?foreach($user_contacts as $key=>$contacts)
+			{
+					echo "<li>";
+				if($contacts->photoURL=='')
+				{
+					$photourl="/images/site/avatar-big.jpg";
+				}
+				else
+				{
+					$photourl=$contacts->photoURL;
+				}
+				if($contacts->displayName=='')
+				{
+					$friendname=$contacts->email;
+				}
+				else
+				{
+					$friendname=$contacts->displayName;
+				}						
+				$emailId=json_encode($contacts->identifier);
+				if(ucfirst($this->provider)=='Google'){?>
+				<? if (!array_key_exists((string)$contacts->identifier, $this->getfriendslists)){?>
+					<input type="checkbox" name="checkuser" id="checkuser[]" class="float_l checkuser" value="<? echo $contacts->identifier;?>"/>
+				<?}?>	
+					<a class="float_l" href="<? echo $contacts->profileURL;?>"><img class="zs-fb-thumb" src="<? echo $photourl;?>" /></a>
+					<!--<div class="invite-btn" >
+					<a class="zs-invite-fb-btn btn mar_t10 float_r"  href='javascript:void(0);' onclick='sendInvitation(<? echo $emailId;?>)' >Invite</a>
+					</div>-->
+					<div class="product">
+					<a class="" title="<? echo $friendname;?>" href="javascript:void(0);"><? echo $friendname;?></a>
+					</div>
+					<div class="clearfix"></div>
+				<?
+					//echo "<table><tr><td><input type='checkbox' id='check' name='check[]' value='".$contacts->identifier."'/></td><td><a href='".$contacts->profileURL."'><img src='".$photourl."'/></a></td><td>".$friendname."<br/><a href='javascript:void(0);' onclick='sendInvitation(".$emailId.")'>Invite</a></td></tr></table>";
+				}else if(ucfirst($this->provider)=='Facebook'){?>
+				<? if (!array_key_exists((string)$contacts->identifier, $this->getfriendslists)){?>
+					<input type="checkbox" name="checkuser" id="checkuser[]" class="float_l checkuser" value="<? echo $contacts->identifier;?>"/>
+				<?}?>
+					<a class="float_l" href=<? echo $contacts->profileURL;?>><img class="zs-fb-thumb" src=<? echo $photourl;?> /></a>
+					<!--<div class="invite-btn" >
+					<a class="zs-invite-fb-btn btn mar_t10 float_r"  href='javascript:void(0);' onclick="sendRequestToRecipients('<? //echo $contacts->identifier;?>')" >Invite</a>
+					</div>-->
+					<div class="product friendPic2Inv">
+					<a class="" title="<? echo $friendname;?>" href="javascript:void(0);"><? echo $friendname;?></a>
+					</div>
+					<div class="clearfix"></div>
+				<?}
+				else if(ucfirst($this->provider)=='Twitter')
+				{?>
+					<? if (!array_key_exists((string)$contacts->identifier, $this->getfriendslists)){?>
+						<input type="checkbox" name="checkuser" id="checkuser[]" class="float_l checkuser" value="<? echo $contacts->identifier;?>"/>
+					<?}?>
+					<a class="float_l" href=<? echo $contacts->profileURL;?>><img class="zs-fb-thumb" src=<? echo $photourl;?> /></a>
+					<!--<div class="invite-btn" >
+					<a class="zs-invite-fb-btn btn mar_t10 float_r"  href='https://twitter.com/intent/tweet?tweet_id=<? echo $contacts->identifier;?>&url=http://freshme.com' >Invite</a>
+					</div>-->
+					<div class="product">
+					<a class="" title="<? echo $friendname;?>" href="javascript:void(0);" class="invtdFrndName"><? echo $friendname;?></a>
+					</div>
+					<div class="clearfix"></div>
+				<?
+					//echo "<table><tr><td><a href='".$contacts->profileURL."'><img src='".$photourl."'/></a></td><td>".$friendname."<br/><a href='https://twitter.com/intent/tweet?tweet_id=".$contacts->identifier."&url=http://freshme.com'>Invite</a></td></tr></table>";
+				}?>
+				<?	echo "</li>";
+					echo '<div class="clearfix"></div>';
+			}
+		echo "</ul>";
+	}else{
+		echo "Contacts list is empty.";
+	}
+}else{
+	echo "<p>Please connect your Facebook account with FreshenMe to continue.<br/>
+	Your contacts will be imported and no invites will be sent at this step.<br/><br/>
+	<a href='/invitefriends/Facebook'><img src='/images/fb-invite-now.png'></a></p>";
+}
+?>
+</div>
+</div>
+</div>
+</div>
+
+<div style="min-height:250px;" class="floatleft2 invite_friend inviteList2">
+<div class="innerList innerLst2">
+	
+	<h2 class="page-heading" style="display: inline;">Follow top FreshenMe in <?php if(isset($_SESSION['ip_cityName'])){echo $_SESSION['ip_cityName'];} ?></h2>
+	<span id="followerslist">
+	<?php if(count($this->suggestfollowers)){?>
+	<!--<div class="right">
+		<a class="btn zs-follow-all-google-btn">Follow all</a>
+	</div>-->
+	<div class="clearfix"></div>
+	<ul class="">
+		<?php  foreach($this->suggestfollowers as $suggetedflwrs){?>
+		<li>
+			<?php if($suggetedflwrs->user_photo==''){?>
+				<img class="zs-fb-thumb float_l" width="30" src="/images/site/avatar_100_1x.png"/>
+			<?}else{?>
+				<img class="zs-fb-thumb float_l" width="30" src="/images/site/avatar_100_1x.png"/>
+			<? } ?>
+			<?php if(!in_array($suggetedflwrs->user_id,$this->myfolowers)){?>
+			<a title="Follow" class="zs-follow-user-button mar_t10 float_r" href="javascript:void(0)" onclick="followuser('<?php echo $suggetedflwrs->user_id?>','<?php echo ucfirst($suggetedflwrs->display_name)?>')">+</a>
+			<?} else { ?>
+			<a title="Follow" class=" mar_t10 float_r" href="javascript:void(0)"><img alt="Followed" title="Followed" style="width:16px" src="/images/site/icon-mark.png"/></a>
+			<? } ?>
+			<div class="product">
+			<?php echo ucfirst($suggetedflwrs->display_name)?>
+			<? if($suggetedflwrs->totalReviews<'25'  && $suggetedflwrs->followercount<'25'){
+				$followertype="Average";?>
+				<a href="/users/customerRatingBoard" class="rank-d mr5 rankLabel100">Enthusiast</a>
+			<?}else if($suggetedflwrs->totalReviews>'25' && $suggetedflwrs->followercount<'25'){
+				$followertype="Average";?>
+				<a href="/users/customerRatingBoard" class="rank-d mr5 rankLabel100">Enthusiast</a>
+			<?}else if($suggetedflwrs->totalReviews<'25' && $suggetedflwrs->followercount>'25'){
+				$followertype="Average";?>
+				<a href="/users/customerRatingBoard" class="rank-d mr5 rankLabel100">Enthusiast</a>
+			<!--END Average-->	
+			<?}else if($suggetedflwrs->totalReviews>='25' && $suggetedflwrs->followercount>='25'){
+				$followertype="Good";?>
+				<a href="/users/customerRatingBoard" class="rank-c mr5 rankLabel100">Performer</a>
+			<?}else if($suggetedflwrs->totalReviews<'45' && $suggetedflwrs->followercount<='54'){
+				$followertype="Good";?>
+				<a href="/users/customerRatingBoard" class="rank-c mr5 rankLabel100">Performer</a>
+			<!--END Good-->
+			<?}else if($suggetedflwrs->totalReviews>='45' && $suggetedflwrs->followercount>='55'){
+				$followertype="Very Good";?>
+				<a href="/users/customerRatingBoard" class="rank-b mr5 rankLabel100">Achiever</a>
+			<?}else if($suggetedflwrs->totalReviews<'100'  && $suggetedflwrs->followercount<='119'){
+				$followertype="Very Good";?>
+				<a href="/users/customerRatingBoard" class="rank-b mr5 rankLabel100">Achiever</a>
+			<!--END Very-->
+			<?}else if($suggetedflwrs->totalReviews>='100' && $suggetedflwrs->followercount>='120'){
+				$followertype="Expert";?>
+				<a href="/users/customerRatingBoard" class="rank-a mr5 rankLabel100">Accomplished</a> 				
+			<?}?>  			
+			<span class="at">
+			<?php echo ucfirst($suggetedflwrs->totalReviews)?> Reviews /
+			<span class="zs-user-follower " title="0 Followers">
+			<span class="zs-user-follower-count"><?php echo ucfirst($suggetedflwrs->followercount)?></span>
+			<span class="zs-user-follower-text">Follower(s)</span>
+			</span>
+			</span>
+			</div>
+		</li>
+		<?}?>
+		<div class="clearfix"></div>
+		</ul>
+		<?}?>
+	</span>
+	</div>
+	</div>
+	<div class="clearfix"></div>
+
+</div>
+<br/>
+
+
+
+
+
+<style>
+  .tooltip {
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+	border-bottom: 5px solid black !important;
+    font-size:12px;
+    height:100%;
+    width:100%;
+    padding:5%;
+    color:#eee;
+  }
+</style>
+<script>	
+function sendInvitation(email,provider)
+{	
+	$.ajax({			
+		type:"POST",
+		url:'../scnauth/send-invite',
+		data:{email:email,invite:'invite_friends',provider:provider},
+			success:function(data){				
+					if(data.output=='success'){	
+						if(provider!='Facebook'){
+							alert("You have successfully invited your friend(s)");
+						}
+						//setInterval(function(){
+							window.location='/invitefriends';
+						//},1000);						
+					}else{
+						alert("No sent Mail");return false;
+					}
+				}		
+	});		
+}		
+  //$("#follow a[title]").tooltip();
+$(document).ready(function () {
+	$('#search').keyup(function(event) {
+		var search_text = $('#search').val();
+		var rg = new RegExp(search_text,'i');
+		$('#friend_list .invite_friend .product').each(function(){
+ 			if($.trim($(this).html()).search(rg) == -1) {
+				$(this).parent().css('display', 'none');
+ 				$(this).css('display', 'none');
+				$(this).next().css('display', 'none');
+				$(this).next().next().css('display', 'none');
+			}	
+			else {
+				$(this).parent().css('display', '');
+				$(this).css('display', '');
+				$(this).next().css('display', '');
+				$(this).next().next().css('display', '');
+			}
+		});
+	});
+});
+ 
+$('#search_clear').click(function() {
+	$('#search').val('');	
+ 
+	$('#friend_list .invite_friend .product').each(function(){
+		$(this).parent().css('display', '');
+		$(this).css('display', '');
+		$(this).next().css('display', '');
+		$(this).next().next().css('display', '');
+	});
+});
+</script>

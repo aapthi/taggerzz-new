@@ -46,30 +46,24 @@
 					<input type="hidden" id="imageId" name="imageId" value="0" />
 					<input type="hidden" id="typeImageCrop" name="typeImageCrop" value="0" />
 					<input type="hidden" id="main_category" name="main_category" value="" />
-					<input type="hidden" id="email" name="email" />
-					<input type="hidden" id="description123" name="description123" />
 			</form>
 
             <section id="secCreatePrivateDatabox">
                 <div id="divCreatePrivateDataboxWrapper" class="divCreatePrivateDataboxWrapper">
                     <div class="heading">PRIVATE DATABOX</div>
                     <div class="divCreatePrivateDataboxHashtag">
-                        <span class="box_crete_color"><h4>Hashtag </h4></span>
+                        <span class="">Hashtag </span>
                         <input type="text" id='hashtagHolder' class='inptHashtag' placeholder="#hashtag" value="<?php if(isset($_SESSION['databox']->hashtag)){ echo $_SESSION['databox']->hashtag ;}?>" />
                     </div>
                     <div class="divCreatePrivateDataboxUniqueCode">
-                        <span class="box_crete_color"><h4>Unique Code</h4> </span>
+                        <span class="">Unique Code </span>
                         <input type="text" id='ucHolder' class='inptUniqueCode' placeholder="un1qu3c0d3" value="<?php if ( isset($this->secret_code) && trim($this->secret_code) != "" ){ echo $this->secret_code; }?>" /> <i onclick="refreshUcodeDatabox()" class="imgRefreshUniqueCode"></i>
                     </div>
                     <div class="divCreatePrivateDataboxTitle">
-                        <span class="box_crete_color"><h4>Title</h4> </span>
+                        <span class="">Title </span>
                         <input type="text" id='titleHolder' class='inptTitle' placeholder="Title of the collection" value="<?php if(isset($_SESSION['databox']->hashtitle)){ echo $_SESSION['databox']->hashtitle ;}?>" />
                     </div>
-					<div class="divCreatePrivateDataboxHashtag">
-                        <span class="box_crete_color"><h4>Description</h4> </span>
-                        <input type="text" id='DescriptionTitle' name="DescriptionTitle" class='inptTitle' placeholder="Description" value="<?php if(isset($this->categoryDescription)){ echo $this->categoryDescription;}?>" />
-                    </div>
-					<div class="divCreateHighlightHashtag"><span  class="box_crete_color"><b id="linksCountPlus"><h4 style="padding:0 6pt;"><?php echo $this->countOfLinks;?></b> Links</h4></span></div>
+					<div class="divCreateHighlightHashtag"><span style="padding:0 10px;">Links </span></div>
 					<div id="textBoxesGroup"><?
 							if( isset($this->boxLinksArr) && count($this->boxLinksArr) > 0 )
 							{
@@ -121,13 +115,13 @@
 						</div><?php } ?>
                     </div>
                     <div class="divCreatePrivateDataboxImage">
-                       <h4><span class="">Image </span><span class="smallFont dimFontColor"> ( related to your collection / sharing )</span></h4>
+                        <span class="">Image </span><span class="smallFont dimFontColor"> ( related to your collection / sharing )</span><br />
                         <button class="primaryButton" id="cropBoxImage">UPLOAD IMAGE</button>
                         <img src="<?php echo $tzCatImage; ?>" alt="" id="uploadedCatImage1" />
                     </div>
                     <div class="divCreatePrivateDataboxEmail">
-                        <span class=""><h4>Email-ID to receive private databox access details</h4></span><br />
-                        <input type='text' id="emailTo" name="emailTo" class="inptEmail" placeholder="example@123.com" />
+                        <span class="">Email-ID to receive private databox access details </span><br />
+                        <input type='text' class="inptEmail" placeholder="example@123.com" />
                     </div>
 					<div  id="dcHtmlDiv">
 						<a href="javascript:void(0)" id="databoxContinue" class="btnBlack right"/>Continue Customising</a></div>

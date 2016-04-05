@@ -154,7 +154,6 @@ class DataboxuserController extends AbstractActionController
 						$user_session->montage_image=$userRow->montage_image;
 						$user_session->montage_main_image=$userRow->montage_main_image;
 						$user_session->hinting_state=$userRow->hinting_state;
-						$user_session->disable_messageing=$userRow->disable_messageing;
 						$getPublicDataboxCount = $this->getUserCategoriesTable()->getPublicDataboxCount( $_SESSION['usersinfo']->userId);
 						$getPrivateDataboxCount = $this->getUserCategoriesTable()->getPrivateDataboxCount( $_SESSION['usersinfo']->userId);
 						$publicprivatetotalcount=count($getPublicDataboxCount->toArray()) + count($getPrivateDataboxCount->toArray());
@@ -328,7 +327,6 @@ class DataboxuserController extends AbstractActionController
 			$user_session->montage_image=$userRow->montage_image;
 			$user_session->montage_main_image=$userRow->montage_main_image;
 			$user_session->hinting_state=$userRow->hinting_state;
-			$user_session->disable_messageing=$userRow->disable_messageing;
 			$user_session->totalcount=$publicprivatetotalcount;
 			$user_session->userMessagesCount=$userMessagesCount;
 			$user_session->collectionsCount=$collectionsCount;
@@ -362,7 +360,6 @@ class DataboxuserController extends AbstractActionController
 			$user_session->montage_image=$userRow->montage_image;
 			$user_session->montage_main_image=$userRow->montage_main_image;
 			$user_session->hinting_state=$userRow->hinting_state;
-			$user_session->disable_messageing=$userRow->disable_messageing;
 			$user_session->totalcount=$publicprivatetotalcount;
 			$user_session->userMessagesCount=$userMessagesCount;
 			$user_session->collectionsCount=$collectionsCount;
@@ -765,7 +762,6 @@ class DataboxuserController extends AbstractActionController
 			$user_session->montage_image=$userRow->montage_image;
 			$user_session->montage_main_image=$userRow->montage_main_image;
 			$user_session->hinting_state=$userRow->hinting_state;
-			$user_session->disable_messageing=$userRow->disable_messageing;
 			$userCollectedLinksCount= $this->getUserCollectionsTable()->getCollectedLinksCount($userRow->user_id);
 			$collectionsCount=count($userCollectedLinksCount->toArray());
 			$getBlockUserDetails= $this->getBlockUserTable()->getBlockedIds();
@@ -860,14 +856,14 @@ class DataboxuserController extends AbstractActionController
 			if(count($getLastActivityLoggedU)>0){
 				$time_diff_Lu = time() - strtotime($getLastActivityLoggedU->activity_dt);
 			}
-			$minutes_lu = floor($time_diff_Lu / 10);
+			$minutes_lu = floor($time_diff_Lu / 60);
 		}
 		$getLastActivityDataboxU = $userpointsTable->lastActivity($uid);
 		$time_diff_Luu = 0;
 		if(count($getLastActivityDataboxU)>0){
 			$time_diff_Luu = time() - strtotime($getLastActivityDataboxU->activity_dt);
 		}
-		$minutes_luu = floor($time_diff_Luu / 10);
+		$minutes_luu = floor($time_diff_Luu / 60);
 		if($minutes_lu!='0'){
 			if(($minutes_lu>1) && ($minutes_luu>1)){
 				$lastInsertedId = $userpointsTable->addUserPoints($uid,$aid);
@@ -1020,16 +1016,12 @@ class DataboxuserController extends AbstractActionController
 			$getUserMessages= $this->getUserMessagesTable()->getUserMessages( $_SESSION['usersinfo']->userId,$frnds)->toArray();
 			//End new added
 			//echo "<pre>";print_r($getUserMessages);
-			//newly added by sivareddy
-			$userInfo = $this->getUserTable()->getUser( $_SESSION['usersinfo']->userId );
-
 			
 			return $view = new ViewModel(array(
 				'baseUrl' 						=> $baseUrl,
 				'basePath' 						=> $basePath,
 				'allDataboxes' 				    => $allDataboxes,
-				'getUserMessages' 				=> $getUserMessages,
-				'userInfo' 				        => $userInfo
+				'getUserMessages' 				=> $getUserMessages
 			));
 			
 	}
@@ -1068,10 +1060,10 @@ class DataboxuserController extends AbstractActionController
 			$userRow = $this->getUserTable()->getUser( $_SESSION['usersinfo']->userId );
 			$getPublicDataboxCount = $this->getUserCategoriesTable()->getPublicDataboxCount( $_SESSION['usersinfo']->userId);
 			$getPrivateDataboxCount = $this->getUserCategoriesTable()->getPrivateDataboxCount( $_SESSION['usersinfo']->userId);
-			$getHiglightDataboxCount = $this->getUserCategoriesTable()->getHighlightDataboxCount( $_SESSION['usersinfo']->userId);
 			$getTotalLinks = $this->getUserCategoriesTable()->getTotalLinks( $_SESSION['usersinfo']->userId);
 			$votesCountRow = $this->getRelevanceWorthVoteTable()->getVotesUpDownCount();
 			$keywordsRow = $this->getUserCategoriesTable()->getAllKeywords();
+			//echo '<pre>'; print_r($keywordsRow); exit;
 			$totalKeywords = 0;
 			if( $keywordsRow->count() )
 			{
@@ -1089,7 +1081,6 @@ class DataboxuserController extends AbstractActionController
 				'basePath' 						=> $basePath,
 				'userDetails' 					=> $userRow,
 				'getPublicDataboxCount' 		=> $getPublicDataboxCount->count(),
-				'getHiglightDataboxCount' 		=> $getHiglightDataboxCount->count(),
 				'publicDataboxes' 		        => $getPublicDataboxCount,
 				'privateDataboxes' 		        => $getPrivateDataboxCount,
 				'getPrivateDataboxCount' 		=> $getPrivateDataboxCount->count(),

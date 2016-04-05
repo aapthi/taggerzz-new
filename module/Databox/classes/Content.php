@@ -107,7 +107,6 @@ class Content
 			$urlExtension = $urlExtArr[1];
 		}
 		// Dileep On 09-12-2015
-		
 		$urlsArray = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.com','360.cn','about.com','abs-cbnnews.com',
 'accuweather.com','adcash.com','addthis.com','adf.ly','adobe.com','alegro.pl','alibaba.com','aliexpress.com','alipay.com',
 'allrecipes.com','amazon.ca','amazon.cn','amazon.co.jp','amazon.co.uk','amazon.com','amazon.de','amazon.es','amazon.fr',
@@ -167,6 +166,22 @@ class Content
 				$images = $imageName;
 			}
 		}
+		
+		// End
+		
+		// if (strpos($url, "facebook.com") !== false) {
+			// $taggerzzImageInserted = true;
+            // $images = "facebook";
+        // }
+		// else if (strpos($url, "twitter.com") !== false) {
+			// $taggerzzImageInserted = true;
+            // $images = "twitter";
+        // }
+		// else if (strpos($url, "plus.google.com") !== false) {
+			// $taggerzzImageInserted = true;
+            // $images = "gplus";
+        // }
+		
 		if( $urlExtension == "pdf" )
 		{
 			$taggerzzImageInserted = true;

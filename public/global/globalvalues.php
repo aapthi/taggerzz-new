@@ -31,13 +31,13 @@ global $homePageYes;
 $homePageYes="";
 
 global $facebook_login;
-$facebook_login='/taggerzz/user/login/facebook';
+$facebook_login='/user/login/facebook';
 
 global $google_login;
-$google_login='/taggerzz/user/login/google';
+$google_login='/user/login/google';
 
 global $facebookAppId;
-$facebookAppId='608131635971702';
+$facebookAppId='808558082540988';
 /*
 $dashBoardSubject = "TAGGERZZ DASHBOARD";
 $dashBoardMessage = '<body>
@@ -210,7 +210,7 @@ $databoxCreatedSubject = "Taggerzz Category Created.";
 $databoxCreatedMessage = '<body style="margin: 0;padding: 0;">
        <div style="position: relative;margin-left: auto;margin-right: auto;width: 620px;height: 500px;overflow: hidden;z-index:0;border:1px solid #ddd; box-shadow:0 2px 2px rgba(0, 0, 0, 0.3);">
                <div style="border-bottom:1px solid #ddd;padding:10px 10px;background:#f7f7f7;">
-                       <img src="http://taggerzz.com/public/images/Layer3.png">
+                       <img style="width:100%;" src="https://taggerzz.com/public/img/imgLogo.png">
                </div>
                <div style="position:relative;padding:20px 30px;">
                        <div style="font-size:15px;">Dear   &nbsp;<FULLNAME>,</div>
@@ -220,7 +220,7 @@ $databoxCreatedMessage = '<body style="margin: 0;padding: 0;">
                                <p style="font-family:sinkin_sans500_medium, sans-serif;font-weight:bold;">Your accesible Hashtag :   &nbsp;<HASHNAME></p>
                                <p style="font-family:sinkin_sans500_medium, sans-serif;font-weight:bold;"><SECURITYCODE></p>                
                        </div> 
-                       <div class=""><img src="http://taggerzz.com/public/images/Taggerzzcom.png"/></div>
+                       <div class=""><img style="width:100%;" src="https://taggerzz.com/public/img/imgLogo.png"/></div>
                </div>
        </div>
 </body>';
@@ -230,7 +230,7 @@ $accessDetailsSubject = "Taggerzz Accessing Details.";
 $accessDetailsMessage = '<body style="margin: 0;padding: 0;">
        <div style="position: relative;margin-left: auto;margin-right: auto;width: 620px;height: 500px;overflow: hidden;z-index:0;border:1px solid #ddd; box-shadow:0 2px 2px rgba(0, 0, 0, 0.3);">
                <div style="border-bottom:1px solid #ddd;padding:10px 10px;background:#f7f7f7;">
-                       <img src="http://taggerzz.com/public/images/Layer3.png">
+                       <img style="width:100%;" src="https://taggerzz.com/public/img/imgLogo.png">
                </div>
                <div style="position:relative;padding:20px 30px;">
                        <div style="font-size:15px;">Dear   &nbsp;<FULLNAME>,</div>
@@ -240,7 +240,7 @@ $accessDetailsMessage = '<body style="margin: 0;padding: 0;">
                                <p style="font-family:sinkin_sans500_medium, sans-serif;font-weight:bold;"><SECURITYCODE></p> 
 							   <p style="font-family:sinkin_sans500_medium, sans-serif;font-weight:bold;">Hashtag Name:   &nbsp;<HASHNAME></p>
                        </div> 
-                       <div class=""><img src="http://taggerzz.com/public/images/Taggerzzcom.png"/></div>
+                       <div class=""><img style="width:100%;" src="https://taggerzz.com/public/img/imgLogo.png"/></div>
                </div>
        </div>
 </body>';
@@ -248,7 +248,7 @@ $dashBoardSubject = "TAGGERZZ DASHBOARD";
 $dashBoardMessage = '<body style="margin: 0;padding: 0;">
        <div style="position: relative;margin-left: auto;margin-right: auto;width: 620px;height: 500px;overflow: hidden;z-index:0;border:1px solid #ddd; box-shadow:0 2px 2px rgba(0, 0, 0, 0.3);">
                <div style="border-bottom:1px solid #ddd;padding:10px 10px;background:#f7f7f7;">
-                       <img src="http://taggerzz.com/public/images/Layer3.png">
+                       <img style="width:100%;" src="https://taggerzz.com/public/img/imgLogo.png">
                </div>
                <div style="position:relative;padding:20px 30px;">
                        <div style="font-size:15px;">Dear   &nbsp;<FULLNAME>,</div>
@@ -257,7 +257,7 @@ $dashBoardMessage = '<body style="margin: 0;padding: 0;">
                                <p style="font-family:sinkin_sans500_medium, sans-serif;font-weight:bold;">Security Code&nbsp;&nbsp;<SECURITYCODE></p> 
 							   <p style="font-family:sinkin_sans500_medium, sans-serif;font-weight:bold;">Hashtag Name:   &nbsp;<HASHNAME></p>
                        </div> 
-                       <div class=""><img src="http://taggerzz.com/public/images/Taggerzzcom.png"/></div>
+                       <div class=""><img style="width:100%;" src="https://taggerzz.com/public/img/imgLogo.png"/></div>
                </div>
        </div>
 </body>';
@@ -267,7 +267,7 @@ $regSubject= "Registration confirmation";
 $regMessage='<body style="margin: 0;padding: 0;">
        <div style="position: relative;margin-left: auto;margin-right: auto;width: 620px;height: 500px;overflow: hidden;z-index:0;border:1px solid #ddd; box-shadow:0 2px 2px rgba(0, 0, 0, 0.3);">
                <div style="border-bottom:1px solid #ddd;padding:10px 10px;background:#f7f7f7;">
-                       <img src="http://taggerzz.com/public/images/Layer3.png">
+                       <img style="width:100%;" src="https://taggerzz.com/public/img/imgLogo.png">
                </div>
                <div style="position:relative;padding:20px 30px;">
                        <div style="font-size:15px;">Dear   &nbsp;<FULLNAME>,</div>
@@ -275,7 +275,7 @@ $regMessage='<body style="margin: 0;padding: 0;">
                                <p style="font-family: sinkin_sans500_medium, sans-serif;font-size:16px">Please click below link to email conformation</p>
                                <p style="font-family:sinkin_sans500_medium, sans-serif;font-weight:bold;"><a href="<REGLINK>"><REGLINK></a></p> 
                        </div> 
-                       <div class=""><img src="http://taggerzz.com/public/images/Taggerzzcom.png"/></div>
+                       <div class=""><img style="width:100%;" src="https://taggerzz.com/public/img/imgLogo.png"/></div>
                </div>
        </div>
 </body>';
@@ -285,7 +285,7 @@ $deactiveSubject= "TAGGERZZ";
 $deactiveMessage='<body style="margin: 0;padding: 0;">
        <div style="position: relative;margin-left: auto;margin-right: auto;width: 620px;height: 500px;overflow: hidden;z-index:0;border:1px solid #ddd; box-shadow:0 2px 2px rgba(0, 0, 0, 0.3);">
                <div style="border-bottom:1px solid #ddd;padding:10px 10px;background:#f7f7f7;">
-                       <img src="http://taggerzz.com/public/images/Layer3.png">
+                       <img style="width:100%;" src="https://taggerzz.com/public/img/imgLogo.png">
                </div>
                <div style="position:relative;padding:20px 30px;">
                        <div style="font-size:15px;">Dear   &nbsp;<FULLNAME>,</div>
@@ -293,7 +293,7 @@ $deactiveMessage='<body style="margin: 0;padding: 0;">
                                <p style="font-family: sinkin_sans500_medium, sans-serif;font-size:16px">Please click below link to relogin . Then your account is Activated</p>
                                <p style="font-family:sinkin_sans500_medium, sans-serif;font-weight:bold;"><a href="<REGLINK>"><REGLINK></a></p> 
                        </div> 
-                       <div class=""><img src="http://taggerzz.com/public/images/Taggerzzcom.png"/></div>
+                       <div class=""><img style="width:100%;" src="https://taggerzz.com/public/img/imgLogo.png"/></div>
                </div>
        </div>
 </body>';
@@ -301,14 +301,14 @@ $pwdChangedSubject = "Your Taggerzz Password Changed.";
 $pwdChangedMessage = '<body style="margin: 0;padding: 0;">
        <div style="position: relative;margin-left: auto;margin-right: auto;width: 620px;height: 500px;overflow: hidden;z-index:0;border:1px solid #ddd; box-shadow:0 2px 2px rgba(0, 0, 0, 0.3);">
                <div style="border-bottom:1px solid #ddd;padding:10px 10px;background:#f7f7f7;">
-                       <img src="http://taggerzz.com/public/images/Layer3.png">
+                       <img style="width:100%;" src="https://taggerzz.com/public/img/imgLogo.png">
                </div>
                <div style="position:relative;padding:20px 30px;">
                        <div style="font-size:15px;">Dear   &nbsp;<FULLNAME>,</div>
                        <div style="width: 620px;height: 360px;display:table-cell;vertical-align:middle;text-align:center;">        
                                <p style="font-family: sinkin_sans500_medium, sans-serif;font-size:16px"><MESSAGE></p>
                        </div> 
-                       <div class=""><img src="http://taggerzz.com/public/images/Taggerzzcom.png"/></div>
+                       <div class=""><img style="width:100%;" src="https://taggerzz.com/public/img/imgLogo.png"/></div>
                </div>
        </div>
 </body>';
@@ -316,7 +316,7 @@ $fpPwdSubject = "Taggerzz Password Reset Link.";
 $fpPwdMessage = '<body style="margin: 0;padding: 0;">
        <div style="position: relative;margin-left: auto;margin-right: auto;width: 620px;height: 500px;overflow: hidden;z-index:0;border:1px solid #ddd; box-shadow:0 2px 2px rgba(0, 0, 0, 0.3);">
                <div style="border-bottom:1px solid #ddd;padding:10px 10px;background:#f7f7f7;">
-                       <img src="http://taggerzz.com/public/images/Layer3.png">
+                       <img style="width:100%;" src="https://taggerzz.com/public/img/imgLogo.png">
                </div>
                <div style="position:relative;padding:20px 30px;">
                        <div style="font-size:15px;">Dear   &nbsp;<FULLNAME>,</div>
@@ -324,7 +324,7 @@ $fpPwdMessage = '<body style="margin: 0;padding: 0;">
                                <p style="font-family: sinkin_sans500_medium, sans-serif;font-size:16px"><MESSAGE></p>
 							   <p style="font-family:sinkin_sans500_medium, sans-serif;font-weight:bold;"><PASSWORDLINK></p>
                        </div> 
-                       <div class=""><img src="http://taggerzz.com/public/images/Taggerzzcom.png"/></div>
+                       <div class=""><img style="width:100%;" src="https://taggerzz.com/public/img/imgLogo.png"/></div>
                </div>
        </div>
 </body>';
@@ -332,7 +332,7 @@ $iniviteFriendSubject = "Inivite to Taggerzz.";
 $iniviteFriendMessage = '<body style="margin: 0;padding: 0;">
        <div style="position: relative;margin-left: auto;margin-right: auto;width: 620px;height: 500px;overflow: hidden;z-index:0;border:1px solid #ddd; box-shadow:0 2px 2px rgba(0, 0, 0, 0.3);">
                <div style="border-bottom:1px solid #ddd;padding:10px 10px;background:#f7f7f7;">
-                       <img src="http://taggerzz.com/public/images/Layer3.png">
+                       <img style="width:100%;" src="https://taggerzz.com/public/img/imgLogo.png">
                </div>
                <div style="position:relative;padding:20px 30px;">
                        <div style="font-size:15px;">Dear   &nbsp;Friend,</div>
@@ -340,7 +340,7 @@ $iniviteFriendMessage = '<body style="margin: 0;padding: 0;">
                                <p style="font-family: sinkin_sans500_medium, sans-serif;font-size:16px"><MESSAGE></p>
 							   <p style="font-family:sinkin_sans500_medium, sans-serif;font-weight:bold;"><SITELINK></p>
                        </div> 
-                       <div class=""><img src="http://taggerzz.com/public/images/Taggerzzcom.png"/></div>
+                       <div class=""><img style="width:100%;" style="width:100%;" src="https://taggerzz.com/public/img/imgLogo.png"/></div>
                </div>
        </div>
 </body>';

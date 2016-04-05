@@ -38,7 +38,6 @@ class UserCategoriesTable
 				'category_id' 	 => $userCatDetails["category_id"], 
 				'user_id' 	     => $userId, 
 				'category_title' => $userCatDetails["categoryTitle"], 
-				'category_description'  => $userCatDetails["description123"], 
 				'user_hashname'  => $userCatDetails["catHashTag"], 
 				'category_type'  => $userCatDetails["categoryType"], 
 				'secret_code'  	 => $userCatDetails["uniqueCode"], 
@@ -61,8 +60,7 @@ class UserCategoriesTable
 			$data = array(
 				'category_id' 	 => $userCatDetails["category_id"], 
 				'user_id' 	     => $userId, 
-				'category_title' => $userCatDetails["categoryTitle"],
-				'category_description'  => $userCatDetails["description123"],
+				'category_title' => $userCatDetails["categoryTitle"], 
 				'user_hashname'  => $userCatDetails["catHashTag"], 
 				'category_type'  => $userCatDetails["categoryType"], 
 				'secret_code'  	 => $userCatDetails["uniqueCode"], 
@@ -130,16 +128,6 @@ class UserCategoriesTable
 		$select->where('user_categories.category_type="1"');
 		$select->where('user_categories.status="1"');
 		$select->where('category.category_highlight="1"');
-		$resultSet = $this->tableGateway->selectWith($select);
-		return $resultSet;
-	}
-	public function getHighlightDataboxCount($userId){
-		$select = $this->tableGateway->getSql()->select();
-		$select->join('category', 'user_categories.category_id=category.category_id',array('category_name','category_image'),'left');
-		$select->where('user_categories.user_id="'.$userId.'"');
-		$select->where('user_categories.category_type="0"');
-		$select->where('user_categories.status="1"');
-		$select->where('category.category_highlight="2"');
 		$resultSet = $this->tableGateway->selectWith($select);
 		return $resultSet;
 	}
@@ -760,8 +748,6 @@ class UserCategoriesTable
 		$data = array(
 			'user_hashname'  => $userCatDetails["catHashTag"], 
 			'category_title' => $userCatDetails["categoryTitle"], 
-			'secret_code'    => $userCatDetails["uniqueCode"], 
-			'category_description' => $userCatDetails["category_description"], 
 			'mature_content' 	 => $userCatDetails["matureContent"], 
 			'not_safe_for_work'  => $userCatDetails["notSafeForWork"], 
 			'meta_tags' 	 => $userCatDetails["metaTags"], 
@@ -786,23 +772,5 @@ class UserCategoriesTable
 		$resultSet = $this->tableGateway->selectWith($select);
 		$row = $resultSet;
 		return $row;
-	}
-	public function updateDataboxHashNames( $userCatDetails )
-	{	
-		$data = array(
-			'user_hashname'  => "#".$userCatDetails["text"], 
-			'updated_date' 	 => date('Y-m-d H:i:s')
-		);	
-		$result=$this->tableGateway->update($data, array('category_id' => $userCatDetails['categoryId']));
-		return 	$result;
-	}
-	public function updateDataboxHashTitle( $userCatDetails )
-	{	
-		$data = array(
-			'category_title' => $userCatDetails["text"], 
-			'updated_date' 	 => date('Y-m-d H:i:s')
-		);	
-		$result=$this->tableGateway->update($data, array('category_id' => $userCatDetails['categoryId']));
-		return 	$result;
 	}
 }

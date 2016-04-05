@@ -33,7 +33,7 @@
 			<?if($_SESSION['usersinfo']->montage_hash_name==""){
 			$montage_hash_name="";
 			?>
-			<div  class=""><h1>#<a href="#">MONTAGE</a>
+			<div  class=""><h1>#MONTAGE
 			<a href="javascript:void(0);" onclick="montagePopUp(1)" class="add_new_pick">ADD YOURS</a>
 			</h1></div>
 			<?}else{
@@ -45,7 +45,7 @@
 			}
 			?>
 			
-			<div ><h1>#<a href="#"><?echo $montageLength;?></a>
+			<div ><h1>#<?echo $montageLength;?>
 				<a href="javascript:void(0);" onclick="montagePopUp(1)" title="Edit hash name" class="add_new_pick">EDIT</a>
 			</h1></div>
 			<?}?>
@@ -58,12 +58,12 @@
 			<?if($_SESSION['usersinfo']->montage_title==""){
 			$montage_title="";
 			?>
-			<h3><a href="javascript:void(0);" onclick="montagePopUp(2)" class="add_title">Add your Title here</a></h3>
+			<h2><a href="javascript:void(0);" onclick="montagePopUp(2)" class="add_title">Add your Title here</a></h2>
 			<?}else{
 			$montage_title=$_SESSION['usersinfo']->montage_title;
 			?>
-			<h3><span><?echo $_SESSION['usersinfo']->montage_title;?><a href="javascript:void(0);" onclick="montagePopUp(2)" class="add_new_pick">&nbsp;&nbsp;&nbsp;&nbsp;
-			EDIT TITLE</a></span></h3>
+			<h2><span><?echo $_SESSION['usersinfo']->montage_title;?><a href="javascript:void(0);" onclick="montagePopUp(2)" class="add_new_pick">&nbsp;&nbsp;&nbsp;&nbsp;
+			EDIT TITLE</a></span></h2>
 			<?}
 			if( $montage_title != "" )
 			{
@@ -98,7 +98,7 @@
 			$montage_paragraph="";
 			?>
 			<div class="profile_text_empty">
-			<div id="montagPara_Div_id1" class="montage_Paragraph_show"><a href="javascript:void(0);" title="Edit your paragraph" onclick="montagePopUp(3)"><img src="<?php echo $basePath; ?>/images/social_media/profile_empty.png" class="edit_paragraph_mon_empty"/></a><p>Set your Profile Description</p></div>
+			<div id="montagPara_Div_id1" class="montage_Paragraph_show"><a href="javascript:void(0);" title="Edit your paragraph" onclick="montagePopUp(3)"><img src="<?php echo $basePath; ?>/images/social_media/profile_empty.png" class="edit_paragraph_mon_empty"/></a><p>No Writing competition needed here</p></div>
 			</div>
 			<?}else{
 			$montage_paragraph=$_SESSION['usersinfo']->montage_paragraph;
@@ -117,41 +117,14 @@
 	<div class="body_mar_b tmar_t20">
 		<div class="body_mar_b">
 			<?php if($this->dashboard!=""){?>
-			<?php foreach($this->dashboard as $key=>$dashboard){$count=0;
-				$viewUrl = "";
-				if( isset($_SESSION['usersinfo']) )
-				{
-					if($dashboard['settingId']==3){
-						$viewUrl = "post-vertical";
-					}else{
-						$viewUrl = "post-horizontal";
-					}
-				}
-				else
-				{
-					if($dashboard['settingId']==3){
-						$viewUrl = "pre-vertical";
-					}else{
-						$viewUrl = "pre-horizontal";
-					}
-				}
-				$displayCustomizationUrl = $baseUrl;
-				$catTitles = str_replace( "-","~",$dashboard["category_title"] );
-				$catTitle = str_replace( " ","-",$catTitles );
-				$catHashName = substr( $dashboard["user_hashname"],1 );
-				$catImageUrl=explode(".",$dashboard["category_image"]);
-				$userImageUrl=$dashboard["image"];
-				$catImageUrll=$catImageUrl[0];
-				$displayCustomizationUrl .= "/databox/" . $viewUrl . "/" . $dashboard["category_id"] . "+" . $catImageUrll . "+" . $catHashName . "+" . $catTitle;
-				//echo "<pre>";print_r($displayCustomizationUrl);exit;
-			?>
+			<?foreach($this->dashboard as $key=>$dashboard){$count=0;?>
 			<input type="hidden" id="totalCount<?echo $key;?>" name="totalCount<?echo $key;?>" value="<?echo $dashboard['totalLinks'];?>">
 			<input type="hidden" id="presentCount<?echo $key;?>" name="presentCount<?echo $key;?>" value="7">
 			<div class="tg_montage_t montage_brg_box">
 				<div class="montage_box_brg_title">
 					<div class="text_row">
-						<div class="float_l"><h3><a href="<?php echo $displayCustomizationUrl;?>"><?echo $dashboard['user_hashname']?><span>&nbsp;(<?echo $dashboard['totalLinks']?>/100)</span></a></h3></div>
-						<div class="float_r"><P class="text_sub_title"><a href="<?php echo $displayCustomizationUrl;?>"><?echo $dashboard['category_title']?></a></P></div>
+						<div class="float_l"><h3><?echo $dashboard['user_hashname']?><span>&nbsp;(<?echo $dashboard['totalLinks']?>/100)</span></h3></div>
+						<div class="float_r"><P class="text_sub_title"><?echo $dashboard['category_title']?></P></div>
 					</div><div class="clearfix"></div>
 				</div>
 				<div class="pos_relative">

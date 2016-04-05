@@ -1,0 +1,49 @@
+<div class="tdatabox_reviews">
+<div class="databox_reviews_w97">
+	<h2>COMMENTS</h2>
+	<?php if(isset($_SESSION['usersinfo']->userId)){?>
+	<div class="">
+		<textarea id="message" class="" placeholder='Enter your comment'></textarea>
+		<div class="comment_btn_bg">
+			<button id="commentSend" onClick="insertComment()" class="btn">COMMENT SEND</button>
+			<input type="hidden" id="hidSendComment" value="0" >
+		</div>
+	</div>
+	<?php } ?>
+	<div id="commentsList">
+	<?php if(count($this->getComments)!=0){$i=0;foreach($this->getComments as $key=>$getComments)
+		{
+		if($i==0){
+		?><input type="hidden" id="hidCommentId" value="<?php echo $getComments->databox_comment_id;?>">
+		<?php
+		}
+			$i++;
+
+		?>
+		<div id="comment<?php echo $getComments->databox_comment_id;?>"class="">
+			<div class="row tmar_b20">
+			<div class="rimg_left"><img  width="55px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $getComments->montage_image; ?>" alt="" class="height100" /></div>
+			<div class="rcontenleft">
+				<div class="name_c"><?php echo $getComments->display_name; ?></div>
+				<span id="commText<?php echo $getComments->databox_comment_id;?>"><?php echo $getComments->databox_comment; ?></span>
+				
+				<?php if( isset($_SESSION['usersinfo']->userId)){if($getComments->comment_user_id==$_SESSION['usersinfo']->userId){?><br/>
+				<div class="comment_btns_pos_ab">
+					<button class="comment_edit_btn" onClick="editComment('<?php echo $getComments->databox_comment_id?>','<?php echo $getComments->databox_comment; ?>')">Edit</button> 
+					
+					<button id="deleteComment<?php echo $getComments->databox_comment_id;?>" 
+					class="comment_delete_btn" onClick="deletedComment(<?php echo $getComments->databox_comment_id;?>)">Delete </button>
+				</div>
+			</div>
+			<?php }}else{}?>
+		</div>
+		<div class="clearfix"></div>
+			</div>
+		<?php
+		}
+		}
+		?>
+					
+	</div>
+</div>
+</div>

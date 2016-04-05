@@ -45,25 +45,19 @@
 					<input type="hidden" id="imageId" name="imageId" value="0" />
 					<input type="hidden" id="typeImageCrop" name="typeImageCrop" value="0" />
 					<input type="hidden" id="main_category" name="main_category" value="" />
-					<input type="hidden" id="description123" name="description123" />
-
 			</form>
             <section id="secCreateHighlight">
                 <div id="divCreateHighlightWrapper" class="divCreateHighlightWrapper">
                     <div class="heading">ADD LINKS</div>
                     <div class="divCreateHighlightHashtag">
-                        <span><h4>Hashtag</h4></span>
+                        <span>Hashtag </span>
                         <input type="text" id="hashtagHolder" class='inptHashtag' placeholder="#hashtag" value="<?php if(isset($_SESSION['databox']->hashtag)){ echo $_SESSION['databox']->hashtag ;}?>" />
                     </div>
                     <div class="divCreateHighlightTitle">
-                        <span><h4 style="margin:0">Title</h4> </span>
+                        <span>Title </span>
                         <input type="text" id='titleHolder' class='inptTitle' placeholder="Title of the collection" value="<?php if(isset($_SESSION['databox']->hashtitle)){ echo $_SESSION['databox']->hashtitle ;}?>" />
                     </div>
-					<div class="divCreateHighlightHashtag">
-                        <span><h4>Description</h4> </span>
-                        <input type="text" id='DescriptionTitle' name="DescriptionTitle" class='inptTitle' placeholder="Description" value="<?php if(isset($this->categoryDescription)){ echo $this->categoryDescription;}?>" />
-                    </div>
-					 <div class="divCreateHighlightHashtag"><span class="box_crete_color" ><h4 style="padding:0 6pt;"><?php echo $this->countOfLinks;?></b> Links</h4> </span></div>
+					 <div class="divCreateHighlightHashtag"><span style="padding:0 10px;">Links </span></div>
 					<div id="textBoxesGroup"><?
 							if( isset($this->boxLinksArr) && count($this->boxLinksArr) > 0 )
 							{
@@ -115,12 +109,12 @@
 						</div><?php } ?>
                     </div>
                     <div class="divCreateHighlightImage">
-                       <h4><span class="">Image </span><span class="smallFont dimFontColor"> ( related to your collection / sharing )</span></h4>
+                        <span class="">Image </span><span class="smallFont dimFontColor"> ( related to your collection / sharing )</span><br />
                         <button class="primaryButton" id="cropBoxImage">UPLOAD IMAGE</button>
                         <img src="<?php echo $tzCatImage; ?>" alt="" id="uploadedCatImage1"/>
                     </div>
 					<div class="divCreateHighlightImage">
-						<span class=""><h4>Categorizing Keywords for your Databox/Highlight</h4></span><br />
+						<span class="">Categorize your databox</span><br />
                         <input type='text' id="boxCategory" class="inptContentCategory input_pad5" placeholder="Ex:- 'Space Travel Astronomers' " value="<?php if ( isset($this->metaTags) && trim($this->metaTags) != "" ){ echo $this->metaTags; }?>" />
 					</div>
                     <div class="">

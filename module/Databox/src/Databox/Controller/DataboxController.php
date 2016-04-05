@@ -155,12 +155,11 @@ class DataboxController extends AbstractActionController
 	}
 	//Upload Bookmarks Action
 	public function bookmarksAction(){
+		
 		$baseUrls = $this->getServiceLocator()->get('config');
 		$baseUrlArr = $baseUrls['urls'];
 		$baseUrl = $baseUrlArr['baseUrl'];
 		$basePath = $baseUrlArr['basePath'];
-		unset($_SESSION['tzCreateEditBoxId']);
-		unset($_SESSION['databox']);
 
 		$databox_session = new Container('databox');
 		if($_POST){
@@ -222,10 +221,7 @@ class DataboxController extends AbstractActionController
 		$not_safe_for_work = 0;
 		$tzCatImage = "";
 		$boxLinksArr= array();
-		$c="00";
-		$categoryDescription="";
 
-		
 		if($this->params()->fromRoute('boxid', 0)!="")
 		{
 			$currBoxId=$this->params()->fromRoute('boxid', 0);
@@ -244,7 +240,6 @@ class DataboxController extends AbstractActionController
 				if( isset($catRow->user_hashname) )
 				{
 					$metaTags=$catRow->meta_tags;
-					$categoryDescription=$catRow->category_description;
 					if( isset($catRow->mature_content) && trim($catRow->mature_content) != "" && is_numeric($catRow->mature_content) )
 					{
 						$mature_content=$catRow->mature_content;
@@ -283,7 +278,6 @@ class DataboxController extends AbstractActionController
 						$fp = fopen( $fileName, 'a' );
 						fwrite( $fp,$currentLinkContent );
 						fclose( $fp );
-						$c++;
 					}
 					// echo "<pre>";print_r($boxLinksArr);exit;
 				}
@@ -319,9 +313,7 @@ class DataboxController extends AbstractActionController
 			'metaTags' 	=> $metaTags,
 			'tzCatImage' => $tzCatImage,
 			'boxLinksArr' => $boxLinksArr,
-			'fetchedLinksCount' => $fetchedLinksCount,
-			'countOfLinks' => $c,
-			'categoryDescription' => $categoryDescription
+			'fetchedLinksCount' => $fetchedLinksCount
 		));
 	}
 	// Select databox
@@ -348,8 +340,6 @@ class DataboxController extends AbstractActionController
 		$not_safe_for_work = 0;
 		$tzCatImage = "";
 		$boxLinksArr= array();
-		$c="00";
-		$categoryDescription="";
 
 		if($this->params()->fromRoute('boxid', 0)!="")
 		{
@@ -369,7 +359,6 @@ class DataboxController extends AbstractActionController
 				if( isset($catRow->user_hashname) )
 				{
 					$metaTags=$catRow->meta_tags;
-					$categoryDescription=$catRow->category_description;
 					if( isset($catRow->mature_content) && trim($catRow->mature_content) != "" && is_numeric($catRow->mature_content) )
 					{
 						$mature_content=$catRow->mature_content;
@@ -384,13 +373,13 @@ class DataboxController extends AbstractActionController
 					}
 					
 					$boxLinksArr = $this->getUserCategoriesTable()->getBoxLinks( $editBoxId )->toArray();
+
 					$userId = $_SESSION['usersinfo']->userId;
 					@unlink( './public/databoxes/'.$userId.'.txt' );
 					
 					$urlId = 1;
 					foreach( $boxLinksArr as $key=>$currBoxLink )
 					{
-
 						$boxLinksArr[$key]["current_db_info"] = $currBoxLink["url_id"] . "\t" . $currBoxLink["link"] . "\t" . $currBoxLink["title"] . "\t" . $currBoxLink["image"] . "\t" . $currBoxLink["description"] . "\t" . $currBoxLink["web_author"] . "\t" . $currBoxLink["meta_content"] . "\t" . $currBoxLink["link_validity_status"] . "\t" . $currBoxLink["is_video"] . "\t" . $currBoxLink["iframe_src"];
 
 						$url_id = 0;
@@ -408,9 +397,8 @@ class DataboxController extends AbstractActionController
 						$fp = fopen( $fileName, 'a' );
 						fwrite( $fp,$currentLinkContent );
 						fclose( $fp );
-						$c++;
 					}
-					 //echo "<pre>";print_r($c);exit;
+					// echo "<pre>";print_r($boxLinksArr);exit;
 				}
 			}
 			else
@@ -444,9 +432,7 @@ class DataboxController extends AbstractActionController
 			'metaTags' 	=> $metaTags,
 			'tzCatImage' => $tzCatImage,
 			'boxLinksArr' => $boxLinksArr,
-			'fetchedLinksCount' => $fetchedLinksCount,
-			'countOfLinks' => $c,
-			'categoryDescription' => $categoryDescription
+			'fetchedLinksCount' => $fetchedLinksCount
 		));
 	}
 	
@@ -464,9 +450,7 @@ class DataboxController extends AbstractActionController
 		$secret_code="";
 		$tzCatImage = "";
 		$boxLinksArr= array();
-		$c="00";
-		$categoryDescription="";
-
+		
 		if($this->params()->fromRoute('boxid', 0)!="")
 		{
 			$currBoxId=$this->params()->fromRoute('boxid', 0);
@@ -485,7 +469,6 @@ class DataboxController extends AbstractActionController
 				if( isset($catRow->user_hashname) )
 				{
 					$secret_code=$catRow->secret_code;
-					$categoryDescription=$catRow->category_description;
 					$metaTags=$catRow->meta_tags;
 					if( isset($catRow->mature_content) && trim($catRow->mature_content) != "" && is_numeric($catRow->mature_content) )
 					{
@@ -525,7 +508,6 @@ class DataboxController extends AbstractActionController
 						$fp = fopen( $fileName, 'a' );
 						fwrite( $fp,$currentLinkContent );
 						fclose( $fp );
-						$c++;
 					}
 					// echo "<pre>";print_r($boxLinksArr);exit;
 				}
@@ -562,9 +544,7 @@ class DataboxController extends AbstractActionController
 			'metaTags' 	=> $metaTags,
 			'tzCatImage' => $tzCatImage,
 			'boxLinksArr' => $boxLinksArr,
-			'fetchedLinksCount' => $fetchedLinksCount,
-			'countOfLinks' => $c,
-			'categoryDescription' => $categoryDescription
+			'fetchedLinksCount' => $fetchedLinksCount
 		));
 	}
 	 public function indexAction()
@@ -624,6 +604,7 @@ class DataboxController extends AbstractActionController
 	*/
    public function displayAscendingAction()
 	{
+
 		$baseUrls = $this->getServiceLocator()->get('config');
 		$baseUrlArr = $baseUrls['urls'];
 		$baseUrl = $baseUrlArr['baseUrl'];
@@ -631,6 +612,8 @@ class DataboxController extends AbstractActionController
 
 		if( isset($_POST) )
 		{
+			// echo "<pre>";print_r($_POST);exit;
+
 			$categoryType = $_POST['categoryType'];
 			$categoryImage = "";
 			if($_POST['typeImageCrop']==0){
@@ -664,7 +647,6 @@ class DataboxController extends AbstractActionController
 			$userCatDetails["matureContent"] = $_POST['matureContent'];
 			$userCatDetails["notSafeForWork"] = $_POST['notSafeForWork'];
 			$userCatDetails["linkPostFormation"] = $_POST['linkPostFormation'];
-			$userCatDetails["category_description"] = $_POST['description123'];
 			
 
 			$userCatDetails["main_category"] = "";
@@ -682,13 +664,13 @@ class DataboxController extends AbstractActionController
 
 			if( isset($_POST['editBoxId']) && is_numeric($_POST['editBoxId']) && $_POST['editBoxId'] > 0 )
 			{
-
 				$category_id = $_POST['editBoxId'];
 				
 				$category["categoryId"] = $_POST['editBoxId'];
 				$userCatDetails["category_id"] = $_POST['editBoxId'];
 
 				$updatedCatRs = $this->getCategoryTable()->updateEditedBoxMain( $category,$_POST['typeImageCrop'] );
+				//echo "<pre>";print_r($updatedCatRs);exit;
 				$updatedCatDetailsRow = $this->getUserCategoriesTable()->updateEditedBoxDts( $userCatDetails );
 
 				$linkIdsArray=array();
@@ -745,7 +727,6 @@ class DataboxController extends AbstractActionController
 			}
 			else
 			{
-
 				$category_id = $this->getCategoryTable()->addCategory( $category );
 				$userCatDetails["category_id"] = $category_id;
 				$user_category_id = $this->getUserCategoriesTable()->addUserCategory( $userCatDetails,$_POST['categoryHighlight'] );
@@ -785,8 +766,8 @@ class DataboxController extends AbstractActionController
 				{
 					fclose($fhandle);
 				}
-			}
-				if( isset($_POST['email']) )
+				
+				if( isset($_SESSION['usersinfo']->email) )
 				{
 					if(isset($_SESSION["userTotBoxes"])){
 						$dxCount = $_SESSION["userTotBoxes"] + 1;
@@ -807,14 +788,11 @@ class DataboxController extends AbstractActionController
 					{
 						$databoxCreatedMessage = str_replace("<SECURITYCODE>",'Your Unique Code :&nbsp;&nbsp;'.$_POST['uniqueCode'], $databoxCreatedMessage);
 					}
-					if($_POST['email']!=""){
-						$to=$_POST['email'];
-					}else{
-						$to=$_SESSION['usersinfo']->email;
-					}
+					$to=$_SESSION['usersinfo']->email;     
 					$sentMail=sendMail($to,$databoxCreatedSubject,$databoxCreatedMessage);
 				}
-			
+			}
+
 			
 			$catHashTag=substr( $_POST['catHashTag'], 1 );
 			$categoryTitles=str_replace('-','~',$_POST['categoryTitle']);
@@ -1779,6 +1757,16 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 			foreach($urlsArrayy as $urlName){
 				$otherLogin = true;
 				$comDomain = explode('.',$urlName);
+				// $imageType = strtolower($comDomain[0]);
+				// if( $image == $imageType ){ 
+					// $image = $basePath . "/images/montage_default_images/".$imageType.".png";
+				// }else if( $image != $imageType ){ 
+					// if(preg_match("/$imageType(\s|$|\.|\,)/", $image)) {  
+						// $image = $basePath . "/images/montage_default_images/".strtolower($imageType).".png";
+					// }
+				// }else{
+					// $image = $basePath . "/images/social_media/noimage.png";
+				// }
 				$imageType = $comDomain[0];
 				$strLo = strtolower($imageType);
 				if( $image == $strLo ){ 
@@ -1789,7 +1777,7 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 					}
 				}else{
 					$image = $basePath . "/images/social_media/noimage.png";
-				}	
+				}
 			}
 		}
 		$keywords = "";
@@ -2193,16 +2181,16 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				} else { 
 					$publicBoxesHtml .='<a href="'.$displayCustomizationUrl.'"><img id="Databox-1-img" class="" alt="'.$dispHashName.'" src="'.$basePath.'/images/project/categoryImages/'.$currentBoxRow->category_image .'"/></a>';
 				}
-				$publicBoxesHtml .='<div id="divDatabox-1-hashtag" class="divCardHashtag hash_tag_color"> <a href="'.$displayCustomizationUrl.'"> <h2 class="hashtagh2_size">'.$dispHashName .'</h2></a></div>';
+				$publicBoxesHtml .='<div id="divDatabox-1-hashtag" class="divCardHashtag hash_tag_color"> <a href="'.$displayCustomizationUrl.'"> '.$dispHashName .' </a></div>';
 				$publicBoxesHtml .='<div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">';
 				$publicBoxesHtml .= '<span class="fatFont">'.$linksCount.' HOT LINKS </span> collected and shared</div>';
-				//$publicBoxesHtml .='<div id="Card-1-user" class="divCardUser">';
-				//$publicBoxesHtml .= ' <div class="divCardUserName">By: '. $currentBoxRow->display_name .' </div>';
-				//if($currentBoxRow->montage_image !=""){
-					//$publicBoxesHtml .=' <div class="pdatabox_profile"><img  src="'.$basePath.'/images/project/montageImages/'.$currentBoxRow->montage_image .'"  class="imgUserImage" alt="" /></div><br/>';
-				//}
-				//$publicBoxesHtml .= ' <div id="likes'.$currentBoxRow->category_id.'" class="divCardUserName likes_percentage"><h2>'.$roundLikes.'% liked</h2></div>';
-				//$publicBoxesHtml .='</div>';
+				$publicBoxesHtml .='<div id="Card-1-user" class="divCardUser">';
+				$publicBoxesHtml .= ' <div class="divCardUserName">By: '. $currentBoxRow->display_name .' </div>';
+				if($currentBoxRow->montage_image !=""){
+					$publicBoxesHtml .=' <div class="pdatabox_profile"><img  src="'.$basePath.'/images/project/montageImages/'.$currentBoxRow->montage_image .'"  class="imgUserImage" alt="" /></div><br/>';
+				}
+				$publicBoxesHtml .= ' <div id="likes'.$currentBoxRow->category_id.'" class="divCardUserName likes_percentage"><h2>'.$roundLikes.'% liked</h2></div>';
+				$publicBoxesHtml .='</div>';
 				$publicBoxesHtml .=' <div class="divbrg_f"></div><div class="divbrg_s"></div><div style="clear:both;"></div></div>';
 				$publicBoxesHtml .='<div id="divDatabox-1-contentWrapper" class="divCardContentWrapper">';
 				$publicBoxesHtml .='<div id="divDatabox-1-views" class="divCardViews views_w">';
@@ -2231,7 +2219,7 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				}
 				if($currentBoxRow->meta_tags !=""){
 					$publicBoxesHtml .='<div id="divCardKeywords" class="divCardKeywords">';
-					$publicBoxesHtml .='<h3 class="home_keyword_h3"><b>Keywords: </b>'.$currentBoxRow->meta_tags.'</h3>';
+					$publicBoxesHtml .='<h3 class="home_keyword_h3"><b>Category:</b>'.$currentBoxRow->meta_tags.'</h3>';
 					$publicBoxesHtml .='</div>';
 				}
 			    if($currentBoxRow->category_description !=""){
@@ -2458,17 +2446,17 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				} else { 
 					$publicBoxesHtml1 .='<a href="'.$displayCustomizationUrl.'"><img id="Databox-1-img" class="" alt="'.$dispHashName.'" src="'.$basePath.'/images/project/categoryImages/'.$currentBoxRow->category_image .'"/></a>';
 				}
-				$publicBoxesHtml1 .='<div id="divDatabox-1-hashtag" class="divCardHashtag hash_tag_color"> <a href="'.$displayCustomizationUrl.'"><h2 class="hashtagh2_size">'.$dispHashName .'</h2></a></div>';
+				$publicBoxesHtml1 .='<div id="divDatabox-1-hashtag" class="divCardHashtag hash_tag_color"> <a href="'.$displayCustomizationUrl.'">'.$dispHashName .' </a></div>';
 				$publicBoxesHtml1 .='<div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">';
 				$publicBoxesHtml1 .= '<span class="fatFont">'.$linksCount.' HOT LINKS </span> collected and shared</div>';
-				//$publicBoxesHtml1 .='<div id="Card-1-user" class="divCardUser">';
-				//$publicBoxesHtml1 .= ' <div class="divCardUserName">By: '. $currentBoxRow->display_name .' </div>';
+				$publicBoxesHtml1 .='<div id="Card-1-user" class="divCardUser">';
+				$publicBoxesHtml1 .= ' <div class="divCardUserName">By: '. $currentBoxRow->display_name .' </div>';
 
-				//if($currentBoxRow->montage_image !=""){
-					//$publicBoxesHtml1 .='<div class="pdatabox_profile"><img  src="'.$basePath.'/images/project/montageImages/'.$currentBoxRow->montage_image .'"  class="imgUserImage" alt="" /></div><br/>';
-				//}
-					//$publicBoxesHtml1 .= ' <div id="likes'.$currentBoxRow->category_id.'" class="divCardUserName likes_percentage"><h2>'.$roundLikes.' % liked</h2></div>';
-				//$publicBoxesHtml1 .='</div>';
+				if($currentBoxRow->montage_image !=""){
+					$publicBoxesHtml1 .='<div class="pdatabox_profile"><img  src="'.$basePath.'/images/project/montageImages/'.$currentBoxRow->montage_image .'"  class="imgUserImage" alt="" /></div><br/>';
+				}
+					$publicBoxesHtml1 .= ' <div id="likes'.$currentBoxRow->category_id.'" class="divCardUserName likes_percentage"><h2>'.$roundLikes.' % liked</h2></div>';
+				$publicBoxesHtml1 .='</div>';
 				$publicBoxesHtml1 .=' <div class="divbrg_f"></div><div class="divbrg_s"></div><div style="clear:both;"></div></div>';
 			    $publicBoxesHtml1 .='<div id="divDatabox-1-contentWrapper" class="divCardContentWrapper"><div>';
 				$publicBoxesHtml1 .='<div id="divDatabox-1-views" class="divCardViews views_w">';
@@ -2496,7 +2484,7 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				'</h2></div>';
 				}
 				if($currentBoxRow->meta_tags !=""){
-				$publicBoxesHtml1 .='<div id="divCardKeywords" class="divCardKeywords"><h3 class="home_keyword_h3"><b>Keywords: </b>';
+				$publicBoxesHtml1 .='<div id="divCardKeywords" class="divCardKeywords"><h3 class="home_keyword_h3"><b>Category:</b>';
 				$publicBoxesHtml1 .=$currentBoxRow->meta_tags;
 				$publicBoxesHtml1 .='</h3></div>';
 				}
@@ -2622,17 +2610,17 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				} else { 
 					$privateBoxHtml .='<a href="'.$displayCustomizationUrl.'"><img id="Databox-1-img" class="" alt="'.$dispHashName.'" src="'.$basePath.'/images/project/categoryImages/'.$currentBoxRow->category_image .'"/></a>';
 				}
-				$privateBoxHtml .='<div id="divDatabox-1-hashtag" class="divCardHashtag hash_tag_color"> <a href="'.$displayCustomizationUrl.'"><h2 class="hashtagh2_size">'.$dispHashName .'</h2> </a></div>';
+				$privateBoxHtml .='<div id="divDatabox-1-hashtag" class="divCardHashtag hash_tag_color"> <a href="'.$displayCustomizationUrl.'">'.$dispHashName .' </a></div>';
 				$privateBoxHtml .='<div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">';
 				$privateBoxHtml .= '<span class="fatFont">'.$linksCount.' HOT LINKS </span> collected and shared</div>';
-				//$privateBoxHtml .='<div id="Card-1-user" class="divCardUser">';
-				//$privateBoxHtml .= ' <div class="divCardUserName">By: '. $currentBoxRow->display_name .' </div>';
+				$privateBoxHtml .='<div id="Card-1-user" class="divCardUser">';
+				$privateBoxHtml .= ' <div class="divCardUserName">By: '. $currentBoxRow->display_name .' </div>';
 
-				//if($currentBoxRow->montage_image !=""){
-					//$privateBoxHtml .='<div class="pdatabox_profile"><img  src="'.$basePath.'/images/project/montageImages/'.$currentBoxRow->montage_image .'"  class="imgUserImage" alt="" /></div><br/>';
-				//}
-					//$privateBoxHtml .= ' <div  id="likes'.$currentBoxRow->category_id.'" class="divCardUserName likes_percentage"><h2>'. $roundLikes.' % liked</h2></div>';
-				//$privateBoxHtml .='</div>';
+				if($currentBoxRow->montage_image !=""){
+					$privateBoxHtml .='<div class="pdatabox_profile"><img  src="'.$basePath.'/images/project/montageImages/'.$currentBoxRow->montage_image .'"  class="imgUserImage" alt="" /></div><br/>';
+				}
+					$privateBoxHtml .= ' <div  id="likes'.$currentBoxRow->category_id.'" class="divCardUserName likes_percentage"><h2>'. $roundLikes.' % liked</h2></div>';
+				$privateBoxHtml .='</div>';
 			$privateBoxHtml .='<div class="divbrg_f"></div><div class="divbrg_s"></div><div style="clear:both;"></div></div>';
 			$privateBoxHtml .='<div id="divDatabox-1-contentWrapper" class="divCardContentWrapper">';
 				$privateBoxHtml .='<div id="divDatabox-1-views" class="divCardViews views_w">';
@@ -2660,7 +2648,7 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				}	
 				if($currentBoxRow->meta_tags !=""){
 				
-				$privateBoxHtml .='<div id="divCardKeywords" class="divCardKeywords"><h3 class="home_keyword_h3"><b>Keywords: </b>'; 
+				$privateBoxHtml .='<div id="divCardKeywords" class="divCardKeywords"><h3 class="home_keyword_h3"><b>Category:</b>'; 
 				$privateBoxHtml .=$currentBoxRow->meta_tags;
 				$privateBoxHtml.='</h3></div>';
 				}
@@ -2860,8 +2848,6 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 			$isPrivateDatabox = 1;
 			$boxKeywords="";
 			$catDescGot = 0;
-			$category_type = "";
-			$category_highlight = "";
 			if($this->params()->fromRoute('id', 0)!="")
 			{
 				$params=$this->params()->fromRoute('id', 0);
@@ -2903,16 +2889,12 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 			$data=1;
 			if(!$databoxLinksGridd->count()){
 				$databoxLinksGrids = $this->getLinkDetailsTable()->getDataboxGrid( $categoryId );
-
 				$databoxLinksGrid = $databoxLinksGrids->buffer();
 				$main_cat_name = $databoxLinksGrids->buffer()->current()->main_cat_tittle;
 				$sub_cat_name = $databoxLinksGrids->buffer()->current()->sub_cat_tittle;
 				$cat_name = $databoxLinksGrids->buffer()->current()->category_name;
 				$displayedCategoryUserId = $databoxLinksGrids->buffer()->current()->user_id;
 				$categoryDescripton = $databoxLinksGrids->buffer()->current()->category_description;
-				$category_type = $databoxLinksGrids->buffer()->current()->category_type;
-				$category_highlight = $databoxLinksGrids->buffer()->current()->category_highlight;
-				
 				if( ($databoxLinksGrids->buffer()->current()->boxPrivacy == 0) && ( ! is_null($databoxLinksGrids->buffer()->current()->secret_code) && (trim($databoxLinksGrids->buffer()->current()->secret_code) != "" ) ) )
 				{
 					$isPrivateDatabox = 0;
@@ -2929,9 +2911,6 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				$main_cat_name = "";
 				$sub_cat_name = "";
 				$cat_name = "";
-				$category_type = "";
-				$category_highlight = "";
-				
 			}
 			// echo '<pre>'; print_r($databoxLinksGrid);exit;
 			
@@ -2950,7 +2929,6 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 			if( $catDescGot == 0 )
 			{
 				$ucRow = $this->getUserCategoriesTable()->getEditHighlight( $categoryId );
-
 				$categoryDescripton = $ucRow->category_description;
 				$main_cat_name = $ucRow->main_cat_tittle;
 				$sub_cat_name = $ucRow->sub_cat_tittle;
@@ -3065,9 +3043,7 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				'boxKeywords' 				=> 	$boxKeywords,
 				'getComments' 				=> 	$getComments,
 				'votePerLikeDis' 			=> 	$votePerLikeDis,
-				'userStatusLD' 			    => 	$userStatusLD,
-				'category_type' 			=>  $category_type,
-				'category_highlight' 		=> 	$category_highlight
+				'userStatusLD' 			    => 	$userStatusLD
 			));
 		}
 	}
@@ -3768,21 +3744,6 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 		$baseUrl = $baseUrlArr['baseUrl'];
 		$basePath = $baseUrlArr['basePath'];
 		$update= $this->getDataboxCommentsTable()->updateCommentId($_POST['databox_comment_id'],$_POST['comment']);
-		return $view = new JsonModel(array(
-			'output' =>	1,
-		));
-    }
-	public function changeDataboxDetailsAction()
-    {
-		$baseUrls = $this->getServiceLocator()->get('config');
-		$baseUrlArr = $baseUrls['urls'];
-		$baseUrl = $baseUrlArr['baseUrl'];
-		$basePath = $baseUrlArr['basePath'];
-		if($_POST['type']=="1"){
-			$updateHashNames = $this->getUserCategoriesTable()->updateDataboxHashNames($_POST);
-		}else{
-			$updateHashNames = $this->getUserCategoriesTable()->updateDataboxHashTitle($_POST);
-		}
 		return $view = new JsonModel(array(
 			'output' =>	1,
 		));
