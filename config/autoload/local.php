@@ -21,8 +21,8 @@ return array(
         'password'         =>     '',
     ),
     'urls'                 =>     array(
-        'baseUrl'         =>     'http://localhost/taggerzz',
-        'basePath'         =>    'http://localhost/taggerzz/public',
+        'baseUrl'         =>     'http://localhost/taggerzz-new/trunk',
+        'basePath'         =>    'http://localhost/taggerzz-new/trunk/public',
         'imagesUrl'        =>    '#',
     ),
     'service_manager'     =>     array(

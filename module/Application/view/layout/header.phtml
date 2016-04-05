@@ -6,24 +6,21 @@
 		$homeActive			='';
 		$hintingOnActive		='';
 		$createActive		='';
-		if($_SERVER['REQUEST_URI']=='/databoxuser/dashboard'){
+		if(strpos($_SERVER['REQUEST_URI'], 'dashboard') !== false){
 			$dashBoardActive='active_menu';
-			
-		}else if($_SERVER['REQUEST_URI']=='/montage'){
+		}
+		else if(strpos($_SERVER['REQUEST_URI'], 'montage') !== false){
 			$montageActive='active_menu';
-			
-		}else if($_SERVER['REQUEST_URI']=='/accounts'){
+		}
+		else if(strpos($_SERVER['REQUEST_URI'], 'accounts') !== false){
 			$accountActive='active_menu';
-			
-		}else if($_SERVER['REQUEST_URI']=='/contentpage'){
+		}
+		else if(strpos($_SERVER['REQUEST_URI'], 'contentpage') !== false){
 			$homeActive='active_menu';
-			
-		}else if($_SERVER['REQUEST_URI']=='/hitting-on'){
+		}else if(strpos($_SERVER['REQUEST_URI'], 'hitting-on') !== false){
 			$hintingOnActive='active_menu';
-			
-		}else if($_SERVER['REQUEST_URI']=='/taggerzz/databox/category-choice'){
+		}else if(strpos($_SERVER['REQUEST_URI'], 'category-choice') !== false){
 			$createActive='active_menu';
-			
 		}
 		$header=$this->action('Application\Controller\IndexController', 'headerAction',array('20','10'));
 		$baseUrl = $header->headerarray['baseUrl'];
@@ -84,7 +81,7 @@ function logOut(value)
 </script>
 <link href='//fonts.googleapis.com/css?family=Raleway:500' rel='stylesheet' type='text/css'>
 	<?php
-if( $_SERVER['REQUEST_URI']== "/taggerzz/" && $_SERVER['REQUEST_URI']== "/taggerzz/signup" )
+if( $_SERVER['REQUEST_URI']== "/taggerzz-new/trunk/" && $_SERVER['REQUEST_URI']== "/taggerzz-new/trunk/signup" )
 	{
 		?> 
 	<link rel="stylesheet" media="(max-width: 799px)" href="<?php echo $basePath; ?>/css/new_css/styles-mobile.css" />
@@ -104,7 +101,7 @@ if( $_SERVER['REQUEST_URI']== "/taggerzz/" && $_SERVER['REQUEST_URI']== "/tagger
 
 
 	<?php
-if( $_SERVER['REQUEST_URI'] != "/taggerzz/" || $_SERVER['REQUEST_URI']== "/taggerzz/signup" )
+if( $_SERVER['REQUEST_URI'] != "/taggerzz-new/trunk/" || $_SERVER['REQUEST_URI']== "/taggerzz-new/trunk/signup" )
 	{
 	?> 
 
@@ -130,7 +127,7 @@ if( $_SERVER['REQUEST_URI'] != "/taggerzz/" || $_SERVER['REQUEST_URI']== "/tagge
 <script src="<?php echo $basePath; ?>/js/jquery.cookie.js"></script>
 
 <?php
-if( $_SERVER['REQUEST_URI']!= "/taggerzz/" )
+if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/"  && $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/signup" )
 	{
 		?>   
 		<div id="mainContainerWrapper" class="mainContainerWrapper">
@@ -179,7 +176,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz/" )
                  <span id="spnGreetingsText" class="block smallFont">Hello, <?php echo $_SESSION['usersinfo']->displayName; ?></span>
                    <!-- <span id="spnUsername" class="block defaultFont"></span>-->
                     <span id="spnMessages" class="block verySmallFont">[<?php if(isset($_SESSION['usersinfo']->userMessagesCount)){echo $_SESSION['usersinfo']->userMessagesCount ; }else{ echo '0';}?> <a href="/taggerzz-new/trunk/databoxuser/dashboard#msgoto">Messages</a>, <span id="tzUserCollCountSpan"><?php if(isset($_SESSION['usersinfo']->collectionsCount)){echo $_SESSION['usersinfo']->collectionsCount; }else{ echo '0';}?></span>  <a class="tag_chk" href="javascript:void(0)" onClick="goToLocation('/databox/my-collected-links')">Collections</a>]</span>
-                    <span id="spnCreateCollection" class="block smallFont highlightFont tmar_t9"><a href="#" class="highlightFont createCollection create_btn" id='createCollection'>+ Create Collection</a></span>
+                    <span id="spnCreateCollection" class="block smallFont highlightFont tmar_t9"><a href="#" class="highlightFont createCollection create_btn" id='createCollection'>+ Start Tagging</a></span>
             </div>
         </div>
         <div id="divLogoWrapper" class="width30 marginallyCenter logo_home_new_size">
@@ -198,7 +195,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz/" )
                     <span id="spnGreetingsText" class="block smallFont">Hello, <?php echo $_SESSION['usersinfo']->displayName; ?></span>
                     <!--<span id="spnUsername" class="block defaultFont"></span>-->
                     <span id="spnMessages" class="block verySmallFont">[<?php if(isset($_SESSION['usersinfo']->userMessagesCount)){echo $_SESSION['usersinfo']->userMessagesCount ; }else{ echo '0';}?> <a href="/taggerzz-new/trunk/databoxuser/dashboard#msgoto">Messages</a>, <span id="tzUserCollCountSpan"><?php if(isset($_SESSION['usersinfo']->collectionsCount)){echo $_SESSION['usersinfo']->collectionsCount; }else{ echo '0';}?></span>  <a class="tag_chk" href="javascript:void(0)" onClick="goToLocation('/databox/my-collected-links')">Collections</a>]</span>
-                    <span id="spnCreateCollection" class="block smallFont highlightFont"><a href="#" class="highlightFont createCollection create_btn" id='createCollection'>+ Create Collection</a></span>
+                    <span id="spnCreateCollection" class="block smallFont highlightFont"><a href="#" class="highlightFont createCollection create_btn" id='createCollection'>+ Start Tagging</a></span>
                 </div>
             </div>
 			<div class="mar_b5 margin_top_20">
@@ -206,16 +203,16 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz/" )
                 <li> <a class="tag_chk  <?php echo $homeActive; ?>" href="javascript:void(0)" onclick="goToLocation('/contentpage')">Home</a> </li>
 				<li> <a class="tag_chk  <?php echo $montageActive; ?>" onClick="goToLocation('/montage')" href="javascript:void(0)" >My Profile</a></li>
                 <li> <a class="tag_chk <?php echo $accountActive; ?>" href="javascript:void(0)" onClick="goToLocation('/accounts')">Account Settings</a> </li>
-                <li> <a class="tag_chk <?php echo $dashBoardActive; ?>" href="javascript:void(0)" onClick="goToLocation('/databoxuser/dashboard')">Dashboard</a> </li>
-                 <li class="invite_hide"> <a class="tag_chk" href="javascript:void(0)" onClick="inivite_frnd()">Invite Friends</a> </li>
+                <li> <a class="tag_chk <?php echo $dashBoardActive; ?>" href="javascript:void(0)" onClick="goToLocation('/databoxuser/dashboard')">Dashboard<?php if( isset($_SESSION['usersinfo']->disable_messageing) && $_SESSION['usersinfo']->disable_messageing == 0){?><span id="disable_messageing_headerId">(<?php if(isset($_SESSION['usersinfo']->userMessagesCount)){echo "<span style='color:red;' >".$_SESSION['usersinfo']->userMessagesCount.'</span>' ; }else{ echo '<span style="color:red;" >0</span>';}?>)</span><?php } ?></a></li>
+                <li class="invite_hide"> <a class="tag_chk" href="javascript:void(0)" onClick="inivite_frnd()">Invite Friends</a> </li>
                 <li class="rewards_hide"> <b><?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $_SESSION['usersinfo']->rewardPoints ; }else{ echo '0000';}?></b> <sub>POINTS</sub> <b>00</b> <sub>INR, Worth</sub><a href="#" title="Conversion is possible at 1000 points."> Convert</a></li>
 				<li> <a class="tag_chk " href="javascript:void(0)" onClick="goToLocation('logout')" >Logout</a> </li>
             </ul>
 			</div>
         </div>
 		<div id="divSearchBoxes" class="divSearchBoxes tinput_s">
-            <input type="text" id="searchTermHolder" class="inptSearchHashTag tplaceholder_c" value="<?if(isset($_REQUEST['serTag']) && $_REQUEST['serTag']!=""){echo '#'.$_REQUEST['serTag'];}else{}?>" placeholder="Search by #hashtag"/>
-            <input type="text" id="pvtUniqueCodeHolder" class="inptSearchUniqueCode" placeholder="Search by private databox unique code" value="<?if(isset($_REQUEST['serCode']) && $_REQUEST['serCode']!=""){echo $_REQUEST['serCode'];}else{}?>"/>
+            <input type="text" id="searchTermHolder" class="inptSearchHashTag tplaceholder_c" value="<?if(isset($_REQUEST['serTag']) && $_REQUEST['serTag']!=""){echo '#'.$_REQUEST['serTag'];}else{}?>" placeholder="Search by #Hashtag for Public & Private Databox"/>
+            <input type="text" id="pvtUniqueCodeHolder" class="inptSearchUniqueCode" placeholder="Enter Private Databox's Unique Code" value="<?if(isset($_REQUEST['serCode']) && $_REQUEST['serCode']!=""){echo $_REQUEST['serCode'];}else{}?>"/>
             <a href="Javascript:void(0);" id='homeSearchLink' class="aSearch"></a>
         </div>
 			<?php
@@ -251,7 +248,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz/" )
 				//{
 				?> 
 				<div id="divSearchBoxes" class="divSearchBoxes tinput_s">
-						<input type="text" id="searchTermHolder" class="inptSearchHashTag tsearch_input_w tplaceholder_c" placeholder="Search by #hashtag" value="<?if(isset($_REQUEST['serTag']) && $_REQUEST['serTag']!=""){echo '#'.$_REQUEST['serTag'];}else{}?>"/>
+						<input type="text" id="searchTermHolder" class="inptSearchHashTag tsearch_input_w tplaceholder_c" placeholder="Search by #Hashtag for Public & Private Databox" value="<?if(isset($_REQUEST['serTag']) && $_REQUEST['serTag']!=""){echo '#'.$_REQUEST['serTag'];}else{}?>"/>
 						<a href="Javascript:void(0);" id='homeSearchLink' class="aSearch "></a>
 				</div>
 				<?php // } ?>
