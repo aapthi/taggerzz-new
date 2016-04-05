@@ -162,7 +162,18 @@
 						$link=explode('***',$links);
 						?>
 						<div class="column1">
-							<div><p><?echo substr($link[0],0,20) . '...';$url = $link[0];?></p>
+							<div>
+							<p>
+							<?echo substr($link[0],0,20) . '...';
+								$url = $link[0];
+									 if(strpos($url, "https://") !== false || strpos($url, "http://") !== false){
+								$url=$url;
+							}
+							else{
+								$url='http://'.$url;
+							}
+								?>
+							</p>
 							<a href="<?php echo $url; ?>" target="_blank"><img src="<?php if($link[2]!=""){echo $link[2];}else{ echo $basePath;?>/images/social_media/noimage.png<? } ?>"/></a></div>
 						</div>
 					<?}}?>

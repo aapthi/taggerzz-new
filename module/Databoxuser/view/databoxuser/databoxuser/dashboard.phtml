@@ -89,8 +89,9 @@
                 </div>
 				<div class="tac_bg das_brg_n">
                 <div  class="divAccountSettingsRow">
-                    <div class="divCreatedCollectionsCard">
-                    <?php if($this->userInfo->disable_messageing!="1"){ ?>
+                   <?php if($this->userInfo->disable_messageing!="1"){ ?> 
+					<div class="divCreatedCollectionsCard">
+                    
 
 						<div id="msgoto" class="divAccountSettingsHeading heading_font_pt12">
                             MESSAGES
@@ -114,15 +115,12 @@
 									<div  class="divCreatedCollectionText">No Records</div>
 							<?}?>
                         </ul>
-					<?php }else{ ?>
-						<div  class="divCreatedCollectionText">Personal Messaging has been disabled.Turn it on back </div>
-					<?php } ?>	
                     </div>
                 </div>
 
                 <div class="divAccountSettingsRow">
+					<?php if(count($this->getUserMessages)!=0){?>
                     <div class="divCreatedCollectionsCard">
-						<? if(count($this->getUserMessages)!=0){?>
                         <div class="divCommentHeader">
                             <div class="divCommentHeaderUsernameBlock">
                                 <div  id="divCommentUsername" class="divCommentUsername">
@@ -162,6 +160,9 @@
                         </div>
                     </div>
                 </div>
+				<?php }else{ ?>
+						<div  class="divCreatedCollectionText"><center>Personal Messaging has been disabled.Turn it on back </center></div>
+					<?php } ?>
                 </div>
 				<input type="hidden" id="hidUserName" value="<?php if(isset($username)){echo $username;}?>">
 				<input type="hidden" id="hidmessage" value="<?php if(isset($msg)){echo $msg;}?>">
