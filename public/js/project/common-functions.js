@@ -2147,14 +2147,14 @@ function getDimensions(id) {
 			$('#viewPageChanged').val( 1 );
 			$('#catDescChanged').val( 1 );
 
-			$('#catDescIntro').html( $.trim(custCatDescText) + "&nbsp;" + "Edit" );
+			$('#catDescIntro').html( $.trim(custCatDescText) + "&nbsp;" + "<b>Edit</b>" );
 
 			var catDescIntroDiv = document.getElementById('catDescIntro');
 			if( $('#hiddenDec').val()!="" )
 			{
 				var fullDescParaHtml = '';
 				fullDescParaHtml += '<span id="categoryDescripton">' + $.trim(custCatDescText) + '</span>&nbsp;';
-				fullDescParaHtml += '<span id="categoryDescLink"><a href="Javascript:void(0);" id="catDescAnchor" onclick="catDescCkEditorShow();">Edit</a></span>';
+				fullDescParaHtml += '<span id="categoryDescLink"><a href="Javascript:void(0);" id="catDescAnchor" onclick="catDescCkEditorShow();"><b>Edit</b></a></span>';
 				$('#fullDescPara').html( fullDescParaHtml );
 
 				if( ($('#fullCatDesc').length) && ($('#fullCatDesc').getNiceScroll()) )
@@ -2171,7 +2171,7 @@ function getDimensions(id) {
 				$('#fullDescPara').html( "" );
 				$('.view_vertical_relavence_btn_circle').css('display','none');
 				var introDescParaHtml = '<span id="categoryDescripton">' + $.trim(custCatDescText) + '</span>&nbsp;'; 
-				introDescParaHtml += '<span id="categoryDescLink"><a href="Javascript:void(0);" id="catDescAnchor" onclick="catDescCkEditorShow();">Edit</a></span>';
+				introDescParaHtml += '<span id="categoryDescLink"><a href="Javascript:void(0);" id="catDescAnchor" onclick="catDescCkEditorShow();"><b>Edit</b></a></span>';
 				$('#catDescIntro').html( introDescParaHtml );
 				$('.add_comment_bg').css('height','68px')
 				$('#fullCatDesc').hide();
@@ -2185,7 +2185,7 @@ function getDimensions(id) {
 			}
 			else
 			{
-				$('#catDescAnchor').html( "Edit" );
+				$('#catDescAnchor').html( "<b>Edit</b>" );
 			}
 		}
 		$('#pop-up-cat-description').popUpWindow({action: "close"});

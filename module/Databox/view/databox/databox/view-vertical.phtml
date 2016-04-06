@@ -98,7 +98,7 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 					<div class="">
 						<div  class="c_DivHeaderCommentRightTop" style="border:1px solid #c7c7c7;">
 							<div id="catDescIntro" class="" style="display:none" align="center">
-								<?php if( ! is_null($this->categoryDescripton) ){ echo $this->categoryDescripton; }?>&nbsp;Edit
+								<?php if( ! is_null($this->categoryDescripton) ){ echo $this->categoryDescripton; }?>&nbsp;<b>Edit</b>
 							</div>
 							<div id="fullCatDesc" class="">
 								<div id="fullDescPara" class="pad_lrtb"><?php if( ! is_null($this->categoryDescripton) ){ echo $this->categoryDescripton; }?></div>
@@ -610,7 +610,7 @@ $(document).ready(function()
 		fullDescParaHtml += '<span id="categoryDescripton">' + $.trim($("#fullDescPara").html().replace(/&nbsp;/g,'')) + '</span>&nbsp;';
 		if( showCustOtions )
 		{
-			fullDescParaHtml += '<span id="categoryDescLink" style="display:none;"><a href="Javascript:void(0);" id="catDescAnchor" onclick="catDescCkEditorShow();" class="">Edit</a></span>';
+			fullDescParaHtml += '<span id="categoryDescLink" style="display:none;"><a href="Javascript:void(0);" id="catDescAnchor" onclick="catDescCkEditorShow();" class=""><b>Edit</b></a></span>';
 		}
 		$('#fullDescPara').html( fullDescParaHtml );
 		if( showCustOtions )
@@ -633,7 +633,7 @@ $(document).ready(function()
 		{
 			if( parseInt($.trim($("#fullDescPara").html().replace(/&nbsp;/g,'')).length) > parseInt("0") )
 			{
-				catDescAnchorLbl = "Edit";
+				catDescAnchorLbl = "<b>Edit</b>";
 			}
 			
 			catDescIntroDivHtml += '<span id="categoryDescLink" style="display:none;"><a href="Javascript:void(0);" id="catDescAnchor" onclick="catDescCkEditorShow();">'+catDescAnchorLbl+'</a></span>';
