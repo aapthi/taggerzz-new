@@ -399,6 +399,7 @@ class UserCategoriesTable
 		$select->where('user.status="1"');
 		// $select->limit(intval($boxesPerPage));
 		// $select->offset(intval($offset));
+		$select->order('views_count DESC');
 		$select->order('highlights_prior_order asc');
 		$select->order('NetVotes desc');
 		$select->order('category.category_id desc');
