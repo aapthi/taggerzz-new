@@ -125,15 +125,15 @@
 						</div><?php } ?>
                     </div>
                     <div class="divCreatePublicDataboxImage">
-                        <h4><span class="box_crete_color">Image </span><span class="smallFont dimFontColor"> ( related to your collection / sharing )</span></h4>
+                        <h4 class="input_space"><span class="box_crete_color">Image </span><span class="smallFont dimFontColor"> ( related to your collection / sharing )</span></h4>
                         <button class="primaryButton" id="cropBoxImage">UPLOAD IMAGE</button>
                         <img src="<?php echo $tzCatImage; ?>" alt="" id="uploadedCatImage1" />
                     </div>
                     <div class="divCreatePublicDataboxNatureCategory">
-                        <span class="box_crete_color"><h4>Your content's nature </h4></span>
+                        <span class="box_crete_color"><h4 class="input_space">Your content's nature </h4></span>
                         <label class="lblInpt box_crete_color"><input type='checkbox' class="inptChkContentNature" id="chkbxMc" <?php if ( isset($this->mature_content) && trim($this->mature_content) != "" && is_numeric($this->mature_content) && $this->mature_content == 1 ){?>checked<?php } ?> onClick="matureContentClicked( this.checked );" /> Mature Content&nbsp;&nbsp;&nbsp;&nbsp;</label>
                         <label class="lblInpt box_crete_color"><input type='checkbox' class="inptChkContentNature"id="chkbxNsfw" <?php if ( isset($this->not_safe_for_work) && trim($this->not_safe_for_work) != "" && is_numeric($this->not_safe_for_work) && $this->not_safe_for_work == 1 ){?>checked<?php } ?> onClick="nsfwContentClicked( this.checked );" /> NSFW ( Not Safe For Work )</label><br /> <br />
-                        <span class=""><h4>Categorizing Keywords for your Databox/Highlight</h4></span>
+                        <span class=""><h4 class="input_space">Categorizing Keywords for your Databox/Highlight</h4></span>
                         <input type='text' id="boxCategory" class="inptContentCategory" placeholder="Ex:- 'Space Travel Astronomers' " value="<?php if ( isset($this->metaTags) && trim($this->metaTags) != "" ){ echo $this->metaTags; }?>" />
 						<div class="" id="dcHtmlDiv" style="margin-top:20px">
 						<a href="javascript:void(0)" id="databoxContinue" class="btnBlack" />CONTINUE CUSTOMISING</a></div>

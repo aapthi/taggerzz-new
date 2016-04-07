@@ -1,4 +1,5 @@
 <?php
+
 return array(
     'db'                 =>     array(
         'dsn'             =>    'mysql:dbname=taggerzz;host=localhost',
@@ -30,3 +31,5 @@ return array(
         ),
     ),
 );
+
+?>

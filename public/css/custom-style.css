@@ -69,7 +69,7 @@ input{
 	margin-top:30px;
 }
 .tmar_t125{
-	margin-top:125px;
+	margin-top:155px;
 }
 .tmar_b5{
 	margin-bottom:5px;
@@ -118,7 +118,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffeff0', end
 	padding-bottom:12px;
 	width:100%;
 	border-top:3px solid #F7D5D2;
-	height:95px;
+	height:105px;
 	
 }
 .logo_martb5 img{
@@ -137,14 +137,20 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffeff0', end
 	font-size: 13px;
     font-weight: bold;
 }
+.rep_l{
+    position: absolute;
+    right: 6px;
+    top: 0;
+	height:40px;
+}
 .reward_points{
 	background: #fff none repeat scroll 0 0;
     border: 1px solid #c7c7c7;
-    bottom: 5px;
-    box-shadow: 2px 2px #ddd;
-    left: 1%;
+    height: 25px;
     padding: 1px 8px 3px;
-    position: absolute
+    position: relative;
+    right: 20%;
+    top: 5px;
 }
 .reward_points b{
 	font-size:18px;
@@ -204,17 +210,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffeff0', end
 	width:60%;
 }
 .twidth_acinfo{
-	width:21% !important;
+	width:23% !important;
 }
 .twidth_acinfo img{
 	border-radius:2px;
 }
 .twidth_acinfo .create_btn{
-	border: 1px solid #D8F0F8;
-    border-radius: 2px;
-    padding: 2px 8px;
+    padding: 4px 12px;
 	background:#ef4436;
 	color:#fff;
+	font-weight:bold;
 }
 .tmenufont_inc li a{
 	font-weight:bold;
@@ -256,7 +261,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffeff0', end
 /* montage page css */
 .montage_container{
 	width:86.3%;
-	margin:125px auto;
+	margin:155px auto;
 }
 .montage_brg_box{
 	border:1px solid #c7c7c7;
@@ -617,10 +622,13 @@ margin-top:4px;
 	width:160px !important;
 }
 .divbrg_f{
-	border-bottom:4px solid #ef4436;width:50%;float:left;
+	border-top:4px solid #ef4436;width:50%;float:left;text-align:center;background:#ef4436;color:#fff;padding:3.6px 0;
 }
 .divbrg_s{
-	border-bottom:4px solid #a12a30;width:50%;float:right;
+	border-top:4px solid #a12a30;width:50%;float:right;background:#ef4436;color:#fff;padding:4px 0;text-align:center;
+}
+.divbrg_f img, .divbrg_s img{
+	margin-top:-3px;
 }
 .home_de_brg_t{
 	border-top:1px solid #ddd;
@@ -684,7 +692,7 @@ margin-top:4px;
 	margin-bottom:5px;
 }
 .margin_top_20{
-	margin-top:-20px;
+	margin-top:-8px;
 }
 .pad_10px{
 	padding-left:10px;
@@ -793,6 +801,35 @@ color:#a12a30;
 }
  .invite_hide,.rewards_hide{
 	display:none !important;
+ }
+ .log_out_l{
+	float: right;
+    position: relative;
+    right: 0;
+    top: -27px;
+ }
+ .tagged_links{
+	 background:#f8dbd9;
+	 padding:11px 2px 0;
+	 text-align:center;
+	 font-size:10.5px;
+	background: -webkit-linear-gradient(#f9ebe9, #f5c5c5); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#f9ebe9, #f5c5c5); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#f9ebe9, #f5c5c5); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#f9ebe9, #f5c5c5);
+ }
+ .y_col{
+	 color:#723f3f;
+ }
+ .input_space{
+	 padding-bottom:5px;
+	 padding-top:10px;
+ }
+ .pad_bb{
+	 padding-bottom:8px;
+ }
+ .pad_tt{
+	 padding-top:10px;
  }
 /* Browser Problem css */
 @media screen and (-webkit-min-device-pixel-ratio:0) { 
@@ -942,6 +979,9 @@ color:#a12a30;
 	}
 	.invite_hide,.rewards_hide{
 		display:block !important;
+	}
+	.log_out_l{
+		display:none;
 	}
 }
 @media (max-width: 480px) { 

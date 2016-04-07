@@ -73,10 +73,10 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 	$tzIsLoggedIn = true;
 }
 ?>
-<div <?php if( $tzIsLoggedIn ) { ?> style="margin-top:110px;"<?php }else{ ?> style="margin-top:72px;"<?php } ?> >
-<div class="c_DivHashTag customize_hashtagh1" id="databoxHashNameId" ><h1 ><?php echo $this->hashName;?><button id="catHashNameBtn" style="display:none" onclick="databoxHash(1);" class="c_BtnEditTitle">EDIT</button></h1></div>
+<div <?php if( $tzIsLoggedIn ) { ?> style="margin-top:125px;"<?php }else{ ?> style="margin-top:72px;"<?php } ?> >
+<div class="c_DivHashTag customize_hashtagh1" id="databoxHashNameId" ><h1 ><?php echo $this->hashName;?><a href="javascript:void(0)"id="catHashNameBtn" style="display:none;font-size:15px;color:#227cec;vertical-align:middle" onclick="databoxHash(1);" class="c_BtnEditTitle"> &nbsp; EDIT</a></h1></div>
 <div class="c_DivTitleWrapper">
-<div class="c_DivTitle customize_hashtag_title"  id="databoxTitleId"><h3><b><?php echo $this->categoryTitle; ?><button id="catHashTitleBtn"  style="display:none" onclick="databoxHash(2);" class="c_BtnEditTitle">EDIT</button></b></h3></div>
+<div class="c_DivTitle customize_hashtag_title"  id="databoxTitleId"><h3><b><?php echo $this->categoryTitle; ?><a href="javascript:void(0)" id="catHashTitleBtn"  style="display:none;font-size:15px;color:#227cec;vertical-align:middle;font-weight:normal" onclick="databoxHash(2);" class="c_BtnEditTitle"> &nbsp;EDIT</a></b></h3></div>
 </div>
 </div>
 
@@ -107,9 +107,9 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 								<img src="<?php echo $basePath; ?>/img/downArrow.png" />
 							</div>
 						<div class="sm_share_btns"><!-- Delete class only c_DivHeaderCommentRightBottom -->
+						<a class="c_BtnReport" style="display:none;" id="LinksEditButtonId" href="javascript:void(0);" onclick="Javascript:editTheDataBoxUrls('<?php echo $currBoxEditLink;?>');" >Links Edit</a>
 							<a class="c_BtnReport" href="javascript:void(0);" onclick="Javascript:custReportPopUpShow();">Report</a>
 							<a class="c_BtnShare" href="javascript:void(0);" onclick="Javascript:openCloseShareCus()">Share</a>
-							<a class="c_BtnShare" style="display:none;" id="LinksEditButtonId" href="javascript:void(0);" onclick="Javascript:editTheDataBoxUrls('<?php echo $currBoxEditLink;?>');" >Links Edit</a>
 							
 							<!--<a class="c_BtnAddComment" href="javascript:void(0);" onclick="custCommentCkEditorShow('',0);">Add Comment &nbsp;<img src="<?php echo $basePath; ?>/images/social_media/chatting.png"/></a>-->
 							<a class="c_BtnAddComment" id="add-new-widget" href="javascript:void(0);" style="display:none">Add Comment</a>

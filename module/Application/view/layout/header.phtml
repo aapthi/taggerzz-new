@@ -133,8 +133,8 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/"  && $_SERVER['REQUEST_URI']
 		<div id="mainContainerWrapper" class="mainContainerWrapper">
 		<div class="tfix_header">
 		<?php if( isset($_SESSION['usersinfo']->userId) &&  $_SESSION['usersinfo']->userId!=""){?>
-		<div class="invite_f"><a class="tag_chk " href="javascript:void(0)" onClick="inivite_frnd()" >Invite Friends</a></div>
-		<div class="reward_points"><b><?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $_SESSION['usersinfo']->rewardPoints ; }else{ echo '0000';}?></b><sub>POINTS</sub><b>00</b><sub>INR, Worth</sub><a href="#" title="Conversion is possible at 1000 points."> Convert</a></div>
+		<!--<div class="invite_f"><a class="tag_chk " href="javascript:void(0)" onClick="inivite_frnd()" >Invite Friends</a></div>-->	
+		<div class="rep_l"><div class="reward_points"><b><?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $_SESSION['usersinfo']->rewardPoints ; }else{ echo '0000';}?></b><sub>POINTS</sub><b>00</b><sub>INR, Worth</sub><a href="#" title="Conversion is possible at 1000 points."> Convert</a></div> <div class="log_out_l"><a href="#"  onClick="goToLocation('logout')"><img src="<?php echo $basePath; ?>/img/logoout.png"></a></div></div>
 		<? } ?> 
 		 <section id="secHeader">
     <div id="divHeaderWrapper" class="width100 divHeaderWrapper">
@@ -166,16 +166,22 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/"  && $_SERVER['REQUEST_URI']
 					else
 					{
 						$headerMontageImage=$basePath.'/images/project/montageImages/'.$_SESSION['usersinfo']->montage_image;
-					}?><div id="divAccountInfo" class="divAccountInfo twidth_acinfo" style="padding-left:36px;margin-top:4px;">
+					}?>
+		<div id="divAccountInfo" class="divAccountInfo twidth_acinfo" style="margin-top:4px;">
+		<div style="padding-left:36px;">
             <div id="divProfileImage" class="inline-block">
                 <!--<img src="<?php //echo $basePath; ?>/img/imgFB.png" alt="" class="height100" />-->
-                <img height="60px" width="46px" src="<?php echo $headerMontageImage; ?>" alt="" class="height100" />
+                <img height="60px" width="30px" src="http://localhost/taggerzz-new/trunk/public/images/project/montageImages/36.jpg <?php //echo $headerMontageImage; ?>" alt="" class="height100" />
             </div>
 
             <div id="divProfileDetails" class="inline-block tphoto_links tphoto_links">
-                 <span id="spnGreetingsText" class="block smallFont">Hello, <?php echo $_SESSION['usersinfo']->displayName; ?></span>
-                   <!-- <span id="spnUsername" class="block defaultFont"></span>-->
-                    <span id="spnMessages" class="block verySmallFont">[<?php if(isset($_SESSION['usersinfo']->userMessagesCount)){echo $_SESSION['usersinfo']->userMessagesCount ; }else{ echo '0';}?> <a href="javascript:void(0)" onclick="goToLocation('/databoxuser/dashboard#msgoto')">Messages</a>, <span id="tzUserCollCountSpan"><?php if(isset($_SESSION['usersinfo']->collectionsCount)){echo $_SESSION['usersinfo']->collectionsCount; }else{ echo '0';}?></span>  <a class="tag_chk" href="javascript:void(0)" onClick="goToLocation('/databox/my-collected-links')">Web links collected</a>]</span>
+                 <span id="spnGreetingsText" class="block smallFont"><b>Hello, <?php echo $_SESSION['usersinfo']->displayName; ?></b></span>
+			</div>
+			</div>
+			<div class="tagged_links">
+				<b><span class="y_col">You have</span> #Tagged 500 WebLinks <span class="y_col">with</span> 18 Databoxes 
+				10 Highlights, <span class="y_col">Stacked</span> 50 Web Resources.</b>
+                    <!--<span id="spnMessages" class="block verySmallFont">[<?php if(isset($_SESSION['usersinfo']->userMessagesCount)){echo $_SESSION['usersinfo']->userMessagesCount ; }else{ echo '0';}?> <a href="javascript:void(0)" onclick="goToLocation('/databoxuser/dashboard#msgoto')">Messages</a>, <span id="tzUserCollCountSpan"><?php if(isset($_SESSION['usersinfo']->collectionsCount)){echo $_SESSION['usersinfo']->collectionsCount; }else{ echo '0';}?></span>  <a class="tag_chk" href="javascript:void(0)" onClick="goToLocation('/databox/my-collected-links')">Web links collected</a>]</span>-->
                     <span id="spnCreateCollection" class="block smallFont highlightFont tmar_t9"><a href="#" class="highlightFont createCollection create_btn" id='createCollection'>+ Start Tagging</a></span>
             </div>
         </div>
@@ -206,7 +212,8 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/"  && $_SERVER['REQUEST_URI']
                 <li> <a class="tag_chk <?php echo $dashBoardActive; ?>" href="javascript:void(0)" onClick="goToLocation('/databoxuser/dashboard')">Dashboard<?php if( isset($_SESSION['usersinfo']->disable_messageing) && $_SESSION['usersinfo']->disable_messageing == 0){?><span id="disable_messageing_headerId">(<?php if(isset($_SESSION['usersinfo']->userMessagesCount)){echo "<span style='color:red;' >".$_SESSION['usersinfo']->userMessagesCount.'</span>' ; }else{ echo '<span style="color:red;" >0</span>';}?>)</span><?php } ?></a></li>
                 <li class="invite_hide"> <a class="tag_chk" href="javascript:void(0)" onClick="inivite_frnd()">Invite Friends</a> </li>
                 <li class="rewards_hide"> <b><?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $_SESSION['usersinfo']->rewardPoints ; }else{ echo '0000';}?></b> <sub>POINTS</sub> <b>00</b> <sub>INR, Worth</sub><a href="#" title="Conversion is possible at 1000 points."> Convert</a></li>
-				<li> <a class="tag_chk " href="javascript:void(0)" onClick="goToLocation('logout')" >Logout</a> </li>
+				<!--<li> <a class="tag_chk " href="javascript:void(0)" onClick="goToLocation('logout')" >Logout</a> </li>-->
+				<li> <a class="tag_chk " href="javascript:void(0)" onClick="inivite_frnd()" >Invite</a> </li>
             </ul>
 			</div>
         </div>

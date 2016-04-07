@@ -19,9 +19,10 @@
                     <div class="heading">CREATE HASHTAG</div>
                     <div class="createHashtagWrapper">
 						<form id="hashtagForm" method="post">
-							<span class="box_crete_color"><h4>Please specify your preferable #hashtag for the collection </h4></span>
+							<span class="box_crete_color input_space"><h4>Please specify your preferable #hashtag for the collection </h4></span>
 							<input type="text" class="inptCreateHashtag" id="hashtagHolder"  name="hashtagHolder" placeholder="Ex:- #GodsDogs" value="<?php if ( isset($this->catHashTag) && trim($this->catHashTag) != "" ){ echo $this->catHashTag; }?>" /><br />
-							<span class="box_crete_color"> <h4>and an interesting title </h4></span>
+							
+							<span class="box_crete_color input_space"> <h4>and an interesting title </h4></span>
 							<input type="text" class="inptCreateTitle" id="hashtagTitle" name="hashtagTitle" placeholder="Ex:- All types of dog breeds" value="<?php if ( isset($this->categoryTitle) && trim($this->categoryTitle) != "" ){ echo $this->categoryTitle; }?>" /><br />
 							<button class="btnBlack right" type="button" onClick="goToUploadBkmrks()" >CONTINUE (STEP 1)</button>
 						</form>

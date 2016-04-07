@@ -2680,7 +2680,7 @@ function openCloseShareCus(){
 	if(openCloseValue=='0'){
 		//$('.at-share-tbx-element .at-share-btn').css('margin-top','13px');
 		$('#atstbx').css('margin-left','54px');
-		$('#atstbx').css('width','260px');
+		$('#atstbx').css('width','auto');
 		$('#social_sharing_btn').css('position','absolute');
 		$('#social_sharing_btn').css('bottom','-32px');
 		$('#social_sharing_btn').css('margin-left','8%');

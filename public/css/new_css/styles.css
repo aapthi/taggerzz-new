@@ -579,7 +579,7 @@ a {
 			}
         .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .divCardSharedLinks {
           z-index: 1;
-          bottom: 10%;
+          bottom: 20%;
           right: 0%;
           background: #fff;
           min-width: 40%;
