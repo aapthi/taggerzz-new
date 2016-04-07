@@ -1,3 +1,4 @@
+<?php //echo "<pre>";print_r($_SESSION);exit;?>
 <input type="hidden" id="boxesterm" name="boxesterm" value="" />
 <?php
 		$dashBoardActive	='';
@@ -179,8 +180,8 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/"  && $_SERVER['REQUEST_URI']
 			</div>
 			</div>
 			<div class="tagged_links">
-				<b><span class="y_col">You have</span> #Tagged 500 WebLinks <span class="y_col">with</span> 18 Databoxes 
-				10 Highlights, <span class="y_col">Stacked</span> 50 Web Resources.</b>
+				<b><span class="y_col">You have</span> #Tagged <?php if(isset($_SESSION['usersinfo']->getTotalLinks)){echo $_SESSION['usersinfo']->getTotalLinks ; }else{ echo '0';}?> WebLinks <span class="y_col">with</span> <?php if(isset($_SESSION['usersinfo']->totalcount)){echo $_SESSION['usersinfo']->totalcount ; }else{ echo '0';}?> Databoxes 
+				<?php if(isset($_SESSION['usersinfo']->HighLightsTotalcount)){echo $_SESSION['usersinfo']->HighLightsTotalcount ; }else{ echo '0';}?> Highlights, <span class="y_col">Stacked</span> <span id="tzUserCollCountSpan"><?php if(isset($_SESSION['usersinfo']->collectionsCount)){echo $_SESSION['usersinfo']->collectionsCount; }else{ echo '0';}?></span> Web Resources.</b>
                     <!--<span id="spnMessages" class="block verySmallFont">[<?php if(isset($_SESSION['usersinfo']->userMessagesCount)){echo $_SESSION['usersinfo']->userMessagesCount ; }else{ echo '0';}?> <a href="javascript:void(0)" onclick="goToLocation('/databoxuser/dashboard#msgoto')">Messages</a>, <span id="tzUserCollCountSpan"><?php if(isset($_SESSION['usersinfo']->collectionsCount)){echo $_SESSION['usersinfo']->collectionsCount; }else{ echo '0';}?></span>  <a class="tag_chk" href="javascript:void(0)" onClick="goToLocation('/databox/my-collected-links')">Web links collected</a>]</span>-->
                     <span id="spnCreateCollection" class="block smallFont highlightFont tmar_t9"><a href="#" class="highlightFont createCollection create_btn" id='createCollection'>+ Start Tagging</a></span>
             </div>
@@ -200,7 +201,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/"  && $_SERVER['REQUEST_URI']
                 <div id="divProfileDetailsMobile" class="divProfileDetails">
                     <span id="spnGreetingsText" class="block smallFont">Hello, <?php echo $_SESSION['usersinfo']->displayName; ?></span>
                     <!--<span id="spnUsername" class="block defaultFont"></span>-->
-                    <span id="spnMessages" class="block verySmallFont">[<?php if(isset($_SESSION['usersinfo']->userMessagesCount)){echo $_SESSION['usersinfo']->userMessagesCount ; }else{ echo '0';}?> <a href="javascript:void(0)" onclick="goToLocation('/databoxuser/dashboard#msgoto')">Messages</a>, <span id="tzUserCollCountSpan"><?php if(isset($_SESSION['usersinfo']->collectionsCount)){echo $_SESSION['usersinfo']->collectionsCount; }else{ echo '0';}?></span>  <a class="tag_chk" href="javascript:void(0)" onClick="goToLocation('/databox/my-collected-links')">Web links collected</a>]</span>
+					<span id="spnMessages" class="block verySmallFont">[<?php if(isset($_SESSION['usersinfo']->userMessagesCount)){echo $_SESSION['usersinfo']->userMessagesCount ; }else{ echo '0';}?> <a href="javascript:void(0)" onclick="goToLocation('/databoxuser/dashboard#msgoto')">Messages</a>, <span id="tzUserCollCountSpan"><?php if(isset($_SESSION['usersinfo']->collectionsCount)){echo $_SESSION['usersinfo']->collectionsCount; }else{ echo '0';}?></span>  <a class="tag_chk" href="javascript:void(0)" onClick="goToLocation('/databox/my-collected-links')">Web links collected</a>]</span>
                     <span id="spnCreateCollection" class="block smallFont highlightFont"><a href="#" class="highlightFont createCollection create_btn" id='createCollection'>+ Start Tagging</a></span>
                 </div>
             </div>

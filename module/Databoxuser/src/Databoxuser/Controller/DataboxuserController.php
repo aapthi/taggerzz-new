@@ -157,11 +157,15 @@ class DataboxuserController extends AbstractActionController
 						$user_session->disable_messageing=$userRow->disable_messageing;
 						$getPublicDataboxCount = $this->getUserCategoriesTable()->getPublicDataboxCount( $_SESSION['usersinfo']->userId);
 						$getPrivateDataboxCount = $this->getUserCategoriesTable()->getPrivateDataboxCount( $_SESSION['usersinfo']->userId);
+						$getHighlights = $this->getUserCategoriesTable()->getHighlightDataboxCount( $_SESSION['usersinfo']->userId);
+						$getHighlightsCount = count($getHighlights->toArray());
 						$publicprivatetotalcount=count($getPublicDataboxCount->toArray()) + count($getPrivateDataboxCount->toArray());
 						$userCollectedLinksCount= $this->getUserCollectionsTable()->getCollectedLinksCount($_SESSION['usersinfo']->userId);
 						$collectionsCount=count($userCollectedLinksCount->toArray());
 						$getBlockUserDetails= $this->getBlockUserTable()->getBlockedIds();
 						$finalIds='';
+						$getTotalLinks = $this->getUserCategoriesTable()->getTotalLinks( $_SESSION['usersinfo']->userId)->count();
+
 						foreach($getBlockUserDetails as $key=>$blockUser){
 
 							if($blockUser->block_by_uid==$_SESSION['usersinfo']->userId){
@@ -174,6 +178,8 @@ class DataboxuserController extends AbstractActionController
 						$frnds= rtrim($finalIds,',');
 						$userMessagesCount= count($this->getUserMessagesTable()->getUserMessages( $_SESSION['usersinfo']->userId,$frnds)->toArray());
 						$user_session->totalcount=$publicprivatetotalcount;
+						$user_session->HighLightsTotalcount=$getHighlightsCount;
+						$user_session->getTotalLinks=$getTotalLinks;
 						$user_session->userMessagesCount=$userMessagesCount;
 						$user_session->collectionsCount=$collectionsCount;
 						$userpointsTable = $this->getUserPointsTable();
@@ -315,6 +321,10 @@ class DataboxuserController extends AbstractActionController
 			$getPublicDataboxCount = $this->getUserCategoriesTable()->getPublicDataboxCount( $user_id);
 			$getPrivateDataboxCount = $this->getUserCategoriesTable()->getPrivateDataboxCount( $user_id);
 			$publicprivatetotalcount=count($getPublicDataboxCount->toArray()) + count($getPrivateDataboxCount->toArray());
+			$getHighlights = $this->getUserCategoriesTable()->getHighlightDataboxCount( $user_id);
+			$getHighlightsCount = count($getHighlights->toArray());
+			$getTotalLinks = $this->getUserCategoriesTable()->getTotalLinks( $user_id)->count();
+
 			if(isset($_SESSION['usersinfo'])){
 				unset($_SESSION['usersinfo']);
 			}
@@ -330,6 +340,8 @@ class DataboxuserController extends AbstractActionController
 			$user_session->hinting_state=$userRow->hinting_state;
 			$user_session->disable_messageing=$userRow->disable_messageing;
 			$user_session->totalcount=$publicprivatetotalcount;
+			$user_session->HighLightsTotalcount=$getHighlightsCount;
+			$user_session->getTotalLinks=$getTotalLinks;
 			$user_session->userMessagesCount=$userMessagesCount;
 			$user_session->collectionsCount=$collectionsCount;
 			$user_session->rewardPoints=$userPoints;
@@ -348,6 +360,9 @@ class DataboxuserController extends AbstractActionController
 			$userRow = $this->getUserTable()->getUser( $user_id );
 			$getPublicDataboxCount = $this->getUserCategoriesTable()->getPublicDataboxCount( $user_id);
 			$getPrivateDataboxCount = $this->getUserCategoriesTable()->getPrivateDataboxCount( $user_id);
+			$getHighlights = $this->getUserCategoriesTable()->getHighlightDataboxCount( $user_id);
+			$getHighlightsCount = count($getHighlights->toArray());
+			$getTotalLinks = $this->getUserCategoriesTable()->getTotalLinks( $user_id)->count();
 			$publicprivatetotalcount=count($getPublicDataboxCount->toArray()) + count($getPrivateDataboxCount->toArray());
 			if(isset($_SESSION['usersinfo'])){
 				unset($_SESSION['usersinfo']);
@@ -364,6 +379,8 @@ class DataboxuserController extends AbstractActionController
 			$user_session->hinting_state=$userRow->hinting_state;
 			$user_session->disable_messageing=$userRow->disable_messageing;
 			$user_session->totalcount=$publicprivatetotalcount;
+			$user_session->HighLightsTotalcount=$getHighlightsCount;
+			$user_session->getTotalLinks=$getTotalLinks;
 			$user_session->userMessagesCount=$userMessagesCount;
 			$user_session->collectionsCount=$collectionsCount;
 			$user_session->rewardPoints=$userPoints;

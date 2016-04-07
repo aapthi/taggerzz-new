@@ -150,7 +150,7 @@ class UserCategoriesTable
 		$select->join('link_details', 'category_links.category_link_id=link_details.link_id',array('title','image'),'left');
 		$select->where('category_links.link_validity_status="1"');
 		$select->where('user_categories.user_id="'.$userId.'"');
-		$select->where('category.category_highlight="1"');
+		//$select->where('category.category_highlight="1"');
 		$select->where('user_categories.status="1"');
 		$resultSet = $this->tableGateway->selectWith($select);
 		return $resultSet;
