@@ -487,6 +487,10 @@ $(document).ready(function(){
 						$( "#homepageSearched" ).val( 1 );
 						$( "#homePageSection" ).val( 1 );
 					}
+					if( parseInt(data.boxesCount) == parseInt("1") )
+					{
+						window.location="http://localhost/taggerzz-new/trunk/databox/post-vertical/3+5+EducationNews+Education-Information";
+					}
 					$('#list_public_boxes').html( data.publicBoxesHtml );
 					//nicesscrollPublic.resize();
 					//nicesscrollPublic.setScrollTop(0);

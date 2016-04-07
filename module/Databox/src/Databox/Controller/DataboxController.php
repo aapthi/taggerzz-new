@@ -2107,7 +2107,6 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 		$publicBoxesRs = $this->getUserCategoriesTable()->getHomePublicBoxes( $publicBoxesPerPage,$publicBoxesOffset );
 		$publicBoxesHtml = "";
 		$publicBoxesAllLoaded = 0;
-		
 		if( $publicBoxesRs->count() == 0 )
 		{
 			$publicBoxesAllLoaded = 1;
@@ -2372,9 +2371,9 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 		// echo $searchTermHolder;exit;
 
 		$searchBoxesRs = $this->getUserCategoriesTable()->getSearchPublicBoxes( $searchTermHolder );
-		//echo "<pre>";print_r($searchBoxesRs->toArray()); exit;
 		$publicBoxesHtml = "";
 		$zeroPublicBoxesFound = 0;
+		$boxesCount=0;
 		if( $searchBoxesRs->count() == 0 )
 		{
 			$zeroPublicBoxesFound = 1;
@@ -2383,6 +2382,10 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				'publicBoxesHtml'		=>	$publicBoxesHtml
 			));	
 			return $result;
+		}
+		if( $searchBoxesRs->count() == 1 )
+		{
+			$boxesCount=$searchBoxesRs->count();
 		}
 		$publicBoxesHtml1='<div id="divDataboxWrapper" class="divCardsWrapper" data-columns>';
 		foreach( $searchBoxesRs as $currentBoxRow )
@@ -2525,6 +2528,8 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 	   
 		$result = new JsonModel(array(					
 			'zeroPublicBoxesFound' 	=>  $zeroPublicBoxesFound,
+			'boxesCount' 	=>  $boxesCount,
+			'url' 	=>  $displayCustomizationUrl,
 			'publicBoxesHtml'		=>	$publicBoxesHtml1
 		));	
 		return $result;

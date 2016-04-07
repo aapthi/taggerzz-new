@@ -1,6 +1,0 @@
-1	http://paytm.com		http://localhost/taggerzz-new/trunk/public/images/montage_default_images/paytm.png	no Description	no Author		1	0	
-2	www.paytm.com		http://localhost/taggerzz-new/trunk/public/images/montage_default_images/paytm.png	no Description	no Author		1	0	
-3	http://github.com		http://localhost/taggerzz-new/trunk/public/images/montage_default_images/github.png	no Description	no Author		1	0	
-4	www.github.com		http://localhost/taggerzz-new/trunk/public/images/montage_default_images/github.png	no Description	no Author		1	0	
-5	www.apherald.com	Telangana, Andhrapradesh, India Politics, Movie Reviews Latest Updates	http://Images.apherald.com/ImageStore/images/MOVIES/MOVIES_LATESTNEWS/prank-300x300.jpg	APHerald.com provides latest News | AP politics | Telugu Political News | Telugu Latest News | Telugu Movie Review | Tollywood Latest News | 2015	no Author	Live Updates, Latest News, andhra news, news in telugu, telugu politics news, telugu movies news, tollywood latest news, gossips, analysis, telngana	1	0	
-6	www.greatandhra.com	GreatAndhra - Godavari	http://www.greatandhra.com/images/great_andhra_logo.gif	no Description	no Author		1	0	
