@@ -32,7 +32,6 @@
                     <div id="divCardsWrapper" class="divCardsWrapper" style="min-height:310px;">
 						<?php if( isset($this->homehighlightBoxesArray) )
 					{foreach( $this->homehighlightBoxesArray as $key=>$currentBoxData ){
-					//echo "<pre>";print_r($currentBoxData);
 						$viewUrl = "";
 						if( isset($_SESSION['usersinfo']) )
 						{
@@ -79,32 +78,50 @@
                                 <div id="divCard-1-sharedLinks" class="divCardSharedLinks">
                                     <span class="fatFont"><?php echo $currentBoxData["categoryLinksCount"]; ?> HOT LINKS</span> collected and shared
                                 </div>
-								<div class="divbrg_f">00 <img src="<?php echo $basePath; ?>/img/love.png" alt="" width="15px"/></div>
-							<div class="divbrg_s">00 <img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px"/></div>
-							<div style="clear:both;"></div>
+							<div id="divCardLoveTrash<?php echo $currentBoxData["category_id"];?>">
+
+								<?php if((isset($_SESSION['usersinfo']->userId )&& $currentBoxData["userVoteId"]==$_SESSION['usersinfo']->userId) || $currentBoxData["userVoteId"]==$_SERVER['REMOTE_ADDR']){
+									if($currentBoxData["userVoteUp"]=='1'){?>
+									<div class="divbrg_f"><?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?> <img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/></div>
+								<div class="divbrg_s"><?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "0";}?> <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "00";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "00";}?>','<?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "00";}?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px"/></a></div>
+									<?php
+									}else if($currentBoxData["uservoteDown"]=='1'){?>
+									<div class="divbrg_f"><?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?> <a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "00";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "00";}?>','<?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "00";}?>');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" width="15px"/></a></div>
+									<div class="divbrg_s"><?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "0";}?> <img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px"/></div>
+									<?php
+									}}else{
+									?>
+									<div class="divbrg_f"><?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?> <a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "00";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>','<?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "00";}?>');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" width="15px"/></a></div>
+									<div class="divbrg_s"><?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "0";}?> <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "00";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>','<?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "00";}?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px"/></a></div>
+									<?php
+									}
+								?>
+								</div>
+                                  <input type="hidden" id="voting<?php echo $currentBoxData["category_id"];?>" name="voting<?php echo $currentBoxData["category_id"];?>" value="<?php if($currentBoxData["userVoteUp"]!=""){echo $currentBoxData["userVoteUp"];}else{ echo "3";}  ?>">
+                               <div style="clear:both;"></div>
                             </div>
 							</a>
                             <div id="divCard-1-contentWrapper" class="divCardContentWrapper">
                                 <div id="divCard-1-views" class="divCardViews views_w">
                                     <img src="<?php echo $basePath; ?>/img/views.png" alt="" /> <?php if($currentBoxData["views_count"]!=""){echo $currentBoxData["views_count"]; }else { echo "0"; } ?> views 
                                 </div>
-								<!--<span><?php echo round($currentBoxData["NetVotes"],2);?>% liked</span>-->
-                                <div id="divCardLoveTrash<?php echo $currentBoxData["category_id"];?>" class="divCardLoveTrash">
-									<?php if((isset($_SESSION['usersinfo']->userId )&& $currentBoxData["userVoteId"]==$_SESSION['usersinfo']->userId) || $currentBoxData["userVoteId"]==$_SERVER['REMOTE_ADDR']){
-									if($currentBoxData["userVoteUp"]=='1'){?>
-									<img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" />  or <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>');"> <img src="<?php echo $basePath; ?>/img/trash.png" alt="" /></a>
+								<!--<span><?php //echo round($currentBoxData["NetVotes"],2);?>% liked</span>-->
+                                <!--<div id="divCardLoveTrash<?php echo $currentBoxData["category_id"];?>" class="divCardLoveTrash">
+									<?php //if((isset($_SESSION['usersinfo']->userId )&& $currentBoxData["userVoteId"]==$_SESSION['usersinfo']->userId) || $currentBoxData["userVoteId"]==$_SERVER['REMOTE_ADDR']){
+									//if($currentBoxData["userVoteUp"]=='1'){?>
+									<img src="<?php //echo $basePath; ?>/img/love_ok.png" alt="" />  or <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>');"> <img src="<?php echo $basePath; ?>/img/trash.png" alt="" /></a>
 									<?php
-									}else if($currentBoxData["uservoteDown"]=='1'){?>
+									//}else if($currentBoxData["uservoteDown"]=='1'){?>
 									<a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" /></a>  or <img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" />
 									<?php
-									}}else{
+									//}}else{
 									?>
 									<a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" /></a>  or <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>');"> <img src="<?php echo $basePath; ?>/img/trash.png" alt="" /></a>
 									<?php
-									}
+									//}
 								?>
                                   <input type="hidden" id="voting<?php echo $currentBoxData["category_id"];?>" name="voting<?php echo $currentBoxData["category_id"];?>" value="<?php if($currentBoxData["userVoteUp"]!=""){echo $currentBoxData["userVoteUp"];}else{ echo "3";}  ?>">
-                                </div>
+                               </div>-->
 								<?php if($currentBoxData["category_title"]!=""){?>
 								<div id="divCard-1-title" class="divCardTitle">
                                    <h2 class="home_title_d"><?php echo $currentBoxData["category_title"];?></h2>
@@ -152,7 +169,6 @@
 						{
 							foreach( $this->homePublicBoxesArray as $key=>$currentBoxData )
 							{
-								//echo "<pre>";print_r($this->homePublicBoxesArray);exit;
 								$showMcNsfwPopup = false;
 								if( (! isset($_SESSION['usersinfo'])) && (($currentBoxData["mature_content"] == 1) || ($currentBoxData["not_safe_for_work"] == 1)) )
 								{
@@ -207,8 +223,26 @@
 								<?php } ?>
 								<div id="likes<?php echo $currentBoxData["category_id"];?>" class="divCardUserName likes_percentage"><h2><?php echo round($currentBoxData["likes"],2);?>% liked</h2></div>
                             </div>-->
-							<div class="divbrg_f"></div>
-							<div class="divbrg_s"></div>
+							<div id="divCardLoveTrash<?php echo $currentBoxData["category_id"];?>">
+							<?php if((isset($_SESSION['usersinfo']->userId )&& $currentBoxData["userVoteId"]==$_SESSION['usersinfo']->userId) || $currentBoxData["userVoteId"]==$_SERVER['REMOTE_ADDR']){
+									if($currentBoxData["userVoteUp"]=='1'){?>
+									<div class="divbrg_f"><?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?> <img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/></div>
+									<div class="divbrg_s"><?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "0";}?> <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "00";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "00";}?>','<?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "00";}?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /></a></div>
+									<?php
+									}else if($currentBoxData["uservoteDown"]=='1'){?>
+									<div class="divbrg_f"><?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?> <a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "00";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "00";}?>','<?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "00";}?>');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" width="15px" /></a></div>  
+									<div class="divbrg_s"><?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "0";}?> <img src="<?php echo $basePath; ?>/img/trash.png" alt=""width="10px" /></div>
+									<?php
+									}}else{
+									?>
+									<div class="divbrg_f"><?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?> <a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "00";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>','<?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "00";}?>');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" width="15px" /></a></div>
+									<div class="divbrg_s"><?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "0";}?> <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "00";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>','<?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "00";}?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /></a></div>
+									<?php
+									}
+								?>
+								<input type="hidden" id="voting<?php echo $currentBoxData["category_id"];?>" name="voting<?php echo $currentBoxData["category_id"];?>" value="<?php if($currentBoxData["userVoteUp"]!=""){echo $currentBoxData["userVoteUp"];}else{ echo "3";}  ?>">
+
+								</div>
 							<div style="clear:both;"></div>
                         </div>
                         <div id="divDatabox-1-contentWrapper" class="divCardContentWrapper">
@@ -217,23 +251,23 @@
                                 <img src="<?php echo $basePath; ?>/img/views.png" alt="" /> <?php if($currentBoxData["views_count"]!=""){echo $currentBoxData["views_count"]; }else { echo "0"; } ?> views
                             </div>
 							<!--<span><?php echo round($currentBoxData["likes"],2);?>% liked</span>-->
-                            <div id="divCardLoveTrash<?php echo $currentBoxData["category_id"];?>" class="divCardLoveTrash love_trash_color">
-								<?php if((isset($_SESSION['usersinfo']->userId )&& $currentBoxData["userVoteId"]==$_SESSION['usersinfo']->userId) || $currentBoxData["userVoteId"]==$_SERVER['REMOTE_ADDR']){
-									if($currentBoxData["userVoteUp"]=='1'){?>
+                            <!--<div id="divCardLoveTrash<?php echo $currentBoxData["category_id"];?>" class="divCardLoveTrash love_trash_color">
+								<?php //if((isset($_SESSION['usersinfo']->userId )&& $currentBoxData["userVoteId"]==$_SESSION['usersinfo']->userId) || $currentBoxData["userVoteId"]==$_SERVER['REMOTE_ADDR']){
+									//if($currentBoxData["userVoteUp"]=='1'){?>
 									<img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" />  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" /></a>
 									<?php
-									}else if($currentBoxData["uservoteDown"]=='1'){?>
+									//}else if($currentBoxData["uservoteDown"]=='1'){?>
 									<a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" /></a>  or  <img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" />
 									<?php
-									}}else{
+									//}}else{
 									?>
 									<a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" /></a>  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" /></a>
 									<?php
-									}
+									//}
 								?>
                             <input type="hidden" id="voting<?php echo $currentBoxData["category_id"];?>" name="voting<?php echo $currentBoxData["category_id"];?>" value="<?php if($currentBoxData["userVoteUp"]!=""){echo $currentBoxData["userVoteUp"];}else{ echo "3";}  ?>">
 
-							</div>
+							</div>-->
                         </div>
 							<?php if($currentBoxData["category_title"]!=""){?>
                             <div id="divDatabox-1-title" class="divCardTitle">

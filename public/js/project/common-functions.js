@@ -883,7 +883,7 @@ function checkSpaces()
 			  }
 		});
 	}
-	function likeDislikeCnt( newVoteValue,categoryId,rw_th,TotalvoteUp,Totalrw_lh )
+	function likeDislikeCnt( newVoteValue,categoryId,rw_th,TotalvoteUp,Totalrw_lh,TotalvoteDown )
 	{
 		var votingid=$('#voting'+categoryId).val();
 		var voteUrl = BASE_URL + "/databox/vote-on-highlight";
@@ -896,15 +896,23 @@ function checkSpaces()
 			if(newVoteValue==1){
 				if(votingid==3){
 					var newTotalvoteUp=parseInt(TotalvoteUp) + parseInt("1");
+					var newTotalvoteDown=parseInt(TotalvoteDown) - parseInt("1");
 					var newTotalrw_lh=parseInt(Totalrw_lh) + parseInt("1");
+					console.log('51'+newTotalvoteDown);
+
 				}
 				if(votingid==1){
 					var newTotalvoteUp=parseInt(TotalvoteUp) + parseInt("1");
+					var newTotalvoteDown=parseInt(TotalvoteDown) - parseInt("1");
 					var newTotalrw_lh=parseInt(Totalrw_lh) + parseInt("1");
+					console.log('52'+newTotalvoteDown);
 				} 
 				if(votingid==0){
 					var newTotalvoteUp=parseInt(TotalvoteUp) + parseInt("1");
+					var newTotalvoteDown=parseInt(TotalvoteDown) - parseInt("1");
 					var newTotalrw_lh=parseInt(Totalrw_lh);
+					console.log('53'+newTotalvoteDown);
+
 				}
 				var insertedActivityAjaxUrl = BASE_URL + "/databoxuser/record-activity-points";
 				$.ajax
@@ -919,32 +927,43 @@ function checkSpaces()
 			if(newVoteValue==0){
 				if(Totalrw_lh=="" || Totalrw_lh==0){
 					var newTotalvoteUp=parseInt(TotalvoteUp);		
+					var newTotalvoteDown=parseInt(TotalvoteDown) + parseInt("1");		
 					var newTotalrw_lh=parseInt(Totalrw_lh) + parseInt("1");
+					console.log('1'+newTotalvoteDown);
 				}else{
 					if(votingid==1){
 						var newTotalvoteUp=parseInt(TotalvoteUp)- parseInt("1");		
+						var newTotalvoteDown=parseInt(TotalvoteDown) + parseInt("1");		
 						var newTotalrw_lh=parseInt(Totalrw_lh);
+						console.log('2'+newTotalvoteDown);
 					}else if(votingid==0){
-						var newTotalvoteUp=parseInt(TotalvoteUp);		
+						var newTotalvoteUp=parseInt(TotalvoteUp);
+						var newTotalvoteDown=parseInt(TotalvoteDown);								
 						var newTotalrw_lh=parseInt(Totalrw_lh);
+						console.log('3'+newTotalvoteDown);
 					}else{
-						var newTotalvoteUp=parseInt(TotalvoteUp);		
+						var newTotalvoteUp=parseInt(TotalvoteUp);	
+						var newTotalvoteDown=parseInt(TotalvoteDown) + parseInt("1");		
 						var newTotalrw_lh=parseInt(Totalrw_lh) + parseInt("1");
-						
+						console.log('4'+newTotalvoteDown);
 					}
 				}
 				
 			}
 			var like=(parseInt(newTotalvoteUp)/parseInt(newTotalrw_lh))*100;
 			like1 = Math.round(like * 100) / 100;
-			$('#likes'+categoryId).html('<h2>'+like1+'% liked</h2>');
+
+			var DislikePercentage=(parseInt(newTotalvoteDown)/parseInt(newTotalrw_lh))*100;
+			DislikePercentage1 = Math.round(DislikePercentage * 100) / 100;
+			//$('#likes'+categoryId).html('<h2>'+like1+'% liked</h2>');
 			if(newVoteValue==1){
-				var clickAppendHtml='<img src="'+BASE_URL+'/public/img/love_ok.png" alt="" />  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'+categoryId+',1,'+newTotalvoteUp+','+newTotalrw_lh+')"><img src="'+BASE_URL+'/public/img/trash.png" alt="" /></a>';
+				var clickAppendHtml='<div class="divbrg_f">'+newTotalvoteUp+' <img src="'+BASE_URL+'/public/img/love_ok.png" alt=""  width="15px"/></div>';
+				clickAppendHtml+='<div class="divbrg_s">'+newTotalvoteDown+' <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'+categoryId+',1,'+newTotalvoteUp+','+newTotalrw_lh+','+newTotalvoteDown+')"><img src="'+BASE_URL+'/public/img/trash.png" alt="" width="10px" /></a></div>';
 				clickAppendHtml+='<input type="hidden" id="voting'+categoryId+'" name="voting'+categoryId+'" value="1">';
 			}else{
-				var clickAppendHtml='<a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'+categoryId+',1,'+newTotalvoteUp+','+newTotalrw_lh+')" ><img src="'+BASE_URL+'/public/img/love.png" alt="" /></a>  or  <img src="'+BASE_URL+'/public/img/love_ok.png" alt="" />';
+				var clickAppendHtml='<div class="divbrg_f">'+newTotalvoteUp+' <a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'+categoryId+',1,'+newTotalvoteUp+','+newTotalrw_lh+','+newTotalvoteDown+')" ><img src="'+BASE_URL+'/public/img/love.png" alt="" width="15px" /></a></div>';
+				clickAppendHtml+='<div class="divbrg_s">'+newTotalvoteDown+' <img src="'+BASE_URL+'/public/img/trash.png" alt="" width="10px"/></div>';
 				clickAppendHtml+='<input type="hidden" id="voting'+categoryId+'" name="voting'+categoryId+'" value="0">';
-
 			}
 			$('#divCardLoveTrash'+categoryId).html(clickAppendHtml);
 		  }
