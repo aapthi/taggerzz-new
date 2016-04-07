@@ -2209,7 +2209,7 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 						$publicBoxesHtml .=	'<div class="divbrg_s">'.$currentBoxRow->voteDown.' <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')"><img src="'.$basePath .'/img/trash.png" alt="" width="10px" /></a></div>';
 					}else if($currentBoxRow->uservoteDown=='1'){	
 						$publicBoxesHtml .=	'<div class="divbrg_f">'.$currentBoxRow->voteUp.' <a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')"><img src="'. $basePath .'/img/love.png" alt="" width="15px" /></a></div>';
-						$publicBoxesHtml .=	'<div class="divbrg_s">'.$currentBoxRow->voteDown.' <img src="'.$basePath .'/img/love_ok.png" alt="" width="10px" /></div>';
+						$publicBoxesHtml .=	'<div class="divbrg_s">'.$currentBoxRow->voteDown.' <img src="'.$basePath .'/img/trash.png" alt="" width="10px" /></div>';
 					}
 				}else{	
 						$publicBoxesHtml .=	'<div class="divbrg_f">'.$currentBoxRow->voteUp.' <a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')"><img src="'. $basePath .'/img/love.png" alt="" width="15px"  /></a></div>';
@@ -2493,13 +2493,34 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				//}
 					//$publicBoxesHtml1 .= ' <div id="likes'.$currentBoxRow->category_id.'" class="divCardUserName likes_percentage"><h2>'.$roundLikes.' % liked</h2></div>';
 				//$publicBoxesHtml1 .='</div>';
-				$publicBoxesHtml1 .=' <div class="divbrg_f"></div><div class="divbrg_s"></div><div style="clear:both;"></div></div>';
+				$publicBoxesHtml1 .='<div id="divCardLoveTrash'.$currentBoxRow->category_id.'" >';
+				if((isset($_SESSION['usersinfo']->userId )&& $currentBoxRow->userVoteId==$_SESSION['usersinfo']->userId) || $currentBoxRow->userVoteId==$_SERVER['REMOTE_ADDR']){
+					if($currentBoxRow->userVoteUp=='1'){
+						$publicBoxesHtml1 .=	'<div class="divbrg_f">'.$currentBoxRow->voteUp.' <img src="'. $basePath .'/img/love_ok.png" alt="" width="15px" /></div>';
+						$publicBoxesHtml1 .=	'<div class="divbrg_s">'.$currentBoxRow->voteDown.' <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')"><img src="'.$basePath .'/img/trash.png" alt="" width="10px" /></a></div>';
+					}else if($currentBoxRow->uservoteDown=='1'){	
+						$publicBoxesHtml1 .=	'<div class="divbrg_f">'.$currentBoxRow->voteUp.' <a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')"><img src="'. $basePath .'/img/love.png" alt="" width="15px" /></a></div>';
+						$publicBoxesHtml1 .=	'<div class="divbrg_s">'.$currentBoxRow->voteDown.' <img src="'.$basePath .'/img/trash.png" alt="" width="10px" /></div>';
+					}
+				}else{	
+						$publicBoxesHtml1 .=	'<div class="divbrg_f">'.$currentBoxRow->voteUp.' <a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')"><img src="'. $basePath .'/img/love.png" alt="" width="15px"  /></a></div>';
+						$publicBoxesHtml1 .=	'<div class="divbrg_s">'.$currentBoxRow->voteDown.' <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')"><img src="'.$basePath .'/img/trash.png" alt="" width="10px" /></a></div>';
+				}
+				$userVoteUpTz = "3";
+				if($currentBoxRow->userVoteUp!=""){
+					$userVoteUpTz = $currentBoxRow->userVoteUp;
+				}
+				$publicBoxesHtml1 .='<input type="hidden" id="voting'.$currentBoxRow->category_id.'" name="voting'.$currentBoxRow->category_id.'" value="'.$userVoteUpTz.'">';
+				$publicBoxesHtml1 .='</div>';
+				$publicBoxesHtml1 .='<div style="clear:both;"></div>';
+
+				//$publicBoxesHtml1 .=' <div class="divbrg_f"></div><div class="divbrg_s"></div><div style="clear:both;"></div></div>';
 			    $publicBoxesHtml1 .='<div id="divDatabox-1-contentWrapper" class="divCardContentWrapper"><div>';
 				$publicBoxesHtml1 .='<div id="divDatabox-1-views" class="divCardViews views_w">';
-					$publicBoxesHtml1 .='<img src="'. $basePath .'/img/views.png" alt="" /> '.$viewsCount.' views';
-			   $publicBoxesHtml1 .='</div>';
+				$publicBoxesHtml1 .='<img src="'. $basePath .'/img/views.png" alt="" /> '.$viewsCount.' views';
+				$publicBoxesHtml1 .='</div>';
 			  // $publicBoxesHtml .='<span>'.$roundLikes.'% liked</span>';
-				$publicBoxesHtml1 .='<div id="divCardLoveTrash'.$currentBoxRow->category_id.'" class="divCardLoveTrash">';
+				/*$publicBoxesHtml1 .='<div id="divCardLoveTrash'.$currentBoxRow->category_id.'" class="divCardLoveTrash">';
 				if((isset($_SESSION['usersinfo']->userId )&& $currentBoxRow->userVoteId==$_SESSION['usersinfo']->userId) || $currentBoxRow->userVoteId==$_SERVER['REMOTE_ADDR']){
 					if($currentBoxRow->userVoteUp=='1'){
 						$publicBoxesHtml1 .=	'<img src="'. $basePath .'/img/love_ok.png" alt="" />  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'.$basePath .'/img/trash.png" alt="" /></a>';
@@ -2515,6 +2536,9 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				}
 				$publicBoxesHtml1 .='<input type="hidden" id="voting'.$currentBoxRow->category_id.'" name="voting'.$currentBoxRow->category_id.'" value="'.$userVoteUpTz.'">';
 				$publicBoxesHtml1 .='</div></div>';
+				*/
+				$publicBoxesHtml1 .='</div></div>';
+
 				if($currentBoxRow->category_title !=""){
 				$publicBoxesHtml1 .='<div id="divDatabox-1-title" class="divCardTitle"><h2 class="home_title_d"> '. $currentBoxRow->category_title .
 				'</h2></div>';
@@ -2579,6 +2603,10 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				'privateBoxHtml'		=>	$privateBoxHtml
 			));	
 			return $result;
+		}
+		if( $privateBoxRs->count() == 1 )
+		{
+			$boxesCount=$privateBoxRs->count();
 		}
 		$privateBoxHtml.='<div id="divDataboxWrapper" class="divCardsWrapper" data-columns>';
 		foreach( $privateBoxRs as $currentBoxRow )
@@ -2659,12 +2687,33 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				//}
 					//$privateBoxHtml .= ' <div  id="likes'.$currentBoxRow->category_id.'" class="divCardUserName likes_percentage"><h2>'. $roundLikes.' % liked</h2></div>';
 				//$privateBoxHtml .='</div>';
-			$privateBoxHtml .='<div class="divbrg_f"></div><div class="divbrg_s"></div><div style="clear:both;"></div></div>';
+				$privateBoxHtml .='<div id="divCardLoveTrash'.$currentBoxRow->category_id.'" >';
+				if((isset($_SESSION['usersinfo']->userId )&& $currentBoxRow->userVoteId==$_SESSION['usersinfo']->userId) || $currentBoxRow->userVoteId==$_SERVER['REMOTE_ADDR']){
+					if($currentBoxRow->userVoteUp=='1'){
+						$privateBoxHtml .=	'<div class="divbrg_f">'.$currentBoxRow->voteUp.' <img src="'. $basePath .'/img/love_ok.png" alt="" width="15px" /></div>';
+						$privateBoxHtml .=	'<div class="divbrg_s">'.$currentBoxRow->voteDown.' <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')"><img src="'.$basePath .'/img/trash.png" alt="" width="10px" /></a></div>';
+					}else if($currentBoxRow->uservoteDown=='1'){	
+						$privateBoxHtml .=	'<div class="divbrg_f">'.$currentBoxRow->voteUp.' <a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')"><img src="'. $basePath .'/img/love.png" alt="" width="15px" /></a></div>';
+						$privateBoxHtml .=	'<div class="divbrg_s">'.$currentBoxRow->voteDown.' <img src="'.$basePath .'/img/trash.png" alt="" width="10px" /></div>';
+					}
+				}else{	
+						$privateBoxHtml .=	'<div class="divbrg_f">'.$currentBoxRow->voteUp.' <a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')"><img src="'. $basePath .'/img/love.png" alt="" width="15px"  /></a></div>';
+						$privateBoxHtml .=	'<div class="divbrg_s">'.$currentBoxRow->voteDown.' <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')"><img src="'.$basePath .'/img/trash.png" alt="" width="10px" /></a></div>';
+				}
+				$userVoteUpTz = "3";
+				if($currentBoxRow->userVoteUp!=""){
+					$userVoteUpTz = $currentBoxRow->userVoteUp;
+				}
+				$privateBoxHtml .='<input type="hidden" id="voting'.$currentBoxRow->category_id.'" name="voting'.$currentBoxRow->category_id.'" value="'.$userVoteUpTz.'">';
+				$privateBoxHtml .='</div>';
+				$privateBoxHtml .='<div style="clear:both;"></div>';
+
+			//$privateBoxHtml .='<div class="divbrg_f"></div><div class="divbrg_s"></div><div style="clear:both;"></div></div>';
 			$privateBoxHtml .='<div id="divDatabox-1-contentWrapper" class="divCardContentWrapper">';
 				$privateBoxHtml .='<div id="divDatabox-1-views" class="divCardViews views_w">';
 					$privateBoxHtml .='<img src="'. $basePath .'/img/views.png" alt="" /> '.$viewsCount.' views';
 			   $privateBoxHtml .='</div>';
-				$privateBoxHtml .='<div id="divCardLoveTrash'.$currentBoxRow->category_id.'" class="divCardLoveTrash">';
+				/*$privateBoxHtml .='<div id="divCardLoveTrash'.$currentBoxRow->category_id.'" class="divCardLoveTrash">';
 				if((isset($_SESSION['usersinfo']->userId )&& $currentBoxRow->userVoteId==$_SESSION['usersinfo']->userId) || $currentBoxRow->userVoteId==$_SERVER['REMOTE_ADDR']){
 					if($currentBoxRow->userVoteUp=='1'){
 						$privateBoxHtml .=	'<img src="'. $basePath .'/img/love_ok.png" alt="" />  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.')"><img src="'.$basePath .'/img/trash.png" alt="" /></a>';
@@ -2680,6 +2729,9 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				}
 				$privateBoxHtml .='<input type="hidden" id="voting'.$currentBoxRow->category_id.'" name="voting'.$currentBoxRow->category_id.'" value="'.$userVoteUpTz.'">';
 				$privateBoxHtml .='</div></div>';
+			*/	
+			$privateBoxHtml .='</div></div>';
+
 				if($currentBoxRow->category_title !=""){
 					$privateBoxHtml .='<div id="divDatabox-1-title" class="divCardTitle"><h2 class="home_title_d"> '. $currentBoxRow->category_title .
 					'</h2></div>';
@@ -2713,6 +2765,8 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				$privateBoxHtml .='</div>';
 		$result = new JsonModel(array(					
 			'zeroPrivateBoxFound' 	=>  $zeroPrivateBoxFound,
+			'boxesCount' 	=>  $boxesCount,
+			'url' 	=>  $displayCustomizationUrl,
 			'privateBoxHtml'		=>	$privateBoxHtml
 		));	
 		return $result;

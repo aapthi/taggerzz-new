@@ -489,7 +489,7 @@ $(document).ready(function(){
 					}
 					if( parseInt(data.boxesCount) == parseInt("1") )
 					{
-						window.location="http://localhost/taggerzz-new/trunk/databox/post-vertical/3+5+EducationNews+Education-Information";
+						window.location=data.url;
 					}
 					$('#list_public_boxes').html( data.publicBoxesHtml );
 					//nicesscrollPublic.resize();
@@ -534,6 +534,10 @@ $(document).ready(function(){
 						$( "#homePageSection" ).val( 1 );
 					}
 					$('#list_public_boxes').html( data.privateBoxHtml );
+					if( parseInt(data.boxesCount) == parseInt("1") )
+					{
+						window.location=data.url;
+					}
 					windowtz.off('scroll',scrollPublicBoxesHandler);
 					$( "#publicBoxesOn" ).val( 0 );
 					$('html,body').animate({ scrollTop: $("#list_public_boxes").offset().top}, 1000);
