@@ -436,7 +436,7 @@ $(document).ready(function(){
 		
 		$(location).attr('href');
 		var pathname = window.location.pathname;
-		if(pathname!='/contentpage'){
+		if(pathname!='/taggerzz-new/trunk/contentpage'){
 			var serTerm = search.substring(1, (search.length)); 
 			var serCode = $( "#pvtUniqueCodeHolder" ).val();
 			var tzSearchUrl = "";
