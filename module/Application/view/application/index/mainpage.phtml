@@ -15,8 +15,11 @@
 <input type="hidden" id="montageBoxesOffset" value="0" />
 <input type="hidden" id="publicBoxesOn" value="1" />
 <input type="hidden" id="montageBoxesOn" value="1" />
+<input type="hidden" id="filterBoxesOn" value="1" />
 <input type="hidden" id="homepageSearched" value="0" />
 <input type="hidden" id="pboxesOnBeforeSearch" value="0" />
+<input type="hidden" id="publicBoxesfilterVal" value="0" />
+
 
 <div class="clearfix"></div>
 
@@ -160,7 +163,7 @@
 			<div class="tmar_t20 pad_lr">
             <section id="secDataboxes" class="secDataboxes">
                 <div id="divDataboxesHeading" class="divHeadingLabel">
-                   <a href="Javascript:void(0);" id="publicBoxesLink">Public Databoxes</a><?php if( isset($_SESSION['usersinfo']) ) {?>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="Javascript:void(0);" id="memCollectionsLink">Members</a><?php } ?>
+                   <a href="Javascript:void(0);" id="publicBoxesLink">Public Databoxes</a><?php if( isset($_SESSION['usersinfo']) ) {?>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="Javascript:void(0);" id="memCollectionsLink">Members</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="Javascript:void(0);" id="publicBoxesLinkForAll">All</a><?php } ?>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="Javascript:void(0);" id="publicBoxesLinkForNew">New</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="Javascript:void(0);" id="publicBoxesLinkForTrending">Trending</a><?php if( isset($_SESSION['usersinfo']) ) {?>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="Javascript:void(0);" id="publicBoxesLinkForMyPosts">My Posts</a><?php } ?>
                 </div>
 				<div id="list_public_boxes" >
                 <div id="divDataboxWrapper" class="divCardsWrapper" data-columns>
@@ -303,7 +306,559 @@
 				</div>-->
 			</div>
               </div>
+				<!-- newly added for filtering -->
+			<div id="list_public_boxesForNew" style="display:none;">
+                <div id="divDataboxWrapper" class="divCardsWrapper" data-columns>
+					<?php
+						if( isset($this->homePublicBoxesNewArray) )
+						{
+							foreach( $this->homePublicBoxesNewArray as $key=>$currentBoxData )
+							{
+								$showMcNsfwPopup = false;
+								if( (! isset($_SESSION['usersinfo'])) && (($currentBoxData["mature_content"] == 1) || ($currentBoxData["not_safe_for_work"] == 1)) )
+								{
+									$showMcNsfwPopup = true;
+								}
+								
+								$viewUrl = "";
+								if( isset($_SESSION['usersinfo']) )
+								{
+									if($currentBoxData['settingId']==3){
+										$viewUrl = "post-vertical";
+									}else{
+										$viewUrl = "post-horizontal";
+									}
+								}
+								else
+								{
+									if($currentBoxData['settingId']==3){
+										$viewUrl = "pre-vertical";
+									}else{
+										$viewUrl = "pre-horizontal";
+									}
+								}
+								$displayCustomizationUrl = $baseUrl;
+								$catTitles = str_replace( "-","~",$currentBoxData["category_title"] );
+								$catTitle = str_replace( " ","-",$catTitles );
+								$catHashName = substr( $currentBoxData["user_hashname"],1 );
+								$catImageUrl=explode(".",$currentBoxData["category_image"]);
+								$userImageUrl=$currentBoxData["image"];
+								$catImageUrll=$catImageUrl[0];
+								$displayCustomizationUrl .= "/databox/" . $viewUrl . "/" . $currentBoxData["category_id"] . "+" . $catImageUrll . "+" . $catHashName . "+" . $catTitle;?>
+								
+				    <div id="divDatabox-1" class="divCard" draggable="true">
+                        <div id="divDatabox-1-imageWrapper" class="divCardImageWrapper">
+							<?php if( $showMcNsfwPopup ){  ?><a href="javascript:void(0)" onClick='Javascript:displayNsfwMc(<?php echo $currentBoxData["category_id"]; ?>,"<?php echo $currentBoxData["user_hashname"]?>","<?php echo $currentBoxData["category_title"]; ?>",<? echo $currentBoxData["settingId"]?>,"<? echo $catImageUrll?>");'><img src="<?php echo $basePath; ?>/images/social_media/mature_content.jpg"  /></a>
+							<?php } else { ?>
+                            <a href="<?php echo $displayCustomizationUrl; ?>"><img id="Databox-1-img" class="" alt="<?php echo $currentBoxData["user_hashname"]; ?>" src="<?php echo $basePath.'/images/project/categoryImages/'.$currentBoxData["category_image"]; ?>"/></a>
+							<?php } ?>
+                            <div id="divDatabox-1-hashtag" class="divCardHashtag hash_tag_color">
+                              <a href="<?php echo $displayCustomizationUrl; ?>"><h2 class="hashtagh2_size"><?php echo $currentBoxData["user_hashname"];?></h2></a>
+                            </div>
+
+                            <div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">
+                                <span class="fatFont"><?php echo $currentBoxData["categoryLinksCount"]; ?> HOT LINKS</span> collected and shared
+                            </div>
+                           <!-- <div id="Card-1-user" class="divCardUser">
+							<div class="divCardUserName">By: <?php echo $currentBoxData["display_name"];?></div>
+								<?php if($currentBoxData["montage_image"]!=""){?>
+                               <div class="pdatabox_profile">
+								<img  src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $currentBoxData["montage_image"];?>" class="imgUserImage" alt="" />
+							   </div><br/>
+								<?php } ?>
+								<div id="likes<?php echo $currentBoxData["category_id"];?>" class="divCardUserName likes_percentage"><h2><?php echo round($currentBoxData["likes"],2);?>% liked</h2></div>
+                            </div>-->
+							<div id="divCardLoveTrash<?php echo $currentBoxData["category_id"];?>">
+							<?php if((isset($_SESSION['usersinfo']->userId )&& $currentBoxData["userVoteId"]==$_SESSION['usersinfo']->userId) || $currentBoxData["userVoteId"]==$_SERVER['REMOTE_ADDR']){
+									if($currentBoxData["userVoteUp"]=='1'){?>
+									<div class="divbrg_f"><?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?> <img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/></div>
+									<div class="divbrg_s"><?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "0";}?> <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "00";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "00";}?>','<?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "00";}?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /></a></div>
+									<?php
+									}else if($currentBoxData["uservoteDown"]=='1'){?>
+									<div class="divbrg_f"><?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?> <a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "00";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "00";}?>','<?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "00";}?>');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" width="15px" /></a></div>  
+									<div class="divbrg_s"><?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "0";}?> <img src="<?php echo $basePath; ?>/img/trash.png" alt=""width="10px" /></div>
+									<?php
+									}}else{
+									?>
+									<div class="divbrg_f"><?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?> <a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "00";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>','<?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "00";}?>');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" width="15px" /></a></div>
+									<div class="divbrg_s"><?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "0";}?> <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "00";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>','<?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "00";}?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /></a></div>
+									<?php
+									}
+								?>
+								<input type="hidden" id="voting<?php echo $currentBoxData["category_id"];?>" name="voting<?php echo $currentBoxData["category_id"];?>" value="<?php if($currentBoxData["userVoteUp"]!=""){echo $currentBoxData["userVoteUp"];}else{ echo "3";}  ?>">
+
+								</div>
+							<div style="clear:both;"></div>
+                        </div>
+                        <div id="divDatabox-1-contentWrapper" class="divCardContentWrapper">
+						<div>
+                            <div id="divDatabox-1-views" class="divCardViews views_w">
+                                <img src="<?php echo $basePath; ?>/img/views.png" alt="" /> <?php if($currentBoxData["views_count"]!=""){echo $currentBoxData["views_count"]; }else { echo "0"; } ?> views
+                            </div>
+							<!--<span><?php echo round($currentBoxData["likes"],2);?>% liked</span>-->
+                            <!--<div id="divCardLoveTrash<?php echo $currentBoxData["category_id"];?>" class="divCardLoveTrash love_trash_color">
+								<?php //if((isset($_SESSION['usersinfo']->userId )&& $currentBoxData["userVoteId"]==$_SESSION['usersinfo']->userId) || $currentBoxData["userVoteId"]==$_SERVER['REMOTE_ADDR']){
+									//if($currentBoxData["userVoteUp"]=='1'){?>
+									<img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" />  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" /></a>
+									<?php
+									//}else if($currentBoxData["uservoteDown"]=='1'){?>
+									<a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" /></a>  or  <img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" />
+									<?php
+									//}}else{
+									?>
+									<a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" /></a>  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" /></a>
+									<?php
+									//}
+								?>
+                            <input type="hidden" id="voting<?php echo $currentBoxData["category_id"];?>" name="voting<?php echo $currentBoxData["category_id"];?>" value="<?php if($currentBoxData["userVoteUp"]!=""){echo $currentBoxData["userVoteUp"];}else{ echo "3";}  ?>">
+
+							</div>-->
+                        </div>
+							<?php if($currentBoxData["category_title"]!=""){?>
+                            <div id="divDatabox-1-title" class="divCardTitle">
+                                <h2 class="home_title_d"><?php echo $currentBoxData["category_title"];?></h2>
+                            </div>
+							<?php } ?>
+							<?php if($currentBoxData["meta_tags"]!=""){?>
+							 <div id="divCardKeywords" class="divCardKeywords">
+								<h3 class="home_keyword_h3"><b>Keywords: </b><?php echo $currentBoxData["meta_tags"];?></h3>
+							 </div>
+							 <?php } ?>
+							 <?php if($currentBoxData["category_description"]!=""){?>
+                            <div id="divDatabox-1-description" class="divCardDescription home_de_brg_t home_title_des_s">
+							<?php if($currentBoxData["category_description"]!=""){
+								if(strlen($currentBoxData["category_description"])>155)
+								{
+									echo substr($currentBoxData["category_description"],0,155) . '...';
+								}
+								else
+								{
+									echo $currentBoxData["category_description"];
+								}
+							}?>
+                            </div>
+							<?php } ?>
+                        </div>
+                    </div>
+						<?php } }?>
+                </div>
+				<div id="publicBoxesLoadingDiv" style="position:relative;display:none;" >
+			</div>
+              </div>	
+			  <div id="list_public_boxesForTrending" style="display:none;">
+                <div id="divDataboxWrapper" class="divCardsWrapper" data-columns>
+					<?php
+						if( isset($this->homePublicBoxesTrendingArray) )
+						{
+							foreach( $this->homePublicBoxesTrendingArray as $key=>$currentBoxData )
+							{
+								$showMcNsfwPopup = false;
+								if( (! isset($_SESSION['usersinfo'])) && (($currentBoxData["mature_content"] == 1) || ($currentBoxData["not_safe_for_work"] == 1)) )
+								{
+									$showMcNsfwPopup = true;
+								}
+								
+								$viewUrl = "";
+								if( isset($_SESSION['usersinfo']) )
+								{
+									if($currentBoxData['settingId']==3){
+										$viewUrl = "post-vertical";
+									}else{
+										$viewUrl = "post-horizontal";
+									}
+								}
+								else
+								{
+									if($currentBoxData['settingId']==3){
+										$viewUrl = "pre-vertical";
+									}else{
+										$viewUrl = "pre-horizontal";
+									}
+								}
+								$displayCustomizationUrl = $baseUrl;
+								$catTitles = str_replace( "-","~",$currentBoxData["category_title"] );
+								$catTitle = str_replace( " ","-",$catTitles );
+								$catHashName = substr( $currentBoxData["user_hashname"],1 );
+								$catImageUrl=explode(".",$currentBoxData["category_image"]);
+								$userImageUrl=$currentBoxData["image"];
+								$catImageUrll=$catImageUrl[0];
+								$displayCustomizationUrl .= "/databox/" . $viewUrl . "/" . $currentBoxData["category_id"] . "+" . $catImageUrll . "+" . $catHashName . "+" . $catTitle;?>
+								
+				    <div id="divDatabox-1" class="divCard" draggable="true">
+                        <div id="divDatabox-1-imageWrapper" class="divCardImageWrapper">
+							<?php if( $showMcNsfwPopup ){  ?><a href="javascript:void(0)" onClick='Javascript:displayNsfwMc(<?php echo $currentBoxData["category_id"]; ?>,"<?php echo $currentBoxData["user_hashname"]?>","<?php echo $currentBoxData["category_title"]; ?>",<? echo $currentBoxData["settingId"]?>,"<? echo $catImageUrll?>");'><img src="<?php echo $basePath; ?>/images/social_media/mature_content.jpg"  /></a>
+							<?php } else { ?>
+                            <a href="<?php echo $displayCustomizationUrl; ?>"><img id="Databox-1-img" class="" alt="<?php echo $currentBoxData["user_hashname"]; ?>" src="<?php echo $basePath.'/images/project/categoryImages/'.$currentBoxData["category_image"]; ?>"/></a>
+							<?php } ?>
+                            <div id="divDatabox-1-hashtag" class="divCardHashtag hash_tag_color">
+                              <a href="<?php echo $displayCustomizationUrl; ?>"><h2 class="hashtagh2_size"><?php echo $currentBoxData["user_hashname"];?></h2></a>
+                            </div>
+
+                            <div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">
+                                <span class="fatFont"><?php echo $currentBoxData["categoryLinksCount"]; ?> HOT LINKS</span> collected and shared
+                            </div>
+                           <!-- <div id="Card-1-user" class="divCardUser">
+							<div class="divCardUserName">By: <?php echo $currentBoxData["display_name"];?></div>
+								<?php if($currentBoxData["montage_image"]!=""){?>
+                               <div class="pdatabox_profile">
+								<img  src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $currentBoxData["montage_image"];?>" class="imgUserImage" alt="" />
+							   </div><br/>
+								<?php } ?>
+								<div id="likes<?php echo $currentBoxData["category_id"];?>" class="divCardUserName likes_percentage"><h2><?php echo round($currentBoxData["likes"],2);?>% liked</h2></div>
+                            </div>-->
+							<div id="divCardLoveTrash<?php echo $currentBoxData["category_id"];?>">
+							<?php if((isset($_SESSION['usersinfo']->userId )&& $currentBoxData["userVoteId"]==$_SESSION['usersinfo']->userId) || $currentBoxData["userVoteId"]==$_SERVER['REMOTE_ADDR']){
+									if($currentBoxData["userVoteUp"]=='1'){?>
+									<div class="divbrg_f"><?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?> <img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/></div>
+									<div class="divbrg_s"><?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "0";}?> <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "00";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "00";}?>','<?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "00";}?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /></a></div>
+									<?php
+									}else if($currentBoxData["uservoteDown"]=='1'){?>
+									<div class="divbrg_f"><?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?> <a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "00";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "00";}?>','<?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "00";}?>');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" width="15px" /></a></div>  
+									<div class="divbrg_s"><?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "0";}?> <img src="<?php echo $basePath; ?>/img/trash.png" alt=""width="10px" /></div>
+									<?php
+									}}else{
+									?>
+									<div class="divbrg_f"><?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?> <a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "00";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>','<?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "00";}?>');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" width="15px" /></a></div>
+									<div class="divbrg_s"><?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "0";}?> <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "00";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>','<?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "00";}?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /></a></div>
+									<?php
+									}
+								?>
+								<input type="hidden" id="voting<?php echo $currentBoxData["category_id"];?>" name="voting<?php echo $currentBoxData["category_id"];?>" value="<?php if($currentBoxData["userVoteUp"]!=""){echo $currentBoxData["userVoteUp"];}else{ echo "3";}  ?>">
+
+								</div>
+							<div style="clear:both;"></div>
+                        </div>
+                        <div id="divDatabox-1-contentWrapper" class="divCardContentWrapper">
+						<div>
+                            <div id="divDatabox-1-views" class="divCardViews views_w">
+                                <img src="<?php echo $basePath; ?>/img/views.png" alt="" /> <?php if($currentBoxData["views_count"]!=""){echo $currentBoxData["views_count"]; }else { echo "0"; } ?> views
+                            </div>
+							<!--<span><?php echo round($currentBoxData["likes"],2);?>% liked</span>-->
+                            <!--<div id="divCardLoveTrash<?php echo $currentBoxData["category_id"];?>" class="divCardLoveTrash love_trash_color">
+								<?php //if((isset($_SESSION['usersinfo']->userId )&& $currentBoxData["userVoteId"]==$_SESSION['usersinfo']->userId) || $currentBoxData["userVoteId"]==$_SERVER['REMOTE_ADDR']){
+									//if($currentBoxData["userVoteUp"]=='1'){?>
+									<img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" />  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" /></a>
+									<?php
+									//}else if($currentBoxData["uservoteDown"]=='1'){?>
+									<a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" /></a>  or  <img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" />
+									<?php
+									//}}else{
+									?>
+									<a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" /></a>  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" /></a>
+									<?php
+									//}
+								?>
+                            <input type="hidden" id="voting<?php echo $currentBoxData["category_id"];?>" name="voting<?php echo $currentBoxData["category_id"];?>" value="<?php if($currentBoxData["userVoteUp"]!=""){echo $currentBoxData["userVoteUp"];}else{ echo "3";}  ?>">
+
+							</div>-->
+                        </div>
+							<?php if($currentBoxData["category_title"]!=""){?>
+                            <div id="divDatabox-1-title" class="divCardTitle">
+                                <h2 class="home_title_d"><?php echo $currentBoxData["category_title"];?></h2>
+                            </div>
+							<?php } ?>
+							<?php if($currentBoxData["meta_tags"]!=""){?>
+							 <div id="divCardKeywords" class="divCardKeywords">
+								<h3 class="home_keyword_h3"><b>Keywords: </b><?php echo $currentBoxData["meta_tags"];?></h3>
+							 </div>
+							 <?php } ?>
+							 <?php if($currentBoxData["category_description"]!=""){?>
+                            <div id="divDatabox-1-description" class="divCardDescription home_de_brg_t home_title_des_s">
+							<?php if($currentBoxData["category_description"]!=""){
+								if(strlen($currentBoxData["category_description"])>155)
+								{
+									echo substr($currentBoxData["category_description"],0,155) . '...';
+								}
+								else
+								{
+									echo $currentBoxData["category_description"];
+								}
+							}?>
+                            </div>
+							<?php } ?>
+                        </div>
+                    </div>
+						<?php } }?>
+                </div>
+				<div id="publicBoxesLoadingDiv" style="position:relative;display:none;" >
+			</div>
+            </div>		
+			<div id="list_public_boxesForMyPosts" style="display:none;">
+                <div id="divDataboxWrapper" class="divCardsWrapper" data-columns>
+					<?php
+						if( isset($this->homePublicBoxesMyPostsArray) )
+						{
+							foreach( $this->homePublicBoxesMyPostsArray as $key=>$currentBoxData )
+							{
+								$showMcNsfwPopup = false;
+								if( (! isset($_SESSION['usersinfo'])) && (($currentBoxData["mature_content"] == 1) || ($currentBoxData["not_safe_for_work"] == 1)) )
+								{
+									$showMcNsfwPopup = true;
+								}
+								
+								$viewUrl = "";
+								if( isset($_SESSION['usersinfo']) )
+								{
+									if($currentBoxData['settingId']==3){
+										$viewUrl = "post-vertical";
+									}else{
+										$viewUrl = "post-horizontal";
+									}
+								}
+								else
+								{
+									if($currentBoxData['settingId']==3){
+										$viewUrl = "pre-vertical";
+									}else{
+										$viewUrl = "pre-horizontal";
+									}
+								}
+								$displayCustomizationUrl = $baseUrl;
+								$catTitles = str_replace( "-","~",$currentBoxData["category_title"] );
+								$catTitle = str_replace( " ","-",$catTitles );
+								$catHashName = substr( $currentBoxData["user_hashname"],1 );
+								$catImageUrl=explode(".",$currentBoxData["category_image"]);
+								$userImageUrl=$currentBoxData["image"];
+								$catImageUrll=$catImageUrl[0];
+								$displayCustomizationUrl .= "/databox/" . $viewUrl . "/" . $currentBoxData["category_id"] . "+" . $catImageUrll . "+" . $catHashName . "+" . $catTitle;?>
+								
+				    <div id="divDatabox-1" class="divCard" draggable="true">
+                        <div id="divDatabox-1-imageWrapper" class="divCardImageWrapper">
+							<?php if( $showMcNsfwPopup ){  ?><a href="javascript:void(0)" onClick='Javascript:displayNsfwMc(<?php echo $currentBoxData["category_id"]; ?>,"<?php echo $currentBoxData["user_hashname"]?>","<?php echo $currentBoxData["category_title"]; ?>",<? echo $currentBoxData["settingId"]?>,"<? echo $catImageUrll?>");'><img src="<?php echo $basePath; ?>/images/social_media/mature_content.jpg"  /></a>
+							<?php } else { ?>
+                            <a href="<?php echo $displayCustomizationUrl; ?>"><img id="Databox-1-img" class="" alt="<?php echo $currentBoxData["user_hashname"]; ?>" src="<?php echo $basePath.'/images/project/categoryImages/'.$currentBoxData["category_image"]; ?>"/></a>
+							<?php } ?>
+                            <div id="divDatabox-1-hashtag" class="divCardHashtag hash_tag_color">
+                              <a href="<?php echo $displayCustomizationUrl; ?>"><h2 class="hashtagh2_size"><?php echo $currentBoxData["user_hashname"];?></h2></a>
+                            </div>
+
+                            <div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">
+                                <span class="fatFont"><?php echo $currentBoxData["categoryLinksCount"]; ?> HOT LINKS</span> collected and shared
+                            </div>
+                           <!-- <div id="Card-1-user" class="divCardUser">
+							<div class="divCardUserName">By: <?php echo $currentBoxData["display_name"];?></div>
+								<?php if($currentBoxData["montage_image"]!=""){?>
+                               <div class="pdatabox_profile">
+								<img  src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $currentBoxData["montage_image"];?>" class="imgUserImage" alt="" />
+							   </div><br/>
+								<?php } ?>
+								<div id="likes<?php echo $currentBoxData["category_id"];?>" class="divCardUserName likes_percentage"><h2><?php echo round($currentBoxData["likes"],2);?>% liked</h2></div>
+                            </div>-->
+							<div id="divCardLoveTrash<?php echo $currentBoxData["category_id"];?>">
+							<?php if((isset($_SESSION['usersinfo']->userId )&& $currentBoxData["userVoteId"]==$_SESSION['usersinfo']->userId) || $currentBoxData["userVoteId"]==$_SERVER['REMOTE_ADDR']){
+									if($currentBoxData["userVoteUp"]=='1'){?>
+									<div class="divbrg_f"><?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?> <img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/></div>
+									<div class="divbrg_s"><?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "0";}?> <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "00";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "00";}?>','<?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "00";}?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /></a></div>
+									<?php
+									}else if($currentBoxData["uservoteDown"]=='1'){?>
+									<div class="divbrg_f"><?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?> <a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "00";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "00";}?>','<?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "00";}?>');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" width="15px" /></a></div>  
+									<div class="divbrg_s"><?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "0";}?> <img src="<?php echo $basePath; ?>/img/trash.png" alt=""width="10px" /></div>
+									<?php
+									}}else{
+									?>
+									<div class="divbrg_f"><?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?> <a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "00";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>','<?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "00";}?>');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" width="15px" /></a></div>
+									<div class="divbrg_s"><?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "0";}?> <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "00";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>','<?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "00";}?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /></a></div>
+									<?php
+									}
+								?>
+								<input type="hidden" id="voting<?php echo $currentBoxData["category_id"];?>" name="voting<?php echo $currentBoxData["category_id"];?>" value="<?php if($currentBoxData["userVoteUp"]!=""){echo $currentBoxData["userVoteUp"];}else{ echo "3";}  ?>">
+
+								</div>
+							<div style="clear:both;"></div>
+                        </div>
+                        <div id="divDatabox-1-contentWrapper" class="divCardContentWrapper">
+						<div>
+                            <div id="divDatabox-1-views" class="divCardViews views_w">
+                                <img src="<?php echo $basePath; ?>/img/views.png" alt="" /> <?php if($currentBoxData["views_count"]!=""){echo $currentBoxData["views_count"]; }else { echo "0"; } ?> views
+                            </div>
+							<!--<span><?php echo round($currentBoxData["likes"],2);?>% liked</span>-->
+                            <!--<div id="divCardLoveTrash<?php echo $currentBoxData["category_id"];?>" class="divCardLoveTrash love_trash_color">
+								<?php //if((isset($_SESSION['usersinfo']->userId )&& $currentBoxData["userVoteId"]==$_SESSION['usersinfo']->userId) || $currentBoxData["userVoteId"]==$_SERVER['REMOTE_ADDR']){
+									//if($currentBoxData["userVoteUp"]=='1'){?>
+									<img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" />  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" /></a>
+									<?php
+									//}else if($currentBoxData["uservoteDown"]=='1'){?>
+									<a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" /></a>  or  <img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" />
+									<?php
+									//}}else{
+									?>
+									<a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" /></a>  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" /></a>
+									<?php
+									//}
+								?>
+                            <input type="hidden" id="voting<?php echo $currentBoxData["category_id"];?>" name="voting<?php echo $currentBoxData["category_id"];?>" value="<?php if($currentBoxData["userVoteUp"]!=""){echo $currentBoxData["userVoteUp"];}else{ echo "3";}  ?>">
+
+							</div>-->
+                        </div>
+							<?php if($currentBoxData["category_title"]!=""){?>
+                            <div id="divDatabox-1-title" class="divCardTitle">
+                                <h2 class="home_title_d"><?php echo $currentBoxData["category_title"];?></h2>
+                            </div>
+							<?php } ?>
+							<?php if($currentBoxData["meta_tags"]!=""){?>
+							 <div id="divCardKeywords" class="divCardKeywords">
+								<h3 class="home_keyword_h3"><b>Keywords: </b><?php echo $currentBoxData["meta_tags"];?></h3>
+							 </div>
+							 <?php } ?>
+							 <?php if($currentBoxData["category_description"]!=""){?>
+                            <div id="divDatabox-1-description" class="divCardDescription home_de_brg_t home_title_des_s">
+							<?php if($currentBoxData["category_description"]!=""){
+								if(strlen($currentBoxData["category_description"])>155)
+								{
+									echo substr($currentBoxData["category_description"],0,155) . '...';
+								}
+								else
+								{
+									echo $currentBoxData["category_description"];
+								}
+							}?>
+                            </div>
+							<?php } ?>
+                        </div>
+                    </div>
+						<?php } }?>
+                </div>
+				<div id="publicBoxesLoadingDiv" style="position:relative;display:none;" >
+			</div>
+              </div>  
+				<!-- End newly added for filtering -->
+				
 				<div id="publicBoxesDiv" style="display:none;">
+				 <div id="divDataboxWrapper" class="divCardsWrapper" data-columns>
+					<?php
+						if( isset($this->homePublicBoxesArray) )
+						{
+							foreach( $this->homePublicBoxesArray as $key=>$currentBoxData )
+							{
+								$showMcNsfwPopup = false;
+								if( (! isset($_SESSION['usersinfo'])) && (($currentBoxData["mature_content"] == 1) || ($currentBoxData["not_safe_for_work"] == 1)) )
+								{
+									$showMcNsfwPopup = true;
+								}
+								
+								$viewUrl = "";
+								if( isset($_SESSION['usersinfo']) )
+								{
+									if($currentBoxData['settingId']==3){
+										$viewUrl = "post-vertical";
+									}else{
+										$viewUrl = "post-horizontal";
+									}
+								}
+								else
+								{
+									if($currentBoxData['settingId']==3){
+										$viewUrl = "pre-vertical";
+									}else{
+										$viewUrl = "pre-horizontal";
+									}
+								}
+								$displayCustomizationUrl = $baseUrl;
+								$catTitles = str_replace( "-","~",$currentBoxData["category_title"] );
+								$catTitle = str_replace( " ","-",$catTitles );
+								$catHashName = substr( $currentBoxData["user_hashname"],1 );
+								$catImageUrl=explode(".",$currentBoxData["category_image"]);
+								$userImageUrl=$currentBoxData["image"];
+								$catImageUrll=$catImageUrl[0];
+								$displayCustomizationUrl .= "/databox/" . $viewUrl . "/" . $currentBoxData["category_id"] . "+" . $catImageUrll . "+" . $catHashName . "+" . $catTitle;?>
+								
+				    <div id="divDatabox-1" class="divCard" draggable="true">
+                        <div id="divDatabox-1-imageWrapper" class="divCardImageWrapper">
+							<?php if( $showMcNsfwPopup ){  ?><a href="javascript:void(0)" onClick='Javascript:displayNsfwMc(<?php echo $currentBoxData["category_id"]; ?>,"<?php echo $currentBoxData["user_hashname"]?>","<?php echo $currentBoxData["category_title"]; ?>",<? echo $currentBoxData["settingId"]?>,"<? echo $catImageUrll?>");'><img src="<?php echo $basePath; ?>/images/social_media/mature_content.jpg"  /></a>
+							<?php } else { ?>
+                            <a href="<?php echo $displayCustomizationUrl; ?>"><img id="Databox-1-img" class="" alt="<?php echo $currentBoxData["user_hashname"]; ?>" src="<?php echo $basePath.'/images/project/categoryImages/'.$currentBoxData["category_image"]; ?>"/></a>
+							<?php } ?>
+                            <div id="divDatabox-1-hashtag" class="divCardHashtag hash_tag_color">
+                              <a href="<?php echo $displayCustomizationUrl; ?>"><h2 class="hashtagh2_size"><?php echo $currentBoxData["user_hashname"];?></h2></a>
+                            </div>
+
+                            <div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">
+                                <span class="fatFont"><?php echo $currentBoxData["categoryLinksCount"]; ?> HOT LINKS</span> collected and shared
+                            </div>
+                           <!-- <div id="Card-1-user" class="divCardUser">
+							<div class="divCardUserName">By: <?php echo $currentBoxData["display_name"];?></div>
+								<?php if($currentBoxData["montage_image"]!=""){?>
+                               <div class="pdatabox_profile">
+								<img  src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $currentBoxData["montage_image"];?>" class="imgUserImage" alt="" />
+							   </div><br/>
+								<?php } ?>
+								<div id="likes<?php echo $currentBoxData["category_id"];?>" class="divCardUserName likes_percentage"><h2><?php echo round($currentBoxData["likes"],2);?>% liked</h2></div>
+                            </div>-->
+							<div id="divCardLoveTrash<?php echo $currentBoxData["category_id"];?>">
+							<?php if((isset($_SESSION['usersinfo']->userId )&& $currentBoxData["userVoteId"]==$_SESSION['usersinfo']->userId) || $currentBoxData["userVoteId"]==$_SERVER['REMOTE_ADDR']){
+									if($currentBoxData["userVoteUp"]=='1'){?>
+									<div class="divbrg_f"><?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?> <img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/></div>
+									<div class="divbrg_s"><?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "0";}?> <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "00";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "00";}?>','<?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "00";}?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /></a></div>
+									<?php
+									}else if($currentBoxData["uservoteDown"]=='1'){?>
+									<div class="divbrg_f"><?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?> <a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "00";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "00";}?>','<?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "00";}?>');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" width="15px" /></a></div>  
+									<div class="divbrg_s"><?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "0";}?> <img src="<?php echo $basePath; ?>/img/trash.png" alt=""width="10px" /></div>
+									<?php
+									}}else{
+									?>
+									<div class="divbrg_f"><?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?> <a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "00";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>','<?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "00";}?>');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" width="15px" /></a></div>
+									<div class="divbrg_s"><?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "0";}?> <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "00";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>','<?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "00";}?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /></a></div>
+									<?php
+									}
+								?>
+								<input type="hidden" id="voting<?php echo $currentBoxData["category_id"];?>" name="voting<?php echo $currentBoxData["category_id"];?>" value="<?php if($currentBoxData["userVoteUp"]!=""){echo $currentBoxData["userVoteUp"];}else{ echo "3";}  ?>">
+
+								</div>
+							<div style="clear:both;"></div>
+                        </div>
+                        <div id="divDatabox-1-contentWrapper" class="divCardContentWrapper">
+						<div>
+                            <div id="divDatabox-1-views" class="divCardViews views_w">
+                                <img src="<?php echo $basePath; ?>/img/views.png" alt="" /> <?php if($currentBoxData["views_count"]!=""){echo $currentBoxData["views_count"]; }else { echo "0"; } ?> views
+                            </div>
+							<!--<span><?php echo round($currentBoxData["likes"],2);?>% liked</span>-->
+                            <!--<div id="divCardLoveTrash<?php echo $currentBoxData["category_id"];?>" class="divCardLoveTrash love_trash_color">
+								<?php //if((isset($_SESSION['usersinfo']->userId )&& $currentBoxData["userVoteId"]==$_SESSION['usersinfo']->userId) || $currentBoxData["userVoteId"]==$_SERVER['REMOTE_ADDR']){
+									//if($currentBoxData["userVoteUp"]=='1'){?>
+									<img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" />  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" /></a>
+									<?php
+									//}else if($currentBoxData["uservoteDown"]=='1'){?>
+									<a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" /></a>  or  <img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" />
+									<?php
+									//}}else{
+									?>
+									<a href="Javascript:void(0);" onClick="return likeDislikeCnt('1','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>');"><img src="<?php echo $basePath; ?>/img/love.png" alt="" /></a>  or  <a href="Javascript:void(0);" onClick="return likeDislikeCnt('0','<?php echo $currentBoxData["category_id"];?>','1','<?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?>','<?php if($currentBoxData["rw_lh"]!=""){echo $currentBoxData["rw_lh"];}else{ echo "0";}?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" /></a>
+									<?php
+									//}
+								?>
+                            <input type="hidden" id="voting<?php echo $currentBoxData["category_id"];?>" name="voting<?php echo $currentBoxData["category_id"];?>" value="<?php if($currentBoxData["userVoteUp"]!=""){echo $currentBoxData["userVoteUp"];}else{ echo "3";}  ?>">
+
+							</div>-->
+                        </div>
+							<?php if($currentBoxData["category_title"]!=""){?>
+                            <div id="divDatabox-1-title" class="divCardTitle">
+                                <h2 class="home_title_d"><?php echo $currentBoxData["category_title"];?></h2>
+                            </div>
+							<?php } ?>
+							<?php if($currentBoxData["meta_tags"]!=""){?>
+							 <div id="divCardKeywords" class="divCardKeywords">
+								<h3 class="home_keyword_h3"><b>Keywords: </b><?php echo $currentBoxData["meta_tags"];?></h3>
+							 </div>
+							 <?php } ?>
+							 <?php if($currentBoxData["category_description"]!=""){?>
+                            <div id="divDatabox-1-description" class="divCardDescription home_de_brg_t home_title_des_s">
+							<?php if($currentBoxData["category_description"]!=""){
+								if(strlen($currentBoxData["category_description"])>155)
+								{
+									echo substr($currentBoxData["category_description"],0,155) . '...';
+								}
+								else
+								{
+									echo $currentBoxData["category_description"];
+								}
+							}?>
+                            </div>
+							<?php } ?>
+                        </div>
+                    </div>
+						<?php } }?>
+                </div>
+				
 				</div>
 				<!-- Members start -->
 				<div id="memCollectionBoxesDiv" style="display:none;">

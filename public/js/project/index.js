@@ -55,6 +55,26 @@ $(document).on("mousedown", "#memCollectionsLink", function(e) {
 		$('#memCollectionsLink').attr('href',BASE_URL);
 	}
 });
+$(document).on("mousedown", "#publicBoxesLinkForAll", function(e) {				
+	if( e.which == 2 ) {
+		$('#publicBoxesLinkForAll').attr('href',BASE_URL);
+	}
+});
+$(document).on("mousedown", "#publicBoxesLinkForNew", function(e) {				
+	if( e.which == 2 ) {
+		$('#publicBoxesLinkForNew').attr('href',BASE_URL);
+	}
+});
+$(document).on("mousedown", "#publicBoxesLinkForTrending", function(e) {				
+	if( e.which == 2 ) {
+		$('#publicBoxesLinkForTrending').attr('href',BASE_URL);
+	}
+});
+$(document).on("mousedown", "#publicBoxesLinkForMyPosts", function(e) {				
+	if( e.which == 2 ) {
+		$('#publicBoxesLinkForMyPosts').attr('href',BASE_URL);
+	}
+});
 $(document).on("mousedown", "#postHighliths", function(e) {	
 			
 	if( e.which == 2 ) {
@@ -142,12 +162,13 @@ $(document).ready(function(){
 				}
 
 				var publicBoxesOffset = $( "#publicBoxesOffset" ).val();
+				var publicBoxesfilterVal = $( "#publicBoxesfilterVal" ).val();
 				
 				var publicBoxesAjaxUrl = BASE_URL + "/databox/public-boxes-ajax";
 				$.ajax({
 				  url: publicBoxesAjaxUrl,
 				  type: "POST",
-				  data:{publicBoxesPerPage:publicBoxesPerPage,publicBoxesOffset:publicBoxesOffset},
+				  data:{publicBoxesPerPage:publicBoxesPerPage,publicBoxesOffset:publicBoxesOffset,publicBoxesfilterVal:publicBoxesfilterVal},
 				  async: false,
 				  dataType: "json",
 				  success: function(data) {
@@ -172,7 +193,7 @@ $(document).ready(function(){
 					}
 					else if( parseInt(data.publicBoxesAllLoaded) == parseInt("1") )
 					{
-					$( "#publicBoxesOn" ).val( 0 );
+					$( "#publicBoxesOn" ).val( 1 );
 						var cards = jQuery.parseJSON(data.cards);
 						jQuery.each(cards, function(index, value){
 							var item = document.createElement('div');
@@ -181,6 +202,8 @@ $(document).ready(function(){
 						    item.outerHTML = value;
 							$('#publicBoxesLoadingDiv').hide();
 						});
+						windowtz.on('scroll',scrollPublicBoxesHandler);
+
 					}
 				  },
 				});
@@ -320,21 +343,17 @@ $(document).ready(function(){
 	{
 		$( "#memCollectionsLink" ).click(function(event)
 		{
-			if( parseInt($( "#homePageSection" ).val()) == parseInt("2") )
-			{
-				return false;
-			}
-			$( "#homePageSection" ).val( 2 );
 			
+			$( "#homePageSection" ).val( 2 );
+			$( "#publicBoxesfilterVal" ).val(0);
 			if( parseInt($( "#publicBoxesOn" ).val()) == parseInt("1") )
 			{
 				windowtz.off("scroll",scrollPublicBoxesHandler);
 			}
 			//publicBoxesScrollTop = nicesxPublic.getScrollTop();
 			
-			$('#publicBoxesDiv').html( $('#list_public_boxes').html() );
 			$('#list_public_boxes').html( $('#memCollectionBoxesDiv').html() );
-		
+			
 
 			/*nicesxPublic.resize();
 			if( montageBoxesScrollTop !== null )
@@ -355,11 +374,9 @@ $(document).ready(function(){
 	{
 		$( "#publicBoxesLink" ).click(function(event)
 		{
-			if( parseInt($( "#homePageSection" ).val()) == parseInt("1") )
-			{
-				return false;
-			}
+			
 			$( "#homePageSection" ).val( 1 );
+			$('#publicBoxesfilterVal').val(0);
 			
 			if( parseInt($( "#montageBoxesOn" ).val()) == parseInt("1") )
 			{
@@ -367,7 +384,6 @@ $(document).ready(function(){
 			}
 			//montageBoxesScrollTop = nicesxPublic.getScrollTop();
 
-			$('#memCollectionBoxesDiv').html( $('#list_public_boxes').html() );
 			$('#list_public_boxes').html( $('#publicBoxesDiv').html() );
 
 			//nicesxPublic.resize();
@@ -379,7 +395,107 @@ $(document).ready(function(){
 			}
 		});
 	}
+	//newly added code for filtering 
+	if( $( "#publicBoxesLinkForAll" ).length )
+	{
+		$( "#publicBoxesLinkForAll" ).click(function(event)
+		{
+			
+			$( "#homePageSection" ).val( 1 );
+			$('#publicBoxesfilterVal').val(0);
+			
+			if( parseInt($( "#montageBoxesOn" ).val()) == parseInt("1") )
+			{
+				windowtz.off("scroll",scrollMontageBoxesHandler);
+			}
+			//montageBoxesScrollTop = nicesxPublic.getScrollTop();
+		
+			$('#list_public_boxes').html( $('#publicBoxesDiv').html() );
 
+			//nicesxPublic.resize();
+			//nicesxPublic.setScrollTop(publicBoxesScrollTop);
+			
+			if( parseInt($( "#publicBoxesOn" ).val()) == parseInt("1") )
+			{
+				windowtz.on("scroll",scrollPublicBoxesHandler);
+			}
+		});
+	}
+	if( $( "#publicBoxesLinkForNew" ).length )
+	{
+		$( "#publicBoxesLinkForNew" ).click(function(event)
+		{
+			$( "#homePageSection" ).val( 1 );
+			$('#publicBoxesfilterVal').val(2);
+			
+			if( parseInt($( "#montageBoxesOn" ).val()) == parseInt("1") )
+			{
+				windowtz.off("scroll",scrollMontageBoxesHandler);
+			}
+			//montageBoxesScrollTop = nicesxPublic.getScrollTop();
+
+			$('#list_public_boxes').html( $('#list_public_boxesForNew').html() );
+
+
+			//nicesxPublic.resize();
+			//nicesxPublic.setScrollTop(publicBoxesScrollTop);
+			
+			if( parseInt($( "#publicBoxesOn" ).val()) == parseInt("1") )
+			{
+				windowtz.on("scroll",scrollPublicBoxesHandler);
+			}
+		});
+	}
+	if( $( "#publicBoxesLinkForTrending" ).length )
+	{
+		$( "#publicBoxesLinkForTrending" ).click(function(event)
+		{
+			
+			$( "#homePageSection" ).val( 1 );
+			$('#publicBoxesfilterVal').val(3);
+			if( parseInt($( "#montageBoxesOn" ).val()) == parseInt("1") )
+			{
+				windowtz.off("scroll",scrollMontageBoxesHandler);
+			}
+			//montageBoxesScrollTop = nicesxPublic.getScrollTop();
+			$('#list_public_boxes').html( $('#list_public_boxesForTrending').html() );
+
+			//nicesxPublic.resize();
+			//nicesxPublic.setScrollTop(publicBoxesScrollTop);
+			
+			if( parseInt($( "#publicBoxesOn" ).val()) == parseInt("1") )
+			{
+				windowtz.on("scroll",scrollPublicBoxesHandler);
+			}
+		});
+	}
+	if( $( "#publicBoxesLinkForMyPosts" ).length )
+	{
+		$( "#publicBoxesLinkForMyPosts" ).click(function(event)
+		{
+			
+			$( "#homePageSection" ).val( 1 );
+			$('#publicBoxesfilterVal').val(4);
+			
+			if( parseInt($( "#montageBoxesOn" ).val()) == parseInt("1") )
+			{
+				windowtz.off("scroll",scrollMontageBoxesHandler);
+			}
+			//montageBoxesScrollTop = nicesxPublic.getScrollTop();
+
+			$('#list_public_boxes').html( $('#list_public_boxesForMyPosts').html() );
+
+
+			//nicesxPublic.resize();
+			//nicesxPublic.setScrollTop(publicBoxesScrollTop);
+			
+			if( parseInt($( "#publicBoxesOn" ).val()) == parseInt("1") )
+			{
+				windowtz.on("scroll",scrollPublicBoxesHandler);
+			}
+		});
+	}
+	//End newly added code
 	$( "#searchTermHolder" ).keyup(function(event)
 	{
 		var keyCode = event.which;

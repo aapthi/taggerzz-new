@@ -175,11 +175,32 @@ class IndexController extends AbstractActionController
 		$boxesPerPage = 10;
 		$highlightsPerPage = 5;
 		$montagesPerPage = 10;
+		$filterPerPage = 10;
 		$relevanceWorthVoteTable=$this->getServiceLocator()->get('Databox\Model\RelevanceWorthVoteFactory');
-		$publicBoxesRs = $this->getUserCategoriesTable()->getHomePublicBoxes( $boxesPerPage,0 );
+		$publicBoxesRs = $this->getUserCategoriesTable()->getHomePublicBoxes( $boxesPerPage,0,0 );
 		$highlightBoxesRs = $this->getUserCategoriesTable()->getHomeHighlightBoxes( $highlightsPerPage,0 );
 		$catWiseLinksCountRs = $this->getCategoryLinksTable()->getCategoryWiseLinksCount();
 		$homeMontageBoxesArray = $this->getUserDetailsTable()->getHomeMontageBoxes( $montagesPerPage,0 )->toArray();
+		//newly added this for filtering
+		$publicBoxesFilterNew = $this->getUserCategoriesTable()->getHomePublicBoxesForFilters( $filterPerPage,0,2);
+		$publicBoxesFilterTrending = $this->getUserCategoriesTable()->getHomePublicBoxesForFilters( $filterPerPage,0,3);
+		$publicBoxesFilterMyPosts = $this->getUserCategoriesTable()->getHomePublicBoxesForFilters( $filterPerPage,0,4);
+		$homePublicBoxesNewArray=array();
+		foreach( $publicBoxesFilterNew as $currentBoxRow )
+		{
+			$homePublicBoxesNewArray[] = (array)$currentBoxRow;
+		}
+		$homePublicBoxesTrendingArray=array();
+		foreach( $publicBoxesFilterTrending as $currentBoxRow )
+		{
+			$homePublicBoxesTrendingArray[] = (array)$currentBoxRow;
+		}
+		$homePublicBoxesMyPostsArray=array();
+		foreach( $publicBoxesFilterMyPosts as $currentBoxRow )
+		{
+			$homePublicBoxesMyPostsArray[] = (array)$currentBoxRow;
+		}
+		// end filter newly added code
 		$homePublicBoxesArray=array();
 		foreach( $publicBoxesRs as $currentBoxRow )
 		{
@@ -196,6 +217,44 @@ class IndexController extends AbstractActionController
 			$catWiseLinksCountArray[] = (array)$currentLinksCountRow;
 		}
 		$_SESSION["catWiseLinksCount"] = $catWiseLinksCountArray;
+		//new added for filters
+		foreach( $homePublicBoxesNewArray as $key=>$values )
+		{
+			$homePublicBoxesNewArray[$key]["categoryLinksCount"] = 0;
+			foreach( $catWiseLinksCountArray as $countkey=>$countvalue )
+			{
+				if( $values['category_id'] == $countvalue['categoryId'] )
+				{
+					$homePublicBoxesNewArray[$key]["categoryLinksCount"] = $countvalue['categoryLinksCount'];
+				}
+			}
+		}
+		foreach( $homePublicBoxesTrendingArray as $key=>$values )
+		{
+			$homePublicBoxesTrendingArray[$key]["categoryLinksCount"] = 0;
+			foreach( $catWiseLinksCountArray as $countkey=>$countvalue )
+			{
+				if( $values['category_id'] == $countvalue['categoryId'] )
+				{
+					$homePublicBoxesTrendingArray[$key]["categoryLinksCount"] = $countvalue['categoryLinksCount'];
+				}
+			}
+		}
+			//echo "<pre>";print_r($homePublicBoxesArray);exit;
+
+		foreach( $homePublicBoxesMyPostsArray as $key=>$values )
+		{
+			$homePublicBoxesMyPostsArray[$key]["categoryLinksCount"] = 0;
+			foreach( $catWiseLinksCountArray as $countkey=>$countvalue )
+			{
+				if( $values['category_id'] == $countvalue['categoryId'] )
+				{
+					$homePublicBoxesMyPostsArray[$key]["categoryLinksCount"] = $countvalue['categoryLinksCount'];
+				}
+			}
+		}
+
+		//End new added for filters
 		foreach( $homePublicBoxesArray as $key=>$values )
 		{
 			$homePublicBoxesArray[$key]["categoryLinksCount"] = 0;
@@ -240,12 +299,15 @@ class IndexController extends AbstractActionController
 		{
 			$viewModel = new ViewModel(
 				array(
-					'baseUrl'				 	=> $baseUrl,
-					'basePath' 					=> $basePath,
-					'homePublicBoxesArray' 	    => $homePublicBoxesArray,
-					'homehighlightBoxesArray' 	=> $homehighlightBoxesArray,
-					'homeMontageBoxesArray' 	=> $homeMontageBoxesArray,
-					'countt'				=>	0
+					'baseUrl'				 			=> $baseUrl,
+					'basePath' 							=> $basePath,
+					'homePublicBoxesArray' 	    		=> $homePublicBoxesArray,
+					'homePublicBoxesNewArray' 	    	=> $homePublicBoxesNewArray,
+					'homePublicBoxesTrendingArray' 	   	=> $homePublicBoxesTrendingArray,
+					'homePublicBoxesMyPostsArray' 	    => $homePublicBoxesMyPostsArray,
+					'homehighlightBoxesArray' 			=> $homehighlightBoxesArray,
+					'homeMontageBoxesArray' 			=> $homeMontageBoxesArray,
+					'countt'							=>	0
 			));
 			$viewModel->setVariable('options', $this->getOptions());
 			return $viewModel;

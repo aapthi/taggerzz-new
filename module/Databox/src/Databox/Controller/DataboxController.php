@@ -2102,9 +2102,10 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 
 		$publicBoxesPerPage = $_POST['publicBoxesPerPage'];
 		$publicBoxesOffset = $_POST['publicBoxesOffset'];
+		$publicBoxesfilterVal = $_POST['publicBoxesfilterVal'];
 		// echo $publicBoxesOffset;exit;
 
-		$publicBoxesRs = $this->getUserCategoriesTable()->getHomePublicBoxes( $publicBoxesPerPage,$publicBoxesOffset );
+		$publicBoxesRs = $this->getUserCategoriesTable()->getHomePublicBoxes( $publicBoxesPerPage,$publicBoxesOffset,$publicBoxesfilterVal );
 		$publicBoxesHtml = "";
 		$publicBoxesAllLoaded = 0;
 		if( $publicBoxesRs->count() == 0 )
