@@ -1003,11 +1003,11 @@ function saveDataboxhash(typee){
 						if(typee==1){
 							$('#pop-up-databoxhash').popUpWindow({action: "close"});
 							$('#databoxHashNameId').html("");
-							$('#databoxHashNameId').html('<h1 >#'+text+'<button id="catDescTopBtn" onclick="databoxHash(1);" class="c_BtnEditTitle">EDIT</button></h1>');
+							$('#databoxHashNameId').html('<h1 >#'+text+'<a href="javascript:void(0)"id="catHashNameBtn" style="font-size:15px;color:#227cec;vertical-align:middle" onclick="databoxHash(1);" class="c_BtnEditTitle"> &nbsp; EDIT</a></h1></h1>');
 						}else if(typee==2){
 							$('#pop-up-databoxhash_title').popUpWindow({action: "close"});
 							$('#databoxTitleId').html("");
-							$('#databoxTitleId').html('<h2>'+text+'<button id="catDescTopBtn" onclick="databoxHash(2);" class="c_BtnEditTitle">EDIT</button></h2>');
+							$('#databoxTitleId').html('<h3><b>'+text+'<a href="javascript:void(0)" id="catHashTitleBtn"  style="font-size:15px;color:#227cec;vertical-align:middle;font-weight:normal" onclick="databoxHash(2);" class="c_BtnEditTitle"> &nbsp;EDIT</a></b></h3>');
 						}
 					}else{
 						alert('Not Updated');
