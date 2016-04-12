@@ -2225,7 +2225,8 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				$publicBoxesHtml .='<div style="clear:both;"></div>';
 				//$publicBoxesHtml .='<div class="divbrg_f"></div><div class="divbrg_s"></div><div style="clear:both;"></div></div>';
 				$publicBoxesHtml .='<div id="divDatabox-1-contentWrapper" class="divCardContentWrapper">';
-				$publicBoxesHtml .='<div id="divDatabox-1-views" class="divCardViews views_w">';
+				//$publicBoxesHtml .='<div id="divDatabox-1-views" class="divCardViews views_w">';
+				$publicBoxesHtml .='<div id="divDatabox-1-views" class="" align="center">';
 				$publicBoxesHtml .='<img src="'. $basePath .'/img/views.png" alt="" />  '.$viewsCount.' views';
 			    $publicBoxesHtml .='</div>';
 			    //$publicBoxesHtml .='<span>'.$roundLikes.'% liked</span>';
@@ -2517,7 +2518,7 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 
 				//$publicBoxesHtml1 .=' <div class="divbrg_f"></div><div class="divbrg_s"></div><div style="clear:both;"></div></div>';
 			    $publicBoxesHtml1 .='<div id="divDatabox-1-contentWrapper" class="divCardContentWrapper"><div>';
-				$publicBoxesHtml1 .='<div id="divDatabox-1-views" class="divCardViews views_w">';
+				$publicBoxesHtml1 .='<div id="divDatabox-1-views" class="" align="center">';
 				$publicBoxesHtml1 .='<img src="'. $basePath .'/img/views.png" alt="" /> '.$viewsCount.' views';
 				$publicBoxesHtml1 .='</div>';
 			  // $publicBoxesHtml .='<span>'.$roundLikes.'% liked</span>';
@@ -2711,7 +2712,7 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 
 			//$privateBoxHtml .='<div class="divbrg_f"></div><div class="divbrg_s"></div><div style="clear:both;"></div></div>';
 			$privateBoxHtml .='<div id="divDatabox-1-contentWrapper" class="divCardContentWrapper">';
-				$privateBoxHtml .='<div id="divDatabox-1-views" class="divCardViews views_w">';
+				$privateBoxHtml .='<div id="divDatabox-1-views" class="" align="center">';
 					$privateBoxHtml .='<img src="'. $basePath .'/img/views.png" alt="" /> '.$viewsCount.' views';
 			   $privateBoxHtml .='</div>';
 				/*$privateBoxHtml .='<div id="divCardLoveTrash'.$currentBoxRow->category_id.'" class="divCardLoveTrash">';
