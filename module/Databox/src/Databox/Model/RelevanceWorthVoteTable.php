@@ -209,7 +209,8 @@ class RelevanceWorthVoteTable
 	}
 	public function votesPercentageAndLD($cat_id){
 		$select = $this->tableGateway->getSql()->select();
-		$select->columns(array('NetVotes1' => new Expression('COALESCE((SUM(voteUp)/SUM(rw_lh)*100),0)'),'vupCatId'=>'category_id','voteUp1'=>new Expression('COALESCE(SUM(voteUp),0)'),'rw_lh1'=>new Expression('COALESCE(SUM(rw_lh),0)')));
+		//$select->columns(array('NetVotes1' => new Expression('COALESCE((SUM(voteUp)/SUM(rw_lh)*100),0)'),'vupCatId'=>'category_id','voteUp1'=>new Expression('COALESCE(SUM(voteUp),0)'),'voteUp1'=>new Expression('COALESCE(SUM(voteUp),0)'),'rw_lh1'=>new Expression('COALESCE(SUM(rw_lh),0)')));
+		$select->columns(array('NetVotes1' => new Expression('COALESCE((SUM(voteUp)/SUM(rw_lh)*100),0)'),'vupCatId'=>'category_id','voteUp1'=>new Expression('COALESCE(SUM(voteUp),0)'),'voteDown1'=>new Expression('COALESCE(SUM(voteDown),0)'),'rw_lh1'=>new Expression('COALESCE(SUM(rw_lh),0)')));
 		$select->where('relevance_worth_vote.rw_lh="1"');
 		$select->where('relevance_worth_vote.category_id="'.$cat_id.'"');
 		$select->group('relevance_worth_vote.category_id');

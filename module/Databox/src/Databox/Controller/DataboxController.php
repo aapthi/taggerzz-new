@@ -3119,6 +3119,8 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 			// echo "<pre>";print_r($getComments);exit;
 			// Added code for Relevance Worth Liked and Disliked By dileep
 			$votePerLikeDis = $relevanceWorthVoteTable->votesPercentageAndLD($categoryId);
+			// echo "<pre>";print_r($votePerLikeDis);exit;
+
 			$userStatusLD = $relevanceWorthVoteTable->userLikedDisLiked($categoryId);
 			return new ViewModel(array(				
 				'baseUrl' 					=> 	$baseUrl,

@@ -160,7 +160,7 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 						?>
 					<div id="dragDropWindow<?echo $key+1;?>" class="grid-stack-item" 
 					<?php if( $tzGsRowNum % 4 == 0 ) { $xSet = $tzDataGsX;$tzDataGsX = 0;$ySet = $tzDataGsY;$tzDataGsY += 3; } else{ $xSet = $tzDataGsX;$tzDataGsX += 3;$ySet = $tzDataGsY; } ?> data-gs-x="<?php echo $xSet; ?>" data-gs-y="<?php echo $ySet; ?>" data-gs-width="3" data-gs-height="4" style="border:none;">
-					<div class="grid-stack-item-content">
+					<div class="grid-stack-item-content" >
 									<?php
 								if($databoxLinksGrids->is_video==1)
 								{
@@ -183,6 +183,7 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 								<?php if(isset($databoxLinksGrids->title) && $databoxLinksGrids->title!=""){?>
 									<div class="pad_10px">
 									<h2>
+										 <a href="<?echo $url;?>" target="_blank">
 										 <?php //if(strlen($databoxLinksGrids->title)>20){
 												// echo substr($databoxLinksGrids->title,0,20) . '...'; 
 											// }
@@ -191,21 +192,22 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 												echo $databoxLinksGrids->title;
 											//}
 										?>
+										</a>
 										</h2>
 									</div><?} $parahid="";
 								if(isset($databoxLinksGrids->description) && $databoxLinksGrids->description!="no Description"){?>
 								<div class="pad_10px">
 								<?php
 									if(strlen($databoxLinksGrids->description)>200){
-										echo substr($databoxLinksGrids->description,0,200) . '<a href="'.$url.'" target="_blank">...Read more</a>';
+										echo '<a href="'.$url.'" target="_blank">'.substr($databoxLinksGrids->description,0,200) . '<a href="'.$url.'" target="_blank">...Read more</a></a>';
 										$parahid=1;
 									}
 									else
-									{
+									{?><a href="<?php echo $url;?>" target="_blank"><?php
 										echo $databoxLinksGrids->description;
 										$parahid=0;
 									}
-								?>
+								?></a>
 								</div>
 								<?}
 								?>
@@ -235,33 +237,35 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 			</span>
 		</div>
 	</section>
-	<P style="text-align:center;font-weight:bold;color:#444;padding-bottom:5px;"><span id="totVP" class="comment_percent"><? if(isset($this->votePerLikeDis->NetVotes1)) { echo round($this->votePerLikeDis->NetVotes1,2);}else{ echo "00"; }?>%</span> loved this collection,Did you found this collection Worthy and Relevant ?
+	<P style="text-align:center;font-weight:bold;color:#444;padding-bottom:5px;"><span id="totVP" ><?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?></span> 
 <span id="l_d">
 <?php if(count($this->userStatusLD)>0){ if((isset($_SESSION['usersinfo']->userId )&& $this->userStatusLD->user_id==$_SESSION['usersinfo']->userId)){?>
 <?php if(isset($this->userStatusLD->voteUp) && $this->userStatusLD->voteUp=='1'){?>
-	<button class="comment_yes_no" style="cursor: pointer; cursor: hand;"  onClick="return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1');">NO</button>
+	<img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/> --  <?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "00"; }?> <a href="javascript:void(0);" onClick="return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"> <img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /></a>
 <?php } else if(isset($this->userStatusLD->voteDown) && $this->userStatusLD->voteDown=='1'){?>
-	<button class="comment_yes_no" style="cursor: pointer; cursor: hand;" onClick="return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1');">YES</button>
+		<a href="javascript:void(0);" onClick="return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"><img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/></a> --  <?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "00"; }?>  <img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" />
 <?php } else {?>
-	<button class="comment_yes_no" style="cursor: pointer; cursor: hand;" onClick="return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1');">YES</button>
-	<button class="comment_yes_no" style="cursor: pointer; cursor: hand;" onClick="return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1');">NO</button>
+	<a href="javascript:void(0);" onClick="return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"><img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/></a> -- <?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "00"; }?>
+	<a href="javascript:void(0);"  onClick="return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /></a>
 <?php } } else if(isset($_SERVER['REMOTE_ADDR'])&& $this->userStatusLD->user_id==$_SERVER['REMOTE_ADDR']){?>
 <?php if(isset($this->userStatusLD->voteUp) && $this->userStatusLD->voteUp=='1'){?>
-	<button class="comment_yes_no" style="cursor: pointer; cursor: hand;"  onClick="return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1');">NO</button>
+	<img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/> --  <?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "00"; }?> <a href="javascript:void(0);" onClick="return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"> <img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /></a>
 <?php } else if(isset($this->userStatusLD->voteDown) && $this->userStatusLD->voteDown=='1'){?>
-	<button class="comment_yes_no" style="cursor: pointer; cursor: hand;" onClick="return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1');">YES</button>
+	<a href="javascript:void(0);" onClick="return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"><img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/></a> --  <?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "00"; }?>  <img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" />
 <?php } else { ?>
-	<button class="comment_yes_no" style="cursor: pointer; cursor: hand;" onClick="return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1');">YES</button>
-	<button class="comment_yes_no" style="cursor: pointer; cursor: hand;" onClick="return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1');">NO</button>
+	<a href="javascript:void(0);" onClick="return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"><img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/></a> -- <?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "00"; }?>
+	<a href="javascript:void(0);"  onClick="return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /></a>
 <?php } }else{ ?>
-	<button class="comment_yes_no" style="cursor: pointer; cursor: hand;" onClick="return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1');">YES</button>
-	<button class="comment_yes_no" style="cursor: pointer; cursor: hand;" onClick="return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1');">NO</button>
+	<a href="javascript:void(0);" onClick="return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"><img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/></a> -- <?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "00"; }?>
+	<a href="javascript:void(0);"  onClick="return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /></a>
 <?php } }else{?>
-	<button class="comment_yes_no" style="cursor: pointer; cursor: hand;" onClick="return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1');">YES</button>
-	<button class="comment_yes_no" style="cursor: pointer; cursor: hand;" onClick="return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1');">NO</button>
+	<a href="javascript:void(0);" onClick="return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"><img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/></a> -- <?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "00"; }?>
+	<a href="javascript:void(0);"  onClick="return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /></a>
 <?php } ?>
 </span>
 </P>
+<input type="hidden" id="voteing" name="voteing" value="<?php if(isset($this->userStatusLD->voteUp) && $this->userStatusLD->voteUp=='1'){ echo "1";}else{ echo "0";}?>">
+<input type="hidden" id="dislikevoteing" name="dislikevoteing" value="<?php if(isset($this->userStatusLD->voteDown) && $this->userStatusLD->voteDown=='1'){ echo "1";}else{ echo "0";}?>">
 	<div class="clearfix"></div>
 </div>
 <div id="tempRemDiv" style="display:none;"><div class="clearfix"></div></div>
@@ -421,7 +425,7 @@ $(function () {
   // allows to owerride jQuery UI draggable options
   draggable: {handle: '.grid-stack-item-content', scroll: true, appendTo: 'body'},
   // allows to owerride jQuery UI resizable options
-  resizable: {autoHide: true, handles: 'se'}
+  resizable: {autoHide: true, handles: 'se'},
 
   });
   
@@ -568,6 +572,7 @@ $(document).ready(function()
 			var editDelCommDivId = parseInt(this.id.replace("deleteComment", ""));
 			$('#deleteComment'+editDelCommDivId).remove();
 		});
+
 		$('#loderImage').html("");
 
 	}
@@ -891,7 +896,9 @@ function deletedReComment(id){
 		});
 	}
 }
-function likeDislikeCntV( newVoteValue,categoryId,rw_th ){
+function likeDislikeCntV( newVoteValue,categoryId,rw_th,love,trash ){
+	var likevoteing=$('#voteing').val();
+	var dislikevoteing=$('#dislikevoteing').val();
 	var voteUrl = BASE_URL + "/databox/vote-on-highlight";
 	$.ajax({
 	  url: voteUrl,
@@ -919,13 +926,67 @@ function likeDislikeCntV( newVoteValue,categoryId,rw_th ){
 				var tot = data.totVotesPer+'%';
 			}
 			if(newVoteValue=='1'){
-				var clickEv = "return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1')";
-				var likeDi='<button class="comment_yes_no" style="cursor: pointer; cursor: hand;" onClick="'+clickEv+'">NO</button>';
-			}else{
-				var clickEv = "return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1')";
-				var likeDi='<button class="comment_yes_no" style="cursor: pointer; cursor: hand;" onClick="'+clickEv+'">YES</button>';
+				if(likevoteing==1){
+					var disLikes=parseInt(trash)+parseInt(1);
+					var likes=parseInt(love)-parseInt(1);
+					console.log(likes);
+					console.log(disLikes);
+
+					console.log('1');
+					
+				}else if(dislikevoteing==1){
+					var disLikes=parseInt(trash)-parseInt(1);
+					var likes=parseInt(love)+parseInt(1);
+					console.log(likes);
+					console.log(disLikes);
+
+					console.log('2');
+				}else{
+					var disLikes=parseInt(trash);
+					var likes=parseInt(love)+parseInt(1);
+					console.log(likes);
+					console.log(disLikes);
+
+					console.log('3');
+				}
+				$('#voteing').val(1);
+				$('#dislikevoteing').val(0);
+
+			}else if(newVoteValue=='0'){
+				if(likevoteing==1){
+					var disLikes=parseInt(trash)+parseInt(1);
+					var likes=parseInt(love)-parseInt(1);
+					console.log(likes);
+					console.log(disLikes);
+
+					console.log('4');
+				}else if(dislikevoteing==1){
+					var disLikes=parseInt(trash)-parseInt(1);
+					var likes=parseInt(love)+parseInt(1);
+					console.log(likes);
+					console.log(disLikes);
+
+					console.log('5');
+				}else{
+					var disLikes=parseInt(trash)+parseInt(1);
+					var likes=parseInt(love);
+					console.log(likes);
+					console.log(disLikes);
+					console.log('6');
+				}
+				$('#voteing').val(0);
+				$('#dislikevoteing').val(1);
+
+
 			}
-			$("#totVP").html(tot);
+			if(newVoteValue=='1'){
+				var clickEv = "return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1','"+likes+"','"+disLikes+"')";
+				var likeDi='<img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/> --  '+disLikes+' <a href="javascript:void(0);" onClick="'+clickEv+'"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /></a>';
+			}else{
+				var clickEv = "return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1','"+likes+"','"+disLikes+"')";
+				var likeDi='<a href="javascript:void(0);" onClick="'+clickEv+'"><img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/></a> -- '+disLikes+' <img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /> ';
+			}
+			$("#totVP").html(likes);
 			$("#l_d").html(likeDi);
 		}
 	  }
