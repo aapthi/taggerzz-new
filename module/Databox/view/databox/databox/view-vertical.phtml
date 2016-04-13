@@ -18,6 +18,7 @@ body{
 	$_SESSION['databox']->hashtitle= "";
 	$_SESSION['databox']->hashtitle= $this->categoryTitle;
 	$_SESSION["tzCreateEditBoxId"] = $this->categoryId;
+	
 	$currBoxEditLink = $baseUrl . "/databox/publicdatabox/". $this->categoryId;
 	if( $this->category_highlight == 2 )
 	{
@@ -1083,5 +1084,11 @@ function editTheDataBoxUrls(redirectUrl){
 		 window.location = redirectUrl;
     } 
 }
+$(document).ready(function()
+{
+	$("#uGetTotalLinks").html(<?php echo $this->getTotalLinks; ?>);
+	$("#uGetTotalPublicBoxesAndprivate").html(<?php echo $this->publicprivatetotalcount; ?>);
+	$("#UGetHighlight").html(<?php echo $this->getHighlightsCount; ?>);
+});
 </script>	       
     
