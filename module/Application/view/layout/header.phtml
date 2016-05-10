@@ -142,7 +142,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/"  && $_SERVER['REQUEST_URI']
         <div id="divMobileMenuWrapper" class="divMobileMenuWrapper">
             <img src="<?php echo $basePath; ?>/img/imgMenuCollapse.png" alt="" id="imgMenuCollapse" class="width25 autoPadding" />
         </div>
-		<?php if( isset($_SESSION['usersinfo']) ) {
+		<?php if( isset($_SESSION['usersinfo']->userId) ) {
 					$hintingUserId = 0;
 					if( isset($_SESSION['usersinfo']->userId) )
 					{

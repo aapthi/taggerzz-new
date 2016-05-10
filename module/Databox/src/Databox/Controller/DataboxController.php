@@ -3121,17 +3121,18 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 			// echo "<pre>";print_r($votePerLikeDis);exit;
 			
 			//Start
-			$getTotalLinks = $this->getUserCategoriesTable()->getTotalLinks( $_SESSION['usersinfo']->userId)->count();
-			$_SESSION['usersinfo']->getTotalLinks=$getTotalLinks;
-			$getHighlights = $this->getUserCategoriesTable()->getHighlightDataboxCount( $_SESSION['usersinfo']->userId);
-			$getHighlightsCount = count($getHighlights->toArray());
-			$_SESSION['usersinfo']->HighLightsTotalcount=$getHighlightsCount;
+			if(isset($_SESSION['usersinfo']->userId)){
+				$getTotalLinks = $this->getUserCategoriesTable()->getTotalLinks( $_SESSION['usersinfo']->userId)->count();
+				$_SESSION['usersinfo']->getTotalLinks=$getTotalLinks;
+				$getHighlights = $this->getUserCategoriesTable()->getHighlightDataboxCount( $_SESSION['usersinfo']->userId);
+				$getHighlightsCount = count($getHighlights->toArray());
+				$_SESSION['usersinfo']->HighLightsTotalcount=$getHighlightsCount;
 
-			$getPublicDataboxCount = $this->getUserCategoriesTable()->getPublicDataboxCount( $user_id);
-			$getPrivateDataboxCount = $this->getUserCategoriesTable()->getPrivateDataboxCount( $user_id);
-			$publicprivatetotalcount=count($getPublicDataboxCount->toArray()) + count($getPrivateDataboxCount->toArray());
-			$_SESSION['usersinfo']->totalcount=$publicprivatetotalcount;
-
+				$getPublicDataboxCount = $this->getUserCategoriesTable()->getPublicDataboxCount( $user_id);
+				$getPrivateDataboxCount = $this->getUserCategoriesTable()->getPrivateDataboxCount( $user_id);
+				$publicprivatetotalcount=count($getPublicDataboxCount->toArray()) + count($getPrivateDataboxCount->toArray());
+				$_SESSION['usersinfo']->totalcount=$publicprivatetotalcount;
+			}
 			//End
 			
 			$userStatusLD = $relevanceWorthVoteTable->userLikedDisLiked($categoryId);
