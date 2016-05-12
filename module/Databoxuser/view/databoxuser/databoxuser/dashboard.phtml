@@ -28,7 +28,7 @@
 									if($allDataboxes['category_type']==1){
 										$pub++;
 							?>
-								<li class="liCreatedCollectionListItem"><div class="divCreatedCollectionText tdashboard_f"><h3 class="h3_size"><b><?php echo $allDataboxes['user_hashname'];?></b>, <?php echo $allDataboxes['category_title'];?></h3></div><a class="aCollectedCollectionEdit" href="Javascript:void(0);" onClick="setEditingBoxId( '<?php echo $allDataboxes['category_id']; ?>','<?php echo $currBoxEditLink; ?>' );">EDIT</a></li>
+								<li class="liCreatedCollectionListItem"><div class="divCreatedCollectionText tdashboard_f"><b><?php echo $allDataboxes['user_hashname'];?></b>, <?php echo $allDataboxes['category_title'];?></div><a class="aCollectedCollectionEdit" href="Javascript:void(0);" onClick="setEditingBoxId( '<?php echo $allDataboxes['category_id']; ?>','<?php echo $currBoxEditLink; ?>' );">EDIT</a></li>
 							<?php }}}
 								if($pub==1){?>
 							<li class="liCreatedCollectionListItem"><div class="divCreatedCollectionText tdashboard_f"><h3 class="h3_size">NO PUBLIC BOXES</h3></div></li>
