@@ -140,7 +140,9 @@
 				$catTitle = str_replace( " ","-",$catTitles );
 				$catHashName = substr( $dashboard["user_hashname"],1 );
 				$catImageUrl=explode(".",$dashboard["category_image"]);
-				$userImageUrl=$dashboard["image"];
+				//$userImageUrl=$dashboard["image"];
+				$userImageUrl=$dashboard["category_image"];
+				
 				$catImageUrll=$catImageUrl[0];
 				$displayCustomizationUrl .= "/databox/" . $viewUrl . "/" . $dashboard["category_id"] . "+" . $catImageUrll . "+" . $catHashName . "+" . $catTitle;
 				//echo "<pre>";print_r($displayCustomizationUrl);exit;
@@ -150,8 +152,8 @@
 			<div class="tg_montage_t montage_brg_box">
 				<div class="montage_box_brg_title">
 					<div class="text_row">
-						<div class="float_l"><h3><a href="<?php echo $displayCustomizationUrl;?>"><?echo $dashboard['user_hashname']?><span>&nbsp;(<?echo $dashboard['totalLinks']?>/100)</span></a></h3></div>
-						<div class="float_r"><P class="text_sub_title"><a href="<?php echo $displayCustomizationUrl;?>"><?echo $dashboard['category_title']?></a></P></div>
+						<div class="float_l"><b><h1><a href="<?php echo $displayCustomizationUrl;?>"><?echo $dashboard['user_hashname']?></a></h1></b><span>&nbsp;(<?echo $dashboard['totalLinks']?>/100)</span></div>
+						<div class="float_r"><P class="text_sub_title"><h3><b><a href="<?php echo $displayCustomizationUrl;?>"><?echo $dashboard['category_title']?></a></b></h3></P></div>
 					</div><div class="clearfix"></div>
 				</div>
 				<div class="pos_relative">

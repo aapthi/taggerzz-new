@@ -28,7 +28,7 @@
 									if($allDataboxes['category_type']==1){
 										$pub++;
 							?>
-								<li class="liCreatedCollectionListItem"><div class="divCreatedCollectionText tdashboard_f"><h3 class="h3_size"><?php echo $allDataboxes['user_hashname'];?>, <?php echo $allDataboxes['category_title'];?></h3></div><a class="aCollectedCollectionEdit" href="Javascript:void(0);" onClick="setEditingBoxId( '<?php echo $allDataboxes['category_id']; ?>','<?php echo $currBoxEditLink; ?>' );">EDIT</a></li>
+								<li class="liCreatedCollectionListItem"><div class="divCreatedCollectionText tdashboard_f"><h3 class="h3_size"><b><?php echo $allDataboxes['user_hashname'];?></b>, <?php echo $allDataboxes['category_title'];?></h3></div><a class="aCollectedCollectionEdit" href="Javascript:void(0);" onClick="setEditingBoxId( '<?php echo $allDataboxes['category_id']; ?>','<?php echo $currBoxEditLink; ?>' );">EDIT</a></li>
 							<?php }}}
 								if($pub==1){?>
 							<li class="liCreatedCollectionListItem"><div class="divCreatedCollectionText tdashboard_f"><h3 class="h3_size">NO PUBLIC BOXES</h3></div></li>
@@ -51,7 +51,7 @@
 									if($allDataboxes['category_type']==0){
 										$p++;
 							?>
-								<li class="liCreatedCollectionListItem"><div class="divCreatedCollectionText tdashboard_f"><h3 class="h3_size"><?php echo $allDataboxes['user_hashname'];?>, <?php echo $allDataboxes['category_title'];?></h3></div><a class="aCollectedCollectionEdit" href="Javascript:void(0);" onClick="setEditingBoxId( '<?php echo $allDataboxes['category_id']; ?>','<?php echo $currBoxEditLink; ?>' );">EDIT</a></li>
+								<li class="liCreatedCollectionListItem"><div class="divCreatedCollectionText tdashboard_f"><b><?php echo $allDataboxes['user_hashname'];?></b>, <?php echo $allDataboxes['category_title'];?></div><a class="aCollectedCollectionEdit" href="Javascript:void(0);" onClick="setEditingBoxId( '<?php echo $allDataboxes['category_id']; ?>','<?php echo $currBoxEditLink; ?>' );">EDIT</a></li>
 								<?php }}}
 								if($p==1){?>
 								<li class="liCreatedCollectionListItem"><div class="divCreatedCollectionText tdashboard_f"><h3 class="h3_size">NO PRIVATE BOXES</h3></div></li>
@@ -77,7 +77,7 @@
 									if($allDataboxes['category_type']==0){
 										$h++;
 							?>
-								<li class="liCreatedCollectionListItem"><div class="divCreatedCollectionText tdashboard_f"><h3 class="h3_size"><?php echo $allDataboxes['user_hashname'];?>, <?php echo $allDataboxes['category_title'];?></h3></div><a class="aCollectedCollectionEdit" href="Javascript:void(0);" onClick="setEditingBoxId( '<?php echo $allDataboxes['category_id']; ?>','<?php echo $currBoxEditLink; ?>' );">EDIT</a></li>
+								<li class="liCreatedCollectionListItem"><div class="divCreatedCollectionText tdashboard_f"><b><?php echo $allDataboxes['user_hashname'];?></b>, <?php echo $allDataboxes['category_title'];?></div><a class="aCollectedCollectionEdit" href="Javascript:void(0);" onClick="setEditingBoxId( '<?php echo $allDataboxes['category_id']; ?>','<?php echo $currBoxEditLink; ?>' );">EDIT</a></li>
 							<?php }}}
 								if($h==1 ){?>
 							<li class="liCreatedCollectionListItem"><div class="divCreatedCollectionText tdashboard_f"><h3 class="h3_size">NO HEIGHLIGHT BOXES</h3></div></li>
@@ -161,7 +161,7 @@
                     </div>
                 </div>
 				<?php }else{ ?>
-						<div  class="divCreatedCollectionText"><center>Personal Messaging has been disabled.Turn it on back </center></div>
+						<div  class="divCreatedCollectionText"><center>Personal Messaging has been disabled.<a href="<?php echo $baseUrl; ?>/accounts" >Turn it on back </a></center></div>
 					<?php } ?>
                 </div>
 				<input type="hidden" id="hidUserName" value="<?php if(isset($username)){echo $username;}?>">

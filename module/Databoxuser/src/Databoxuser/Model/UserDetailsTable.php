@@ -141,7 +141,7 @@ class UserDetailsTable
 		$select->join(array('userPublicBoxesRj' => $userWisePdbListSqSelect), 'user_details.user_id=ucUserId1',array('userWiseLinksCount' => 'userWiseLinksCount1','ucUserId'=>'ucUserId1'),'right');
 		//newly added query
 		$select->where('user.status="1"');
-		$select->where('user.disable_messageing="0"');
+		$select->where('user.hide_me="0"');
 		$select->limit(intval($boxesPerPage));
 		$select->offset(intval($offset));
 		$select->order('montageOrder ASC');

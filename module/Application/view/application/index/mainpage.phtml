@@ -163,13 +163,15 @@
 			<div class="tmar_t20 pad_lr">
             <section id="secDataboxes" class="secDataboxes">
                 <div id="divDataboxesHeading" class="divHeadingLabel">
-                   <a href="Javascript:void(0);" id="publicBoxesLink">Public Databoxes</a><?php if( isset($_SESSION['usersinfo']) ) {?>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="Javascript:void(0);" id="memCollectionsLink">Members</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="Javascript:void(0);" id="publicBoxesLinkForAll">All</a><?php } ?>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="Javascript:void(0);" id="publicBoxesLinkForNew">New</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="Javascript:void(0);" id="publicBoxesLinkForTrending">Trending</a><?php if( isset($_SESSION['usersinfo']) ) {?>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="Javascript:void(0);" id="publicBoxesLinkForMyPosts">My Posts</a><?php } ?>
+                   <a href="Javascript:void(0);" id="publicBoxesLink">Public Databoxes</a> ( <a href="Javascript:void(0);" id="publicBoxesLinkForNew">New</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="Javascript:void(0);" id="publicBoxesLinkForTrending">Trending&nbsp;&nbsp;|&nbsp;&nbsp;<a href="Javascript:void(0);" id="publicBoxesLinkForAll">All</a></a><?php if( isset($_SESSION['usersinfo']) ) {?>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="Javascript:void(0);" id="publicBoxesLinkForMyPosts">My Posts</a><?php } ?><?php if( isset($_SESSION['usersinfo']) ) {?><a href="Javascript:void(0);" id="memCollectionsLink">) &nbsp;&nbsp;|&nbsp;&nbsp; Members</a><?php }else{ echo ' )';} ?>
                 </div>
 				<div id="list_public_boxes" >
                 <div id="divDataboxWrapper" class="divCardsWrapper" data-columns>
 					<?php
 						if( isset($this->homePublicBoxesArray) )
 						{
+						if(count($this->homePublicBoxesArray)!="0"){
+								
 							foreach( $this->homePublicBoxesArray as $key=>$currentBoxData )
 							{
 								$showMcNsfwPopup = false;
@@ -298,7 +300,7 @@
 							<?php } ?>
                         </div>
                     </div>
-						<?php } }?>
+						<?php } }else { echo '<div>Not Found</div>';}}?>
                 </div>
 				<div id="publicBoxesLoadingDiv" style="position:relative;display:none;" >
 				<!--<div class="home_publicboxes_loading" >
@@ -312,6 +314,8 @@
 					<?php
 						if( isset($this->homePublicBoxesNewArray) )
 						{
+							if(count($this->homePublicBoxesNewArray)!="0"){
+								
 							foreach( $this->homePublicBoxesNewArray as $key=>$currentBoxData )
 							{
 								$showMcNsfwPopup = false;
@@ -440,7 +444,7 @@
 							<?php } ?>
                         </div>
                     </div>
-						<?php } }?>
+						<?php } }else{ echo '<div>NOT FOUND THE NEW POSTS</div>';}}?>
                 </div>
 				<div id="publicBoxesLoadingDiv" style="position:relative;display:none;" >
 			</div>
@@ -450,6 +454,8 @@
 					<?php
 						if( isset($this->homePublicBoxesTrendingArray) )
 						{
+						if(count($this->homePublicBoxesTrendingArray)!="0"){
+
 							foreach( $this->homePublicBoxesTrendingArray as $key=>$currentBoxData )
 							{
 								$showMcNsfwPopup = false;
@@ -578,7 +584,7 @@
 							<?php } ?>
                         </div>
                     </div>
-						<?php } }?>
+						<?php } }else{ echo '<div>NOT FOUND THE TRENDING POSTS</div>';}}?>
                 </div>
 				<div id="publicBoxesLoadingDiv" style="position:relative;display:none;" >
 			</div>
@@ -588,6 +594,8 @@
 					<?php
 						if( isset($this->homePublicBoxesMyPostsArray) )
 						{
+							if(count($this->homePublicBoxesMyPostsArray)!="0"){
+
 							foreach( $this->homePublicBoxesMyPostsArray as $key=>$currentBoxData )
 							{
 								$showMcNsfwPopup = false;
@@ -716,7 +724,7 @@
 							<?php } ?>
                         </div>
                     </div>
-						<?php } }?>
+						<?php } }else{ echo '<div>NOT FOUND THE MY POSTS</div>';}}?>
                 </div>
 				<div id="publicBoxesLoadingDiv" style="position:relative;display:none;" >
 			</div>
@@ -728,6 +736,8 @@
 					<?php
 						if( isset($this->homePublicBoxesArray) )
 						{
+						if(count($this->homePublicBoxesArray)!="0"){
+
 							foreach( $this->homePublicBoxesArray as $key=>$currentBoxData )
 							{
 								$showMcNsfwPopup = false;
@@ -856,7 +866,7 @@
 							<?php } ?>
                         </div>
                     </div>
-						<?php } }?>
+						<?php } }else{ echo '<div>NOT FOUND </div>';}}?>
                 </div>
 				
 				</div>
@@ -866,6 +876,8 @@
 					<?php
 					if( isset($this->homeMontageBoxesArray) )
 					{
+					if(count($this->homePublicBoxesArray)!="0"){
+	
 					foreach( $this->homeMontageBoxesArray as $key=>$currentBoxData )
 					{
 					//echo "<pre>";print_r($currentBoxData);
@@ -952,7 +964,7 @@
                             </div>
                         </div>
                     </div>
-					<?php } }?>
+					<?php } }else{ echo "<div>Not Found The Mumbers</div>";}}?>
 					</div>
 					</div>
                 </div>
