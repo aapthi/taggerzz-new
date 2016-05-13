@@ -107,7 +107,7 @@
 						$montage_paragraph="";
 					?>
 					<div class="profile_text_empty">
-							<div id="montagPara_Div_id1" class="montage_Paragraph_show"><?if( isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId==$this->ucUserId){?><a href="javascript:void(0);" title="Edit your paragraph" onclick="montagePopUp(3)"><? } ?><img src="<?php echo $basePath; ?>/images/social_media/profile_empty.png" class="edit_paragraph_mon_empty"/><?if( isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId==$this->ucUserId){?></a><p>No Writing competition needed here</p><? } else { ?><p>&nbsp;</p><? } ?></div>
+							<div id="montagPara_Div_id1" class="montage_Paragraph_show"><?if( isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId==$this->ucUserId){?><a href="javascript:void(0);" title="Edit your paragraph" onclick="montagePopUp(3)"><? } ?><img src="<?php echo $basePath; ?>/images/social_media/profile_empty.png" class="edit_paragraph_mon_empty"/><?if( isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId==$this->ucUserId){?></a><p>Set your Profile Description</p><? } else { ?><p>&nbsp;</p><? } ?></div>
 					</div>
 					<?}else{
 						$montage_paragraph=$this->montageParagraph;
@@ -135,14 +135,43 @@
 	<div class="body_mar_b">
 		<div class="body_mar_b">
 		<?php if($this->dashboard!=""){?>
-		<?foreach($this->dashboard as $key=>$dashboard){$count=0;?>
+		<?foreach($this->dashboard as $key=>$dashboard){$count=0;
+		$viewUrl = "";
+				if( isset($_SESSION['usersinfo']) )
+				{
+					if($dashboard['settingId']==3){
+						$viewUrl = "post-vertical";
+					}else{
+						$viewUrl = "post-horizontal";
+					}
+				}
+				else
+				{
+					if($dashboard['settingId']==3){
+						$viewUrl = "pre-vertical";
+					}else{
+						$viewUrl = "pre-horizontal";
+					}
+				}
+				$displayCustomizationUrl = $baseUrl;
+				$catTitles = str_replace( "-","~",$dashboard["category_title"] );
+				$catTitle = str_replace( " ","-",$catTitles );
+				$catHashName = substr( $dashboard["user_hashname"],1 );
+				$catImageUrl=explode(".",$dashboard["category_image"]);
+				//$userImageUrl=$dashboard["image"];
+				$userImageUrl=$dashboard["category_image"];
+				
+				$catImageUrll=$catImageUrl[0];
+				$displayCustomizationUrl .= "/databox/" . $viewUrl . "/" . $dashboard["category_id"] . "+" . $catImageUrll . "+" . $catHashName . "+" . $catTitle;
+
+		?>
 			<input type="hidden" id="totalCount<?echo $key;?>" name="totalCount<?echo $key;?>" value="<?echo $dashboard['totalLinks'];?>">
 			<input type="hidden" id="presentCount<?echo $key;?>" name="presentCount<?echo $key;?>" value="7">
 			<div class="tg_montage_t montage_brg_box">
 			<div class="montage_box_brg_title">
 				<div class="text_row">
-					<div class="float_l"><h3><?echo $dashboard['user_hashname']?><span>&nbsp;(<?echo $dashboard['totalLinks']?>/100)</span></h3></div>
-					<div class="float_r"><P class="text_sub_title"><?echo $dashboard['category_title']?></P></div>
+					<div class="float_l"><h3><a href="<?php echo $displayCustomizationUrl;?>"><?echo $dashboard['user_hashname']?></a><span>&nbsp;(<?echo $dashboard['totalLinks']?>/100)</span></h3></div>
+					<div class="float_r"><P class="text_sub_title"><a href="<?php echo $displayCustomizationUrl;?>"><?echo $dashboard['category_title'];?></a></P></div>
 				</div><div class="clearfix"></div>
 			</div>
 			<div class="pos_relative">
@@ -153,8 +182,16 @@
 					$link=explode('***',$links);
 					?>
 					<div class="column1">
-						<div><p><?echo substr($link[0],0,22) . '...';$url = $link[0];?></p>
-						<a href="<?php echo $url; ?>" target="_blank"><img src="<?php echo $link[2]; ?>"/></a></div>
+						<div><p><?echo substr($link[0],0,20) . '...';
+								$url = $link[0];
+									 if(strpos($url, "https://") !== false || strpos($url, "http://") !== false){
+								$url=$url;
+							}
+							else{
+								$url='http://'.$url;
+							}
+								?></p>
+						<a href="<?php echo $url; ?>" target="_blank"><img src="<?php if($link[2]!=""){echo $link[2];}else{ echo $basePath;?>/images/social_media/noimage.png<? } ?>"/></a></div>
 					</div>
 				<?}}?>
 				</div>

@@ -118,6 +118,7 @@
 		<div class="body_mar_b">
 			<?php if($this->dashboard!=""){?>
 			<?php foreach($this->dashboard as $key=>$dashboard){$count=0;
+
 				$viewUrl = "";
 				if( isset($_SESSION['usersinfo']) )
 				{
@@ -152,8 +153,8 @@
 			<div class="tg_montage_t montage_brg_box">
 				<div class="montage_box_brg_title">
 					<div class="text_row">
-						<div class="float_l"><b><h1><a href="<?php echo $displayCustomizationUrl;?>"><?echo $dashboard['user_hashname']?></a></h1></b><span>&nbsp;(<?echo $dashboard['totalLinks']?>/100)</span></div>
-						<div class="float_r"><P class="text_sub_title"><h3><b><a href="<?php echo $displayCustomizationUrl;?>"><?echo $dashboard['category_title']?></a></b></h3></P></div>
+						<div class="float_l"><b><h1><a href="<?php echo $displayCustomizationUrl;?>"><?echo $dashboard['user_hashname'];?></a></h1></b><span>&nbsp;(<?echo $dashboard['totalLinks'];?>/100)</span></div>
+						<div class="float_r"><P class="text_sub_title"><h3><b><a href="<?php echo $displayCustomizationUrl;?>"><?echo $dashboard['category_title'];?></a></b></h3></P></div>
 					</div><div class="clearfix"></div>
 				</div>
 				<div class="pos_relative">
