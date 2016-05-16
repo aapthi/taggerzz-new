@@ -154,7 +154,13 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 						$imageSocialAlone="";
 						$valueSocialAlone=0;
 						if(isset($databoxLinksGrids->image) && $databoxLinksGrids->image!=null){
-							$imageLink=$databoxLinksGrids->image;
+							$sizeOfImage=$databoxLinksGrids->image;
+							$imageLink1 = getimagesize($sizeOfImage);
+							if($imageLink1[0]!="" && $imageLink1[2]!=""){
+								$imageLink=$databoxLinksGrids->image;
+							}else{
+								$imageLink=$basePath.'/images/social_media/noimage.png';
+							}
 						}else{
 							$imageLink=$basePath.'/images/social_media/noimage.png';
 						}
@@ -353,7 +359,7 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5461ef997855b9fa" async="async"></script>
 <div id="pop-up-databoxhash" class="pop-up-display-content conform_popup_content">
 	<div class="montage_desc">
-		<h4>Please provide your databox hash name</h4>
+		<h4>Please provide your databox hash name</h4><br/>
 		<p><input type="text" name="databox_hash_name" class="text_pad" id="databox_hash_name" value="<?php echo $this->hashName;?>" /></p>
 	</div>
 	<p>
@@ -364,7 +370,7 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 </div>
 <div id="pop-up-databoxhash_title" class="pop-up-display-content conform_popup_content">
 	<div class="montage_desc">
-		<h4>Please provide your databox title</h4>
+		<h4>Please provide your databox title</h4><br/>
 		<p><input type="text" name="databoxhash_title" class="text_pad" id="databoxhash_title" value="<?php echo $this->categoryTitle; ?>"/></p>
 	</div>
 	<p>

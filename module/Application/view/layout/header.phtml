@@ -1,4 +1,4 @@
-<?php //echo "<pre>";print_r($_SESSION);exit;?>
+<?php //echo "<pre>";print_r($_SERVER['REQUEST_URI']);exit;?>
 <input type="hidden" id="boxesterm" name="boxesterm" value="" />
 <?php
 		$dashBoardActive	='';
@@ -188,7 +188,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/"  && $_SERVER['REQUEST_URI']
         </div>
         <div id="divLogoWrapper" class="width30 marginallyCenter logo_home_new_size">
             <div class="width100 logo_martb5">
-                <a href="<?php echo $baseUrl; ?>/contentpage"><img src="<?php echo $basePath; ?>/img/imgLogo.png" alt="" class="imgLogo width100" /></a>
+                <a href="javascript:void(0)" onclick="goToLocation('/contentpage')"><img src="<?php echo $basePath; ?>/img/imgLogo.png" alt="" class="imgLogo width100" /></a>
             </div> 
         </div>
         <div id="divLeftSlideMenu" class="divLeftSlideMenu">
