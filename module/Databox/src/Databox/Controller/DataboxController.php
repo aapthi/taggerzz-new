@@ -2206,14 +2206,14 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				if((isset($_SESSION['usersinfo']->userId )&& $currentBoxRow->userVoteId==$_SESSION['usersinfo']->userId) || $currentBoxRow->userVoteId==$_SERVER['REMOTE_ADDR']){
 					if($currentBoxRow->userVoteUp=='1'){
 						$publicBoxesHtml .=	'<div class="divbrg_f">'.$currentBoxRow->voteUp.' <img src="'. $basePath .'/img/love_ok.png" alt="" width="15px" /></div>';
-						$publicBoxesHtml .=	'<div class="divbrg_s">'.$currentBoxRow->voteDown.' <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')"><img src="'.$basePath .'/img/trash.png" alt="" width="10px" /></a></div>';
+						$publicBoxesHtml .=	'<div class="divbrg_s" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')">'.$currentBoxRow->voteDown.' <a href="Javascript:void(0);" ><img src="'.$basePath .'/img/trash.png" alt="" width="10px" /></a></div>';
 					}else if($currentBoxRow->uservoteDown=='1'){	
-						$publicBoxesHtml .=	'<div class="divbrg_f">'.$currentBoxRow->voteUp.' <a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')"><img src="'. $basePath .'/img/love.png" alt="" width="15px" /></a></div>';
+						$publicBoxesHtml .=	'<div class="divbrg_f" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')">'.$currentBoxRow->voteUp.' <a href="Javascript:void(0);" ><img src="'. $basePath .'/img/love.png" alt="" width="15px" /></a></div>';
 						$publicBoxesHtml .=	'<div class="divbrg_s">'.$currentBoxRow->voteDown.' <img src="'.$basePath .'/img/trash.png" alt="" width="10px" /></div>';
 					}
 				}else{	
-						$publicBoxesHtml .=	'<div class="divbrg_f">'.$currentBoxRow->voteUp.' <a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')"><img src="'. $basePath .'/img/love.png" alt="" width="15px"  /></a></div>';
-						$publicBoxesHtml .=	'<div class="divbrg_s">'.$currentBoxRow->voteDown.' <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')"><img src="'.$basePath .'/img/trash.png" alt="" width="10px" /></a></div>';
+						$publicBoxesHtml .=	'<div class="divbrg_f" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')">'.$currentBoxRow->voteUp.' <a href="Javascript:void(0);" ><img src="'. $basePath .'/img/love.png" alt="" width="15px"  /></a></div>';
+						$publicBoxesHtml .=	'<div class="divbrg_s" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')">'.$currentBoxRow->voteDown.' <a href="Javascript:void(0);" ><img src="'.$basePath .'/img/trash.png" alt="" width="10px" /></a></div>';
 				}
 				$userVoteUpTz = "3";
 				if($currentBoxRow->userVoteUp!=""){
@@ -2498,14 +2498,14 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				if((isset($_SESSION['usersinfo']->userId )&& $currentBoxRow->userVoteId==$_SESSION['usersinfo']->userId) || $currentBoxRow->userVoteId==$_SERVER['REMOTE_ADDR']){
 					if($currentBoxRow->userVoteUp=='1'){
 						$publicBoxesHtml1 .=	'<div class="divbrg_f">'.$currentBoxRow->voteUp.' <img src="'. $basePath .'/img/love_ok.png" alt="" width="15px" /></div>';
-						$publicBoxesHtml1 .=	'<div class="divbrg_s">'.$currentBoxRow->voteDown.' <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')"><img src="'.$basePath .'/img/trash.png" alt="" width="10px" /></a></div>';
+						$publicBoxesHtml1 .=	'<div class="divbrg_s" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')">'.$currentBoxRow->voteDown.' <a href="Javascript:void(0);" ><img src="'.$basePath .'/img/trash.png" alt="" width="10px" /></a></div>';
 					}else if($currentBoxRow->uservoteDown=='1'){	
-						$publicBoxesHtml1 .=	'<div class="divbrg_f">'.$currentBoxRow->voteUp.' <a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')"><img src="'. $basePath .'/img/love.png" alt="" width="15px" /></a></div>';
+						$publicBoxesHtml1 .=	'<div class="divbrg_f" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')">'.$currentBoxRow->voteUp.' <a href="Javascript:void(0);" ><img src="'. $basePath .'/img/love.png" alt="" width="15px" /></a></div>';
 						$publicBoxesHtml1 .=	'<div class="divbrg_s">'.$currentBoxRow->voteDown.' <img src="'.$basePath .'/img/trash.png" alt="" width="10px" /></div>';
 					}
 				}else{	
-						$publicBoxesHtml1 .=	'<div class="divbrg_f">'.$currentBoxRow->voteUp.' <a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')"><img src="'. $basePath .'/img/love.png" alt="" width="15px"  /></a></div>';
-						$publicBoxesHtml1 .=	'<div class="divbrg_s">'.$currentBoxRow->voteDown.' <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')"><img src="'.$basePath .'/img/trash.png" alt="" width="10px" /></a></div>';
+						$publicBoxesHtml1 .=	'<div class="divbrg_f" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')">'.$currentBoxRow->voteUp.' <a href="Javascript:void(0);" ><img src="'. $basePath .'/img/love.png" alt="" width="15px"  /></a></div>';
+						$publicBoxesHtml1 .=	'<div class="divbrg_s" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')">'.$currentBoxRow->voteDown.' <a href="Javascript:void(0);" ><img src="'.$basePath .'/img/trash.png" alt="" width="10px" /></a></div>';
 				}
 				$userVoteUpTz = "3";
 				if($currentBoxRow->userVoteUp!=""){
@@ -2691,15 +2691,15 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				$privateBoxHtml .='<div id="divCardLoveTrash'.$currentBoxRow->category_id.'" >';
 				if((isset($_SESSION['usersinfo']->userId )&& $currentBoxRow->userVoteId==$_SESSION['usersinfo']->userId) || $currentBoxRow->userVoteId==$_SERVER['REMOTE_ADDR']){
 					if($currentBoxRow->userVoteUp=='1'){
-						$privateBoxHtml .=	'<div class="divbrg_f">'.$currentBoxRow->voteUp.' <img src="'. $basePath .'/img/love_ok.png" alt="" width="15px" /></div>';
-						$privateBoxHtml .=	'<div class="divbrg_s">'.$currentBoxRow->voteDown.' <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')"><img src="'.$basePath .'/img/trash.png" alt="" width="10px" /></a></div>';
+						$privateBoxHtml .=	'<div class="divbrg_f" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')">'.$currentBoxRow->voteUp.' <img src="'. $basePath .'/img/love_ok.png" alt="" width="15px" /></div>';
+						$privateBoxHtml .=	'<div class="divbrg_s">'.$currentBoxRow->voteDown.' <a href="Javascript:void(0);" ><img src="'.$basePath .'/img/trash.png" alt="" width="10px" /></a></div>';
 					}else if($currentBoxRow->uservoteDown=='1'){	
-						$privateBoxHtml .=	'<div class="divbrg_f">'.$currentBoxRow->voteUp.' <a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')"><img src="'. $basePath .'/img/love.png" alt="" width="15px" /></a></div>';
+						$privateBoxHtml .=	'<div class="divbrg_f" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')">'.$currentBoxRow->voteUp.' <a href="Javascript:void(0);" ><img src="'. $basePath .'/img/love.png" alt="" width="15px" /></a></div>';
 						$privateBoxHtml .=	'<div class="divbrg_s">'.$currentBoxRow->voteDown.' <img src="'.$basePath .'/img/trash.png" alt="" width="10px" /></div>';
 					}
 				}else{	
-						$privateBoxHtml .=	'<div class="divbrg_f">'.$currentBoxRow->voteUp.' <a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')"><img src="'. $basePath .'/img/love.png" alt="" width="15px"  /></a></div>';
-						$privateBoxHtml .=	'<div class="divbrg_s">'.$currentBoxRow->voteDown.' <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')"><img src="'.$basePath .'/img/trash.png" alt="" width="10px" /></a></div>';
+						$privateBoxHtml .=	'<div class="divbrg_f" onClick="return likeDislikeCnt(1,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')">'.$currentBoxRow->voteUp.' <a href="Javascript:void(0);" ><img src="'. $basePath .'/img/love.png" alt="" width="15px"  /></a></div>';
+						$privateBoxHtml .=	'<div class="divbrg_s" onClick="return likeDislikeCnt(0,'.$currentBoxRow->category_id.',1,'.$currentBoxRow->voteUp.','.$currentBoxRow->rw_lh.','.$currentBoxRow->voteDown.')">'.$currentBoxRow->voteDown.' <a href="Javascript:void(0);" ><img src="'.$basePath .'/img/trash.png" alt="" width="10px" /></a></div>';
 				}
 				$userVoteUpTz = "3";
 				if($currentBoxRow->userVoteUp!=""){

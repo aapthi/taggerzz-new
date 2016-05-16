@@ -110,8 +110,8 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 						<div class="sm_share_btns"><!-- Delete class only c_DivHeaderCommentRightBottom -->
 						<a class="c_BtnReport" style="display:none;" id="LinksEditButtonId" href="javascript:void(0);" onclick="Javascript:editTheDataBoxUrls('<?php echo $currBoxEditLink;?>');" >Links Edit</a>
 							<a class="c_BtnReport" href="javascript:void(0);" onclick="Javascript:custReportPopUpShow();">Report</a>
-							<a class="c_BtnShare" href="javascript:void(0);" onclick="Javascript:openCloseShareCus()">Share</a>
-							
+							<a class="c_BtnShare" href="javascript:void(0);" onclick="Javascript:openCloseShareCus()">Share</a>&nbsp;&nbsp;&nbsp;&nbsp;
+							<span id="dragDropMsgId" style="display:none;" ><b>Drag, Drop to relocate & Resize the Web Link posts below to Customize as per your Idea</b></span>
 							<!--<a class="c_BtnAddComment" href="javascript:void(0);" onclick="custCommentCkEditorShow('',0);">Add Comment &nbsp;<img src="<?php echo $basePath; ?>/images/social_media/chatting.png"/></a>-->
 							<a class="c_BtnAddComment" id="add-new-widget" href="javascript:void(0);" style="display:none">Add Comment</a>
 							<a class="c_BtnPublish" id="tzPublishLink" href="javascript:void(0);" onclick="savePositions('<?echo $this->categoryId?>')" style="display:none">Publish</a>
@@ -127,7 +127,7 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 				</div>
 			</div>
 			<!--  c_DivCardsWrapper customize_wp -->
-			<span id="loderImage"><center><img  src="<?php echo $basePath; ?>/img/bx_loader.gif"  alt="loader image" /></center></span>
+			<span id="loderImage"><center><img width="100px" height="100px" src="<?php echo $basePath; ?>/img/bx_loader.gif"  alt="loader image" /></center></span>
 
 			<span id="pubDddContainer"><?php if($this->data==0){?><div id="drag-drop-demo" class="grid-stack" data-gs-width="12"><?php $tzGsRowNum= 1;
 					$tzDataGsX = 0;
@@ -553,6 +553,7 @@ $(document).ready(function()
 		$('#catHashNameBtn').show();
 		$('#catHashTitleBtn').show();
 		$('#LinksEditButtonId').show();
+		$('#dragDropMsgId').show();
 		$('.div_collect_this').hide();
 
 		$('.grid-stack').on('dragstop', function (event, ui) {

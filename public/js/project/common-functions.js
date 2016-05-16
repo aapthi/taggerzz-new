@@ -896,22 +896,22 @@ function checkSpaces()
 			if(newVoteValue==1){
 				if(votingid==3){
 					var newTotalvoteUp=parseInt(TotalvoteUp) + parseInt("1");
-					var newTotalvoteDown=parseInt(TotalvoteDown) - parseInt("1");
+					var newTotalvoteDown=parseInt(TotalvoteDown);
 					var newTotalrw_lh=parseInt(Totalrw_lh) + parseInt("1");
-					console.log('51'+newTotalvoteDown);
+					console.log('51 '+newTotalvoteDown);
 
 				}
 				if(votingid==1){
 					var newTotalvoteUp=parseInt(TotalvoteUp) + parseInt("1");
 					var newTotalvoteDown=parseInt(TotalvoteDown) - parseInt("1");
 					var newTotalrw_lh=parseInt(Totalrw_lh) + parseInt("1");
-					console.log('52'+newTotalvoteDown);
+					console.log('52 '+newTotalvoteDown);
 				} 
 				if(votingid==0){
 					var newTotalvoteUp=parseInt(TotalvoteUp) + parseInt("1");
 					var newTotalvoteDown=parseInt(TotalvoteDown) - parseInt("1");
 					var newTotalrw_lh=parseInt(Totalrw_lh);
-					console.log('53'+newTotalvoteDown);
+					console.log('53 '+newTotalvoteDown);
 
 				}
 				var insertedActivityAjaxUrl = BASE_URL + "/databoxuser/record-activity-points";
@@ -929,23 +929,23 @@ function checkSpaces()
 					var newTotalvoteUp=parseInt(TotalvoteUp);		
 					var newTotalvoteDown=parseInt(TotalvoteDown) + parseInt("1");		
 					var newTotalrw_lh=parseInt(Totalrw_lh) + parseInt("1");
-					console.log('1'+newTotalvoteDown);
+					console.log('1 '+newTotalvoteDown);
 				}else{
 					if(votingid==1){
 						var newTotalvoteUp=parseInt(TotalvoteUp)- parseInt("1");		
 						var newTotalvoteDown=parseInt(TotalvoteDown) + parseInt("1");		
 						var newTotalrw_lh=parseInt(Totalrw_lh);
-						console.log('2'+newTotalvoteDown);
+						console.log('2 '+newTotalvoteDown);
 					}else if(votingid==0){
 						var newTotalvoteUp=parseInt(TotalvoteUp);
 						var newTotalvoteDown=parseInt(TotalvoteDown);								
 						var newTotalrw_lh=parseInt(Totalrw_lh);
-						console.log('3'+newTotalvoteDown);
+						console.log('3 '+newTotalvoteDown);
 					}else{
 						var newTotalvoteUp=parseInt(TotalvoteUp);	
 						var newTotalvoteDown=parseInt(TotalvoteDown) + parseInt("1");		
 						var newTotalrw_lh=parseInt(Totalrw_lh) + parseInt("1");
-						console.log('4'+newTotalvoteDown);
+						console.log('4 '+newTotalvoteDown);
 					}
 				}
 				
@@ -958,10 +958,10 @@ function checkSpaces()
 			//$('#likes'+categoryId).html('<h2>'+like1+'% liked</h2>');
 			if(newVoteValue==1){
 				var clickAppendHtml='<div class="divbrg_f">'+newTotalvoteUp+' <img src="'+BASE_URL+'/public/img/love_ok.png" alt=""  width="15px"/></div>';
-				clickAppendHtml+='<div class="divbrg_s">'+newTotalvoteDown+' <a href="Javascript:void(0);" onClick="return likeDislikeCnt(0,'+categoryId+',1,'+newTotalvoteUp+','+newTotalrw_lh+','+newTotalvoteDown+')"><img src="'+BASE_URL+'/public/img/trash.png" alt="" width="10px" /></a></div>';
+				clickAppendHtml+='<div class="divbrg_s" onClick="return likeDislikeCnt(0,'+categoryId+',1,'+newTotalvoteUp+','+newTotalrw_lh+','+newTotalvoteDown+')">'+newTotalvoteDown+' <a href="Javascript:void(0);" ><img src="'+BASE_URL+'/public/img/trash.png" alt="" width="10px" /></a></div>';
 				clickAppendHtml+='<input type="hidden" id="voting'+categoryId+'" name="voting'+categoryId+'" value="1">';
 			}else{
-				var clickAppendHtml='<div class="divbrg_f">'+newTotalvoteUp+' <a href="Javascript:void(0);" onClick="return likeDislikeCnt(1,'+categoryId+',1,'+newTotalvoteUp+','+newTotalrw_lh+','+newTotalvoteDown+')" ><img src="'+BASE_URL+'/public/img/love.png" alt="" width="15px" /></a></div>';
+				var clickAppendHtml='<div class="divbrg_f" onClick="return likeDislikeCnt(1,'+categoryId+',1,'+newTotalvoteUp+','+newTotalrw_lh+','+newTotalvoteDown+')">'+newTotalvoteUp+' <a href="Javascript:void(0);"  ><img src="'+BASE_URL+'/public/img/love.png" alt="" width="15px" /></a></div>';
 				clickAppendHtml+='<div class="divbrg_s">'+newTotalvoteDown+' <img src="'+BASE_URL+'/public/img/trash.png" alt="" width="10px"/></div>';
 				clickAppendHtml+='<input type="hidden" id="voting'+categoryId+'" name="voting'+categoryId+'" value="0">';
 			}
