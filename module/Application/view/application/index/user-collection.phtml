@@ -170,7 +170,7 @@
 			<div class="tg_montage_t montage_brg_box">
 			<div class="montage_box_brg_title">
 				<div class="text_row">
-					<div class="float_l"><h3><a href="<?php echo $displayCustomizationUrl;?>"><?echo $dashboard['user_hashname']?></a><span>&nbsp;(<?echo $dashboard['totalLinks']?>/100)</span></h3></div>
+					<div class="float_l"><h3><b><a href="<?php echo $displayCustomizationUrl;?>"><?echo $dashboard['user_hashname']?></a></b><span>&nbsp;(<?echo $dashboard['totalLinks']?>/100)</span></h3></div>
 					<div class="float_r"><P class="text_sub_title"><a href="<?php echo $displayCustomizationUrl;?>"><?echo $dashboard['category_title'];?></a></P></div>
 				</div><div class="clearfix"></div>
 			</div>
@@ -190,8 +190,14 @@
 							else{
 								$url='http://'.$url;
 							}
+							$imageLink1 = getimagesize($link[2]);
+							if($imageLink1[0]!="" && $imageLink1[2]!=""){
+								$imageLink=$link[2];
+							}else{
+								$imageLink=$basePath.'/images/social_media/noimage.png';
+							}
 								?></p>
-						<a href="<?php echo $url; ?>" target="_blank"><img src="<?php if($link[2]!=""){echo $link[2];}else{ echo $basePath;?>/images/social_media/noimage.png<? } ?>"/></a></div>
+						<a href="<?php echo $url; ?>" target="_blank"><img src="<?php if($link[2]!=""){echo $imageLink;}else{ echo $basePath;?>/images/social_media/noimage.png<? } ?>"/></a></div>
 					</div>
 				<?}}?>
 				</div>
