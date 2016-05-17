@@ -140,6 +140,21 @@ class UserDetailsTable
 		$select->join('user', 'user_details.user_id=user.user_id',array('display_name','ustatus'=>'status','montageOrder'=>'montage_prior_order'),'left');
 		$select->join(array('userPublicBoxesRj' => $userWisePdbListSqSelect), 'user_details.user_id=ucUserId1',array('userWiseLinksCount' => 'userWiseLinksCount1','ucUserId'=>'ucUserId1'),'right');
 		//newly added query
+		//$select->where( 'user_details.montage_hash_name!="" ');
+		
+		$select->where
+		  ->NEST->
+				NotequalTo('user_details.montage_hash_name',"")
+					->OR->
+				NotequalTo('user_details.montage_title',"")
+				->OR->
+				NotequalTo('user_details.montage_paragraph',"")
+				->OR->
+				NotequalTo('user_details.montage_main_image',"")
+				->OR->
+				NotequalTo('user_details.montage_image',"")
+		  ->UNNEST;
+
 		$select->where('user.status="1"');
 		$select->where('user.hide_me="0"');
 		$select->limit(intval($boxesPerPage));

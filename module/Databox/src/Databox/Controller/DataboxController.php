@@ -2192,7 +2192,7 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				} else { 
 					$publicBoxesHtml .='<a href="'.$displayCustomizationUrl.'"><img id="Databox-1-img" class="" alt="'.$dispHashName.'" src="'.$basePath.'/images/project/categoryImages/'.$currentBoxRow->category_image .'"/></a>';
 				}
-				$publicBoxesHtml .='<div id="divDatabox-1-hashtag" class="divCardHashtag hash_tag_color"> <a href="'.$displayCustomizationUrl.'"> <h2 class="hashtagh2_size">'.$dispHashName .'</h2></a></div>';
+				$publicBoxesHtml .='<div id="divDatabox-1-hashtag" class="divCardHashtag hash_tag_color"> <a href="'.$displayCustomizationUrl.'"> <h3 class="hashtagh2_size"><b>'.$dispHashName .'</b></h3></a></div>';
 				$publicBoxesHtml .='<div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">';
 				$publicBoxesHtml .= '<span class="fatFont">';
 				if( $currentBoxRow->user_classification!="" ){
@@ -2489,7 +2489,7 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				} else { 
 					$publicBoxesHtml1 .='<a href="'.$displayCustomizationUrl.'"><img id="Databox-1-img" class="" alt="'.$dispHashName.'" src="'.$basePath.'/images/project/categoryImages/'.$currentBoxRow->category_image .'"/></a>';
 				}
-				$publicBoxesHtml1 .='<div id="divDatabox-1-hashtag" class="divCardHashtag hash_tag_color"> <a href="'.$displayCustomizationUrl.'"><h2 class="hashtagh2_size">'.$dispHashName .'</h2></a></div>';
+				$publicBoxesHtml1 .='<div id="divDatabox-1-hashtag" class="divCardHashtag hash_tag_color"> <a href="'.$displayCustomizationUrl.'"><h3 class="hashtagh2_size"><b>'.$dispHashName .'</b></h3></a></div>';
 				$publicBoxesHtml1 .='<div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">';
 				$publicBoxesHtml1 .= '<span class="fatFont">';
 				if( $currentBoxRow->user_classification!="" ){
@@ -2689,7 +2689,7 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				} else { 
 					$privateBoxHtml .='<a href="'.$displayCustomizationUrl.'"><img id="Databox-1-img" class="" alt="'.$dispHashName.'" src="'.$basePath.'/images/project/categoryImages/'.$currentBoxRow->category_image .'"/></a>';
 				}
-				$privateBoxHtml .='<div id="divDatabox-1-hashtag" class="divCardHashtag hash_tag_color"> <a href="'.$displayCustomizationUrl.'"><h2 class="hashtagh2_size">'.$dispHashName .'</h2> </a></div>';
+				$privateBoxHtml .='<div id="divDatabox-1-hashtag" class="divCardHashtag hash_tag_color"> <a href="'.$displayCustomizationUrl.'"><h3 class="hashtagh2_size"><b>'.$dispHashName .'</b></h3> </a></div>';
 				$privateBoxHtml .='<div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">';
 				$privateBoxHtml .= '<span class="fatFont">';
 				if( $currentBoxRow->user_classification!="" ){
