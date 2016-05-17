@@ -3911,6 +3911,17 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 			'output' =>	1,
 		));
     }
+	public function deleteLinkAction()
+    {
+		$baseUrls = $this->getServiceLocator()->get('config');
+		$baseUrlArr = $baseUrls['urls'];
+		$baseUrl = $baseUrlArr['baseUrl'];
+		$basePath = $baseUrlArr['basePath'];
+		$categoryLinksDeleteStatus = $this->getCategoryLinksTable()->deleteCustomisedCategoryLink( $_POST['category_link_id'] );		
+		return $view = new JsonModel(array(
+			'output' =>	1,
+		));
+    }
 }
 
 		

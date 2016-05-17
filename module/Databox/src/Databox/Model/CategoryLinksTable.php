@@ -86,4 +86,10 @@ class CategoryLinksTable
 		return $resultSet;
 	}
 	
+	public function deleteCustomisedCategoryLink( $category_link_id )
+    {	
+		$deleteStatus=$this->tableGateway->delete(array('category_link_id' => $category_link_id));
+		return $deleteStatus;
+	}
+	
 }

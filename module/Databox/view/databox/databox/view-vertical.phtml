@@ -165,9 +165,11 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 							$imageLink=$basePath.'/images/social_media/noimage.png';
 						}
 						?>
+						
 					<div id="dragDropWindow<?echo $key+1;?>" class="grid-stack-item" 
 					<?php if( $tzGsRowNum % 4 == 0 ) { $xSet = $tzDataGsX;$tzDataGsX = 0;$ySet = $tzDataGsY;$tzDataGsY += 3; } else{ $xSet = $tzDataGsX;$tzDataGsX += 3;$ySet = $tzDataGsY; } ?> data-gs-x="<?php echo $xSet; ?>" data-gs-y="<?php echo $ySet; ?>" data-gs-width="3" data-gs-height="4" style="border:none;">
 					<div class="grid-stack-item-content" >
+					<a class="c_BtnReport linkDeletePost" style="display:none;"  href="javascript:void(0);" onclick="Javascript:deleteLink('<?php echo $databoxLinksGrids->category_link_id; ?>','<?echo $key+1;?>');" >X</a>
 									<?php
 								if($databoxLinksGrids->is_video==1)
 								{
@@ -553,6 +555,7 @@ $(document).ready(function()
 		$('#catHashNameBtn').show();
 		$('#catHashTitleBtn').show();
 		$('#LinksEditButtonId').show();
+		$('.linkDeletePost').show();
 		$('#dragDropMsgId').show();
 		$('.div_collect_this').hide();
 
@@ -1097,5 +1100,23 @@ $(document).ready(function()
 	$("#uGetTotalPublicBoxesAndprivate").html(<?php echo $this->publicprivatetotalcount; ?>);
 	$("#UGetHighlight").html(<?php echo $this->getHighlightsCount; ?>);
 });
+function deleteLink(deletedLinkId,dragDropId){
+	if(confirm("Are you sure delete the comment!")){
+		$.ajax({
+			url: BASE_URL+'/databox/delete-link',
+			dataType: "json",
+			type	: "POST",
+			data	:{category_link_id:deletedLinkId},
+			success: function( data ) {
+				if(data.output!=0) {
+					$('#viewPageChanged').val( 1 );
+					$('.grid-stack').data('gridstack').remove_widget('#dragDropWindow'+dragDropId);
+					//$('#dragDropWindow'+dragDropId).remove();
+				}
+			}	
+		});
+	}
+} 
+
 </script>	       
     

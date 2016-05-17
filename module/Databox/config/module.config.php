@@ -639,6 +639,16 @@ return array(
                             ),
                         ),
                     ),
+					'delete-link' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route' => '/delete-link',
+                            'defaults' => array(
+                                'controller' => 'Databox\Controller\Databox',
+                                'action'     => 'deleteLink',
+                            ),
+                        ),
+                    ),
                 ),
             ),
         ),

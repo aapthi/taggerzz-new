@@ -2641,7 +2641,8 @@ function savePositions(categoryId){
 }
 function deleteComment(idValue){
 	$('#viewPageChanged').val( 1 );
-	$('#dragDropWindow'+idValue).remove();
+	$('.grid-stack').data('gridstack').remove_widget('#dragDropWindow'+idValue);
+	//$('#dragDropWindow'+idValue).remove();
 }
 function addFocus(idValue){
 	$('#data_'+idValue).focus();
