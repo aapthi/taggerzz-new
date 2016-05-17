@@ -27,6 +27,7 @@ class UserCategoriesTable
 
 	public function addUserCategory( $userCatDetails,$categoryHighlight )
     {
+
 		$userId = 0;
 		if( isset($_SESSION['usersinfo']) )
 		{
@@ -38,7 +39,7 @@ class UserCategoriesTable
 				'category_id' 	 => $userCatDetails["category_id"], 
 				'user_id' 	     => $userId, 
 				'category_title' => $userCatDetails["categoryTitle"], 
-				'category_description'  => $userCatDetails["description123"], 
+				'user_classification'  => $userCatDetails["description123"], 
 				'user_hashname'  => $userCatDetails["catHashTag"], 
 				'category_type'  => $userCatDetails["categoryType"], 
 				'secret_code'  	 => $userCatDetails["uniqueCode"], 
@@ -62,7 +63,7 @@ class UserCategoriesTable
 				'category_id' 	 => $userCatDetails["category_id"], 
 				'user_id' 	     => $userId, 
 				'category_title' => $userCatDetails["categoryTitle"],
-				'category_description'  => $userCatDetails["description123"],
+				'user_classification'  => $userCatDetails["description123"],
 				'user_hashname'  => $userCatDetails["catHashTag"], 
 				'category_type'  => $userCatDetails["categoryType"], 
 				'secret_code'  	 => $userCatDetails["uniqueCode"], 
@@ -830,7 +831,7 @@ class UserCategoriesTable
 			'user_hashname'  => $userCatDetails["catHashTag"], 
 			'category_title' => $userCatDetails["categoryTitle"], 
 			'secret_code'    => $userCatDetails["uniqueCode"], 
-			'category_description' => $userCatDetails["category_description"], 
+			'user_classification' => $userCatDetails["user_classification"], 
 			'mature_content' 	 => $userCatDetails["matureContent"], 
 			'not_safe_for_work'  => $userCatDetails["notSafeForWork"], 
 			'meta_tags' 	 => $userCatDetails["metaTags"], 

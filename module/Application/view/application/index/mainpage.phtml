@@ -79,7 +79,8 @@
 									<h2><?php echo round($currentBoxData["NetVotes"],2);?>% liked</h2></div>
                                 </div>-->
                                 <div id="divCard-1-sharedLinks" class="divCardSharedLinks">
-                                    <span class="fatFont"><?php echo $currentBoxData["categoryLinksCount"]; ?> HOT LINKS</span> collected and shared
+                                    <span class="fatFont"><?php if($currentBoxData["user_classification"]!="") { echo $currentBoxData["user_classification"]; }else{?><?php echo $currentBoxData["categoryLinksCount"]; ?> HOT LINKS</span> collected and shared
+									<?php } ?>
                                 </div>
 							<div id="divCardLoveTrash<?php echo $currentBoxData["category_id"];?>">
 
@@ -217,7 +218,8 @@
                             </div>
 
                             <div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">
-                                <span class="fatFont"><?php echo $currentBoxData["categoryLinksCount"]; ?> HOT LINKS</span> collected and shared
+                                <span class="fatFont"><?php if($currentBoxData["user_classification"]!="") { echo $currentBoxData["user_classification"]; }else{ ?><?php echo $currentBoxData["categoryLinksCount"]; ?> HOT LINKS</span> collected and shared
+								<?php } ?>
                             </div>
                            <!-- <div id="Card-1-user" class="divCardUser">
 							<div class="divCardUserName">By: <?php echo $currentBoxData["display_name"];?></div>
@@ -361,7 +363,7 @@
                             </div>
 
                             <div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">
-                                <span class="fatFont"><?php echo $currentBoxData["categoryLinksCount"]; ?> HOT LINKS</span> collected and shared
+                                <span class="fatFont"><?php if($currentBoxData["user_classification"]!="") { echo $currentBoxData["user_classification"]; }else{ ?><?php echo $currentBoxData["categoryLinksCount"]; ?> HOT LINKS</span> collected and shared<?php } ?>
                             </div>
                            <!-- <div id="Card-1-user" class="divCardUser">
 							<div class="divCardUserName">By: <?php echo $currentBoxData["display_name"];?></div>
@@ -501,7 +503,7 @@
                             </div>
 
                             <div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">
-                                <span class="fatFont"><?php echo $currentBoxData["categoryLinksCount"]; ?> HOT LINKS</span> collected and shared
+                                <span class="fatFont"><?php if($currentBoxData["user_classification"]!="") { echo $currentBoxData["user_classification"]; }else{ ?><?php echo $currentBoxData["categoryLinksCount"]; ?> HOT LINKS</span> collected and shared<?php } ?>
                             </div>
                            <!-- <div id="Card-1-user" class="divCardUser">
 							<div class="divCardUserName">By: <?php echo $currentBoxData["display_name"];?></div>
@@ -641,7 +643,7 @@
                             </div>
 
                             <div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">
-                                <span class="fatFont"><?php echo $currentBoxData["categoryLinksCount"]; ?> HOT LINKS</span> collected and shared
+                                <span class="fatFont"><?php if($currentBoxData["user_classification"]!="") { echo $currentBoxData["user_classification"]; }else{ ?><?php echo $currentBoxData["categoryLinksCount"]; ?> HOT LINKS</span> collected and shared<?php } ?>
                             </div>
                            <!-- <div id="Card-1-user" class="divCardUser">
 							<div class="divCardUserName">By: <?php echo $currentBoxData["display_name"];?></div>
@@ -783,7 +785,7 @@
                             </div>
 
                             <div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">
-                                <span class="fatFont"><?php echo $currentBoxData["categoryLinksCount"]; ?> HOT LINKS</span> collected and shared
+                                <span class="fatFont"><?php if($currentBoxData["user_classification"]!="") { echo $currentBoxData["user_classification"]; }else{ ?><?php echo $currentBoxData["categoryLinksCount"]; ?> HOT LINKS</span> collected and shared<?php } ?>
                             </div>
                            <!-- <div id="Card-1-user" class="divCardUser">
 							<div class="divCardUserName">By: <?php echo $currentBoxData["display_name"];?></div>

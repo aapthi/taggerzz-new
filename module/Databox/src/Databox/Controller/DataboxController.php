@@ -223,7 +223,7 @@ class DataboxController extends AbstractActionController
 		$tzCatImage = "";
 		$boxLinksArr= array();
 		$c="00";
-		$categoryDescription="";
+		$user_classification="";
 
 		
 		if($this->params()->fromRoute('boxid', 0)!="")
@@ -244,7 +244,7 @@ class DataboxController extends AbstractActionController
 				if( isset($catRow->user_hashname) )
 				{
 					$metaTags=$catRow->meta_tags;
-					$categoryDescription=$catRow->category_description;
+					$user_classification=$catRow->user_classification;
 					if( isset($catRow->mature_content) && trim($catRow->mature_content) != "" && is_numeric($catRow->mature_content) )
 					{
 						$mature_content=$catRow->mature_content;
@@ -321,7 +321,7 @@ class DataboxController extends AbstractActionController
 			'boxLinksArr' => $boxLinksArr,
 			'fetchedLinksCount' => $fetchedLinksCount,
 			'countOfLinks' => $c,
-			'categoryDescription' => $categoryDescription
+			'user_classification' => $user_classification
 		));
 	}
 	// Select databox
@@ -349,7 +349,7 @@ class DataboxController extends AbstractActionController
 		$tzCatImage = "";
 		$boxLinksArr= array();
 		$c="00";
-		$categoryDescription="";
+		$user_classification="";
 
 		if($this->params()->fromRoute('boxid', 0)!="")
 		{
@@ -369,7 +369,7 @@ class DataboxController extends AbstractActionController
 				if( isset($catRow->user_hashname) )
 				{
 					$metaTags=$catRow->meta_tags;
-					$categoryDescription=$catRow->category_description;
+					$user_classification=$catRow->user_classification;
 					if( isset($catRow->mature_content) && trim($catRow->mature_content) != "" && is_numeric($catRow->mature_content) )
 					{
 						$mature_content=$catRow->mature_content;
@@ -446,7 +446,7 @@ class DataboxController extends AbstractActionController
 			'boxLinksArr' => $boxLinksArr,
 			'fetchedLinksCount' => $fetchedLinksCount,
 			'countOfLinks' => $c,
-			'categoryDescription' => $categoryDescription
+			'user_classification' => $user_classification
 		));
 	}
 	
@@ -465,7 +465,7 @@ class DataboxController extends AbstractActionController
 		$tzCatImage = "";
 		$boxLinksArr= array();
 		$c="00";
-		$categoryDescription="";
+		$user_classification="";
 
 		if($this->params()->fromRoute('boxid', 0)!="")
 		{
@@ -485,7 +485,7 @@ class DataboxController extends AbstractActionController
 				if( isset($catRow->user_hashname) )
 				{
 					$secret_code=$catRow->secret_code;
-					$categoryDescription=$catRow->category_description;
+					$user_classification=$catRow->user_classification;
 					$metaTags=$catRow->meta_tags;
 					if( isset($catRow->mature_content) && trim($catRow->mature_content) != "" && is_numeric($catRow->mature_content) )
 					{
@@ -564,7 +564,7 @@ class DataboxController extends AbstractActionController
 			'boxLinksArr' => $boxLinksArr,
 			'fetchedLinksCount' => $fetchedLinksCount,
 			'countOfLinks' => $c,
-			'categoryDescription' => $categoryDescription
+			'user_classification' => $user_classification
 		));
 	}
 	 public function indexAction()
@@ -663,7 +663,7 @@ class DataboxController extends AbstractActionController
 			$userCatDetails["matureContent"] = $_POST['matureContent'];
 			$userCatDetails["notSafeForWork"] = $_POST['notSafeForWork'];
 			$userCatDetails["linkPostFormation"] = $_POST['linkPostFormation'];
-			$userCatDetails["category_description"] = $_POST['description123'];
+			$userCatDetails["user_classification"] = $_POST['description123'];
 			
 
 			$userCatDetails["main_category"] = "";
@@ -2194,7 +2194,13 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				}
 				$publicBoxesHtml .='<div id="divDatabox-1-hashtag" class="divCardHashtag hash_tag_color"> <a href="'.$displayCustomizationUrl.'"> <h2 class="hashtagh2_size">'.$dispHashName .'</h2></a></div>';
 				$publicBoxesHtml .='<div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">';
-				$publicBoxesHtml .= '<span class="fatFont">'.$linksCount.' HOT LINKS </span> collected and shared</div>';
+				$publicBoxesHtml .= '<span class="fatFont">';
+				if( $currentBoxRow->user_classification!="" ){
+					$publicBoxesHtml .= $currentBoxRow->user_classification;
+				}else{
+					$publicBoxesHtml .= $linksCount.' HOT LINKS </span> collected and shared';
+				}
+				$publicBoxesHtml .= '</div>';
 				//$publicBoxesHtml .='<div id="Card-1-user" class="divCardUser">';
 				//$publicBoxesHtml .= ' <div class="divCardUserName">By: '. $currentBoxRow->display_name .' </div>';
 				//if($currentBoxRow->montage_image !=""){
@@ -2485,7 +2491,13 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				}
 				$publicBoxesHtml1 .='<div id="divDatabox-1-hashtag" class="divCardHashtag hash_tag_color"> <a href="'.$displayCustomizationUrl.'"><h2 class="hashtagh2_size">'.$dispHashName .'</h2></a></div>';
 				$publicBoxesHtml1 .='<div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">';
-				$publicBoxesHtml1 .= '<span class="fatFont">'.$linksCount.' HOT LINKS </span> collected and shared</div>';
+				$publicBoxesHtml1 .= '<span class="fatFont">';
+				if( $currentBoxRow->user_classification!="" ){
+					$publicBoxesHtml1 .= $currentBoxRow->user_classification;
+				}else{
+					$publicBoxesHtml1 .= $linksCount.' HOT LINKS </span> collected and shared';
+				}
+				$publicBoxesHtml1 .= '</div>';
 				//$publicBoxesHtml1 .='<div id="Card-1-user" class="divCardUser">';
 				//$publicBoxesHtml1 .= ' <div class="divCardUserName">By: '. $currentBoxRow->display_name .' </div>';
 
@@ -2679,7 +2691,13 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				}
 				$privateBoxHtml .='<div id="divDatabox-1-hashtag" class="divCardHashtag hash_tag_color"> <a href="'.$displayCustomizationUrl.'"><h2 class="hashtagh2_size">'.$dispHashName .'</h2> </a></div>';
 				$privateBoxHtml .='<div id="divDatabox-1-sharedLinks" class="divCardSharedLinks">';
-				$privateBoxHtml .= '<span class="fatFont">'.$linksCount.' HOT LINKS </span> collected and shared</div>';
+				$privateBoxHtml .= '<span class="fatFont">';
+				if( $currentBoxRow->user_classification!="" ){
+					$privateBoxHtml .= $currentBoxRow->user_classification;
+				}else{
+					$privateBoxHtml .= $linksCount.' HOT LINKS </span> collected and shared';
+				}
+				$privateBoxHtml .= '</div>';
 				//$privateBoxHtml .='<div id="Card-1-user" class="divCardUser">';
 				//$privateBoxHtml .= ' <div class="divCardUserName">By: '. $currentBoxRow->display_name .' </div>';
 
