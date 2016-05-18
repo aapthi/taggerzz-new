@@ -2098,11 +2098,6 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 		$baseUrlArr = $baseUrls['urls'];
 		$baseUrl = $baseUrlArr['baseUrl'];
 		$basePath = $baseUrlArr['basePath'];
-			
-		
-		
-		
-		
 		$publicBoxesfilterVal 	   = $_POST['publicBoxesfilterVal'];
 		// echo $publicBoxesOffset;exit;
 		if($publicBoxesfilterVal==0){
