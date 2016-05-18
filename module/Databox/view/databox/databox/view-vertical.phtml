@@ -559,7 +559,6 @@ $(document).ready(function()
 		$('#catHashNameBtn').show();
 		$('#catHashTitleBtn').show();
 		$('#LinksEditButtonId').show();
-		$('.linkDeletePost').show();
 		$('#dragDropMsgId').show();
 		$('.div_collect_this').hide();
 
@@ -579,8 +578,7 @@ $(document).ready(function()
 		$('#loderImage').html("");
 		$('#hideShadowLineId').show();
 		$('#hideShadowLineIdParaLove').show();
-
-		
+		$('.linkDeletePost').show();
 	}
 	else
 	{
@@ -590,12 +588,10 @@ $(document).ready(function()
 			var editDelCommDivId = parseInt(this.id.replace("deleteComment", ""));
 			$('#deleteComment'+editDelCommDivId).remove();
 		});
-
 		$('#loderImage').html("");
 		$('#hideShadowLineId').show();
 		$('#hideShadowLineIdParaLove').show();
-
-
+		$('.linkDeletePost').hide();
 	}
 	// End Own box allow customization options...
 	
