@@ -153,22 +153,49 @@ $(document).ready(function(){
 			//{
 				$('#publicBoxesLoadingDiv').show();
 				windowtz.off("scroll",scrollPublicBoxesHandler);
-
-				var publicBoxesPerPage = $( "#publicBoxesPerPage" ).val();
-				
-				if( $('#publicBoxesOffset').val() != "" )
-				{
-					$('#publicBoxesOffset').val( parseInt($('#publicBoxesPerPage').val()) + parseInt($('#publicBoxesOffset').val()) );
-				}
-
-				var publicBoxesOffset = $( "#publicBoxesOffset" ).val();
 				var publicBoxesfilterVal = $( "#publicBoxesfilterVal" ).val();
+				if(publicBoxesfilterVal=='0'){
+					var publicBoxesPerPage = $( "#publicBoxesPerPage" ).val();
+					if( $('#publicBoxesOffset').val() != "" )
+					{
+						$('#publicBoxesOffset').val( parseInt($('#publicBoxesPerPage').val()) + parseInt($('#publicBoxesOffset').val()) );
+					}
+					var publicBoxesOffset = $( "#publicBoxesOffset" ).val();
+					var postData= {publicBoxesPerPage:publicBoxesPerPage,publicBoxesOffset:publicBoxesOffset,publicBoxesfilterVal:publicBoxesfilterVal};
+				}
+				if(publicBoxesfilterVal=='2'){
+					var publicBoxesNewPerPage = $( "#publicBoxesNewPerPage" ).val();
+					if( $('#publicBoxesNewOffset').val() != "" )
+					{
+						$('#publicBoxesNewOffset').val( parseInt($('#publicBoxesNewPerPage').val()) + parseInt($('#publicBoxesNewOffset').val()) );
+					}
+					var publicBoxesNewOffset = $( "#publicBoxesNewOffset" ).val();
+					var postData= {publicBoxesNewPerPage:publicBoxesNewPerPage,publicBoxesNewOffset:publicBoxesNewOffset,publicBoxesfilterVal:publicBoxesfilterVal};
+				}
+				if(publicBoxesfilterVal=='3'){
+					var publicBoxesTrendingPerPage = $( "#publicBoxesTrendingPerPage" ).val();
+					if( $('#publicBoxesTrendingOffset').val() != "" )
+					{
+						$('#publicBoxesTrendingOffset').val( parseInt($('#publicBoxesTrendingPerPage').val()) + parseInt($('#publicBoxesTrendingOffset').val()) );
+					}
+					var publicBoxesTrendingOffset = $( "#publicBoxesTrendingOffset" ).val();
+					var postData= {publicBoxesTrendingPerPage:publicBoxesTrendingPerPage,publicBoxesTrendingOffset:publicBoxesTrendingOffset,publicBoxesfilterVal:publicBoxesfilterVal};
+				}
+				if(publicBoxesfilterVal=='4'){
+					var publicBoxesMyPostPerPage = $( "#publicBoxesMyPostPerPage" ).val();
+					if( $('#publicBoxesMyPostOffset').val() != "" )
+					{
+						$('#publicBoxesMyPostOffset').val( parseInt($('#publicBoxesMyPostPerPage').val()) + parseInt($('#publicBoxesMyPostOffset').val()) );
+					}
+					var publicBoxesMyPostOffset = $( "#publicBoxesMyPostOffset" ).val();
+					var postData= {publicBoxesMyPostPerPage:publicBoxesMyPostPerPage,publicBoxesMyPostOffset:publicBoxesMyPostOffset,publicBoxesfilterVal:publicBoxesfilterVal};
+				}
 				
 				var publicBoxesAjaxUrl = BASE_URL + "/databox/public-boxes-ajax";
 				$.ajax({
 				  url: publicBoxesAjaxUrl,
 				  type: "POST",
-				  data:{publicBoxesPerPage:publicBoxesPerPage,publicBoxesOffset:publicBoxesOffset,publicBoxesfilterVal:publicBoxesfilterVal},
+				  data:postData,
 				  async: false,
 				  dataType: "json",
 				  success: function(data) {
@@ -376,6 +403,7 @@ $(document).ready(function(){
 		{
 			
 			$( "#homePageSection" ).val( 1 );
+			$('#publicBoxesOffset').val(0);
 			$('#publicBoxesfilterVal').val(0);
 			
 			if( parseInt($( "#montageBoxesOn" ).val()) == parseInt("1") )
@@ -402,6 +430,8 @@ $(document).ready(function(){
 		{
 			
 			$( "#homePageSection" ).val( 1 );
+			$('#publicBoxesOffset').val(0);
+
 			$('#publicBoxesfilterVal').val(0);
 			
 			if( parseInt($( "#montageBoxesOn" ).val()) == parseInt("1") )
@@ -426,6 +456,7 @@ $(document).ready(function(){
 		$( "#publicBoxesLinkForNew" ).click(function(event)
 		{
 			$( "#homePageSection" ).val( 1 );
+			$('#publicBoxesNewOffset').val(0);
 			$('#publicBoxesfilterVal').val(2);
 			
 			if( parseInt($( "#montageBoxesOn" ).val()) == parseInt("1") )
@@ -452,6 +483,7 @@ $(document).ready(function(){
 		{
 			
 			$( "#homePageSection" ).val( 1 );
+			$('#publicBoxesTrendingOffset').val(0);
 			$('#publicBoxesfilterVal').val(3);
 			if( parseInt($( "#montageBoxesOn" ).val()) == parseInt("1") )
 			{
@@ -475,6 +507,7 @@ $(document).ready(function(){
 		{
 			
 			$( "#homePageSection" ).val( 1 );
+			$('#publicBoxesMyPostOffset').val(0);
 			$('#publicBoxesfilterVal').val(4);
 			
 			if( parseInt($( "#montageBoxesOn" ).val()) == parseInt("1") )

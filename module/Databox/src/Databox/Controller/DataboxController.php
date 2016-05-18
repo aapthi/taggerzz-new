@@ -2098,13 +2098,31 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 		$baseUrlArr = $baseUrls['urls'];
 		$baseUrl = $baseUrlArr['baseUrl'];
 		$basePath = $baseUrlArr['basePath'];
-
-		$publicBoxesPerPage = $_POST['publicBoxesPerPage'];
-		$publicBoxesOffset = $_POST['publicBoxesOffset'];
-		$publicBoxesfilterVal = $_POST['publicBoxesfilterVal'];
+			
+		
+		
+		
+		
+		$publicBoxesfilterVal 	   = $_POST['publicBoxesfilterVal'];
 		// echo $publicBoxesOffset;exit;
-
-		$publicBoxesRs = $this->getUserCategoriesTable()->getHomePublicBoxes( $publicBoxesPerPage,$publicBoxesOffset,$publicBoxesfilterVal );
+		if($publicBoxesfilterVal==0){
+			$publicBoxesPerPage        = $_POST['publicBoxesPerPage'];
+			$publicBoxesOffset         = $_POST['publicBoxesOffset'];
+			$publicBoxesRs = $this->getUserCategoriesTable()->getHomePublicBoxes( $publicBoxesPerPage,$publicBoxesOffset,$publicBoxesfilterVal );
+		}else if($publicBoxesfilterVal==2){
+			$publicBoxesNewPerPage     = $_POST['publicBoxesNewPerPage'];
+			$publicBoxesNewOffset      = $_POST['publicBoxesNewOffset'];
+			$publicBoxesRs = $this->getUserCategoriesTable()->getHomePublicBoxesForFilters( $publicBoxesNewPerPage,$publicBoxesNewOffset,$publicBoxesfilterVal);
+		}else if($publicBoxesfilterVal==3){
+			$publicBoxesTrendingPerPage= $_POST['publicBoxesTrendingPerPage'];
+			$publicBoxesTrendingOffset = $_POST['publicBoxesTrendingOffset'];
+			$publicBoxesRs = $this->getUserCategoriesTable()->getHomePublicBoxesForFilters( $publicBoxesTrendingPerPage,$publicBoxesTrendingOffset,$publicBoxesfilterVal);
+		}else if($publicBoxesfilterVal==4){
+			$publicBoxesMyPostPerPage  = $_POST['publicBoxesMyPostPerPage'];
+			$publicBoxesMyPostOffset   = $_POST['publicBoxesMyPostOffset'];
+			$publicBoxesRs = $this->getUserCategoriesTable()->getHomePublicBoxesForFilters( $publicBoxesMyPostPerPage,$publicBoxesMyPostOffset,$publicBoxesfilterVal);
+		}
+		
 		$publicBoxesHtml = "";
 		$publicBoxesAllLoaded = 0;
 		if( $publicBoxesRs->count() == 0 )
