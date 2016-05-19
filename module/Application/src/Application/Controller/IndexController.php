@@ -800,10 +800,10 @@ class IndexController extends AbstractActionController
 			$combined = array();
 			$countInc=1;
 			foreach($hashNames as $index => $refNumber) {
-				foreach($combined as $combined1){
+				/*foreach($combined as $combined1){
 					if ($refNumber == $combined1['ref']) {
-						$combined[] = array('');
 						if($countInc==1){
+							$combined[] = array();
 							$combined[] = array(
 							'ref'  => $refNumber.'('.$countInc.')',
 							'part' => $hashNameIds[$index]
@@ -814,7 +814,7 @@ class IndexController extends AbstractActionController
 					}else{
 						$refNumber=$refNumber;
 					}
-				}
+				}*/
 				$combined[] = array(
 					'ref'  => $refNumber,
 					'part' => $hashNameIds[$index]
