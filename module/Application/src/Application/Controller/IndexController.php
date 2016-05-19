@@ -794,11 +794,27 @@ class IndexController extends AbstractActionController
 		if($getsearchHashNames->count()!=0){
 			foreach($getsearchHashNames as $key=>$search){
 				$hashNames[$key]=$search->user_hashname;
-				$hashNameIds[$key]=$key;
+				$hashNameIds[$key]=$key+1;
 				$count=$key;				
 			}		
 			$combined = array();
-			foreach($hashNames as $index => $refNumber) {			
+			$countInc=1;
+			foreach($hashNames as $index => $refNumber) {
+				foreach($combined as $combined1){
+					if ($refNumber == $combined1['ref']) {
+						$combined[] = array('');
+						if($countInc==1){
+							$combined[] = array(
+							'ref'  => $refNumber.'('.$countInc.')',
+							'part' => $hashNameIds[$index]
+							);
+						}
+						$countInc++;
+						$refNumber=$refNumber.'('.$countInc.')';
+					}else{
+						$refNumber=$refNumber;
+					}
+				}
 				$combined[] = array(
 					'ref'  => $refNumber,
 					'part' => $hashNameIds[$index]

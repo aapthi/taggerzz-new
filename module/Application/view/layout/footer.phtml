@@ -307,7 +307,9 @@ $(function() {
 				}			
 			},
 			select: function(event, ui) {
-				$("#searchTermHolder").val(ui.item.label); 
+				var removeSelect=ui.item.label;
+				var removeSplit=removeSelect.split('(');
+				$("#searchTermHolder").val(removeSplit[0]); 
 				return false;
 			},
 			focus: function(event, ui) {
