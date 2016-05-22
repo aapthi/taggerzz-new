@@ -679,7 +679,8 @@ a {
     .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardSharedLinks {
 	  padding:5px;
       z-index: 2;
-      bottom: 10%;
+     /*  bottom: 10%; */
+	 top:28%;
       right: 0%;
       background: #fff;
       min-width: 40%; 
@@ -945,10 +946,10 @@ a {
   right: 10pt; }
 #secCustomizeDatabox .c_BtnReport {
   padding: 2pt 2pt;
-  margin: 0pt 3pt; }
+  margin: 3pt 3pt; }
 #secCustomizeDatabox .c_BtnShare {
   padding: 2pt 2pt;
-  margin: 0pt 3pt; }
+  margin: 3pt 3pt; }
 #secCustomizeDatabox .c_BtnAddComment {
   padding: 2pt 2pt;
   margin: 0pt 3pt; }

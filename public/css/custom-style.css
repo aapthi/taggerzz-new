@@ -622,7 +622,7 @@ margin-top:4px;
 	width:160px !important;
 }
 .divbrg_f{
-	border-top:4px solid #ef4436;width:50%;float:left;text-align:center;background:#ef4436;color:#fff;padding:3.6px 0;
+	border-top:4px solid #ef4436;width:50%;float:left;text-align:center;background:#ef4436;color:#fff;padding:3.8px 0;
 }
 .divbrg_s{
 	border-top:4px solid #a12a30;width:50%;float:right;background:#ef4436;color:#fff;padding:4px 0;text-align:center;
@@ -833,6 +833,15 @@ color:#a12a30;
  }
  .pad_tt{
 	 padding-top:10px;
+ }
+ .img_center{
+	 text-align:center;
+ }
+ .linkDeletePost{
+	 display:block;
+	 position:absolute;
+	 top:0;
+	 right:0;
  }
 /* Browser Problem css */
 @media screen and (-webkit-min-device-pixel-ratio:0) { 

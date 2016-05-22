@@ -169,7 +169,7 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 					<div id="dragDropWindow<?echo $key+1;?>" class="grid-stack-item" 
 					<?php if( $tzGsRowNum % 4 == 0 ) { $xSet = $tzDataGsX;$tzDataGsX = 0;$ySet = $tzDataGsY;$tzDataGsY += 3; } else{ $xSet = $tzDataGsX;$tzDataGsX += 3;$ySet = $tzDataGsY; } ?> data-gs-x="<?php echo $xSet; ?>" data-gs-y="<?php echo $ySet; ?>" data-gs-width="3" data-gs-height="4" style="border:none;">
 					<div class="grid-stack-item-content" >
-					<a class="c_BtnReport linkDeletePost" style="display:none;"  href="javascript:void(0);" onclick="Javascript:deleteLink('<?php echo $databoxLinksGrids->category_link_id; ?>','<?echo $key+1;?>');" >X</a>
+					<a class="c_BtnReport linkDeletePost"   href="javascript:void(0);" onclick="Javascript:deleteLink('<?php echo $databoxLinksGrids->category_link_id; ?>','<?echo $key+1;?>');" >X</a>
 									<?php
 								if($databoxLinksGrids->is_video==1)
 								{
@@ -247,7 +247,7 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 			</div>
 		</div>
 	</section>
-<div id="hideShadowLineIdParaLove" style="display:none;" >
+<div id="hideShadowLineIdParaLove" style="display:none; width:300px;border:1px solid #ddd;padding:10px 0 5px;background:#fff;margin:20px auto 0;" >
 
 	<P style="text-align:center;font-weight:bold;color:#444;padding-bottom:5px;"><span id="totVP" ><?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?></span> 
 <span id="l_d">
@@ -578,7 +578,7 @@ $(document).ready(function()
 		$('#loderImage').html("");
 		$('#hideShadowLineId').show();
 		$('#hideShadowLineIdParaLove').show();
-		$('.linkDeletePost').show();
+		//$('.linkDeletePost').show();
 	}
 	else
 	{
@@ -591,7 +591,7 @@ $(document).ready(function()
 		$('#loderImage').html("");
 		$('#hideShadowLineId').show();
 		$('#hideShadowLineIdParaLove').show();
-		$('.linkDeletePost').hide();
+		//$('.linkDeletePost').hide();
 	}
 	// End Own box allow customization options...
 	
