@@ -2199,7 +2199,7 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 			$displayCustomizationUrl .= "/databox/" . $viewUrl . "/" . $currentBoxRow->category_id . "+" . $catImageUrll . "+" . $catHashName . "+" . $catTitle;
 			/* nch */
 				 $publicBoxesHtml='<div class="publicsearchdatabox">';
-				$publicBoxesHtml .= '<div id="divDatabox-1" class="divCard"><div id="divDatabox-1-imageWrapper" class="divCardImageWrapper">';
+				$publicBoxesHtml .= '<div id="divDatabox-1" class="divCard"><div id="divDatabox-1-imageWrapper" class="divCardImageWrapper img_center">';
 				if( $showMcNsfwPopup ){
 					$publicBoxesHtml .=	'<a href="javascript:void(0)" onClick="Javascript:displayNsfwMc(' .$currentBoxRow->category_id .','. $dispHashName .','. $currentBoxRow->category_title .','. $currentBoxRow->settingId .', '.$catImageUrll.'><img src="'.$basePath .'/images/social_media/mature_content.jpg" width="234" height="302" /></a>';
 				} else { 
@@ -2496,7 +2496,7 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 			
 			//NEW Code
 		    $publicBoxesHtml1 .='<div class="left width20 remove_mobile_c" id="remove_mobile_c">';
-			$publicBoxesHtml1 .= '<div id="divDatabox-1" class="divCard" draggable="true"><div id="divDatabox-1-imageWrapper" class="divCardImageWrapper">';
+			$publicBoxesHtml1 .= '<div id="divDatabox-1" class="divCard" draggable="true"><div id="divDatabox-1-imageWrapper" class="divCardImageWrapper img_center">';
 				if( $showMcNsfwPopup ){
 					$publicBoxesHtml1 .=	'<a href="javascript:void(0)" onClick="Javascript:displayNsfwMc(' .$currentBoxRow->category_id .','. $dispHashName .','. $currentBoxRow->category_title .','. $currentBoxRow->settingId .', '.$catImageUrll.'><img src="'.$basePath .'/images/social_media/mature_content.jpg" width="234" height="302" /></a>';
 				} else { 
@@ -2696,7 +2696,7 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 			$roundLikes=round($currentBoxRow->likes);
 			//new code 
 			$privateBoxHtml.='<div class="left width20 remove_mobile_c" id="remove_mobile_c">';
-			$privateBoxHtml .= '<div id="divDatabox-1" class="divCard" draggable="true"><div id="divDatabox-1-imageWrapper" class="divCardImageWrapper">';
+			$privateBoxHtml .= '<div id="divDatabox-1" class="divCard" draggable="true"><div id="divDatabox-1-imageWrapper" class="divCardImageWrapper img_center">';
 				if( $showMcNsfwPopup ){
 					$privateBoxHtml .=	'<a href="javascript:void(0)" onClick="Javascript:displayNsfwMc(' .$currentBoxRow->category_id .','. $dispHashName .','. $currentBoxRow->category_title .','. $currentBoxRow->settingId .', '.$catImageUrll.'><img src="'.$basePath .'/images/social_media/mature_content.jpg" width="234" height="302" /></a>';
 				} else { 
