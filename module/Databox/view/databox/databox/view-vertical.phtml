@@ -582,7 +582,11 @@ $(document).ready(function()
 	}
 	else
 	{
-		$('.div_collect_this').show();
+		<?php if(isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId!=""){?>	
+			$('.div_collect_this').show();
+		<?php } else{?>
+			$('.div_collect_this').hide();
+		<?php } ?>
 		$("div[id^='deleteComment']").each(function()
 		{
 			var editDelCommDivId = parseInt(this.id.replace("deleteComment", ""));
