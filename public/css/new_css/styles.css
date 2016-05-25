@@ -679,8 +679,7 @@ a {
     .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardSharedLinks {
 	  padding:5px;
       z-index: 2;
-     /*  bottom: 10%; */
-	 top:28%;
+     bottom: 40px; 
       right: 0%;
       background: #fff;
       min-width: 40%; 
@@ -1119,6 +1118,7 @@ a {
 .hashtagh2_size{
 	font-size:14.5px;
 	color:#000;
+	text-align:left;
 }
 .h3_size{
 	font-size:10pt;
