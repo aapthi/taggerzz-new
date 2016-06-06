@@ -855,6 +855,9 @@ color:#a12a30;
 	 text-transform:uppercase;
 	 color:#333;
  }
+ .lgd_hide{
+	 display:none;
+ }
 /* Browser Problem css */
 @media screen and (-webkit-min-device-pixel-ratio:0) { 
 	.divHeaderWrapper .divSearchBoxes .aSearch {
@@ -915,6 +918,15 @@ color:#a12a30;
 	}
 	.tinput_s{
 		padding-top:15px;
+	}
+	.smhide_m{
+		display:none !important;
+	}
+	.lgd_hide{
+		display:block;
+	}
+	.com_mar20{
+		margin-top:20px;
 	}
  }
 
