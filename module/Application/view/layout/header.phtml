@@ -176,7 +176,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/"  && $_SERVER['REQUEST_URI']
             </div>
 
             <div id="divProfileDetails" class="inline-block tphoto_links tphoto_links">
-                 <span id="spnGreetingsText" class="block smallFont" style="margin-top:10px;"><b>Hello, <?php echo $_SESSION['usersinfo']->displayName; ?></b></span>
+                 <span id="spnGreetingsText" class="block smallFont name_adj"><b>Hello, <?php echo $_SESSION['usersinfo']->displayName; ?></b></span>
 			</div>
 			</div>
 			<div class="tagged_links">
@@ -215,7 +215,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/"  && $_SERVER['REQUEST_URI']
                 <li class="rewards_hide"> <b><?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $_SESSION['usersinfo']->rewardPoints ; }else{ echo '0000';}?></b> <sub>POINTS</sub> <b>00</b> <sub>INR, Worth</sub><a href="#" title="Conversion is possible at 1000 points."> Convert</a></li>
 				<!--<li> <a class="tag_chk " href="javascript:void(0)" onClick="goToLocation('logout')" >Logout</a> </li>-->
 				<li> <a class="tag_chk " href="javascript:void(0)"  >Help</a> </li>
-				<li> <a class="tag_chk " href="javascript:void(0)" onClick="inivite_frnd()" >Invite</a> </li>
+				<li> <a class="tag_chk " href="javascript:void(0)" onClick="inivite_frnd()" style="color:#723f3f ">Invite</a> </li>
             </ul>
 			</div>
         </div>

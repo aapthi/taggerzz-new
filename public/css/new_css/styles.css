@@ -554,7 +554,7 @@ a {
           top: 2%;
           left: 0%;
           background: white;
-          min-width: 40%;
+          min-width: auto;
           text-decoration: none;
           font-size: 10.5pt;
 		}
@@ -650,7 +650,7 @@ a {
       top: 2%;
       left: 0%;
       background: white;
-      min-width: 40%;
+      min-width: auto;
       text-decoration: none;
 	  font-size: 14.5pt;
 	  font-weight:bold;
@@ -679,7 +679,7 @@ a {
     .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardSharedLinks {
 	  padding:5px;
       z-index: 2;
-     bottom: 40px; 
+     bottom: 41px; 
       right: 0%;
       background: #fff;
       min-width: 40%; 

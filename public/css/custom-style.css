@@ -843,6 +843,18 @@ color:#a12a30;
 	 top:0;
 	 right:0;
  }
+ .name_adj{
+	 margin-top:5px;
+	 position:absolute;
+	 line-height:16px;
+	 
+ }
+ .marr_top15{
+	 padding-top:10px;
+	 padding-bottom:10px;
+	 text-transform:uppercase;
+	 color:#333;
+ }
 /* Browser Problem css */
 @media screen and (-webkit-min-device-pixel-ratio:0) { 
 	.divHeaderWrapper .divSearchBoxes .aSearch {
@@ -872,6 +884,10 @@ color:#a12a30;
 	.views_w {
 		width: 135px !important;
 	}
+	 .tagged_links{
+		  font-size:9px;
+		  padding:17px 2px 0;
+	  }	
 }
 @media (min-width: 768px) and (max-width: 980px) {
 	.secDataboxes #divDataboxWrapper[data-columns]::before {
