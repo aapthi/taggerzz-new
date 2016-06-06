@@ -679,7 +679,7 @@ a {
     .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardSharedLinks {
 	  padding:5px;
       z-index: 2;
-     bottom: 41px; 
+	  bottom: 21px; 
       right: 0%;
       background: #fff;
       min-width: 40%; 

@@ -101,9 +101,9 @@
 		?>
 		</div> 
 	<!-- Title End -->		
-	</div>			
+	</div>	<?php if( isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId==$this->ucUserId){?>
 				<div id="your_paragraph" class="dashboard_img_paragrap">
-					<?if($this->montageParagraph==""){
+					<?php if($this->montageParagraph==""){
 						$montage_paragraph="";
 					?>
 					<div class="profile_text_empty">
@@ -117,6 +117,25 @@
 					</div>
 					<?}?>
 				</div>
+	<?php }else{ 	if(isset($this->montageParagraph) && $this->montageParagraph!="" ){?>	
+
+	
+			<div id="your_paragraph" class="dashboard_img_paragrap">
+					<?php if($this->montageParagraph==""){
+						$montage_paragraph="";
+					?>
+					<div class="profile_text_empty">
+							<div id="montagPara_Div_id1" class="montage_Paragraph_show"><?if( isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId==$this->ucUserId){?><a href="javascript:void(0);" title="Edit your paragraph" onclick="montagePopUp(3)"><? } ?><img src="<?php echo $basePath; ?>/images/social_media/profile_empty.png" class="edit_paragraph_mon_empty"/><?if( isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId==$this->ucUserId){?></a><p>Set your Profile Description</p><? } else { ?><p>&nbsp;</p><? } ?></div>
+					</div>
+					<?}else{
+						$montage_paragraph=$this->montageParagraph;
+					?>
+					<div class="">
+						<div id="montagPara_Div_id" class="montage_Paragraph_show"><P><?echo $this->montageParagraph?><?if( isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId==$this->ucUserId){?><span><a href="javascript:void(0);" title="Edit your paragraph" onclick="montagePopUp(3)" class="edit_paragraph_mon_empty">EDIT</a></SPAN><? } ?></P></div>
+					</div>
+					<?}?>
+			</div>
+	<?php } }?>
 		</div>
 	</div>
 
