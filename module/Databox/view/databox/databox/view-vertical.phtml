@@ -108,7 +108,7 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 								<img src="<?php echo $basePath; ?>/img/downArrow.png" />
 							</div>
 						<div class="sm_share_btns"><!-- Delete class only c_DivHeaderCommentRightBottom -->
-						<a class="c_BtnReport" style="display:none;" id="LinksEditButtonId" href="javascript:void(0);" onclick="Javascript:editTheDataBoxUrls('<?php echo $currBoxEditLink;?>');" >Links Edit</a>
+						<a class="c_BtnReport" style="display:none;" id="LinksEditButtonId" href="javascript:void(0);" onclick="Javascript:editTheDataBoxUrls('<?php echo $currBoxEditLink;?>');" >Refresh Data</a>
 							<a class="c_BtnReport" href="javascript:void(0);" onclick="Javascript:custReportPopUpShow();">Report</a>
 							<a class="c_BtnShare" href="javascript:void(0);" onclick="Javascript:openCloseShareCus()">Share</a>&nbsp;&nbsp;&nbsp;&nbsp;
 							<span id="dragDropMsgId" style="display:none;" ><b>Drag, Drop to relocate & Resize the Web Link posts below to Customize as per your Idea</b></span>
@@ -367,7 +367,7 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5461ef997855b9fa" async="async"></script>
 <div id="pop-up-databoxhash" class="pop-up-display-content conform_popup_content">
 	<div class="montage_desc">
-		<h4>Please provide your databox hash name</h4><br/>
+		<h4>Edit/Modify your #Hashtag</h4><br/>
 		<p><input type="text" name="databox_hash_name" class="text_pad" id="databox_hash_name" value="<?php echo $this->hashName;?>" /></p>
 	</div>
 	<p>
@@ -378,7 +378,7 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 </div>
 <div id="pop-up-databoxhash_title" class="pop-up-display-content conform_popup_content">
 	<div class="montage_desc">
-		<h4>Please provide your databox title</h4><br/>
+		<h4>Edit/Modify Page Title for the below collected Web/Hot Links</h4><br/>
 		<p><input type="text" name="databoxhash_title" class="text_pad" id="databoxhash_title" value="<?php echo $this->categoryTitle; ?>"/></p>
 	</div>
 	<p>

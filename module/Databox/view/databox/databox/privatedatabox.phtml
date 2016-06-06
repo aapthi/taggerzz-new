@@ -52,7 +52,7 @@
 
             <section id="secCreatePrivateDatabox">
                 <div id="divCreatePrivateDataboxWrapper" class="divCreatePrivateDataboxWrapper">
-                    <div class="heading">PRIVATE DATABOX</div>
+                    <div class="heading">Creating Your Private Databox</div>
                     <div class="divCreatePrivateDataboxHashtag">
                         <span class="box_crete_color"><h4>Hashtag </h4></span>
                         <input type="text" id='hashtagHolder' class='inptHashtag' placeholder="#hashtag" value="<?php if(isset($_SESSION['databox']->hashtag)){ echo $_SESSION['databox']->hashtag ;}?>" />
@@ -66,7 +66,7 @@
                         <input type="text" id='titleHolder' class='inptTitle' placeholder="Title of the collection" value="<?php if(isset($_SESSION['databox']->hashtitle)){ echo $_SESSION['databox']->hashtitle ;}?>" />
                     </div>
 					<div class="divCreatePrivateDataboxHashtag">
-                        <span class="box_crete_color"><h4 id="linksCountPlus"><?php echo $this->countOfLinks;?> Links</h4> </span>
+                        <span class="box_crete_color"><h4 id="linksCountPlus"><?php echo $this->countOfLinks;?> Hot Links</h4> </span>
                         <input type="text" id='DescriptionTitle' name="DescriptionTitle" class='inptTitle' placeholder="Aritcles, Videos, News" value="<?php if(isset($this->user_classification)){ echo $this->user_classification;}?>" />
                     </div>
 					<div id="textBoxesGroup"><?

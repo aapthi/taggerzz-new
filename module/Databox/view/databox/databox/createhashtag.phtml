@@ -16,7 +16,16 @@
             
             <section id="secCreateHashtag" class="">
                 <div id="divCreateHighlightWrapper" class="divCreateHighlightWrapper">
-                    <div class="heading">CREATE HASHTAG</div>
+					<?php 
+					if(strpos($_SERVER['REQUEST_URI'], 'highlight') !== false){
+						$hashTagHeading='Creating Your Highlight';
+					}else if(strpos($_SERVER['REQUEST_URI'], 'publicdatabox') !== false){
+						$hashTagHeading='Creating Your Public Databox';
+					} else if(strpos($_SERVER['REQUEST_URI'], 'privatedatabox') !== false){
+						$hashTagHeading='Creating Your Private Databox';
+					}
+					?>
+					<div class="heading"><?php if(isset($hashTagHeading) && $hashTagHeading!=""){ echo $hashTagHeading;}?></div>
                     <div class="createHashtagWrapper">
 						<form id="hashtagForm" method="post">
 							<span class="box_crete_color input_space"><h4>Please specify your preferable #hashtag for the collection </h4></span>

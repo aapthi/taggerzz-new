@@ -57,7 +57,7 @@
 
             <section id="secCreatePublicDatabox">
                 <div id="divCreatePublicDataboxWrapper" class="divCreatePublicDataboxWrapper">
-                    <div class="heading">PUBLIC DATABOX</div>
+                    <div class="heading">Creating your Public Databox</div>
                     <div class="divCreatePublicDataboxHashtag">
                         <span class="box_crete_color"><h4>Hashtag</h4> </span>
                         <input type="text" id='hashtagHolder' class='inptHashtag' placeholder="#hashtag" value="<?php if(isset($_SESSION['databox']->hashtag)){ echo $_SESSION['databox']->hashtag ;}?>" />
@@ -67,7 +67,7 @@
                         <input type="text" id='titleHolder' class='inptTitle' placeholder="Title of the collection" value="<?php if(isset($_SESSION['databox']->hashtitle)){ echo $_SESSION['databox']->hashtitle ;}?>" />
                     </div>
 					<div class="divCreatePublicDataboxHashtag">
-                        <span><h4 id="linksCountPlus"><?php echo $this->countOfLinks;?> Links</h4> </span>
+                        <span><h4 id="linksCountPlus"><?php echo $this->countOfLinks;?> Hot Links</h4> </span>
                         <input type="text" id='DescriptionTitle' name="DescriptionTitle" class='inptTitle' placeholder="Aritcles, Videos, News" value="<?php if(isset($this->user_classification)){ echo $this->user_classification;}?>" />
                     </div>
 					

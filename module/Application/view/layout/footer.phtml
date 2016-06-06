@@ -16,14 +16,14 @@
 </div>
 <!-- Inivite Friends --->
 <div id="inivite-alerts" class="pop-up-display-content d">
-<div class="tg_users_title">Inivinting Our Friends</div>
+<div class="tg_users_title">Invite your Friends</div>
 <div class="tg_users_email_login1">
 	<div class="tg_create_email">
 		<form class="" method="post" id="userinivitFormUrl2" name="userinivitFormUrl2" role="form">
-			<p>Friend Email ID</p>
-			<input type="text" class="text_pad" name="frnd_email" id="frnd_email" placeholder="Enter a friend email"/>
-			<p id="c_password">Comment</p>
-			<textarea id="frnd_content" class="text_pad" style="height: 53px;width: 474px;" name="frnd_content" placeholder="Enter a comment"></textarea>
+			<p>Email ID</p>
+			<input type="text" class="text_pad" name="frnd_email" id="frnd_email" placeholder="Ex: emailname@emailid.com,emailname@emailid.com"/>
+			<p id="c_password">Your Context</p>
+			<textarea id="frnd_content" class="text_pad" style="height: 53px;width: 474px;" name="frnd_content" placeholder="Tell them what you feel about taggerzz.com"></textarea>
 			<br/><br/><p class="tg_email_btn"><button name="btnSubmit" id="btnSubmit" type="button" class="btn" onClick="return funnyInivite();">SEND</button></p>
 			<span class="tg_email_btn success_display_c"><span id="userMessage22" style="display:none;font-size:8pt;" class="check_un_p">inserting....</span></span>
 			<input type="hidden" id="exsits_email" name="exsits_email" value="<?php echo $_SESSION['usersinfo']->email;?>">
