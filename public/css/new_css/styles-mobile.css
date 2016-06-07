@@ -203,7 +203,8 @@ input {
   z-index: 8; }
 
 .fatFont, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .divCardHashtag, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardContentWrapper .divCardTitle, .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardHashtag, .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardTitle, #secAccountSettings .divAccountSettingsRow .divAccountSettingsCard .divAccountSettingsHeading, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divAccountSettingsHeading, #secAccountSettings .divAccountSettingsRow .divCreatedCollectionsCard .divAccountSettingsHeading, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divUserSummaryHeading, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divPublicDataboxCount, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divPrivateDataboxCount, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divTotalKeywordsCount, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divTotalLinksCount, #secAccountSettings .divAccountSettingsRow .divUserSummaryCard .divVotesCount, #secAccountSettings .divAccountSettingsRow .divCommentHeader .divCommentHeaderUsernameBlock .divCommentUsername, #secAccountSettings .divAccountSettingsRow .divCommentHeader .divCommentTime, #secAccountSettings .divAccountSettingsRow .divReplyToWrapper .divReplyToControls .divReplyToMaxCharsText {
-  font-family: sinkin_sans800_black; }
+  /* font-family: sinkin_sans800_black;  */ font-family: 'Roboto', sans-serif !important; 
+}
 
 .whiteFont, .primaryButton, #secUploadBookmarks .uploadBookmarksWrapper .inptUploadBookmarkFile, #secAccountSettings .divAccountSettingsRow .btnSaveAccount, .btnBlack, .verticalMenu li a, .ulMenu li a, .ulMenu, .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .divCardUser .divCardUserName, .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardUser .divCardUserName {
   color: #333; }
@@ -535,7 +536,7 @@ body {
           left: 0%;
           background: white;
           min-width: 40%;
-          display: none;
+          display: block;
           font-size: 8pt; }
         .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .divCardUser {
           z-index: 2;
@@ -551,11 +552,12 @@ body {
             font-size: 7pt; }
         .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardImageWrapper .divCardSharedLinks {
           z-index: 2;
-          bottom: 10%;
+          bottom: 20%;
           left: 0%;
-          background: #fdce02;
+          background: #fff;
+		  border-top:2px solid #77120a;
           min-width: 40%;
-          display: none; }
+          display: block; }
         .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard .divCardContentWrapper .divCardLoveTrash {
           background: rgba(0, 0, 0, 0.5);
           margin: -6pt -5pt 0pt 0pt;
@@ -626,9 +628,10 @@ body {
 	}
     .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardSharedLinks {
       z-index: 2;
-      bottom: 30%;
+      bottom: 41px;
       left: 0%;
-      background: #fdce02;
+      background: #fff;
+	  border-top:2px solid #f04537;
       min-width: 40%;
       max-width: 90%; }
     .secDataboxes .divCardsWrapper .divCard .divCardContentWrapper .divCardLoveTrash {

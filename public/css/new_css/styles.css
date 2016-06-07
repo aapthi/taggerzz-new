@@ -357,7 +357,7 @@ input {
   margin: 0px; }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif !important;
   color: rgba(0, 0, 0, 0.9);
   background: white;
   overflow-x: hidden; 
@@ -530,12 +530,13 @@ a {
         vertical-align: top;
         white-space: normal;
         background: white;
+		 border-radius: 5pt;
         border: 1px solid rgba(0, 0, 0, 0.1);
         cursor: pointer !important;
-        box-shadow: 0.02em 0.02em 0.5em 0.15em #6a1e1e;
-        -webkit-box-shadow: 0.02em 0.5em 0.2em 0.15em #6a1e1e;
-        -moz-box-shadow: 0.02em 0.02em 0.5em 0.15em #6a1e1e;
-        -o-box-shadow: 0.02em 0.02em 0.5em 0.15em #6a1e1e; }
+        box-shadow: 0.02em 0.02em 0.2em 0.02em #f24646;
+        -webkit-box-shadow: 0.02em 0.02em 0.2em 0.02em #f24646;
+        -moz-box-shadow: 0.02em 0.02em 0.2em 0.02em #f24646;
+        -o-box-shadow: 0.02em 0.02em 0.2em 0.02em #f24646; }
         .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard:hover .divCardImageWrapper .divCardUser {
           display: block; }
         .secHighlights .divCardsMainWrapper .divCardsWrapper .divCard a {
@@ -679,7 +680,7 @@ a {
     .secDataboxes .divCardsWrapper .divCard .divCardImageWrapper .divCardSharedLinks {
 	  padding:5px;
       z-index: 2;
-	  bottom: 21px; 
+	  bottom: 41px; 
       right: 0%;
       background: #fff;
       min-width: 40%; 
