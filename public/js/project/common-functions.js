@@ -957,15 +957,17 @@ function checkSpaces()
 			DislikePercentage1 = Math.round(DislikePercentage * 100) / 100;
 			//$('#likes'+categoryId).html('<h2>'+like1+'% liked</h2>');
 			if(newVoteValue==1){
-				var clickAppendHtml='<div class="divbrg_f">'+newTotalvoteUp+' <img src="'+BASE_URL+'/public/img/love_ok.png" alt=""  width="15px"/></div>';
+				var clickAppendHtml='<div class="divbrg_f" onClick="return likeDislikeCnt(0,'+categoryId+',1,'+newTotalvoteUp+','+newTotalrw_lh+','+newTotalvoteDown+')" >'+newTotalvoteUp+' <img src="'+BASE_URL+'/public/img/love_ok.png" alt=""  width="15px"/></div>';
 				clickAppendHtml+='<div class="divbrg_s" onClick="return likeDislikeCnt(0,'+categoryId+',1,'+newTotalvoteUp+','+newTotalrw_lh+','+newTotalvoteDown+')">'+newTotalvoteDown+' <a href="Javascript:void(0);" ><img src="'+BASE_URL+'/public/img/trash.png" alt="" width="10px" /></a></div>';
 				clickAppendHtml+='<input type="hidden" id="voting'+categoryId+'" name="voting'+categoryId+'" value="1">';
 			}else{
+				
 				var clickAppendHtml='<div class="divbrg_f" onClick="return likeDislikeCnt(1,'+categoryId+',1,'+newTotalvoteUp+','+newTotalrw_lh+','+newTotalvoteDown+')">'+newTotalvoteUp+' <a href="Javascript:void(0);"  ><img src="'+BASE_URL+'/public/img/love.png" alt="" width="15px" /></a></div>';
-				clickAppendHtml+='<div class="divbrg_s">'+newTotalvoteDown+' <img src="'+BASE_URL+'/public/img/trash.png" alt="" width="10px"/></div>';
+				clickAppendHtml+='<div class="divbrg_s" onClick="return likeDislikeCnt(1,'+categoryId+',1,'+newTotalvoteUp+','+newTotalrw_lh+','+newTotalvoteDown+')" >'+newTotalvoteDown+' <img src="'+BASE_URL+'/public/img/trash.png" alt="" width="10px"/></div>';
 				clickAppendHtml+='<input type="hidden" id="voting'+categoryId+'" name="voting'+categoryId+'" value="0">';
+				console.log(clickAppendHtml);
 			}
-			$('#divCardLoveTrash'+categoryId).html(clickAppendHtml);
+			$('.divCardLoveTrash'+categoryId).html(clickAppendHtml);
 		  }
 		});	
 	}
