@@ -2223,7 +2223,7 @@ function getDimensions(id) {
 		if( parseInt($('#catDescCkEditorYes').val()) == parseInt("0") )
 		{
 			$('#catDescCkEditorYes').val( 1 );
-			CKEDITOR.replace( 'catDescCkeditor',{} );
+			CKEDITOR.replace( 'catDescCkeditor',{customConfig: BASE_PATH + '/js/ckeditor/customization-config.js'}  );
 		}
 		
 		CKEDITOR.instances.catDescCkeditor.setData( $('#categoryDescripton').html() );
