@@ -786,44 +786,49 @@ class IndexController extends AbstractActionController
 			return $result;
 	}
 
-	public function searchHashNamesAction(){
+	
+	public function searchHashNamesAction()
+	{
 		$hashNames="";
 		$hashNameIds="";
 		$count="";
-		$getsearchHashNames = $this->getUserCategoriesTable()->getsearchHashNames($_POST['value']);
-		if($getsearchHashNames->count()!=0){
-			foreach($getsearchHashNames as $key=>$search){
-				$hashNames[$key]=$search->user_hashname;
-				$hashNameIds[$key]=$key+1;
-				$count=$key;				
+		
+		$getsearchHashNames = $this->getUserCategoriesTable()->getsearchHashNames($_POST['value'])->toArray();
+
+		if( count($getsearchHashNames) > 0 )
+		{
+			$searchedHashNames = array();
+			
+			foreach( $getsearchHashNames as $key=>$searchArr)
+			{
+				array_push ( $searchedHashNames,$searchArr["user_hashname"] );
 			}		
-			$combined = array();
-			$countInc=1;
-			foreach($hashNames as $index => $refNumber) {
-				/*foreach($combined as $combined1){
-					if ($refNumber == $combined1['ref']) {
-						if($countInc==1){
-							$combined[] = array();
-							$combined[] = array(
-							'ref'  => $refNumber.'('.$countInc.')',
-							'part' => $hashNameIds[$index]
-							);
-						}
-						$countInc++;
-						$refNumber=$refNumber.'('.$countInc.')';
-					}else{
-						$refNumber=$refNumber;
-					}
-				}*/
-				$combined[] = array(
-					'ref'  => $refNumber,
-					'part' => $hashNameIds[$index]
-				);
+
+			$hashNameWiseCountsArr = array_count_values( $searchedHashNames );
+
+			$partsVal = 1;
+			$combinedCountsArr = array();
+
+			foreach( $hashNameWiseCountsArr as $currHashName => $currHasCount )
+			{
+				$currRefVal = "";
+				if( $currHasCount > 1 )
+				{
+					$currRefVal = $currHashName.'('.$currHasCount.')';
+				}
+				else
+				{
+					$currRefVal = $currHashName;
+				}
+				
+				$currHashArr = array( "ref" => $currRefVal,"part" => $partsVal++ );
+				array_push ( $combinedCountsArr,$currHashArr );
 			}
+
 			return $view = new JsonModel(
 			array(
 				'output'			=>	1,
-				'searchHashNames'	=>	$combined,
+				'searchHashNames'	=>	$combinedCountsArr,
 				'countt'				=>	$count,
 			));
 		}else{
@@ -833,6 +838,7 @@ class IndexController extends AbstractActionController
 			));
 		}
 	}
+
 	
 	public function termsAction()
 	{
