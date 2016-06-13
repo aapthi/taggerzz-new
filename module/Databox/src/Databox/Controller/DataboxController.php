@@ -633,7 +633,7 @@ class DataboxController extends AbstractActionController
 			$categoryType = $_POST['categoryType'];
 			$categoryImage = "";
 			if($_POST['typeImageCrop']==0){
-				$categoryImage = "montage_default_img.png";
+				$categoryImage = "no_img_uploaded_home.jpg";
 			}else{
 				$categoryImage = $_POST['imageId'];
 			}
@@ -1610,7 +1610,7 @@ class DataboxController extends AbstractActionController
 		if( $image == "" )
 		{
 			$site_image = "no Image";
-			$image = $basePath . "/images/social_media/noimage.png";
+			$image = $basePath . "/images/social_media/customization_no_img.jpg";
 		}
 
 		$otherLogin = false;
@@ -1632,7 +1632,7 @@ class DataboxController extends AbstractActionController
 			$otherLogin = true;
 			if( $extensionsImgFlag )
 			{
-				$image = $basePath . "/images/social_media/noimage.png";
+				$image = $basePath . "/images/social_media/customization_no_img.jpg";
 			}
 			else
 			{
@@ -1644,7 +1644,7 @@ class DataboxController extends AbstractActionController
 			$otherLogin = true;
 			if( $extensionsImgFlag )
 			{
-				$image = $basePath . "/images/social_media/noimage.png";
+				$image = $basePath . "/images/social_media/customization_no_img.jpg";
 			}
 			else
 			{
@@ -1656,7 +1656,7 @@ class DataboxController extends AbstractActionController
 			$otherLogin = true;
 			if( $extensionsImgFlag )
 			{
-				$image = $basePath . "/images/social_media/noimage.png";
+				$image = $basePath . "/images/social_media/customization_no_img.jpg";
 			}
 			else
 			{
@@ -1668,7 +1668,7 @@ class DataboxController extends AbstractActionController
 			$otherLogin = true;
 			if( $extensionsImgFlag )
 			{
-				$image = $basePath . "/images/social_media/noimage.png";
+				$image = $basePath . "/images/social_media/customization_no_img.jpg";
 			}
 			else
 			{
@@ -1680,7 +1680,7 @@ class DataboxController extends AbstractActionController
 			$otherLogin = true;
 			if( $extensionsImgFlag )
 			{
-				$image = $basePath . "/images/social_media/noimage.png";
+				$image = $basePath . "/images/social_media/customization_no_img.jpg";
 			}
 			else
 			{
@@ -1692,7 +1692,7 @@ class DataboxController extends AbstractActionController
 			$otherLogin = true;
 			if( $extensionsImgFlag )
 			{
-				$image = $basePath . "/images/social_media/noimage.png";
+				$image = $basePath . "/images/social_media/customization_no_img.jpg";
 			}
 			else
 			{
@@ -1704,7 +1704,7 @@ class DataboxController extends AbstractActionController
 			$otherLogin = true;
 			if( $extensionsImgFlag )
 			{
-				$image = $basePath . "/images/social_media/noimage.png";
+				$image = $basePath . "/images/social_media/customization_no_img.jpg";
 			}
 			else
 			{
@@ -1716,7 +1716,7 @@ class DataboxController extends AbstractActionController
 			$otherLogin = true;
 			if( $extensionsImgFlag )
 			{
-				$image = $basePath . "/images/social_media/noimage.png";
+				$image = $basePath . "/images/social_media/customization_no_img.jpg";
 			}
 			else
 			{
@@ -1728,7 +1728,7 @@ class DataboxController extends AbstractActionController
 			$otherLogin = true;
 			if( $extensionsImgFlag )
 			{
-				$image = $basePath . "/images/social_media/noimage.png";
+				$image = $basePath . "/images/social_media/customization_no_img.jpg";
 			}
 			else
 			{
@@ -1740,7 +1740,7 @@ class DataboxController extends AbstractActionController
 			$otherLogin = true;
 			if( $extensionsImgFlag )
 			{
-				$image = $basePath . "/images/social_media/noimage.png";
+				$image = $basePath . "/images/social_media/customization_no_img.jpg";
 			}
 			else
 			{
@@ -1752,7 +1752,7 @@ class DataboxController extends AbstractActionController
 			$otherLogin = true;
 			if( $extensionsImgFlag )
 			{
-				$image = $basePath . "/images/social_media/noimage.png";
+				$image = $basePath . "/images/social_media/customization_no_img.jpg";
 			}
 			else
 			{
@@ -1816,14 +1816,14 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				$comDomain = explode('.',$urlName);
 				$imageType = $comDomain[0];
 				$strLo = strtolower($imageType);
-				if( $image == $strLo ){ 
+				if( $image == $strLo ){
 					$image = $basePath . "/images/montage_default_images/".$strLo.".png";
 				}else if($image != $strLo){ 
 					if(preg_match("/\.$strLo\.[A-Z]{2,4}/$image")) {  
 						$image = $basePath . "/images/montage_default_images/".$strLo.".png";
 					}
 				}else{
-					$image = $basePath . "/images/social_media/noimage.png";
+					$image = $basePath . "/images/social_media/customization_no_img.jpg";
 				}	
 			}
 		}
