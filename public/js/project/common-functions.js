@@ -883,7 +883,7 @@ function checkSpaces()
 			  }
 		});
 	}
-	function likeDislikeCnt( newVoteValue,categoryId,rw_th,TotalvoteUp,Totalrw_lh,TotalvoteDown )
+	function likeDislikeCnt( categoryId,newVoteValue,rw_th)
 	{
 		var votingid=$('#voting'+categoryId).val();
 		var voteUrl = BASE_URL + "/databox/vote-on-highlight";
@@ -894,7 +894,7 @@ function checkSpaces()
 		  async: false,
 		  success: function(data) {
 			if(newVoteValue==1){
-				if(votingid==3){
+				/* if(votingid==3){
 					var newTotalvoteUp=parseInt(TotalvoteUp) + parseInt("1");
 					var newTotalvoteDown=parseInt(TotalvoteDown);
 					var newTotalrw_lh=parseInt(Totalrw_lh) + parseInt("1");
@@ -913,19 +913,22 @@ function checkSpaces()
 					var newTotalrw_lh=parseInt(Totalrw_lh);
 					console.log('53 '+newTotalvoteDown);
 
+				} */
+				if(votingid==3){
+					 var insertedActivityAjaxUrl = BASE_URL + "/databoxuser/record-activity-points";
+					$.ajax
+					({
+						url: insertedActivityAjaxUrl,
+						type: "POST",
+						data:{activityType:'Like Points'},
+						dataType: "json",
+						success: function(data) {}
+					});
 				}
-				var insertedActivityAjaxUrl = BASE_URL + "/databoxuser/record-activity-points";
-				$.ajax
-				({
-					url: insertedActivityAjaxUrl,
-					type: "POST",
-					data:{activityType:'Like Points'},
-					dataType: "json",
-					success: function(data) {}
-				});
+
 			}
 			if(newVoteValue==0){
-				if(Totalrw_lh=="" || Totalrw_lh==0){
+				/* if(Totalrw_lh=="" || Totalrw_lh==0){
 					var newTotalvoteUp=parseInt(TotalvoteUp);		
 					var newTotalvoteDown=parseInt(TotalvoteDown) + parseInt("1");		
 					var newTotalrw_lh=parseInt(Totalrw_lh) + parseInt("1");
@@ -948,25 +951,18 @@ function checkSpaces()
 						console.log('4 '+newTotalvoteDown);
 					}
 				}
-				
+				 */
 			}
-			var like=(parseInt(newTotalvoteUp)/parseInt(newTotalrw_lh))*100;
-			like1 = Math.round(like * 100) / 100;
+			/* var like=(parseInt(newTotalvoteUp)/parseInt(newTotalrw_lh))*100;
+			like1 = Math.round(like * 100) / 100; */
 
-			var DislikePercentage=(parseInt(newTotalvoteDown)/parseInt(newTotalrw_lh))*100;
-			DislikePercentage1 = Math.round(DislikePercentage * 100) / 100;
+			/* var DislikePercentage=(parseInt(newTotalvoteDown)/parseInt(newTotalrw_lh))*100;
+			DislikePercentage1 = Math.round(DislikePercentage * 100) / 100; */
 			//$('#likes'+categoryId).html('<h2>'+like1+'% liked</h2>');
-			if(newVoteValue==1){
-				var clickAppendHtml='<div class="divbrg_f" onClick="return likeDislikeCnt(0,'+categoryId+',1,'+newTotalvoteUp+','+newTotalrw_lh+','+newTotalvoteDown+')" >'+newTotalvoteUp+' <img src="'+BASE_URL+'/public/img/love_ok.png" alt=""  width="15px"/></div>';
-				clickAppendHtml+='<div class="divbrg_s" onClick="return likeDislikeCnt(0,'+categoryId+',1,'+newTotalvoteUp+','+newTotalrw_lh+','+newTotalvoteDown+')">'+newTotalvoteDown+' <a href="Javascript:void(0);" ><img src="'+BASE_URL+'/public/img/trash.png" alt="" width="10px" /></a></div>';
-				clickAppendHtml+='<input type="hidden" id="voting'+categoryId+'" name="voting'+categoryId+'" value="1">';
-			}else{
-				
-				var clickAppendHtml='<div class="divbrg_f" onClick="return likeDislikeCnt(1,'+categoryId+',1,'+newTotalvoteUp+','+newTotalrw_lh+','+newTotalvoteDown+')">'+newTotalvoteUp+' <a href="Javascript:void(0);"  ><img src="'+BASE_URL+'/public/img/love.png" alt="" width="15px" /></a></div>';
-				clickAppendHtml+='<div class="divbrg_s" onClick="return likeDislikeCnt(1,'+categoryId+',1,'+newTotalvoteUp+','+newTotalrw_lh+','+newTotalvoteDown+')" >'+newTotalvoteDown+' <img src="'+BASE_URL+'/public/img/trash.png" alt="" width="10px"/></div>';
-				clickAppendHtml+='<input type="hidden" id="voting'+categoryId+'" name="voting'+categoryId+'" value="0">';
-				console.log(clickAppendHtml);
-			}
+			var clickAppendHtml='<div class="divbrg_f" onClick="return likeDislikeCnt('+categoryId+',1,'+rw_th+')" >'+data.countUp+' <img src="'+BASE_URL+'/public/img/love.png" alt=""  width="15px"/></div>';
+			clickAppendHtml+='<div class="divbrg_s" onClick="return likeDislikeCnt('+categoryId+',0,'+rw_th+')">'+data.countDown+' <a href="Javascript:void(0);" ><img src="'+BASE_URL+'/public/img/trash.png" alt="" width="10px" /></a></div>';
+			clickAppendHtml+='<input type="hidden" id="voting'+categoryId+'" name="voting'+categoryId+'" value="1">';
+			
 			$('.divCardLoveTrash'+categoryId).html(clickAppendHtml);
 		  }
 		});	

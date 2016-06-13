@@ -230,4 +230,30 @@ class RelevanceWorthVoteTable
 		$resultSet = $this->tableGateway->selectWith($select);
 		return $resultSet->current();
 	}
+	public function checkUserLikeAndDislike($categoryId,$userId){
+		$select = $this->tableGateway->getSql()->select();
+		$select->where('relevance_worth_vote.user_id="'.$userId.'"');
+		$select->where('relevance_worth_vote.category_id="'.$categoryId.'"');
+		$resultSet = $this->tableGateway->selectWith($select);
+		return $resultSet->current();
+	}
+	public function updateLikeAndDislike($categoryId,$userId,$voteUp,$voteDown){
+		$data = array(
+			'voteUp'		 		=> $voteUp,
+			'voteDown'		 		=> $voteDown,
+			'updated_date'		=>	date('Y-m-d H:i:s'), 
+		);	
+		$row=$this->tableGateway->update($data, array('category_id' => $categoryId,'user_id' => $userId));
+		return $row;
+	}
+	public function getDataboxVotesUpDownCount($categoryId)
+    {
+		
+		$select = $this->tableGateway->getSql()->select();
+		$select->columns(array('countUp' => new \Zend\Db\Sql\Expression('sum(voteUp)'),'countDown' => new \Zend\Db\Sql\Expression('sum(voteDown)')));
+		$select->where('category_id="'.$categoryId.'"');
+		$resultSet = $this->tableGateway->selectWith($select);
+		$row = $resultSet->current();
+		return $row;
+	}
 }
