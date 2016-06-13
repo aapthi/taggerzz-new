@@ -1051,7 +1051,14 @@ class DataboxuserController extends AbstractActionController
 			
 	}
 	public function couponsAction(){
-		
+		$baseUrls = $this->getServiceLocator()->get('config');
+			$baseUrlArr = $baseUrls['urls'];
+			$baseUrl = $baseUrlArr['baseUrl'];
+			$basePath = $baseUrlArr['basePath'];
+			return $view = new ViewModel(array(
+					'baseUrl' 						=> $baseUrl,
+					'basePath' 						=> $basePath
+				));
 	}
 	public function accountsAction(){
 		if(isset($_POST['display_name'])){
