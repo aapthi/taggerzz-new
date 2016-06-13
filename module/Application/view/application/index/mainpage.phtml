@@ -89,8 +89,24 @@
 									<?php } ?>
                                 </div>
 								<div class="divCardLoveTrash<?php echo $currentBoxData["category_id"];?>" id="divCardLoveTrash<?php echo $currentBoxData["category_id"];?>">
-									<div class="divbrg_f" onClick="return likeDislikeCnt('<?php echo $currentBoxData["category_id"];?>','1','1');"><?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?> <img src="<?php echo $basePath; ?>/img/love.png" alt="" width="15px"/></div>
-									<div class="divbrg_s" onClick="return likeDislikeCnt('<?php echo $currentBoxData["category_id"];?>','0','1');"><?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "0";}?> <a href="Javascript:void(0);" ><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px"/></a></div>
+									
+										
+										<div class="divbrg_f" onClick="return likeDislikeCnt('<?php echo $currentBoxData["category_id"];?>','1','1');"><?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?>
+										<?php if($currentBoxData["userVoteUp"]=='1'){?>
+											<img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/>
+										<?php }else{?>
+											<img src="<?php echo $basePath; ?>/img/love.png" alt="" width="15px"/>
+										<?php } ?>
+										</div>
+										<div class="divbrg_s" onClick="return likeDislikeCnt('<?php echo $currentBoxData["category_id"];?>','0','1');"><?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "0";}?> 
+										<a href="Javascript:void(0);" >
+										<?php if($currentBoxData["uservoteDown"]!='1'){?>
+											<img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px"/>
+										<?php }else{?>
+											<img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px"/>
+										<?php }?>
+										</a></div>
+										
 								</div>
                                   <input type="hidden" id="voting<?php echo $currentBoxData["category_id"];?>" name="voting<?php echo $currentBoxData["category_id"];?>" value="<?php if($currentBoxData["userVoteUp"]!=""){echo $currentBoxData["userVoteUp"];}else{ echo "3";}  ?>">
                                <div style="clear:both;"></div>
@@ -222,7 +238,13 @@
 								<div id="likes<?php echo $currentBoxData["category_id"];?>" class="divCardUserName likes_percentage"><h2><?php echo round($currentBoxData["likes"],2);?>% liked</h2></div>
                             </div>-->
 							<div class="divCardLoveTrash<?php echo $currentBoxData["category_id"];?>" id="divCardLoveTrash<?php echo $currentBoxData["category_id"];?>">
-								<div class="divbrg_f" onClick="return likeDislikeCnt('<?php echo $currentBoxData["category_id"];?>','1','1');"><?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?> <img src="<?php echo $basePath; ?>/img/love.png" alt="" width="15px"/></div>
+								<div class="divbrg_f" onClick="return likeDislikeCnt('<?php echo $currentBoxData["category_id"];?>','1','1');"><?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?> 
+								<?php if($currentBoxData["userVoteUp"]=='1'){?>
+									<img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/>
+								<?php }else{?>
+									<img src="<?php echo $basePath; ?>/img/love.png" alt="" width="15px"/>
+								<?php } ?>
+								</div>
 								<div class="divbrg_s" onClick="return likeDislikeCnt('<?php echo $currentBoxData["category_id"];?>','0','1');"><?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "0";}?> <a href="Javascript:void(0);" ><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px"/></a></div>
 								<input type="hidden" id="voting<?php echo $currentBoxData["category_id"];?>" name="voting<?php echo $currentBoxData["category_id"];?>" value="<?php if($currentBoxData["userVoteUp"]!=""){echo $currentBoxData["userVoteUp"];}else{ echo "3";}  ?>">
 								</div>
@@ -351,7 +373,13 @@
 								<div id="likes<?php echo $currentBoxData["category_id"];?>" class="divCardUserName likes_percentage"><h2><?php echo round($currentBoxData["likes"],2);?>% liked</h2></div>
                             </div>-->
 							<div class="divCardLoveTrash<?php echo $currentBoxData["category_id"];?>" id="divCardLoveTrash<?php echo $currentBoxData["category_id"];?>">
-								<div class="divbrg_f" onClick="return likeDislikeCnt('<?php echo $currentBoxData["category_id"];?>','1','1');"><?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?> <img src="<?php echo $basePath; ?>/img/love.png" alt="" width="15px"/></div>
+								<div class="divbrg_f" onClick="return likeDislikeCnt('<?php echo $currentBoxData["category_id"];?>','1','1');"><?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?> 
+								<?php if($currentBoxData["userVoteUp"]=='1'){?>
+									<img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/>
+								<?php }else{?>
+									<img src="<?php echo $basePath; ?>/img/love.png" alt="" width="15px"/>
+								<?php } ?>
+								</div>
 								<div class="divbrg_s" onClick="return likeDislikeCnt('<?php echo $currentBoxData["category_id"];?>','0','1');"><?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "0";}?> <a href="Javascript:void(0);" ><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px"/></a></div>
 								<input type="hidden" id="voting<?php echo $currentBoxData["category_id"];?>" name="voting<?php echo $currentBoxData["category_id"];?>" value="<?php if($currentBoxData["userVoteUp"]!=""){echo $currentBoxData["userVoteUp"];}else{ echo "3";}  ?>">
 
@@ -477,7 +505,12 @@
 								<div id="likes<?php echo $currentBoxData["category_id"];?>" class="divCardUserName likes_percentage"><h2><?php echo round($currentBoxData["likes"],2);?>% liked</h2></div>
                             </div>-->
 							<div class="divCardLoveTrash<?php echo $currentBoxData["category_id"];?>" id="divCardLoveTrash<?php echo $currentBoxData["category_id"];?>">
-								<div class="divbrg_f" onClick="return likeDislikeCnt('<?php echo $currentBoxData["category_id"];?>','1','1');"><?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?> <img src="<?php echo $basePath; ?>/img/love.png" alt="" width="15px"/></div>
+								<div class="divbrg_f" onClick="return likeDislikeCnt('<?php echo $currentBoxData["category_id"];?>','1','1');"><?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?> 
+								<?php if($currentBoxData["userVoteUp"]=='1'){?>
+									<img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/>
+								<?php }else{?>
+									<img src="<?php echo $basePath; ?>/img/love.png" alt="" width="15px"/>
+								<?php } ?></div>
 								<div class="divbrg_s" onClick="return likeDislikeCnt('<?php echo $currentBoxData["category_id"];?>','0','1');"><?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "0";}?> <a href="Javascript:void(0);" ><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px"/></a></div>
 								<input type="hidden" id="voting<?php echo $currentBoxData["category_id"];?>" name="voting<?php echo $currentBoxData["category_id"];?>" value="<?php if($currentBoxData["userVoteUp"]!=""){echo $currentBoxData["userVoteUp"];}else{ echo "3";}  ?>">
 
@@ -603,7 +636,14 @@
 								<div id="likes<?php echo $currentBoxData["category_id"];?>" class="divCardUserName likes_percentage"><h2><?php echo round($currentBoxData["likes"],2);?>% liked</h2></div>
                             </div>-->
 							<div class="divCardLoveTrash<?php echo $currentBoxData["category_id"];?>" id="divCardLoveTrash<?php echo $currentBoxData["category_id"];?>">
-								<div class="divbrg_f" onClick="return likeDislikeCnt('<?php echo $currentBoxData["category_id"];?>','1','1');"><?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?> <img src="<?php echo $basePath; ?>/img/love.png" alt="" width="15px"/></div>
+								<div class="divbrg_f" onClick="return likeDislikeCnt('<?php echo $currentBoxData["category_id"];?>','1','1');"><?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?> 
+								<?php if($currentBoxData["userVoteUp"]=='1'){?>
+									<img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/>
+								<?php }else{?>
+									<img src="<?php echo $basePath; ?>/img/love.png" alt="" width="15px"/>
+								<?php } ?>
+								
+								</div>
 								<div class="divbrg_s" onClick="return likeDislikeCnt('<?php echo $currentBoxData["category_id"];?>','0','1');"><?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "0";}?> <a href="Javascript:void(0);" ><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px"/></a></div>
 								<input type="hidden" id="voting<?php echo $currentBoxData["category_id"];?>" name="voting<?php echo $currentBoxData["category_id"];?>" value="<?php if($currentBoxData["userVoteUp"]!=""){echo $currentBoxData["userVoteUp"];}else{ echo "3";}  ?>">
 
@@ -731,7 +771,13 @@
 								<div id="likes<?php echo $currentBoxData["category_id"];?>" class="divCardUserName likes_percentage"><h2><?php echo round($currentBoxData["likes"],2);?>% liked</h2></div>
                             </div>-->
 							<div class="divCardLoveTrash<?php echo $currentBoxData["category_id"];?>" id="divCardLoveTrash<?php echo $currentBoxData["category_id"];?>">
-								<div class="divbrg_f" onClick="return likeDislikeCnt('<?php echo $currentBoxData["category_id"];?>','1','1');"><?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?> <img src="<?php echo $basePath; ?>/img/love.png" alt="" width="15px"/></div>
+								<div class="divbrg_f" onClick="return likeDislikeCnt('<?php echo $currentBoxData["category_id"];?>','1','1');"><?php if($currentBoxData["voteUp"]!=""){echo $currentBoxData["voteUp"];}else{ echo "0";}?> 
+								<?php if($currentBoxData["userVoteUp"]=='1'){?>
+									<img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/>
+								<?php }else{?>
+									<img src="<?php echo $basePath; ?>/img/love.png" alt="" width="15px"/>
+								<?php } ?>
+								</div>
 								<div class="divbrg_s" onClick="return likeDislikeCnt('<?php echo $currentBoxData["category_id"];?>','0','1');"><?php if($currentBoxData["voteDown"]!=""){echo $currentBoxData["voteDown"];}else{ echo "0";}?> <a href="Javascript:void(0);" ><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px"/></a></div>
 								<input type="hidden" id="voting<?php echo $currentBoxData["category_id"];?>" name="voting<?php echo $currentBoxData["category_id"];?>" value="<?php if($currentBoxData["userVoteUp"]!=""){echo $currentBoxData["userVoteUp"];}else{ echo "3";}  ?>">
 

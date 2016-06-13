@@ -959,8 +959,18 @@ function checkSpaces()
 			/* var DislikePercentage=(parseInt(newTotalvoteDown)/parseInt(newTotalrw_lh))*100;
 			DislikePercentage1 = Math.round(DislikePercentage * 100) / 100; */
 			//$('#likes'+categoryId).html('<h2>'+like1+'% liked</h2>');
-			var clickAppendHtml='<div class="divbrg_f" onClick="return likeDislikeCnt('+categoryId+',1,'+rw_th+')" >'+data.countUp+' <img src="'+BASE_URL+'/public/img/love.png" alt=""  width="15px"/></div>';
-			clickAppendHtml+='<div class="divbrg_s" onClick="return likeDislikeCnt('+categoryId+',0,'+rw_th+')">'+data.countDown+' <a href="Javascript:void(0);" ><img src="'+BASE_URL+'/public/img/trash.png" alt="" width="10px" /></a></div>';
+			if(data.voteUp==0){
+				var imgUp='love';
+			}else{
+				var imgUp='love_ok';
+			}
+			if(data.voteDown==0){
+				var imgDown='trash';
+			}else{
+				var imgDown='trash';
+			}
+			var clickAppendHtml='<div class="divbrg_f" onClick="return likeDislikeCnt('+categoryId+',1,'+rw_th+')" >'+data.countUp+' <img src="'+BASE_URL+'/public/img/'+imgUp+'.png" alt=""  width="15px"/></div>';
+			clickAppendHtml+='<div class="divbrg_s" onClick="return likeDislikeCnt('+categoryId+',0,'+rw_th+')">'+data.countDown+'<img src="'+BASE_URL+'/public/img/'+imgDown+'.png" alt="" width="10px" /></div>';
 			clickAppendHtml+='<input type="hidden" id="voting'+categoryId+'" name="voting'+categoryId+'" value="1">';
 			
 			$('.divCardLoveTrash'+categoryId).html(clickAppendHtml);

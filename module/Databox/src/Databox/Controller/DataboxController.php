@@ -1415,7 +1415,9 @@ class DataboxController extends AbstractActionController
 			}
 			$checkInsert=$relevanceWorthVoteTable->checkUserLikeAndDislike( $categoryId,$userId);
 			if($checkInsert!=""){
+				
 				$LikeValue=$checkInsert->voteUp;
+				$disLikeValue=$checkInsert->voteDown;
 				if($type==1){
 					if($LikeValue==1){
 						$voteUp   = 0;
@@ -1425,10 +1427,10 @@ class DataboxController extends AbstractActionController
 						$voteDown = 0;
 					}
 				}else if($type==0){
-					if($checkInsert->voteDown==1){
+					if($disLikeValue==1){
 						$voteUp   = 0;
 						$voteDown = 0;
-					}else if($checkInsert->voteDown==0){
+					}else if($disLikeValue==0){
 						$voteUp   = 0;
 						$voteDown = 1;
 					}
@@ -1436,14 +1438,24 @@ class DataboxController extends AbstractActionController
 				
 				$updatedRecord = $relevanceWorthVoteTable->updateLikeAndDislike( $categoryId,$userId,$voteUp,$voteDown);
 			}else{
+				if($type==1){
+					$voteUp=1;
+					$voteDown=0;
+				}else if($type==0){
+					$voteUp=0;
+					$voteDown=1;
+				}
+				
 				$updatedRow = $relevanceWorthVoteTable->voteOnHighlight( $categoryId,$userId,$type,$rw_th);
 			}
 			$votePerLikeDisCount = $relevanceWorthVoteTable->getDataboxVotesUpDownCount($categoryId);
 			if(count($votePerLikeDisCount)>0){
 				$result = new JsonModel(array(	
-					'output'     => '1',
-					'countUp' 	 =>  $votePerLikeDisCount->countUp,
-					'countDown'  =>  $votePerLikeDisCount->countDown
+					'output'        => '1',
+					'countUp' 	    =>  $votePerLikeDisCount->countUp,
+					'countDown'     =>  $votePerLikeDisCount->countDown,
+					'voteUp'        =>  $voteUp,
+					'voteDown'      =>  $voteDown
 				));	
 				return $result;
 			}
@@ -2239,9 +2251,14 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				}
 				$publicBoxesHtml .= '</div>';
 				$publicBoxesHtml .='<div class="divCardLoveTrash'.$currentBoxRow->category_id.'" id="divCardLoveTrash'.$currentBoxRow->category_id.'" >';
+				if($currentBoxRow->userVoteUp=='1'){
+					$imgUp='love_ok';
+				}else{
+					$imgUp='love';	
+				} 
 				
-				$publicBoxesHtml .=	'<div class="divbrg_f" onClick="return likeDislikeCnt('.$currentBoxRow->category_id.',1,'.$currentBoxRow->rw_lh.')">'.$currentBoxRow->voteUp.' <a href="Javascript:void(0);" ><img src="'. $basePath .'/img/love.png" alt="" width="15px"  /></a></div>';
-				$publicBoxesHtml .=	'<div class="divbrg_s" onClick="return likeDislikeCnt('.$currentBoxRow->category_id.',1,'.$currentBoxRow->rw_lh.')">'.$currentBoxRow->voteDown.' <a href="Javascript:void(0);" ><img src="'.$basePath .'/img/trash.png" alt="" width="10px" /></a></div>';
+				$publicBoxesHtml .=	'<div class="divbrg_f" onClick="return likeDislikeCnt('.$currentBoxRow->category_id.',1,'.$currentBoxRow->rw_lh.')">'.$currentBoxRow->voteUp.' <a href="Javascript:void(0);" ><img src="'. $basePath .'/img/'.$imgUp.'.png" alt="" width="15px"  /></a></div>';
+				$publicBoxesHtml .=	'<div class="divbrg_s" onClick="return likeDislikeCnt('.$currentBoxRow->category_id.',1,'.$currentBoxRow->rw_lh.')">'.$currentBoxRow->voteDown.'<img src="'.$basePath .'/img/trash.png" alt="" width="10px" /></div>';
 				
 				$userVoteUpTz = "3";
 				if($currentBoxRow->userVoteUp!=""){
@@ -2502,8 +2519,12 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				$publicBoxesHtml1 .= '</div>';
 			
 				$publicBoxesHtml1 .='<div class="divCardLoveTrash'.$currentBoxRow->category_id.'" id="divCardLoveTrash'.$currentBoxRow->category_id.'" >';
-				
-				$publicBoxesHtml1 .=	'<div class="divbrg_f" onClick="return likeDislikeCnt('.$currentBoxRow->category_id.',1,'.$currentBoxRow->rw_lh.')">'.$currentBoxRow->voteUp.' <a href="Javascript:void(0);" ><img src="'. $basePath .'/img/love.png" alt="" width="15px"  /></a></div>';
+					if($currentBoxRow->userVoteUp=='1'){
+						$imgUp='love_ok';
+					}else{
+						$imgUp='love';	
+					} 
+				$publicBoxesHtml1 .=	'<div class="divbrg_f" onClick="return likeDislikeCnt('.$currentBoxRow->category_id.',1,'.$currentBoxRow->rw_lh.')">'.$currentBoxRow->voteUp.' <a href="Javascript:void(0);" ><img src="'. $basePath .'/img/'.$imgUp.'.png" alt="" width="15px"  /></a></div>';
 				$publicBoxesHtml1 .=	'<div class="divbrg_s" onClick="return likeDislikeCnt('.$currentBoxRow->category_id.',1,'.$currentBoxRow->rw_lh.')">'.$currentBoxRow->voteDown.' <a href="Javascript:void(0);" ><img src="'.$basePath .'/img/trash.png" alt="" width="10px" /></a></div>';
 				
 				$userVoteUpTz = "3";
@@ -2669,8 +2690,12 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				$privateBoxHtml .= '</div>';
 				
 				$privateBoxHtml .='<div class="divCardLoveTrash'.$currentBoxRow->category_id.'" id="divCardLoveTrash'.$currentBoxRow->category_id.'" >';
-					
-				$privateBoxHtml .=	'<div class="divbrg_f" onClick="return likeDislikeCnt('.$currentBoxRow->category_id.',1,'.$currentBoxRow->rw_lh.')">'.$currentBoxRow->voteUp.' <a href="Javascript:void(0);" ><img src="'. $basePath .'/img/love.png" alt="" width="15px"  /></a></div>';
+				if($currentBoxRow->userVoteUp=='1'){
+					$imgUp='love_ok';
+				}else{
+					$imgUp='love';	
+				} 	
+				$privateBoxHtml .=	'<div class="divbrg_f" onClick="return likeDislikeCnt('.$currentBoxRow->category_id.',1,'.$currentBoxRow->rw_lh.')">'.$currentBoxRow->voteUp.' <a href="Javascript:void(0);" ><img src="'. $basePath .'/img/'.$imgUp.'.png" alt="" width="15px"  /></a></div>';
 				$privateBoxHtml .=	'<div class="divbrg_s" onClick="return likeDislikeCnt('.$currentBoxRow->category_id.',1,'.$currentBoxRow->rw_lh.')">'.$currentBoxRow->voteDown.' <a href="Javascript:void(0);" ><img src="'.$basePath .'/img/trash.png" alt="" width="10px" /></a></div>';
 				
 				$userVoteUpTz = "3";
