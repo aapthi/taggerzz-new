@@ -263,6 +263,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffeff0', end
 	width:86.3%;
 	margin:155px auto;
 }
+.montage_container1{
+	width:100%;
+	margin:155px auto;
+}
+.montage_container2{
+	width:65.00%;
+	 margin: -142px auto auto;
+}
 .montage_brg_box{
 	border:1px solid #c7c7c7;
 	border-radius:2px;
@@ -277,6 +285,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffeff0', end
 	text-transform:capitalize;
 }
 /* End */
+.hor_line{
+border-bottom:1px solid #c7c7c7;
+width:100% ;
+padding-bottom:14px;
+
+}
 /* forgot Page css */
 .tfogotcontainer{
 	width:50%;
@@ -342,6 +356,26 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffeff0', end
 	padding:6px 4px;
 	border:1px solid #c7c7c7;
 	 box-sizing: border-box;
+}
+.text_pad2{
+	padding:3px 10px;
+	border:1px solid #c7c7c7;
+	 box-sizing: border-box;
+}
+.lab_color{
+  color:#625e5e;
+}
+.lab_color2{
+  color:#625e5e;
+  margin-left:88px;
+}
+.lab_color3{
+  color:#625e5e;
+  margin-left:145px;
+}
+.img_label{
+text-align: center; 
+margin-top: 5px;
 }
 .home_anchor_black{
 	color:#000000;

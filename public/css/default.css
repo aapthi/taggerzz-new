@@ -1159,6 +1159,26 @@ margin-bottom:20px;
 	height:108px;
 	width:134px;
 }
+.column2{
+	width:136px;
+	height:160px;
+}
+.column2 p{
+	background:#ebeff4;
+	color:#222;
+	font-size:11px;
+	padding:3px;
+	border-bottom:1px solid #c7c7c7;
+}
+.column2 div{
+	border:1px solid #c7c7c7;
+	height:130px;
+	border-radius:2px;
+}
+.column2 img{
+	height:108px;
+	width:134px;
+}
 .Previous img{
 	vertical-align:middle;
 	margin-top:-2px;
