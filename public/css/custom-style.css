@@ -265,11 +265,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffeff0', end
 }
 .montage_container1{
 	width:100%;
-	margin:155px auto;
+	margin:125px auto;
 }
 .montage_container2{
-	width:65.00%;
-	 margin: -142px auto auto;
+	width:72%;
+	 margin: 0 auto;
+	 background:#fff;
 }
 .montage_brg_box{
 	border:1px solid #c7c7c7;
@@ -288,7 +289,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffeff0', end
 .hor_line{
 border-bottom:1px solid #c7c7c7;
 width:100% ;
-padding-bottom:14px;
+padding-bottom:13px;
 
 }
 /* forgot Page css */
@@ -929,6 +930,12 @@ color:#a12a30;
 		  font-size:9px;
 		  padding:17px 2px 0;
 	  }	
+	  .text_pad2{
+		padding:3px 0;
+	  }
+	  .montage_container2{
+		width:80%;
+	  }
 }
 @media (min-width: 768px) and (max-width: 980px) {
 	.secDataboxes #divDataboxWrapper[data-columns]::before {
@@ -939,6 +946,23 @@ color:#a12a30;
 	}
 	.divHeaderWrapper .divSearchBoxes input[type="text"]{
 		width: 28%;
+	}
+	 .montage_container2{
+		width:85%;
+	  }
+	  .mlabel label{
+		display:block;
+		padding-bottom:8px;
+		padding-top:20px;
+	}
+	.lab_color2{
+		margin-left:0;
+	}
+	.lab_color3{
+		margin-left:0;
+	}
+	.text_pad2{
+		width:100%;
 	}
  }
  @media only screen and (device-width: 768px){
@@ -1060,6 +1084,23 @@ color:#a12a30;
 	}
 	.log_out_l{
 		display:none;
+	}
+	.montage_container2{
+		width:95%;
+	}
+	.mlabel label{
+		display:block;
+		padding-bottom:8px;
+		padding-top:20px;
+	}
+	.lab_color2{
+		margin-left:0;
+	}
+	.lab_color3{
+		margin-left:0;
+	}
+	.text_pad2{
+		width:100%;
 	}
 }
 @media (max-width: 480px) { 
