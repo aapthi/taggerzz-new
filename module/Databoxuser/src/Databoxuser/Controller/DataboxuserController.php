@@ -1050,7 +1050,9 @@ class DataboxuserController extends AbstractActionController
 			));
 			
 	}
-
+	public function couponsAction(){
+		
+	}
 	public function accountsAction(){
 		if(isset($_POST['display_name'])){
 			$user_session = new Container('usersinfo');

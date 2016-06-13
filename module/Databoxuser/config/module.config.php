@@ -166,6 +166,16 @@ return array(
                             ),
                         ),
                     ),
+					'coupons' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route' => '/coupons',
+                            'defaults' => array(
+                                'controller' => 'Databoxuser\Controller\Databoxuser',
+                                'action'     => 'coupons',
+                            ),
+                        ),
+                    ),
                 ),
             ),
 			'accounts' => array(
