@@ -1,3 +1,58 @@
+function rechargeCancelFun(){
+	var mob=$('#mob').val('');
+	var amt=$('#amt').val('');
+}
+
+
+function rechargeFun()
+{	
+	var operator_name=$('#operator_name').val();
+	var mob=$('#mob').val();
+	var amt=$('#amt').val();
+	var avaiableCash=$('#avaiableCash').val();
+	var OperatorCode=$('#operator_code').val();
+	var UserID=$('#hid_userid').val();
+	var Pass=$('#hid_pass').val();
+	var hid_agentid=$('#hid_agentid').val();
+	var format=$('#hid_fmt').val();
+	
+	if(operator_name==""){
+		alert('Please select your operator.' );
+		return false;
+	}
+	var pattern = /^\d{10}$/;
+	if(mob==""){
+		alert('Please enter your 10 digit mobile number.' );
+		return false;
+	}else if(!pattern.test(mob)){
+		alert("It is not valid mobile number.input 10 digits number!");
+        return false;
+	}
+	var pattern2 = /^\d$/;
+	if(amt==""){
+		alert('Please enter the amount.' );
+		return false;
+	}else if(!pattern2.test(amt)){
+		alert("Only enter numbers with out the decimal points");
+        return false;
+	}
+	if(amt >=avaiableCash){
+		alert('Amount excedded the  available cash.' );
+		return false;
+	}
+	$("#submitToRechargeForm").submit();
+}
+function networkSelecting(operator_id,network,classId){
+	$('#operator_code').val(operator_id);
+	$('#operator_name').val(network);
+	var hidRemove=$('#hid_remove_class').val();
+	$('#'+classId).addClass('coupons_active');
+	$('#'+hidRemove).removeClass('coupons_active');
+	$('#hid_remove_class').val(classId);
+}
+function convertPoints(points){
+	window.location=BASE_URL + "/databoxuser/coupons";
+}
 function inivite_frnd(){
 	$("#userMessage22").html('');
 	$('#inivite-alerts').popUpWindow({action: "open"});

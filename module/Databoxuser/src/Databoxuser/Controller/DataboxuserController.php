@@ -24,6 +24,8 @@ class DataboxuserController extends AbstractActionController
 	protected $invitationsTable;
 	protected $categoryTable;
 	protected $categoryLinksTable;
+	protected $rechargeOrders;
+	protected $rechargeOrdersTable;
 
     public function indexAction()
 	{
@@ -1052,13 +1054,81 @@ class DataboxuserController extends AbstractActionController
 	}
 	public function couponsAction(){
 		$baseUrls = $this->getServiceLocator()->get('config');
-			$baseUrlArr = $baseUrls['urls'];
-			$baseUrl = $baseUrlArr['baseUrl'];
-			$basePath = $baseUrlArr['basePath'];
-			return $view = new ViewModel(array(
-					'baseUrl' 						=> $baseUrl,
-					'basePath' 						=> $basePath
-				));
+		$baseUrlArr = $baseUrls['urls'];
+		$baseUrl = $baseUrlArr['baseUrl'];
+		$basePath = $baseUrlArr['basePath'];
+		$userRechargeOrdersTable = $this->getUserRechargeOrdersTable();
+		if(isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId!=""){
+			$userpointsTable = $this->getUserPointsTable();
+			$userPointss = $userpointsTable->loggedUserPoints($_SESSION['usersinfo']->userId);
+			$userRecharge = $userRechargeOrdersTable->userRechargedPoints($_SESSION['usersinfo']->userId);
+			if(count($userPointss)>0){
+				$userPoints = (($userPointss->userPoints)-$userRecharge->userPointsminus);
+			}
+			$_SESSION['usersinfo']->rewardPoints=$userPoints;
+		}
+
+		if(isset($_POST['mob']) && $_POST['mob']!=""){
+					$UserID=$_POST['hid_userid'];
+					$Pass=$_POST['hid_pass'];
+					$mob=$_POST['mob'];
+					$OperatorCode=$_POST['operator_code'];
+					$amt=$_POST['amt'];
+					$agentid=$_POST['hid_agentid'];
+					$format=$_POST['hid_fmt'];
+			/*$rechargeUrl='https://taggerzz.com/API/APIService.aspx?userid='.$UserID.'&pass='.$Pass.'&mob='.$mob.'.& opt='.$OperatorCode.'&amt='.$amt.'& agentid = '.$agentid.'&optional1=Value&fmt='.$format;
+			 $rechargeInit = curl_init();
+			curl_setopt($rechargeInit, CURLOPT_URL, $rechargeUrl);
+			curl_setopt($rechargeInit, CURLOPT_USERAGENT, 'SugarConnector/1.4');
+			curl_setopt($rechargeInit, CURLOPT_HTTPHEADER, array('Content-Type: application/json',//'Content-Length: ' . strlen($data)
+			));
+			curl_setopt($rechargeInit, CURLOPT_VERBOSE, 1);
+			curl_setopt($rechargeInit, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($rechargeInit, CURLOPT_CUSTOMREQUEST, "GET"); 
+			//curl_setopt($cInit, CURLOPT_POSTFIELDS,$data);
+			curl_setopt($rechargeInit, CURLOPT_SSL_VERIFYPEER, 0);
+			$rechargeresult = curl_exec($rechargeInit);
+			$rechargeapierr = curl_errno($rechargeInit);
+			$rechargeerrmsg = curl_error($rechargeInit);
+			curl_close($rechargeInit);
+			 //echo "<pre>";print_r($rechargeresult); exit;
+			$rechargeArr = json_decode($rechargeresult); */
+				$status=1;
+				
+				if(isset($status) && $status=!""){
+					$OperatorCode=$_POST['operator_code'];
+					$recharge_mobile=$_POST['mob'];
+					$amt=$_POST['amt'];
+					$recharge_rp_id='2536475';
+					$recharge_agent_id='123';
+					$recharge_op_id=$_POST['operator_code'];
+					$recharge_msg='sucess recharge';
+					$recharge_usage_points=($amt*0.10*100);
+					$recharge_status='1';
+					$userRechargeAdd = $userRechargeOrdersTable->addRechargeDetails($recharge_mobile,$amt,$recharge_rp_id,$recharge_agent_id,$recharge_op_id,$recharge_msg,$recharge_usage_points,$recharge_status);
+					if($recharge_status=="1"){
+						return $this->redirect()->toUrl($baseUrl . '/databoxuser/recharge-status?status=1');
+					}else{
+						return $this->redirect()->toUrl($baseUrl . '/databoxuser/recharge-status?status=2');
+					}
+				}	
+
+		}
+		return $view = new ViewModel(array(
+			'baseUrl' 						=> $baseUrl,
+			'basePath' 						=> $basePath,
+			'points' 						=> $userPoints
+		));
+	}
+	public function rechargeStatusAction(){
+		$baseUrls   = $this->getServiceLocator()->get('config');
+		$baseUrlArr = $baseUrls['urls'];
+		$baseUrl    = $baseUrlArr['baseUrl'];
+		$basePath   = $baseUrlArr['basePath'];
+		return $view = new ViewModel(array(
+			'baseUrl' 						=> $baseUrl,
+			'basePath' 						=> $basePath
+		));
 	}
 	public function accountsAction(){
 		if(isset($_POST['display_name'])){
@@ -1536,6 +1606,14 @@ class DataboxuserController extends AbstractActionController
             $this->userpointsTable = $sm->get('Databoxuser\Model\UserPointsFactory');			
         }
         return $this->userpointsTable;
+    }
+	public function getUserRechargeOrdersTable()
+    {
+        if (!$this->rechargeOrdersTable) {				
+            $sm = $this->getServiceLocator();
+            $this->rechargeOrdersTable = $sm->get('Databoxuser\Model\rechargeOrdersFactory');			
+        }
+        return $this->rechargeOrdersTable;
     }
 	public function getInvitationsTable()
     {

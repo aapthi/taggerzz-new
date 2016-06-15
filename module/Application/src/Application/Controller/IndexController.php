@@ -10,7 +10,7 @@ class IndexController extends AbstractActionController
 {
     const ROUTE_LOGIN        = '/';
 
-    protected $options;
+    protected  $options;
 
 	protected  $userCategoriesTable;
 	protected  $categoryLinksTable;
@@ -19,7 +19,9 @@ class IndexController extends AbstractActionController
 	protected  $linkDetailsTable;
 	protected  $userTable;
 	protected  $userpointsTable;
-
+	protected  $rechargeOrders;
+	protected  $rechargeOrdersTable;
+	
 	public function setOptions(ModuleOptions $options)
     {
         $this->options = $options;
@@ -371,8 +373,10 @@ class IndexController extends AbstractActionController
 		if(isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId!=""){
 			$userpointsTable = $this->getUserPointsTable();
 			$userPointss = $userpointsTable->loggedUserPoints($_SESSION['usersinfo']->userId);
+			$userRechargeOrdersTable = $this->getUserRechargeOrdersTable();
+			$userRecharge = $userRechargeOrdersTable->userRechargedPoints($_SESSION['usersinfo']->userId);
 			if(count($userPointss)>0){
-				$userPoints = $userPointss->userPoints;
+				$userPoints = (($userPointss->userPoints)-$userRecharge->userPointsminus);
 			}
 			$_SESSION['usersinfo']->rewardPoints=$userPoints;
 		}else if(isset($_SESSION['Zend_Auth']->storage) && $_SESSION['Zend_Auth']->storage!=""){
@@ -913,6 +917,14 @@ class IndexController extends AbstractActionController
             $this->userpointsTable = $sm->get('Databoxuser\Model\UserPointsFactory');			
         }
         return $this->userpointsTable;
+    }
+	public function getUserRechargeOrdersTable()
+    {
+        if (!$this->rechargeOrdersTable) {				
+            $sm = $this->getServiceLocator();
+            $this->rechargeOrdersTable = $sm->get('Databoxuser\Model\rechargeOrdersFactory');			
+        }
+        return $this->rechargeOrdersTable;
     }
 }
 

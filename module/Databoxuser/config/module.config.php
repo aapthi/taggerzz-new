@@ -176,6 +176,29 @@ return array(
                             ),
                         ),
                     ),
+					'recharge-status' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route' => '/recharge-status',
+                            'defaults' => array(
+                                'controller' => 'Databoxuser\Controller\Databoxuser',
+                                'action'     => 'rechargeStatus',
+                            ),
+                        ),
+                    ),
+					'recharge-status' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/recharge-status[/:id]',
+							'constraints' => array(
+							   'id'     => '[a-zA-Z][a-zA-Z0-9-=_-]*',
+							),
+                            'defaults' => array(
+                                'controller' => 'Databoxuser\Controller\Databoxuser',
+                                'action'     => 'rechargeStatus',
+                            ),
+                        ),
+                    ),
                 ),
             ),
 			'accounts' => array(

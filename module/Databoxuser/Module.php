@@ -24,6 +24,8 @@ use Databoxuser\Model\UserPoints;
 use Databoxuser\Model\UserPointsTable;
 use Databoxuser\Model\Invitations;
 use Databoxuser\Model\InvitationsTable;
+use Databoxuser\Model\rechargeOrders;
+use Databoxuser\Model\rechargeOrdersTable;
 
 
 class Module implements 
@@ -52,6 +54,7 @@ class Module implements
     {
         return array(
             'factories' => array( 
+            	'Databoxuser\Model\rechargeOrdersFactory'=>'Databoxuser\Factory\Model\rechargeOrdersTableFactory',			
             	'Databoxuser\Model\InvitationsFactory'=>'Databoxuser\Factory\Model\InvitationsTableFactory',			
             	'Databoxuser\Model\ActivityPointsFactory'=>'Databoxuser\Factory\Model\ActivityPointsTableFactory',			
             	'Databoxuser\Model\UserPointsFactory'=>'Databoxuser\Factory\Model\UserPointsTableFactory',			
