@@ -47,7 +47,7 @@ function rechargeFun()
 		$("#alert_meassage").html('Enter numbers with out decimal points');
 		return false;
 	}
-	if(amt >=avaiableCash){
+	if(parseInt(amt) >= parseInt(avaiableCash)){
 		$('#pop-up-alerts').popUpWindow({action: "open"});	
 		$("#alert_header_meassge").html('');
 		$("#alert_meassage").html('Amount excedded the  available cash.');
