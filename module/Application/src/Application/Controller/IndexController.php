@@ -382,8 +382,10 @@ class IndexController extends AbstractActionController
 		}else if(isset($_SESSION['Zend_Auth']->storage) && $_SESSION['Zend_Auth']->storage!=""){
 			$userpointsTable = $this->getUserPointsTable();
 			$userPointss = $userpointsTable->loggedUserPoints($_SESSION['Zend_Auth']->storage);
+			$userRechargeOrdersTable = $this->getUserRechargeOrdersTable();
+			$userRecharge = $userRechargeOrdersTable->userRechargedPoints($_SESSION['Zend_Auth']->storage);
 			if(count($userPointss)>0){
-				$userPoints = $userPointss->userPoints;
+				$userPoints = (($userPointss->userPoints)-$userRecharge->userPointsminus);
 			}
 			$_SESSION['usersinfo']->rewardPoints=$userPoints;
 		}		

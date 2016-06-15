@@ -153,14 +153,15 @@
 <form id="submitToRechargeForm" name="submitToRechargeForm" method="post" >
 
 	<div class="mlabel">
-		<p class="lab_color3">You have Selected : <input type="text" class="text_pad2" id="operator_name" name="operator_name" value=""PlaceHolder="Selected operator" readonly /></p>
+		<p class="lab_color3">You have Selected : <span  id="operator_name" name="operator_name"></span></p>
 		<br class="smhide_m">
 		<label  class="lab_color2">Enter a Valid Mobile Number:</label>
 		<input type="text" id="mob" name="mob" class="text_pad2" PlaceHolder="Mobile Number"><br><br class="smhide_m">
 		<label  class="lab_color"> Enter the valid Recharge/Payment amount:</label>
 		<input type="text" id="amt" name="amt" class="text_pad2" PlaceHolder="Amount">
-		<label  class="lab_color">from your Available Cash</label>
-		<input type="text" id="avaiableCash" name="avaiableCash" class="text_pad2" readonly PlaceHolder="Cash" value="<?php echo $rewardMoney; ?>">
+		<label  class="lab_color">from your Available Cash : </label><?php echo $rewardMoney; ?>
+		
+		<input type="hidden" id="avaiableCash" name="avaiableCash" class="text_pad2" readonly PlaceHolder="Cash" value="<?php echo $rewardMoney; ?>">
 		<input type="hidden" id="operator_code" name="operator_code" value=""/>
 		<input type="hidden" id="hid_remove_class" name="hid_remove_class" value=""/>
 		<input type="hidden" id="hid_userid" name="hid_userid" value=""/>

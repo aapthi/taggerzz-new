@@ -6,7 +6,7 @@ function rechargeCancelFun(){
 
 function rechargeFun()
 {	
-	var operator_name=$('#operator_name').val();
+	//var operator_name=$('#operator_name').val();
 	var mob=$('#mob').val();
 	var amt=$('#amt').val();
 	var avaiableCash=$('#avaiableCash').val();
@@ -16,35 +16,48 @@ function rechargeFun()
 	var hid_agentid=$('#hid_agentid').val();
 	var format=$('#hid_fmt').val();
 	
-	if(operator_name==""){
-		alert('Please select your operator.' );
+	if(OperatorCode==""){
+		$('#pop-up-alerts').popUpWindow({action: "open"});	
+		$("#alert_header_meassge").html('');
+		$("#alert_meassage").html('Please select your operator.');			
 		return false;
 	}
 	var pattern = /^\d{10}$/;
 	if(mob==""){
-		alert('Please enter your 10 digit mobile number.' );
+		$('#pop-up-alerts').popUpWindow({action: "open"});	
+		$("#alert_header_meassge").html('');
+		$("#alert_meassage").html('Please enter your 10 digit mobile number.');			
 		return false;
+		
 	}else if(!pattern.test(mob)){
-		alert("It is not valid mobile number.input 10 digits number!");
-        return false;
-	}
-	var pattern2 = /^\d$/;
-	if(amt==""){
-		alert('Please enter the amount.' );
+		$('#pop-up-alerts').popUpWindow({action: "open"});	
+		$("#alert_header_meassge").html('');
+		$("#alert_meassage").html('It is not valid mobile number.input 10 digits number!');
 		return false;
-	}else if(!pattern2.test(amt)){
-		alert("Enter numbers with out decimal points");
-        return false;
+	}
+	var numbers = /^[0-9]+$/;  
+	if(amt==""){
+		$('#pop-up-alerts').popUpWindow({action: "open"});	
+		$("#alert_header_meassge").html('');
+		$("#alert_meassage").html('Please enter the amount.');
+		return false;
+	}else if(!numbers.test(amt)){
+		$('#pop-up-alerts').popUpWindow({action: "open"});	
+		$("#alert_header_meassge").html('');
+		$("#alert_meassage").html('Enter numbers with out decimal points');
+		return false;
 	}
 	if(amt >=avaiableCash){
-		alert('Amount excedded the  available cash.' );
+		$('#pop-up-alerts').popUpWindow({action: "open"});	
+		$("#alert_header_meassge").html('');
+		$("#alert_meassage").html('Amount excedded the  available cash.');
 		return false;
 	}
 	$("#submitToRechargeForm").submit();
 }
 function networkSelecting(operator_id,network,classId){
 	$('#operator_code').val(operator_id);
-	$('#operator_name').val(network);
+	$('#operator_name').html(network);
 	var hidRemove=$('#hid_remove_class').val();
 	$('#'+classId).addClass('coupons_active');
 	$('#'+hidRemove).removeClass('coupons_active');
@@ -983,6 +996,17 @@ function checkSpaces()
 
 			}
 			if(newVoteValue==0){
+				if(votingid==3){
+					 var insertedActivityAjaxUrl = BASE_URL + "/databoxuser/record-activity-points";
+					$.ajax
+					({
+						url: insertedActivityAjaxUrl,
+						type: "POST",
+						data:{activityType:'trashDatabox'},
+						dataType: "json",
+						success: function(data) {}
+					});
+				}
 				/* if(Totalrw_lh=="" || Totalrw_lh==0){
 					var newTotalvoteUp=parseInt(TotalvoteUp);		
 					var newTotalvoteDown=parseInt(TotalvoteDown) + parseInt("1");		

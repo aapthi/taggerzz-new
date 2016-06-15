@@ -42,6 +42,9 @@ class rechargeOrdersTable
 	public function userRechargedPoints($uid){
 		$select = $this->tableGateway->getSql()->select();
 		$select->columns(array('userPointsminus' => new Expression('COALESCE((SUM(recharge_orders.recharge_usage_points)),0)')));
+		$select->where('recharge_user_id="'.$uid.'"');
+		$select->where('recharge_status="1"');
+		$select->group('recharge_user_id');
 		$resultSet = $this->tableGateway->selectWith($select);
 		return $resultSet->current();
 	}
