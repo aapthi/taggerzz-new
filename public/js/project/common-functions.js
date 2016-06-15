@@ -33,7 +33,7 @@ function rechargeFun()
 		alert('Please enter the amount.' );
 		return false;
 	}else if(!pattern2.test(amt)){
-		alert("Only enter numbers with out the decimal points");
+		alert("Enter numbers with out decimal points");
         return false;
 	}
 	if(amt >=avaiableCash){
