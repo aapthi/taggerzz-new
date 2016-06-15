@@ -936,8 +936,10 @@ class DataboxuserController extends AbstractActionController
 			}
 			if($_POST['activityType']=='trashDatabox'){
 				if(isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId!=''){
-					$user_id = $_SESSION['usersinfo']->userId;
-					$acitvityInserted = $this->activityMethod($user_id,$activityId);
+					$categoryId = $_POST['categoryId'];
+					$categoryIdDetails = $this->getCategoryTable()->getInfo($categoryId);
+					$dataBoxOwner=$categoryIdDetails->user_id;
+					$acitvityInserted = $this->activityMethod($dataBoxOwner,$activityId);
 					return $view = new JsonModel(array(
 						'output' 	=> 1,
 					));

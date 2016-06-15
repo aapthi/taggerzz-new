@@ -954,6 +954,7 @@ function checkSpaces()
 	function likeDislikeCnt( categoryId,newVoteValue,rw_th)
 	{
 		var votingid=$('#voting'+categoryId).val();
+		var votingDownid=$('#votingDown'+categoryId).val();
 		var voteUrl = BASE_URL + "/databox/vote-on-highlight";
 		$.ajax({
 		  url: voteUrl,
@@ -982,7 +983,7 @@ function checkSpaces()
 					console.log('53 '+newTotalvoteDown);
 
 				} */
-				if(votingid==3){
+				if(votingDownid==3){
 					 var insertedActivityAjaxUrl = BASE_URL + "/databoxuser/record-activity-points";
 					$.ajax
 					({
@@ -996,17 +997,20 @@ function checkSpaces()
 
 			}
 			if(newVoteValue==0){
-				if(votingid==3){
-					 var insertedActivityAjaxUrl = BASE_URL + "/databoxuser/record-activity-points";
+				 if(votingDownid==3){
+					var insertedActivityAjaxUrl = BASE_URL + "/databoxuser/record-activity-points";
 					$.ajax
 					({
 						url: insertedActivityAjaxUrl,
 						type: "POST",
-						data:{activityType:'trashDatabox'},
+						data:{activityType:'trashDatabox',categoryId:categoryId},
 						dataType: "json",
-						success: function(data) {}
+						success: function(data) {
+							
+						}
 					});
-				}
+				 }
+				
 				/* if(Totalrw_lh=="" || Totalrw_lh==0){
 					var newTotalvoteUp=parseInt(TotalvoteUp);		
 					var newTotalvoteDown=parseInt(TotalvoteDown) + parseInt("1");		

@@ -2264,7 +2264,12 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				if($currentBoxRow->userVoteUp!=""){
 					$userVoteUpTz = $currentBoxRow->userVoteUp;
 				}
+				$userVoteDownTz = "3";
+				if($currentBoxRow->uservoteDown!=""){
+					$userVoteDownTz = $currentBoxRow->uservoteDown;
+				}
 				$publicBoxesHtml .='<input type="hidden" id="voting'.$currentBoxRow->category_id.'" name="voting'.$currentBoxRow->category_id.'" value="'.$userVoteUpTz.'">';
+				$publicBoxesHtml .='<input type="hidden" id="votingDown'.$currentBoxRow->category_id.'" name="votingDown'.$currentBoxRow->category_id.'" value="'.$userVoteDownTz.'">';
 				$publicBoxesHtml .='</div>';
 				$publicBoxesHtml .='<div style="clear:both;"></div></div>';
 				
@@ -2531,7 +2536,12 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				if($currentBoxRow->userVoteUp!=""){
 					$userVoteUpTz = $currentBoxRow->userVoteUp;
 				}
+				$userVoteDownTz = "3";
+				if($currentBoxRow->uservoteDown!=""){
+					$userVoteDownTz = $currentBoxRow->uservoteDown;
+				}
 				$publicBoxesHtml1 .='<input type="hidden" id="voting'.$currentBoxRow->category_id.'" name="voting'.$currentBoxRow->category_id.'" value="'.$userVoteUpTz.'">';
+				$publicBoxesHtml1 .='<input type="hidden" id="votingDown'.$currentBoxRow->category_id.'" name="votingDown'.$currentBoxRow->category_id.'" value="'.$userVoteDownTz.'">';
 				$publicBoxesHtml1 .='</div>';
 				$publicBoxesHtml1 .='<div style="clear:both;"></div></div>';
 				
@@ -2702,7 +2712,12 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				if($currentBoxRow->userVoteUp!=""){
 					$userVoteUpTz = $currentBoxRow->userVoteUp;
 				}
+				$userVoteDownTz = "3";
+				if($currentBoxRow->uservoteDown!=""){
+					$userVoteDownTz = $currentBoxRow->uservoteDown;
+				}
 				$privateBoxHtml .='<input type="hidden" id="voting'.$currentBoxRow->category_id.'" name="voting'.$currentBoxRow->category_id.'" value="'.$userVoteUpTz.'">';
+				$privateBoxHtml .='<input type="hidden" id="votingDown'.$currentBoxRow->category_id.'" name="votingDown'.$currentBoxRow->category_id.'" value="'.$userVoteUpTz.'">';
 				$privateBoxHtml .='</div>';
 				$privateBoxHtml .='<div style="clear:both;"></div></div>';
 
