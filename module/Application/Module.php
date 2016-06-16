@@ -15,7 +15,7 @@ use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 
 class Module implements AutoloaderProviderInterface
 {
-	protected $whitelist = array('user-collection','databox/privatedatabox','databox/publicdatabox','databox/createhighlights','databox/bookmarks','databox/createhashtag','/dashboard','/databox/view-ascending','/databox/category-choice','/montage','/accounts','/databox/highlights-both','/databox/edit-highlight','/databox/userdefined-both','/databox/predefined-both','/databox/userdefined-bookmarks','/progress','/databox/post-vertical','/databox/post-horizontal');
+	protected $whitelist = array('coupons','recharge-status','user-collection','databox/privatedatabox','databox/publicdatabox','databox/createhighlights','databox/bookmarks','databox/createhashtag','/dashboard','/databox/view-ascending','/databox/category-choice','/montage','/accounts','/databox/highlights-both','/databox/edit-highlight','/databox/userdefined-both','/databox/predefined-both','/databox/userdefined-bookmarks','/progress','/databox/post-vertical','/databox/post-horizontal');
     public function onBootstrap(MvcEvent $e)
     {
         $eventManager        = $e->getApplication()->getEventManager();
