@@ -1084,48 +1084,39 @@ class DataboxuserController extends AbstractActionController
 		}
 
 		if(isset($_POST['mob']) && $_POST['mob']!=""){
-					$UserID=$_POST['hid_userid'];
-					$Pass=$_POST['hid_pass'];
-					$mob=$_POST['mob'];
-					$OperatorCode=$_POST['operator_code'];
-					$amt=$_POST['amt'];
-					$agentid=$_POST['hid_agentid'];
-					$format=$_POST['hid_fmt'];
-			/*$rechargeUrl='https://taggerzz.com/API/APIService.aspx?userid='.$UserID.'&pass='.$Pass.'&mob='.$mob.'.& opt='.$OperatorCode.'&amt='.$amt.'& agentid = '.$agentid.'&optional1=Value&fmt='.$format;
-			 $rechargeInit = curl_init();
+			$UserID=$_POST['hid_userid'];
+			$Pass=$_POST['hid_pass'];
+			$mob=$_POST['mob'];
+			$OperatorCode=$_POST['operator_code'];
+			$amt=$_POST['amt'];
+			$agentid=$_POST['hid_agentid'];
+			$format=$_POST['hid_fmt'];
+			$rechargeUrl='http://erechargesoftware.com/API/APIService.aspx?userid='.$UserID.'&pass='.$Pass.'&mob='.$mob.'&opt='.$OperatorCode.'&amt='.$amt.'&agentid='.$agentid.'&optional1=Value&fmt=Json';
+			$rechargeInit = curl_init();
 			curl_setopt($rechargeInit, CURLOPT_URL, $rechargeUrl);
 			curl_setopt($rechargeInit, CURLOPT_USERAGENT, 'SugarConnector/1.4');
-			curl_setopt($rechargeInit, CURLOPT_HTTPHEADER, array('Content-Type: application/json',//'Content-Length: ' . strlen($data)
+			curl_setopt($rechargeInit, CURLOPT_HTTPHEADER, array('Content-Type: application/json','Content-Length: ' . strlen($data)
 			));
 			curl_setopt($rechargeInit, CURLOPT_VERBOSE, 1);
 			curl_setopt($rechargeInit, CURLOPT_RETURNTRANSFER, true);
 			curl_setopt($rechargeInit, CURLOPT_CUSTOMREQUEST, "GET"); 
-			//curl_setopt($cInit, CURLOPT_POSTFIELDS,$data);
 			curl_setopt($rechargeInit, CURLOPT_SSL_VERIFYPEER, 0);
 			$rechargeresult = curl_exec($rechargeInit);
 			$rechargeapierr = curl_errno($rechargeInit);
 			$rechargeerrmsg = curl_error($rechargeInit);
 			curl_close($rechargeInit);
-			 //echo "<pre>";print_r($rechargeresult); exit;
-			$rechargeArr = json_decode($rechargeresult); */
-				$status=1;
-				
-				if(isset($status) && $status=!""){
-					$OperatorCode=$_POST['operator_code'];
-					$recharge_mobile=$_POST['mob'];
-					$amt=$_POST['amt'];
-					$recharge_rp_id='2536475';
-					$recharge_agent_id='123';
-					$recharge_op_id=$_POST['operator_code'];
-					$recharge_msg='sucess recharge';
+			$rechargeArr = json_decode($rechargeresult);
+				if(isset($rechargeArr) && $rechargeArr=!""){
+					$recharge_mobile=$rechargeArr->MOBILE;
+					$amt=$rechargeArr->AMOUNT;
+					$recharge_rp_id=$rechargeArr->RPID;
+					$recharge_agent_id=$rechargeArr->AGENTID;
+					$recharge_op_id=$rechargeArr->OPID;
+					$recharge_msg=$rechargeArr->MSG;
 					$recharge_usage_points=($amt*0.10*100);
-					$recharge_status='1';
+					$recharge_status=$rechargeArr->STATUS;
 					$userRechargeAdd = $userRechargeOrdersTable->addRechargeDetails($recharge_mobile,$amt,$recharge_rp_id,$recharge_agent_id,$recharge_op_id,$recharge_msg,$recharge_usage_points,$recharge_status);
-					if($recharge_status=="1"){
-						return $this->redirect()->toUrl($baseUrl . '/databoxuser/recharge-status?status=1');
-					}else{
-						return $this->redirect()->toUrl($baseUrl . '/databoxuser/recharge-status?status=2');
-					}
+					return $this->redirect()->toUrl($baseUrl . '/databoxuser/recharge-status?status='.$recharge_status);
 				}	
 
 		}
@@ -1704,6 +1695,31 @@ class DataboxuserController extends AbstractActionController
 		}else{
 			echo "NO DATA FOUND";exit;
 		}
+	}
+	function restClient($url, $method, $data ) {
+		
+		$cInit = curl_init();
+		curl_setopt($cInit, CURLOPT_URL, $url);
+		curl_setopt($cInit, CURLOPT_USERAGENT, 'SugarConnector/1.4');
+		if($data != ""){
+			curl_setopt($cInit, CURLOPT_HTTPHEADER, array('Content-Type: application/json',
+			'Content-Length: ' . strlen($data)
+			));
+		}else{
+			curl_setopt($cInit, CURLOPT_HTTPHEADER, array('Content-Type: application/json',
+			//'Content-Length: ' . strlen($data)
+			));
+		}
+		curl_setopt($cInit, CURLOPT_VERBOSE, 1);
+		curl_setopt($cInit, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($cInit, CURLOPT_CUSTOMREQUEST, $method);
+		if($data != ""){
+			curl_setopt($cInit, CURLOPT_POSTFIELDS,$data);
+		}		
+		curl_setopt($cInit, CURLOPT_SSL_VERIFYPEER, 0);
+		$cLoginresult = curl_exec($cInit); 
+		curl_close($cInit);
+		return $cLoginresult;
 	}
 }
 
