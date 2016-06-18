@@ -1082,53 +1082,58 @@ class DataboxuserController extends AbstractActionController
 			}
 			$_SESSION['usersinfo']->rewardPoints=$userPoints;
 		}
+		$checkRechargeCount = $userRechargeOrdersTable->checkRechargeCount($_SESSION['usersinfo']->userId);
+		$rcechargeCountstatus='';
 
-		if(isset($_POST['mob']) && $_POST['mob']!=""){
-			$UserID=$_POST['hid_userid'];
-			$Pass=$_POST['hid_pass'];
-			$mob=$_POST['mob'];
-			$OperatorCode=$_POST['operator_code'];
-			$amt=$_POST['amt'];
-			$agentid=$_POST['hid_agentid'];
-			$format=$_POST['hid_fmt'];
-			$rechargeUrl='http://erechargesoftware.com/API/APIService.aspx?userid='.$UserID.'&pass='.$Pass.'&mob='.$mob.'&opt='.$OperatorCode.'&amt='.$amt.'&agentid='.$agentid.'&optional1=Value&fmt=Json';
-			//$rechargeUrl='http://erechargesoftware.com/API/APIService.aspx?userid=8105259914&pass=words_9949_truth-649&mob=8686151775&opt=RI&amt=10&agentid=12555&fmt=Json';
-			$rechargeInit = curl_init();
-			curl_setopt($rechargeInit, CURLOPT_URL, $rechargeUrl);
-			curl_setopt($rechargeInit, CURLOPT_USERAGENT, 'SugarConnector/1.4');
-			curl_setopt($rechargeInit, CURLOPT_HTTPHEADER, array('Content-Type: application/json','Content-Length: ' . strlen($data)
-			));
-			curl_setopt($rechargeInit, CURLOPT_VERBOSE, 1);
-			curl_setopt($rechargeInit, CURLOPT_RETURNTRANSFER, true);
-			curl_setopt($rechargeInit, CURLOPT_CUSTOMREQUEST, "GET"); 
-			curl_setopt($rechargeInit, CURLOPT_SSL_VERIFYPEER, 0);
-			$rechargeresult = curl_exec($rechargeInit);
-			$rechargeapierr = curl_errno($rechargeInit);
-			$rechargeerrmsg = curl_error($rechargeInit);
-			curl_close($rechargeInit);
-			$rechargeArr = json_decode($rechargeresult);
-
-				if(isset($rechargeArr->STATUS) && $rechargeArr->STATUS!=""){
+		if($checkRechargeCount <=4)
+		{
 					
-					$recharge_mobile=$rechargeArr->MOBILE;
-					$amt=$rechargeArr->AMOUNT;
-					$recharge_rp_id=$rechargeArr->RPID;
-					$recharge_agent_id=$rechargeArr->AGENTID;
-					$recharge_op_id=$rechargeArr->OPID;
-					$recharge_msg=$rechargeArr->MSG;
-					$recharge_usage_points=($amt*0.10*100);
-					$recharge_status=$rechargeArr->STATUS;
-					
-					$checkRechargeCount = $userRechargeOrdersTable->checkRechargeCount($_SESSION['usersinfo']->userId);
-					if($checkRechargeCount <=4){
-						$userRechargeAdd = $userRechargeOrdersTable->addRechargeDetails($recharge_mobile,$amt,$recharge_rp_id,$recharge_agent_id,$recharge_op_id,$recharge_msg,$recharge_usage_points,$recharge_status);
-					}else{
-						$recharge_status='Limit is 5 times for day';
-					}
-					return $this->redirect()->toUrl($baseUrl . '/databoxuser/recharge-status?status='.$rechargeArr->STATUS);
-				}	
+			if(isset($_POST['mob']) && $_POST['mob']!=""){
+				$UserID=$_POST['hid_userid'];
+				$Pass=$_POST['hid_pass'];
+				$mob=$_POST['mob'];
+				$OperatorCode=$_POST['operator_code'];
+				$amt=$_POST['amt'];
+				$agentid=$_POST['hid_agentid'];
+				$format=$_POST['hid_fmt'];
+				$rechargeUrl='http://erechargesoftware.com/API/APIService.aspx?userid='.$UserID.'&pass='.$Pass.'&mob='.$mob.'&opt='.$OperatorCode.'&amt='.$amt.'&agentid='.$agentid.'&fmt=Json';
+				//$rechargeUrl='http://erechargesoftware.com/API/APIService.aspx?userid=8105259914&pass=words_9949_truth-649&mob=8686151775&opt=RI&amt=10&agentid=12555&fmt=Json';
+				$rechargeInit = curl_init();
+				curl_setopt($rechargeInit, CURLOPT_URL, $rechargeUrl);
+				curl_setopt($rechargeInit, CURLOPT_USERAGENT, 'SugarConnector/1.4');
+				curl_setopt($rechargeInit, CURLOPT_HTTPHEADER, array('Content-Type: application/json','Content-Length: ' . strlen($data)
+				));
+				curl_setopt($rechargeInit, CURLOPT_VERBOSE, 1);
+				curl_setopt($rechargeInit, CURLOPT_RETURNTRANSFER, true);
+				curl_setopt($rechargeInit, CURLOPT_CUSTOMREQUEST, "GET"); 
+				curl_setopt($rechargeInit, CURLOPT_SSL_VERIFYPEER, 0);
+				$rechargeresult = curl_exec($rechargeInit);
+				$rechargeapierr = curl_errno($rechargeInit);
+				$rechargeerrmsg = curl_error($rechargeInit);
+				curl_close($rechargeInit);
+				$rechargeArr = json_decode($rechargeresult);
 
-		}
+					if(isset($rechargeArr->STATUS) && $rechargeArr->STATUS!=""){
+						
+						$recharge_mobile=$rechargeArr->MOBILE;
+						$amt=$rechargeArr->AMOUNT;
+						$recharge_rp_id=$rechargeArr->RPID;
+						$recharge_agent_id=$rechargeArr->AGENTID;
+						$recharge_op_id=$rechargeArr->OPID;
+						$recharge_msg=$rechargeArr->MSG;
+						$recharge_usage_points=($amt*0.10*100);
+						$recharge_status=$rechargeArr->STATUS;
+						
+							$userRechargeAdd = $userRechargeOrdersTable->addRechargeDetails($recharge_mobile,$amt,$recharge_rp_id,$recharge_agent_id,$recharge_op_id,$recharge_msg,$recharge_usage_points,$recharge_status);
+						return $this->redirect()->toUrl($baseUrl . '/databoxuser/recharge-status?status='.$rechargeArr->STATUS);
+					}	
+
+			}
+		}else{
+			$rcechargeCountstatus='Limit is 5 times for day';
+			return $this->redirect()->toUrl($baseUrl . '/databoxuser/recharge-status?status='.$rcechargeCountstatus);
+
+		}	
 		return $view = new ViewModel(array(
 			'baseUrl' 						=> $baseUrl,
 			'basePath' 						=> $basePath,
