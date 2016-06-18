@@ -43,9 +43,18 @@ class rechargeOrdersTable
 		$select = $this->tableGateway->getSql()->select();
 		$select->columns(array('userPointsminus' => new Expression('COALESCE((SUM(recharge_orders.recharge_usage_points)),0)')));
 		$select->where('recharge_user_id="'.$uid.'"');
-		$select->where('recharge_status="1"');
+		$select->where('recharge_status="SUCCESS"');
 		$select->group('recharge_user_id');
 		$resultSet = $this->tableGateway->selectWith($select);
 		return $resultSet->current();
+	}
+	public function checkRechargeCount($uid){
+		$todayDate= date('Y-m-d');
+		$select = $this->tableGateway->getSql()->select();
+		$select->where('recharge_user_id="'.$uid.'"');
+		$select->where->like( 'recharge_date', '%' . $todayDate . '%' );
+		//$select->where('recharge_status="SUCCESS"');
+		$resultSet = $this->tableGateway->selectWith($select);
+		return $resultSet->count();
 	}
 }

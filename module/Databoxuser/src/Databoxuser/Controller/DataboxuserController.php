@@ -1118,7 +1118,13 @@ class DataboxuserController extends AbstractActionController
 					$recharge_msg=$rechargeArr->MSG;
 					$recharge_usage_points=($amt*0.10*100);
 					$recharge_status=$rechargeArr->STATUS;
-					$userRechargeAdd = $userRechargeOrdersTable->addRechargeDetails($recharge_mobile,$amt,$recharge_rp_id,$recharge_agent_id,$recharge_op_id,$recharge_msg,$recharge_usage_points,$recharge_status);
+					
+					$checkRechargeCount = $userRechargeOrdersTable->checkRechargeCount($_SESSION['usersinfo']->userId);
+					if($checkRechargeCount <=4){
+						$userRechargeAdd = $userRechargeOrdersTable->addRechargeDetails($recharge_mobile,$amt,$recharge_rp_id,$recharge_agent_id,$recharge_op_id,$recharge_msg,$recharge_usage_points,$recharge_status);
+					}else{
+						$recharge_status='Limit is 5 times for day';
+					}
 					return $this->redirect()->toUrl($baseUrl . '/databoxuser/recharge-status?status='.$rechargeArr->STATUS);
 				}	
 
