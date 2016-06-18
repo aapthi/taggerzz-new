@@ -952,7 +952,7 @@ class DataboxuserController extends AbstractActionController
 		}
 		//Comments Points For Fresh Databox
 		if(isset($_POST['comt']) && $_POST['comt']=='cmtt'){
-			$acitvityInserted = $this->activityMethod($_POST['databoxUser'],$activityId);
+			//$acitvityInserted = $this->activityMethod($_POST['databoxUser'],$activityId);
 			return $view = new JsonModel(array(
 				'output' 	=> 1,
 			));
@@ -1092,6 +1092,7 @@ class DataboxuserController extends AbstractActionController
 			$agentid=$_POST['hid_agentid'];
 			$format=$_POST['hid_fmt'];
 			$rechargeUrl='http://erechargesoftware.com/API/APIService.aspx?userid='.$UserID.'&pass='.$Pass.'&mob='.$mob.'&opt='.$OperatorCode.'&amt='.$amt.'&agentid='.$agentid.'&optional1=Value&fmt=Json';
+			//$rechargeUrl='http://erechargesoftware.com/API/APIService.aspx?userid=8105259914&pass=words_9949_truth-649&mob=8686151775&opt=RI&amt=10&agentid=12555&fmt=Json';
 			$rechargeInit = curl_init();
 			curl_setopt($rechargeInit, CURLOPT_URL, $rechargeUrl);
 			curl_setopt($rechargeInit, CURLOPT_USERAGENT, 'SugarConnector/1.4');
@@ -1105,9 +1106,10 @@ class DataboxuserController extends AbstractActionController
 			$rechargeapierr = curl_errno($rechargeInit);
 			$rechargeerrmsg = curl_error($rechargeInit);
 			curl_close($rechargeInit);
-			
 			$rechargeArr = json_decode($rechargeresult);
-				if(isset($rechargeArr) && $rechargeArr=!""){
+
+				if(isset($rechargeArr->STATUS) && $rechargeArr->STATUS!=""){
+					
 					$recharge_mobile=$rechargeArr->MOBILE;
 					$amt=$rechargeArr->AMOUNT;
 					$recharge_rp_id=$rechargeArr->RPID;
@@ -1117,7 +1119,7 @@ class DataboxuserController extends AbstractActionController
 					$recharge_usage_points=($amt*0.10*100);
 					$recharge_status=$rechargeArr->STATUS;
 					$userRechargeAdd = $userRechargeOrdersTable->addRechargeDetails($recharge_mobile,$amt,$recharge_rp_id,$recharge_agent_id,$recharge_op_id,$recharge_msg,$recharge_usage_points,$recharge_status);
-					return $this->redirect()->toUrl($baseUrl . '/databoxuser/recharge-status?status='.$recharge_status);
+					return $this->redirect()->toUrl($baseUrl . '/databoxuser/recharge-status?status='.$rechargeArr->STATUS);
 				}	
 
 		}
