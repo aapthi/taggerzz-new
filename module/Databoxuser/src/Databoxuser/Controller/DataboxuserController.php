@@ -1105,6 +1105,7 @@ class DataboxuserController extends AbstractActionController
 			$rechargeapierr = curl_errno($rechargeInit);
 			$rechargeerrmsg = curl_error($rechargeInit);
 			curl_close($rechargeInit);
+			
 			$rechargeArr = json_decode($rechargeresult);
 				if(isset($rechargeArr) && $rechargeArr=!""){
 					$recharge_mobile=$rechargeArr->MOBILE;
