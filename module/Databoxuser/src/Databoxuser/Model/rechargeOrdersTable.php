@@ -43,7 +43,13 @@ class rechargeOrdersTable
 		$select = $this->tableGateway->getSql()->select();
 		$select->columns(array('userPointsminus' => new Expression('COALESCE((SUM(recharge_orders.recharge_usage_points)),0)')));
 		$select->where('recharge_user_id="'.$uid.'"');
-		$select->where('recharge_status="SUCCESS"');
+		$select->where('recharge_status="PENDING"');
+		$select->where
+		  ->NEST->
+				equalTo('recharge_status','PENDING')
+					->OR->
+				equalTo('recharge_status','SUCCESS')
+		  ->UNNEST;
 		$select->group('recharge_user_id');
 		$resultSet = $this->tableGateway->selectWith($select);
 		return $resultSet->current();
@@ -53,7 +59,12 @@ class rechargeOrdersTable
 		$select = $this->tableGateway->getSql()->select();
 		$select->where('recharge_user_id="'.$uid.'"');
 		$select->where->like( 'recharge_date', '%' . $todayDate . '%' );
-		//$select->where('recharge_status="SUCCESS"');
+		$select->where
+		  ->NEST->
+				equalTo('recharge_status','PENDING')
+					->OR->
+				equalTo('recharge_status','SUCCESS')
+		  ->UNNEST;
 		$resultSet = $this->tableGateway->selectWith($select);
 		return $resultSet->count();
 	}

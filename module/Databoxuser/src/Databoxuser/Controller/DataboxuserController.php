@@ -1089,15 +1089,13 @@ class DataboxuserController extends AbstractActionController
 		{
 					
 			if(isset($_POST['mob']) && $_POST['mob']!=""){
-				$UserID=$_POST['hid_userid'];
-				$Pass=$_POST['hid_pass'];
+				$UserID='8105259914';
+				$Pass='words_9949_truth-649';
 				$mob=$_POST['mob'];
 				$OperatorCode=$_POST['operator_code'];
 				$amt=$_POST['amt'];
-				$agentid=$_POST['hid_agentid'];
-				$format=$_POST['hid_fmt'];
+				$agentid='12555';
 				$rechargeUrl='http://erechargesoftware.com/API/APIService.aspx?userid='.$UserID.'&pass='.$Pass.'&mob='.$mob.'&opt='.$OperatorCode.'&amt='.$amt.'&agentid='.$agentid.'&fmt=Json';
-				//$rechargeUrl='http://erechargesoftware.com/API/APIService.aspx?userid=8105259914&pass=words_9949_truth-649&mob=8686151775&opt=RI&amt=10&agentid=12555&fmt=Json';
 				$rechargeInit = curl_init();
 				curl_setopt($rechargeInit, CURLOPT_URL, $rechargeUrl);
 				curl_setopt($rechargeInit, CURLOPT_USERAGENT, 'SugarConnector/1.4');

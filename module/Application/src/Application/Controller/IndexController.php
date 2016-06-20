@@ -393,6 +393,7 @@ class IndexController extends AbstractActionController
 			"headerarray",array(
 				'baseUrl' 		=> 	$baseUrl,
 				'basePath'		=>	$basePath,				
+				'userPoints'    =>	$userPoints,				
 			)
 		);
 	}

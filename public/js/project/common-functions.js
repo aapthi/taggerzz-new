@@ -47,12 +47,13 @@ function rechargeFun()
 		$("#alert_meassage").html('Enter numbers with out decimal points');
 		return false;
 	}
-	if(parseInt(amt) >= parseInt(avaiableCash)){
+	if(parseInt(amt) > parseInt(avaiableCash)){
 		$('#pop-up-alerts').popUpWindow({action: "open"});	
 		$("#alert_header_meassge").html('');
 		$("#alert_meassage").html('Amount excedded the  available cash.');
 		return false;
 	}
+	return false;
 	$("#submitToRechargeForm").submit();
 }
 function networkSelecting(operator_id,network,classId){
