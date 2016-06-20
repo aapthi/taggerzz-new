@@ -109,7 +109,7 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 							</div>
 						<div class="sm_share_btns"><!-- Delete class only c_DivHeaderCommentRightBottom -->
 						<a class="c_BtnReport" style="display:none;" id="LinksEditButtonId" href="javascript:void(0);" onclick="Javascript:editTheDataBoxUrls('<?php echo $currBoxEditLink;?>');" >Refresh Data</a>
-							<a class="c_BtnReport" href="javascript:void(0);" onclick="Javascript:custReportPopUpShow();">Report</a>
+							<a class="c_BtnReport" id="c_BtnReport" href="javascript:void(0);" onclick="Javascript:custReportPopUpShow();">Report</a>
 							<a class="c_BtnShare" href="javascript:void(0);" onclick="Javascript:openCloseShareCus()">Share</a>&nbsp;&nbsp;&nbsp;&nbsp;
 							<span id="dragDropMsgId" style="display:none;" ><b>Drag, Drop to relocate & Resize the Web Link posts below to Customize as per your Idea</b></span>
 							<!--<a class="c_BtnAddComment" href="javascript:void(0);" onclick="custCommentCkEditorShow('',0);">Add Comment &nbsp;<img src="<?php echo $basePath; ?>/images/social_media/chatting.png"/></a>-->
@@ -563,6 +563,7 @@ $(document).ready(function()
 		$('#LinksEditButtonId').show();
 		$('#dragDropMsgId').show();
 		$('.div_collect_this').hide();
+		$('#c_BtnReport').hide();
 
 		$('.grid-stack').on('dragstop', function (event, ui) {
 			var grid = this;
@@ -662,7 +663,8 @@ $(document).ready(function()
 		{
 			var catDescAnchorLbl = "<center><h3><b>Set Description</b></center></h3><img  width='100px' src='<?php echo $basePath; ?>/img/profile_empty.png' title='Set Description'/>";
 		}else{
-			var catDescAnchorLbl = "<img  width='100px' src='<?php echo $basePath; ?>/img/profile_empty.png' title='Set Description'/>";
+			var catDescAnchorLbl = "";
+
 		}
 
 		var catDescIntroDivHtml = '<span id="">' + $.trim($("#fullDescPara").html().replace(/&nbsp;/g,'')) + '</span>&nbsp;'; 
@@ -679,6 +681,8 @@ $(document).ready(function()
 		else
 		{
 			catDescIntroDivHtml += '<span id="categoryDescLink" style="display:none;">'+catDescAnchorLbl+'</span>';
+			$('.c_DivHeaderCommentRightTop').hide();
+
 		}
 
 		$('#catDescIntro').html( catDescIntroDivHtml );

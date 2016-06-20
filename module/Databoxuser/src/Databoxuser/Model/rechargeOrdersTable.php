@@ -63,7 +63,7 @@ class rechargeOrdersTable
 		  ->NEST->
 				equalTo('recharge_status','PENDING')
 					->OR->
-				equalTo('recharge_status','SUCCESS')
+				equalTo('recharge_status','SUCCESS') 
 		  ->UNNEST;
 		$resultSet = $this->tableGateway->selectWith($select);
 		return $resultSet->count();

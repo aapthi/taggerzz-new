@@ -635,7 +635,7 @@ function addTextBox( count,useMode )
 		{
 			totalUrlsPresent++;
 		});
-		$("#linksCountPlus").html( parseInt(totalUrlsPresent - parseInt(1)) +' Links');
+		$("#linksCountPlus").html( parseInt(totalUrlsPresent - parseInt(1)) +' Hot Links');
 
 		// if( parseInt(totalUrlsPresent) == parseInt("100") )
 		// {
@@ -761,7 +761,7 @@ function removeTextBox( counter,mode )
 						if( imageName == "manage_checking.png" )
 						{
 							ticmarksCount++;
-							$("#linksCountPlus").html(ticmarksCount+' Links');
+							$("#linksCountPlus").html(ticmarksCount+' Hot Links');
 						}
 						if( imageName == "checkmark_wrong.png" ){
 							invalidlinksCount++;
