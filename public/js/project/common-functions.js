@@ -53,7 +53,6 @@ function rechargeFun()
 		$("#alert_meassage").html('Amount excedded the  available cash.');
 		return false;
 	}
-	return false;
 	$("#submitToRechargeForm").submit();
 }
 function networkSelecting(operator_id,network,classId){
