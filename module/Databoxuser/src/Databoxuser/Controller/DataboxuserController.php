@@ -1130,7 +1130,7 @@ class DataboxuserController extends AbstractActionController
 
 			}
 		}else{
-			$rcechargeCountstatus='Limit is 5 times for day';
+			$rcechargeCountstatus='5 times for day only.';
 			return $this->redirect()->toUrl($baseUrl . '/databoxuser/recharge-status?status='.$rcechargeCountstatus);
 
 		}	
