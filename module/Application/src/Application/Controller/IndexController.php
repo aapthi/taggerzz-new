@@ -718,6 +718,7 @@ class IndexController extends AbstractActionController
 				}
 			}
 			$_SESSION['userCollectionLinks']=$dashboard;
+
 			return $view = new ViewModel(
 			array(
 				'baseUrl' 			=> 	$baseUrl,
@@ -789,8 +790,8 @@ class IndexController extends AbstractActionController
 				'baseUrl'		=>  $baseUrl,
 				'basePath'		=>  $basePath,
 			));
-			$result->setTerminal(true);
-			return $result;
+			$result1=$result->setTerminal(true);
+			return $result1;
 	}
 
 	

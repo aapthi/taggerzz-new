@@ -1,3 +1,4 @@
+
 <link href="<?php echo $basePath; ?>/css/default.css" rel="stylesheet" type="text/css" />
 	<div class="montage_container">
 	<div>
@@ -195,7 +196,7 @@
 			</div>
 			<div class="pos_relative">
 				<div class="montage_row" id="montageRow<?echo $key;?>">
-				<?foreach($dashboard['links'] as $links){
+				<?php foreach($dashboard['links'] as $links){
 					$count++;
 				if($count<=8){
 					$link=explode('***',$links);
@@ -226,7 +227,7 @@
 							<img src="<?php echo $basePath; ?>/images/social_media/leftarrow.png"/>&nbsp;Previous
 						</a>
 					</div>
-					<?if($dashboard['totalLinks']>7){?>
+					<?php if($dashboard['totalLinks']>8){?>
 					<div class="float_r" id="nextPagination<?echo $key;?>">
 						<a href="javascript:void(0);" onclick="userCollectionLinks('1',<?echo $key;?>)">Next&nbsp;
 							<img src="<?php echo $basePath; ?>/images/social_media/rightarrow.png"/>

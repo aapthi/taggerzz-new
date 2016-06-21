@@ -1,3 +1,4 @@
+
 <?if( isset($dashboard) )
 {
 	foreach($dashboard[$this->catId]['links'] as $key=>$links){
@@ -5,8 +6,25 @@
 	$link=explode('***',$links);
 	?>
 	<div class="column1">
-		<p><?echo substr($link[0],0,22) . '...';$url = $link[0];?></p>
-		<div><a href="Javascript:void(0);" onClick="window.open('<?php echo $link[0]; ?>');"><img src="<?php $validImage=@getimagesize($link[2]); if( isset($validImage[3]) && $validImage[3]!=""){echo $link[2];}else{ echo $basePath;?>/images/social_media/noimage.png<? } ?>"/></a></div>
+		<p><?echo substr($link[0],0,22) . '...';
+			$url = $link[0];
+			if(strpos($url, "https://") !== false || strpos($url, "http://") !== false){
+				$url=$url;
+			}
+			else{
+				$url='http://'.$url;
+			}
+			$imageLink1 = getimagesize($link[2]);
+			if($imageLink1[0]!="" && $imageLink1[2]!=""){
+				$imageLink=$link[2];
+			}else{
+				$imageLink=$basePath.'/images/social_media/customization_no_img.jpg';
+			}
+		
+		?></p>
+		<div>
+		<a href="<?php echo $url; ?>" target="_blank"><img src="<?php if($link[2]!=""){echo $imageLink;}else{ echo $basePath;?>/images/social_media/customization_no_img.jpg<? } ?>"/></a>
+		</div>
 	</div>
 <?}}}
 else{?><script type="text/javascript">
