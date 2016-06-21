@@ -149,7 +149,7 @@
 				//echo "<pre>";print_r($displayCustomizationUrl);exit;
 			?>
 			<input type="hidden" id="totalCount<?echo $key;?>" name="totalCount<?echo $key;?>" value="<?echo $dashboard['totalLinks'];?>">
-			<input type="hidden" id="presentCount<?echo $key;?>" name="presentCount<?echo $key;?>" value="7">
+			<input type="hidden" id="presentCount<?echo $key;?>" name="presentCount<?echo $key;?>" value="8">
 			<div class="tg_montage_t montage_brg_box">
 				<div class="montage_box_brg_title">
 					<div class="text_row">
@@ -159,9 +159,9 @@
 				</div>
 				<div class="pos_relative">
 					<div class="montage_row" id="montageRow<?echo $key;?>">
-					<?foreach($dashboard['links'] as $links){
+					<?php foreach($dashboard['links'] as $links){
 					$count++;
-					if($count){
+					if($count<=8){
 						$link=explode('***',$links);
 						?>
 						<div class="column1">
@@ -188,6 +188,20 @@
 							<a href="<?php echo $url; ?>" target="_blank"><img src="<?php if($link[2]!=""){ echo $imageLink;}else{ echo $basePath;?>/images/social_media/customization_no_img.jpg<? } ?>"/></a></div>
 						</div>
 					<?}}?>
+					</div>
+					<div class="text_row Previous">
+					<div class="float_l" id="prevPagination<?echo $key;?>" style="display:none">
+						<a href="javascript:void(0);" onclick="paginationLinks('0',<?echo $key;?>)" >
+							<img src="<?php echo $basePath; ?>/images/social_media/leftarrow.png"/>&nbsp;Previous
+						</a>
+					</div>
+					<?php if($dashboard['totalLinks']>8){?>
+					<div class="float_r " id="nextPagination<?echo $key;?>">
+						<a href="javascript:void(0);" onclick="paginationLinks('1',<?echo $key;?>)">Next&nbsp;
+							<img src="<?php echo $basePath; ?>/images/social_media/rightarrow.png"/>
+						</a>
+					</div>
+					<?}?>
 					</div>
 					<div class="clearfix"></div>
 				</div>

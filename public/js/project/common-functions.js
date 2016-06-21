@@ -1369,14 +1369,14 @@ function displayUserCollection( userId )
 	function userCollectionLinks(type,catId)
 	{
 		var totalCount=$('#totalCount'+catId).val();
-		var value=Math.ceil((parseInt(totalCount)/7))-1;
+		var value=Math.ceil((parseInt(totalCount)/8))-1;
 		var presentCount=$('#presentCount'+catId).val();
 		if(type=='1'){
-			var end=parseInt(presentCount)+7;
-			var start=end-6;
+			var end=parseInt(presentCount)+8;
+			var start=end-7;
 		}else{
-			var end=parseInt(presentCount)-7;
-			var start=end-6;
+			var end=parseInt(presentCount)-8;
+			var start=end-7;
 		}
 		var lod_image_set = '<div class="" id="montage_loder" style="position:absolute;top:45%;left:50%;"><img src="'+BASE_URL+'/public/images/social_media/bx_loader.gif"></div>';
 		$('#montageRow'+catId).html(lod_image_set);
@@ -1391,14 +1391,14 @@ function displayUserCollection( userId )
 				if(end>=totalCount){
 					$('#nextPagination'+catId).hide();
 				}
-				if(end>7){
+				if(end>8){
 					$('#prevPagination'+catId).show();
 				}
 				if(start==1){
 					$('#prevPagination'+catId).hide();
 					$('#nextPagination'+catId).show();
 				}
-				if(end==value*7){
+				if(end==value*8){
 					$('#nextPagination'+catId).show();
 				}
 			}
@@ -1546,14 +1546,14 @@ function saveMontage(typee){
 	}
 function paginationLinks(type,catId){
 		var totalCount=$('#totalCount'+catId).val();
-		var value=Math.ceil((parseInt(totalCount)/7))-1;
+		var value=Math.ceil((parseInt(totalCount)/8))-1;
 		var presentCount=$('#presentCount'+catId).val();
 		if(type=='1'){
-			var end=parseInt(presentCount)+7;
-			var start=end-6;
+			var end=parseInt(presentCount)+8;
+			var start=end-7;
 		}else{
-			var end=parseInt(presentCount)-7;
-			var start=end-6;
+			var end=parseInt(presentCount)-8;
+			var start=end-7;
 		}
 		var lod_image_set = '<div class="" id="montage_loder" style="position:absolute;top:45%;left:50%;"><img src="'+BASE_URL+'/public/images/social_media/bx_loader.gif"></div>';
 		$('#montageRow'+catId).html(lod_image_set);
@@ -1568,14 +1568,14 @@ function paginationLinks(type,catId){
 				if(end>=totalCount){
 					$('#nextPagination'+catId).hide();
 				}
-				if(end>7){
+				if(end>8){
 					$('#prevPagination'+catId).show();
 				}
 				if(start==1){
 					$('#prevPagination'+catId).hide();
 					$('#nextPagination'+catId).show();
 				}
-				if(end==value*7){
+				if(end==value*8){
 					$('#nextPagination'+catId).show();
 				}
 			}

@@ -277,6 +277,10 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 </span>
 </P>
 </div>
+<div >
+	Meta Tags : <?php if(isset($databoxLinksGrids->meta_tags)&& $databoxLinksGrids->meta_tags!=""){echo  $databoxLinksGrids->meta_tags;}?>
+</div>
+
 <input type="hidden" id="voteing" name="voteing" value="<?php if(isset($this->userStatusLD->voteUp) && $this->userStatusLD->voteUp=='1'){ echo "1";}else{ echo "0";}?>">
 <input type="hidden" id="dislikevoteing" name="dislikevoteing" value="<?php if(isset($this->userStatusLD->voteDown) && $this->userStatusLD->voteDown=='1'){ echo "1";}else{ echo "0";}?>">
   <!--<div class="lgd_hide com_mar20"> 
