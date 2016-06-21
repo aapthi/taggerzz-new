@@ -278,7 +278,7 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 </P>
 </div>
 <div >
-	Meta Tags : <?php if(isset($databoxLinksGrids->meta_tags)&& $databoxLinksGrids->meta_tags!=""){echo  $databoxLinksGrids->meta_tags;}?>
+	Meta Tags : <?php if(isset($this->boxKeywords)&& $this->boxKeywords!=""){echo  $this->boxKeywords;}?>
 </div>
 
 <input type="hidden" id="voteing" name="voteing" value="<?php if(isset($this->userStatusLD->voteUp) && $this->userStatusLD->voteUp=='1'){ echo "1";}else{ echo "0";}?>">
