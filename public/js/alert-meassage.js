@@ -54,7 +54,7 @@ var high_lose_customization='On editing the links, you would lose customization 
 // Dashboard alerts
 var lose_customization='On editing, you would lose customization for this databox.';
 var dashboard_no_changes='No changes to save for this databox.';
-var saved_success='Saved Successfully.';
+var saved_success='Published Successfully.';
 // upload in progress.
 var upload_in_progress='Please wait, An Upload already in progress .';
 // Confirmation alert close

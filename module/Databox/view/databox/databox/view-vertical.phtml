@@ -776,7 +776,7 @@ function insertComment(){
 					$('#message').val('');
 					$('#hidSendComment').val('0');
 					$('#commentSend').html('');
-					$('#commentSend').html('COMMENT SEND');
+					$('#commentSend').html('SUBMIT COMMENT');
 				}
 			}
 		});
@@ -803,7 +803,7 @@ function deletedComment(id){
 					$("#comtDiv").html(data.comDiv);
 					$('#message').val('');
 					$('#commentSend').html('');
-					$('#commentSend').html('COMMENT SEND');
+					$('#commentSend').html('SUBMIT COMMENT');
 					$('#hidSendComment').val('0');
 				}else{
 					alert('No data is found');
@@ -1121,7 +1121,7 @@ $(document).ready(function()
 	$("#UGetHighlight").html(<?php echo $this->getHighlightsCount; ?>);
 });
 function deleteLink(deletedLinkId,dragDropId){
-	if(confirm("Are you sure delete the comment!")){
+	if(confirm("Are you sure about deleting this Web Link/Link Post from Collection ?")){
 		$.ajax({
 			url: BASE_URL+'/databox/delete-link',
 			dataType: "json",

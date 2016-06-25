@@ -1386,6 +1386,7 @@ function displayUserCollection( userId )
 			url			:  	BASE_URL+'/user-collection-links',
 			data		:	{type:type,catId:catId,start:start,end:end},
 			success: function(data){
+				console.log(data);
 				$('#montageRow'+catId).html(data);
 				$('#presentCount'+catId).val(end);
 				if(end>=totalCount){

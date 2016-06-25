@@ -341,7 +341,7 @@ if(message==""){
 						data	:{msg_receiver_id:msg_receiver_id,msg_subject:msg_subject,message:message},
 						success: function( data ) {
 							if(data.output!=0) {
-								alert('Inserted Sucessfully');
+								alert('Your message has been sent');
 								$('#txtReplyTo').val('');
 								$('#txtSubject').val('');
 								$('#textArea').val('');
