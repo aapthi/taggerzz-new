@@ -82,6 +82,15 @@ class AdminController extends AbstractActionController
 		$contactContents = $this->getAdminReportsTable()->getContactContents()->toArray();
 		
 		$getAllCommentsDataboxes = $this->getUserCategoriesTable()->getCommentsAllDataboxes();
+		
+		$userpointsTable = $this->getUserPointsTable();
+		$UserRechargeOrdersTable = $this->getUserRechargeOrdersTable();
+		$userPointss = $userpointsTable->loggedUserPoints($user_id);
+		$userRecharge = $UserRechargeOrdersTable->userRechargedPoints($user_id);
+
+		if(count($userPointss)>0){
+			$userPoints = (($userPointss->userPoints)-$userRecharge->userPointsminus);
+		}
 		return $view = new ViewModel(
 		array(
 			'baseUrl' 	   				=> $baseUrl,
@@ -93,6 +102,7 @@ class AdminController extends AbstractActionController
 			'user_id' 					=> $user_id,
 			'adminUserReports' 			=> $adminUserReports,
 			'contactContents' 			=> $contactContents,
+			'userPoints' 			    => $userPoints,
 			'getAllCommentsDataboxes' 	=> $getAllCommentsDataboxes
 		));
 	}
