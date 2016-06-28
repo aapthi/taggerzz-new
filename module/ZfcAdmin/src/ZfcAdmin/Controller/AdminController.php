@@ -17,6 +17,9 @@ class AdminController extends AbstractActionController
 	protected $userCategoriesTable;
 	protected $adminReportsTable;
 	protected $databoxCommentsTable;
+	protected $userpointsTable;
+	protected $rechargeOrdersTable;
+
 	
 	
 	public function indexAction(){
@@ -94,6 +97,7 @@ class AdminController extends AbstractActionController
 		));
 	}
 	public function ajaxDataAction(){
+
 		$user_id=$_POST['user_id'];
 		$getDataboxAndHighlights = $this->getUserCategoriesTable()->getDataboxAndHighlights($user_id);
 		$getAllUsers = $this->getUserTable()->getMontageName($user_id);
@@ -101,6 +105,16 @@ class AdminController extends AbstractActionController
 		$highlightsBoxes="";
 		$countD=0;
 		$countH=0;
+		$userPoints =0;
+
+		$userpointsTable = $this->getUserPointsTable();
+		$UserRechargeOrdersTable = $this->getUserRechargeOrdersTable();
+		$userPointss = $userpointsTable->loggedUserPoints($user_id);
+		$userRecharge = $UserRechargeOrdersTable->userRechargedPoints($user_id);
+
+		if(count($userPointss)>0){
+			$userPoints = (($userPointss->userPoints)-$userRecharge->userPointsminus);
+		}
 		if($getDataboxAndHighlights->count()){
 			foreach($getDataboxAndHighlights as $data){
 				if($data->category_highlight==1){
@@ -129,6 +143,7 @@ class AdminController extends AbstractActionController
 			'dataBoxes' 				=> $dataBoxes,
 			'highlightsBoxes' 			=> $highlightsBoxes,
 			'montage_hash_name' 		=> $montage_hash_name,
+			'userPoints' 		        => $userPoints,
 			'reports' 					=> $reports,
 		));
 		return $view;
@@ -393,6 +408,22 @@ class AdminController extends AbstractActionController
             $this->databoxCommentsTable = $sm->get('Databox\Model\DataboxCommentsFactory');			
         }
         return $this->databoxCommentsTable;
+    }
+	public function getUserPointsTable()
+    {
+        if (!$this->userpointsTable) {				
+            $sm = $this->getServiceLocator();
+            $this->userpointsTable = $sm->get('Databoxuser\Model\UserPointsFactory');			
+        }
+        return $this->userpointsTable;
+    }
+	public function getUserRechargeOrdersTable()
+    {
+        if (!$this->rechargeOrdersTable) {				
+            $sm = $this->getServiceLocator();
+            $this->rechargeOrdersTable = $sm->get('Databoxuser\Model\rechargeOrdersFactory');			
+        }
+        return $this->rechargeOrdersTable;
     }
 	public function searchAjaxDataboxsAction(){
 		$baseUrls = $this->getServiceLocator()->get('config');

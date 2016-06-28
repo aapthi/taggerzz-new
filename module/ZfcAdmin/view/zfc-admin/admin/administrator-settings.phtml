@@ -80,6 +80,7 @@
 					<table id="customers">
 						<tr>
 							<th class="tab_pos_re">USERS<span class="tab_pos_ab">&#9662;</span></th>
+							<th class="tab_pos_re">REWARDING POINTS<span class="tab_pos_ab">&#9662;</span></th>
 							<th class="tab_pos_re">DATABOXES<span class="tab_pos_ab">&#9662;</span></th>
 							<th class="tab_pos_re">HIGHLIGHTS <span class="tab_pos_ab">&#9662;</span></th>
 							<th class="tab_pos_re">MONTAGE <span class="tab_pos_ab">&#9662;</span></th>
@@ -123,6 +124,11 @@
 								<input type="hidden" id="montageActivated" value="0" />
 								<input type="hidden" id="activeUserId" name="activeUserId" value="<?echo $userId;?>">
 							</td>
+								<td>
+									<div id="boxscroll2" class="ajax_points"> 
+										<?php echo $this->userPoints;?>
+									</div>
+								</td>
 								<td>
 									<div id="boxscroll3" class="ajax_databox"> 
 										<?php $countd=0; if(count($this->getDataboxAndHighlights)!=0){foreach($this->getDataboxAndHighlights as $data){

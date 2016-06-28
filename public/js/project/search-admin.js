@@ -610,6 +610,7 @@
 			  type: "POST",
 			  data:{user_id:id},
 			  success: function(data) {
+				$('.ajax_points').html(data.userPoints);
 				$('.ajax_databox').html(data.dataBoxes);
 				$('.ajax_high').html(data.highlightsBoxes);
 				$('#ajax_hash_name').html(data.montage_hash_name);
