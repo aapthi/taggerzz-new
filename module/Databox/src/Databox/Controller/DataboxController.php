@@ -3714,8 +3714,8 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 			$html.='<div class="rimg_left"><img  width="55px" src="'.$headerMontageImage.'" alt="" class="height100" /></div>';
 			$html.='<div class="rcontenleft">';
 			$html.='<div class="name_c">'.$getComments['display_name'].'</div>';
-			$html.='<span id="commText'. $getComments['databox_comment_id'].'">'.$getComments["databox_comment"].'</span><br/>';
-			$html.='<span id="commTextUpdatedDate'. $getComments['databox_comment_id'].'">'.$getComments["updated_date"].'</span><br/>';
+			$html.='<span id="commText'. $getComments['databox_comment_id'].'">'.$getComments["databox_comment"].'</span><br/><br/>';
+			$html.='<span id="commTextUpdatedDate'. $getComments['databox_comment_id'].'"> Commented On : '.$getComments["updated_date"].'</span><br/>';
 			if(isset($_SESSION['usersinfo']->userId)){if($_SESSION['usersinfo']->userId==$getComments['comment_user_id']){ 
 			$html.='<br/><div class="comment_btns_pos_ab">';
 			$html.='<button class="comment_edit_btn" onClick="editComment('.$getComments["databox_comment_id"].')">Edit</button>&nbsp;'; 
@@ -3740,8 +3740,8 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 			$html.='<div class="rimg_left"><img  width="55px" src="<?php echo $basePath; ?>/images/project/montageImages/'.$getCommentss["montage_image"].'" alt="" class="height100" /></div>';
 			$html.='<div class="rcontenleft">';
 			$html.='<div class="name_c">'.$getCommentss['display_name'].'</div>';
-			$html.='<span id="reCommText'.$getCommentss['databox_comment_id'].'">'.$getCommentss['databox_comment'].'</span><br/>';
-			$html.='<span id="reCommTextUpdatedDate'.$getCommentss['databox_comment_id'].'">'.$getCommentss['updated_date'].'</span><br/>';
+			$html.='<span id="reCommText'.$getCommentss['databox_comment_id'].'">'.$getCommentss['databox_comment'].'</span><br/><br/>';
+			$html.='<span id="reCommTextUpdatedDate'.$getCommentss['databox_comment_id'].'">Commented On : '.$getCommentss['updated_date'].'</span><br/>';
 			if(isset($_SESSION['usersinfo']->userId)){if($_SESSION['usersinfo']->userId==$getCommentss['comment_user_id']){
 			$html.='<br/><div class="comment_btns_pos_ab">';
 			$html.='<button class="comment_edit_btn" onClick="editReComment('.$getCommentss['databox_comment_id'].','.$getCommentss['parent_comment_id'].')">Edit</button>&nbsp;'; 
@@ -3818,7 +3818,8 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 			$html.='<div class="rimg_left"><img  width="55px" src="'.$headerMontageImage.'" alt="" class="height100" /></div>';
 			$html.='<div class="rcontenleft">';
 			$html.='<div class="name_c">'.$getComments['display_name'].'</div>';
-			$html.='<span id="commText'. $getComments['databox_comment_id'].'">'.$getComments["databox_comment"].'</span><br/>';
+			$html.='<span id="commText'. $getComments['databox_comment_id'].'">'.$getComments["databox_comment"].'</span><br/><br/>';
+			$html.='<span id="commTextUpdatedDate'. $getComments['databox_comment_id'].'"> Commented On : '.$getComments["updated_date"].'</span><br/>';
 			if(isset($_SESSION['usersinfo']->userId)){if($_SESSION['usersinfo']->userId==$getComments['comment_user_id']){ 
 			$html.='<br/><div class="comment_btns_pos_ab">';
 			$html.='<button class="comment_edit_btn" onClick="editComment('.$getComments["databox_comment_id"].')">Edit</button>&nbsp;'; 
@@ -3843,7 +3844,8 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 			$html.='<div class="rimg_left"><img  width="55px" src="<?php echo $basePath; ?>/images/project/montageImages/'.$getCommentss["montage_image"].'" alt="" class="height100" /></div>';
 			$html.='<div class="rcontenleft">';
 			$html.='<div class="name_c">'.$getCommentss['display_name'].'</div>';
-			$html.='<span id="reCommText'.$getCommentss['databox_comment_id'].'">'.$getCommentss['databox_comment'].'</span><br/>';
+			$html.='<span id="reCommText'.$getCommentss['databox_comment_id'].'">'.$getCommentss['databox_comment'].'</span><br/><br/>';
+			$html.='<span id="reCommTextUpdatedDate'.$getCommentss['databox_comment_id'].'">Commented On : '.$getCommentss['updated_date'].'</span><br/>';
 			if(isset($_SESSION['usersinfo']->userId)){if($_SESSION['usersinfo']->userId==$getCommentss['comment_user_id']){
 			$html.='<br/><div class="comment_btns_pos_ab">';
 			$html.='<button class="comment_edit_btn" onClick="editReComment('.$getCommentss['databox_comment_id'].','.$getCommentss['parent_comment_id'].')">Edit</button>&nbsp;'; 
