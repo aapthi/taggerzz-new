@@ -247,32 +247,32 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 			</div>
 		</div>
 	</section>
-<div id="hideShadowLineIdParaLove" style="display:none; width:300px;border:1px solid #ddd;padding:10px 0 5px;background:#fff;margin:20px auto 0;" >
+<div id="hideShadowLineIdParaLove" style="display:none; width:600px;border:1px solid #ddd;padding:10px 0 5px;background:#fff;margin:20px auto 0;" >
 
 	<P style="text-align:center;font-weight:bold;color:#444;padding-bottom:5px;"><span id="totVP" ><?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?></span> 
 <span id="l_d">
 <?php if(count($this->userStatusLD)>0){ if((isset($_SESSION['usersinfo']->userId )&& $this->userStatusLD->user_id==$_SESSION['usersinfo']->userId)){?>
 <?php if(isset($this->userStatusLD->voteUp) && $this->userStatusLD->voteUp=='1'){?>
-	<img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/> --  <?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "00"; }?> <a href="javascript:void(0);" onClick="return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"> <img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /></a>
+	<img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/>Loved this collection --  <?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "00"; }?> <a href="javascript:void(0);" onClick="return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"> <img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /></a> Trashed this Collection
 <?php } else if(isset($this->userStatusLD->voteDown) && $this->userStatusLD->voteDown=='1'){?>
-		<a href="javascript:void(0);" onClick="return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"><img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/></a> --  <?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "00"; }?>  <img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" />
+		<a href="javascript:void(0);" onClick="return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"><img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/></a> Loved this collection --  <?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "00"; }?>  <img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /> Trashed this Collection
 <?php } else {?>
-	<a href="javascript:void(0);" onClick="return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"><img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/></a> -- <?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "00"; }?>
-	<a href="javascript:void(0);"  onClick="return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /></a>
+	<a href="javascript:void(0);" onClick="return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"><img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/></a> Loved this collection -- <?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "00"; }?>
+	<a href="javascript:void(0);"  onClick="return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /></a> Trashed this Collection
 <?php } } else if(isset($_SERVER['REMOTE_ADDR'])&& $this->userStatusLD->user_id==$_SERVER['REMOTE_ADDR']){?>
 <?php if(isset($this->userStatusLD->voteUp) && $this->userStatusLD->voteUp=='1'){?>
-	<img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/> --  <?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "00"; }?> <a href="javascript:void(0);" onClick="return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"> <img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /></a>
+	<img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/> Loved this collection --  <?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "00"; }?> <a href="javascript:void(0);" onClick="return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"> <img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /></a> Trashed this Collection
 <?php } else if(isset($this->userStatusLD->voteDown) && $this->userStatusLD->voteDown=='1'){?>
-	<a href="javascript:void(0);" onClick="return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"><img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/></a> --  <?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "00"; }?>  <img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" />
+	<a href="javascript:void(0);" onClick="return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"><img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/></a> Loved this collection --  <?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "00"; }?>  <img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /> Trashed this Collection
 <?php } else { ?>
-	<a href="javascript:void(0);" onClick="return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"><img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/></a> -- <?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "00"; }?>
-	<a href="javascript:void(0);"  onClick="return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /></a>
+	<a href="javascript:void(0);" onClick="return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"><img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/></a> Loved this collection -- <?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "00"; }?>
+	<a href="javascript:void(0);"  onClick="return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /></a> Trashed this Collection
 <?php } }else{ ?>
-	<a href="javascript:void(0);" onClick="return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"><img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/></a> -- <?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "00"; }?>
-	<a href="javascript:void(0);"  onClick="return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /></a>
+	<a href="javascript:void(0);" onClick="return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"><img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/></a> Loved this collection -- <?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "00"; }?>
+	<a href="javascript:void(0);"  onClick="return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /></a> Trashed this Collection
 <?php } }else{?>
-	<a href="javascript:void(0);" onClick="return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"><img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/></a> -- <?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "00"; }?>
-	<a href="javascript:void(0);"  onClick="return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /></a>
+	<a href="javascript:void(0);" onClick="return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"><img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/></a> Loved this collection -- <?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "00"; }?>
+	<a href="javascript:void(0);"  onClick="return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1','<?php if(isset($this->votePerLikeDis->voteUp1)) { echo round($this->votePerLikeDis->voteUp1,2);}else{ echo "0"; }?>','<?php if(isset($this->votePerLikeDis->voteDown1)) { echo round($this->votePerLikeDis->voteDown1,2);}else{ echo "0"; }?>');"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /></a> Trashed this Collection
 <?php } ?>
 </span>
 </P>
@@ -714,6 +714,9 @@ function insertComment(){
 	if(comment==""){
 		alert('Enter the comment');return false;
 	}
+	var dNow = new Date();
+	var localdate= dNow.getFullYear() + '-' + (dNow.getMonth()+1)+ '-' + dNow.getDate() + ' ' + dNow.getHours() + ':' + dNow.getMinutes()+':' +dNow.getSeconds();
+	
 	if(editHid=='0'){
 		$.ajax({
 			url: BASE_URL+'/databox/insert-comment',
@@ -765,7 +768,10 @@ function insertComment(){
 					addHtmlEdit+='<div id="comment'+editHid+'" ><div class="row tmar_b20"><div class="rimg_left"><img  width="55px" src="<?php echo $headerMontageImage;?>" alt="" class="height100" /></div><div class="rcontenleft"><div class="name_c"><?php if(isset($_SESSION['usersinfo']->displayName)){echo $_SESSION['usersinfo']->displayName;} ?></div><span id="commText'+editHid+'">';
 					addHtmlEdit+=comment;
 					addHtmlEdit+='</span>';
-					addHtmlEdit+='<br/>';
+					addHtmlEdit+='<br/><br/>';
+					addHtmlEdit+='<span id="commTextUpdatedDate'+editHid+'"> Commented On: ';
+					addHtmlEdit+=localdate;
+					addHtmlEdit+='</span><br/>';
 					addHtmlEdit+='<div class="comment_btns_pos_ab"><button onClick="editComment('+editHid+')" class="comment_edit_btn">Edit</button> <button onClick="deletedComment('+editHid+')" class="comment_delete_btn">Delete</button> <button onClick="replyComment('+editHid+')" class="comment_edit_btn">Reply</button></div></div></div><div class="clearfix"></div></div>';
 					addHtmlEdit+='<div style="display:none;margin-left:8%;" id="replyDiv'+editHid+'">';
 					addHtmlEdit+='<textarea id="msg'+editHid+'" class="" placeholder="Enter your replay"></textarea>';
@@ -822,6 +828,8 @@ function insertReplyComment(id){
 		$('#msg'+id).focus();
 		return false;
 	}
+	var dNow = new Date();
+	var localdate= dNow.getFullYear() + '-' + (dNow.getMonth()+1)+ '-' + dNow.getDate() + ' ' + dNow.getHours() + ':' + dNow.getMinutes()+':' +dNow.getSeconds();
 	<?php
 		$headerMontageImage="";
 		if( strpos($_SESSION['usersinfo']->montage_image, "https://" ) !== false || strpos($_SESSION['usersinfo']->montage_image, "http://") !== false )
@@ -848,8 +856,10 @@ function insertReplyComment(id){
 				$('#msg'+id).val('');
 				addHtml+='<div id="reComment'+updateReCid+'"><div class="row tmar_b20"><div class="rimg_left"><img  width="55px" src="<?php echo $headerMontageImage;?>" alt="" class="height100" /></div><div class="rcontenleft"><div class="name_c"><?php if(isset($_SESSION['usersinfo']->displayName)){echo $_SESSION['usersinfo']->displayName;} ?></div><span id="reCommText'+updateReCid+'">';
 				addHtml+=comment;
-				addHtml+='</span>';
-				addHtml+='<br/>';
+				addHtml+='</span><br/><br/>';
+				addHtml+='<span id="reCommTextUpdatedDate'+updateReCid+'">Commented On : ';
+				addHtml+=localdate;
+				addHtml+='</span><br/>';
 				addHtml+='<div class="comment_btns_pos_ab"><button onClick="editReComment('+updateReCid+','+parentCid+')" class="comment_edit_btn">Edit</button> <button onClick="deletedReComment('+updateReCid+')" class="comment_delete_btn">Delete </button></div></div></div><div class="clearfix"></div></div>';
 				$('#reComment'+updateReCid).show();
 				$('#reCommentSend'+parentCid).html('SEND Reply');
@@ -889,7 +899,10 @@ function insertReplyComment(id){
 					addHtml+='<div id="reComment'+lastInsertId+'"><div class="row tmar_b20"><div class="rimg_left"><img  width="55px" src="<?php echo $headerMontageImage;?>" alt="" class="height100" /></div><div class="rcontenleft"><div class="name_c"><?php if(isset($_SESSION['usersinfo']->displayName)){echo $_SESSION['usersinfo']->displayName;} ?></div><span id="reCommText'+lastInsertId+'">';
 					addHtml+=comment;
 					addHtml+='</span>';
-					addHtml+='<br/>';
+					addHtml+='<br/><br/>';
+					addHtml+='<span id="reCommTextUpdatedDate'+updateReCid+'"> Commented On : ';
+					addHtml+=localdate;
+					addHtml+='</span><br/>';
 					addHtml+='<div class="comment_btns_pos_ab"><button onClick="editReComment('+lastInsertId+','+id+')" class="comment_edit_btn">Edit</button> <button onClick="deletedReComment('+lastInsertId+')" class="comment_delete_btn">Delete </button></div></div></div><div class="clearfix"></div></div></div>';
 					$('#insert_div'+id).append(addHtml);
 				}else{
@@ -1012,10 +1025,10 @@ function likeDislikeCntV( newVoteValue,categoryId,rw_th,love,trash ){
 			}
 			if(newVoteValue=='1'){
 				var clickEv = "return likeDislikeCntV('0','<?php echo $this->categoryId;?>','1','"+likes+"','"+disLikes+"')";
-				var likeDi='<img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/> --  '+disLikes+' <a href="javascript:void(0);" onClick="'+clickEv+'"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /></a>';
+				var likeDi='<img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/> Loved this collection --  '+disLikes+' <a href="javascript:void(0);" onClick="'+clickEv+'"><img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /></a> Trashed this Collection';
 			}else{
 				var clickEv = "return likeDislikeCntV('1','<?php echo $this->categoryId;?>','1','"+likes+"','"+disLikes+"')";
-				var likeDi='<a href="javascript:void(0);" onClick="'+clickEv+'"><img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/></a> -- '+disLikes+' <img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /> ';
+				var likeDi='<a href="javascript:void(0);" onClick="'+clickEv+'"><img src="<?php echo $basePath; ?>/img/love_ok.png" alt="" width="15px"/></a> Loved this collection -- '+disLikes+' <img src="<?php echo $basePath; ?>/img/trash.png" alt="" width="10px" /> Trashed this Collection';
 			}
 			$("#totVP").html(likes);
 			$("#l_d").html(likeDi);

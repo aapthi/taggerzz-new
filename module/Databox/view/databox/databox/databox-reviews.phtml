@@ -19,7 +19,7 @@
 						<div class="rcontenleft">
 							<div class="name_c"><?php echo $getComments['display_name']; ?></div>
 							<span id="commText<?php echo $getComments['databox_comment_id'];?>"><?php echo $getComments['databox_comment']; ?></span><br/><br/>
-							<span id="commTextUpdatedDate<?php echo $getComments['databox_comment_id'];?>"><?php echo $getComments['updated_date']; ?></span><br/>
+							<span id="commTextUpdatedDate<?php echo $getComments['databox_comment_id'];?>">Commented On : <?php echo $getComments['updated_date']; ?></span><br/>
 							<?php if(isset($_SESSION['usersinfo']->userId)){if($_SESSION['usersinfo']->userId==$getComments['comment_user_id']){?><br/>
 								<div class="comment_btns_pos_ab">
 									<button class="comment_edit_btn" onClick="editComment('<?php echo $getComments['databox_comment_id']?>','<?php echo $getComments['databox_comment']; ?>')">Edit</button> 
@@ -55,8 +55,8 @@
 								<div class="rimg_left"><img  width="55px" src="<?php echo $basePath; ?>/images/project/montageImages/<?php echo $getCommentss['montage_image']; ?>" alt="" class="height100" /></div>
 								<div class="rcontenleft">
 									<div class="name_c"><?php echo $getCommentss['display_name']; ?></div>
-									<span id="reCommText<?php echo $getCommentss['databox_comment_id'];?>"><?php echo $getCommentss['databox_comment']; ?></span><br/>
-									<span id="reCommTextUpdatedDate<?php echo $getCommentss['databox_comment_id'];?>"><?php echo $getCommentss['updated_date']; ?></span><br/>
+									<span id="reCommText<?php echo $getCommentss['databox_comment_id'];?>"><?php echo $getCommentss['databox_comment']; ?></span><br/><br/>
+									<span id="reCommTextUpdatedDate<?php echo $getCommentss['databox_comment_id'];?>">Commented On : <?php echo $getCommentss['updated_date']; ?></span><br/>
 									<?php if(isset($_SESSION['usersinfo']->userId)){if($_SESSION['usersinfo']->userId==$getCommentss['comment_user_id']){?><br/>
 										<div class="comment_btns_pos_ab">
 											<button class="comment_edit_btn" onClick="editReComment('<?php echo $getCommentss['databox_comment_id']?>','<?php echo $getCommentss['parent_comment_id']; ?>')">Edit</button> 
