@@ -379,6 +379,22 @@ class IndexController extends AbstractActionController
 				$userPoints = (($userPointss->userPoints)-$userRecharge->userPointsminus);
 			}
 			$_SESSION['usersinfo']->rewardPoints=$userPoints;
+			$getBlockUserDetails= $this->getBlockUserTable()->getBlockedIds();
+			$finalIds='';
+			foreach($getBlockUserDetails as $key=>$blockUser){
+				if($blockUser->block_by_uid==$_SESSION['usersinfo']->userId){
+					$finalIds .='"'. $blockUser->blocked_to_uid.'"' . ',';
+				}
+				if($blockUser->blocked_to_uid==$_SESSION['usersinfo']->userId){
+					$finalIds.='"'.$blockUser->block_by_uid.'"' . ',';
+				}
+			}
+			$frnds= rtrim($finalIds,',');
+			$userMessagesCount= count($this->getUserMessagesTable()->getUserMessages( $_SESSION['usersinfo']->userId,$frnds)->toArray());
+			$_SESSION['usersinfo']->userMessagesCount='';
+			$_SESSION['usersinfo']->userMessagesCount=$userMessagesCount;
+
+			
 		}else if(isset($_SESSION['Zend_Auth']->storage) && $_SESSION['Zend_Auth']->storage!=""){
 			$userpointsTable = $this->getUserPointsTable();
 			$userPointss = $userpointsTable->loggedUserPoints($_SESSION['Zend_Auth']->storage);
@@ -782,6 +798,7 @@ class IndexController extends AbstractActionController
 		$baseUrlArr = $baseUrls['urls'];
 		$baseUrl 	= $baseUrlArr['baseUrl'];
 		$basePath 	= $baseUrlArr['basePath'];
+		
 		$result= new ViewModel(array(
 				'dashboard'		=>	$_SESSION['userCollectionLinks'],
 				'start'			=>	$_POST['start'],
@@ -929,6 +946,24 @@ class IndexController extends AbstractActionController
             $this->rechargeOrdersTable = $sm->get('Databoxuser\Model\rechargeOrdersFactory');			
         }
         return $this->rechargeOrdersTable;
+    }
+	
+	public function getBlockUserTable()
+    {
+        if (!$this->blockUserTable) {				
+            $sm = $this->getServiceLocator();
+            $this->blockUserTable = $sm->get('Databox\Model\BlockUserFactory');			
+        }
+        return $this->blockUserTable;
+    }
+	
+	public function getUserMessagesTable()
+    {
+        if (!$this->userMessagesTable) {				
+            $sm = $this->getServiceLocator();
+            $this->userMessagesTable = $sm->get('Databox\Model\UserMessagesFactory');			
+        }
+        return $this->userMessagesTable;
     }
 }
 
