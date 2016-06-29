@@ -80,6 +80,9 @@ function logOut(value)
 	});	
 }
 </script>
+
+
+    
 <link href='//fonts.googleapis.com/css?family=Raleway:500' rel='stylesheet' type='text/css'>
 	<?php
 if( $_SERVER['REQUEST_URI']== "/taggerzz-new/trunk/" && $_SERVER['REQUEST_URI']== "/taggerzz-new/trunk/signup" )
@@ -135,7 +138,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/"  && $_SERVER['REQUEST_URI']
 		<div class="tfix_header">
 		<?php if( isset($_SESSION['usersinfo']->userId) &&  $_SESSION['usersinfo']->userId!=""){?>
 		<!--<div class="invite_f"><a class="tag_chk " href="javascript:void(0)" onClick="inivite_frnd()" >Invite Friends</a></div>-->	
-		<div class="rep_l"><div class="reward_points"><b><?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $_SESSION['usersinfo']->rewardPoints ; }else{ echo '0000';}?></b><sub>POINTS</sub><b><?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $rewardMoney=number_format(($_SESSION['usersinfo']->rewardPoints)*0.10, 2) ; }else{ echo '00';}?></b><sub>INR, Worth</sub><a href="#" onClick="convertPoints('<?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $_SESSION['usersinfo']->rewardPoints ; }else{ echo '0000';}?>');" title="Convert"> Convert</a></div> <div class="log_out_l"><a href="#"  onClick="goToLocation('logout')"><img src="<?php echo $basePath; ?>/img/logoout.png"></a></div></div>
+		<div class="rep_l"><div  class="reward_points"><span id="ab-message" style="display: none" >Disable Ad blocker to earn</span><span id="add_blocker_disable" style="display: block"><b><?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $_SESSION['usersinfo']->rewardPoints ; }else{ echo '0000';}?></b><sub>POINTS</sub><b><?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $rewardMoney=number_format(($_SESSION['usersinfo']->rewardPoints)*0.10, 2) ; }else{ echo '00';}?></b><sub>INR, Worth</sub><a href="#" onClick="convertPoints('<?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $_SESSION['usersinfo']->rewardPoints ; }else{ echo '0000';}?>');" title="Convert"> Convert</a></span></div> <div class="log_out_l"><a href="#"  onClick="goToLocation('logout')"><img src="<?php echo $basePath; ?>/img/logoout.png"></a></div></div>
 		<? } ?> 
 		 <section id="secHeader">
     <div id="divHeaderWrapper" class="width100 divHeaderWrapper">
@@ -178,6 +181,8 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/"  && $_SERVER['REQUEST_URI']
             <div id="divProfileDetails" class="inline-block tphoto_links tphoto_links">
                  <span id="spnGreetingsText" class="block smallFont name_adj"><b>Hello, <a href="javascript:void(0)" onclick="goToLocation('/montage')"><?php echo $_SESSION['usersinfo']->displayName; ?></a></b></span>
 			</div>
+						
+
 			</div>
 			<div class="tagged_links">
 				<b><span class="y_col">You have</span> #Tagged <span id="uGetTotalLinks"><?php if(isset($_SESSION['usersinfo']->getTotalLinks)){echo $_SESSION['usersinfo']->getTotalLinks ; }else{ echo '0';}?></span> WebLinks <span class="y_col">with</span> <span id="uGetTotalPublicBoxesAndprivate"><?php if(isset($_SESSION['usersinfo']->totalcount)){echo $_SESSION['usersinfo']->totalcount ; }else{ echo '0';}?></span> Databoxes 
@@ -205,6 +210,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/"  && $_SERVER['REQUEST_URI']
                     <span id="spnCreateCollection" class="block smallFont highlightFont"><a href="#" class="highlightFont createCollection create_btn" id='createCollection'>+ Start Tagging</a></span>
                 </div>
             </div>
+
 			<div class="mar_b5 margin_top_20">
             <ul id="ulMenu" class="ulMenu tmenufont_inc">
                 <li> <a class="tag_chk  <?php echo $homeActive; ?>" href="javascript:void(0)" onclick="goToLocation('/contentpage')">Home</a> </li>
@@ -212,7 +218,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/"  && $_SERVER['REQUEST_URI']
                 <li> <a class="tag_chk <?php echo $accountActive; ?>" href="javascript:void(0)" onClick="goToLocation('/accounts')">Account Settings</a> </li>
                 <li> <a class="tag_chk <?php echo $dashBoardActive; ?>" href="javascript:void(0)" onClick="goToLocation('/databoxuser/dashboard')">Dashboard<?php if( isset($_SESSION['usersinfo']->disable_messageing) && $_SESSION['usersinfo']->disable_messageing == 0){?><span id="disable_messageing_headerId"  >(<?php if(isset($_SESSION['usersinfo']->userMessagesCount)){echo "<span style='color:red;' >".$_SESSION['usersinfo']->userMessagesCount.'</span>' ; }else{ echo '<span style="color:red;" >0</span>';}?>)</span><?php }else{ ?><span id="disable_messageing_headerId" style="display: none;"  >(<?php if(isset($_SESSION['usersinfo']->userMessagesCount)){echo "<span style='color:red;' >".$_SESSION['usersinfo']->userMessagesCount.'</span>' ; }else{ echo '<span style="color:red;" >0</span>';}?>)</span><?php } ?></a></li>
                 <li class="invite_hide"> <a class="tag_chk" href="javascript:void(0)" onClick="inivite_frnd()">Invite Friends</a> </li>
-                <li class="rewards_hide"> <b><?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $_SESSION['usersinfo']->rewardPoints ; }else{ echo '0000';}?></b> <sub>POINTS</sub> <b><?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $rewardMoney=number_format(($_SESSION['usersinfo']->rewardPoints)*0.10, 2) ; }else{ echo '00';}?></b> <sub>INR, Worth</sub><a href="#" onClick="convertPoints('<?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $_SESSION['usersinfo']->rewardPoints ; }else{ echo '0000';}?>');" title="Convert"> Convert</a></li>
+                <li class="rewards_hide"><b><?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $_SESSION['usersinfo']->rewardPoints ; }else{ echo '0000';}?></b> <sub>POINTS</sub> <b><?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $rewardMoney=number_format(($_SESSION['usersinfo']->rewardPoints)*0.10, 2) ; }else{ echo '00';}?></b> <sub>INR, Worth</sub><a href="#" onClick="convertPoints('<?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $_SESSION['usersinfo']->rewardPoints ; }else{ echo '0000';}?>');" title="Convert"> Convert</a></li>
 				<!--<li> <a class="tag_chk " href="javascript:void(0)" onClick="goToLocation('logout')" >Logout</a> </li>-->
 				<li> <a class="tag_chk " href="javascript:void(0)"  >Help</a> </li>
 				<li> <a class="tag_chk " href="javascript:void(0)" onClick="inivite_frnd()" style="color:#723f3f ">Invite</a> </li>
@@ -224,6 +230,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/"  && $_SERVER['REQUEST_URI']
             <input type="text" id="pvtUniqueCodeHolder" class="inptSearchUniqueCode" placeholder="Enter Private Databox's Unique Code" value="<?if(isset($_REQUEST['serCode']) && $_REQUEST['serCode']!=""){echo $_REQUEST['serCode'];}else{}?>"/>
             <a href="Javascript:void(0);" id='homeSearchLink' class="aSearch"></a>
         </div>
+
 			<?php
 				} else { ?>
 					<style>
@@ -375,6 +382,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/"  && $_SERVER['REQUEST_URI']
 	</div>
 </div>
 </div>
+
 <script>
 function goTohashtag(title){
 	if(title=="highlights"){
@@ -397,4 +405,19 @@ $('#userPassword2').keypress(function(e) {
 	checkLogin('loginPopup');
   }
 }); 
+$(function() {
+	setTimeout(function(){	
+	   var add_blocker=$('#ab-message');
+		if (add_blocker.css('display') == 'block') { 
+		// Current display
+			$('#add_blocker_disable').css('display', 'none');
+			
+		} else if (add_blocker.css('display') == 'none') { 
+		// Hide reply form
+			$('#add_blocker_disable').css('display', 'block');
+		}
+	}, 2000);
+	 
+});
+
 </script>

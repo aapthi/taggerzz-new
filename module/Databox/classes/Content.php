@@ -158,14 +158,27 @@ class Content
 'youth.cn','youtube.com','zendesk.com','zhihu.com','zippyshare.com','zol.com.cn','zollow.com','ssl.gstatic.com');
 		$path = parse_url($url);
 		$domainPath = $path['host'];
+
 		foreach($urlsArray as $urlName){
-			if (strpos($domainPath, $urlName) !== false) { 
+			if (preg_match($domainPath, $urlName)) {
+
 				$comDomain = explode('.',$urlName);
+
 				$imageName = strtolower($comDomain[0]);
+
+				$taggerzzImageInserted = true;
+				$images = $imageName;
+
+			}else{
+				$comDomain = explode('.',$domainPath);
+
+				$imageName = strtolower($comDomain[1]);
+
 				$taggerzzImageInserted = true;
 				$images = $imageName;
 			}
 		}
+
 		
 		// End
 		
@@ -240,10 +253,12 @@ class Content
 		if( $taggerzzImageInserted )
 		{
 			return $images;
+
 		}
 		else
 		{
 			return substr($images, 0, -1);
+
 		}
     }
 

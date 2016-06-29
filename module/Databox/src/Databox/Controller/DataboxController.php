@@ -1602,6 +1602,7 @@ class DataboxController extends AbstractActionController
 		$image1 = $answer["images"];
 		$imageArray=explode('|',$image1);
 		$image=$imageArray[0];
+		
 		$site_image = "";
 		
 		$isVideo = $answer["video"];

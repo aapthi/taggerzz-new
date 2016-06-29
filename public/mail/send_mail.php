@@ -56,5 +56,42 @@
 		}
 		
 	}
+	$deactiveMessage='
+	<body style="margin: 0;padding: 0;">
+       <div style="position: relative;margin-left: auto;margin-right: auto;width: 620px;height: 500px;overflow: hidden;z-index:0;border:1px solid #ddd; box-shadow:0 2px 2px rgba(0, 0, 0, 0.3);">
+               <div style="border-bottom:1px solid #ddd;padding:10px 10px;background:#f7f7f7;">
+                       <img style="width:100%;" src="https://taggerzz.com/public/img/imgLogo.png">
+               </div>
+               <div style="position:relative;padding:20px 30px;">
+                       <div style="font-size:15px;">Dear   &nbsp;FULLNAME,</div>
+                       <div style="width: 620px;height: 360px;display:table-cell;vertical-align:middle;text-align:center;">        
+                               <p style="font-family: sinkin_sans500_medium, sans-serif;font-size:16px">MESSAGE</p>
+							   <p style="font-family:sinkin_sans500_medium, sans-serif;font-weight:bold;">PASSWORDLINK</p>
+                       </div> 
+                       <div class=""><img style="width:100%;" src="https://taggerzz.com/public/img/imgLogo.png"/></div>
+               </div>
+       </div>
+</body>
+
+	<body style="margin: 0;padding: 0;">
+       <div style="position: relative;margin-left: auto;margin-right: auto;width: 620px;height: 500px;overflow: hidden;z-index:0;border:1px solid #ddd; box-shadow:0 2px 2px rgba(0, 0, 0, 0.3);">
+               <div style="border-bottom:1px solid #ddd;padding:10px 10px;background:#f7f7f7;">
+                       <img style="width:100%;" src="https://taggerzz.com/public/img/imgLogo.png">
+               </div>
+               <div style="position:relative;padding:20px 30px;">
+                       <div style="font-size:15px;">Dear   &nbsp;<FULLNAME>,</div>
+                       <div style="width: 620px;height: 360px;display:table-cell;vertical-align:middle;text-align:center;">        
+                               <p style="font-family: sinkin_sans500_medium, sans-serif;font-size:16px"><MESSAGE></p>
+							   <p style="font-family:sinkin_sans500_medium, sans-serif;font-weight:bold;"><PASSWORDLINK></p>
+                       </div> 
+                       <div class=""><img style="width:100%;" src="https://taggerzz.com/public/img/imgLogo.png"/></div>
+               </div>
+       </div>
+</body>
+
+<br/><br/>
+Regards,<br/>
+Taggerzz.org Customer Service
+</body>';
 	// sendMail('bhargava.aapthi@gmail.com','subject','mesaage');
 ?>

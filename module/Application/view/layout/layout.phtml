@@ -22,7 +22,7 @@
 		<meta property="og:description" content="<? echo $layoutDescription; ?>">  
 		<meta property="og:url" content="<? echo $layoutUrl; ?>">
 		<meta property="fb:app_id" content="608131635971702">
-	
+
 		
 	<?php } else if( strpos($_SERVER['REQUEST_URI'],'montage') !== false ){
 		global $layoutTitle;
@@ -71,6 +71,9 @@
 	<link rel="shortcut icon" href="<?php echo $basePath?>/images/social_media/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="<?php echo $basePath?>/images/social_media/favicon.ico" type="image/x-icon">
 	<link href="https://plus.google.com/u/0/106787898385927742881" rel="publisher" />
+			<script src="<?php echo $basePath; ?>/js/abDetector.min.js"></script>
+
+
 </head>
 <body>
 <?php $page=basename($_SERVER['REQUEST_URI']); if($page=="intro"){
