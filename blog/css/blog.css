@@ -1,0 +1,447 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+
+.main_block{
+	width:100%;
+	height:auto;
+	margin:0px auto;
+	
+	}
+.header{
+	width:100%;
+	height:auto;
+	float:left;
+	background-color:#FCC;
+	position:fixed;
+	z-index: 10000;
+	margin-top:0em;
+	margin-left:0em;
+	}	
+.logo{
+	width:15%;
+	height:15%;
+	float:left;
+	margin-left:0.5em;
+	}
+	
+.heading{
+	font-family: 'Lato', sans-serif;
+	font-size:1.80em;
+	margin:0em auto;
+	margin-top:1.00em;
+	color:#333;
+	}
+	
+	
+	
+/************************************************************************************
+Menu
+*************************************************************************************/
+
+.menu_block{
+	font-family:'Lato', sans-serif;
+	width:100%;
+	height:auto;
+	float:left;
+	margin-left:0em;
+	margin-top:0.50em;
+	text-align:center;
+	}
+	.menu_holder{
+		margin:0em auto;
+		width:80%;
+		height:auto;
+		text-align:center;
+		}
+		
+nav ul {
+
+/*	-webkit-font-smoothing:antialiased; */
+	text-shadow:0 1px 0 #FFF;
+/*    background: #ddd; */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+nav li {
+    float: left;
+    margin: 0;
+    padding: 0;
+	padding-left:0em;
+    position: relative;
+    min-width: 15%;
+	text-align:center;
+}
+nav a {
+/*    background: #ddd; */
+    color: #747474;
+    display: block;
+	font-weight:bolder;
+    font: 0.83em/25px 'Lato';
+    padding: 0 5px;
+    text-align: center;
+    text-decoration: none;
+    -webkit-transition: all .25s ease;
+       -moz-transition: all .25s ease;
+        -ms-transition: all .25s ease;
+         -o-transition: all .25s ease;
+            transition: all .25s ease;
+}
+nav .dropdown:after {
+    font: 10px/25px 'Lato';	
+    content: ' \25b6';
+}
+nav .dropdown:hover:after{
+    font: 10px/25px 'Lato';		
+	content:'  \25bc'
+}
+nav li:hover a {
+
+	color:#c54427;	
+    background: #f5f5f5;
+}
+nav li ul {
+    float: left;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    top: 35px;
+    visibility: hidden;
+    z-index: 1;
+    -webkit-transition: all .25s ease;
+       -moz-transition: all .25s ease;
+        -ms-transition: all .25s ease;
+         -o-transition: all .25s ease;
+            transition: all .25s ease;
+}
+nav li:hover ul {
+    opacity: 1;
+    top: 50px;
+    visibility: visible;
+}
+nav li ul li {
+    float:left;
+    width: 100%;
+}
+nav li ul a:hover {
+ background: #ccc;
+ color:#333;
+	 
+}
+
+nav > ul li#responsive-tab {
+  display: none;
+
+  /* Hide for large screens */
+}
+
+/* Clearfix */
+
+.cf:after, .cf:before {
+    content:"";
+    display:table;
+}
+.cf:after {
+    clear:both;
+}
+.cf {
+    zoom:1;
+}
+
+
+nav > ul li.right {
+  float:right;
+  
+}
+nav > ul li.has-sub {
+   position: relative;
+   z-index:10;  
+   text-align: left;
+}
+nav > ul li.has-sub:hover ul {
+  display: block;
+}
+nav > ul li.has-sub ul {
+  display: none;
+  width: 100%;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  background: #ffffff;
+  border: 1px solid #ece6e8;
+  border-bottom: 3px solid #d9ced2;
+  border-top: 0 none;
+  z-index:10;
+}
+nav > ul li.has-sub ul li {
+
+  display: block;
+  width:100%;
+  padding:0px;
+}
+nav > ul li.has-sub > a {
+  background-image:url('../imgs/caret.png');
+  background-image: url('../imgs/caret.png');
+ background-repeat: no-repeat;
+  background-position: 90% -95%;
+}
+nav > ul li.has-sub > a.active,
+nav > ul li.has-sub > a:hover {
+  background: #c54427 url('../imgs/caret.png') no-repeat;
+  background-position: 90% 195%;
+}
+nav > ul li a {
+  display: block;
+ padding: 12px 24px 11px 24px; 
+  text-decoration: none;
+  color: #747474;
+  text-shadow: 0px 1px 0px #fff;
+}
+nav > ul li a.active,
+nav > ul li a:hover {
+  background: #c54427;
+  color: #fff;
+  text-shadow: 0px 1px 0px #000;
+}
+
+
+
+@media (max-width: 800px) {
+  nav > ul {
+    width: 100%;
+
+  }
+  nav > ul li#responsive-tab {
+    display: block;
+  }
+  nav > ul li#responsive-tab a {
+    background:url('../imgs/menu.png') no-repeat;
+    background-position: 90% -35%;
+  }
+  nav > ul li#responsive-tab a:hover {
+    background-color: #c54427;
+    background-position: 95% 135%;
+  }
+  nav > ul li {
+    display:block;
+
+  }
+  nav > ul li.right {	
+    float: left;
+  }
+  nav > ul li.has-sub {
+    position:fixed;
+	z-index:100;
+  }
+  nav > ul li.has-sub ul {
+    display:block;
+    position:relative;
+    width: 100%;
+    background: #ffffff;
+    border: 0 none;
+  }
+  nav > ul li.has-sub ul li {
+    display: block !important;
+
+  }
+  nav > ul li.has-sub ul li a span {
+    display:inline-block;
+    padding-left: 24px;
+  }
+  nav > ul li.has-sub > a {
+    background-image: none;
+  }
+  
+}
+/* Make sure they show even if hidden in mobile view by JS */
+@media (min-width: 800px) {
+  nav > ul > li.collapsed {
+    display: inline-block !important;
+    *display: inline;
+
+  }
+  nav > ul ul li.collapsed {
+    display: block !important;
+  }
+}
+
+
+/************************************************************************************
+Menu
+*************************************************************************************/
+
+/************************************************************************************
+Content
+*************************************************************************************/
+.cntnt_main{
+	height:auto;
+	width:100%;
+	float:left;
+	margin-top:15.00em; 
+	background-color:#f4f4f4;
+	position:absolute;
+	z-index:0;
+	overflow:auto;
+	}
+
+.heading_cnt{
+	font-family: 'Lato', sans-serif;
+	font-size:2.10em;
+	padding-bottom:0.50em;
+	margin:0em auto;
+	margin-top:1.00em;
+	color:#333;
+	line-height:1.20em;
+	}
+
+#passage_text{
+	width:80%;
+	font-family: 'Lato', sans-serif;
+	font-size:1.00em;
+	margin:0em auto;
+	line-height:1.50em;
+	color:#333;
+	padding:0.50em;
+	
+	}
+	
+.numbers_points_text{
+margin-left:15px; line-height:2.00em; list-style-type:decimal;	
+	}	
+
+.points_text{
+margin-left:15px; line-height:2.00em; list-style-type:circle;	
+	}	
+	
+	.textual_link{
+	font-family: 'Lato', sans-serif;
+	font-size:1.00em;
+	font-weight:bold;
+	color:#333;
+	text-decoration:none;	
+		}
+	.textual_link:a{
+	color:#333;
+	text-decoration:none;
+		}
+		
+		.img_unique_hashtag{
+			height:auto;
+			width:50%;
+			margin:0em auto;
+			text-align:center;
+			}
+		
+/************************************************************************************
+Content
+*************************************************************************************/
+
+
+	
+	
+	/************************************************************************************
+Enquiry
+*************************************************************************************/
+
+		
+	.field_props{
+		font-family:'Open sans', sans-serif;
+
+		font-size:0.78em;		
+		line-height:1.30em;
+		height:auto;
+		width:80%;
+		margin:0em auto;
+		background-color:#fff;
+		border:1px solid #d6d6d6;
+		box-shadow:#999 0.00em 0.10em 0.10em;
+		border-radius:5px;
+		padding:0.30em;
+		margin-bottom:0.40em;
+		margin-top:0.30em;
+		color:#666;		
+			}
+		
+		.fields_saver{
+			height:auto;
+			width:80%;
+			margin:0px auto;
+		color:#666;		
+			}
+		.field_props_phone_0{
+		font-family:'Open sans', sans-serif;
+
+		font-size:0.78em;		
+		line-height:1.30em;
+		height:auto;
+		width:10%;
+		float:left;
+		background-color:#fff;
+		border:1px solid #d6d6d6;
+		border-radius:5px;
+		padding:0.30em;
+		margin-bottom:0.40em;
+		margin-top:0.30em;
+		box-shadow:#999 0.00em 0.10em 0.10em;		
+		color:#333;		
+		}	
+		
+	.field_props_phone_1{
+		font-family:'Open sans', sans-serif;
+
+		font-size:0.78em;		
+		line-height:1.30em;
+		height:auto;
+		width:83%;
+		float:left;
+		background-color:#fff;
+		border:1px solid #d6d6d6;
+		border-radius:5px;
+		padding:0.30em;
+		margin-bottom:0.40em;
+		margin-top:0.30em;
+		box-shadow:#999 0.00em 0.10em 0.10em;		
+		color:#666;		
+		}	
+		
+	.field_props_desc{
+		font-family:'Open sans', sans-serif;
+
+		font-size:0.78em;		
+		line-height:1.30em;
+		height:auto;
+		width:80%;
+		margin:0px auto;
+		background-color:#fff;
+		border:1px solid #d6d6d6;
+		border-radius:5px;
+		padding:3px;
+		margin-bottom:5px;
+		color:#666;		
+		}			
+
+
+
+		.submit_button_props{
+			font-family:'Open sans', sans-serif;
+			font-size:1.08em;					
+			height:auto;
+			width:5%;
+			background-color:#c54427;
+			padding:5px;
+			float:left;
+			margin-left:1.00em;
+			margin-top:1.00em;
+			border-radius:5px;
+			margin-bottom:5px;
+			color:#FFF;
+			}
+			
+
+/************************************************************************************
+Enquiry
+*************************************************************************************/

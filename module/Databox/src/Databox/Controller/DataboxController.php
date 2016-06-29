@@ -678,7 +678,11 @@ class DataboxController extends AbstractActionController
 			}
 
 			$userId = $_SESSION['usersinfo']->userId;
-
+			if(isset($_SESSION['usersinfo']->rewardPoints)){
+				$rewardMoney=number_format(($_SESSION['usersinfo']->rewardPoints)*0.10, 2) ; 
+			}else{ 
+				$rewardMoney="00";
+			}
 			if( isset($_POST['editBoxId']) && is_numeric($_POST['editBoxId']) && $_POST['editBoxId'] > 0 )
 			{
 
@@ -802,9 +806,13 @@ class DataboxController extends AbstractActionController
 					$databoxCreatedMessage = str_replace("<MESSAGE>",$databoxesCount, $databoxCreatedMessage);
 					$databoxCreatedMessage = str_replace("<CATEGORYNAME>",$_POST['categoryName'], $databoxCreatedMessage);
 					$databoxCreatedMessage = str_replace("<HASHNAME>",$_POST['catHashTag'], $databoxCreatedMessage);
+					$databoxCreatedMessage = str_replace("<LINKS>",$_SESSION['usersinfo']->getTotalLinks, $databoxCreatedMessage);
+					$databoxCreatedMessage = str_replace("<KEYWORDS>",$_POST['metaTags'], $databoxCreatedMessage);
+					$databoxCreatedMessage = str_replace("<POINTS>",$_SESSION['usersinfo']->rewardPoints, $databoxCreatedMessage);
+					$databoxCreatedMessage = str_replace("<AMOUNT>",$rewardMoney, $databoxCreatedMessage);
 					if( $_POST['categoryType'] == 0 )
 					{
-						$databoxCreatedMessage = str_replace("<SECURITYCODE>",'Your Unique Code :&nbsp;&nbsp;'.$_POST['uniqueCode'], $databoxCreatedMessage);
+						$databoxCreatedMessage = str_replace("<SECURITYCODE>",'Your Unique Code :&nbsp;&nbsp;<b style="font-size:1.50em;">'.$_POST['uniqueCode'].'</b>', $databoxCreatedMessage);
 					}
 					if($_POST['email']!=""){
 						$to=$_POST['email'];
