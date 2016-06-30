@@ -116,7 +116,7 @@ src="https://accounts.google.com/CheckCookie?continue=https%3A%2F%2Fwww.google.c
     </head>
     <body>
 
-        <div id="mainWrapper" class="mainWrapper">
+        <div id="mainWrapper" class="mainWrapper mobilepad">
             <!--            Fixed Section-->
             <section id="secFixedAspects">
                 <img id="imgBackgoundOverlay" class="imgBackground" src="<?php echo $basePath; ?>/img/imgLightBlueOverlay.png" alt="" />
@@ -133,7 +133,7 @@ src="https://accounts.google.com/CheckCookie?continue=https%3A%2F%2Fwww.google.c
             </section>
             
             <!--            Left Section-->
-			<section id="secLeftAspects" class="leftSticky verticalCenterWrapper">
+			<section id="secLeftAspects" class="mblogo leftSticky verticalCenterWrapper">
                 <div id="divLeftWrapper" class="divLeftWrapper verticalCenterContainer whiteFont">
                     <img id="imgLogo" class="imgLogo verticalCenter width100" src="<?php echo $basePath; ?>/img/imgLogo.png" alt="" /> <br>
                     <div id="divLogoText" class="divLogoText">
@@ -146,7 +146,7 @@ src="https://accounts.google.com/CheckCookie?continue=https%3A%2F%2Fwww.google.c
           <div class="ctrl_right_sticky">
                <div id="divLoginWrapper" class="divLoginWrapper rightSticky">
                         <div id="divLoginSocial" class="divLoginSocial smallFont whiteFont fatFont textCenter largeFont">
-						<form class="" method="post" id="userLoginFormUrl1" name="userLoginFormUrl1" role="form" >
+						<form class="mobileadj" method="post" id="userLoginFormUrl1" name="userLoginFormUrl1" role="form" >
                             <div class="block">
                                 <span class="fatFont _footer_text_shadow">LOGIN USING</span>
                             </div>
@@ -178,7 +178,7 @@ src="https://accounts.google.com/CheckCookie?continue=https%3A%2F%2Fwww.google.c
 								-->
 								<input type="password" name="userPassword1" id="userPassword1" class="formField txtPassword"/>
                             </div>
-							<div class="block textLeft _footer_text_shadow">
+							<div class="block textLeft _footer_text_shadow marn_top10">
 								<label><input type="checkbox" name="remember_me" id="remember_me" value="" style="width:7% !important;">Remember Me</label> 									
 							</div>
                             <div class="block textRight">
@@ -186,17 +186,17 @@ src="https://accounts.google.com/CheckCookie?continue=https%3A%2F%2Fwww.google.c
 								<!--
                                 <button name="btnSubmit" id="btnSubmit" class="formField btnSubmit">SUBMIT</button>
 								-->
-								<button type="button" name="btnSubmit" id="btnSubmit" onClick="return checkLogin('loginChe');" class="formField btnSubmit _shadow_boxes">SUBMIT</button>
+								<button type="button" name="btnSubmit" id="btnSubmit" onClick="return checkLogin('loginChe');" class="formField btnSubmit _shadow_boxes buttons">SUBMIT</button>
                             </div>
 								<input type="hidden" id="hid_log" name="hid_log" value="logChe">
-                            <div class="block textCenter _footer_text_shadow">
+                            <div class="block textCenter _footer_text_shadow mar_top">
                                 <label>Don't have account with us? </label><br>
 								<!--
                                 <button name="btnSignup" id="btnSignup" class="formField btnSignup">SIGNUP</button>
 								-->
-								<button type="button" name="btnSignup" id="btnSignup" class="formField btnSignup" onClick="Javascript:sUpFunction();" >SIGNUP</button>
+								<button type="button" name="btnSignup" id="btnSignup" class="formField btnSignup buttonss" onClick="Javascript:sUpFunction();" >SIGNUP</button>
                             </div>
-                            <div class="block">
+                            <div class="block marbottomm10">
 								<a href="<?php echo $baseUrl; ?>/contentpage">I'll do this later >></a>
                             </div>
 							</form>
@@ -246,7 +246,7 @@ src="https://accounts.google.com/CheckCookie?continue=https%3A%2F%2Fwww.google.c
                 </div>
             </section>
 
-            <div class="side_image">
+            <div class="side_image login_hide">
           <img src="<?php echo $basePath; ?>/img/imgLeftArrow.png"></div>
 
             <!--            Right Section-->
@@ -334,3 +334,97 @@ $('#userPassword1').keypress(function(e) {
 <?}else{?>
 	<script> window.location=BASE_URL+ "/contentpage"; </script>
 <?}?>
+<style>
+	@media (max-width: 767px) { 
+		.verticalCenterContainer, .mainWrapper .divLoaderWrapper .divLoader, .mainWrapper #secLeftAspects .divLeftWrapper{
+			vertical-align:middle;
+		}
+		.mobilepad{
+			
+		}
+		.mobileadj{
+			margin-top:35%;
+			padding:20px;
+		}
+		.mblogo{
+			text-align:center;
+			margin-top:20px;
+		}
+		.mblogo img{
+			width:200px;
+		}
+		.divLoginWrapper{
+			margin-top:0;
+			width:100%
+		}
+		.mobileadj img{
+			margin:8px;
+		}
+		.mobileadj input{
+			width:100%;
+			box-sizing:border-box;
+			padding:10px;
+			border:1px solid #edf4fb;
+			border-radius:4px;
+			margin-top:5px;
+		}
+		.mobileadj .buttons{
+			width:100%;
+			box-sizing:border-box;
+			padding:10px;
+			border:1px solid #fc4242;
+			background:#fc4242;
+			color:#fff;
+			border-radius:4px;
+		}
+		.mobileadj .buttonss{
+			width:100%;
+			box-sizing:border-box;
+			padding:10px;
+			border:1px solid #424242;
+			background:#424242;
+			color:#fff;
+			border-radius:4px;
+			margin-top:10px;
+			margin-bottom:10px;
+		}
+		.bottomSticky{
+			position:relative;
+			bottom:-80px;
+			padding:20px;
+		}
+		.intro_footer_text{
+			font-size:1em;
+		}
+		.mar_top{
+			margin-top:20px;
+		}
+		.login_hide{
+			background:#b2d8ff;
+		}
+		#forgot_password{
+			display: block;
+			margin-bottom: 20px;
+			margin-top: -20px;
+			color:#fc4242;
+		}
+		.rightSticky img{
+			opacity:1;
+		}
+		._footer_text_shadow{
+			text-shadow:none;
+		}
+		.marbottomm10{
+			margin-borrom:20px;
+			color:#fc4242;
+		}
+		.marn_top10{
+			margin-top:10px;
+		}
+		body{
+			background:#b2d8ff;
+		}
+	}
+	
+	@media (max-width: 480px) { }
+</style>
