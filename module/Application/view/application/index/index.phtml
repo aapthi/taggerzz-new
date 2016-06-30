@@ -179,7 +179,7 @@ src="https://accounts.google.com/CheckCookie?continue=https%3A%2F%2Fwww.google.c
 								<input type="password" name="userPassword1" id="userPassword1" class="formField txtPassword"/>
                             </div>
 							<div class="block textLeft _footer_text_shadow marn_top10">
-								<label><input type="checkbox" name="remember_me" id="remember_me" value="" style="width:7% !important;">Remember Me</label> 									
+								<label><input type="checkbox" name="remember_me" id="remember_me" value="" style="width:7% !important;margin-top:-5px;">Remember Me</label> 									
 							</div>
                             <div class="block textRight">
 								<a href="javascript:void(0)" id="forgot_password"  onClick="Javascript:showFpEmailIdForm();">Forgot Password?</a>
@@ -257,7 +257,7 @@ src="https://accounts.google.com/CheckCookie?continue=https%3A%2F%2Fwww.google.c
                 <div id="divFooterSentence" class="whiteFont">
                     <span class="fatFont intro_footer_text"><?php echo $totalHotLinksCount;?></span> <span class="smallFont _footer_text_shadow">HOT LINKS, PERSONALIZED AND SHARED,</span> <span class="fatFont  intro_footer_text"><?php echo $homeUsersCount;?></span> <span class="smallFont _footer_text_shadow">Users</span>
                 </div>
-            </section>
+        </section>
         
         <script src="<?php echo $basePath; ?>/js/new_js/custom.js"></script>
 
@@ -376,6 +376,7 @@ $('#userPassword1').keypress(function(e) {
 			background:#fc4242;
 			color:#fff;
 			border-radius:4px;
+			cursor:pointer;
 		}
 		.mobileadj .buttonss{
 			width:100%;
@@ -387,6 +388,7 @@ $('#userPassword1').keypress(function(e) {
 			border-radius:4px;
 			margin-top:10px;
 			margin-bottom:10px;
+			cursor:pointer;
 		}
 		.bottomSticky{
 			position:relative;
@@ -405,7 +407,7 @@ $('#userPassword1').keypress(function(e) {
 		#forgot_password{
 			display: block;
 			margin-bottom: 20px;
-			margin-top: -20px;
+			margin-top: -22px;
 			color:#fc4242;
 		}
 		.rightSticky img{
@@ -416,6 +418,9 @@ $('#userPassword1').keypress(function(e) {
 		}
 		.marbottomm10{
 			margin-borrom:20px;
+			
+		}
+		.marbottomm10 a{
 			color:#fc4242;
 		}
 		.marn_top10{
