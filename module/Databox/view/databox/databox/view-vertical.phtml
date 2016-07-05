@@ -1134,20 +1134,25 @@ $(document).ready(function()
 	$("#UGetHighlight").html(<?php echo $this->getHighlightsCount; ?>);
 });
 function deleteLink(deletedLinkId,dragDropId){
-	if(confirm("Are you sure about deleting this Web Link/Link Post from Collection ?")){
-		$.ajax({
-			url: BASE_URL+'/databox/delete-link',
-			dataType: "json",
-			type	: "POST",
-			data	:{category_link_id:deletedLinkId},
-			success: function( data ) {
-				if(data.output!=0) {
-					$('#viewPageChanged').val( 1 );
-					$('.grid-stack').data('gridstack').remove_widget('#dragDropWindow'+dragDropId);
-					//$('#dragDropWindow'+dragDropId).remove();
-				}
-			}	
-		});
+	var countOfLinks=$('#incrId').val();
+	if(parseInt(countOfLinks) > parseInt(5)){
+		if(confirm("Are you sure about deleting this Web Link/Link Post from Collection ?")){
+			$.ajax({
+				url: BASE_URL+'/databox/delete-link',
+				dataType: "json",
+				type	: "POST",
+				data	:{category_link_id:deletedLinkId},
+				success: function( data ) {
+					if(data.output!=0) {
+						$('#viewPageChanged').val( 1 );
+						$('.grid-stack').data('gridstack').remove_widget('#dragDropWindow'+dragDropId);
+						//$('#dragDropWindow'+dragDropId).remove();
+					}
+				}	
+			});
+		}
+	}else{
+		alert('Minimum 5 links needed for a databox.');
 	}
 } 
 
