@@ -43,6 +43,10 @@ function cStyleSet()
 	{
 		$("#chkbxNsfw").attr("disabled", true);
 	}
+	if( $("#DescriptionTitle").length )
+	{
+		$("#DescriptionTitle").attr('readonly', true);
+	}
 
 	var allValid = true;
 	$("input[id^='textbox']").each(function()
@@ -222,7 +226,6 @@ function validateSettings( submitVal )
 		{
 			$('#description123').val( $('#DescriptionTitle').val() );
 		}
-
 		$('#submitVal').val( "CStyle" );
 
 		return cStyleSet();

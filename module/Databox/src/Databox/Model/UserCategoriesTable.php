@@ -39,7 +39,7 @@ class UserCategoriesTable
 				'category_id' 	 => $userCatDetails["category_id"], 
 				'user_id' 	     => $userId, 
 				'category_title' => $userCatDetails["categoryTitle"], 
-				'user_classification'  => $userCatDetails["description123"], 
+				'user_classification'  => $userCatDetails["user_classification"], 
 				'user_hashname'  => $userCatDetails["catHashTag"], 
 				'category_type'  => $userCatDetails["categoryType"], 
 				'secret_code'  	 => $userCatDetails["uniqueCode"], 

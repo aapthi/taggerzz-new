@@ -213,15 +213,15 @@ src="https://accounts.google.com/CheckCookie?continue=https%3A%2F%2Fwww.google.c
 								</div>
 								<div class="block textLeft">
 									<label>Email</label> <br>
-									<input type="email" name="emailId" id="emailId" class="formField txtEmail"/>
+									<input type="email" name="emailId" id="emailId" class="formField txtEmail" value="<?php if(isset($_GET['email']) && $_GET['email']!=""){echo $_GET['email'];}?>"/>
 								</div>
 								<div class="block textLeft">
 									<label>Create a Password</label> <br>
-									<input type="password" name="userPassword" id="userPassword" class="formField txtPassword"/>
+									<input type="password" name="userPassword" id="userPassword" value="<?php if(isset($_GET['pass']) && $_GET['pass']!=""){echo $_GET['pass'];}?>" class="formField txtPassword"/>
 								</div>
 								<input type="hidden" id="hid_log" name="hid_log" value="regChe">
 								<div class="block textCenter">
-									<button type="button" name="btnSignup" id="btnSignup" class="formField btnSignup" onClick="return checkLogin('regChe');" >SIGNUP</button>
+									<button type="button" name="btnSignup" id="btnSignup" class="formField btnSignup" onClick="return checkLogin('regChe');" >CONTINUE</button>
 									<button type="button" name="backlogin" id="backlogin"  class="formField btnSignup"  onClick="return loginBackFunction();" >LOGIN</button>
 								</div>
 							</form>

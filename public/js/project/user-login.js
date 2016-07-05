@@ -26,7 +26,7 @@ $(document).ready(function()
 				event.preventDefault();
 				return false;
 			}
-			var invalidDispNameCharacters = /[^a-z^A-Z^0-9^ ]/;
+			var invalidDispNameCharacters = /[^a-z^A-Z^0-9^_ ]/;
 			if( invalidDispNameCharacters.test( displayName ) )
 			{
 				$('#pop-up-alerts').popUpWindow({action: "open"});	
