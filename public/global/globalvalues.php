@@ -291,19 +291,17 @@ global $regSubject;
 global $regMessage;
 $regSubject= "Registration confirmation";
 $regMessage='<body style="margin: 0;padding: 0;">
-       <div style="position: relative;margin-left: auto;margin-right: auto;width: 620px;height: 500px;overflow: hidden;z-index:0;border:1px solid #ddd; box-shadow:0 2px 2px rgba(0, 0, 0, 0.3);">
-               <div style="border-bottom:1px solid #ddd;padding:10px 10px;background:#f7f7f7;">
-                       <img style="width:100%;" src="https://taggerzz.com/public/img/imgLogo.png">
-               </div>
-               <div style="position:relative;padding:20px 30px;">
-                       <div style="font-size:15px;">Dear   &nbsp;<FULLNAME>,</div>
-                       <div style="width: 620px;height: 360px;display:table-cell;vertical-align:middle;text-align:center;">        
-                               <p style="font-family: sinkin_sans500_medium, sans-serif;font-size:16px">Please click below link to email conformation</p>
-                               <p style="font-family:sinkin_sans500_medium, sans-serif;font-weight:bold;"><a href="<REGLINK>"><REGLINK></a></p> 
-                       </div> 
-                       <div class=""><img style="width:100%;" src="https://taggerzz.com/public/img/imgLogo.png"/></div>
-               </div>
-       </div>
+<div style="position: relative; margin-left: auto; margin-right: auto; width: 620px; height: auto; overflow: hidden; z-index:0; border:1px solid #ddd; box-shadow:0 0px 0px rgba(0, 0, 0, 0.3);">
+  <div style="border-bottom:1px solid #ddd;padding:10px 10px;background:#f7f7f7;"> <img style="width:30%;" src="https://taggerzz.com/public/img/imgLogo.png"> </div>
+  <div style="position:relative;padding:20px 30px;">
+    <div style="font-family:"Trebuchet MS", Arial, Helvetica, sans-serif; font-size:1.00em;">Dear <FULLNAME>,</div>
+    <div style="width: 620px;height: 360px;display:table-cell;vertical-align:middle;text-align:center;">
+        <p style="font-family: sinkin_sans500_medium, sans-serif;font-size:16px">Please click below link to email conformation</p>
+        <p style="font-family:sinkin_sans500_medium, sans-serif;font-weight:bold;"><a href="<REGLINK>"><REGLINK></a></p> 
+    </div>
+    <div><p style="font-family:"Trebuchet MS", Arial, Helvetica, sans-serif; font-size:1.00em;"><a href="https://taggerzz.com" target="_blank"><b>Visit Taggerzz.com</b></a></p></div>
+  </div>
+</div>
 </body>';
 global $deactiveSubject;
 global $deactiveMessage;
@@ -325,18 +323,16 @@ $deactiveMessage='<body style="margin: 0;padding: 0;">
 </body>';
 $pwdChangedSubject = "Your Taggerzz Password Changed.";
 $pwdChangedMessage = '<body style="margin: 0;padding: 0;">
-       <div style="position: relative;margin-left: auto;margin-right: auto;width: 620px;height: 500px;overflow: hidden;z-index:0;border:1px solid #ddd; box-shadow:0 2px 2px rgba(0, 0, 0, 0.3);">
-               <div style="border-bottom:1px solid #ddd;padding:10px 10px;background:#f7f7f7;">
-                       <img style="width:100%;" src="https://taggerzz.com/public/img/imgLogo.png">
-               </div>
-               <div style="position:relative;padding:20px 30px;">
-                       <div style="font-size:15px;">Dear   &nbsp;<FULLNAME>,</div>
-                       <div style="width: 620px;height: 360px;display:table-cell;vertical-align:middle;text-align:center;">        
-                               <p style="font-family: sinkin_sans500_medium, sans-serif;font-size:16px"><MESSAGE></p>
-                       </div> 
-                       <div class=""><img style="width:100%;" src="https://taggerzz.com/public/img/imgLogo.png"/></div>
-               </div>
-       </div>
+<div style="position: relative; margin-left: auto; margin-right: auto; width: 620px; height: auto; overflow: hidden; z-index:0; border:1px solid #ddd; box-shadow:0 0px 0px rgba(0, 0, 0, 0.3);">
+  <div style="border-bottom:1px solid #ddd;padding:10px 10px;background:#f7f7f7;"> <img style="width:30%;" src="https://taggerzz.com/public/img/imgLogo.png"> </div>
+  <div style="position:relative;padding:20px 30px;">
+    <div style="font-family:"Trebuchet MS", Arial, Helvetica, sans-serif; font-size:1.00em;">Dear <FULLNAME>,</div>
+    <div style="width: 620px;height: 360px;display:table-cell;vertical-align:middle;text-align:center;">
+      <p style="font-family:"Trebuchet MS", Arial, Helvetica, sans-serif; font-size:16px"><MESSAGE></p>
+    </div>
+    <div><p style="font-family:"Trebuchet MS", Arial, Helvetica, sans-serif; font-size:1.00em;"><a href="https://taggerzz.com" target="_blank"><b>Visit Taggerzz.com</b></a></p></div>
+  </div>
+</div>
 </body>';
 $fpPwdSubject = "Taggerzz Password Reset Link.";
 $fpPwdMessage = '<body style="margin: 0;padding: 0;">
