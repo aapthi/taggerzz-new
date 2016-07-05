@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="UTF-8">
@@ -29,25 +29,41 @@
 		if( $layoutTitle != "" ){?>
 			<title><?php echo $layoutTitle; ?></title>
 	<?php }else{?>
-	<title>Taggerzz | Present Your Favorites, Customize and Share #Hashtag Identify</title>
+	<title>#Tagging, Customize, Share Interests and Earn - Taggerzz.com</title>
 	<?php }} else if( strpos($_SERVER['REQUEST_URI'],'user-collection') !== false ){
 		global $layoutTitle;
 		if( $layoutTitle != "" ){?>
 			<title><?php echo $layoutTitle; ?></title>
 	<?php } else {?>
-	<title>Taggerzz | Present Your Favorites, Customize and Share #Hashtag Identify</title>
+	<title>#Tagging, Customize, Share Interests and Earn - Taggerzz.com</title>
 	<?php }} else if( isset($homePageYes) && $homePageYes == "Yes" ){?>
-	<title>Taggerzz | Present Your Favorites, Customize and Share #Hashtag Identify</title>
-	<meta name="keywords" content="Upload Bookmarks, share 20 different fileformat type direct links, Json and BAK bookmarks upload, Share Bookmarks, Hashtag Identify, Customize and share your Favorite Websites, Share Bookmarks anonymously, Share Bookmarks Socially, Social media Login, Present an Idea, Favorites, use your Long old useless bookmark files, Unique #Hashtagging, Absolute Search results, control your search Results, fabulous usage of Hashtagging">
-	<meta name="description" content="Create an Idea. Share your Knowledge or have fun sharing your favorites and Bookmarks. Upload hundreds of Links at a single Click. Customize, prioritize, Highlight your Own Unique Ideas, Share your friends Your Ideas, Favorites, Thoughts, Ideals by a single Hashtag search. Share major file types presenting Direct Links">
+	<title>Start #Tagging, Collecting Customizing Sharing – Taggerzz.com</title>
+	<meta name="keywords" content="Public Databoxes,Private Databoxes, Highlights shared by Members,Cash rewarding Points,Free Mobile recharging,Cash rewarding,User activity">
+	<meta name="description" content="Start #tagging here, collect and create Public databoxes and Private databoxes, Post any Highlighting content of Web by sharing Simple Web Paths.">
 	<?php } else if( strpos($_SERVER['REQUEST_URI'],'dashboard') !== false ){?>
-	<title>Your Dashboard, Total Management of your Web Links - taggerzz</title>
+	<title>Your Dashboard, Edit your Shared content - taggerzz</title>
+	<meta name="keywords" content="Edit or alter content,Edit Private Databoxes,Edit Highlights shared by Members,Customization mode Navigation,User activity">
+	<meta name="description" content="Your Posted collections of Web links can be edited from this dashboard.">
 	<?php } else if( strpos($_SERVER['REQUEST_URI'],'accounts') !== false ){?>
 	<title>Manage your account - taggerzz</title>
+	<meta name="keywords" content="Edit Your details,Change Profile name, ,Total User activity report,Profile picture,De-activate account">
+	<meta name="description" content="Your account Details, Profile name/alias can be changed here.">
 	<?php } else if( strpos($_SERVER['REQUEST_URI'],'category-choice') !== false ){?>
 	<title>Create Your Collage, Upload Bookmark file & Hashtag your favorites - taggerzz</title>
 	<meta name="keywords" content="Share and Customize your Ideas, Unique Opinions, Break Propagandists, Stereotypes, Bring change by your Opinions, Present and Share your Opinion by Web Links, Collect Customize present and share by Hashtag">
 	<meta name="description" content="Upload your Bookmarks, Share your favorite Entertainment, Share your preferred Political Ideas">
+	<?php } else if( strpos($_SERVER['REQUEST_URI'],'selectdatabox') !== false ){?>
+	<title>Select Your Mode of Sharing - taggerzz</title>
+	<?php } else if( strpos($_SERVER['REQUEST_URI'],'/databox/createhashtag/highlight/0') !== false ){?>
+	<title>Creating Your Highlight - taggerzz</title>	
+	<?php } else if( strpos($_SERVER['REQUEST_URI'],'databox/createhashtag/publicdatabox/0') !== false ){?>
+	<title>Creating your Public Databox - taggerzz</title>
+	<?php } else if( strpos($_SERVER['REQUEST_URI'],'databox/createhashtag/privatedatabox/0') !== false ){?>
+	<title>Creating your Private Databox - taggerzz</title>
+	<?php } else if( strpos($_SERVER['REQUEST_URI'],'contentpage') !== false ){?>
+	 <title>Start #Tagging, Collecting Customizing Sharing – Taggerzz.com</title>
+	<meta name="keywords" content="#Hashtag,Customize Link posts,Bookmark files upload, Private mode sharing,Unique #tagging,Public Databoxes,Private Databoxes,Post and share 100 web links">
+	<meta name="description" content="Taggerzz.com is an Ideal Web Application to collage and Share Web Links of your Interests. Great tool to present your Ideas and Opinions.">
 	<?php } else if( strpos($_SERVER['REQUEST_URI'],'enlist-highlights') !== false ){?>
 	<title>Highlights and Current on-going Affairs - taggerzz</title>
 	<meta name="keywords" content="Vote your preferred or valuable content">
@@ -61,7 +77,7 @@
 	<meta name="keywords" content="Share and Customize your Ideas, Unique Opinions, Break Propagandists, Stereotypes, Bring change by your Opinions, Present and Share your Opinion by Web Links, Collect Customize present and share by Hashtag">
 	<meta name="description" content="Upload your Bookmarks, Share your favorite Entertainment, Share your preferred Political Ideas">
 	<?php } else {?>
-		<title id="enlist-title">Taggerzz | Present Your Favorites, Customize and Share #Hashtag Identify</title>
+			<title>#Tagging, Customize, Share Interests and Earn - Taggerzz.com</title>
 	<?php } ?>
 	<?php
 		$header=$this->action('Application\Controller\IndexController', 'headerAction',array('20','10'));

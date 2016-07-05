@@ -900,10 +900,14 @@ class IndexController extends AbstractActionController
 		$baseUrlArr = $baseUrls['urls'];
 		$baseUrl = $baseUrlArr['baseUrl'];
 		$basePath = $baseUrlArr['basePath'];
+		$homeUsersCount = $this->getUserTable()->getUsersCount();
+		$totalHotLinksCount = $this->getLinkDetailsTable()->gettotalHotLinksCount();
 			return $viewModel = new ViewModel(
 				array(
 					'baseUrl' 	=> $baseUrl,
 					'basePath' 	=> $basePath,
+					'homeUsersCount' 	    => $homeUsersCount,
+					'totalHotLinksCount' 	    => $totalHotLinksCount
 				)
 			);
 	}

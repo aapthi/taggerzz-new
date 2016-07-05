@@ -16,6 +16,9 @@
 		else if(strpos($_SERVER['REQUEST_URI'], 'accounts') !== false){
 			$accountActive='active_menu';
 		}
+		else if(strpos($_SERVER['REQUEST_URI'], 'help') !== false){
+			$helpActive='active_menu';
+		}
 		else if(strpos($_SERVER['REQUEST_URI'], 'contentpage') !== false){
 			$homeActive='active_menu';
 		}else if(strpos($_SERVER['REQUEST_URI'], 'hitting-on') !== false){
@@ -222,7 +225,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/"  && $_SERVER['REQUEST_URI']
                 <li class="invite_hide"> <a class="tag_chk" href="javascript:void(0)" onClick="inivite_frnd()">Invite Friends</a> </li>
                 <li class="rewards_hide"><b><?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $_SESSION['usersinfo']->rewardPoints ; }else{ echo '0000';}?></b> <sub>POINTS</sub> <b><?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $rewardMoney=number_format(($_SESSION['usersinfo']->rewardPoints)*0.10, 2) ; }else{ echo '00';}?></b> <sub>INR, Worth</sub><a href="#" onClick="convertPoints('<?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $_SESSION['usersinfo']->rewardPoints ; }else{ echo '0000';}?>');" title="Convert"> Convert</a></li>
 				<!--<li> <a class="tag_chk " href="javascript:void(0)" onClick="goToLocation('logout')" >Logout</a> </li>-->
-				<li> <a class="tag_chk <?php echo $dashBoardActive; ?>" href="javascript:void(0)" onClick="goToLocation('/blog')" >Help</a> </li>
+				<li> <a class="tag_chk <?php echo $helpActive; ?>"  href="javascript:void(0)" onClick="goToLocation('/blog')" >Help</a> </li>
 				<li> <a class="tag_chk " href="javascript:void(0)" onClick="inivite_frnd()" style="color:#723f3f ">Invite</a> </li>
             </ul>
 			</div>
@@ -418,7 +421,7 @@ $(function() {
 		// Hide reply form
 			$('#add_blocker_disable').css('display', 'block');
 		}
-	}, 2000);
+	}, 4000);
 	 
 });
 
