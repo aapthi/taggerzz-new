@@ -392,7 +392,7 @@ function updateUser(userId)
 			$("#alert_meassage").html(entered_profile);			
 			return false;
 		}
-		var invalidDispNameCharacters = /[^a-z^A-Z^0-9^ ]/;
+		var invalidDispNameCharacters = /[^a-z^A-Z^0-9^_ ]/;
 		if( invalidDispNameCharacters.test( display_name ) )
 		{
 			$('#pop-up-alerts').popUpWindow({action: "open"});	

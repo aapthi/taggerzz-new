@@ -198,14 +198,14 @@ function validateSettings( submitVal )
 			//var invalidTitleCharacters = /[^a-z^A-Z^0-9^ ]/;
 			var invalidTitleCharacters = /[^a-z^A-Z^0-9^, ]/;
 			
-			if( invalidTitleCharacters.test( boxCategory ) )
+			/* if( invalidTitleCharacters.test( boxCategory ) )
 			{
 				$('#pop-up-alerts').popUpWindow({action: "open"});	
 				$("#alert_header_meassge").html('');
 				$("#alert_meassage").html(box_category_invalid);
 				$("#boxCategory").focus();
 				return false;
-			}
+			} */
 			$('#metaTags').val( $('#boxCategory').val() );
 		}
 
