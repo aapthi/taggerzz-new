@@ -467,7 +467,6 @@ function setNotSafeForWork( categoryType )
 
 	function resetUrlStatus( counter,edit )
 	{
-		console.log(edit);
 		var urlEntered=$.trim( stripHtmlTags($("#textbox"+counter).val()).replace(/&nbsp;/g,'') );
 		urlEntered = urlEntered.trim();
 		$("#textbox"+counter).val( urlEntered );

@@ -336,7 +336,7 @@ $fpPwdMessage = '<body style="margin: 0;padding: 0;">
     <div style="font-family:"Trebuchet MS", Arial, Helvetica, sans-serif; font-size:1.00em;">Dear <FULLNAME>,</div>
     <div style="width: 620px;height: 360px;display:table-cell;vertical-align:middle;text-align:center;">
       <p style="font-family:"Trebuchet MS", Arial, Helvetica, sans-serif; font-size:16px"><MESSAGE></p>
-	  <p style="font-family:sinkin_sans500_medium, sans-serif;font-weight:bold;"><PASSWORDLINK></p>
+	  <p style="font-family:sinkin_sans500_medium, sans-serif;font-weight:bold;"><a href="<PASSWORDLINK>" target="_blank"><PASSWORDLINK></a></p>
     </div>
     <div><p style="font-family:"Trebuchet MS", Arial, Helvetica, sans-serif; font-size:1.00em;"><a href="https://taggerzz.com" target="_blank"><b>Visit Taggerzz.com</b></a></p></div>
   </div>

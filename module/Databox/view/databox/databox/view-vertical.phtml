@@ -1124,7 +1124,7 @@ function saveDataboxhash(typee){
 function editTheDataBoxUrls(redirectUrl){
 	var r = confirm("Warning: You may lose your Customized pattern of Link posts!");
     if (r == true) {
-		 window.location = redirectUrl;
+		 window.location = redirectUrl+'?type=refresh';
     } 
 }
 $(document).ready(function()
