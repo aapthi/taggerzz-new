@@ -37,6 +37,7 @@
 	
 	var newCommentText = "";
 	var tzGridStackRef;
+	var stopPoints=0;
 	
 	var BASE_URL = '<?php echo $baseUrl;?>';
 	var BASE_PATH = '<?php echo $basePath;?>';
@@ -134,7 +135,6 @@ if( $_SERVER['REQUEST_URI'] != "/taggerzz-new/trunk/" || $_SERVER['REQUEST_URI']
 
 <script type="text/javascript" src="<?php echo $basePath; ?>/js/project/index.js"></script>
 <script src="<?php echo $basePath; ?>/js/jquery.cookie.js"></script>
-
 
 <?php
 if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/"  && $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/signup" )
@@ -417,9 +417,10 @@ $('#userPassword2').keypress(function(e) {
 		if (add_blocker.css('display') == 'block') { 
 		// Current display
 			$('#add_blocker_disable').css('display', 'none');
-			
+				stopPoints=1;
 		} else if (add_blocker.css('display') == 'none') { 
 		// Hide reply form
+			stopPoints=0;
 			$('#add_blocker_disable').css('display', 'block');
 		}
 	}, 4000);

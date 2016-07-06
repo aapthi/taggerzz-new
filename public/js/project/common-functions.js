@@ -984,31 +984,42 @@ function checkSpaces()
 
 				} */
 				if(votingDownid==3){
-					 var insertedActivityAjaxUrl = BASE_URL + "/databoxuser/record-activity-points";
-					$.ajax
-					({
-						url: insertedActivityAjaxUrl,
-						type: "POST",
-						data:{activityType:'Like Points'},
-						dataType: "json",
-						success: function(data) {}
-					});
+					setTimeout(function(){	
+
+						if(stopPoints==0){
+							 var insertedActivityAjaxUrl = BASE_URL + "/databoxuser/record-activity-points";
+							$.ajax
+							({
+								url: insertedActivityAjaxUrl,
+								type: "POST",
+								data:{activityType:'Like Points'},
+								dataType: "json",
+								success: function(data) {}
+							});
+						}
+					}, 4000);
 				}
+
 
 			}
 			if(newVoteValue==0){
 				 if(votingDownid==3){
-					var insertedActivityAjaxUrl = BASE_URL + "/databoxuser/record-activity-points";
-					$.ajax
-					({
-						url: insertedActivityAjaxUrl,
-						type: "POST",
-						data:{activityType:'trashDatabox',categoryId:categoryId},
-						dataType: "json",
-						success: function(data) {
-							
-						}
-					});
+				setTimeout(function(){	
+
+					if(stopPoints==0){ 
+						var insertedActivityAjaxUrl = BASE_URL + "/databoxuser/record-activity-points";
+						$.ajax
+						({
+							url: insertedActivityAjaxUrl,
+							type: "POST",
+							data:{activityType:'trashDatabox',categoryId:categoryId},
+							dataType: "json",
+							success: function(data) {
+								
+							}
+						});
+					}
+					}, 4000);
 				 }
 				
 				/* if(Totalrw_lh=="" || Totalrw_lh==0){

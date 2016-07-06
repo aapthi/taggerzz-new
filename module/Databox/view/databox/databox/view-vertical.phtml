@@ -623,19 +623,23 @@ $(document).ready(function()
 	// End Increment box view count
 	
 	// Activity Databox views   
-	<? if(isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId!=""){?>	
-		var insertedActivityAjaxUrl = BASE_URL + "/databoxuser/record-activity-points";
-		$.ajax
-		({
-		  url: insertedActivityAjaxUrl,
-		  type: "POST",
-		  data:{databoxId:category_id,dataBoxOwner:category_user_id,activityType:'Databox viewer'},
-		  dataType: "json",
-		  success: function(data)
-		  {
-			
-		  }
-		});
+	<? if(isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId!=""){?>
+		setTimeout(function(){	
+			if(stopPoints==0){ 
+				var insertedActivityAjaxUrl = BASE_URL + "/databoxuser/record-activity-points";
+				$.ajax
+				({
+				  url: insertedActivityAjaxUrl,
+				  type: "POST",
+				  data:{databoxId:category_id,dataBoxOwner:category_user_id,activityType:'Databox viewer'},
+				  dataType: "json",
+				  success: function(data)
+				  {
+					
+				  }
+				});
+			}
+		}, 4000);
 	<? } ?>
 	//End
 	
@@ -729,13 +733,18 @@ function insertComment(){
 					if(parseInt(data.databoxCommentsCount)=='5'){
 						var databoxUser = data.databoxUser;
 						var insertedActivityAjaxUrl = BASE_URL + "/databoxuser/record-activity-points";
-						$.ajax({
-							url: insertedActivityAjaxUrl,
-							type: "POST",
-							data:{databoxId:databoxId,databoxUser:databoxUser,activityType:'CommentsLinks',comt:'cmtt'},
-							dataType: "json",
-							success: function(data) {}
-						});	
+					setTimeout(function(){	
+
+						if(stopPoints==0){ 
+							$.ajax({
+								url: insertedActivityAjaxUrl,
+								type: "POST",
+								data:{databoxId:databoxId,databoxUser:databoxUser,activityType:'CommentsLinks',comt:'cmtt'},
+								dataType: "json",
+								success: function(data) {}
+							});	
+						}
+					}, 4000);
 					}
 					$("#comtDiv").html('');
 					$("#comtDiv").append(data.comDiv);
@@ -953,15 +962,17 @@ function likeDislikeCntV( newVoteValue,categoryId,rw_th,love,trash ){
 		if(data.output == '1'){
 			if(newVoteValue=='1'){
 				<?php if(isset($_SESSION['usersinfo']->userId) && $_SESSION['usersinfo']->userId!=""){?>	
-					var insertedActivityAjaxUrl = BASE_URL + "/databoxuser/record-activity-points";
-					$.ajax
-					({
-						url: insertedActivityAjaxUrl,
-						type: "POST",
-						data:{activityType:'Like Points'},
-						dataType: "json",
-						success: function(data) {}
-					});
+					if(stopPoints==0){ 
+						var insertedActivityAjaxUrl = BASE_URL + "/databoxuser/record-activity-points";
+						$.ajax
+						({
+							url: insertedActivityAjaxUrl,
+							type: "POST",
+							data:{activityType:'Like Points'},
+							dataType: "json",
+							success: function(data) {}
+						});
+					}
 				<?php } ?>
 			}	
 			if(data.totVotesPer=='0'){
