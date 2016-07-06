@@ -87,7 +87,11 @@
 	<link rel="shortcut icon" href="<?php echo $basePath?>/images/social_media/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="<?php echo $basePath?>/images/social_media/favicon.ico" type="image/x-icon">
 	<link href="https://plus.google.com/u/0/106787898385927742881" rel="publisher" />
-			<script src="<?php echo $basePath; ?>/js/abDetector.min.js"></script>
+			<?php
+if( $_SERVER['REQUEST_URI'] != "/taggerzz-new/trunk/" || $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/signup" )
+	{
+	?> <script src="<?php echo $basePath; ?>/js/abDetector.min.js"></script>
+	<?php } ?>
 
 
 </head>

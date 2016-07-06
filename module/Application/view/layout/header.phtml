@@ -135,6 +135,7 @@ if( $_SERVER['REQUEST_URI'] != "/taggerzz-new/trunk/" || $_SERVER['REQUEST_URI']
 <script type="text/javascript" src="<?php echo $basePath; ?>/js/project/index.js"></script>
 <script src="<?php echo $basePath; ?>/js/jquery.cookie.js"></script>
 
+
 <?php
 if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/"  && $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/signup" )
 	{
@@ -410,7 +411,7 @@ $('#userPassword2').keypress(function(e) {
 	checkLogin('loginPopup');
   }
 }); 
-$(function() {
+ $(function() {
 	setTimeout(function(){	
 	   var add_blocker=$('#ab-message');
 		if (add_blocker.css('display') == 'block') { 
@@ -423,6 +424,6 @@ $(function() {
 		}
 	}, 4000);
 	 
-});
+}); 
 
 </script>

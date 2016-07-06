@@ -101,15 +101,19 @@
 										}else{
 											$imageValue='manage_checking.png';
 										}
-						?><div class='divCreatePublicDataboxLinks' id="textBoxDiv<?echo $url_id;?>">
-											<input type="text" class="inptLinks" placeholder="Ex:- http://www.google.co.in" id="textbox<?echo $url_id;?>" value="<?echo $currentLinkArray[1];?>" onBlur="resetUrlStatus('<?echo $url_id;?>');" />
+										
+										
+						?>
+						
+						<div class='divCreatePublicDataboxLinks' id="textBoxDiv<?echo $url_id;?>">
+											<input type="text" class="inptLinks" placeholder="Ex:- http://www.google.co.in" id="textbox<?echo $url_id;?>" value="<?echo $currentLinkArray[1];?>" onFocus="resetUrlStatus('<?echo $url_id;?>');" />
 											<span style="display:none" id="loadImg<?echo $url_id;?>"><img style="vertical-align:middle;width:15px;" src="<?php echo $basePath; ?>/img/bx_loader.gif" /></span>
 											<span id="verifyImg<?echo $url_id;?>"><img id="imgVerified<?echo $url_id;?>" src="<?php echo $basePath; ?>/img/<?echo $imageValue;?>" /></span>
 											<b id="rem<?echo $url_id;?>"><a href="javascript:void(0);" onClick="removeTextBox('<?php echo $url_id; ?>',1)"><img src="<?php echo $basePath; ?>/img/dashboard_delete.png" /></a></b>
 										</div><?
 									}
 								}?><div class='divCreatePublicDataboxLinks' id="textBoxDiv<?php echo $extraBoxUrlId + 1; ?>">
-							<input type="text" class="inptLinks" placeholder="Ex:- http://www.google.co.in" id="textbox<?php echo $extraBoxUrlId + 1; ?>" onBlur="resetUrlStatus('<?php echo $extraBoxUrlId + 1; ?>');" />
+							<input type="text" class="inptLinks" placeholder="Ex:- http://www.google.co.in" id="textbox<?php echo $extraBoxUrlId + 1; ?>" onFocus="resetUrlStatus('<?php echo $extraBoxUrlId + 1; ?>');" />
 							<span style="display:none" id="loadImg<?php echo $extraBoxUrlId + 1; ?>"><img style="vertical-align:middle;width:15px;" src="<?php echo $basePath; ?>/img/bx_loader.gif" /></span>
 							<span id="verifyImg<?php echo $extraBoxUrlId + 1; ?>"></span>
 							<b id="rem<?php echo $extraBoxUrlId + 1; ?>"></b>
@@ -117,7 +121,7 @@
 						else
 						{
 						?><div class='divCreatePublicDataboxLinks' id="textBoxDiv1">
-							<input type="text" class="inptLinks" placeholder="Ex:- http://www.google.co.in" id="textbox1" onBlur="resetUrlStatus(1);" />
+							<input type="text" class="inptLinks" placeholder="Ex:- http://www.google.co.in" id="textbox1" onFocus="resetUrlStatus(1);" />
 							<span style="display:none" id="loadImg1"><img style="vertical-align:middle;width:15px;" src="<?php echo $basePath; ?>/img/bx_loader.gif" /></span>
 							<span id="verifyImg1"></span>
 							<b id="rem1"></b>
