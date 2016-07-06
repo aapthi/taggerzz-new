@@ -121,7 +121,7 @@
 								<?php } ?>
 								
 						<div class='divCreatePublicDataboxLinks' id="textBoxDiv<?php echo $extraBoxUrlId + 1; ?>">
-							<input type="text" class="inptLinks" placeholder="Ex:- http://www.google.co.in" id="textbox<?php echo $extraBoxUrlId + 1; ?>" <?php if(isset($_GET['type']) && $_GET['type']=='refresh' ){ ?> onBlur="resetUrlStatus('<?php echo $extraBoxUrlId + 1; ?>','0');"<?php } ?> />
+							<input type="text" class="inptLinks" placeholder="Ex:- http://www.google.co.in" id="textbox<?php echo $extraBoxUrlId + 1; ?>" onBlur="resetUrlStatus('<?php echo $extraBoxUrlId + 1; ?>','0');" />
 							<span style="display:none" id="loadImg<?php echo $extraBoxUrlId + 1; ?>"><img style="vertical-align:middle;width:15px;" src="<?php echo $basePath; ?>/img/bx_loader.gif" /></span>
 							<span id="verifyImg<?php echo $extraBoxUrlId + 1; ?>"></span>
 							<b id="rem<?php echo $extraBoxUrlId + 1; ?>"></b>

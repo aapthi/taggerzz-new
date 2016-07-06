@@ -98,14 +98,22 @@
 											$imageValue='manage_checking.png';
 										}
 						?><div class='divCreatePrivateDataboxLinks' id="textBoxDiv<?echo $url_id;?>">
-											<input type="text" class="inptLinks" placeholder="Ex:- http://www.google.co.in" id="textbox<?echo $url_id;?>" value="<?echo $currentLinkArray[1];?>" onBlur="resetUrlStatus('<?echo $url_id;?>');" />
+											<input type="text" class="inptLinks" placeholder="Ex:- http://www.google.co.in" id="textbox<?echo $url_id;?>" value="<?echo $currentLinkArray[1];?>" <?php if(isset($_GET['type']) && $_GET['type']!='refresh' ){ ?>onBlur="resetUrlStatus('<?echo $url_id;?>','0');" <?php }?>>
 											<span style="display:none" id="loadImg<?echo $url_id;?>"><img style="vertical-align:middle;width:15px;" src="<?php echo $basePath; ?>/img/bx_loader.gif" /></span>
 											<span id="verifyImg<?echo $url_id;?>"><img id="imgVerified<?echo $url_id;?>" src="<?php echo $basePath; ?>/img/<?echo $imageValue;?>" /></span>
 											<b id="rem<?echo $url_id;?>"><a href="javascript:void(0);" onClick="removeTextBox('<?php echo $url_id; ?>',1)"><img src="<?php echo $basePath; ?>/img/dashboard_delete.png" /></a></b>
-										</div><?
-									}
-								}?><div class='divCreatePrivateDataboxLinks' id="textBoxDiv<?php echo $extraBoxUrlId + 1; ?>">
-							<input type="text" class="inptLinks" placeholder="Ex:- http://www.google.co.in" id="textbox<?php echo $extraBoxUrlId + 1; ?>" onBlur="resetUrlStatus('<?php echo $extraBoxUrlId + 1; ?>');" />
+										</div><?php
+									}?>
+									<?php if(isset($_GET['type']) && $_GET['type']=='refresh' ){ ?>
+								<script>	
+								$(document).ready(function () {
+									resetUrlStatus('<?php echo $url_id;?>','edit');
+								});
+								</script>
+									
+								<?php } ?>
+								<?php }?><div class='divCreatePrivateDataboxLinks' id="textBoxDiv<?php echo $extraBoxUrlId + 1; ?>">
+							<input type="text" class="inptLinks" placeholder="Ex:- http://www.google.co.in" id="textbox<?php echo $extraBoxUrlId + 1; ?>" onBlur="resetUrlStatus('<?php echo $extraBoxUrlId + 1; ?>','0');" >
 							<span style="display:none" id="loadImg<?php echo $extraBoxUrlId + 1; ?>"><img style="vertical-align:middle;width:15px;" src="<?php echo $basePath; ?>/img/bx_loader.gif" /></span>
 							<span id="verifyImg<?php echo $extraBoxUrlId + 1; ?>"></span>
 							<b id="rem<?php echo $extraBoxUrlId + 1; ?>"></b>
