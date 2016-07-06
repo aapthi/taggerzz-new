@@ -465,8 +465,9 @@ function setNotSafeForWork( categoryType )
 // links-common	
 	var duplFocusEle = null;
 
-	function resetUrlStatus( counter )
+	function resetUrlStatus( counter,edit )
 	{
+		console.log(edit);
 		var urlEntered=$.trim( stripHtmlTags($("#textbox"+counter).val()).replace(/&nbsp;/g,'') );
 		urlEntered = urlEntered.trim();
 		$("#textbox"+counter).val( urlEntered );
@@ -542,10 +543,17 @@ function setNotSafeForWork( categoryType )
 			$('#rem'+counter).html('');
 			return false;
 		}
-		if( $("#originalValue").val() == urlEntered )
-		{
-			return false;
+		if(edit==0){
+			if( $("#originalValue").val() == urlEntered )
+			{
+				return false;
+			}
+		}else{
+			if( $("#originalValue").val() == urlEntered )
+			{
+			}
 		}
+		
 		
 		$('#submitVal').val( "Go" );
 		if( $('#imgVerified' + counter).length == 1 )

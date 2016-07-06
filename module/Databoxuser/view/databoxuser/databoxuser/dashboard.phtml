@@ -151,9 +151,9 @@
                         <div id="divReplyToWrapper" style="display:none;" class="divReplyToWrapper">
                             <input type="text" id="txtReplyTo" class="txtReplyTo" placeholder="To: Username" />
 							<input type="text" id="txtSubject" class="txtReplyTo" placeholder="Enter message subject" />
-                            <textarea id="textArea" class="txtReplyToText"></textarea>
+                            <textarea id="textArea" class="txtReplyToText" maxlength="5000" ></textarea>
                             <div class="divReplyToControls">
-                                <div class="divReplyToMaxCharsText smhide_m">( &ast; MAXIMUM 5000 CHARS )</div>
+                                <div class="divReplyToMaxCharsText smhide_m">( &ast; Remaining <span id="max_length_chars">5000</span> CHARS   )</div>
                                 <button onClick="insertMsg()" class="btnReplyToSend">SEND</button>
                                 <button onclick="cancelForm()" class="btnReplyToCancel">CANCEL</button>
                             </div>
@@ -185,8 +185,9 @@ function setEditingBoxId( tzCreateEditBoxId,currBoxEditLink )
 		return false;
 	}
 }
-
 $(function() {
+		
+	
  $('html').niceScroll();
 	$("#txtReplyTo").autocomplete({	
 		source: function( request, response ) {
@@ -362,4 +363,16 @@ if(message==""){
 function cancelForm(){
 	  $("#divReplyToWrapper").hide();
 }
+var maxLength = 5000;
+$('textArea').keyup(function() {
+	
+	var length = $(this).val().length;
+	var length = maxLength-length;
+	$('#max_length_chars').text(length);
+	if(length==0){
+		alert('Maximum input alloewd is over.');
+	}
+});
+	    
+
 </script>
