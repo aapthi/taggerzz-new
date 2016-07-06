@@ -346,6 +346,104 @@ $('#userPassword1').keypress(function(e) {
 	<script> window.location=BASE_URL+ "/contentpage"; </script>
 <?}?>
 <style>
+@media only screen and (device-width: 768px) {
+  .verticalCenterContainer, .mainWrapper .divLoaderWrapper .divLoader, .mainWrapper #secLeftAspects .divLeftWrapper{
+			vertical-align:middle;
+		}
+		.mobilepad{
+			
+		}
+		.mobileadj{
+			margin-top:20%;
+			padding:20px;
+		}
+		.mblogo{
+			text-align:center;
+			margin-top:20px;
+		}
+		.mblogo img{
+			width:200px;
+		}
+		.divLoginWrapper{
+			margin-top:0;
+			width:100%
+		}
+		.mobileadj img{
+			margin:8px;
+		}
+		.mobileadj input{
+			width:100%;
+			box-sizing:border-box;
+			padding:10px;
+			border:1px solid #edf4fb;
+			border-radius:4px;
+			margin-top:5px;
+		}
+		.mobileadj .buttons{
+			width:100%;
+			box-sizing:border-box;
+			padding:10px;
+			border:1px solid #fc4242;
+			background:#fc4242;
+			color:#fff;
+			border-radius:4px;
+			cursor:pointer;
+		}
+		.mobileadj .buttonss{
+			width:100%;
+			box-sizing:border-box;
+			padding:10px;
+			border:1px solid #424242;
+			background:#424242;
+			color:#fff;
+			border-radius:4px;
+			margin-top:10px;
+			margin-bottom:10px;
+			cursor:pointer;
+		}
+		.bottomSticky{
+			position:relative;
+			bottom:7px;
+			padding:20px;
+		}
+		.intro_footer_text{
+			font-size:1em;
+		}
+		.mar_top{
+			margin-top:20px;
+		}
+		.login_hide{
+			background:#b2d8ff;
+		}
+		#forgot_password{
+			display: block;
+			margin-bottom: 20px;
+			margin-top: -22px;
+			color:#fc4242;
+		}
+		.rightSticky img{
+			opacity:1;
+		}
+		._footer_text_shadow{
+			text-shadow:none;
+		}
+		.marbottomm10{
+			margin-borrom:20px;
+			
+		}
+		.marbottomm10 a{
+			color:#fc4242;
+		}
+		.marn_top10{
+			margin-top:10px;
+		}
+		body{
+			background:#b2d8ff;
+		}
+		#divFooterSentence{
+			margin-left:185px;
+		}
+}
 	@media (max-width: 767px) { 
 		.verticalCenterContainer, .mainWrapper .divLoaderWrapper .divLoader, .mainWrapper #secLeftAspects .divLeftWrapper{
 			vertical-align:middle;
@@ -442,5 +540,34 @@ $('#userPassword1').keypress(function(e) {
 		}
 	}
 	
-	@media (max-width: 480px) { }
+	@media (max-width: 480px) { 
+		/*.bottomSticky{
+			position:relative;
+			bottom:-40px;
+			padding:20px;
+		}*/
+	}
+	@media screen and (max-width: 360px){
+			.bottomSticky{
+			position:absolute;
+			bottom:0px;
+			padding:20px;
+		}
+	}
+	@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 667px) { 
+	.bottomSticky{
+			position:absolute;
+			bottom:0;
+			padding:20px;
+		}
+}
+	@media (max-width:320px){
+		.bottomSticky{
+			position:relative;
+			bottom:-70px;
+			padding:20px;
+		}
+	}
 </style>
