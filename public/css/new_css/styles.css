@@ -444,11 +444,13 @@ a {
     border: none;
     background: #fc4242;
     padding: 3pt 8pt;
-    color: white; }
+    color: white; 
+	cursor:pointer;
+	}
   .divLoginWrapper .btnSignup {
     border: none;
     background: #f9f9f9;
-    padding: 3pt 8pt; }
+    padding: 3pt 8pt;cursor:pointer; }
   .divLoginWrapper input {
     width: 100% !important;
     padding: 4pt; }

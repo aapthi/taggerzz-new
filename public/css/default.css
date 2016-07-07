@@ -320,17 +320,17 @@ a{
 }
 .montage_pick{
 	width:225px;
-	height:300px;
+	height:178px;/*300px */
 	border:1px solid #d9d9d9;
 }
 .thumb_pick{
 	width:175px;
-	height:160px;
+	height:132px; /* 160px */
 	border:1px solid #d9d9d9;
 }
 .montage_box_pick{
 	width:44px;
-	height:44px;
+	height:33px;
 	border:1px solid #d9d9d9;
 }
 .img_brg{
@@ -364,7 +364,7 @@ a{
 .file-input-wrapper > .btn-file-input {
     display: inline-block;
     width:225px;
-    height: 280px;
+    height: 160px;/*280px */
 }
 .file-input-wrapper:hover > .btn-file-input {
     background-color: #aaa;
@@ -386,8 +386,8 @@ a{
 }
 .file-input-wrapper-2 > .btn-file-input {
     display: inline-block;
-    width: 174px;
-    height: 158px;
+    width: 175px;
+    height: 130px; /* 158px */
 }
 .file-input-wrapper-2:hover > .btn-file-input {
     background-color: #aaa;
@@ -409,8 +409,8 @@ a{
 }
 .file-input-wrapper-3 > .btn-file-input {
     display: inline-block;
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 33px;
 }
 .file-input-wrapper-3:hover > .btn-file-input {
     background-color: #aaa;
