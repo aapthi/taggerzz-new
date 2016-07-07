@@ -68,7 +68,7 @@ if( isset($this->boxKeywords) && trim($this->boxKeywords) != "" )
 							$imageLink=$basePath.'/images/social_media/customization_no_img.jpg';
 						}
 						?>
-						<div id="dragDropWindow<?echo $key+1;?>" class="grid-stack-item  c_DivCard"
+						<div id="dragDropWindow<?echo $key+1;?>" class="grid-stack-item c_DivCard"
 						<?php if( $tzGsRowNum % 4 == 0 ) { $xSet = $tzDataGsX;$tzDataGsX = 0;$ySet = $tzDataGsY;$tzDataGsY += 20; } else{ $xSet = $tzDataGsX;$tzDataGsX += 2;$ySet = $tzDataGsY; } ?> data-gs-x="<?php echo $xSet; ?>" data-gs-y="<?php echo $ySet; ?>" data-gs-height="18" data-gs-width="2">
 							<div class="grid-stack-item-content">
 									<?php
@@ -91,7 +91,7 @@ if( isset($this->boxKeywords) && trim($this->boxKeywords) != "" )
 								<?php } ?>	
 								
 								<?php if(isset($databoxLinksGrids['title']) && $databoxLinksGrids['title']!=""){?>
-									<div class="c_DivCardTitle" >
+									<div class="pad_10px" ><h2>
 										<?php if(strlen($databoxLinksGrids['title'])>20){
 												echo substr($databoxLinksGrids['title'],0,20) . '...'; 
 											}
@@ -100,9 +100,9 @@ if( isset($this->boxKeywords) && trim($this->boxKeywords) != "" )
 												echo $databoxLinksGrids['title'];
 											}
 										?>
-									</div><?} $parahid="";
+									</h2></div><?} $parahid="";
 								if(isset($databoxLinksGrids['description']) && $databoxLinksGrids['description']!="no Description"){?>
-								<div class="c_DivCardDescription" >
+								<div class="pad_10px" >
 								<?php
 									if(strlen($databoxLinksGrids['description'])>250){
 										echo substr($databoxLinksGrids['description'],0,250) . '<a href="'.$url.'" target="_blank">...Read more</a>';

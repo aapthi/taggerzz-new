@@ -166,7 +166,7 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 						}
 						?>
 						
-					<div id="dragDropWindow<?echo $key+1;?>" class="grid-stack-item" 
+					<div id="dragDropWindow<?echo $key+1;?>" class="grid-stack-item c_DivCard" 
 					<?php if( $tzGsRowNum % 4 == 0 ) { $xSet = $tzDataGsX;$tzDataGsX = 0;$ySet = $tzDataGsY;$tzDataGsY += 3; } else{ $xSet = $tzDataGsX;$tzDataGsX += 3;$ySet = $tzDataGsY; } ?> data-gs-x="<?php echo $xSet; ?>" data-gs-y="<?php echo $ySet; ?>" data-gs-width="3" data-gs-height="4" style="border:none;">
 					<div class="grid-stack-item-content" >
 					<a class="c_BtnReport linkDeletePost"   href="javascript:void(0);" onclick="Javascript:deleteLink('<?php echo $databoxLinksGrids->category_link_id; ?>','<?echo $key+1;?>');" >X</a>
