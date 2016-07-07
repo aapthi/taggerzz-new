@@ -266,7 +266,7 @@
 						  <tr>
 							<td width="25%" style="padding:0;">
 								<div id="boxscroll2" class="users_ajax1"> 
-									<p  style="padding:0;line-height:0"><input type="text" id="searchComment" name="searchComment" placeholder="SEARCH COMMENT"><img  src="<?php echo $basePath; ?>/images/go_search_btn.png" onClick="Javascript:searchDatabox();"/></p>
+									<p  style="padding:0;line-height:0"><input type="text" id="searchComment" name="searchComment" placeholder="SEARCH DATABOX"><img  src="<?php echo $basePath; ?>/images/go_search_btn.png" onClick="Javascript:searchDatabox();"/></p>
 										<?php 
 											$category_id="";
 											if(count($this->getAllCommentsDataboxes)!=0){
@@ -318,5 +318,15 @@
     var nicesx = $("#boxscroll,#boxscroll1,#boxscroll2,#boxscroll3,#boxscroll4,#boxscroll5").niceScroll({touchbehavior:false,cursorcolor:"#acacac",cursoropacitymax:0.6,cursorwidth:8});
     
   });
+    $('#searchComment').keypress(function(e) {
+	  if(e.which == 13) {
+		searchDatabox();
+	  }
+    });
+	$('#search').keypress(function(e) {
+	  if(e.which == 13) {
+		searchUsers();
+	  }
+    });
 </script>
 	
