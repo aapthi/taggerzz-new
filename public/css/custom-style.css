@@ -993,6 +993,9 @@ color:#a12a30;
  }
 
 @media (max-width: 767px){ 
+.lgd_hide{
+		display:block;
+	}
 	[class*="span"] {
     display: block !important;
     float: none !important;

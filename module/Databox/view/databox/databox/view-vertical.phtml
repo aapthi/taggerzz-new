@@ -283,8 +283,8 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 
 <input type="hidden" id="voteing" name="voteing" value="<?php if(isset($this->userStatusLD->voteUp) && $this->userStatusLD->voteUp=='1'){ echo "1";}else{ echo "0";}?>">
 <input type="hidden" id="dislikevoteing" name="dislikevoteing" value="<?php if(isset($this->userStatusLD->voteDown) && $this->userStatusLD->voteDown=='1'){ echo "1";}else{ echo "0";}?>">
-  <!--<div class="lgd_hide com_mar20"> 
-<?php //include('databox-reviews.phtml');?></div> -->
+  <div class="lgd_hide com_mar20"> 
+<?php include('databox-reviews.phtml');?></div>
 	<div class="clearfix"></div>
 </div>
 <div id="tempRemDiv" style="display:none;"><div class="clearfix"></div></div>
@@ -526,7 +526,9 @@ $(function () {
 <script type="text/javascript">
 $(document).ready(function()
 {
-	// Collect this...
+	
+			addBlockerEvent();
+// Collect this...
 	$("div[id^='divCollectThis']").each(function()
 	{
 		var divCollectThisId = parseInt(this.id.replace("divCollectThis", ""));
@@ -714,6 +716,7 @@ $(document).ready(function()
 function insertComment(){
 	var databoxId='<?php echo $this->categoryId ?>';
 	var comment=$('#message').val();
+	alert(comment);
 	var editHid = $('#hidSendComment').val();
 	if(comment==""){
 		alert('Enter the comment');return false;
