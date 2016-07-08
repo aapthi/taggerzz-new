@@ -278,20 +278,8 @@ src="https://accounts.google.com/CheckCookie?continue=https%3A%2F%2Fwww.google.c
 
 
 function sUpFunction(){
-	/* var email=$('#emailId1').val();
-	var pass= $('#userPassword1').val();
-	if(email!="" && pass!=""){
-		window.location=BASE_URL+ '/signup?email='+email+'&pass='+pass+'';
-	}else if(email!=""){
-		window.location=BASE_URL+ '/signup?email='+email;
-	}
-	else if(pass!=""){
-		window.location=BASE_URL+ '/signup?email=&pass='+pass;
-	}else{
-		window.location=BASE_URL+ "/signup";
-	}  */
-	window.location=BASE_URL+ "/signup";
-
+		$("#userLoginFormUrl1").prop('action', 'signup');
+		$("#userLoginFormUrl1").submit();
 }
 $(document).ready(function() {
 	setInterval(function(){ $("#secFixedAspects").css({"display":"none"}); },2000);

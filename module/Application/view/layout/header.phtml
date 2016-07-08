@@ -10,7 +10,7 @@
 		if(strpos($_SERVER['REQUEST_URI'], 'dashboard') !== false){
 			$dashBoardActive='active_menu';
 		}
-		else if($_SERVER['REQUEST_URI']=='/taggerzz-new/trunk/montage'){
+		else if($_SERVER['REQUEST_URI']=='/montage'){
 			$montageActive='active_menu';
 		}
 		else if(strpos($_SERVER['REQUEST_URI'], 'accounts') !== false){
@@ -91,7 +91,7 @@ function logOut(value)
     
 <link href='//fonts.googleapis.com/css?family=Raleway:500' rel='stylesheet' type='text/css'>
 	<?php
-if( $_SERVER['REQUEST_URI']== "/taggerzz-new/trunk/" && $_SERVER['REQUEST_URI']== "/taggerzz-new/trunk/signup" )
+if( $_SERVER['REQUEST_URI']== "/" && $_SERVER['REQUEST_URI']== "/signup" )
 	{
 		?> 
 	<link rel="stylesheet" media="(max-width: 799px)" href="<?php echo $basePath; ?>/css/new_css/styles-mobile.css" />
@@ -111,7 +111,7 @@ if( $_SERVER['REQUEST_URI']== "/taggerzz-new/trunk/" && $_SERVER['REQUEST_URI']=
 
 
 	<?php
-if( $_SERVER['REQUEST_URI'] != "/taggerzz-new/trunk/" || $_SERVER['REQUEST_URI']== "/taggerzz-new/trunk/signup" )
+if( $_SERVER['REQUEST_URI'] != "/" || $_SERVER['REQUEST_URI']== "/signup" )
 	{
 	?> 
 

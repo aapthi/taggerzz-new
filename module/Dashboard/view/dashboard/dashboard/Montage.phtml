@@ -115,6 +115,10 @@
 	
 	
 	<div class="body_mar_b tmar_t20">
+		<input type="hidden" id="perloadTotal" name="perloadTotal" value="3">
+		<input type="hidden" id="start" name="start" value="3">
+		<input type="hidden" id="end" name="end" value="4">
+
 		<div class="body_mar_b">
 			<?php if($this->dashboard!=""){?>
 			<?php foreach($this->dashboard as $key=>$dashboard){$count=0;
@@ -150,7 +154,7 @@
 			?>
 			<input type="hidden" id="totalCount<?echo $key;?>" name="totalCount<?echo $key;?>" value="<?echo $dashboard['totalLinks'];?>">
 			<input type="hidden" id="presentCount<?echo $key;?>" name="presentCount<?echo $key;?>" value="8">
-			<div class="tg_montage_t montage_brg_box">
+			<div id="montage_lode_more_id" class="tg_montage_t montage_brg_box">
 				<div class="montage_box_brg_title">
 					<div class="text_row">
 						<div class="float_l"><h3><b><a href="<?php echo $displayCustomizationUrl;?>"><?echo $dashboard['user_hashname'];?></a></b><span>&nbsp;(<?echo $dashboard['totalLinks'];?>/100)</span></h3></div>
@@ -348,5 +352,67 @@ $('.edit_paragraph_mon_empty').click(function() {
 			alert('Please select a crop region then press submit.');
 		}
 	}
+	$(window).scroll(function(){
+		if ($(window).scrollTop() == $(document).height() - $(window).height()){
+			alert('siva');
+			var perloadTotal=$('#perloadTotal').val();
+			var start=$('#start').val();
+			var end=$('#end').val();
+				$.ajax({
+					type		:	'GET',
+					url			:  	BASE_URL+'/montage',
+					success: function(data){
+						$('#start').val(start+2);
+						$('#end').val(end+2);
+						var html='<div class="montage_box_brg_title">';
+					html +='<div class="text_row">';
+						html +='<div class="float_l"><h3><b><a href="<?php echo $displayCustomizationUrl;?>"><?echo $dashboard['user_hashname'];?></a></b><span>&nbsp;(<?echo $dashboard['totalLinks'];?>/100)</span></h3></div>';
+						html +='<div class="float_r"><P class="text_sub_title"><h3><b><a href="<?php echo $displayCustomizationUrl;?>"><?echo $dashboard['category_title'];?></a></b></h3></P></div>';
+					html +='</div><div class="clearfix"></div>';
+				html +='</div>';
+				html +='<div class="pos_relative">';
+					html +='<div class="montage_row" id="montageRow<?echo $key;?>">';
+					<?php foreach($dashboard['links'] as $links){
+					$count++;
+					if($count<=8){
+						$link=explode('***',$links);
+						?>
+						html +='<div class="column1">';
+							html +='<div>';
+							html +='<p>';
+							<?php echo substr($link[0],0,20) . '...';
+								$url = $link[0];
+									 if(strpos($url, "https://") !== false || strpos($url, "http://") !== false){
+								$url=$url;
+							}
+							else{
+								$url='http://'.$url;
+							}
+							$imageLink1 = getimagesize($link[2]);
+							if($imageLink1[0]!="" && $imageLink1[2]!=""){
+								$imageLink=$link[2];
+							}else{
+								$imageLink=$basePath.'/images/social_media/customization_no_img.jpg';
+							}
+							
+							?>
+								
+							html +='</p>';
+							html +='<a href="<?php echo $url; ?>" target="_blank"><img src="<?php if($link[2]!=""){ echo $imageLink;}else{ echo $basePath;?>/images/social_media/customization_no_img.jpg<? } ?>"/></a></div>';
+						html +='</div>';
+					<?}}?>
+					html +='</div>'
+					html +='<div class="clearfix"></div>';
+					
+					
+				html +='</div>';
+				$('#montage_lode_more_id').html('sivaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+					}
+				});
+			
+
+		}
+	});
+
 	
 </script>

@@ -242,8 +242,10 @@ class DashboardController extends AbstractActionController
 		$baseUrl 	= $baseUrlArr['baseUrl'];
 		$basePath 	= $baseUrlArr['basePath'];
 		
+		
 		$relevanceWorthVoteTable=$this->getServiceLocator()->get('Databox\Model\RelevanceWorthVoteFactory');
-		$getDataboxes = $this->getUserCategoriesTable()->getMontages( $_SESSION['usersinfo']->userId );
+		$getDataboxes = $this->getUserCategoriesTable()->getMontages( $_SESSION['usersinfo']->userId);
+
 		$dashboard=array();
 		$count=0;
 		$privateCount=0;
@@ -309,6 +311,7 @@ class DashboardController extends AbstractActionController
 
 				}
 			}
+
 			$_SESSION['montageLinks']=$dashboard;
 			$view = new ViewModel(
 			array(

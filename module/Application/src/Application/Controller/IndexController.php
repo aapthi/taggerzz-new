@@ -900,16 +900,32 @@ class IndexController extends AbstractActionController
 		$baseUrlArr = $baseUrls['urls'];
 		$baseUrl = $baseUrlArr['baseUrl'];
 		$basePath = $baseUrlArr['basePath'];
+		$emailId = "";
+		$userPassword = "";
+		if( $_POST )
+		{
+			if( isset($_POST["emailId1"]) )
+			{
+				$emailId = $_POST["emailId1"];
+			}
+			if( isset($_POST["userPassword1"]) )
+			{
+				$userPassword = $_POST["userPassword1"];
+			}
+		}
 		$homeUsersCount = $this->getUserTable()->getUsersCount();
 		$totalHotLinksCount = $this->getLinkDetailsTable()->gettotalHotLinksCount();
-			return $viewModel = new ViewModel(
+			$viewModel = new ViewModel(
 				array(
+					'emailId' 			=> $emailId,
+					'userPassword' 		=> $userPassword,
 					'baseUrl' 	=> $baseUrl,
 					'basePath' 	=> $basePath,
 					'homeUsersCount' 	    => $homeUsersCount,
 					'totalHotLinksCount' 	    => $totalHotLinksCount
 				)
 			);
+			return $viewModel; 
 	}
 	public function getAdminReportsTable(){
 		if (!$this->adminReportsTable) {				

@@ -596,8 +596,8 @@ function showimagepreview(input)
 function checkLogin(alChe)
 	{
 		if(alChe == 'regChe'){
-			var emailId = $.trim( stripHtmlTags($('#emailId').val()).replace(/&nbsp;/g,'') );
-			$('#emailId').val( emailId );
+			var emailId = $.trim( stripHtmlTags($('#emailId45').val()).replace(/&nbsp;/g,'') );
+			$('#emailId45').val( emailId );
 			if( emailId == "" )
 			{
 				/*
@@ -616,9 +616,9 @@ function checkLogin(alChe)
 				$('#emailId').focus();
 				return false;
 			}
-			var userPassword = $.trim( stripHtmlTags($('#userPassword').val()).replace(/&nbsp;/g,'') );
-			$('#userPassword').val( userPassword );
-			var userPassword = $('#userPassword').val().trim();
+			var userPassword = $.trim( stripHtmlTags($('#userPassword45').val()).replace(/&nbsp;/g,'') );
+			$('#userPassword45').val( userPassword );
+			var userPassword = $('#userPassword45').val().trim();
 			if( userPassword == "" )
 			{
 				/*

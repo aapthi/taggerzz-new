@@ -122,13 +122,13 @@ class DataboxuserController extends AbstractActionController
 						$userPassword = $_POST["userPassword2"];
 					}				
 				}else{
-					if( isset($_POST["emailId"]) )
+					if( isset($_POST["emailId45"]) )
 					{
-						$emailId = $_POST["emailId"];
+						$emailId = $_POST["emailId45"];
 					}
-					if( isset($_POST["userPassword"]) )
+					if( isset($_POST["userPassword45"]) )
 					{
-						$userPassword = $_POST["userPassword"];
+						$userPassword = $_POST["userPassword45"];
 					}
 				}
 				if( ($emailId != "") && ($userPassword != "") )
@@ -1348,10 +1348,49 @@ class DataboxuserController extends AbstractActionController
 				if( $resetPasswordStatus >=0 )
 				{
 					$deleteTokenStatus = $this->getForgotPasswordTable()->deleteToken( $userId );
+					$userRow = $this->getUserTable()->getUser( $userId );
+					$user_session = new Container('usersinfo');
+					$user_session->userId=$userRow->user_id;
+					$user_session->email=$userRow->email;
+					$user_session->displayName=$userRow->display_name;
+					$user_session->montage_hash_name=$userRow->montage_hash_name;
+					$user_session->montage_title=$userRow->montage_title;
+					$user_session->montage_paragraph=$userRow->montage_paragraph;
+					$user_session->montage_image=$userRow->montage_image;
+					$user_session->montage_main_image=$userRow->montage_main_image;
+					$user_session->hinting_state=$userRow->hinting_state;
+					$user_session->disable_messageing=$userRow->disable_messageing;
+					$userCollectedLinksCount= $this->getUserCollectionsTable()->getCollectedLinksCount($userRow->user_id);
+					$collectionsCount=count($userCollectedLinksCount->toArray());
+					$getBlockUserDetails= $this->getBlockUserTable()->getBlockedIds();
+					$finalIds='';
+					foreach($getBlockUserDetails as $key=>$blockUser){
+
+						if($blockUser->block_by_uid==$userRow->user_id){
+							$finalIds .='"'. $blockUser->blocked_to_uid.'"' . ',';
+						}
+						if($blockUser->blocked_to_uid==$userRow->user_id){
+							$finalIds.='"'.$blockUser->block_by_uid.'"' . ',';
+						}
+					}
+					$frnds= rtrim($finalIds,',');
+					$userMessagesCount= count($this->getUserMessagesTable()->getUserMessages( $userRow->user_id,$frnds)->toArray());
+					$user_session->totalcount=$publicprivatetotalcount;
+					$user_session->userMessagesCount=$userMessagesCount;
+					$user_session->collectionsCount=$collectionsCount;
+					$userpointsTable = $this->getUserPointsTable();
+					$userPointss = $userpointsTable->loggedUserPoints($userRow->user_id);
+					
+					$userPoints ='0';
+					if(count($userPointss)>0){
+						$userPoints = $userPointss->userPoints;
+					}
+					$user_session->rewardPoints=$userPoints;
 					return $view = new JsonModel(
 					array(
 						'output' 	=> 1,
 					));
+					return $this->redirect()->toUrl($baseUrl . '/contentpage');
 				}
 				else
 				{
