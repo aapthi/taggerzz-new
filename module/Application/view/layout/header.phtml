@@ -141,10 +141,11 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/"  && $_SERVER['REQUEST_URI']
 	{
 		?>   
 		<div id="mainContainerWrapper" class="mainContainerWrapper">
+		
 		<div class="tfix_header">
 		<?php if( isset($_SESSION['usersinfo']->userId) &&  $_SESSION['usersinfo']->userId!=""){?>
 		<!--<div class="invite_f"><a class="tag_chk " href="javascript:void(0)" onClick="inivite_frnd()" >Invite Friends</a></div>-->	
-		<div class="rep_l"><div  class="reward_points"><span id="ab-message" style="display: none" >Disable Ad blocker to earn</span><span id="add_blocker_disable" style="display: none"><b><?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $_SESSION['usersinfo']->rewardPoints ; }else{ echo '0000';}?></b><sub>POINTS</sub><b><?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $rewardMoney=number_format(($_SESSION['usersinfo']->rewardPoints)*0.10, 2) ; }else{ echo '00';}?></b><sub>INR, Worth</sub><a href="#" onClick="convertPoints('<?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $_SESSION['usersinfo']->rewardPoints ; }else{ echo '0000';}?>');" title="Convert"> Convert</a></span></div> <div class="log_out_l"><a href="#"  onClick="goToLocation('logout')"><img src="<?php echo $basePath; ?>/img/logoout.png"></a></div></div>
+		<div class="rep_l"><div  class="reward_points"><span id="some-ad" style="display: none" >Disable Ad blocker to earn</span><span id="add_blocker_disable" style="display: block"><b><?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $_SESSION['usersinfo']->rewardPoints ; }else{ echo '0000';}?></b><sub>POINTS</sub><b><?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $rewardMoney=number_format(($_SESSION['usersinfo']->rewardPoints)*0.10, 2) ; }else{ echo '00';}?></b><sub>INR, Worth</sub><a href="#" onClick="convertPoints('<?php if(isset($_SESSION['usersinfo']->rewardPoints)){echo $_SESSION['usersinfo']->rewardPoints ; }else{ echo '0000';}?>');" title="Convert"> Convert</a></span></div> <div class="log_out_l"><a href="#"  onClick="goToLocation('logout')"><img src="<?php echo $basePath; ?>/img/logoout.png"></a></div></div>
 		<? } ?> 
 		 <section id="secHeader">
     <div id="divHeaderWrapper" class="width100 divHeaderWrapper">
@@ -411,9 +412,9 @@ $('#userPassword2').keypress(function(e) {
 	checkLogin('loginPopup');
   }
 }); 
- $(function() {
-	 function addBlockerEvent(){
-		$('#add_blocker_disable').hide();
+$(document).ready(function() {
+	$('#add_blocker_disable').hide();
+	setTimeout(function(){
 	   var add_blocker=$('#ab-message');
 		if (add_blocker.css('display') == 'block') { 
 		// Current display
@@ -428,8 +429,8 @@ $('#userPassword2').keypress(function(e) {
 			$('#add_blocker_disable').show();
 			$('#add_blocker_disable').css('display', 'block');
 		}
-	 }
-	 
-}); 
+	}, 4000);
+
+});	 
 
 </script>

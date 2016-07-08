@@ -10,6 +10,9 @@ body{
 		background-color: #fff;
 		box-shadow: 0.05em 0.05em 0.30em 0.05em #666;
 	}
+ul{
+	margin-left:30px
+}
 </style>
 <?php 
 	unset($_SESSION['tzCreateEditBoxId']);
@@ -97,9 +100,9 @@ if( isset($_SESSION['usersinfo']) && isset($_SESSION['usersinfo']->userId ) )
 				<div class="wrote_p">
 					<div class="">
 						<div  class="c_DivHeaderCommentRightTop" style="border:1px solid #c7c7c7;">
-							<div id="catDescIntro" class="" style="display:none" align="center">
+							 <div id="catDescIntro" class="" style="display:none" align="center">
 								<?php if( ! is_null($this->categoryDescripton) ){ echo $this->categoryDescripton; }?>&nbsp;<b>Edit</b>
-							</div>
+							</div> 
 							<div id="fullCatDesc" class="">
 								<div id="fullDescPara" class="pad_lrtb"><?php if( ! is_null($this->categoryDescripton) ){ echo $this->categoryDescripton; }?></div>
 							</div>
@@ -648,6 +651,7 @@ $(document).ready(function()
 	var catDescIntroDiv = document.getElementById('catDescIntro');
 	if($('#hiddenDec').val()!="" )
 	{
+
 		$('#catDescIntro').hide();
 		var fullDescParaHtml = "";
 		fullDescParaHtml += '<span id="categoryDescripton">' + $.trim($("#fullDescPara").html().replace(/&nbsp;/g,'')) + '</span>&nbsp;';
@@ -667,6 +671,8 @@ $(document).ready(function()
 	}
 	else
 	{
+		$('#fullDescPara').hide();
+
 		var catDescIntroDivHtml = "";
 		if( category_user_id == currUserId )
 		{
@@ -676,28 +682,38 @@ $(document).ready(function()
 
 		}
 
-		var catDescIntroDivHtml = '<span id="">' + $.trim($("#fullDescPara").html().replace(/&nbsp;/g,'')) + '</span>&nbsp;'; 
+		var catDescIntroDivHtml = '<span id="categoryDescripton">' + $.trim($("#fullDescPara").html().replace(/&nbsp;/g,'')) + '</span>&nbsp;'; 
 
 		if( showCustOtions )
 		{
+
 			if( parseInt($.trim($("#fullDescPara").html().replace(/&nbsp;/g,'')).length) > parseInt("0") )
 			{
 				catDescAnchorLbl = "<b>Edit</b>";
 			}
 			
 			catDescIntroDivHtml += '<span id="categoryDescLink" style="display:none;"><a href="Javascript:void(0);" id="catDescAnchor" onclick="catDescCkEditorShow();">'+catDescAnchorLbl+'</a></span>';
+
 		}
 		else
 		{
+
 			catDescIntroDivHtml += '<span id="categoryDescLink" style="display:none;">'+catDescAnchorLbl+'</span>';
 			$('.c_DivHeaderCommentRightTop').hide();
 
 		}
-
+		//$('#fullDescPara').html( '' );
+		//$('#catDescIntro').html( '' );
 		$('#catDescIntro').html( catDescIntroDivHtml );
 
-		$('#categoryDescLink').show();
 		$('#catDescIntro').show();
+		$('#categoryDescLink').show();
+
+		
+
+
+
+
 	}
 	// End Cat desc...
  });

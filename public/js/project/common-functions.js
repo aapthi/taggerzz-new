@@ -2712,6 +2712,7 @@ function savePositions(categoryId){
 				if( parseInt($('#catDescChanged').val()) == parseInt("1") )
 				{
 					var catNewDesc = $('#categoryDescripton').html();
+					catNewDesc = catNewDesc.replace('"', '&ldquo;');
 					$.ajax({
 						url		: 	BASE_URL+'/databox/update-cat-desc',
 						type	: 	"POST",
@@ -3298,6 +3299,7 @@ function loginWindow(){
 	$(".crete_acc").fadeIn(600);
 	$("#forgot_password").fadeIn(600);
 }
+ 
 //SIGN UP 
 
 
