@@ -3209,6 +3209,7 @@ function getTpCookie(name) {
 			{
 				$('#resetPwdSbmt').show();
 				$('#resetPwdSbmt').html( "Your password reset successfully." );
+				window.location=BASE_URL+ "/contentpage";
 			}
 			else
 			{

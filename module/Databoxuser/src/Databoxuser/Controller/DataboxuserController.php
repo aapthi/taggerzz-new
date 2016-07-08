@@ -1390,7 +1390,7 @@ class DataboxuserController extends AbstractActionController
 					array(
 						'output' 	=> 1,
 					));
-					return $this->redirect()->toUrl($baseUrl . '/contentpage');
+					//return $this->redirect()->toUrl($baseUrl . '/contentpage');
 				}
 				else
 				{

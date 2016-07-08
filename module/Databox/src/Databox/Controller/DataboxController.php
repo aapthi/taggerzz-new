@@ -2288,16 +2288,16 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 			    $publicBoxesHtml .='</div>';
 			   
 				if($currentBoxRow->category_title !=""){
-					$publicBoxesHtml .='<div id="divDatabox-1-title" class="divCardTitle"> <h2 class="home_title_d">'. $currentBoxRow->category_title .
-					'</h2></div>';
+					$publicBoxesHtml .='<div id="divDatabox-1-title" class="divCardTitle"><a href="'.$displayCustomizationUrl.'"> <h2 class="home_title_d">'. $currentBoxRow->category_title .
+					'</h2></a></div>';
 				}
 				if($currentBoxRow->meta_tags !=""){
 					$publicBoxesHtml .='<div id="divCardKeywords" class="divCardKeywords">';
-					$publicBoxesHtml .='<h3 class="home_keyword_h3"><b>Keywords: </b>'.$currentBoxRow->meta_tags.'</h3>';
+					$publicBoxesHtml .='<a href="'.$displayCustomizationUrl.'"><h3 class="home_keyword_h3"><b>Keywords: </b>'.$currentBoxRow->meta_tags.'</h3></a>';
 					$publicBoxesHtml .='</div>';
 				}
 			    if($currentBoxRow->category_description !=""){
-			   $publicBoxesHtml .=' <div id="divDatabox-1-description" class="divCardDescription home_de_brg_t home_title_des_s">';
+			   $publicBoxesHtml .=' <div id="divDatabox-1-description" class="divCardDescription home_de_brg_t home_title_des_s"><a href="'.$displayCustomizationUrl.'">';
 			   if($currentBoxRow->category_description !=""){
 					if(strlen($currentBoxRow->category_description)>160)
 					{
@@ -2308,7 +2308,7 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 						$publicBoxesHtml.= $currentBoxRow->category_description;
 					}
 				}
-			   $publicBoxesHtml .='</div>';
+			   $publicBoxesHtml .='</a></div>';
 			   }
 			   $publicBoxesHtml .='</div>';
 		       $publicBoxesHtml .='</div>';
@@ -2562,16 +2562,16 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				$publicBoxesHtml1 .='</div></div>';
 
 				if($currentBoxRow->category_title !=""){
-				$publicBoxesHtml1 .='<div id="divDatabox-1-title" class="divCardTitle"><h2 class="home_title_d"> '. $currentBoxRow->category_title .
-				'</h2></div>';
+				$publicBoxesHtml1 .='<div id="divDatabox-1-title" class="divCardTitle"><a href="'.$displayCustomizationUrl.'"><h2 class="home_title_d"> '. $currentBoxRow->category_title .
+				'</h2></a></div>';
 				}
 				if($currentBoxRow->meta_tags !=""){
-				$publicBoxesHtml1 .='<div id="divCardKeywords" class="divCardKeywords"><h3 class="home_keyword_h3"><b>Keywords: </b>';
+				$publicBoxesHtml1 .='<div id="divCardKeywords" class="divCardKeywords"><a href="'.$displayCustomizationUrl.'"><h3 class="home_keyword_h3"><b>Keywords: </b>';
 				$publicBoxesHtml1 .=$currentBoxRow->meta_tags;
-				$publicBoxesHtml1 .='</h3></div>';
+				$publicBoxesHtml1 .='</h3></a></div>';
 				}
 				if($currentBoxRow->category_description !=""){
-			   $publicBoxesHtml1 .=' <div id="divDatabox-1-description" class="divCardDescription home_de_brg_t home_title_des_s">';
+			   $publicBoxesHtml1 .=' <div id="divDatabox-1-description" class="divCardDescription home_de_brg_t home_title_des_s"><a href="'.$displayCustomizationUrl.'">';
 			   if($currentBoxRow->category_description !=""){
 					if(strlen($currentBoxRow->category_description)>160)
 					{
@@ -2582,7 +2582,7 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 						$publicBoxesHtml1.= $currentBoxRow->category_description;
 					}
 				}
-			   $publicBoxesHtml1 .='</div>';
+			   $publicBoxesHtml1 .='</a></div>';
 			   }
 			$publicBoxesHtml1 .='</div>';
 		    $publicBoxesHtml1 .='</div>';
@@ -2738,17 +2738,17 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 			$privateBoxHtml .='</div></div>';
 
 				if($currentBoxRow->category_title !=""){
-					$privateBoxHtml .='<div id="divDatabox-1-title" class="divCardTitle"><h2 class="home_title_d"> '. $currentBoxRow->category_title .
-					'</h2></div>';
+					$privateBoxHtml .='<div id="divDatabox-1-title" class="divCardTitle"><a href="'.$displayCustomizationUrl.'"><h2 class="home_title_d"> '. $currentBoxRow->category_title .
+					'</h2></a></div>';
 				}	
 				if($currentBoxRow->meta_tags !=""){
 				
-				$privateBoxHtml .='<div id="divCardKeywords" class="divCardKeywords"><h3 class="home_keyword_h3"><b>Keywords: </b>'; 
+				$privateBoxHtml .='<div id="divCardKeywords" class="divCardKeywords"><a href="'.$displayCustomizationUrl.'"><h3 class="home_keyword_h3"><b>Keywords: </b>'; 
 				$privateBoxHtml .=$currentBoxRow->meta_tags;
-				$privateBoxHtml.='</h3></div>';
+				$privateBoxHtml.='</h3></a></div>';
 				}
 				if($currentBoxRow->category_description !=""){
-			   $privateBoxHtml .=' <div id="divDatabox-1-description" class="divCardDescription home_de_brg_t home_title_des_s">';
+			   $privateBoxHtml .=' <div id="divDatabox-1-description" class="divCardDescription home_de_brg_t home_title_des_s"><a href="'.$displayCustomizationUrl.'">';
 			   if($currentBoxRow->category_description !=""){
 					if(strlen($currentBoxRow->category_description)>160)
 					{
@@ -2759,7 +2759,7 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 						$privateBoxHtml.= $currentBoxRow->category_description;
 					}
 				}
-			   $privateBoxHtml .='</div>';
+			   $privateBoxHtml .='</a></div>';
 			   }
 			$privateBoxHtml .='</div>';
 		    $privateBoxHtml .='</div>';
