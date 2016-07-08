@@ -806,6 +806,11 @@ function insertComment(){
 	}
 }
 function editComment(id){
+	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        $('#smhide_m123').remove();
+    }else{
+		$('#lgd_hide123').remove();
+	}
     $('#message').focus();
 	var editCommTxt = $('#commText'+id).html();
 	$('#message').val(editCommTxt);
@@ -813,6 +818,11 @@ function editComment(id){
 	$('#hidSendComment').val(id);
 }
 function deletedComment(id){
+	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        $('#smhide_m123').remove();
+    }else{
+		$('#lgd_hide123').remove();
+	}
 	var databoxId='<?php echo $this->categoryId ?>';
 	if(confirm("Are you sure delete the comment!")){
 		$.ajax({
