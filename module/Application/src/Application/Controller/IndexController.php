@@ -655,7 +655,15 @@ class IndexController extends AbstractActionController
 		$baseUrlArr = $baseUrls['urls'];
 		$baseUrl 	= $baseUrlArr['baseUrl'];
 		$basePath 	= $baseUrlArr['basePath'];
-
+		
+		if(isset($_POST['start']) && $_POST['start']!="" ){
+			$boxesPerPage=2;
+			$offset=$_POST['start'];	
+		}else{
+			$boxesPerPage=2;
+			$offset=0;
+		}
+		
 		$userId = 0;
 		if($this->params()->fromRoute('id', 0)!="")
 		{
@@ -670,13 +678,14 @@ class IndexController extends AbstractActionController
 		$montageParagraph = $ucUserMontageDetails->montage_paragraph;
 
 		$relevanceWorthVoteTable=$this->getServiceLocator()->get('Databox\Model\RelevanceWorthVoteFactory');
-		$getDataboxes = $this->getUserCategoriesTable()->getHomeUserCollection( $userId );
+		$getDataboxes = $this->getUserCategoriesTable()->getHomeUserCollection( $userId,$boxesPerPage,$offset );
 
 		$dashboard=array();
+		$linkIdsMembersArray=array();
 
 		$count=0;
 
-		if($getDataboxes->count()!=0){
+		if(count($getDataboxes)!=0){
 			foreach($getDataboxes as $databoxes){
 				if(isset($_SESSION['usersinfo']->userId)){
 					$user_id=$_SESSION['usersinfo']->userId;
@@ -705,11 +714,17 @@ class IndexController extends AbstractActionController
 					$categoryRelevanceStatus = "2";
 					$categoryWorthStatus = "2";
 				}
+				$categoryLinks = $this->getCategoryLinksTable()->getDataboxTotalLinks( $databoxes->category_id );
+				foreach( $categoryLinks as $categoryLinksList )
+				{
+					$count++;
+					$linkIdsMembersArray[] = $categoryLinksList->link.'***'.$categoryLinksList->title.'***'.$categoryLinksList->image;
+				}
+				
 				if(array_key_exists($databoxes->category_id,$dashboard)){
-						$count++;
 						$dashboard[$databoxes->category_id]['category_title']=$databoxes->category_title;
 						$dashboard[$databoxes->category_id]['user_hashname']=$databoxes->user_hashname;
-						$dashboard[$databoxes->category_id]['links'][$count]=$databoxes->link.'***'.$databoxes->title.'***'.$databoxes->image;
+						$dashboard[$databoxes->category_id]['links']=$linkIdsMembersArray;
 						$dashboard[$databoxes->category_id]['totalLinks']=$count;
 						$dashboard[$databoxes->category_id]['user_category_id']=$databoxes->user_category_id;
 						$dashboard[$databoxes->category_id]['categoryRelevance']=$categoryRelevanceStatus;
@@ -718,11 +733,12 @@ class IndexController extends AbstractActionController
 						$dashboard[$databoxes->category_id]['category_id']=$databoxes->category_id;
 						$dashboard[$databoxes->category_id]['category_image']=$databoxes->category_image;
 						$dashboard[$databoxes->category_id]['settingId']=$databoxes->setting_id;
+						$count=0;
+						$linkIdsMembersArray=array();
 				}else{
-					$count=1;
 					$dashboard[$databoxes->category_id]['category_title']=$databoxes->category_title;
 					$dashboard[$databoxes->category_id]['user_hashname']=$databoxes->user_hashname;
-					$dashboard[$databoxes->category_id]['links'][$count]=$databoxes->link.'***'.$databoxes->title.'***'.$databoxes->image;
+					$dashboard[$databoxes->category_id]['links']=$linkIdsMembersArray;
 					$dashboard[$databoxes->category_id]['totalLinks']=$count;
 					$dashboard[$databoxes->category_id]['user_category_id']=$databoxes->user_category_id;
 					$dashboard[$databoxes->category_id]['categoryRelevance']=$categoryRelevanceStatus;
@@ -731,10 +747,11 @@ class IndexController extends AbstractActionController
 					$dashboard[$databoxes->category_id]['category_id']=$databoxes->category_id;
 					$dashboard[$databoxes->category_id]['category_image']=$databoxes->category_image;
 					$dashboard[$databoxes->category_id]['settingId']=$databoxes->setting_id;
+					$count=0;
+					$linkIdsMembersArray=array();
 				}
 			}
-			$_SESSION['userCollectionLinks']=$dashboard;
-
+			//$_SESSION['userCollectionLinks']=$dashboard;
 			return $view = new ViewModel(
 			array(
 				'baseUrl' 			=> 	$baseUrl,
@@ -765,7 +782,7 @@ class IndexController extends AbstractActionController
 			));
 		}
 	}
-
+	
 	public function reportsAction(){
 		$baseUrls 	= $this->getServiceLocator()->get('config');
 		$baseUrlArr = $baseUrls['urls'];
@@ -927,6 +944,142 @@ class IndexController extends AbstractActionController
 			);
 			return $viewModel; 
 	}
+	
+	public function userCollectionLoadAjaxAction()
+	{
+		$baseUrls 	= $this->getServiceLocator()->get('config');
+		$baseUrlArr = $baseUrls['urls'];
+		$baseUrl 	= $baseUrlArr['baseUrl'];
+		$basePath 	= $baseUrlArr['basePath'];
+		
+		if(isset($_POST['start']) && $_POST['start']!="" ){
+			$boxesPerPage=2;
+			$offset=$_POST['start'];	
+		}else{
+			$boxesPerPage=2;
+			$offset=0;
+		}
+		
+		if(isset($_SESSION['usersinfo']->userId)){
+			$user_id=$_SESSION['usersinfo']->userId;
+		}else{
+			$user_id=$_SERVER['REMOTE_ADDR'];
+		}
+
+		$ucUserMontageDetails = $this->getUserDetailsTable()->getUcUserMontageDetails( $userId );
+		$montageHashName = $ucUserMontageDetails->montage_hash_name;
+		$montageTitle = $ucUserMontageDetails->montage_title;
+		$montageImage = $ucUserMontageDetails->montage_image;
+		$montageMainImage = $ucUserMontageDetails->montage_main_image;
+		$montageParagraph = $ucUserMontageDetails->montage_paragraph;
+
+		$relevanceWorthVoteTable=$this->getServiceLocator()->get('Databox\Model\RelevanceWorthVoteFactory');
+		$getDataboxes = $this->getUserCategoriesTable()->getHomeUserCollection( $user_id,$boxesPerPage,$offset );
+
+		$dashboard=array();
+		$linkIdsMembersArray=array();
+
+		$count=0;
+		if($getDataboxes->count()!=0){
+			foreach($getDataboxes as $databoxes){
+				if(isset($_SESSION['usersinfo']->userId)){
+					$user_id=$_SESSION['usersinfo']->userId;
+				}else{
+					$user_id=$_SERVER['REMOTE_ADDR'];
+				}
+				$getRelevanceWorth = $relevanceWorthVoteTable->getVoteUpDown( $databoxes->category_id,$user_id );
+				$categoryRelevanceStatus = "";
+				$categoryWorthStatus = "";
+				if( $getRelevanceWorth->count()!= 0 )
+				{
+					$getRelevanceWorth->buffer();
+					$categoryRelevanceStatus = $getRelevanceWorth->current()->relevance;
+					if( $categoryRelevanceStatus == null )
+					{
+						$categoryRelevanceStatus = "2";
+					}
+					$categoryWorthStatus = $getRelevanceWorth->current()->worth;
+					if( $categoryWorthStatus == null )
+					{
+						$categoryWorthStatus = "2";
+					}
+				}
+				else
+				{
+					$categoryRelevanceStatus = "2";
+					$categoryWorthStatus = "2";
+				}
+				$categoryLinks = $this->getCategoryLinksTable()->getDataboxTotalLinks( $databoxes->category_id );
+				foreach( $categoryLinks as $categoryLinksList )
+				{
+					$count++;
+					$linkIdsMembersArray[] = $categoryLinksList->link.'***'.$categoryLinksList->title.'***'.$categoryLinksList->image;
+				}
+				
+				if(array_key_exists($databoxes->category_id,$dashboard)){
+						$dashboard[$databoxes->category_id]['category_title']=$databoxes->category_title;
+						$dashboard[$databoxes->category_id]['user_hashname']=$databoxes->user_hashname;
+						$dashboard[$databoxes->category_id]['links']=$linkIdsMembersArray;
+						$dashboard[$databoxes->category_id]['totalLinks']=$count;
+						$dashboard[$databoxes->category_id]['user_category_id']=$databoxes->user_category_id;
+						$dashboard[$databoxes->category_id]['categoryRelevance']=$categoryRelevanceStatus;
+						$dashboard[$databoxes->category_id]['categoryWorth']=$categoryWorthStatus;
+						$dashboard[$databoxes->category_id]['user_id']=$databoxes->user_id;
+						$dashboard[$databoxes->category_id]['category_id']=$databoxes->category_id;
+						$dashboard[$databoxes->category_id]['category_image']=$databoxes->category_image;
+						$dashboard[$databoxes->category_id]['settingId']=$databoxes->setting_id;
+						$count=0;
+						$linkIdsMembersArray=array();
+				}else{
+					$dashboard[$databoxes->category_id]['category_title']=$databoxes->category_title;
+					$dashboard[$databoxes->category_id]['user_hashname']=$databoxes->user_hashname;
+					$dashboard[$databoxes->category_id]['links']=$linkIdsMembersArray;
+					$dashboard[$databoxes->category_id]['totalLinks']=$count;
+					$dashboard[$databoxes->category_id]['user_category_id']=$databoxes->user_category_id;
+					$dashboard[$databoxes->category_id]['categoryRelevance']=$categoryRelevanceStatus;
+					$dashboard[$databoxes->category_id]['categoryWorth']=$categoryWorthStatus;
+					$dashboard[$databoxes->category_id]['user_id']=$databoxes->user_id;
+					$dashboard[$databoxes->category_id]['category_id']=$databoxes->category_id;
+					$dashboard[$databoxes->category_id]['category_image']=$databoxes->category_image;
+					$dashboard[$databoxes->category_id]['settingId']=$databoxes->setting_id;
+					$count=0;
+					$linkIdsMembersArray=array();
+				}
+			}
+			//$_SESSION['userCollectionLinks']=$dashboard;
+			 $view = new ViewModel(
+			array(
+				'baseUrl' 			=> 	$baseUrl,
+				'basePath' 			=> 	$basePath,
+				'dashboard'			=>	$dashboard,
+				'totalDataboxes'	=>	count($dashboard),
+				'options'			=>	$this->getOptions(),
+				'montageHashName'	=>	$montageHashName,
+				'montageTitle'		=>	$montageTitle,
+				'montageImage'		=>	$montageImage,
+				'montageMainImage'	=>	$montageMainImage,
+				'montageParagraph'	=>	$montageParagraph,
+				'ucUserId'			=>	$userId,
+			));
+		}else{
+			 $view = new ViewModel(
+			array(
+				'baseUrl' 	=> $baseUrl,
+				'basePath' 	=> $basePath,
+				'dashboard'	=>	"",
+				'options'	=>	$this->getOptions(),
+				'montageHashName'	=>	$montageHashName,
+				'montageTitle'		=>	$montageTitle,
+				'montageImage'		=>	$montageImage,
+				'montageMainImage'	=>	$montageMainImage,
+				'montageParagraph'	=>	$montageParagraph,
+				'ucUserId'			=>	$userId,
+			));
+		}
+				$view->setTerminal(true);
+			return $view;
+	}
+
 	public function getAdminReportsTable(){
 		if (!$this->adminReportsTable) {				
 			$sm = $this->getServiceLocator();

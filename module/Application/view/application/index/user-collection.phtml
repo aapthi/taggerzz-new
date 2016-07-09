@@ -152,8 +152,10 @@
 	
 	
 		<div class="tmar_t20">
-	<div class="body_mar_b">
-		<div class="body_mar_b">
+	<div id="montage_load_ajax_member_div_id" class="body_mar_b">
+	<input type="hidden" id="perloadTotal" name="perloadTotal" value="2">
+		<input type="hidden" id="start" name="start" value="2">
+		<div  class="body_mar_b">
 		<?php if($this->dashboard!=""){?>
 		<?foreach($this->dashboard as $key=>$dashboard){$count=0;
 		$viewUrl = "";
@@ -198,7 +200,7 @@
 				<div class="montage_row" id="montageRow<?echo $key;?>">
 				<?php foreach($dashboard['links'] as $links){
 					$count++;
-				if($count<=8){
+				if($count){
 					$link=explode('***',$links);
 					?>
 					<div class="column1">
@@ -221,7 +223,7 @@
 					</div>
 				<?}}?>
 				</div>
-				<div class="clearfix"></div>
+				<!--<div class="clearfix"></div>
 				<div class="text_row Previous">
 					<div class="float_l" id="prevPagination<?echo $key;?>" style="display:none">
 						<a href="javascript:void(0);" onclick="userCollectionLinks('0',<?echo $key;?>)" >
@@ -235,7 +237,7 @@
 						</a>
 					</div>
 					<?}?>
-				</div>
+				</div>-->
 				<div class="clearfix"></div>
 			</div>
 			</div>
@@ -320,6 +322,35 @@ $('.edit_paragraph_mon_empty').click(function() {
 			});
 		});
 	});
+		var scroolTopMember=0;
+
+	$(window).scroll(function(){
+		if ($(window).scrollTop() == $(document).height() - $(window).height()){
+			if(scroolTopMember==0){
+				var perloadTotal=$('#perloadTotal').val();
+				var start=$('#start').val();
+					$.ajax({
+						type		:	'POST',
+						url			:  	BASE_URL+'/user-collection-load-ajax',
+						data		:	{start:start,perloadTotal:perloadTotal},
+						success: function(data){
+							console.log(data);
+							if(data!=""){
+								var startcount=parseInt(start)+2;
+								$('#start').val(startcount);
+								$('#montage_load_ajax_member_div_id').append(data);
+							}else{
+								scroolTopMember=1;
+							}
+							
+						}
+					});
+			}		
+				
+
+		}
+	});
+
 
 </script>
 <? } ?>

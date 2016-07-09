@@ -92,4 +92,15 @@ class CategoryLinksTable
 		return $deleteStatus;
 	}
 	
+	public function getDataboxTotalLinks( $user_category_id )
+	{
+		$select = $this->tableGateway->getSql()->select();
+		$select->join('link_details', 'category_links.category_link_id=link_details.link_id',array('title','image','url_id'),'left');
+		$select->where('category_links.user_category_id="'. $user_category_id .'"');
+		$select->where('category_links.link_validity_status="1"');
+		$select->order('link_details.url_id ASC');
+		$resultSet = $this->tableGateway->selectWith($select);
+		return $resultSet;
+	}
+	
 }

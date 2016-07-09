@@ -241,12 +241,18 @@ class DashboardController extends AbstractActionController
 		$baseUrlArr = $baseUrls['urls'];
 		$baseUrl 	= $baseUrlArr['baseUrl'];
 		$basePath 	= $baseUrlArr['basePath'];
-		
+		if(isset($_POST['start']) && $_POST['start']!="" ){
+			$boxesPerPage=2;
+			$offset=$_POST['start'];	
+		}else{
+			$boxesPerPage=2;
+			$offset=0;
+		}
 		
 		$relevanceWorthVoteTable=$this->getServiceLocator()->get('Databox\Model\RelevanceWorthVoteFactory');
-		$getDataboxes = $this->getUserCategoriesTable()->getMontages( $_SESSION['usersinfo']->userId);
-
+		$getDataboxes = $this->getUserCategoriesTable()->getMontages( $_SESSION['usersinfo']->userId,$boxesPerPage,$offset);
 		$dashboard=array();
+		$linkIdsArray=array();
 		$count=0;
 		$privateCount=0;
 		if($getDataboxes->count()!=0){
@@ -278,12 +284,20 @@ class DashboardController extends AbstractActionController
 					$categoryRelevanceStatus = "2";
 					$categoryWorthStatus = "2";
 				}
+				
+				$categoryLinks = $this->getCategoryLinksTable()->getDataboxTotalLinks( $databoxes->category_id );
+				foreach( $categoryLinks as $categoryLinksList )
+				{
+					$count++;
+					$linkIdsArray[] = $categoryLinksList->link.'***'.$categoryLinksList->title.'***'.$categoryLinksList->image;
+				} 
+
+				
 
 				if(array_key_exists($databoxes->category_id,$dashboard)){
-						$count++;
 						$dashboard[$databoxes->category_id]['category_title']=$databoxes->category_title;
 						$dashboard[$databoxes->category_id]['user_hashname']=$databoxes->user_hashname;
-						$dashboard[$databoxes->category_id]['links'][$count]=$databoxes->link.'***'.$databoxes->title.'***'.$databoxes->image;
+						$dashboard[$databoxes->category_id]['links']=$linkIdsArray;
 						$dashboard[$databoxes->category_id]['totalLinks']=$count;
 						$dashboard[$databoxes->category_id]['user_category_id']=$databoxes->user_category_id;
 						$dashboard[$databoxes->category_id]['categoryRelevance']=$categoryRelevanceStatus;
@@ -292,14 +306,15 @@ class DashboardController extends AbstractActionController
 						$dashboard[$databoxes->category_id]['category_id']=$databoxes->category_id;
 						$dashboard[$databoxes->category_id]['category_image']=$databoxes->category_image;
 						$dashboard[$databoxes->category_id]['settingId']=$databoxes->setting_id;
+						$count=0;
+						$linkIdsArray=array();
 				}else{
-					$count=1;
 					if($databoxes->category_type==0){
 						$privateCount++;
 					}
 					$dashboard[$databoxes->category_id]['category_title']=$databoxes->category_title;
 					$dashboard[$databoxes->category_id]['user_hashname']=$databoxes->user_hashname;
-					$dashboard[$databoxes->category_id]['links'][$count]=$databoxes->link.'***'.$databoxes->title.'***'.$databoxes->image;
+					$dashboard[$databoxes->category_id]['links']=$linkIdsArray;
 					$dashboard[$databoxes->category_id]['totalLinks']=$count;
 					$dashboard[$databoxes->category_id]['user_category_id']=$databoxes->user_category_id;
 					$dashboard[$databoxes->category_id]['categoryRelevance']=$categoryRelevanceStatus;
@@ -308,11 +323,13 @@ class DashboardController extends AbstractActionController
 					$dashboard[$databoxes->category_id]['category_id']=$databoxes->category_id;
 					$dashboard[$databoxes->category_id]['category_image']=$databoxes->category_image;
 					$dashboard[$databoxes->category_id]['settingId']=$databoxes->setting_id;
-
+					$count=0;
+					$linkIdsArray=array();
 				}
+
 			}
 
-			$_SESSION['montageLinks']=$dashboard;
+			//$_SESSION['montageLinks']=$dashboard;
 			$view = new ViewModel(
 			array(
 				'baseUrl' 			=> 	$baseUrl,
@@ -608,6 +625,121 @@ class DashboardController extends AbstractActionController
 			));
 			$result->setTerminal(true);
 			return $result;
+	}
+	public function montageLodeAjaxAction(){
+		$baseUrls 	= $this->getServiceLocator()->get('config');
+		$baseUrlArr = $baseUrls['urls'];
+		$baseUrl 	= $baseUrlArr['baseUrl'];
+		$basePath 	= $baseUrlArr['basePath'];
+		if(isset($_POST['start']) && $_POST['start']!="" ){
+			$boxesPerPage=2;
+			$offset=$_POST['start'];	
+		}else{
+			$boxesPerPage=2;
+			$offset=0;
+		}
+		
+		$relevanceWorthVoteTable=$this->getServiceLocator()->get('Databox\Model\RelevanceWorthVoteFactory');
+		$getDataboxes = $this->getUserCategoriesTable()->getMontages( $_SESSION['usersinfo']->userId,$boxesPerPage,$offset);
+		$dashboard=array();
+		$linkIdsArray=array();
+		$count=0;
+		$privateCount=0;
+		if($getDataboxes->count()!=0){
+			foreach($getDataboxes as $databoxes){
+				if(isset($_SESSION['usersinfo']->userId)){
+					$user_id=$_SESSION['usersinfo']->userId;
+				}else{
+					$user_id=$_SERVER['REMOTE_ADDR'];
+				}
+				$getRelevanceWorth = $relevanceWorthVoteTable->getVoteUpDown( $databoxes->category_id,$user_id );
+				$categoryRelevanceStatus = "";
+				$categoryWorthStatus = "";
+				if( $getRelevanceWorth->count()!= 0 )
+				{
+					$getRelevanceWorth->buffer();
+					$categoryRelevanceStatus = $getRelevanceWorth->current()->relevance;
+					if( $categoryRelevanceStatus == null )
+					{
+						$categoryRelevanceStatus = "2";
+					}
+					$categoryWorthStatus = $getRelevanceWorth->current()->worth;
+					if( $categoryWorthStatus == null )
+					{
+						$categoryWorthStatus = "2";
+					}
+				}
+				else
+				{
+					$categoryRelevanceStatus = "2";
+					$categoryWorthStatus = "2";
+				}
+				
+				$categoryLinks = $this->getCategoryLinksTable()->getDataboxTotalLinks( $databoxes->category_id );
+				foreach( $categoryLinks as $categoryLinksList )
+				{
+					$count++;
+					$linkIdsArray[] = $categoryLinksList->link.'***'.$categoryLinksList->title.'***'.$categoryLinksList->image;
+				} 
+
+				
+
+				if(array_key_exists($databoxes->category_id,$dashboard)){
+						$dashboard[$databoxes->category_id]['category_title']=$databoxes->category_title;
+						$dashboard[$databoxes->category_id]['user_hashname']=$databoxes->user_hashname;
+						$dashboard[$databoxes->category_id]['links']=$linkIdsArray;
+						$dashboard[$databoxes->category_id]['totalLinks']=$count;
+						$dashboard[$databoxes->category_id]['user_category_id']=$databoxes->user_category_id;
+						$dashboard[$databoxes->category_id]['categoryRelevance']=$categoryRelevanceStatus;
+						$dashboard[$databoxes->category_id]['categoryWorth']=$categoryWorthStatus;
+						$dashboard[$databoxes->category_id]['user_id']=$databoxes->user_id;
+						$dashboard[$databoxes->category_id]['category_id']=$databoxes->category_id;
+						$dashboard[$databoxes->category_id]['category_image']=$databoxes->category_image;
+						$dashboard[$databoxes->category_id]['settingId']=$databoxes->setting_id;
+						$count=0;
+						$linkIdsArray=array();
+				}else{
+					if($databoxes->category_type==0){
+						$privateCount++;
+					}
+					$dashboard[$databoxes->category_id]['category_title']=$databoxes->category_title;
+					$dashboard[$databoxes->category_id]['user_hashname']=$databoxes->user_hashname;
+					$dashboard[$databoxes->category_id]['links']=$linkIdsArray;
+					$dashboard[$databoxes->category_id]['totalLinks']=$count;
+					$dashboard[$databoxes->category_id]['user_category_id']=$databoxes->user_category_id;
+					$dashboard[$databoxes->category_id]['categoryRelevance']=$categoryRelevanceStatus;
+					$dashboard[$databoxes->category_id]['categoryWorth']=$categoryWorthStatus;
+					$dashboard[$databoxes->category_id]['user_id']=$databoxes->user_id;
+					$dashboard[$databoxes->category_id]['category_id']=$databoxes->category_id;
+					$dashboard[$databoxes->category_id]['category_image']=$databoxes->category_image;
+					$dashboard[$databoxes->category_id]['settingId']=$databoxes->setting_id;
+					$count=0;
+					$linkIdsArray=array();
+				}
+
+			}
+
+			$view = new ViewModel(
+			array(
+				'baseUrl' 			=> 	$baseUrl,
+				'basePath' 			=> 	$basePath,
+				'dashboard'			=>	$dashboard,
+				'totalDataboxes'	=>	count($dashboard),
+				'privateCount'		=>	$privateCount,
+			));
+
+		}else{
+			$view = new ViewModel(
+			array(
+				'baseUrl' 	=> $baseUrl,
+				'basePath' 	=> $basePath,
+				'dashboard'			=>	"",
+				'totalDataboxes'	=>	"",
+				'privateCount'		=>	""
+			));
+		}
+		$view->setTerminal(true);
+			return $view;
 	}
 	public function getCategoryTable()
     {

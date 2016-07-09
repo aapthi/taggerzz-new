@@ -73,6 +73,16 @@ return array(
 					),
 				),
 			),
+			'montage-lode-ajax' => array(
+				'type' => 'Literal',
+				'options' => array(
+					'route' => '/montage-lode-ajax',
+					'defaults' => array(
+						'controller' => 'Dashboard\Controller\Dashboard',
+						'action'     => 'montageLodeAjax',
+					),
+				),
+			),
         ),
 	),     
     'view_manager' => array(

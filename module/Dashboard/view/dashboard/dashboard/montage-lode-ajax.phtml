@@ -1,0 +1,92 @@
+<?php if($this->dashboard!=""){?>
+			<?php foreach($this->dashboard as $key=>$dashboard){$count=0;
+
+				$viewUrl = "";
+				if( isset($_SESSION['usersinfo']) )
+				{
+					if($dashboard['settingId']==3){
+						$viewUrl = "post-vertical";
+					}else{
+						$viewUrl = "post-horizontal";
+					}
+				}
+				else
+				{
+					if($dashboard['settingId']==3){
+						$viewUrl = "pre-vertical";
+					}else{
+						$viewUrl = "pre-horizontal";
+					}
+				}
+				$displayCustomizationUrl = $baseUrl;
+				$catTitles = str_replace( "-","~",$dashboard["category_title"] );
+				$catTitle = str_replace( " ","-",$catTitles );
+				$catHashName = substr( $dashboard["user_hashname"],1 );
+				$catImageUrl=explode(".",$dashboard["category_image"]);
+				//$userImageUrl=$dashboard["image"];
+				$userImageUrl=$dashboard["category_image"];
+				
+				$catImageUrll=$catImageUrl[0];
+				$displayCustomizationUrl .= "/databox/" . $viewUrl . "/" . $dashboard["category_id"] . "+" . $catImageUrll . "+" . $catHashName . "+" . $catTitle;
+				//echo "<pre>";print_r($displayCustomizationUrl);exit;
+			?>
+			<input type="hidden" id="totalCount<?echo $key;?>" name="totalCount<?echo $key;?>" value="<?echo $dashboard['totalLinks'];?>">
+			<input type="hidden" id="presentCount<?echo $key;?>" name="presentCount<?echo $key;?>" value="8">
+			<div id="montage_lode_more_id" class="tg_montage_t montage_brg_box">
+				<div class="montage_box_brg_title">
+					<div class="text_row">
+						<div class="float_l"><h3><b><a href="<?php echo $displayCustomizationUrl;?>"><?echo $dashboard['user_hashname'];?></a></b><span>&nbsp;(<?echo $dashboard['totalLinks'];?>/100)</span></h3></div>
+						<div class="float_r"><P class="text_sub_title"><h3><b><a href="<?php echo $displayCustomizationUrl;?>"><?echo $dashboard['category_title'];?></a></b></h3></P></div>
+					</div><div class="clearfix"></div>
+				</div>
+				<div class="pos_relative">
+					<div class="montage_row" id="montageRow<?echo $key;?>">
+					<?php foreach($dashboard['links'] as $links){
+					$count++;
+					if($count){
+						$link=explode('***',$links);
+						?>
+						<div class="column1">
+							<div>
+							<p>
+							<?php echo substr($link[0],0,20) . '...';
+								$url = $link[0];
+									 if(strpos($url, "https://") !== false || strpos($url, "http://") !== false){
+								$url=$url;
+							}
+							else{
+								$url='http://'.$url;
+							}
+							$imageLink1 = getimagesize($link[2]);
+							if($imageLink1[0]!="" && $imageLink1[2]!=""){
+								$imageLink=$link[2];
+							}else{
+								$imageLink=$basePath.'/images/social_media/customization_no_img.jpg';
+							}
+							
+							?>
+								
+							</p>
+							<a href="<?php echo $url; ?>" target="_blank"><img src="<?php if($link[2]!=""){ echo $imageLink;}else{ echo $basePath;?>/images/social_media/customization_no_img.jpg<? } ?>"/></a></div>
+						</div>
+					<?}}?>
+					</div>
+					<!--<div class="clearfix"></div>
+					<div class="text_row Previous">
+					<div class="float_l" id="prevPagination<?echo $key;?>" style="display:none">
+						<a href="javascript:void(0);" onclick="paginationLinks('0',<?echo $key;?>)" >
+							<img src="<?php echo $basePath; ?>/images/social_media/leftarrow.png"/>&nbsp;Previous
+						</a>
+					</div>
+					<?php if($dashboard['totalLinks']>8){?>
+					<div class="float_r " id="nextPagination<?echo $key;?>">
+						<a href="javascript:void(0);" onclick="paginationLinks('1',<?echo $key;?>)">Next&nbsp;
+							<img src="<?php echo $basePath; ?>/images/social_media/rightarrow.png"/>
+						</a>
+					</div>
+					<?}?>
+					</div>-->
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<?}}?>

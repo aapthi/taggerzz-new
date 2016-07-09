@@ -140,6 +140,16 @@ return array(
 					),
 				),
 			),
+			'user-collection-load-ajax' => array(
+				'type' => 'Literal',
+				'options' => array(
+					'route' => '/user-collection-load-ajax',
+					'defaults' => array(
+						'controller' => 'Application\Controller\Index',
+						'action'     => 'userCollectionLoadAjax',
+					),
+				),
+			),
 			'display-terms' => array(
 				'type' => 'Literal',
 				'options' => array(

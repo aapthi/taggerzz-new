@@ -205,17 +205,15 @@ class UserCategoriesTable
 		}
 		return $update;
     }
-	public function getMontages( $userId ){
+	public function getMontages( $userId,$boxesPerPage,$offset){
 		$select = $this->tableGateway->getSql()->select();
 		$select->join('category', 'user_categories.category_id=category.category_id',array('category_name','category_image'),'left');
-		$select->join('category_links', 'user_categories.category_id=category_links.user_category_id',array('link'),'left');
-		$select->join('link_details', 'category_links.category_link_id=link_details.link_id',array('title','image','url_id'),'left');
 		$select->where('user_categories.user_id="'.$userId.'"');
 		$select->where('category.category_highlight="1"');
-		$select->where('category_links.link_validity_status="1"');
 		$select->where('user_categories.status="1"');
+		$select->limit(intval($boxesPerPage));
+		$select->offset(intval($offset));
 		$select->order('user_categories.category_id ASC');
-		$select->order('link_details.url_id ASC');
 		$resultSet = $this->tableGateway->selectWith($select);
 		return $resultSet;
 	}
@@ -767,24 +765,28 @@ class UserCategoriesTable
 		return $resultSet;
     }
 
-	public function getHomeUserCollection( $userId )
+	public function getHomeUserCollection( $userId,$boxesPerPage,$offset )
 	{
 		$select = $this->tableGateway->getSql()->select();
 		$select->join('category', 'user_categories.category_id=category.category_id',array('category_name','category_image'),'left');
-		$select->join('category_links', 'user_categories.category_id=category_links.user_category_id',array('link'),'left');
-		$select->join('link_details', 'category_links.category_link_id=link_details.link_id',array('title','image'),'left');
+		/* $select->join('category_links', 'user_categories.category_id=category_links.user_category_id',array('link'),'left');
+		$select->join('link_details', 'category_links.category_link_id=link_details.link_id',array('title','image'),'left'); */
 		$select->join('user', 'user_categories.user_id=user.user_id',array('ustatus'=>'status'),'left');
 		$select->where('category.category_highlight="1"');
-		$select->where('category_links.link_validity_status="1"');
+		//$select->where('category_links.link_validity_status="1"');
 		$select->where('user_categories.user_id="' . $userId . '"');
 		$select->where('user_categories.status="1"');
 		$select->where('user_categories.category_type="1"');
+		
 		if( ! isset($_SESSION['usersinfo']->userId) )
 		{
 			$select->where('user_categories.mature_content="0"');
 			$select->where('user_categories.not_safe_for_work="0"');
 		}
 		$select->where('user.status="1"');
+		$select->limit(intval($boxesPerPage));
+		$select->offset(intval($offset));
+		
 		$select->order('user_categories.category_id asc');
 		$resultSet = $this->tableGateway->selectWith($select);
 		return $resultSet;
