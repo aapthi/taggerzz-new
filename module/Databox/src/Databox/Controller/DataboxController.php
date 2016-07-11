@@ -1850,7 +1850,7 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 		$linkValidityStatus = 0;
 		
 		// commented by siva reddy and bhargav if( ($title != "") || ($description != "no Description") || ($site_image != "no Image") )
-		if( ($title != "") || ($description != "no Description")  )
+		if( ($title != "") || ($description != "no Description") || ($site_image != "no Image") )
 		{
 			// echo "<pre>";print_r($_SESSION['urls']);exit;
 			$linkValidityStatus = 1;
