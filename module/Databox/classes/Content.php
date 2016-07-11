@@ -96,7 +96,6 @@ class Content
                     break;
             }
         }
-		
 		$taggerzzImageInserted = false;
 		
 		$extensionUrl = explode( "/",$url );
@@ -106,6 +105,7 @@ class Content
 			$urlExtArr = explode( ".",$extensionUrl[count($extensionUrl)-1] );
 			$urlExtension = $urlExtArr[1];
 		}
+
 		// Dileep On 09-12-2015
 		$urlsArray = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.com','360.cn','about.com','abs-cbnnews.com',
 'accuweather.com','adcash.com','addthis.com','adf.ly','adobe.com','alegro.pl','alibaba.com','aliexpress.com','alipay.com',
@@ -168,7 +168,6 @@ class Content
 
 				$taggerzzImageInserted = true;
 				$images = $imageName;
-
 			}else{
 				$comDomain = explode('.',$domainPath);
 

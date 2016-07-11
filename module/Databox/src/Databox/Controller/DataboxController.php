@@ -1608,9 +1608,11 @@ class DataboxController extends AbstractActionController
 		$title = $answer["title"];
 		$description = $answer["description"];
 		$image1 = $answer["images"];
+						//echo "<pre>";print_r($image1);exit;
+
 		$imageArray=explode('|',$image1);
 		$image=$imageArray[0];
-		
+
 		$site_image = "";
 		
 		$isVideo = $answer["video"];
@@ -1621,7 +1623,6 @@ class DataboxController extends AbstractActionController
 			$site_image = "no Image";
 			$image = $basePath . "/images/social_media/customization_no_img.jpg";
 		}
-
 		$otherLogin = false;
 		
 		$extensionsImgFlag = false;
@@ -1845,13 +1846,15 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 
 		$author = "no Author";
 
+
 		$linkValidityStatus = 0;
-		if( ($title != "") || ($description != "no Description") || ($site_image != "no Image") )
+		
+		// commented by siva reddy and bhargav if( ($title != "") || ($description != "no Description") || ($site_image != "no Image") )
+		if( ($title != "") || ($description != "no Description")  )
 		{
 			// echo "<pre>";print_r($_SESSION['urls']);exit;
 			$linkValidityStatus = 1;
 		}
-		
 		$currentUrlInfo = $urlId . "\t" . $request_url . "\t" . $title . "\t" . $image . "\t" . $description . "\t" . $author . "\t" . $keywords . "\t" . $linkValidityStatus . "\t" . $isVideo . "\t" . $iframeSrc . PHP_EOL;
 		
 		$userId = $_SESSION['usersinfo']->userId;
@@ -2288,8 +2291,8 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 			    $publicBoxesHtml .='</div>';
 			   
 				if($currentBoxRow->category_title !=""){
-					$publicBoxesHtml .='<div id="divDatabox-1-title" class="divCardTitle"><a href="'.$displayCustomizationUrl.'"> <h2 class="home_title_d">'. $currentBoxRow->category_title .
-					'</h2></a></div>';
+					$publicBoxesHtml .='<div id="divDatabox-1-title" class="divCardTitle"><a href="'.$displayCustomizationUrl.'"> <h2 class="home_title_d"><b>'. $currentBoxRow->category_title .
+					'</b></h2></a></div>';
 				}
 				if($currentBoxRow->meta_tags !=""){
 					$publicBoxesHtml .='<div id="divCardKeywords" class="divCardKeywords">';
@@ -2562,8 +2565,8 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 				$publicBoxesHtml1 .='</div></div>';
 
 				if($currentBoxRow->category_title !=""){
-				$publicBoxesHtml1 .='<div id="divDatabox-1-title" class="divCardTitle"><a href="'.$displayCustomizationUrl.'"><h2 class="home_title_d"> '. $currentBoxRow->category_title .
-				'</h2></a></div>';
+				$publicBoxesHtml1 .='<div id="divDatabox-1-title" class="divCardTitle"><a href="'.$displayCustomizationUrl.'"><h2 class="home_title_d"> <b>'. $currentBoxRow->category_title .
+				'</b></h2></a></div>';
 				}
 				if($currentBoxRow->meta_tags !=""){
 				$publicBoxesHtml1 .='<div id="divCardKeywords" class="divCardKeywords"><a href="'.$displayCustomizationUrl.'"><h3 class="home_keyword_h3"><b>Keywords: </b>';
@@ -2738,8 +2741,8 @@ $urlsArrayy = array('2ch.net','4shared.com','6pm.com','9gag.com','39.net','163.c
 			$privateBoxHtml .='</div></div>';
 
 				if($currentBoxRow->category_title !=""){
-					$privateBoxHtml .='<div id="divDatabox-1-title" class="divCardTitle"><a href="'.$displayCustomizationUrl.'"><h2 class="home_title_d"> '. $currentBoxRow->category_title .
-					'</h2></a></div>';
+					$privateBoxHtml .='<div id="divDatabox-1-title" class="divCardTitle"><a href="'.$displayCustomizationUrl.'"><h2 class="home_title_d"><b>'. $currentBoxRow->category_title .
+					'</b></h2></a></div>';
 				}	
 				if($currentBoxRow->meta_tags !=""){
 				
