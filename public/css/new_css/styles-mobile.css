@@ -869,5 +869,7 @@ body {
       right: 5%; }
       #secAccountSettings .divAccountSettingsRow .divReplyToWrapper .divReplyToControls .divReplyToMaxCharsText {
         display: inline-block; }
-
+ a{
+	text-decoration:none;
+}
 /*# sourceMappingURL=styles-mobile.css.map */
