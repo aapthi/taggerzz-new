@@ -129,9 +129,11 @@ class UserDetailsTable
 		$userWisePdbListSqSelect->columns(array('ucUserId1'=>'user_id','ucCatType'=>'category_type','ucCatId'=>'category_id','ucStatus'=>'STATUS'));
 		$userWisePdbListSqSelect->join(array('catWiseLinksCountRj' => $catWiseLinksCountSqSelect), 'clUserCatId1=category_id',array('userWiseLinksCount1' => new Expression('SUM(catWiseLinksCount1)'),'clUserCatId'=>'clUserCatId1'),'right');
 		$userWisePdbListSqSelect->group('ucUserId1');
-		$userWisePdbListSqSelect->group('ucCatType');
+		//commented by siva reddy 
+		//$userWisePdbListSqSelect->group('ucCatType');
 		$userWisePdbListSqSelect->group('ucStatus');
-		$userWisePdbListSqSelect->having('ucCatType="1"');
+		//$userWisePdbListSqSelect->having('ucCatType="1"');
+		// End Commented by siva reddy
 		$userWisePdbListSqSelect->having('ucStatus="1"');
 		// $resultSet1 = $this->userCategoriesTg->selectWith($userWisePdbListSqSelect);
 		// echo "<pre>;";print_r($resultSet1);exit;

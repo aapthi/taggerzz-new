@@ -356,6 +356,9 @@ $('.edit_paragraph_mon_empty').click(function() {
 		if ($(window).scrollTop() == $(document).height() - $(window).height()){
 			if(scroolTop==0){
 				var perloadTotal=$('#perloadTotal').val();
+					var data='<span id="loderImage"><center><img width="50px" height="50px" src="'+BASE_PATH+'/img/bx_loader.gif"  alt="loader image" /></center></span>';
+							$('#montage_load_ajax_div_id').append();
+
 				var start=$('#start').val();
 					$.ajax({
 						type		:	'POST',
