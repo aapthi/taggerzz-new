@@ -618,7 +618,7 @@ margin-top:4px;
 	
 }
 .current_affairs .divCard{
-	width:50% !important;
+	width:20% !important;
 
 }
 .edit_pick_img{
@@ -938,6 +938,9 @@ color:#a12a30;
 	  }
 }
 @media (min-width: 768px) and (max-width: 980px) {
+	.current_affairs .divCard{
+		width:50% !important;
+	}
 	.secDataboxes #divDataboxWrapper[data-columns]::before {
 		content: '3 .left.width31'; 
 	  }
