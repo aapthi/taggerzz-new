@@ -372,12 +372,15 @@ $('.edit_paragraph_mon_empty').click(function() {
 								$('#MontageloderImageId').hide();
 								$('#montage_load_ajax_div_id').append(data);
 							}else{
+								$('#MontageloderImage').hide();	
 								scroolTop=1;
 							}
 							
 						}
 					});
-			}		
+			}else{
+				$('#MontageloderImageId').hide();	
+			}			
 				
 
 		}
