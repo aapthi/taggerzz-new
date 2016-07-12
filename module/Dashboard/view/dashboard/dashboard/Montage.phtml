@@ -220,6 +220,7 @@
 			<?php } ?>
 		</div>
 	</div>
+	<span id="MontageloderImageId" style="display:none;"><center><img width="50px" height="50px" src="<?php echo $basePath; ?>/img/bx_loader.gif"  alt="loader image" /></center></span>
 	</div>
 	</div>
 	<div class="clearfix"></div>
@@ -356,8 +357,8 @@ $('.edit_paragraph_mon_empty').click(function() {
 		if ($(window).scrollTop() == $(document).height() - $(window).height()){
 			if(scroolTop==0){
 				var perloadTotal=$('#perloadTotal').val();
-					var data='<span id="loderImage"><center><img width="50px" height="50px" src="'+BASE_PATH+'/img/bx_loader.gif"  alt="loader image" /></center></span>';
-							$('#montage_load_ajax_div_id').append();
+					
+							$('#MontageloderImageId').show();
 
 				var start=$('#start').val();
 					$.ajax({
@@ -368,6 +369,7 @@ $('.edit_paragraph_mon_empty').click(function() {
 							if(data!=""){
 								var startcount=parseInt(start)+2;
 								$('#start').val(startcount);
+								$('#MontageloderImageId').hide();
 								$('#montage_load_ajax_div_id').append(data);
 							}else{
 								scroolTop=1;

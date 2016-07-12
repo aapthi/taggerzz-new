@@ -252,6 +252,7 @@
 			<?php } ?>
 		</div>
 	</div>
+	<span id="MontageloderImage" style="display:none;"><center><img width="50px" height="50px" src="<?php echo $basePath; ?>/img/bx_loader.gif"  alt="loader image" /></center></span>
 		</div>
 	</div>
 </div>
@@ -329,15 +330,17 @@ $('.edit_paragraph_mon_empty').click(function() {
 			if(scroolTopMember==0){
 				var perloadTotal=$('#perloadTotal').val();
 				var start=$('#start').val();
+				$('#MontageloderImage').show();
+
 					$.ajax({
 						type		:	'POST',
 						url			:  	BASE_URL+'/user-collection-load-ajax',
 						data		:	{start:start,perloadTotal:perloadTotal},
 						success: function(data){
-							console.log(data);
 							if(data!=""){
 								var startcount=parseInt(start)+2;
 								$('#start').val(startcount);
+								$('#MontageloderImage').hide();
 								$('#montage_load_ajax_member_div_id').append(data);
 							}else{
 								scroolTopMember=1;
