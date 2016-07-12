@@ -108,7 +108,7 @@
             </li>
             <li class="active"><a href="taggerzz-terms-and-conditions.htm">TERMS AND CONDITIONS</a></li>
             <li class="active"><a href="taggerzz-privacy-policy.htm">PRIVACY POLICY</a></li>            
-            <li class="active"><a href="feedback-enquiry.htm">REPORT ISSUE / CONTACT ADMIN</a></li>
+            <li class="active"><a href="feedback-enquiry.php">REPORT ISSUE / CONTACT ADMIN</a></li>
         </ul>
         </nav></div>    
   </div>
@@ -122,26 +122,29 @@
 <h2 class="heading_cnt">Contact Admin</h2>
 
 <div class="enquiry_block_new">
+<form id="enquiryForm" name="enquiryForm" method="POST" >
 <div class="enquiry_heading" id="enq_heading_text">Submit Your Enquiry/Feed back/Your Issue with any Feature</div>
       <select input name="cproject" id="cproject" type="text"  class="field_props" />
       
-      <option value="0">Please Select Your Request </option>
-      <option value="1">Enquiry</option>
-      <option value="2">Feedback</option>
-      <option value="3">Issue Report</option>      
+      <option value="">Please Select Your Request </option>
+      <option value="Enquiry">Enquiry</option>
+      <option value="Feedback">Feedback</option>
+      <option value="Issue Report">Issue Report</option>      
       </select>
       <input name="email" id="email" type="text" placeholder="Email:" class="field_props" />      
-      <select input name="source" id="source" type="text" value="" class="field_props" />
-           <option value="0">Known Taggerzz.com by </option>
-      <option value="1">News papers ad</option>
-      <option value="2">Friends</option>
-      <option value="3">Website</option>
-      <option value="4">Network</option>
-      <option value="5">Internet & Email</option>
+      <select input name="source" id="source" type="text" value="" class="field_props" >
+           <option value="">Known Taggerzz.com by </option>
+      <option value="News papers ad">News papers ad</option>
+      <option value="Friends">Friends</option>
+      <option value="Website">Website</option>
+      <option value="Network">Network</option>
+      <option value="Internet & Email">Internet & Email</option>
       </select>
 
       <textarea name="requirement" id="requirement" cols="" rows="" class="field_props_desc" placeholder="Your Requirement"></textarea>
       <br />
+	   <input type="text" id='captcha' class='field_props' placeholder="Captcha" value="" /> <button onclick="blogCaptcha();" class="">Refresh</button>
+	   <br/>
       <a href="#">
       <div class="submit_button_props" onclick="contact();">Submit</div>
       </a> 
@@ -152,3 +155,11 @@
 </div>
 </body>
 </html>
+<script>
+	function blogCaptcha()
+	{
+	alert('siva');return false;
+	document.getElementById().value=#captcha
+		$('#captcha').val( randomString(6) );
+	}
+</script>

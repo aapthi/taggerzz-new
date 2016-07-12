@@ -1,3 +1,32 @@
+<?php
+	$ismailed=0;
+	if (isset($_POST['email']) && $_POST['email']!='')
+	   {
+		  $name=$_REQUEST['cproject'];
+		  $email = $_REQUEST['email'];
+		  $source = $_REQUEST['source'];
+		  $requirement = $_REQUEST['requirement'];
+		  $ipaddress = $_SERVER['REMOTE_ADDR'];
+		  $headers  = 'From: ' .$email. "\r\n" .
+					'MIME-Version: 1.0' . "\r\n" .
+					'Content-type: text/html; charset=iso-8859-1' . "\r\n" .
+					'X-Mailer: PHP/' . phpversion();
+		  $subject="Contactus";
+		  
+		  $message ="<table border='1' cellpadding='20'>
+			<tr><td>cproject:</td><td>$name</td></tr>
+			<tr><td>Email:</td><td>$email</td></tr>
+			<tr><td>Source:</td><td>$source</td></tr>
+			<tr><td>IP Address:</td><td>$ipaddress</td></tr>
+			<tr><td>Requirement:</td><td>$requirement</td></tr>
+		  </table>";
+
+		  $to = 'sivareddybtech@gmail.com';
+		 // $to = 'admin@taggerzz.com';
+		  $ismailed=mail($to,$subject,$message, $headers);
+		}
+	?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -11,7 +40,7 @@
 <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 <link href="css/media-queries.css" rel="stylesheet" type="text/css" /><!--CSS-->
 
-  <title>Help Topics for Taggerzz.com</title>
+<title>Help Topics for Taggerzz.com</title>
 </head>
 
 <body>
@@ -30,12 +59,12 @@
             </li>
             <li class="active"><a href="taggerzz-header.htm">TAGGERZZ HEADER</a>
               <ul>
-                <li><a href="#activityrpt">User Activity Report (Header)</a></li>
-                <li><a href="#crtdhighlights">Number of User Created Highlights</a></li>
-                <li><a href="#collectedresources">User Collected Web resources</a></li>
-                <li><a href="#starttagging">Start #Tagging</a></li>
-				<li><a href="#cashrewarding">Cash Rewarding Points</a></li>
-				<li><a href="#convert">Convert (Conversion of Rewarding Points)</a></li>                                   
+                <li><a href="taggerzz-header.htm#activityrpt">User Activity Report (Header)</a></li>
+                <li><a href="taggerzz-header.htm#crtdhighlights">Number of User Created Highlights</a></li>
+                <li><a href="taggerzz-header.htm#collectedresources">User Collected Web resources</a></li>
+                <li><a href="taggerzz-header.htm#starttagging">Start #Tagging</a></li>
+				<li><a href="taggerzz-header.htm#cashrewarding">Cash Rewarding Points</a></li>
+				<li><a href="taggerzz-header.htm#convert">Convert (Conversion of Rewarding Points)</a></li>                  
               </ul>
             </li>
             <li class="active"><a href="taggerzz-home-content.htm">TAGGERZZ CONTENT</a>
@@ -119,45 +148,116 @@
 
 <div class="cntnt_main">
 <div id="passage_text">
-<h2 class="heading_cnt">TAGGERZZ.com's Header</h2>
-<p><strong id="activityrpt">You have #tagged 500 WebLinks with 18 Databoxes, 19 Highlights, Stacked 50 Web resources</strong></p>
-<p><strong>Post Login:</strong> The above text is just an example to showcase the user activity report in Header of taggerzz.com. On the header section of taggerzz.com, registered users can see details of their activity, such as the number of web links they have shared, the number of databoxes they have created, the number of highlights and the number of stacked web links they have. Stacked web links are the links that the user collects from other users’ published databoxes and highlights.
-</p>
-<h3>Number of User Created Databoxes (Public Databoxes)</h3>
-<p>You have #tagged 500 WebLinks with <strong>18 Databoxes</strong>, 19 Highlights, Stacked 50 Web resources</p>
-<p>The above text is just an example of how the user activity report appears to the user to the user on the header section of taggerzz.com. Note that only the number of public databoxes created by the user (displayed in bold in the example text) is displayed to him/her.</p>
-<h3 id="crtdhighlights">Number of User Created Highlights</h3>
-<p>You have #tagged 500 WebLinks with 18 Databoxes, <strong>19 Highlights</strong>, Stacked 50 Web resources</p>
-<p>The above text is just an example of how the user activity report appears to the user to the user on the header section of taggerzz.com. The user can see the number of highlights he/she has created (displayed in bold in the example text). </p>
-<h3 id="collectedresources">User Collected Web resources </h3>
-<p>You have #tagged 500 WebLinks with 18 Databoxes, 19 Highlights, <strong>Stacked 50 Web resources</strong></p>
-<p>The above text is just an example of how the user activity report appears to the user to the user on the header section of taggerzz.com. The user can see the number of web resources he/she has collected, (displayed in bold in the example text). The user can also navigate to the “Stacked web resources” page and find all the web links he/she has collected from published databoxes and highlights of other users.
-</p>
-<h3 id="starttagging">Start #Tagging</h3>
-<p>Registered users can start creating their own collection of web links here. The user can also choose to create and/or publish a highlight or a public or private databox.</p>
-<h3>Cash Rewarding Points</h3>
-<p>Taggerzz.com has introduced a feature called cash reward points that rewards a user based on his/her activities on taggerzz.com. This feature is activated from the moment the user logs in for the first time. The cash reward point algorithm takes into account every activity a user conducts, including the creation and sharing of databoxes and highlights, and also their interactions with other users on taggerzz.com. The user can convert these cash reward points into mobile recharge cash at any time and recharge any mobile with in the enlisted Indian mobile networks, some of which may work for individuals out of India as well. As of now, Indian citizens from any part of globe can use this feature to recharge their mobile numbers on Indian mobile networks. When cash reward points are used by a user to make a recharge, taggerzz.com displays the remaining quantity of cash reward points. Learn more about the rules for using this feature under <a href="#" target="_blank" class="textual_link">Terms and Conditions.</a>
-</p>
-<h3 id="cashrewarding">How much are Cash Reward Points worth?</h3>
-<p>Once the user logs in, the header section of the page displays his/her cash reward points and also the monetary value of those cash rewarded points in Indian rupees.  </p>
-<h3 id="convert">Convert (Conversion of Rewarding Points)</h3>
-<p>Clicking on “Convert” takes the user to the page where he/she can convert his/her cash reward points to mobile recharging cash with available Indian mobile networks.</p>
+<h2 class="heading_cnt">Contact Admin</h2>
+<?php 
+					if( $ismailed!=0){?>
+					<script> 
+						window.location = '/blog/feedback-enquiry.php?success=true';
+					</script>
+					<?php }if($_GET['success']){
+						echo "<p  id='successMessage'><b>Thank you for contacting us, We will get back to you soon.</b></p> ";
+					}
+					?>
+<div class="enquiry_block_new">
+<form id="enquiryForm" name="enquiryForm" method="POST" onsubmit="contact();" >
+<div class="enquiry_heading" id="enq_heading_text">Submit Your Enquiry/Feed back/Your Issue with any Feature</div>
+      <select input name="cproject" id="cproject" type="text"  class="field_props" />
+      
+      <option value="">Please Select Your Request </option>
+      <option value="Enquiry">Enquiry</option>
+      <option value="Feedback">Feedback</option>
+      <option value="Issue Report">Issue Report</option>      
+      </select>
+      <input name="email" id="email" type="text" placeholder="Email:" class="field_props" />      
+      <select input name="source" id="source" type="text" value="" class="field_props" >
+           <option value="">Known Taggerzz.com by </option>
+      <option value="News papers ad">News papers ad</option>
+      <option value="Friends">Friends</option>
+      <option value="Website">Website</option>
+      <option value="Network">Network</option>
+      <option value="Internet & Email">Internet & Email</option>
+      </select>
 
-<h3>#Hashtag Search field</h3>
-<p>Both registered as well as non-registered users can search for public databoxes using #tags. However, private databoxes and public databoxes marked as NSFW/Mature material are only accessible to registered users. Furthermore, in order to access a private databox a logged in user must provide its #tag as well as the freshly generated Unique Combination Code.</p>
-<h3>Unique code field</h3>
-<p>The Unique Code field on the page header is where logged in users who want to access private databoxes can put in its Unique Combination Code.
-The Unique Combination Code can be created by the user or generated by taggerzz.com. It must be between 4-15 characters long, can be alpha numeric and is case sensitive.</p>
-<h3>Help</h3>
-<p>Clicking on “Help” on the home page will bring you to the blog you’re currently reading. This section contains all the information about taggerzz.com that you would need as a user.</p>
-<h3>Invite</h3>
-<p>Registered users of taggerzz.com can invite their friends and acquaintances to the platform, and earn reward points in the process. A user can only send out a limited number of invitations in a 24 hour time period.</p>
+      <textarea name="requirement" id="requirement" cols="" rows="" class="field_props_desc" placeholder="Your Requirement"></textarea>
+      <br />
+	    <input type="text" id='captcha' class='field_props' placeholder="captcha" value="" /> 
+		<input type="text" class="img_captcha" id="refreshCode" name="refreshCode" readonly="readonly" disabled="disabled"  value="">
 
+	   <img class="img_refresh" src="imgs/refresh.png"  onclick="return refresh()" alt="refresh"/>
+	   <br/>
+	   	<button type="submit" id="submit" name="submit" >Send Message</button>
 
-
+      <!-- <a href="#">
+      <div class="submit_button_props" onclick="contact();" >Submit</div>
+      </a> -->
+</div>
 
 
 </div>
 </div>
 </body>
 </html>
+<script>
+$(document).ready(function() {
+	refresh();
+   });
+function contact()
+	{
+	        //alert();
+			var flag=true;
+			if($('#cproject').val()==""){
+				$('#cproject').focus();
+				flag=false;
+				alert('Please Select Your Request');return false;
+			}
+			if($('#email').val()==""){
+				$('#email').focus();
+				flag=false;
+				alert('Please enter valid email');return false;
+			}
+			
+			if($('#source').val()==""){
+				$('#source').focus();
+			flag=false;
+			alert('Please Select Known Taggerzz.com by');return false;
+			
+			}
+		
+			if($('#requirement').val()==""){
+				$('#requirement').focus();
+			flag=false;
+			alert('Please enter requirement');return false;
+			
+			}
+			if($('#captcha').val()==""){
+				flag=false;
+				$('#captcha').focus();
+
+			alert('Please enter captcha');return false;
+			}else if($('#captcha').val()!=$("#refreshCode").val()){ 
+			flag=false;
+             alert("Please enter the correct code");return false;
+	         
+			}
+			if(flag==false){
+				return false;
+            }else{
+				return true;
+				alert('sf');
+				$( "#enquiryForm" ).submit();
+						
+			}
+	}	
+function refresh(){
+	$.ajax({
+		url: "captchacgetcode.php",
+		type: "POST",				
+		success: function(msg){ 
+			$("#refreshCode").val(msg);
+		},				
+	});   
+}
+	$('#successMessage').delay(6000).fadeOut('slow');
+	
+
+</script>
