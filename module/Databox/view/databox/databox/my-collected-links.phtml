@@ -40,6 +40,7 @@ if( isset($this->boxKeywords) && trim($this->boxKeywords) != "" )
 <div id="mainContainerWrapper" class="mainContainerWrapper" style="width:95%;margin:125px auto;">
 	<section id="secCustomizeDatabox">
 		<div class="c_DivCustomizationWrapper">
+			<?php if(isset($this->userCollectedLinksArr) && $this->userCollectedLinksArr!="") {?>
 				<span id="pubDddContainer">
 				<?php if($this->data==0){?>
 					<div id="drag-drop-demo" class="grid-stack c_DivCardsWrapper customize_w"><?php $tzGsRowNum= 1;
@@ -135,6 +136,11 @@ if( isset($this->boxKeywords) && trim($this->boxKeywords) != "" )
 					<?php }
 				}?>
 			</span>
+			<?php }else{?>
+			<br/>
+		
+			<center><h3>NO STACKED WEB RESOURCES</h3></center>
+			<?php }?>
 		</div>
 	</section>
 </div>
