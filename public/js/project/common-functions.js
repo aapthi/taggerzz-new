@@ -984,9 +984,9 @@ function checkSpaces()
 
 				} */
 				if(votingDownid==3){
-					setTimeout(function(){	
+					//setTimeout(function(){	
 
-						if(stopPoints==0){
+						//if(stopPoints==0){
 							 var insertedActivityAjaxUrl = BASE_URL + "/databoxuser/record-activity-points";
 							$.ajax
 							({
@@ -996,17 +996,17 @@ function checkSpaces()
 								dataType: "json",
 								success: function(data) {}
 							});
-						}
-					}, 4000);
+						//}
+					//}, 4000);
 				}
 
 
 			}
 			if(newVoteValue==0){
 				 if(votingDownid==3){
-				setTimeout(function(){	
+				//setTimeout(function(){	
 
-					if(stopPoints==0){ 
+					//if(stopPoints==0){ 
 						var insertedActivityAjaxUrl = BASE_URL + "/databoxuser/record-activity-points";
 						$.ajax
 						({
@@ -1018,8 +1018,8 @@ function checkSpaces()
 								
 							}
 						});
-					}
-					}, 4000);
+					//}
+					//}, 4000);
 				 }
 				
 				/* if(Totalrw_lh=="" || Totalrw_lh==0){

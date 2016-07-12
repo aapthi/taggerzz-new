@@ -92,7 +92,6 @@ class DataboxController extends AbstractActionController
 		$editBoxId = 0;
 		$catHashTag="";
 		$categoryTitle="";
-		
 		$baseUrls = $this->getServiceLocator()->get('config');
 		$baseUrlArr = $baseUrls['urls'];
 		$baseUrl = $baseUrlArr['baseUrl'];
@@ -118,7 +117,6 @@ class DataboxController extends AbstractActionController
 		if($this->params()->fromRoute('boxid', 0)!="")
 		{
 			$currBoxId=$this->params()->fromRoute('boxid', 0);
-			// echo "<pre>"; print_r($currBoxId);exit;
 
 			$editBoxId = $currBoxId;
 			if( isset($editBoxId) && trim($editBoxId) != "" && is_numeric($editBoxId) && $editBoxId )
@@ -224,17 +222,19 @@ class DataboxController extends AbstractActionController
 		$boxLinksArr= array();
 		$c="00";
 		$user_classification="";
-
-		
+		$userId1 = $_SESSION['usersinfo']->userId;
+		@unlink( './public/databoxes/'.$userId1.'.txt' );
 		if($this->params()->fromRoute('boxid', 0)!="")
 		{
+			
 			$currBoxId=$this->params()->fromRoute('boxid', 0);
-			// echo "<pre>"; print_r($currBoxId);exit;
+		// echo "<pre>"; print_r($currBoxId);exit;
 
 			$editBoxId = $currBoxId;
 			if( isset($editBoxId) && trim($editBoxId) != "" && is_numeric($editBoxId) && $editBoxId )
 			{
 				// echo $editBoxId;exit;
+
 				if( isset($_SESSION["tzCreateEditBoxId"]) && $_SESSION["tzCreateEditBoxId"] != $editBoxId )
 				{
 					return $this->redirect()->toUrl($baseUrl.'/contentpage');
@@ -296,7 +296,6 @@ class DataboxController extends AbstractActionController
 				}
 			}
 		}
-
 		$htmlBook = "";
 
 		$links=array();
@@ -350,7 +349,9 @@ class DataboxController extends AbstractActionController
 		$boxLinksArr= array();
 		$c="00";
 		$user_classification="";
-
+		$userId1 = $_SESSION['usersinfo']->userId;
+		@unlink( './public/databoxes/'.$userId1.'.txt' );
+					
 		if($this->params()->fromRoute('boxid', 0)!="")
 		{
 			$currBoxId=$this->params()->fromRoute('boxid', 0);
@@ -466,7 +467,8 @@ class DataboxController extends AbstractActionController
 		$boxLinksArr= array();
 		$c="00";
 		$user_classification="";
-
+		$userId1 = $_SESSION['usersinfo']->userId;
+		@unlink( './public/databoxes/'.$userId1.'.txt' );
 		if($this->params()->fromRoute('boxid', 0)!="")
 		{
 			$currBoxId=$this->params()->fromRoute('boxid', 0);
@@ -781,6 +783,8 @@ class DataboxController extends AbstractActionController
 							$link_details_id = $this->getLinkDetailsTable()->addLinkDetails( $category_link_id,$title,$image,$description,$author,$keywords,$urlId,$isVideo,$iframeSrc );
 						}
 					}
+					//echo "<pre>";print_r( $fileUrlsArray );exit;
+
 					@unlink( './public/databoxes/'.$userId.'.txt' );
 					// echo "<pre>";print_r( $fileUrlsArray );
 				}
