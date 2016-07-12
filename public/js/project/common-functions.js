@@ -194,11 +194,14 @@ function removeCss()
 	}
 	
 // header-menu
-	$(document).on("mousedown", "a.tag_chk", function(e) {	
+	$(document).on("mousedown", "a.tag_chk", function(e) {
+		
 			if( e.which == 2 ) {
-				var removeHashvalue=this.text.split('#')['0'].trim().toLowerCase();
+				var removeHashvalue=this.text.split('#')['0'].trim().toLowerCase
+
 				var hashMontage=this.text.trim().toLowerCase();
 				 var hashNameMontage=hashMontage.charAt(0);
+
 				if(removeHashvalue=='collections'){
 					var m_url= BASE_URL +'/databox/my-collected-links';
 					var mm_url=	'/databox/my-collected-links';			
@@ -220,7 +223,7 @@ function removeCss()
 				}else if(removeHashvalue=='databox/post-vertical'){
 					var m_url= BASE_URL +'/databox/post-vertical';
 						var mm_url=	'/databox/post-vertical';	
-				}	
+				}				
 				if( chkvalues == 2 )
 				{
 					var urlmouse='mousedownEvent';
@@ -234,15 +237,20 @@ function removeCss()
 				}
 				else if( chkvalues==0 )
 				{	
+
 					var menuUrlM= m_url;
+
 					if(navigator.userAgent.toLowerCase().indexOf('chrome') > -1){
+
 						window.open(m_url);
 					}else{
 						$('a.tag_chk').attr('href',m_url);
+						$('a.tag_chk_logo').attr('href',BASE_URL +'/montage');
 					}
 				}
 				else
 				{
+
 					$('.tag_chk').removeAttr('href');
 					$('.tag_chk').css('cursor','pointer');
 					$('#pop-up-alerts').popUpWindow({action: "open"});	
@@ -284,11 +292,15 @@ function removeCss()
 	function goToLocation( menuLocation )
 	{
 		//New Code
-		
 		if(menuLocation=="accounts"){
 			window.location.href = BASE_URL +'/'+ menuLocation;
 			return false;
 		}else if(menuLocation=="montage"){
+			window.location.href = BASE_URL +'/'+ menuLocation;
+			return false;
+		}else if(menuLocation=="contentpage"){
+					alert('contentpage');
+
 			window.location.href = BASE_URL +'/'+ menuLocation;
 			return false;
 		}

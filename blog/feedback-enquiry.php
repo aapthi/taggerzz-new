@@ -3,7 +3,7 @@
 	if (isset($_POST['email']) && $_POST['email']!='')
 	   {
 		  $name=$_REQUEST['cproject'];
-		  $email = $_REQUEST['email'];
+		  $email = $_POST['email'];
 		  $source = $_REQUEST['source'];
 		  $requirement = $_REQUEST['requirement'];
 		  $ipaddress = $_SERVER['REMOTE_ADDR'];
@@ -21,8 +21,8 @@
 			<tr><td>Requirement:</td><td>$requirement</td></tr>
 		  </table>";
 
-		  $to = 'sivareddybtech@gmail.com';
-		 // $to = 'admin@taggerzz.com';
+		  //$to = 'sivareddybtech@gmail.com';
+		  $to = 'admin@taggerzz.com';
 		  $ismailed=mail($to,$subject,$message, $headers);
 		}
 	?>
@@ -33,8 +33,7 @@
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-  <script src="js/menu.js"></script>  <!-- CSS -->
+
 <link href="css/normalize.css" rel="stylesheet" type="text/css" />
 <link href="css/blog.css" rel="stylesheet" type="text/css" />
 <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
@@ -159,7 +158,7 @@
 					}
 					?>
 <div class="enquiry_block_new">
-<form id="enquiryForm" name="enquiryForm" method="POST" onsubmit="contact();" >
+<form id="enquiryForm" name="enquiryForm" method="POST" onsubmit="return contact();" >
 <div class="enquiry_heading" id="enq_heading_text">Submit Your Enquiry/Feed back/Your Issue with any Feature</div>
       <select input name="cproject" id="cproject" type="text"  class="field_props" />
       
@@ -185,7 +184,7 @@
 
 	   <img class="img_refresh" src="imgs/refresh.png"  onclick="return refresh()" alt="refresh"/>
 	   <br/>
-	   	<button type="submit" id="submit" name="submit" >Send Message</button>
+	   	<button type="submit" id="submit" name="submit" >Submit</button>
 
       <!-- <a href="#">
       <div class="submit_button_props" onclick="contact();" >Submit</div>
@@ -197,13 +196,15 @@
 </div>
 </body>
 </html>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+  <script src="js/menu.js"></script>  <!-- CSS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>
 $(document).ready(function() {
 	refresh();
    });
 function contact()
 	{
-	        //alert();
 			var flag=true;
 			if($('#cproject').val()==""){
 				$('#cproject').focus();
@@ -243,7 +244,6 @@ function contact()
 				return false;
             }else{
 				return true;
-				alert('sf');
 				$( "#enquiryForm" ).submit();
 						
 			}
