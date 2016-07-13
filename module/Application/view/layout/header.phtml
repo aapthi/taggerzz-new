@@ -1,4 +1,4 @@
-<?php //echo "<pre>";print_r($_SESSION['usersinfo']);exit;?>
+<?php //echo "<pre>";print_r($_SERVER['REQUEST_URI']);exit;?>
 <input type="hidden" id="boxesterm" name="boxesterm" value="" />
 <?php
 		$dashBoardActive	='';
@@ -10,7 +10,7 @@
 		if(strpos($_SERVER['REQUEST_URI'], 'dashboard') !== false){
 			$dashBoardActive='active_menu';
 		}
-		else if($_SERVER['REQUEST_URI']=='/taggerzz-new/trunk/montage'){
+		else if($_SERVER['REQUEST_URI']=='/montage'){
 			$montageActive='active_menu';
 		}
 		else if(strpos($_SERVER['REQUEST_URI'], 'accounts') !== false){
@@ -182,7 +182,9 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/"  && $_SERVER['REQUEST_URI']
 		<div style="padding-left:36px;">
             <div id="divProfileImage" class="inline-block">
                 <!--<img src="<?php //echo $basePath; ?>/img/imgFB.png" alt="" class="height100" />-->
-                <a class="" href="javascript:void(0)" onclick="goToLocation('/montage')"><img height="60px" width="55px" src="<?php echo $headerMontageImage; ?>" alt="" class="height100" /></a>
+               
+				<a href="javascript:void(0)" onclick="goToLocation('/montage')"><img height="60px" width="55px" src="<?php echo $headerMontageImage; ?>" alt="" class="height100" /></a>
+			
             </div>
 
             <div id="divProfileDetails" class="inline-block tphoto_links tphoto_links">
@@ -200,7 +202,11 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/"  && $_SERVER['REQUEST_URI']
         </div>
         <div id="divLogoWrapper" class="width30 marginallyCenter logo_home_new_size">
             <div class="width100 logo_martb5">
-                <a class="tag_chk"  onclick="goToLocation('/contentpage')" href="javascript:void(0)"><img src="<?php echo $basePath; ?>/img/imgLogo.png" alt="" class="imgLogo width100" /></a>
+                <?php if(strpos($cropUrl, "post-vertical") == false && strpos($cropUrl, "post-horizontal") == false && strpos($_SERVER['REQUEST_URI'], '/databox/publicdatabox/') == false && strpos($_SERVER['REQUEST_URI'], '/databox/privatedatabox/') == false && strpos($_SERVER['REQUEST_URI'], '/databox/createhighlights/') == false){?>
+				<a href="<?php echo $baseUrl; ?>/contentpage"><img src="<?php echo $basePath; ?>/img/imgLogo.png" alt="nagaraju" class="imgLogo width100" /></a>
+			<?php } else{?>
+				<a  onclick="goToLocation('/contentpage')" href="javascript:void(0)"><img src="<?php echo $basePath; ?>/img/imgLogo.png" alt="" class="imgLogo width100" /></a>
+			<?php } ?>	
             </div> 
         </div>
         <div id="divLeftSlideMenu" class="divLeftSlideMenu">
@@ -248,7 +254,7 @@ if( $_SERVER['REQUEST_URI']!= "/taggerzz-new/trunk/"  && $_SERVER['REQUEST_URI']
 					</style>
 					<div id="divLogoWrapper" class="width30 marginallyCenter withoutlogin_logo">
 						<div class="width100">
-							<a class="tag_chk" href="<?php echo $baseUrl; ?>/contentpage"><img src="<?php echo $basePath; ?>/img/imgLogo.png" alt="nagaraju" class="imgLogo width100" /></a>
+							<a href="<?php echo $baseUrl; ?>/contentpage"><img src="<?php echo $basePath; ?>/img/imgLogo.png" alt="nagaraju" class="imgLogo width100" /></a>
 						</div>
 					</div>
 				<div>
